@@ -79,7 +79,13 @@ extern uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_in
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t sdio_obj);
+extern uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj);
+
+/** Detach the WLAN Device to a specific SDIO bus
+ *
+ *  @param  whd_driver         Pointer to handle instance of the driver
+ */
+extern void whd_bus_sdio_detach(whd_driver_t whd_driver);
 
 /** Attach the WLAN Device to a specific SPI bus
  *
@@ -89,7 +95,13 @@ extern uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t spi_obj);
+extern uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t *spi_obj);
+
+/** Detach the WLAN Device to a specific SPI bus
+ *
+ *  @param  whd_driver         Pointer to handle instance of the driver
+ */
+extern void whd_bus_spi_detach(whd_driver_t whd_driver);
 
 /*  @} */
 

@@ -1,8 +1,10 @@
 var searchData=
 [
   ['whd_5fadd_5fsecondary_5finterface',['whd_add_secondary_interface',['../group__wifimanagement.html#ga553c009e9f6f856dfe243d745e21bbf9',1,'whd_wifi_api.h']]],
-  ['whd_5fbus_5fsdio_5fattach',['whd_bus_sdio_attach',['../group__busapi.html#ga560dfe07064a0f5b93e15c2bbaf8549d',1,'whd_wifi_api.h']]],
-  ['whd_5fbus_5fspi_5fattach',['whd_bus_spi_attach',['../group__busapi.html#gab2711cc901be2cc0d5e76cd4cf8daf72',1,'whd_wifi_api.h']]],
+  ['whd_5fbus_5fsdio_5fattach',['whd_bus_sdio_attach',['../group__busapi.html#ga9f08c5241843cbe2ef06ffa8bfb5118d',1,'whd_wifi_api.h']]],
+  ['whd_5fbus_5fsdio_5fdetach',['whd_bus_sdio_detach',['../group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da',1,'whd_wifi_api.h']]],
+  ['whd_5fbus_5fspi_5fattach',['whd_bus_spi_attach',['../group__busapi.html#ga16b799bb65db52fb4518e1fbc203fe53',1,'whd_wifi_api.h']]],
+  ['whd_5fbus_5fspi_5fdetach',['whd_bus_spi_detach',['../group__busapi.html#gae83aaeef8c3d922cbb839b75ab289d13',1,'whd_wifi_api.h']]],
   ['whd_5fdeinit',['whd_deinit',['../group__wifimanagement.html#gab7d6e59874922e5646e08e52082e32f5',1,'whd_wifi_api.h']]],
   ['whd_5finit',['whd_init',['../group__wifimanagement.html#ga286dde2ee65ac3ea5ae67a6e6ef25f0a',1,'whd_wifi_api.h']]],
   ['whd_5fnetwork_5fget_5fbsscfgidx_5ffrom_5fifp',['whd_network_get_bsscfgidx_from_ifp',['../group__dbg.html#ga84376c0830fbdb04c67812243539d4c6',1,'whd_wifi_api.h']]],

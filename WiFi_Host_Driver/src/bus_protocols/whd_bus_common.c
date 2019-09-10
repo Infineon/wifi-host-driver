@@ -217,6 +217,15 @@ void whd_bus_common_info_init(whd_driver_t whd_driver)
     }
 }
 
+void whd_bus_common_info_deinit(whd_driver_t whd_driver)
+{
+    if (whd_driver->bus_common_info != NULL)
+    {
+        free(whd_driver->bus_common_info);
+        whd_driver->bus_common_info = NULL;
+    }
+}
+
 void whd_delayed_bus_release_schedule_update(whd_driver_t whd_driver, whd_bool_t is_scheduled)
 {
     whd_driver->bus_common_info->delayed_bus_release_scheduled = is_scheduled;

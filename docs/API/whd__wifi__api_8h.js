@@ -2,8 +2,10 @@ var whd__wifi__api_8h =
 [
     [ "whd_scan_result_callback_t", "group__wifijoin.html#ga9f8c6096922212981dd2101a17aec471", null ],
     [ "whd_init", "group__wifimanagement.html#ga286dde2ee65ac3ea5ae67a6e6ef25f0a", null ],
-    [ "whd_bus_sdio_attach", "group__busapi.html#ga560dfe07064a0f5b93e15c2bbaf8549d", null ],
-    [ "whd_bus_spi_attach", "group__busapi.html#gab2711cc901be2cc0d5e76cd4cf8daf72", null ],
+    [ "whd_bus_sdio_attach", "group__busapi.html#ga9f08c5241843cbe2ef06ffa8bfb5118d", null ],
+    [ "whd_bus_sdio_detach", "group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da", null ],
+    [ "whd_bus_spi_attach", "group__busapi.html#ga16b799bb65db52fb4518e1fbc203fe53", null ],
+    [ "whd_bus_spi_detach", "group__busapi.html#gae83aaeef8c3d922cbb839b75ab289d13", null ],
     [ "whd_wifi_on", "group__wifimanagement.html#ga1c8bf41b593cb947266f8690d495f381", null ],
     [ "whd_wifi_off", "group__wifimanagement.html#ga422587a9b104a871233a42aceb2141d2", null ],
     [ "whd_deinit", "group__wifimanagement.html#gab7d6e59874922e5646e08e52082e32f5", null ],

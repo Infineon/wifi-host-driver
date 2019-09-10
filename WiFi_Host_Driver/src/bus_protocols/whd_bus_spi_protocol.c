@@ -124,7 +124,7 @@ static const uint8_t whd_bus_gspi_command_mapping[] = { 0, 1 };
 struct whd_bus_priv
 {
     whd_spi_config_t spi_config;
-    cyhal_spi_t spi_obj;
+    cyhal_spi_t *spi_obj;
 
 };
 
@@ -144,7 +144,7 @@ static whd_result_t whd_bus_spi_transfer_buffer(whd_driver_t whd_driver, whd_bus
 *             Global Function definitions
 ******************************************************/
 
-uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_config, cyhal_spi_t spi_obj)
+uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_config, cyhal_spi_t *spi_obj)
 {
     struct whd_bus_info *whd_bus_info;
 
@@ -213,6 +213,20 @@ uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_c
     whd_bus_info->whd_bus_irq_enable_fptr = whd_bus_spi_irq_enable;
 
     return WHD_SUCCESS;
+}
+
+void whd_bus_spi_detach(whd_driver_t whd_driver)
+{
+    if (whd_driver->bus_if != NULL)
+    {
+        free(whd_driver->bus_if);
+        whd_driver->bus_if = NULL;
+    }
+    if (whd_driver->bus_priv != NULL)
+    {
+        free(whd_driver->bus_priv);
+        whd_driver->bus_priv = NULL;
+    }
 }
 
 whd_result_t whd_bus_spi_send_buffer(whd_driver_t whd_driver, whd_buffer_t buffer)
@@ -298,12 +312,12 @@ static whd_result_t whd_bus_spi_transfer_buffer(whd_driver_t whd_driver, whd_bus
     /* Send the data */
     if (direction == BUS_READ)
     {
-        result = cyhal_spi_transfer(&whd_driver->bus_priv->spi_obj, NULL, 0, (uint8_t *)gspi_header,
+        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, 0, (uint8_t *)gspi_header,
                                     transfer_size, 0);
     }
     else
     {
-        result = cyhal_spi_transfer(&whd_driver->bus_priv->spi_obj, (uint8_t *)gspi_header, transfer_size, NULL,
+        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, (uint8_t *)gspi_header, transfer_size, NULL,
                                     0, 0);
     }
 
@@ -476,7 +490,7 @@ whd_result_t whd_bus_spi_init(whd_driver_t whd_driver)
                                                                 (uint32_t)( (SPI_READ_TEST_REGISTER & 0x1FFFFu) <<
                                                                             11 ) |
                                                                 (uint32_t)( (4u /*size*/ & 0x7FFu) << 0 ) ) );
-        CHECK_RETURN(cyhal_spi_transfer(&whd_driver->bus_priv->spi_obj, NULL, 0, init_data, transfer_size, 0) );
+        CHECK_RETURN(cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, 0, init_data, transfer_size, 0) );
         loop_count++;
     } while ( (NULL == memchr(&init_data[4], SPI_READ_TEST_REG_LSB, (size_t)8) ) &&
               (NULL == memchr(&init_data[4], SPI_READ_TEST_REG_LSB_SFT1, (size_t)8) ) &&
@@ -856,12 +870,12 @@ whd_result_t whd_bus_spi_transfer_bytes(whd_driver_t whd_driver, whd_bus_transfe
     /* Send the data */
     if (direction == BUS_READ)
     {
-        result = cyhal_spi_transfer(&whd_driver->bus_priv->spi_obj, NULL, 0, (uint8_t *)gspi_header,
+        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, 0, (uint8_t *)gspi_header,
                                     transfer_size, 0);
     }
     else
     {
-        result = cyhal_spi_transfer(&whd_driver->bus_priv->spi_obj, (uint8_t *)gspi_header, transfer_size, NULL,
+        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, (uint8_t *)gspi_header, transfer_size, NULL,
                                     0, 0);
     }
 

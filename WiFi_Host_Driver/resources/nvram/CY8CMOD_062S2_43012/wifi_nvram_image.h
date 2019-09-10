@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/** @file
+ *  NVRAM file for CY8CMOD-062S2-43012
+ */
+
 #ifndef INCLUDED_NVRAM_IMAGE_H_
 #define INCLUDED_NVRAM_IMAGE_H_
 
@@ -21,13 +25,6 @@
 #include <stdint.h>
 #include "generated_mac_address.txt"
 
-/*
- * CYW43012 Rev C0 WLCSP Murata module EVB
- * Rev History
- *  1. 6/22/2017 copied from bcm bcm943012mdcspad.txt
- *  2. 6/22/2017 updated boardtype, boardrev, macadd
- *  3. 7/10/2017 udpated swctrlmap*
- */
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,7 +35,7 @@ extern "C" {
  * cyw943012csp_ty1LV.TXT
  */
 static const char wifi_nvram_image[] =
-    "NVRAMRev=$Rev:722124$"                                              "\x00"
+    "NVRAMRev=$Rev:722123$"                                              "\x00"
     "sromrev=11"                                                         "\x00"
     "cckdigfilttype=4"                                                   "\x00"
     "cckpwroffset0=2"                                                    "\x00"
@@ -51,8 +48,8 @@ static const char wifi_nvram_image[] =
     NVRAM_GENERATED_MAC_ADDRESS                                          "\x00"
     "mac_clkgating=1"                                                    "\x00"
     "nocrc=1"                                                            "\x00"
-    "boardtype=0x0871"                                                   "\x00"
-    "boardrev=0x1202"                                                    "\x00"
+    "boardtype=0x0869"                                                   "\x00"
+    "boardrev=0x1102"                                                    "\x00"
     "xtalfreq=37400"                                                     "\x00"
     "boardflags2=0xc0000000"                                             "\x00"
     "boardflags=0x00000001"                                              "\x00"
@@ -114,6 +111,7 @@ static const char wifi_nvram_image[] =
     "femctrlwar=0"                                                       "\x00"
     "use5gpllfor2g=1"                                                    "\x00"
     "pt5db_gaintbl=0"                                                    "\x00"
+    "muxenab=0x01"                                                       "\x00"
     "txwbpapden=1"                                                       "\x00"
     "wb_rxattn=0x0303"                                                   "\x00"
     "wb_txattn=0x0203"                                                   "\x00"
@@ -128,8 +126,6 @@ static const char wifi_nvram_image[] =
     "wb_txbuf_offset=0x1e1e"                                             "\x00"
     "wb_frac_del=0x6991"                                                 "\x00"
     "wb_g_frac_bits=0xab"                                                "\x00"
-
-
     "nb_rxattn=0x0404"                                                   "\x00"
     "nb_txattn=0x0404"                                                   "\x00"
     "nb_papdcalidx=0x1414"                                               "\x00"
@@ -137,24 +133,21 @@ static const char wifi_nvram_image[] =
     "nb_bbmult=0x5A5A"                                                   "\x00"
     "nb_tia_gain_mode=0x0000"                                            "\x00"
     "AvVmid_c0=6,100,7,70,7,70,7,70,7,70"                                "\x00"
-
     "tssisleep_en=0x5"                                                   "\x00"
     "lpflags=0x28"                                                       "\x00"
     "lpo_select=4"                                                       "\x00"
-    "muxenab=0x01"                                                       "\x00"
     "paprrmcsgamma2g=450,500,550,600,675,950,950,950,950,950,950,950"    "\x00"
     "paprrmcsgamma5g20=450,500,550,600,800,950,1100,1100,1100,1100,1100,1100" "\x00"
-    "swdiv_en=0 #To enable SW-DIV feature"                               "\x00"
+    "swdiv_en=0"                                                         "\x00"
     "swdiv_gpio=0"                                                       "\x00"
     "swdiv_swctrl_en=2"                                                  "\x00"
     "swdiv_swctrl_ant0=0"                                                "\x00"
     "swdiv_swctrl_ant1=1"                                                "\x00"
     "swdiv_antmap2g_main=1"                                              "\x00"
     "swdiv_antmap5g_main=1"                                              "\x00"
-
-    "swdiv_snrlim=10000 #Only enable sw_div if the snr on present antenna is less than 10000/8=1250"
-    "swdiv_thresh=3000 #No.of rxpkts threshold"                          "\x00"
-    "swdiv_snrthresh=24 #Difference between antenna's snr is greater than 24/8=3dB, then shift the antennas"
+    "swdiv_snrlim=10000"                                                 "\x00"
+    "swdiv_thresh=3000"                                                  "\x00"
+    "swdiv_snrthresh=24"                                                 "\x00"
     "\x00\x00";
 
 #ifdef __cplusplus

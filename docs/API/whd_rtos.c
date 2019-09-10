@@ -32,6 +32,17 @@ cy_rslt_t cy_rtos_create_thread(cy_thread_t *thread, cy_thread_entry_fn_t entry_
 }
 
 /**
+ * Exit the current thread
+ *
+ * @returns WHD_SUCCESS on success or otherwise
+ */
+cy_rslt_t cy_rtos_exit_thread(void)
+{
+    osThreadExit();
+    return CY_RSLT_SUCCESS;
+}
+
+/**
  * Terminates the current thread
  *
  *

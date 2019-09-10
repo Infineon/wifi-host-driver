@@ -58,9 +58,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structwhd__listen__interval__t.html#af001610277052191979db17c0133c933",
-"whd__types_8h.html#a4d4a4586c264fe8e4acb0bf7169b7b0f",
-"whd__types_8h.html#a634bebec2a4dba9371c7c0168cf9c081"
+"structwhd__init__config.html#abd05090115efa85f6e47087351cc502a",
+"whd__types_8h.html#a4ab8a2182e68bb029551aa754bff1861",
+"whd__types_8h.html#a5adb0953a8527552bc47001673830602afe6c1511f2547395ce73ed2ee5be0775"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

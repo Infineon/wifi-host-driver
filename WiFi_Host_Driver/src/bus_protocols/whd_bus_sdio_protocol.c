@@ -78,7 +78,7 @@ struct whd_bus_priv
 {
     whd_sdio_config_t sdio_config;
     whd_bus_stats_t whd_bus_stats;
-    cyhal_sdio_t sdio_obj;
+    cyhal_sdio_t *sdio_obj;
 
 };
 
@@ -121,7 +121,7 @@ static whd_result_t whd_bus_sdio_enable_oob_intr(whd_driver_t whd_driver, whd_bo
 *             Global Function definitions
 ******************************************************/
 
-uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdio_config, cyhal_sdio_t sdio_obj)
+uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdio_config, cyhal_sdio_t *sdio_obj)
 {
     struct whd_bus_info *whd_bus_info;
 
@@ -183,6 +183,20 @@ uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdi
     whd_bus_info->whd_bus_irq_enable_fptr = whd_bus_sdio_irq_enable;
 
     return WHD_SUCCESS;
+}
+
+void whd_bus_sdio_detach(whd_driver_t whd_driver)
+{
+    if (whd_driver->bus_if != NULL)
+    {
+        free(whd_driver->bus_if);
+        whd_driver->bus_if = NULL;
+    }
+    if (whd_driver->bus_priv != NULL)
+    {
+        free(whd_driver->bus_priv);
+        whd_driver->bus_priv = NULL;
+    }
 }
 
 whd_result_t whd_bus_sdio_ack_interrupt(whd_driver_t whd_driver, uint32_t intstatus)
@@ -458,7 +472,7 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 
     CHECK_RETURN(whd_chip_specific_init(whd_driver) );
     CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
-    cyhal_sdio_irq_enable(&whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_TRUE);
+    cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_TRUE);
     UNUSED_PARAMETER(elapsed_time);
     return result;
 }
@@ -467,7 +481,7 @@ whd_result_t whd_bus_sdio_deinit(whd_driver_t whd_driver)
 {
     CHECK_RETURN(whd_bus_sdio_deinit_oob_intr(whd_driver) );
 
-    cyhal_sdio_irq_enable(&whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_FALSE);
+    cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_FALSE);
 
     CHECK_RETURN(whd_allow_wlan_bus_to_sleep(whd_driver) );
 
@@ -785,7 +799,7 @@ static whd_result_t whd_bus_sdio_cmd52(whd_driver_t whd_driver, whd_bus_transfer
     arg.cmd52.write_data = value;
 
     WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, cmd52);
-    result = cyhal_sdio_send_cmd(&whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction,
+    result = cyhal_sdio_send_cmd(whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction,
                                  CYHAL_SDIO_CMD_IO_RW_DIRECT, arg.value,
                                  &sdio_response);
     WHD_BUS_STATS_CONDITIONAL_INCREMENT_VARIABLE(whd_driver->bus_priv, (result != WHD_SUCCESS), cmd52_fail);
@@ -827,7 +841,7 @@ static whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer
         arg.cmd53.count = (unsigned int)(data_size & 0x1FF);
 
         result =
-            cyhal_sdio_bulk_transfer(&whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction, arg.value,
+            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction, arg.value,
                                      (uint32_t *)data, data_size, response);
 
         if (result != CY_RSLT_SUCCESS)
@@ -846,7 +860,7 @@ static whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer
         arg.cmd53.block_mode = (unsigned int)1;
 
         result =
-            cyhal_sdio_bulk_transfer(&whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction, arg.value,
+            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction, arg.value,
                                      (uint32_t *)data, data_size, response);
 
         if (result != CY_RSLT_SUCCESS)
@@ -1325,9 +1339,11 @@ static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t e
     if (event != CYHAL_SDIO_CARD_INTERRUPT)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
-
+        WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, error_intrs);
         return;
     }
+
+    WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, sdio_intrs);
 
     /* call thread notify to wake up WHD thread */
     whd_thread_notify_irq(whd_driver);
@@ -1335,13 +1351,13 @@ static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t e
 
 whd_result_t whd_bus_sdio_irq_register(whd_driver_t whd_driver)
 {
-    cyhal_sdio_register_irq(&whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
+    cyhal_sdio_register_irq(whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
     return WHD_SUCCESS;
 }
 
 whd_result_t whd_bus_sdio_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
 {
-    cyhal_sdio_irq_enable(&whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, enable);
+    cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, enable);
     return WHD_SUCCESS;
 }
 
@@ -1355,7 +1371,7 @@ static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event
     if (event != expected_event)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
-
+        WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, error_intrs);
         return;
     }
 

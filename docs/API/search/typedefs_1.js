@@ -13,6 +13,7 @@ var searchData=
   ['whd_5finit_5fconfig_5ft',['whd_init_config_t',['../whd_8h.html#a933f0025533b9b88ecb77b651db29250',1,'whd.h']]],
   ['whd_5finterface_5ft',['whd_interface_t',['../whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0',1,'whd.h']]],
   ['whd_5fnetif_5ffuncs_5ft',['whd_netif_funcs_t',['../whd_8h.html#ac35b975959ed585acf554535b502ce68',1,'whd.h']]],
+  ['whd_5foob_5fconfig_5ft',['whd_oob_config_t',['../whd__types_8h.html#ac07b13dcb5ec0e66a707dcf8a539c97e',1,'whd_types.h']]],
   ['whd_5fresource_5fsource_5ft',['whd_resource_source_t',['../whd_8h.html#a05847ad8fa418d69d5f51fe654835b8b',1,'whd.h']]],
   ['whd_5fresult_5ft',['whd_result_t',['../whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05',1,'whd_types.h']]],
   ['whd_5fscan_5fresult_5fcallback_5ft',['whd_scan_result_callback_t',['../group__wifijoin.html#ga9f8c6096922212981dd2101a17aec471',1,'whd_wifi_api.h']]],

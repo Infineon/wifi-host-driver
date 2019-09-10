@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.10.0
+# Wi-Fi Host Driver (WHD)  v1.30.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ### New Features

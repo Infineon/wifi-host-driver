@@ -943,6 +943,9 @@ typedef struct
     uint8_t data[32]; /**< WEP key as values NOT characters                                */
 } whd_wep_key_t;
 
+/**
+ * Structure for Out-of-band interrupt config parameters which can be set by application during whd power up
+ */
 typedef struct whd_oob_config
 {
     cyhal_gpio_t host_oob_pin;   /**< Host-side GPIO pin selection */
