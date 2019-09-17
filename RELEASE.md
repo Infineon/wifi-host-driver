@@ -35,7 +35,7 @@ None
 * --- 7.45.98.81 ---
 
 #### 43012
-* --- 13.10.271.198 ---
+* --- 13.10.271.192 ---
 * Security fix(Dragonblood WPA3 attack)
 * Association failure fix
 * BT coex throughput fix
