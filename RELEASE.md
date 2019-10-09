@@ -1,67 +1,55 @@
-# Wi-Fi Host Driver (WHD)  v1.30.0
+# Wi-Fi Host Driver (WHD)  v1.40.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
 * Supports Wi-Fi Station (STA) and AP mode of operation
 * Supports concurrent operation of STA and AP interface
-* Includes multiple security support like WPA2, WPA3, and open
-* Provides function to perform Advanced Power Management
-* Supports low power offloads, including ARP, packet filters
-* Includes WFA Pre-certification support for 802.11n and WPA3
+* Supports multiple security methods such as WPA2, WPA3, and open
+* Provides functions for Advanced Power Management
+* Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
+* Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.10.0
+## Changes since v1.30.0
 ### New Features
-* TCP Keepalive offload, DHCP lease time renewal offload and Beacon trim
-* Out-of-bound (OOB) interrupt support
-* Allow clm_blob from external storage
-* Nvram addition
+None
 
 ### Defect Fixes
-* Cdc semaphores are freed twice during deinit
-* Whd_bus_sdio_attach API throws WHD_ERROR("Timeout while waiting for high throughput clock\n") while testing deinit and init case
-* API input parameter validation
-* Lots of assert message "failed to post AP link semaphore" in whd_handle_apsta_event
+* Security fix (KRACK all-zero-key)
+* Fixed Wi-Fi connection issue after receiving DISASSOC_IND messages
+* Fixed ioctl buffer length overflow
+* Added API input argument checks
 
 ### Known Issues
 None
 
 ### Firmware Changes
-#### 4343W
+#### CYW4343W
 
+* --- 7.45.98.92 ---
+* Security fix (KRACK all-zero-key)
 * --- 7.45.98.89 ---
-* Security fix(Dragonblood WPA3 attack)
-* TCP Keepalive Implementation
-* Security fix(CVE-2019-9501 / CVE-2019-9502)
-* --- 7.45.98.81 ---
 
-#### 43012
+#### CYW43012
+* --- 13.10.271.203 ---
+* Security fix (KRACK all-zero-key)
 * --- 13.10.271.192 ---
-* Security fix(Dragonblood WPA3 attack)
-* Association failure fix
-* BT coex throughput fix
-* Fix for Beacon loss issue
-* Fix for WPA3 Cert timeout failure
-* 2G/5G band-edge improvement [r]
-* RSSI value display fix
-* Security fix(CVE-2019-9501 / CVE-2019-9502)
-* --- 13.10.271.162 ---
 
-Note: [r] is regulatory related
+Note: [r] is regulatory-related
 
 ## Supported Software and Tools
-This version of the WHD was validated for compatibility with the following Software and Tools:
+This version of the WHD was validated for compatibility with the following software and tools:
 
 | Software and Tools                                      | Version      |
 | :---                                                    | :----        |
 | GCC Compiler                                            | 7.2.1        |
 | IAR Compiler                                            | 8.32         |
-| ARM Compiler 6                                          | 6.11         |
-| MBED OS                                                 | 5.13.1       |
+| Arm Compiler 6                                          | 6.11         |
+| Mbed OS                                                 | 5.13.1       |
 | ThreadX/NetX-Duo                                        | 5.8          |
 | FreeRTOS/LWIP                                           | 2.0.3        |
 
 
-## More information
+## More Information
 * [Wi-Fi Host Driver README File](./README.md)
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html)
 * [Cypress Semiconductor](http://www.cypress.com)
