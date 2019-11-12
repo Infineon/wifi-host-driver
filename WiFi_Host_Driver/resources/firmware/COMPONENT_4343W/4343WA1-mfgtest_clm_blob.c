@@ -397,4 +397,5 @@ const unsigned char wifi_mfg_firmware_clm_blob_image_data[7222] =
     1, 255, 1, 52, 1, 14, 1, 15, 3, 28, 39, 49, 2, 19, 49, 166, 169, 0,
     0
 };
-
+const resource_hnd_t wifi_mfg_firmware_clm_blob =
+{ RESOURCE_IN_MEMORY, 7222, {.mem = { (const char *)wifi_mfg_firmware_clm_blob_image_data }}};
