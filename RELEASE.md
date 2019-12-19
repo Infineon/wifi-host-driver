@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.40.0
+# Wi-Fi Host Driver (WHD)  v1.70.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -9,30 +9,37 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.30.0
+## Changes since v1.40.0
 ### New Features
-None
+* Mfgtest support
+* Power saving enhancements
 
 ### Defect Fixes
-* Security fix (KRACK all-zero-key)
-* Fixed Wi-Fi connection issue after receiving DISASSOC_IND messages
-* Fixed ioctl buffer length overflow
-* Added API input argument checks
+* APSTA fix
+* Roaming failure fix
 
 ### Known Issues
 None
 
 ### Firmware Changes
 #### CYW4343W
-
 * --- 7.45.98.92 ---
-* Security fix (KRACK all-zero-key)
-* --- 7.45.98.89 ---
 
 #### CYW43012
+* --- 13.10.271.218 ---
+* Fixed softap PHYTX error due to probe response length mismatch.
+* Fixed reinit path for PM2 mode.
+* Fixed tempsense as a work around.
+* Fixed PHY deaf for ATE.
+* Fixed reassociation problem when beacon loss and deauth roam is triggered in sequence.
+* Fixed security trap with softap.
+* Fixed PHYTX for BTCOEX stability.
+* Zero stalls and very low throughput fixed due to minimum schedule configuration.
+* Fixed PHY CRS stuck as a work around.
+* Enable additional IOVAR for PHY i.e. PHY_EXT_IOV.
+* Fixed coverity, build issues.
+* Enhanced WPA3 PWE speed optimization.
 * --- 13.10.271.203 ---
-* Security fix (KRACK all-zero-key)
-* --- 13.10.271.192 ---
 
 Note: [r] is regulatory-related
 
