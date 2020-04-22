@@ -115,4 +115,3 @@ static const char wifi_nvram_image[] =
 #error Wi-Fi NVRAM image included twice
 
 #endif /* ifndef INCLUDED_NVRAM_IMAGE_H_ */
-

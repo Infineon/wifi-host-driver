@@ -263,4 +263,3 @@ cy_rslt_t cy_rtos_delay_milliseconds(cy_time_t num_ms)
     }
     return CY_RTOS_GENERAL_ERROR;
 }
-

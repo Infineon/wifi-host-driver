@@ -45,4 +45,3 @@ typedef volatile uint32_t cy_thread_t;       /** RTOS definition of a thread han
 typedef int32_t cy_rtos_error_t;                      /** RTOS definition of a error status */
 typedef uint32_t cy_time_t;
 typedef uint32_t cy_thread_arg_t;
-

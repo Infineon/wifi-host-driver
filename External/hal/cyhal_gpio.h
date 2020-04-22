@@ -205,4 +205,3 @@ void cyhal_gpio_irq_enable(cyhal_gpio_t pin, cyhal_gpio_irq_event_t event, bool 
 #endif /* __cplusplus */
 
 /** \} group_hal_gpio */
-

@@ -39,4 +39,3 @@ var indexSectionLabels =
   8: "Macros",
   9: "Modules"
 };
-

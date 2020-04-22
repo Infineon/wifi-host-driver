@@ -287,4 +287,3 @@ extern cy_rslt_t cy_rtos_delay_milliseconds(cy_time_t num_ms);
 } /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_CY_RTOS_INTERFACE_H_ */
-

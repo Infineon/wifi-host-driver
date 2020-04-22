@@ -83,4 +83,3 @@ enum cyhal_rslt_module_chip
 #endif /* __cplusplus */
 
 /** \} group_hal_modules */
-

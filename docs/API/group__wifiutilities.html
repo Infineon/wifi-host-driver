@@ -60,7 +60,7 @@ $(function() {
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
+  <div id="splitbar" style="-moz-user-select:none;"
        class="ui-resizable-handle">
   </div>
 </div>
@@ -79,7 +79,7 @@ $(document).ready(function(){initNavTree('group__wifiutilities.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -153,6 +153,99 @@ Functions</h2></td></tr>
 <tr class="memitem:ga95237c0e6182bfb176519421ac9287b4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga95237c0e6182bfb176519421ac9287b4">whd_wifi_set_coex_config</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#a1cb4da9972e0e9317a6e26e2fd460902">whd_coex_config_t</a> *coex_config)</td></tr>
 <tr class="memdesc:ga95237c0e6182bfb176519421ac9287b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set coex configuration.  <a href="#ga95237c0e6182bfb176519421ac9287b4">More...</a><br /></td></tr>
 <tr class="separator:ga95237c0e6182bfb176519421ac9287b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6bf707d845518cba9a8256fb5681f4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gae6bf707d845518cba9a8256fb5681f4a">whd_arp_version</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t *version)</td></tr>
+<tr class="memdesc:gae6bf707d845518cba9a8256fb5681f4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version of Device (WLAN) Firmware.  <a href="#gae6bf707d845518cba9a8256fb5681f4a">More...</a><br /></td></tr>
+<tr class="separator:gae6bf707d845518cba9a8256fb5681f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2cd55bdc13221177c61310ecaa6f4bd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga2cd55bdc13221177c61310ecaa6f4bd7">whd_arp_peerage_get</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t *seconds)</td></tr>
+<tr class="memdesc:ga2cd55bdc13221177c61310ecaa6f4bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ARP Offload Peer Age from Device (WLAN) Length of time in seconds before aging out an entry in the WLAN processor ARP table.  <a href="#ga2cd55bdc13221177c61310ecaa6f4bd7">More...</a><br /></td></tr>
+<tr class="separator:ga2cd55bdc13221177c61310ecaa6f4bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab61ae9878853c02b4cf194c2c3a7377f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gab61ae9878853c02b4cf194c2c3a7377f">whd_arp_peerage_set</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t seconds)</td></tr>
+<tr class="memdesc:gab61ae9878853c02b4cf194c2c3a7377f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ARP Offload Peer Age in Device (WLAN) Length of time in seconds before aging out an entry in the WLAN processor ARP table.  <a href="#gab61ae9878853c02b4cf194c2c3a7377f">More...</a><br /></td></tr>
+<tr class="separator:gab61ae9878853c02b4cf194c2c3a7377f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga22d76514755f2dfde0ee6acbc193787a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga22d76514755f2dfde0ee6acbc193787a">whd_arp_arpoe_get</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t *agent_enable)</td></tr>
+<tr class="memdesc:ga22d76514755f2dfde0ee6acbc193787a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ARP Offload Agent Enable from Device (WLAN)  <a href="#ga22d76514755f2dfde0ee6acbc193787a">More...</a><br /></td></tr>
+<tr class="separator:ga22d76514755f2dfde0ee6acbc193787a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa30d9e2a761de17962312d818f941c05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaa30d9e2a761de17962312d818f941c05">whd_arp_arpoe_set</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t agent_enable)</td></tr>
+<tr class="memdesc:gaa30d9e2a761de17962312d818f941c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ARP Offload Agent Enable in Device (WLAN) Set Enable/Disable of ARP Offload Agent.  <a href="#gaa30d9e2a761de17962312d818f941c05">More...</a><br /></td></tr>
+<tr class="separator:gaa30d9e2a761de17962312d818f941c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga01ece00a357914d02fa5a181fbddbf8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga01ece00a357914d02fa5a181fbddbf8c">whd_arp_cache_clear</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
+<tr class="memdesc:ga01ece00a357914d02fa5a181fbddbf8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear ARP Offload cache in Device (WLAN)  <a href="#ga01ece00a357914d02fa5a181fbddbf8c">More...</a><br /></td></tr>
+<tr class="separator:ga01ece00a357914d02fa5a181fbddbf8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga54728d3d6a714ef9264d6e25df9a6722"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga54728d3d6a714ef9264d6e25df9a6722">whd_arp_features_get</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t *features)</td></tr>
+<tr class="memdesc:ga54728d3d6a714ef9264d6e25df9a6722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ARP Offload Feature Flags from Device (WLAN)  <a href="#ga54728d3d6a714ef9264d6e25df9a6722">More...</a><br /></td></tr>
+<tr class="separator:ga54728d3d6a714ef9264d6e25df9a6722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab4ebcd7fdd7b328e2f4e10b79197cfca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gab4ebcd7fdd7b328e2f4e10b79197cfca">whd_arp_features_set</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t features)</td></tr>
+<tr class="memdesc:gab4ebcd7fdd7b328e2f4e10b79197cfca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ARP Offload Feature Flags in Device (WLAN)  <a href="#gab4ebcd7fdd7b328e2f4e10b79197cfca">More...</a><br /></td></tr>
+<tr class="separator:gab4ebcd7fdd7b328e2f4e10b79197cfca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf70b6becc3e4ecc551f5bf5278d7ad93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaf70b6becc3e4ecc551f5bf5278d7ad93">whd_arp_features_print</a> (uint32_t features, const char *title)</td></tr>
+<tr class="memdesc:gaf70b6becc3e4ecc551f5bf5278d7ad93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print ARP Offload Feature Flags in Human readable form to console.  <a href="#gaf70b6becc3e4ecc551f5bf5278d7ad93">More...</a><br /></td></tr>
+<tr class="separator:gaf70b6becc3e4ecc551f5bf5278d7ad93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga417b404b9892862a572802a4ea38eb79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga417b404b9892862a572802a4ea38eb79">whd_arp_hostip_list_add</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t *host_ipv4_list, uint32_t count)</td></tr>
+<tr class="memdesc:ga417b404b9892862a572802a4ea38eb79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add ARP Offload Host IP Identifier(s) to HostIP List to Device (WLAN)  <a href="#ga417b404b9892862a572802a4ea38eb79">More...</a><br /></td></tr>
+<tr class="separator:ga417b404b9892862a572802a4ea38eb79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61135784226a59af098384f4a071af02"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga61135784226a59af098384f4a071af02">whd_arp_hostip_list_add_string</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const char *ip_addr)</td></tr>
+<tr class="memdesc:ga61135784226a59af098384f4a071af02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add One ARP Offload Host IP Identifier to HostIP List (mbed-style IP string) to Device (WLAN)  <a href="#ga61135784226a59af098384f4a071af02">More...</a><br /></td></tr>
+<tr class="separator:ga61135784226a59af098384f4a071af02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15cfc56bd481a4bc02c6dc93bfa6883c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga15cfc56bd481a4bc02c6dc93bfa6883c">whd_arp_hostip_list_clear_id</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t ipv4_addr)</td></tr>
+<tr class="memdesc:ga15cfc56bd481a4bc02c6dc93bfa6883c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear One ARP Offload Host IP Identifier from Host IP List in Device (WLAN)  <a href="#ga15cfc56bd481a4bc02c6dc93bfa6883c">More...</a><br /></td></tr>
+<tr class="separator:ga15cfc56bd481a4bc02c6dc93bfa6883c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa38f97cc9800e7355d96d833b32b1c1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaa38f97cc9800e7355d96d833b32b1c1c">whd_arp_hostip_list_clear_id_string</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const char *ip_addr)</td></tr>
+<tr class="memdesc:gaa38f97cc9800e7355d96d833b32b1c1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear One ARP Offload Host IP Identifier from Host IP List (mbed-style IP string) in Device (WLAN)  <a href="#gaa38f97cc9800e7355d96d833b32b1c1c">More...</a><br /></td></tr>
+<tr class="separator:gaa38f97cc9800e7355d96d833b32b1c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaf3cec4a4896670049ec3802c91a2d66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaaf3cec4a4896670049ec3802c91a2d66">whd_arp_hostip_list_clear</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
+<tr class="memdesc:gaaf3cec4a4896670049ec3802c91a2d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all ARP Offload Host IP Identifier List.  <a href="#gaaf3cec4a4896670049ec3802c91a2d66">More...</a><br /></td></tr>
+<tr class="separator:gaaf3cec4a4896670049ec3802c91a2d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4287cc85981a511399ea927c84f61330"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga4287cc85981a511399ea927c84f61330">whd_arp_hostip_list_get</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t count, uint32_t *host_ipv4_list, uint32_t *filled)</td></tr>
+<tr class="memdesc:ga4287cc85981a511399ea927c84f61330"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ARP Offload Host IP Identifiers from Device (WLAN)  <a href="#ga4287cc85981a511399ea927c84f61330">More...</a><br /></td></tr>
+<tr class="separator:ga4287cc85981a511399ea927c84f61330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga564e95d3343802ed33d1b2c6fb531aeb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga564e95d3343802ed33d1b2c6fb531aeb">whd_arp_stats_clear</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
+<tr class="memdesc:ga564e95d3343802ed33d1b2c6fb531aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear ARP Offload statistics in Device (WLAN)  <a href="#ga564e95d3343802ed33d1b2c6fb531aeb">More...</a><br /></td></tr>
+<tr class="separator:ga564e95d3343802ed33d1b2c6fb531aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9d65fe0a82dee5edf65eb6f1efe9df52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga9d65fe0a82dee5edf65eb6f1efe9df52">whd_arp_stats_get</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, whd_arp_stats_t *stats)</td></tr>
+<tr class="memdesc:ga9d65fe0a82dee5edf65eb6f1efe9df52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ARP Offload statistics from Device (WLAN)  <a href="#ga9d65fe0a82dee5edf65eb6f1efe9df52">More...</a><br /></td></tr>
+<tr class="separator:ga9d65fe0a82dee5edf65eb6f1efe9df52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga37714a68f350e5a9e24dd6aeaea0ae98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga37714a68f350e5a9e24dd6aeaea0ae98">whd_arp_stats_print</a> (whd_arp_stats_t *arp_stats, const char *title)</td></tr>
+<tr class="memdesc:ga37714a68f350e5a9e24dd6aeaea0ae98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print ARP Offload statistics NOTE: call <a class="el" href="group__wifiutilities.html#ga9d65fe0a82dee5edf65eb6f1efe9df52" title="Get ARP Offload statistics from Device (WLAN)">whd_arp_stats_get()</a>, then print them using this function.  <a href="#ga37714a68f350e5a9e24dd6aeaea0ae98">More...</a><br /></td></tr>
+<tr class="separator:ga37714a68f350e5a9e24dd6aeaea0ae98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae81aead624f8e374970e1aa3f330ea30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gae81aead624f8e374970e1aa3f330ea30">whd_pf_add_packet_filter</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const <a class="el" href="structwhd__packet__filter__t.html">whd_packet_filter_t</a> *settings)</td></tr>
+<tr class="memdesc:gae81aead624f8e374970e1aa3f330ea30"><td class="mdescLeft">&#160;</td><td class="mdescRight">A filter must be added (e.g.  <a href="#gae81aead624f8e374970e1aa3f330ea30">More...</a><br /></td></tr>
+<tr class="separator:gae81aead624f8e374970e1aa3f330ea30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff414d31f3406ec5d1af54b889f4849a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaff414d31f3406ec5d1af54b889f4849a">whd_pf_remove_packet_filter</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t filter_id)</td></tr>
+<tr class="memdesc:gaff414d31f3406ec5d1af54b889f4849a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a previously added filter.  <a href="#gaff414d31f3406ec5d1af54b889f4849a">More...</a><br /></td></tr>
+<tr class="separator:gaff414d31f3406ec5d1af54b889f4849a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3e70cd84bf811b869c955d75fa80590d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga3e70cd84bf811b869c955d75fa80590d">whd_pf_enable_packet_filter</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t filter_id)</td></tr>
+<tr class="memdesc:ga3e70cd84bf811b869c955d75fa80590d"><td class="mdescLeft">&#160;</td><td class="mdescRight">After a filter has been added it can be enabled or disabled as needed.  <a href="#ga3e70cd84bf811b869c955d75fa80590d">More...</a><br /></td></tr>
+<tr class="separator:ga3e70cd84bf811b869c955d75fa80590d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6af0c7e202709713fa5d06e71a585e28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga6af0c7e202709713fa5d06e71a585e28">whd_pf_disable_packet_filter</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t filter_id)</td></tr>
+<tr class="memdesc:ga6af0c7e202709713fa5d06e71a585e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">After a filter has been added it can be enabled or disabled as needed.  <a href="#ga6af0c7e202709713fa5d06e71a585e28">More...</a><br /></td></tr>
+<tr class="separator:ga6af0c7e202709713fa5d06e71a585e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga35860e8c45162735f5ef3d93ed262d90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga35860e8c45162735f5ef3d93ed262d90">whd_wifi_toggle_packet_filter</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t filter_id, <a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a> enable)</td></tr>
+<tr class="memdesc:ga35860e8c45162735f5ef3d93ed262d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">After a filter has been added it can be enabled or disabled as needed.  <a href="#ga35860e8c45162735f5ef3d93ed262d90">More...</a><br /></td></tr>
+<tr class="separator:ga35860e8c45162735f5ef3d93ed262d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacd9d57c8febb11cc240db23f5de92cd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gacd9d57c8febb11cc240db23f5de92cd9">whd_pf_get_packet_filter_mask_and_pattern</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t filter_id, uint32_t max_size, uint8_t *mask, uint8_t *pattern, uint32_t *size_out)</td></tr>
+<tr class="memdesc:gacd9d57c8febb11cc240db23f5de92cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters are implemented in WLAN subsystem as a bit pattern and matching bit mask that are applied to incoming packets.  <a href="#gacd9d57c8febb11cc240db23f5de92cd9">More...</a><br /></td></tr>
+<tr class="separator:gacd9d57c8febb11cc240db23f5de92cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3e9371ccaa61f1f40e0246a66db42a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gab3e9371ccaa61f1f40e0246a66db42a6">whd_wifi_clear_packet_filter_stats</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t filter_id)</td></tr>
+<tr class="memdesc:gab3e9371ccaa61f1f40e0246a66db42a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the packet filter stats associated with a filter id.  <a href="#gab3e9371ccaa61f1f40e0246a66db42a6">More...</a><br /></td></tr>
+<tr class="separator:gab3e9371ccaa61f1f40e0246a66db42a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26172adb5ec181bb8f2009e47eb252cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga26172adb5ec181bb8f2009e47eb252cf">whd_pf_get_packet_filter_stats</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t filter_id, whd_pkt_filter_stats_t *stats)</td></tr>
+<tr class="memdesc:ga26172adb5ec181bb8f2009e47eb252cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the stats associated with a filter.  <a href="#ga26172adb5ec181bb8f2009e47eb252cf">More...</a><br /></td></tr>
+<tr class="separator:ga26172adb5ec181bb8f2009e47eb252cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga482c8ffcb1166f2f161e4ad67f8ef9d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga482c8ffcb1166f2f161e4ad67f8ef9d5">whd_tko_param</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, whd_tko_retry_t *whd_tko_retry, int set)</td></tr>
+<tr class="memdesc:ga482c8ffcb1166f2f161e4ad67f8ef9d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/Get TKO retry &amp; interval parameters.  <a href="#ga482c8ffcb1166f2f161e4ad67f8ef9d5">More...</a><br /></td></tr>
+<tr class="separator:ga482c8ffcb1166f2f161e4ad67f8ef9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6b46bcc1a3c7d708abc71ae6a123481"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gae6b46bcc1a3c7d708abc71ae6a123481">whd_tko_get_status</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, whd_tko_status_t *tko_status)</td></tr>
+<tr class="memdesc:gae6b46bcc1a3c7d708abc71ae6a123481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the tko status for all indexes.  <a href="#gae6b46bcc1a3c7d708abc71ae6a123481">More...</a><br /></td></tr>
+<tr class="separator:gae6b46bcc1a3c7d708abc71ae6a123481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70cacca6b62ca658882d9070c49b6343"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343">whd_tko_max_assoc</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t *max)</td></tr>
+<tr class="memdesc:ga70cacca6b62ca658882d9070c49b6343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the stats associated with a filter.  <a href="#ga70cacca6b62ca658882d9070c49b6343">More...</a><br /></td></tr>
+<tr class="separator:ga70cacca6b62ca658882d9070c49b6343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacc2882e3a308f7b2b938bc5741ab43c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gacc2882e3a308f7b2b938bc5741ab43c3">whd_tko_get_FW_connect</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t index, whd_tko_connect_t *whd_connect, uint16_t buflen)</td></tr>
+<tr class="memdesc:gacc2882e3a308f7b2b938bc5741ab43c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the stats associated with a filter.  <a href="#gacc2882e3a308f7b2b938bc5741ab43c3">More...</a><br /></td></tr>
+<tr class="separator:gacc2882e3a308f7b2b938bc5741ab43c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga189ed043d5ce9cf8d1a0845484a96d6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga189ed043d5ce9cf8d1a0845484a96d6b">whd_tko_toggle</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a> enable)</td></tr>
+<tr class="memdesc:ga189ed043d5ce9cf8d1a0845484a96d6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the stats associated with a filter.  <a href="#ga189ed043d5ce9cf8d1a0845484a96d6b">More...</a><br /></td></tr>
+<tr class="separator:ga189ed043d5ce9cf8d1a0845484a96d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga168fb83b839bab61d2c9d3b1f42a6782"></a>
@@ -953,6 +1046,1235 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="gae6bf707d845518cba9a8256fb5681f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae6bf707d845518cba9a8256fb5681f4a">&#9670;&nbsp;</a></span>whd_arp_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_version </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get version of Device (WLAN) Firmware. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">version</td><td>: pointer to store version #</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga2cd55bdc13221177c61310ecaa6f4bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2cd55bdc13221177c61310ecaa6f4bd7">&#9670;&nbsp;</a></span>whd_arp_peerage_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_peerage_get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get ARP Offload Peer Age from Device (WLAN) Length of time in seconds before aging out an entry in the WLAN processor ARP table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">seconds</td><td>: pointer to store value</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gab61ae9878853c02b4cf194c2c3a7377f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab61ae9878853c02b4cf194c2c3a7377f">&#9670;&nbsp;</a></span>whd_arp_peerage_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_peerage_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set ARP Offload Peer Age in Device (WLAN) Length of time in seconds before aging out an entry in the WLAN processor ARP table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">seconds</td><td>: Seconds to age out IP</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga22d76514755f2dfde0ee6acbc193787a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga22d76514755f2dfde0ee6acbc193787a">&#9670;&nbsp;</a></span>whd_arp_arpoe_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_arpoe_get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>agent_enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get ARP Offload Agent Enable from Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">agent_enable</td><td>: pointer to store value</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gaa30d9e2a761de17962312d818f941c05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa30d9e2a761de17962312d818f941c05">&#9670;&nbsp;</a></span>whd_arp_arpoe_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_arpoe_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>agent_enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set ARP Offload Agent Enable in Device (WLAN) Set Enable/Disable of ARP Offload Agent. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">agent_enable</td><td>: Enable=1 / Disable=0</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga01ece00a357914d02fa5a181fbddbf8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga01ece00a357914d02fa5a181fbddbf8c">&#9670;&nbsp;</a></span>whd_arp_cache_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_cache_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear ARP Offload cache in Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga54728d3d6a714ef9264d6e25df9a6722"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54728d3d6a714ef9264d6e25df9a6722">&#9670;&nbsp;</a></span>whd_arp_features_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_features_get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>features</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get ARP Offload Feature Flags from Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">features</td><td>: ptr to store currently set features - bit flags CY_ARP_OL_AGENT_ENABLE, etc. ARL_OL_AGENT | ARL_OL_SNOOP | ARP_OL_HOST_AUTO_REPLY | ARP_OL_PEER_AUTO_REPLY</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gab4ebcd7fdd7b328e2f4e10b79197cfca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab4ebcd7fdd7b328e2f4e10b79197cfca">&#9670;&nbsp;</a></span>whd_arp_features_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_features_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>features</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set ARP Offload Feature Flags in Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">features</td><td>: features to set value (you can OR ('|') multiple flags) CY_ARP_OL_AGENT_ENABLE, etc. ARL_OL_AGENT | ARL_OL_SNOOP | ARP_OL_HOST_AUTO_REPLY | ARP_OL_PEER_AUTO_REPLY</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gaf70b6becc3e4ecc551f5bf5278d7ad93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf70b6becc3e4ecc551f5bf5278d7ad93">&#9670;&nbsp;</a></span>whd_arp_features_print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_features_print </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>features</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>title</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print ARP Offload Feature Flags in Human readable form to console. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">features</td><td>: feature flags to set (you can OR '|' multiple flags) CY_ARP_OL_AGENT_ENABLE, etc. ARL_OL_AGENT | ARL_OL_SNOOP | ARP_OL_HOST_AUTO_REPLY | ARP_OL_PEER_AUTO_REPLY </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">title</td><td>: Optional: Title for output (NULL == no title)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga417b404b9892862a572802a4ea38eb79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga417b404b9892862a572802a4ea38eb79">&#9670;&nbsp;</a></span>whd_arp_hostip_list_add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_hostip_list_add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>host_ipv4_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add ARP Offload Host IP Identifier(s) to HostIP List to Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">host_ipv4_list</td><td>: pointer to host_ip data (IPv4, 1 uint32_t per ip addr) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>: Number of array elements in host_ip</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga61135784226a59af098384f4a071af02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61135784226a59af098384f4a071af02">&#9670;&nbsp;</a></span>whd_arp_hostip_list_add_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_hostip_list_add_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ip_addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add One ARP Offload Host IP Identifier to HostIP List (mbed-style IP string) to Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ip_addr</td><td>: pointer to ip string (as returned from mbedos calls)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga15cfc56bd481a4bc02c6dc93bfa6883c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga15cfc56bd481a4bc02c6dc93bfa6883c">&#9670;&nbsp;</a></span>whd_arp_hostip_list_clear_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_hostip_list_clear_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ipv4_addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear One ARP Offload Host IP Identifier from Host IP List in Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ipv4_addr</td><td>: ip addr expressed as a uint32_t</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gaa38f97cc9800e7355d96d833b32b1c1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa38f97cc9800e7355d96d833b32b1c1c">&#9670;&nbsp;</a></span>whd_arp_hostip_list_clear_id_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_hostip_list_clear_id_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ip_addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear One ARP Offload Host IP Identifier from Host IP List (mbed-style IP string) in Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ip_addr</td><td>: pointer to ip string (as returned from mbedos calls)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gaaf3cec4a4896670049ec3802c91a2d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaf3cec4a4896670049ec3802c91a2d66">&#9670;&nbsp;</a></span>whd_arp_hostip_list_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_hostip_list_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear all ARP Offload Host IP Identifier List. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga4287cc85981a511399ea927c84f61330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4287cc85981a511399ea927c84f61330">&#9670;&nbsp;</a></span>whd_arp_hostip_list_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_hostip_list_get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>host_ipv4_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>filled</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get ARP Offload Host IP Identifiers from Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>: Number of array elements in host_ip </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">host_ipv4_list</td><td>: Pointer to structure array to store host_ip data </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">filled</td><td>: Number of array elements filled by this routine</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga564e95d3343802ed33d1b2c6fb531aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga564e95d3343802ed33d1b2c6fb531aeb">&#9670;&nbsp;</a></span>whd_arp_stats_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_stats_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear ARP Offload statistics in Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga9d65fe0a82dee5edf65eb6f1efe9df52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d65fe0a82dee5edf65eb6f1efe9df52">&#9670;&nbsp;</a></span>whd_arp_stats_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_stats_get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_arp_stats_t *&#160;</td>
+          <td class="paramname"><em>stats</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get ARP Offload statistics from Device (WLAN) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">stats</td><td>: Ptr to store statistics whd_arp_stats_t</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga37714a68f350e5a9e24dd6aeaea0ae98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga37714a68f350e5a9e24dd6aeaea0ae98">&#9670;&nbsp;</a></span>whd_arp_stats_print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_arp_stats_print </td>
+          <td>(</td>
+          <td class="paramtype">whd_arp_stats_t *&#160;</td>
+          <td class="paramname"><em>arp_stats</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>title</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print ARP Offload statistics NOTE: call <a class="el" href="group__wifiutilities.html#ga9d65fe0a82dee5edf65eb6f1efe9df52" title="Get ARP Offload statistics from Device (WLAN)">whd_arp_stats_get()</a>, then print them using this function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">arp_stats</td><td>: Ptr to ARP statistics structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">title</td><td>: Optional: Title for output (NULL == no title)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gae81aead624f8e374970e1aa3f330ea30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae81aead624f8e374970e1aa3f330ea30">&#9670;&nbsp;</a></span>whd_pf_add_packet_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_pf_add_packet_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structwhd__packet__filter__t.html">whd_packet_filter_t</a> *&#160;</td>
+          <td class="paramname"><em>settings</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A filter must be added (e.g. </p>
+<p>created) before it can be enabled. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">settings</td><td>: Ptr to filter settings <a class="el" href="structwhd__packet__filter__t.html">whd_packet_filter_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gaff414d31f3406ec5d1af54b889f4849a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaff414d31f3406ec5d1af54b889f4849a">&#9670;&nbsp;</a></span>whd_pf_remove_packet_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_pf_remove_packet_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a previously added filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: filter to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga3e70cd84bf811b869c955d75fa80590d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3e70cd84bf811b869c955d75fa80590d">&#9670;&nbsp;</a></span>whd_pf_enable_packet_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_pf_enable_packet_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>After a filter has been added it can be enabled or disabled as needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: filter to enable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga6af0c7e202709713fa5d06e71a585e28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6af0c7e202709713fa5d06e71a585e28">&#9670;&nbsp;</a></span>whd_pf_disable_packet_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_pf_disable_packet_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>After a filter has been added it can be enabled or disabled as needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: filter to disable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga35860e8c45162735f5ef3d93ed262d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga35860e8c45162735f5ef3d93ed262d90">&#9670;&nbsp;</a></span>whd_wifi_toggle_packet_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_toggle_packet_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a>&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>After a filter has been added it can be enabled or disabled as needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: filter to disable/enable </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>: Enable/Disable Flag </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gacd9d57c8febb11cc240db23f5de92cd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacd9d57c8febb11cc240db23f5de92cd9">&#9670;&nbsp;</a></span>whd_pf_get_packet_filter_mask_and_pattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_pf_get_packet_filter_mask_and_pattern </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>max_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>pattern</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>size_out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filters are implemented in WLAN subsystem as a bit pattern and matching bit mask that are applied to incoming packets. </p>
+<p>This API retrieves the pattern and mask. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: which filter to retrieve </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_size</td><td>: size of both mask and pattern buffers </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">mask</td><td>: mask for this filter </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pattern</td><td>: pattern for this filter </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_out</td><td>: length of both mask and pattern </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gab3e9371ccaa61f1f40e0246a66db42a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab3e9371ccaa61f1f40e0246a66db42a6">&#9670;&nbsp;</a></span>whd_wifi_clear_packet_filter_stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_clear_packet_filter_stats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear the packet filter stats associated with a filter id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: which filter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga26172adb5ec181bb8f2009e47eb252cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga26172adb5ec181bb8f2009e47eb252cf">&#9670;&nbsp;</a></span>whd_pf_get_packet_filter_stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_pf_get_packet_filter_stats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>filter_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_pkt_filter_stats_t *&#160;</td>
+          <td class="paramname"><em>stats</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the stats associated with a filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_id</td><td>: which filter </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">stats</td><td>: Ptr to store statistics wl_pkt_filter_stats_t </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga482c8ffcb1166f2f161e4ad67f8ef9d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga482c8ffcb1166f2f161e4ad67f8ef9d5">&#9670;&nbsp;</a></span>whd_tko_param()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_tko_param </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_tko_retry_t *&#160;</td>
+          <td class="paramname"><em>whd_tko_retry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>set</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set/Get TKO retry &amp; interval parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">whd_tko_retry</td><td>: whd retry &amp; interval parameters structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set</td><td>: Set/Get Flag </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gae6b46bcc1a3c7d708abc71ae6a123481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae6b46bcc1a3c7d708abc71ae6a123481">&#9670;&nbsp;</a></span>whd_tko_get_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_tko_get_status </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_tko_status_t *&#160;</td>
+          <td class="paramname"><em>tko_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the tko status for all indexes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">tko_status</td><td>: Ptr to store tko_status </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga70cacca6b62ca658882d9070c49b6343"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70cacca6b62ca658882d9070c49b6343">&#9670;&nbsp;</a></span>whd_tko_max_assoc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_tko_max_assoc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the stats associated with a filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">max</td><td>: returns Max TCP connections supported by WLAN Firmware </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="gacc2882e3a308f7b2b938bc5741ab43c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacc2882e3a308f7b2b938bc5741ab43c3">&#9670;&nbsp;</a></span>whd_tko_get_FW_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_tko_get_FW_connect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_tko_connect_t *&#160;</td>
+          <td class="paramname"><em>whd_connect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>buflen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the stats associated with a filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>: index for TCP offload connection </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">whd_connect</td><td>: tko_connect structure buffer from Firmware </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buflen</td><td>: Buffer given for tko_connect </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga189ed043d5ce9cf8d1a0845484a96d6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga189ed043d5ce9cf8d1a0845484a96d6b">&#9670;&nbsp;</a></span>whd_tko_toggle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_tko_toggle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a>&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the stats associated with a filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifp</td><td>: Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>: Enable/Disable TCP Keepalive offload </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
 
 </div>
 </div>

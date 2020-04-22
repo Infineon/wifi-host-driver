@@ -1,13 +1,13 @@
 /*
- * Copyright 2019 Cypress Semiconductor Corporation
+ * Copyright 2020 Cypress Semiconductor Corporation
  * SPDX-License-Identifier: Apache-2.0
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -252,8 +252,7 @@ static uint8_t *whd_management_alloc_event_msgs_buffer(whd_interface_t ifp, whd_
  * @param event_nums          An array of event types that is to trigger the handler.
  *                            The array must be terminated with a WLC_E_NONE event
  *                            See @ref whd_event_num_t for available events
- * @param handler_func        A function pointer to the new handler callback,
- *                            or NULL if callbacks are to be disabled for the given event type
+ * @param handler_func        A function pointer to the new handler callback
  * @param handler_user_data   A pointer value which will be passed to the event handler function
  *                            at the time an event is triggered (NULL is allowed)
  * @param[out] *event_index   entry where the event handler is registered in the list
@@ -473,4 +472,3 @@ uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_i
     WPRINT_WHD_DEBUG( ("Invalid event index received to deregister the event handler \n") );
     return WHD_BADARG;
 }
-

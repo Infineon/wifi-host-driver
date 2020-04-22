@@ -271,4 +271,3 @@ void cyhal_sdio_irq_enable(cyhal_sdio_t *obj, cyhal_sdio_irq_event_t event, bool
 #endif
 
 /** \} group_hal_sdio */
-

@@ -132,4 +132,3 @@ typedef uint32_t cy_rslt_t;
 #endif
 
 /** \} group_result */
-

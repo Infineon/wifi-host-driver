@@ -15,6 +15,7 @@ var searchData=
   ['whd_5fmaclist_5ft',['whd_maclist_t',['../structwhd__maclist__t.html',1,'']]],
   ['whd_5fnetif_5ffuncs',['whd_netif_funcs',['../structwhd__netif__funcs.html',1,'']]],
   ['whd_5foob_5fconfig',['whd_oob_config',['../structwhd__oob__config.html',1,'']]],
+  ['whd_5fpacket_5ffilter_5ft',['whd_packet_filter_t',['../structwhd__packet__filter__t.html',1,'']]],
   ['whd_5fresource_5fsource',['whd_resource_source',['../structwhd__resource__source.html',1,'']]],
   ['whd_5fscan_5fextended_5fparams_5ft',['whd_scan_extended_params_t',['../structwhd__scan__extended__params__t.html',1,'']]],
   ['whd_5fscan_5fresult',['whd_scan_result',['../structwhd__scan__result.html',1,'']]],

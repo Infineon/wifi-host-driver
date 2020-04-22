@@ -247,4 +247,3 @@ void cyhal_spi_irq_enable(cyhal_spi_t *obj, cyhal_spi_irq_event_t event, bool en
 #if defined(__cplusplus)
 }
 #endif
-
