@@ -605,6 +605,7 @@
         <topic label="WPA_SECURITY" href="whd__types_8h.html#aa7ccd472bacbd8ee01f31f0f0e2ce3dc"/>
         <topic label="WPA2_SECURITY" href="whd__types_8h.html#a8875737a0403d2136a69bbc96401cccf"/>
         <topic label="WPA3_SECURITY" href="whd__types_8h.html#ad175824d1581f69f5a725e4c9171aa79"/>
+        <topic label="SECURITY_MASK" href="whd__types_8h.html#a537103c16413b65ffb4d9ee0156248f5"/>
         <topic label="ENTERPRISE_ENABLED" href="whd__types_8h.html#ada6d6331053c0f88c63d77ba8d2019c8"/>
         <topic label="WPS_ENABLED" href="whd__types_8h.html#aaae7e8a0eb357cae8f130f9099d8e7b8"/>
         <topic label="IBSS_ENABLED" href="whd__types_8h.html#a9640c064932a3a633a3312b737658f83"/>
@@ -789,6 +790,8 @@
           <topic label="WHD_SECURITY_WPA2_MIXED_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a602d04db8143c505cc674c738bf20150"/>
           <topic label="WHD_SECURITY_WPA2_FBT_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059ae380b414a2bc8a9343d0a6f4a71c0c0c"/>
           <topic label="WHD_SECURITY_WPA3_SAE" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a9d550fa7cc0ea96ac1e9a4de5223d2b0"/>
+          <topic label="WHD_SECURITY_WPA2_WPA_AES_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a2ecbc670d4cb7b82a2fbe4ee9af3a217"/>
+          <topic label="WHD_SECURITY_WPA2_WPA_MIXED_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a769e1d8325cd5eda1363e1d2b9157235"/>
           <topic label="WHD_SECURITY_WPA3_WPA2_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059af4d58bc2335113f0c70abdbd3019bb61"/>
           <topic label="WHD_SECURITY_WPA_TKIP_ENT" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a8331ab29a560b0936a5f16ed2745b550"/>
           <topic label="WHD_SECURITY_WPA_AES_ENT" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a45b9dd3606cbe683b3db7fd13b392ec2"/>

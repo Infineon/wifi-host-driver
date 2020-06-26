@@ -8,6 +8,7 @@ var searchData=
   ['sdio_5f1bit_5fmode',['sdio_1bit_mode',['../structwhd__sdio__config.html#aaf50e6ef7ee9717f104ced9db86efd6a',1,'whd_sdio_config']]],
   ['sdpcm_5fheader',['SDPCM_HEADER',['../whd__types_8h.html#aaf73ac170e07969ed067a6cd5088044f',1,'whd_types.h']]],
   ['security',['security',['../structwhd__scan__result.html#ae8d5baabacdabe6d3590465572849754',1,'whd_scan_result::security()'],['../structwhd__simple__scan__result.html#ae8d5baabacdabe6d3590465572849754',1,'whd_simple_scan_result::security()'],['../structwhd__ap__info.html#ae8d5baabacdabe6d3590465572849754',1,'whd_ap_info::security()']]],
+  ['security_5fmask',['SECURITY_MASK',['../whd__types_8h.html#a537103c16413b65ffb4d9ee0156248f5',1,'whd_types.h']]],
   ['shared_5fenabled',['SHARED_ENABLED',['../whd__types_8h.html#a4d4a4586c264fe8e4acb0bf7169b7b0f',1,'whd_types.h']]],
   ['signal_5fstrength',['signal_strength',['../structwhd__scan__result.html#ac303b69da3c469c92299a6ff260e2859',1,'whd_scan_result::signal_strength()'],['../structwhd__simple__scan__result.html#ac303b69da3c469c92299a6ff260e2859',1,'whd_simple_scan_result::signal_strength()'],['../structwhd__ap__info.html#ac303b69da3c469c92299a6ff260e2859',1,'whd_ap_info::signal_strength()']]],
   ['snr',['SNR',['../structwl__bss__info__struct.html#abcbf8106d506ba6a33c01411d5ec3e99',1,'wl_bss_info_struct']]],

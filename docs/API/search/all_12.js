@@ -458,6 +458,8 @@ var searchData=
   ['whd_5fsecurity_5fwpa2_5fmixed_5fpsk',['WHD_SECURITY_WPA2_MIXED_PSK',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a602d04db8143c505cc674c738bf20150',1,'whd_types.h']]],
   ['whd_5fsecurity_5fwpa2_5ftkip_5fent',['WHD_SECURITY_WPA2_TKIP_ENT',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059ad3888b236e75c3d5d5e491d01de5cd7f',1,'whd_types.h']]],
   ['whd_5fsecurity_5fwpa2_5ftkip_5fpsk',['WHD_SECURITY_WPA2_TKIP_PSK',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a901ffc3e307d8b44bc80150e7cea8fbb',1,'whd_types.h']]],
+  ['whd_5fsecurity_5fwpa2_5fwpa_5faes_5fpsk',['WHD_SECURITY_WPA2_WPA_AES_PSK',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a2ecbc670d4cb7b82a2fbe4ee9af3a217',1,'whd_types.h']]],
+  ['whd_5fsecurity_5fwpa2_5fwpa_5fmixed_5fpsk',['WHD_SECURITY_WPA2_WPA_MIXED_PSK',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a769e1d8325cd5eda1363e1d2b9157235',1,'whd_types.h']]],
   ['whd_5fsecurity_5fwpa3_5fsae',['WHD_SECURITY_WPA3_SAE',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a9d550fa7cc0ea96ac1e9a4de5223d2b0',1,'whd_types.h']]],
   ['whd_5fsecurity_5fwpa3_5fwpa2_5fpsk',['WHD_SECURITY_WPA3_WPA2_PSK',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059af4d58bc2335113f0c70abdbd3019bb61',1,'whd_types.h']]],
   ['whd_5fsecurity_5fwpa_5faes_5fent',['WHD_SECURITY_WPA_AES_ENT',['../whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a45b9dd3606cbe683b3db7fd13b392ec2',1,'whd_types.h']]],

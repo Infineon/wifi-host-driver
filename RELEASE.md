@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.90.2
+# Wi-Fi Host Driver (WHD)  v1.91.2
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,16 +11,14 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.70.0
+## Changes since v1.90.2
 ### New Features
-* Supports LPA API
-* Enabled OOB for 43012 in nvram.
+None
 
 ### Defect Fixes
-* Fixed WPA3 SoftAP security issue
-* Fixed roaming issue
-* Fixed 43012 softap stop failure
-* Fixed WPS security failure
+* Fixed unknown security mode return issue for whd_wifi_get_ap_info()
+* Add full channel scan support for join_specific()
+* Fixed mfg_test compilation error
 
 ### Known Issues
 None
@@ -51,7 +49,7 @@ This version of the WHD was validated for compatibility with the following softw
 | GCC Compiler                                            | 7.2.1        |
 | IAR Compiler                                            | 8.32         |
 | Arm Compiler 6                                          | 6.11         |
-| Mbed OS                                                 | 5.15.1       |
+| Mbed OS                                                 | 6.0.0        |
 | ThreadX/NetX-Duo                                        | 5.8          |
 | FreeRTOS/LWIP                                           | 2.0.3        |
 

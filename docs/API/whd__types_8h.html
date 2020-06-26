@@ -186,6 +186,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#ad175824d1581f69f5a725e4c9171aa79">WPA3_SECURITY</a>&#160;&#160;&#160;0x01000000</td></tr>
 <tr class="memdesc:ad175824d1581f69f5a725e4c9171aa79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to enable WPA3 PSK Security. <br /></td></tr>
 <tr class="separator:ad175824d1581f69f5a725e4c9171aa79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537103c16413b65ffb4d9ee0156248f5"><td class="memItemLeft" align="right" valign="top"><a id="a537103c16413b65ffb4d9ee0156248f5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a537103c16413b65ffb4d9ee0156248f5">SECURITY_MASK</a>&#160;&#160;&#160;(<a class="el" href="whd__types_8h.html#a4199a1b37dba92f482ff0b9eb406c323">WEP_ENABLED</a> | <a class="el" href="whd__types_8h.html#a20f0d7118c2d35a688bcdc5b8b0920d9">TKIP_ENABLED</a> | <a class="el" href="whd__types_8h.html#a577a9dbc615ba145496a41a2035bd615">AES_ENABLED</a>)</td></tr>
+<tr class="memdesc:a537103c16413b65ffb4d9ee0156248f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to Security mask. <br /></td></tr>
+<tr class="separator:a537103c16413b65ffb4d9ee0156248f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada6d6331053c0f88c63d77ba8d2019c8"><td class="memItemLeft" align="right" valign="top"><a id="ada6d6331053c0f88c63d77ba8d2019c8"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#ada6d6331053c0f88c63d77ba8d2019c8">ENTERPRISE_ENABLED</a>&#160;&#160;&#160;0x02000000</td></tr>
 <tr class="memdesc:ada6d6331053c0f88c63d77ba8d2019c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to enable Enterprise Security. <br /></td></tr>
@@ -853,21 +857,24 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a602d04db8143c505cc674c738bf20150">WHD_SECURITY_WPA2_MIXED_PSK</a> = (WPA2_SECURITY | AES_ENABLED | TKIP_ENABLED),
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059ae380b414a2bc8a9343d0a6f4a71c0c0c">WHD_SECURITY_WPA2_FBT_PSK</a> = (WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a9d550fa7cc0ea96ac1e9a4de5223d2b0">WHD_SECURITY_WPA3_SAE</a> = (WPA3_SECURITY | AES_ENABLED),
+<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a2ecbc670d4cb7b82a2fbe4ee9af3a217">WHD_SECURITY_WPA2_WPA_AES_PSK</a> = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED),
+<br />
+&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a769e1d8325cd5eda1363e1d2b9157235">WHD_SECURITY_WPA2_WPA_MIXED_PSK</a> = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059af4d58bc2335113f0c70abdbd3019bb61">WHD_SECURITY_WPA3_WPA2_PSK</a> = (WPA3_SECURITY | WPA2_SECURITY | AES_ENABLED),
-<br />
-&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a8331ab29a560b0936a5f16ed2745b550">WHD_SECURITY_WPA_TKIP_ENT</a> = (ENTERPRISE_ENABLED | WPA_SECURITY | TKIP_ENABLED),
+<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a8331ab29a560b0936a5f16ed2745b550">WHD_SECURITY_WPA_TKIP_ENT</a> = (ENTERPRISE_ENABLED | WPA_SECURITY | TKIP_ENABLED),
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a45b9dd3606cbe683b3db7fd13b392ec2">WHD_SECURITY_WPA_AES_ENT</a> = (ENTERPRISE_ENABLED | WPA_SECURITY | AES_ENABLED),
-<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a67aad7934dfb63684dcf3859f3dd1d88">WHD_SECURITY_WPA_MIXED_ENT</a> = (ENTERPRISE_ENABLED | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),
+<br />
+&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a67aad7934dfb63684dcf3859f3dd1d88">WHD_SECURITY_WPA_MIXED_ENT</a> = (ENTERPRISE_ENABLED | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059ad3888b236e75c3d5d5e491d01de5cd7f">WHD_SECURITY_WPA2_TKIP_ENT</a> = (ENTERPRISE_ENABLED | WPA2_SECURITY | TKIP_ENABLED),
-<br />
-&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a278600fd506f0522cd923a8ee066c3f4">WHD_SECURITY_WPA2_AES_ENT</a> = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED),
+<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a278600fd506f0522cd923a8ee066c3f4">WHD_SECURITY_WPA2_AES_ENT</a> = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED),
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059af37aae67b60c8d1cfc83be2bbbeeb894">WHD_SECURITY_WPA2_MIXED_ENT</a> = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED | TKIP_ENABLED),
-<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a843c4f3ffe1f3e006cde49b7bdee5a09">WHD_SECURITY_WPA2_FBT_ENT</a> = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),
-<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059aa9ded800120d37ad54c4467688416abc">WHD_SECURITY_IBSS_OPEN</a> = (IBSS_ENABLED),
 <br />
-&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a2d39ccad06b7d7225b03186160144195">WHD_SECURITY_WPS_SECURE</a> = AES_ENABLED,
+&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a843c4f3ffe1f3e006cde49b7bdee5a09">WHD_SECURITY_WPA2_FBT_ENT</a> = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),
+<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059aa9ded800120d37ad54c4467688416abc">WHD_SECURITY_IBSS_OPEN</a> = (IBSS_ENABLED),
+<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a2d39ccad06b7d7225b03186160144195">WHD_SECURITY_WPS_SECURE</a> = AES_ENABLED,
 <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059aebaa913f60b77b94277287056775c27d">WHD_SECURITY_UNKNOWN</a> = -1,
-<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059aa6ab763d4d6b3fcffd944d14b3edd1f4">WHD_SECURITY_FORCE_32_BIT</a> = 0x7fffffff
+<br />
+&#160;&#160;<a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059aa6ab763d4d6b3fcffd944d14b3edd1f4">WHD_SECURITY_FORCE_32_BIT</a> = 0x7fffffff
 <br />
  }</td></tr>
 <tr class="memdesc:aaeeea5666743710aa4f01ff264b27059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of Wi-Fi security modes.  <a href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059">More...</a><br /></td></tr>
@@ -1337,10 +1344,10 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a> + <a class="code" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a> + \</div><div class="line">                         SDPCM_HEADER + <a class="code" href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a> + <a class="code" href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a>)</div><div class="ttc" id="whd__types_8h_html_aab3fad8b23f2db6d6c985134359bec0d"><div class="ttname"><a href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a></div><div class="ttdeci">#define MAX_BUS_HEADER_SIZE</div><div class="ttdoc">Max bus header size for all bus types (sdio/spi)</div><div class="ttdef"><b>Definition:</b> whd_types.h:89</div></div>
-<div class="ttc" id="whd__types_8h_html_a50f830e25a5ac6d7d0e3eb8d23e90943"><div class="ttname"><a href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a></div><div class="ttdeci">#define BDC_HEADER_WITH_PAD</div><div class="ttdoc">BDC Header with padding 4 + 2.</div><div class="ttdef"><b>Definition:</b> whd_types.h:80</div></div>
-<div class="ttc" id="whd__types_8h_html_a9b159bb86ca28f2200f30661441f232e"><div class="ttname"><a href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a></div><div class="ttdeci">#define BUFFER_OVERHEAD</div><div class="ttdoc">Buffer overhead, sizeof(void *)</div><div class="ttdef"><b>Definition:</b> whd_types.h:91</div></div>
-<div class="ttc" id="whd__types_8h_html_a559655385d80ca97754fafa29ac87717"><div class="ttname"><a href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a></div><div class="ttdeci">#define BDC_HEADER_OFFSET_TO_DATA</div><div class="ttdoc">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).</div><div class="ttdef"><b>Definition:</b> whd_types.h:85</div></div>
+<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a> + <a class="code" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a> + \</div><div class="line">                         SDPCM_HEADER + <a class="code" href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a> + <a class="code" href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a>)</div><div class="ttc" id="whd__types_8h_html_aab3fad8b23f2db6d6c985134359bec0d"><div class="ttname"><a href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a></div><div class="ttdeci">#define MAX_BUS_HEADER_SIZE</div><div class="ttdoc">Max bus header size for all bus types (sdio/spi)</div><div class="ttdef"><b>Definition:</b> whd_types.h:90</div></div>
+<div class="ttc" id="whd__types_8h_html_a50f830e25a5ac6d7d0e3eb8d23e90943"><div class="ttname"><a href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a></div><div class="ttdeci">#define BDC_HEADER_WITH_PAD</div><div class="ttdoc">BDC Header with padding 4 + 2.</div><div class="ttdef"><b>Definition:</b> whd_types.h:81</div></div>
+<div class="ttc" id="whd__types_8h_html_a9b159bb86ca28f2200f30661441f232e"><div class="ttname"><a href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a></div><div class="ttdeci">#define BUFFER_OVERHEAD</div><div class="ttdoc">Buffer overhead, sizeof(void *)</div><div class="ttdef"><b>Definition:</b> whd_types.h:92</div></div>
+<div class="ttc" id="whd__types_8h_html_a559655385d80ca97754fafa29ac87717"><div class="ttname"><a href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a></div><div class="ttdeci">#define BDC_HEADER_OFFSET_TO_DATA</div><div class="ttdoc">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).</div><div class="ttdef"><b>Definition:</b> whd_types.h:86</div></div>
 </div><!-- fragment -->
 <p>The maximum space in bytes required for headers in front of the Ethernet header. </p>
 <p>6 + (8 + 4) + 4 + 4 + 4 = 30 bytes </p>
@@ -1569,6 +1576,10 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="aaeeea5666743710aa4f01ff264b27059ae380b414a2bc8a9343d0a6f4a71c0c0c"></a>WHD_SECURITY_WPA2_FBT_PSK&#160;</td><td class="fielddoc"><p>WPA2 FBT PSK Security with AES &amp; TKIP. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="aaeeea5666743710aa4f01ff264b27059a9d550fa7cc0ea96ac1e9a4de5223d2b0"></a>WHD_SECURITY_WPA3_SAE&#160;</td><td class="fielddoc"><p>WPA3 Security with AES. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aaeeea5666743710aa4f01ff264b27059a2ecbc670d4cb7b82a2fbe4ee9af3a217"></a>WHD_SECURITY_WPA2_WPA_AES_PSK&#160;</td><td class="fielddoc"><p>WPA2 WPA PSK Security with AES. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aaeeea5666743710aa4f01ff264b27059a769e1d8325cd5eda1363e1d2b9157235"></a>WHD_SECURITY_WPA2_WPA_MIXED_PSK&#160;</td><td class="fielddoc"><p>WPA2 WPA PSK Security with AES &amp; TKIP. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="aaeeea5666743710aa4f01ff264b27059af4d58bc2335113f0c70abdbd3019bb61"></a>WHD_SECURITY_WPA3_WPA2_PSK&#160;</td><td class="fielddoc"><p>WPA3 WPA2 PSK Security with AES. </p>
 </td></tr>
