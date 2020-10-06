@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.91.2
+# Wi-Fi Host Driver (WHD)  v1.92.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,17 +11,20 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.90.2
+## Changes since v1.91.2
 ### New Features
-None
+* Support 4373 on mbed-os
+* Update Nvram for CY8CKIT_064B0S2_4343W and CY8CKIT_064S0S2_4343W
+* Define WHD_PRINT_DISABLE MACRO to disable print
 
 ### Defect Fixes
-* Fixed unknown security mode return issue for whd_wifi_get_ap_info()
-* Add full channel scan support for join_specific()
-* Fixed mfg_test compilation error
+* Add key length check
+* Fix CMD53 error on PSoc6 + 4343w
+* Fix the compilation error in ModusToolbox
+* Fix semaphore timeout when stopping concurrent AP
 
 ### Known Issues
-None
+* Memory leak when calling wifi_Off()
 
 ### Firmware Changes
 #### CYW4343W
@@ -30,7 +33,12 @@ None
 * --- 7.45.98.92 ---
 
 #### CYW43012
-* --- 13.10.271.236 ---
+* --- 13.10.271.253 ---
+* Fix SoftAP low throughput issue under 80211 PS  mode
+* Support DPP feature
+* Support Coex security design of DOS
+* Support to account for drift in LPO frequency
+* Enhence power saving mechanism for Tx direction
 * Fixed 11n certification 5.2.27 issue
 * Fixed ATE FW crash in repeated RxPER tests
 * Supported WPA3/SAE Softap
@@ -38,6 +46,9 @@ None
 * Fixed roaming issue with password mismatch
 * Fixed firmware trap caused by Big hammer
 * --- 13.10.271.218 ---
+
+#### CYW4373
+* --- 13.10.246.234 ---
 
 Note: [r] is regulatory-related
 
@@ -49,7 +60,7 @@ This version of the WHD was validated for compatibility with the following softw
 | GCC Compiler                                            | 7.2.1        |
 | IAR Compiler                                            | 8.32         |
 | Arm Compiler 6                                          | 6.11         |
-| Mbed OS                                                 | 6.0.0        |
+| Mbed OS                                                 | 6.2.0        |
 | ThreadX/NetX-Duo                                        | 5.8          |
 | FreeRTOS/LWIP                                           | 2.0.3        |
 

@@ -27,16 +27,16 @@ extern "C" {
 
 /**
  * Character array of NVRAM image
- * Generated from cyw9cy8cmod-064b0s2-4343w_P100.txt
+ * Generated from cyw9cy8cmod-064s0s2-4343w_P100.txt
  */
 
 static const char wifi_nvram_image[] =
         "NVRAMRev=$Rev$"                                                     "\x00"
         "manfid=0x2d0"                                                       "\x00"
-        "prodid=0x087d"                                                      "\x00"
+        "prodid=0x088d"                                                      "\x00"
         "vendid=0x14e4"                                                      "\x00"
         "devid=0x43e2"                                                       "\x00"
-        "boardtype=0x087d"                                                   "\x00"
+        "boardtype=0x088d"                                                   "\x00"
         "boardrev=0x1100"                                                    "\x00"
         "boardnum=22"                                                        "\x00"
         NVRAM_GENERATED_MAC_ADDRESS                                          "\x00"
