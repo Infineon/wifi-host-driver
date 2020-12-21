@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__scan__extended__params__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_scan_extended_params_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__scan__extended__params__t_1ae142c15dcc2633a4ab09a282fc942186" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t number_of_probes_per_channel</definition>
+        <argsstring></argsstring>
+        <name>number_of_probes_per_channel</name>
+        <briefdescription>
+<para>Number of probes to send on each channel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="667" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="667" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__extended__params__t_1addbd186dd08b75e5de298a3d8dbb76a1" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t scan_active_dwell_time_per_channel_ms</definition>
+        <argsstring></argsstring>
+        <name>scan_active_dwell_time_per_channel_ms</name>
+        <briefdescription>
+<para>Period of time to wait on each channel when active scanning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="668" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="668" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__extended__params__t_1afe48c256e4f4f14eb202d51dd8348818" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t scan_passive_dwell_time_per_channel_ms</definition>
+        <argsstring></argsstring>
+        <name>scan_passive_dwell_time_per_channel_ms</name>
+        <briefdescription>
+<para>Period of time to wait on each channel when passive scanning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="669" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="669" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__extended__params__t_1a325bae58ff955b428047edab0a2f0799" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t scan_home_channel_dwell_time_between_channels_ms</definition>
+        <argsstring></argsstring>
+        <name>scan_home_channel_dwell_time_between_channels_ms</name>
+        <briefdescription>
+<para>Period of time to wait on the home channel when scanning. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only relevant if associated. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="670" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="670" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for storing extended scan parameters. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="666" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="665" bodyend="671"/>
+    <listofallmembers>
+      <member refid="structwhd__scan__extended__params__t_1ae142c15dcc2633a4ab09a282fc942186" prot="public" virt="non-virtual"><scope>whd_scan_extended_params_t</scope><name>number_of_probes_per_channel</name></member>
+      <member refid="structwhd__scan__extended__params__t_1addbd186dd08b75e5de298a3d8dbb76a1" prot="public" virt="non-virtual"><scope>whd_scan_extended_params_t</scope><name>scan_active_dwell_time_per_channel_ms</name></member>
+      <member refid="structwhd__scan__extended__params__t_1a325bae58ff955b428047edab0a2f0799" prot="public" virt="non-virtual"><scope>whd_scan_extended_params_t</scope><name>scan_home_channel_dwell_time_between_channels_ms</name></member>
+      <member refid="structwhd__scan__extended__params__t_1afe48c256e4f4f14eb202d51dd8348818" prot="public" virt="non-virtual"><scope>whd_scan_extended_params_t</scope><name>scan_passive_dwell_time_per_channel_ms</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

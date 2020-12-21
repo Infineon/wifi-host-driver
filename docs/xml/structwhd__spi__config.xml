@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__spi__config" kind="struct" language="C++" prot="public">
+    <compoundname>whd_spi_config</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__spi__config_1a65649e24a48dbfcf74a6e3b0ea729181" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+        <definition>whd_bool_t is_spi_normal_mode</definition>
+        <argsstring></argsstring>
+        <name>is_spi_normal_mode</name>
+        <briefdescription>
+<para>Default is false. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="971" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="971" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__spi__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1ac07b13dcb5ec0e66a707dcf8a539c97e" kindref="member">whd_oob_config_t</ref></type>
+        <definition>whd_oob_config_t oob_config</definition>
+        <argsstring></argsstring>
+        <name>oob_config</name>
+        <briefdescription>
+<para>Out-of-band interrupt configuration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="972" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="972" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for SPI config parameters which can be set by application during whd power up. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="57">
+        <label>whd_spi_config</label>
+        <link refid="structwhd__spi__config"/>
+        <childnode refid="58" relation="usage">
+          <edgelabel>oob_config</edgelabel>
+        </childnode>
+      </node>
+      <node id="58">
+        <label>whd_oob_config</label>
+        <link refid="structwhd__oob__config"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="969" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="968" bodyend="973"/>
+    <listofallmembers>
+      <member refid="structwhd__spi__config_1a65649e24a48dbfcf74a6e3b0ea729181" prot="public" virt="non-virtual"><scope>whd_spi_config</scope><name>is_spi_normal_mode</name></member>
+      <member refid="structwhd__spi__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" virt="non-virtual"><scope>whd_spi_config</scope><name>oob_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

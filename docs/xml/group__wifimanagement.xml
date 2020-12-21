@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__wifimanagement" kind="group">
+    <compoundname>wifimanagement</compoundname>
+    <title>WHD Wi-Fi Management API</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__wifimanagement_1ga286dde2ee65ac3ea5ae67a6e6ef25f0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_init</definition>
+        <argsstring>(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_config, whd_resource_source_t *resource_ops, whd_buffer_funcs_t *buffer_ops, whd_netif_funcs_t *network_ops)</argsstring>
+        <name>whd_init</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref> *</type>
+          <declname>whd_driver_ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a933f0025533b9b88ecb77b651db29250" kindref="member">whd_init_config_t</ref> *</type>
+          <declname>whd_init_config</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a05847ad8fa418d69d5f51fe654835b8b" kindref="member">whd_resource_source_t</ref> *</type>
+          <declname>resource_ops</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a44a6e9abc68a4322a3958bdc24ae9981" kindref="member">whd_buffer_funcs_t</ref> *</type>
+          <declname>buffer_ops</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1ac35b975959ed585acf554535b502ce68" kindref="member">whd_netif_funcs_t</ref> *</type>
+          <declname>network_ops</declname>
+        </param>
+        <briefdescription>
+<para>Initialize an instance of the WHD driver. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structwhd__init__config" kindref="compound">whd_init_config</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to configuration data that controls how the driver is initialized </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resource_ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to resource interface to provide resources to the driver initialization process </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a buffer interface to provide buffer related services to the driver instance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>network_ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a whd_netif_funcs_t to provide network stack services to the driver instance</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga1c8bf41b593cb947266f8690d495f381" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_on</definition>
+        <argsstring>(whd_driver_t whd_driver, whd_interface_t *ifpp)</argsstring>
+        <name>whd_wifi_on</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref> *</type>
+          <declname>ifpp</declname>
+        </param>
+        <briefdescription>
+<para>Turn on the Wi-Fi device. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialise Wi-Fi platform Program various WiFi parameters and modes</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ifpp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if initialization is successful, error code otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="117" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga422587a9b104a871233a42aceb2141d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_off</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_off</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Turn off the Wi-Fi device. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>De-Initialises the required parts of the hardware platform i.e. pins for SDIO/SPI, interrupt, reset, power etc.</para>
+</listitem><listitem><para>De-Initialises the whd thread which arbitrates access to the SDIO/SPI bus</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if deinitialization is successful, Error code otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="132" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1gab7d6e59874922e5646e08e52082e32f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_deinit</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_deinit</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Shutdown this instance of the wifi driver, freeing all used resources. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="140" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga925da3b1ed914d7bb661d3cb2af50680" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_up</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_set_up</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Brings up the Wi-Fi core. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga412c2d4653a7c36329c6cf78be344336" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_down</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_set_down</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Bring down the Wi-Fi core. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>WARNING / NOTE: This brings down the Wi-Fi core and existing network connections will be lost.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga553c009e9f6f856dfe243d745e21bbf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_add_secondary_interface</definition>
+        <argsstring>(whd_driver_t whd_drv, whd_mac_t *mac_addr, whd_interface_t *ifpp)</argsstring>
+        <name>whd_add_secondary_interface</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_drv</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>mac_addr</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref> *</type>
+          <declname>ifpp</declname>
+        </param>
+        <briefdescription>
+<para>Creates a secondary interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mac_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MAC address for the interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ifpp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the whd interface pointer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="169" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Initialisation and other management functions for WHD system. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

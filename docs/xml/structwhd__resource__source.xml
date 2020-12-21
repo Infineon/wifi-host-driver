@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__resource__source" kind="struct" language="C++" prot="public">
+    <compoundname>whd_resource_source</compoundname>
+    <includes local="no">whd_resource_api.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__resource__source_1ab2a3bf0a36362b733939361143158e02" prot="public" static="no" mutable="no">
+        <type>uint32_t(*</type>
+        <definition>uint32_t(* whd_resource_size) (whd_driver_t whd_drv, whd_resource_type_t resource, uint32_t *size_out)</definition>
+        <argsstring>)(whd_driver_t whd_drv, whd_resource_type_t resource, uint32_t *size_out)</argsstring>
+        <name>whd_resource_size</name>
+        <briefdescription>
+<para>Gets the size of the resource for respective resource type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resource</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of resource - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the resource</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="70" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__resource__source_1a621cec3fecb5491d46d3534a59b6862b" prot="public" static="no" mutable="no">
+        <type>uint32_t(*</type>
+        <definition>uint32_t(* whd_get_resource_block) (whd_driver_t whd_drv, whd_resource_type_t type, uint32_t blockno, const uint8_t **data, uint32_t *size_out)</definition>
+        <argsstring>)(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t blockno, const uint8_t **data, uint32_t *size_out)</argsstring>
+        <name>whd_get_resource_block</name>
+        <briefdescription>
+<para>Gets the resource block for specified resource type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of resource - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>blockno</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of block </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a block of data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the resource</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="83" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__resource__source_1a2645315e933c6e65046bec5dad04b8e4" prot="public" static="no" mutable="no">
+        <type>uint32_t(*</type>
+        <definition>uint32_t(* whd_get_resource_no_of_blocks) (whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *block_count)</definition>
+        <argsstring>)(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *block_count)</argsstring>
+        <name>whd_get_resource_no_of_blocks</name>
+        <briefdescription>
+<para>Gets block count for the specified resource_type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of resource - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to store block count for the resource</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="95" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__resource__source_1af7ac61e99cc2504e39dfb220a34b8d39" prot="public" static="no" mutable="no">
+        <type>uint32_t(*</type>
+        <definition>uint32_t(* whd_get_resource_block_size) (whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out)</definition>
+        <argsstring>)(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out)</argsstring>
+        <name>whd_get_resource_block_size</name>
+        <briefdescription>
+<para>Gets block size for the specified resource_type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of resources - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to store size of the block</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="106" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to a data source that provides external resources to the radio driver. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This data structure defines a source for data generally intended to be downloaded to the radio device.</para>
+<para>The data is assumed to be available as a set of blocks that are all the same size with the exception of the last block. The whd_get_resource_block_size function returns this block size. The whd_get_resource_block call returns a pointer to a block of data. The actual storage for the data block is owned by the data source, so only a pointer to the block is returned. There are two predominate use cases. If the data is stored in the internal flash memory, then whd_get_resource_no_of_blocks will return 1 and a call to whd_get_resource_block will return a pointer to the data image with the size being the size of the data image. If the data is stored in an external flash of some type, each block of data can be read from the external flash one at a time. whd_get_resource_no_of_blocks will return the physical number of blocks in the data and each call to whd_get_resource_block will read data from the external memory and make it available via an internal buffer. </para>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="59" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="58" bodyend="107"/>
+    <listofallmembers>
+      <member refid="structwhd__resource__source_1a621cec3fecb5491d46d3534a59b6862b" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_block</name></member>
+      <member refid="structwhd__resource__source_1af7ac61e99cc2504e39dfb220a34b8d39" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_block_size</name></member>
+      <member refid="structwhd__resource__source_1a2645315e933c6e65046bec5dad04b8e4" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_no_of_blocks</name></member>
+      <member refid="structwhd__resource__source_1ab2a3bf0a36362b733939361143158e02" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_resource_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

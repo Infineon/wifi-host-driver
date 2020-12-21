@@ -66,26 +66,25 @@
 
 #pragma pack(1)
 
-/*TODO: Keep this typedef? (in preference to the defines above */
-#if 0
+/*
+ * Sdio bus specific header consists of 3 parts:
+ * hardware header, hardware extension header and software header
+ *  - hardware header (frame tag) - 4 bytes
+ *  - hardware extension header - 8 bytes
+ *  - software header - 8 bytes
+ */
+/*
+ * Sdio bus specific header - Software header
+ */
 typedef struct
 {
-    uint16_t control_id;
-    uint8_t interface_index : 4;
-    uint16_t reserved        : 10;
-    uint8_t set             : 1;
-    uint8_t error           : 1;
-}sdpcm_cdc_flags_t;
-#endif /* if 0 */
-typedef struct
-{
-    uint8_t sequence;
-    uint8_t channel_and_flags;
-    uint8_t next_length;
-    uint8_t header_length;
-    uint8_t wireless_flow_control;
-    uint8_t bus_data_credit;
-    uint8_t _reserved[2];
+    uint8_t sequence;               /* Rx/Tx sequence number */
+    uint8_t channel_and_flags;      /*  4 MSB Channel number, 4 LSB arbitrary flag */
+    uint8_t next_length;            /* Length of next data frame, reserved for Tx */
+    uint8_t header_length;          /* Data offset */
+    uint8_t wireless_flow_control;  /* Flow control bits, reserved for Tx */
+    uint8_t bus_data_credit;        /* Maximum Sequence number allowed by firmware for Tx */
+    uint8_t _reserved[2];           /* Reserved */
 } sdpcm_sw_header_t;
 
 /*

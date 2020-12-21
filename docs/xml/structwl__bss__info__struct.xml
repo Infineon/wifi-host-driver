@@ -1,0 +1,408 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwl__bss__info__struct" kind="struct" language="C++" prot="public">
+    <compoundname>wl_bss_info_struct</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwl__bss__info__struct_1acd99bb05ca015e7d74448acb1deba7ca" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t version</definition>
+        <argsstring></argsstring>
+        <name>version</name>
+        <briefdescription>
+<para>version field </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="717" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="717" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aebb70c2aab3407a9f05334c47131a43b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <briefdescription>
+<para>byte length of data in this record, starting at version and including IEs </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="718" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="718" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1acff14471b28062500a2992114ae54765" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
+        <definition>whd_mac_t BSSID</definition>
+        <argsstring></argsstring>
+        <name>BSSID</name>
+        <briefdescription>
+<para>Unique 6-byte MAC address. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="719" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="719" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1ab3cd1ed6ac499c1d63772712337edba8" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t beacon_period</definition>
+        <argsstring></argsstring>
+        <name>beacon_period</name>
+        <briefdescription>
+<para>Interval between two consecutive beacon frames. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Units are Kusec </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="720" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="720" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a4d6a7cc78819fe901fa45a1b51266e18" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t capability</definition>
+        <argsstring></argsstring>
+        <name>capability</name>
+        <briefdescription>
+<para>Capability information. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="721" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="721" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a7eafb3bd3419add91d9d532df5dcf63e" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SSID_len</definition>
+        <argsstring></argsstring>
+        <name>SSID_len</name>
+        <briefdescription>
+<para>SSID length. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="722" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="722" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a337a4a90b9c8cb320d1232cf9f88fa90" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SSID[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>SSID</name>
+        <briefdescription>
+<para>Array to store SSID. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="723" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="723" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a86988a65e0d3ece7990c032c159786d6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <briefdescription>
+<para>Count of rates in this set. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="726" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="726" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a686551a9eef0a3911a371e315bb24d36" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t rates[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>rates</name>
+        <briefdescription>
+<para>rates in 500kbps units, higher bit set if basic </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="727" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="727" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aee32c70ea369b8be44e5cf2b9a1184a2" prot="public" static="no" mutable="no">
+        <type>struct wl_bss_info_struct::@1</type>
+        <definition>struct wl_bss_info_struct::@1  rateset</definition>
+        <argsstring></argsstring>
+        <name>rateset</name>
+        <briefdescription>
+<para>supported rates </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="728" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aa5d9886a989c0e36349581e3f06cd4c0" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1ac2f5aa33ad4da263645133854e489c76" kindref="member">wl_chanspec_t</ref></type>
+        <definition>wl_chanspec_t chanspec</definition>
+        <argsstring></argsstring>
+        <name>chanspec</name>
+        <briefdescription>
+<para>Channel specification for basic service set. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="729" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="729" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a1bec52968a72b2101def88458f0371ec" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t atim_window</definition>
+        <argsstring></argsstring>
+        <name>atim_window</name>
+        <briefdescription>
+<para>Announcement traffic indication message window size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Units are Kusec </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="730" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="730" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a2817cb129e69f6ce5a24dfb2dd8706cc" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t dtim_period</definition>
+        <argsstring></argsstring>
+        <name>dtim_period</name>
+        <briefdescription>
+<para>Delivery traffic indication message period. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="731" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="731" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1ae45c71dee229890b4401a4c0105d73cf" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t RSSI</definition>
+        <argsstring></argsstring>
+        <name>RSSI</name>
+        <briefdescription>
+<para>receive signal strength (in dBm) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="732" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="732" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a85ba569dec5085a93016434929bbf7d1" prot="public" static="no" mutable="no">
+        <type>int8_t</type>
+        <definition>int8_t phy_noise</definition>
+        <argsstring></argsstring>
+        <name>phy_noise</name>
+        <briefdescription>
+<para>noise (in dBm) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="733" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="733" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aaa58323f8c11ee56cc8d8c2e66938230" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t n_cap</definition>
+        <argsstring></argsstring>
+        <name>n_cap</name>
+        <briefdescription>
+<para>BSS is 802.11N Capable. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="735" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="735" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aafd41688d55159e60c6970dddbfdf4ba" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t nbss_cap</definition>
+        <argsstring></argsstring>
+        <name>nbss_cap</name>
+        <briefdescription>
+<para>802.11N BSS Capabilities (based on HT_CAP_*) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="736" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="736" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aaba7272626229ace409b150bb1981044" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ctl_ch</definition>
+        <argsstring></argsstring>
+        <name>ctl_ch</name>
+        <briefdescription>
+<para>802.11N BSS control channel number </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="737" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="737" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1ae3f4b5f7822024fbf0bea3a8845c67c4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t reserved32[1]</definition>
+        <argsstring>[1]</argsstring>
+        <name>reserved32</name>
+        <briefdescription>
+<para>Reserved for expansion of BSS properties. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="738" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="738" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1aa2585d779da0ab21273a8d92de9a0ebe" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t flags</definition>
+        <argsstring></argsstring>
+        <name>flags</name>
+        <briefdescription>
+<para>flags </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="739" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="739" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a72aca6ea6d8153b28ea8f139b932ec3e" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t reserved[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>reserved</name>
+        <briefdescription>
+<para>Reserved for expansion of BSS properties. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="740" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="740" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a7efd75a130623350ac4a98d3688ee791" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t basic_mcs[MCSSET_LEN]</definition>
+        <argsstring>[MCSSET_LEN]</argsstring>
+        <name>basic_mcs</name>
+        <briefdescription>
+<para>802.11N BSS required MCS set </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="741" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="741" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a67b93773e8da423543b703cad84da5a5" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t ie_offset</definition>
+        <argsstring></argsstring>
+        <name>ie_offset</name>
+        <briefdescription>
+<para>offset at which IEs start, from beginning </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="743" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="743" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1a5312679515b5ee9c1875196c703a8a52" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ie_length</definition>
+        <argsstring></argsstring>
+        <name>ie_length</name>
+        <briefdescription>
+<para>byte length of Information Elements </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="744" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="744" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwl__bss__info__struct_1abcbf8106d506ba6a33c01411d5ec3e99" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t SNR</definition>
+        <argsstring></argsstring>
+        <name>SNR</name>
+        <briefdescription>
+<para>Average SNR(signal to noise ratio) during frame reception. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="745" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="745" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>BSS(Basic Service Set) information structure. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Applications MUST CHECK ie_offset field and length field to access IEs(Information Elements) and next bss_info structure in a vector (in whd_sync_scan_result_t) </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="64">
+        <label>wl_bss_info_struct</label>
+        <link refid="structwl__bss__info__struct"/>
+        <childnode refid="65" relation="usage">
+          <edgelabel>BSSID</edgelabel>
+        </childnode>
+      </node>
+      <node id="65">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="716" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="715" bodyend="748"/>
+    <listofallmembers>
+      <member refid="structwl__bss__info__struct_1a1bec52968a72b2101def88458f0371ec" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>atim_window</name></member>
+      <member refid="structwl__bss__info__struct_1a7efd75a130623350ac4a98d3688ee791" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>basic_mcs</name></member>
+      <member refid="structwl__bss__info__struct_1ab3cd1ed6ac499c1d63772712337edba8" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>beacon_period</name></member>
+      <member refid="structwl__bss__info__struct_1acff14471b28062500a2992114ae54765" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>BSSID</name></member>
+      <member refid="structwl__bss__info__struct_1a4d6a7cc78819fe901fa45a1b51266e18" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>capability</name></member>
+      <member refid="structwl__bss__info__struct_1aa5d9886a989c0e36349581e3f06cd4c0" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>chanspec</name></member>
+      <member refid="structwl__bss__info__struct_1a86988a65e0d3ece7990c032c159786d6" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>count</name></member>
+      <member refid="structwl__bss__info__struct_1aaba7272626229ace409b150bb1981044" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>ctl_ch</name></member>
+      <member refid="structwl__bss__info__struct_1a2817cb129e69f6ce5a24dfb2dd8706cc" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>dtim_period</name></member>
+      <member refid="structwl__bss__info__struct_1aa2585d779da0ab21273a8d92de9a0ebe" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>flags</name></member>
+      <member refid="structwl__bss__info__struct_1a5312679515b5ee9c1875196c703a8a52" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>ie_length</name></member>
+      <member refid="structwl__bss__info__struct_1a67b93773e8da423543b703cad84da5a5" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>ie_offset</name></member>
+      <member refid="structwl__bss__info__struct_1aebb70c2aab3407a9f05334c47131a43b" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>length</name></member>
+      <member refid="structwl__bss__info__struct_1aaa58323f8c11ee56cc8d8c2e66938230" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>n_cap</name></member>
+      <member refid="structwl__bss__info__struct_1aafd41688d55159e60c6970dddbfdf4ba" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>nbss_cap</name></member>
+      <member refid="structwl__bss__info__struct_1a85ba569dec5085a93016434929bbf7d1" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>phy_noise</name></member>
+      <member refid="structwl__bss__info__struct_1a686551a9eef0a3911a371e315bb24d36" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>rates</name></member>
+      <member refid="structwl__bss__info__struct_1aee32c70ea369b8be44e5cf2b9a1184a2" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>rateset</name></member>
+      <member refid="structwl__bss__info__struct_1a72aca6ea6d8153b28ea8f139b932ec3e" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>reserved</name></member>
+      <member refid="structwl__bss__info__struct_1ae3f4b5f7822024fbf0bea3a8845c67c4" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>reserved32</name></member>
+      <member refid="structwl__bss__info__struct_1ae45c71dee229890b4401a4c0105d73cf" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>RSSI</name></member>
+      <member refid="structwl__bss__info__struct_1abcbf8106d506ba6a33c01411d5ec3e99" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>SNR</name></member>
+      <member refid="structwl__bss__info__struct_1a337a4a90b9c8cb320d1232cf9f88fa90" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>SSID</name></member>
+      <member refid="structwl__bss__info__struct_1a7eafb3bd3419add91d9d532df5dcf63e" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>SSID_len</name></member>
+      <member refid="structwl__bss__info__struct_1acd99bb05ca015e7d74448acb1deba7ca" prot="public" virt="non-virtual"><scope>wl_bss_info_struct</scope><name>version</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

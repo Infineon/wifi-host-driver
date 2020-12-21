@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__event__ether__header" kind="struct" language="C++" prot="public">
+    <compoundname>whd_event_ether_header</compoundname>
+    <includes local="no">whd_events.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__event__ether__header_1aecece25a401285d039a6f30991dad78e" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
+        <definition>whd_mac_t destination_address</definition>
+        <argsstring></argsstring>
+        <name>destination_address</name>
+        <briefdescription>
+<para>Ethernet destination address. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="127" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__ether__header_1aceb7473ccdf9d41c5b6aee7a0264972a" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
+        <definition>whd_mac_t source_address</definition>
+        <argsstring></argsstring>
+        <name>source_address</name>
+        <briefdescription>
+<para>Ethernet source address. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="128" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__ether__header_1aa9296c58dc24c63c4ee927db394a97d7" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t ethertype</definition>
+        <argsstring></argsstring>
+        <name>ethertype</name>
+        <briefdescription>
+<para>Ethertype for identifying event packets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="129" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure to store ethernet destination, source and ethertype in event packets. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="22">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+      <node id="21">
+        <label>whd_event_ether_header</label>
+        <link refid="structwhd__event__ether__header"/>
+        <childnode refid="22" relation="usage">
+          <edgelabel>source_address</edgelabel>
+          <edgelabel>destination_address</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="126" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="125" bodyend="130"/>
+    <listofallmembers>
+      <member refid="structwhd__event__ether__header_1aecece25a401285d039a6f30991dad78e" prot="public" virt="non-virtual"><scope>whd_event_ether_header</scope><name>destination_address</name></member>
+      <member refid="structwhd__event__ether__header_1aa9296c58dc24c63c4ee927db394a97d7" prot="public" virt="non-virtual"><scope>whd_event_ether_header</scope><name>ethertype</name></member>
+      <member refid="structwhd__event__ether__header_1aceb7473ccdf9d41c5b6aee7a0264972a" prot="public" virt="non-virtual"><scope>whd_event_ether_header</scope><name>source_address</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

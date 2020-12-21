@@ -1035,7 +1035,7 @@ static whd_result_t whd_bus_sdio_abort_read(whd_driver_t whd_driver, whd_bool_t 
     /* If we want to retry message, send NAK */
     if (retry == WHD_TRUE)
     {
-        CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, (uint32_t)SDIO_TO_SB_MAIL_BOX(whd_driver), (uint8_t)1,
+        CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, (uint32_t)SDIO_TO_SB_MAILBOX(whd_driver), (uint8_t)1,
                                                    SMB_NAK) );
     }
 
@@ -1051,8 +1051,7 @@ whd_result_t whd_bus_sdio_read_register_value(whd_driver_t whd_driver, whd_bus_f
 
 whd_result_t whd_bus_sdio_poke_wlan(whd_driver_t whd_driver)
 {
-    /*TODO: change 1<<3 to a register hash define */
-    return whd_bus_write_backplane_value(whd_driver, SDIO_TO_SB_MAILBOX(whd_driver), (uint8_t)4, (uint32_t)(1 << 3) );
+    return whd_bus_write_backplane_value(whd_driver, SDIO_TO_SB_MAILBOX(whd_driver), (uint8_t)4, SMB_DEV_INT);
 }
 
 whd_result_t whd_bus_sdio_wakeup(whd_driver_t whd_driver)

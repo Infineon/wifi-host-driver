@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__event__eth__hdr" kind="struct" language="C++" prot="public">
+    <compoundname>whd_event_eth_hdr</compoundname>
+    <includes local="no">whd_events.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__event__eth__hdr_1ac5d9ab8403fb9ca24facc32b821dd53b" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t subtype</definition>
+        <argsstring></argsstring>
+        <name>subtype</name>
+        <briefdescription>
+<para>Vendor specific..32769. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="115" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__eth__hdr_1a1892eba2086d12ac2b09005aeb09ea3b" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <briefdescription>
+<para>Length of ethernet header. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="116" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__eth__hdr_1ab22abc2906422da61885ac6c8e6a1a59" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t version</definition>
+        <argsstring></argsstring>
+        <name>version</name>
+        <briefdescription>
+<para>Version is 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="117" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__eth__hdr_1a5d81eb4d4b4a5b8d3a89be061d06b64d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t oui[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>oui</name>
+        <briefdescription>
+<para>Organizationally Unique Identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="118" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__eth__hdr_1ae9ad9911fe2a5dc5789001a2b48d5c9d" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t usr_subtype</definition>
+        <argsstring></argsstring>
+        <name>usr_subtype</name>
+        <briefdescription>
+<para>User specific data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="119" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure to store ethernet header fields in event packets. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="114" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="113" bodyend="120"/>
+    <listofallmembers>
+      <member refid="structwhd__event__eth__hdr_1a1892eba2086d12ac2b09005aeb09ea3b" prot="public" virt="non-virtual"><scope>whd_event_eth_hdr</scope><name>length</name></member>
+      <member refid="structwhd__event__eth__hdr_1a5d81eb4d4b4a5b8d3a89be061d06b64d" prot="public" virt="non-virtual"><scope>whd_event_eth_hdr</scope><name>oui</name></member>
+      <member refid="structwhd__event__eth__hdr_1ac5d9ab8403fb9ca24facc32b821dd53b" prot="public" virt="non-virtual"><scope>whd_event_eth_hdr</scope><name>subtype</name></member>
+      <member refid="structwhd__event__eth__hdr_1ae9ad9911fe2a5dc5789001a2b48d5c9d" prot="public" virt="non-virtual"><scope>whd_event_eth_hdr</scope><name>usr_subtype</name></member>
+      <member refid="structwhd__event__eth__hdr_1ab22abc2906422da61885ac6c8e6a1a59" prot="public" virt="non-virtual"><scope>whd_event_eth_hdr</scope><name>version</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

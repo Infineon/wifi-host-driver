@@ -33,14 +33,12 @@ extern "C" {
 #define SDIO_TO_SB_MAILBOX(wd)           ( (uint32_t)(GET_C_VAR(wd, SDIOD_CORE_BASE_ADDRESS) + 0x40) )
 #define SDIO_TO_SB_MAILBOX_DATA(wd)      ( (uint32_t)(GET_C_VAR(wd, SDIOD_CORE_BASE_ADDRESS) + 0x48) )
 #define SDIO_TO_HOST_MAILBOX_DATA(wd)    ( (uint32_t)(GET_C_VAR(wd, SDIOD_CORE_BASE_ADDRESS) + 0x4C) )
-#define SDIO_TO_SB_MAIL_BOX(wd)          ( (uint32_t)(GET_C_VAR(wd, SDIOD_CORE_BASE_ADDRESS) + 0x40) )
 #define SDIO_INT_HOST_MASK(wd)           ( (uint32_t)(GET_C_VAR(wd, SDIOD_CORE_BASE_ADDRESS) + 0x24) )
 #define SDIO_FUNCTION_INT_MASK(wd)       ( (uint32_t)(GET_C_VAR(wd, SDIOD_CORE_BASE_ADDRESS) + 0x34) )
 
 /* SDIO Function 0 (SDIO Bus) register addresses */
 
-/* SDIO Device CCCR offsets */
-/* TODO: What does CIS/CCCR stand for? */
+/* SDIO Device CCCR (Card Common Control Register) offsets */
 /* CCCR accesses do not require backpane clock */
 #define SDIOD_CCCR_REV             ( (uint32_t)0x00 )     /* CCCR/SDIO Revision */
 #define SDIOD_CCCR_SDREV           ( (uint32_t)0x01 )     /* SD Revision */
@@ -54,10 +52,10 @@ extern "C" {
 #define SDIOD_CCCR_CISPTR_0        ( (uint32_t)0x09 )     /* Common CIS Base Address Pointer Register 0 (LSB) */
 #define SDIOD_CCCR_CISPTR_1        ( (uint32_t)0x0A )     /* Common CIS Base Address Pointer Register 1 */
 #define SDIOD_CCCR_CISPTR_2        ( (uint32_t)0x0B )     /* Common CIS Base Address Pointer Register 2 (MSB - only bit 1 valid)*/
-#define SDIOD_CCCR_BUSSUSP         ( (uint32_t)0x0C )     /*  */
-#define SDIOD_CCCR_FUNCSEL         ( (uint32_t)0x0D )     /*  */
-#define SDIOD_CCCR_EXECFLAGS       ( (uint32_t)0x0E )     /*  */
-#define SDIOD_CCCR_RDYFLAGS        ( (uint32_t)0x0F )     /*  */
+#define SDIOD_CCCR_BUSSUSP         ( (uint32_t)0x0C )     /* Bus Suspend. Valid only if SBS is set */
+#define SDIOD_CCCR_FUNCSEL         ( (uint32_t)0x0D )     /* Function Select. Valid only if SBS is set */
+#define SDIOD_CCCR_EXECFLAGS       ( (uint32_t)0x0E )     /* Exec Flags. Valid only if SBS is set */
+#define SDIOD_CCCR_RDYFLAGS        ( (uint32_t)0x0F )     /* Ready Flags. Valid only if SBS is set */
 #define SDIOD_CCCR_BLKSIZE_0       ( (uint32_t)0x10 )     /* Function 0 (Bus) SDIO Block Size Register 0 (LSB) */
 #define SDIOD_CCCR_BLKSIZE_1       ( (uint32_t)0x11 )     /* Function 0 (Bus) SDIO Block Size Register 1 (MSB) */
 #define SDIOD_CCCR_POWER_CONTROL   ( (uint32_t)0x12 )     /* Power Control */
@@ -212,7 +210,7 @@ extern "C" {
 #define SFC_CRC4WOOS               ( (uint32_t)(1 << 2) ) /* HW reports CRC error for write out of sync */
 #define SFC_ABORTALL               ( (uint32_t)(1 << 3) ) /* Abort cancels all in-progress frames */
 
-/* SDIO_TO_SB_MAIL_BOX bits corresponding to intstatus bits */
+/* SDIO_TO_SB_MAILBOX bits corresponding to intstatus bits */
 #define SMB_NAK                    ( (uint32_t)(1 << 0) ) /* To SB Mailbox Frame NAK */
 #define SMB_INT_ACK                ( (uint32_t)(1 << 1) ) /* To SB Mailbox Host Interrupt ACK */
 #define SMB_USE_OOB                ( (uint32_t)(1 << 2) ) /* To SB Mailbox Use OOB Wakeup */

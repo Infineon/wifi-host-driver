@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__busapi" kind="group">
+    <compoundname>busapi</compoundname>
+    <title>WHD Bus API</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__busapi_1ga9f08c5241843cbe2ef06ffa8bfb5118d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_bus_sdio_attach</definition>
+        <argsstring>(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj)</argsstring>
+        <name>whd_bus_sdio_attach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a2b3fb82834e1fbcbbf1f51e83c675edd" kindref="member">whd_sdio_config_t</ref> *</type>
+          <declname>whd_config</declname>
+        </param>
+        <param>
+          <type>cyhal_sdio_t *</type>
+          <declname>sdio_obj</declname>
+        </param>
+        <briefdescription>
+<para>Attach the WLAN Device to a specific SDIO bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>whd_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration for SDIO bus </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sdio_obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SDHC hardware interface, from the Level 3 CY HW APIs</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="69" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1gadeed66e792eed64cbb6a0deef1dbe2da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void whd_bus_sdio_detach</definition>
+        <argsstring>(whd_driver_t whd_driver)</argsstring>
+        <name>whd_bus_sdio_detach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <briefdescription>
+<para>Detach the WLAN Device to a specific SDIO bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1ga16b799bb65db52fb4518e1fbc203fe53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_bus_spi_attach</definition>
+        <argsstring>(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t *spi_obj)</argsstring>
+        <name>whd_bus_spi_attach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a2f5c5d3c7f74ce9a86595fe220c860d3" kindref="member">whd_spi_config_t</ref> *</type>
+          <declname>whd_config</declname>
+        </param>
+        <param>
+          <type>cyhal_spi_t *</type>
+          <declname>spi_obj</declname>
+        </param>
+        <briefdescription>
+<para>Attach the WLAN Device to a specific SPI bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>whd_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration for SPI bus </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spi_obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SPI hardware interface, from the Level 3 CY HW APIs</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="85" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1gae83aaeef8c3d922cbb839b75ab289d13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void whd_bus_spi_detach</definition>
+        <argsstring>(whd_driver_t whd_driver)</argsstring>
+        <name>whd_bus_spi_detach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <briefdescription>
+<para>Detach the WLAN Device to a specific SPI bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="91" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Allows WHD to operate with specific SDIO/SPI bus. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

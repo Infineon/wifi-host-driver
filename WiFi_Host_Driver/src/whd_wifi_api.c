@@ -1188,7 +1188,7 @@ static uint32_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t auth_t
      * Enable Robust Management Frame Protection Capable (MFPC) functionality
      */
     if ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) ||
-         auth_type & WPA2_SECURITY )
+         (auth_type & WPA2_SECURITY) )
     {
         auth_mfp = WL_MFP_CAPABLE;
     }
@@ -1547,7 +1547,7 @@ uint32_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_result_t *ap
 
             uint16_t chip_id = whd_chip_get_chip_id(whd_driver);
 
-            result = whd_wifi_join_wait_for_complete(ifp, &join_semaphore);
+            CHECK_RETURN(whd_wifi_join_wait_for_complete(ifp, &join_semaphore) );
 
             if (chip_id == 0x4373)
             {
@@ -1619,7 +1619,7 @@ uint32_t whd_wifi_join(whd_interface_t ifp, const whd_ssid_t *ssid, whd_security
 
         if (result == WHD_SUCCESS)
         {
-            result = whd_wifi_join_wait_for_complete(ifp, &join_sema);
+            CHECK_RETURN(whd_wifi_join_wait_for_complete(ifp, &join_sema) );
         }
     }
 
@@ -1662,6 +1662,19 @@ uint32_t whd_wifi_leave(whd_interface_t ifp)
 
     whd_driver->internal_info.whd_join_status[ifp->bsscfgidx] = 0;
     ifp->role = WHD_INVALID_ROLE;
+
+    if (whd_driver->internal_info.active_join_mutex_initted == WHD_TRUE)
+    {
+        cy_rtos_deinit_semaphore(&whd_driver->internal_info.active_join_mutex);
+        whd_driver->internal_info.active_join_mutex_initted = WHD_FALSE;
+    }
+    if (whd_driver->internal_info.active_join_semaphore)
+    {
+        cy_rtos_deinit_semaphore(whd_driver->internal_info.active_join_semaphore);
+        whd_driver->internal_info.active_join_semaphore = NULL;
+    }
+
+
     return WHD_SUCCESS;
 }
 
@@ -3465,6 +3478,11 @@ uint32_t whd_wifi_get_bss_info(whd_interface_t ifp, wl_bss_info_t *bi)
 
 uint32_t whd_wifi_set_coex_config(whd_interface_t ifp, whd_coex_config_t *coex_config)
 {
+    CHECK_IFP_NULL(ifp);
+
+    if (coex_config == NULL)
+        return WHD_BADARG;
+
     return whd_wifi_set_iovar_buffer(ifp, IOVAR_STR_BTC_LESCAN_PARAMS, &coex_config->le_scan_params,
                                      sizeof(whd_btc_lescan_params_t) );
 }

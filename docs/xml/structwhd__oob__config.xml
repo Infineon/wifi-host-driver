@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__oob__config" kind="struct" language="C++" prot="public">
+    <compoundname>whd_oob_config</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__oob__config_1a6c705dc46f1c4249cef91f1fc8a877dc" prot="public" static="no" mutable="no">
+        <type>cyhal_gpio_t</type>
+        <definition>cyhal_gpio_t host_oob_pin</definition>
+        <argsstring></argsstring>
+        <name>host_oob_pin</name>
+        <briefdescription>
+<para>Host-side GPIO pin selection. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="948" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="948" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__oob__config_1a2d83d43c26f20c82203b65cef7cf9d2f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t dev_gpio_sel</definition>
+        <argsstring></argsstring>
+        <name>dev_gpio_sel</name>
+        <briefdescription>
+<para>WiFi device-side GPIO pin selection (must be zero) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="949" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="949" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__oob__config_1afac6867bb224b40190d70a7bed57b556" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+        <definition>whd_bool_t is_falling_edge</definition>
+        <argsstring></argsstring>
+        <name>is_falling_edge</name>
+        <briefdescription>
+<para>Interrupt trigger (polarity) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="950" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="950" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__oob__config_1a948130b9ee9aaba4463a9a678c830b2f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t intr_priority</definition>
+        <argsstring></argsstring>
+        <name>intr_priority</name>
+        <briefdescription>
+<para>OOB interrupt priority. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="951" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="951" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for Out-of-band interrupt config parameters which can be set by application during whd power up. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="947" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="946" bodyend="952"/>
+    <listofallmembers>
+      <member refid="structwhd__oob__config_1a2d83d43c26f20c82203b65cef7cf9d2f" prot="public" virt="non-virtual"><scope>whd_oob_config</scope><name>dev_gpio_sel</name></member>
+      <member refid="structwhd__oob__config_1a6c705dc46f1c4249cef91f1fc8a877dc" prot="public" virt="non-virtual"><scope>whd_oob_config</scope><name>host_oob_pin</name></member>
+      <member refid="structwhd__oob__config_1a948130b9ee9aaba4463a9a678c830b2f" prot="public" virt="non-virtual"><scope>whd_oob_config</scope><name>intr_priority</name></member>
+      <member refid="structwhd__oob__config_1afac6867bb224b40190d70a7bed57b556" prot="public" virt="non-virtual"><scope>whd_oob_config</scope><name>is_falling_edge</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

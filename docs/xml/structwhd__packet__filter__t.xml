@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__packet__filter__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_packet_filter_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1abaabdc509cdaba7df9f56c6c76f3ae19" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+<para>Unique identifier for a packet filter item. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1026" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1026" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1a6b5d1db53f323ed75aaaa1ecaabe4533" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a36b806b9b0e986bf290ae005d1bae038" kindref="member">whd_packet_filter_rule_t</ref></type>
+        <definition>whd_packet_filter_rule_t rule</definition>
+        <argsstring></argsstring>
+        <name>rule</name>
+        <briefdescription>
+<para>Filter matches are either POSITIVE or NEGATIVE matching. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1027" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1027" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1ac681806181c80437cfab37335f62ff39" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <briefdescription>
+<para>Offset in bytes to start filtering (referenced to the start of the ethernet packet) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1028" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1028" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1a4366e37b92d06167be3c708a731a904a" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t mask_size</definition>
+        <argsstring></argsstring>
+        <name>mask_size</name>
+        <briefdescription>
+<para>Size of the mask in bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1029" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1029" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1aeef3362381f6b1bbd1ae35e60f5aa077" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <briefdescription>
+<para>Pattern mask bytes to be ANDed with the pattern eg. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&quot;\xff00&quot; (must be in network byte order) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1030" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1030" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1af42a55e4e3cdd2ea57e52a29a0d77ce3" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* pattern</definition>
+        <argsstring></argsstring>
+        <name>pattern</name>
+        <briefdescription>
+<para>Pattern bytes used to filter eg. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&quot;\x0800&quot; (must be in network byte order) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1031" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1031" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__packet__filter__t_1ad9dfd7c243623af351789a69a792beb8" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+        <definition>whd_bool_t enabled_status</definition>
+        <argsstring></argsstring>
+        <name>enabled_status</name>
+        <briefdescription>
+<para>When returned from wwd_wifi_get_packet_filters, indicates if the filter is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1032" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1032" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure describing a packet filter list item. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1025" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1024" bodyend="1033"/>
+    <listofallmembers>
+      <member refid="structwhd__packet__filter__t_1ad9dfd7c243623af351789a69a792beb8" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>enabled_status</name></member>
+      <member refid="structwhd__packet__filter__t_1abaabdc509cdaba7df9f56c6c76f3ae19" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>id</name></member>
+      <member refid="structwhd__packet__filter__t_1aeef3362381f6b1bbd1ae35e60f5aa077" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>mask</name></member>
+      <member refid="structwhd__packet__filter__t_1a4366e37b92d06167be3c708a731a904a" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>mask_size</name></member>
+      <member refid="structwhd__packet__filter__t_1ac681806181c80437cfab37335f62ff39" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>offset</name></member>
+      <member refid="structwhd__packet__filter__t_1af42a55e4e3cdd2ea57e52a29a0d77ce3" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>pattern</name></member>
+      <member refid="structwhd__packet__filter__t_1a6b5d1db53f323ed75aaaa1ecaabe4533" prot="public" virt="non-virtual"><scope>whd_packet_filter_t</scope><name>rule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

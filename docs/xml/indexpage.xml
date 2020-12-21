@@ -1,0 +1,819 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>Wi-Fi Host Driver (WHD)</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="index_1overview">
+<title>WHD Overview</title>
+<para>The WHD is an independent, embedded Wi-Fi Host Driver that provides a set of APIs to interact with Cypress WLAN chips. The WHD is an independent firmware product that is easily portable to any embedded software environment, including popular IOT frameworks like Mbed OS, Amazon FreeRTOS, etc. Hence, the WHD includes hooks for RTOS and TCP/IP network abstraction layers. <linebreak/>
+ The WHD requires the following services: <itemizedlist>
+<listitem>
+<para><bold>HAL:</bold> High-level abstraction layer that provides access to hardware like SDIO/SPI host controllers within the platform. </para>
+</listitem>
+<listitem>
+<para><bold>RTOS:</bold> The WHD uses the abstraction layer to access RTOS functionality like threads, semaphores etc. This is the same interface that the Cypress Middleware uses. </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+</para>
+</sect1>
+<sect1 id="index_1whd_features">
+<title>WHD Features</title>
+<para><itemizedlist>
+<listitem>
+<para>Supports Wi-Fi Station (STA) and AP mode of operation. </para>
+</listitem>
+<listitem>
+<para>Supports concurrent operation of STA and AP interface. </para>
+</listitem>
+<listitem>
+<para>Includes multiple security support like WPA2, WPA3, and open. </para>
+</listitem>
+<listitem>
+<para>Provides function to perform Advanced Power Management. </para>
+</listitem>
+<listitem>
+<para>Supports low power offloads, including ARP and packet filters. </para>
+</listitem>
+<listitem>
+<para>Includes WFA Pre-certification support for 802.11n and WPA3. </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+</para>
+</sect1>
+<sect1 id="index_1whd_folder_struct">
+<title>WHD Folder Structure</title>
+<para><itemizedlist>
+<listitem>
+<para>whd\src - Core WHD files </para>
+</listitem>
+<listitem>
+<para>whd\inc - WHD API files </para>
+</listitem>
+<listitem>
+<para>whd\resources - WLAN Firmware </para>
+</listitem>
+<listitem>
+<para>whd.mk - A simple make file to build a <emphasis>libwhd.a</emphasis> library. </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+</para>
+</sect1>
+<sect1 id="index_1whd_architecture">
+<title>WHD Architecture</title>
+<para>The WHD consists of 3 different components as shown in the following architectural diagram. Blocks highlighted in red are external dependencies for the WHD, blue ones are Porting layer and black ones are WHD core.<linebreak/>
+  <image type="html" name="whd_arch.png" inline="yes">></image>
+<linebreak/>
+ </para>
+</sect1>
+<sect1 id="index_1whd_porting">
+<title>Porting WHD</title>
+<para>To port the WHD, implement the following APIs or Function Pointers (shown in the the WHD Architecture section diagram), so that the WHD is functional:</para>
+<para><itemizedlist>
+<listitem>
+<para><ulink url="#_CY_RTOS_API">CY RTOS API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="#_CY_HAL_Resource_API">CY HAL Resource API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="#_Buffer_Interface_API">Buffer Interface API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="#_Network_Interface_API">Network Interface API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="#_CY_HAL_SPI/SDIO_Bus_API">CY HAL SPI/SDIO Bus API</ulink> </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+ <heading level="2"><anchor id="_1_CY_RTOS_API"/>CY RTOS API</heading>
+</para>
+<para>The CY RTOS API provides prototypes for functions that allow the WHD to use RTOS functionality, such as threads, semaphores, and timing functions.<linebreak/>
+You must implement the appropriate functions in your code. See <bold><ulink url="whd_rtos.c">here</ulink></bold> for an example implementation. <table rows="10" cols="2"><row>
+<entry thead="no"><para></para>
+<para><bold>Function</bold></para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para><bold>Description</bold></para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_create_thread</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Create RTOS thread.</para>
+<para></para>
+<para>The WHD calls this function to create the main WHD thread.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_terminate_thread</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Terminate the RTOS thread.</para>
+<para></para>
+<para>The WHD calls this function to terminate WHD main thread created using cy_rtos_create_thread. It is called after calling cy_rtos_join_thread().</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_join_thread</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Join the RTOS thread.</para>
+<para></para>
+<para>The WHD calls this function so that any resources that were allocated for it are cleaned up. It is called by WHD before cy_rtos_terminate_thread()</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_get_time</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>To provide time in milliseconds since RTOS start</para>
+<para></para>
+<para>The WHD uses this to get the time in milliseconds.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_delay_milliseconds</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Delay for a specified number of milliseconds.</para>
+<para></para>
+<para>The WHD calls this function to obtain the time delay.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_init_semaphore</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Create a semaphore.</para>
+<para></para>
+<para>The WHD uses only binary semaphore, this function is used to init a semaphore</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_get_semaphore</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Get/Acquire a semaphore</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_set_semaphore</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Set/Release a semaphore</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cy_rtos_deinit_semaphore</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Deletes a semaphore</para>
+<para></para>
+<para>This function frees the resources associated with a semaphore.</para>
+<para></para>
+</entry></row>
+</table>
+<linebreak/>
+ <heading level="2"><anchor id="_1_CY_HAL_Resource_API"/>CY HAL Resource API</heading>
+</para>
+<para>The Wi-Fi firmware, NVRAM, and CLM BLOB information are treated as resources to be downloaded onto the Wi-Fi chip. Refer to the file <emphasis><ref refid="whd__resource__api_8h" kindref="compound">inc\whd_resource_api.h</ref></emphasis> for a detailed description. <linebreak/>
+You must implement the appropriate function pointers in your code. See <bold><ulink url="whd_resources.c">here</ulink></bold> for an example implementation. <table rows="5" cols="2"><row>
+<entry thead="no"><para></para>
+<para><bold>Function</bold></para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para><bold>Description</bold></para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_resource_size</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Gets the size of the resource for respective resource type</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_get_resource_block</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Gets the resource block for specified resource type</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_get_resource_no_of_blocks</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Gets block count for the specified resource_type</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_get_resource_block_size</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Gets block size for the specified resource_type</para>
+<para></para>
+</entry></row>
+</table>
+<linebreak/>
+ <heading level="2"><anchor id="_1_Buffer_Interface_API"/>Buffer Interface API</heading>
+</para>
+<para>The WHD requires packet buffers to exchange information between the host and Wi-Fi firmware. Refer to the file <emphasis><ref refid="whd__network__types_8h" kindref="compound">inc\whd_network_types.h</ref></emphasis> for a detailed description. <linebreak/>
+You must implement the appropriate function pointers in your code. See <bold><ulink url="cy_network_buffer.c">here</ulink></bold> for an example implementation. <table rows="7" cols="2"><row>
+<entry thead="no"><para></para>
+<para><bold>Function</bold></para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para><bold>Description</bold></para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_host_buffer_get</para>
+<para></para>
+</entry><entry thead="no"><para>Allocates a packet buffer <linebreak/>
+<linebreak/>
+ You can implement this function by allocating a pre-existing packet from a pool, using a static buffer, or by dynamically allocating memory. The method chosen must match the way the network stack expects packet buffers to be allocated. Usually, the WHD requires a packet of size of WHD_LINK_MTU which includes the MTU and various other headers. Refer to <ref refid="whd__types_8h" kindref="compound">whd_types.h</ref> to find the size of WHD_LINK_MTU. The following include expected return error codes other than WHD_SUCCESS: <itemizedlist>
+<listitem>
+<para><bold>WHD_BUFFER_UNAVAILABLE_PERMANENT </bold>: Attempt to allocate more than MTU size </para>
+</listitem>
+<listitem>
+<para><bold>WHD_BUFFER_UNAVAILABLE_TEMPORARY </bold>: No Packet available in any pool </para>
+</listitem>
+<listitem>
+<para><bold>WHD_BUFFER_ALLOC_FAIL </bold>: Packet allocation fails </para>
+</listitem>
+</itemizedlist>
+</para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_buffer_release</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Releases a packet buffer</para>
+<para></para>
+<para>The WHD uses this function to indicate that it no longer requires a packet buffer. The buffer can then be released back into a pool for reuse, or the dynamically allocated memory can be freed, according to how the packet was allocated.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_buffer_get_current_piece_data_pointer</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Retrieves the current pointer of a packet buffer</para>
+<para></para>
+<para>Since packet buffers usually need to be created with space at the front for additional headers, this function allows the WHD to get the current &apos;front&apos; location pointer.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_buffer_get_current_piece_size</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Retrieves the size of a packet buffer</para>
+<para></para>
+<para>Since packet buffers usually need to be created with space at the front for additional headers, the memory block used to contain a packet buffer will often be larger than the current size of the packet buffer data. This function allows the WHD to retrieve the current size of a packet buffer&apos;s data.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_buffer_set_size</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Sets the current length of a WHD packet buffer.</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_buffer_add_remove_at_front</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>Moves the current pointer of a packet buffer</para>
+<para></para>
+<para>Since packet buffers usually need to be created with space at the front for additional headers, this function allows the WHD to move the current &apos;front&apos; location pointer. This ensures that the WHD has space to add headers to transmit packets, and that the network stack does not see the internal WHD headers on received packets.</para>
+<para></para>
+</entry></row>
+</table>
+<linebreak/>
+<heading level="2"><anchor id="_1_Network_Interface_API"/>Network Interface API</heading>
+</para>
+<para>The WHD calls this function pointer to pass the received TCP/IP data packet from WLAN. Refer to the file <emphasis><ref refid="whd__network__types_8h" kindref="compound">inc\whd_network_types.h</ref></emphasis> for a detailed description. <linebreak/>
+You must implement the appropriate function pointers in your code. See <bold><ulink url="whd_network.c">here</ulink></bold> for an example implementation. <table rows="2" cols="2"><row>
+<entry thead="no"><para></para>
+<para><bold>FUNCTION</bold></para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para><bold>Description</bold></para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>whd_network_process_ethernet_data</para>
+<para></para>
+</entry><entry thead="no"><para></para>
+<para>The WHD calls this function pointer to pass received data to the network stack. You must provide the definition of the function.</para>
+<para></para>
+<para>This function pointer is called asynchronously in the context of the WHD thread whenever new data has arrived.</para>
+<para></para>
+<para>Packet buffers are allocated within the WHD, and ownership is transferred to the network stack. The network stack or application is thus responsible for releasing the packet buffers. Most packet buffering systems have a pointer to the &apos;current point&apos; within the packet buffer. When this function is called, the pointer points to the start of the Ethernet header. There are other inconsequential data before the Ethernet header.</para>
+<para></para>
+<para>It is preferable that you implement this function simply by putting the received packet on a queue for processing by another thread. This avoids the WHD thread being unnecessarily tied up which would delay other packets being transmitted or received.</para>
+<para></para>
+</entry></row>
+</table>
+<linebreak/>
+<heading level="2"><anchor id="_1_CY_HAL_SPI/SDIO_Bus_API"/>CY HAL SPI/SDIO Bus API</heading>
+</para>
+<para>The WHD uses the following functions to access the host bus controller for SDIO or SPI buses. <linebreak/>
+You must implement these functions in your code. See <bold><ulink url="cyhal_sdhc.c">here</ulink></bold> for an example implementation. <linebreak/>
+ Based on the target environment implementation, replace and use these functions appropriately to ensure bus operations. <table rows="8" cols="2"><row>
+<entry thead="no"><para><heading level="3"><bold>Function</bold></heading>
+</para>
+<para></para>
+</entry><entry thead="no"><para><heading level="3"><bold>Description</bold></heading>
+</para>
+<para></para>
+</entry></row>
+<row>
+<entry thead="no"><para>cyhal_spi_register_irq </para>
+</entry><entry thead="no"><para>The SPI interrupt handler registration.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cyhal_spi_transfer</para>
+<para></para>
+</entry><entry thead="no"><para>Writes a block out and receives a value. The total number of bytes sent and received will be the maximum of tx_length and rx_length. The bytes written will be padded with the value 0xff.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cyhal_spi_irq_enable</para>
+<para></para>
+</entry><entry thead="no"><para>Configure SPI interrupt. This function is used for word-approach.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cyhal_sdio_register_irq</para>
+<para></para>
+<para><nonbreakablespace/></para>
+<para></para>
+</entry><entry thead="no"><para>The SDIO interrupt handler registration.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cyhal_sdio_irq_enable</para>
+<para></para>
+<para><nonbreakablespace/></para>
+<para></para>
+</entry><entry thead="no"><para>Configures the SDIO interrupt  </para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cyhal_sdio_send_cmd</para>
+<para></para>
+</entry><entry thead="no"><para>Sends a command to the SDIO block.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+<para>cyhal_sdio_bulk_transfer</para>
+<para></para>
+</entry><entry thead="no"><para>Performs a bulk data transfer (CMD=53) to the SDIO block.  </para>
+</entry></row>
+</table>
+<linebreak/>
+</para>
+</sect1>
+<sect1 id="index_1power_up">
+<title>WHD Power up sequence</title>
+<para>Before starting the WHD, perform the following steps: <itemizedlist>
+<listitem>
+<para>Connect the WLAN chip to a 32 kHz reference clock and to the sleep clock input pin. </para>
+</listitem>
+<listitem>
+<para>Toggle the WL_REG_ON pin shown in the WHD Power up sequence chart. <itemizedlist>
+<listitem>
+<para>WL_REG_ON pin has same polarity for all the WLAN chips </para>
+</listitem>
+<listitem>
+<para>For SDIO Case, SHDC complete the SD Enumeration as per the “SDIO Simplified Specification.” Refer to <ulink url="https://www.sdcard.org/downloads/pls/">https://www.sdcard.org/downloads/pls/</ulink> “Part E1 Simplified”, “SDIO Simplified Specification,” section 3.1.2, flowchart in Figure 3-2. </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+</para>
+<para> <image type="html" name="whd_power_up.png" inline="yes">></image>
+<linebreak/>
+</para>
+<para></para>
+</listitem>
+</itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1modes">
+<title>WHD Modes of Operation</title>
+<para>There are basically three modes of operation in WHD: <itemizedlist>
+<listitem>
+<para><ulink url="#_WHD_STA_or_AP_mode">WHD STA mode</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="#_WHD_STA_or_AP_mode">WHD AP mode</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="#_WHD_STA+AP_concurrent_mode">WHD STA+AP concurrent mode</ulink> </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+ <heading level="2"><anchor id="_1_WHD_STA_or_AP_mode"/>WHD STA or AP mode</heading>
+</para>
+<para>The following example code shows the program flow for execution in STA/AP mode: <programlisting><codeline><highlight class="normal">#############################</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>File<sp/>whd.h</highlight></codeline>
+<codeline><highlight class="normal">##############################</highlight></codeline>
+<codeline><highlight class="normal">//Abstract<sp/>struct</highlight></codeline>
+<codeline><highlight class="normal">typedef<sp/>struct<sp/>whd_driver<sp/>*whd_driver_t;</highlight></codeline>
+<codeline><highlight class="normal">typedef<sp/>struct<sp/>whd_interface<sp/>*whd_interface_t;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##############################</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>File<sp/>app.c</highlight></codeline>
+<codeline><highlight class="normal">###############################</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&quot;whd.h&quot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">app_start_whd()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_driver_t<sp/>whd_driver;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_interface_t<sp/>ifp;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Each<sp/>wifi<sp/>chip,<sp/>will<sp/>have<sp/>it&apos;s<sp/>own<sp/>instance<sp/>of<sp/>whd_driver.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Each<sp/>whd_driver<sp/>may<sp/>use<sp/>multiple<sp/>instance<sp/>of<sp/>whd_interface_t<sp/>structs<sp/>to<sp/>define<sp/>behavior<sp/>and<sp/>functionality.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Most<sp/>of<sp/>the<sp/>WHD<sp/>function<sp/>calls<sp/>take<sp/>this<sp/>structure<sp/>as<sp/>input.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>The<sp/>default<sp/>primary<sp/>interface<sp/>is<sp/>created<sp/>automatically<sp/>at<sp/>the<sp/>time<sp/>of<sp/>power<sp/>up<sp/>of<sp/>wifi<sp/>chip,<sp/>whd_wifi_on(..).</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Primary<sp/>interface<sp/>is<sp/>STA/AP<sp/>role<sp/>neutral.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Call<sp/>whd_init<sp/>per<sp/>wifi<sp/>chip<sp/>(in<sp/>other<sp/>words<sp/>per<sp/>bus<sp/>slot,<sp/>two<sp/>SDIO<sp/>Wifi<sp/>chip<sp/>requires<sp/>two<sp/>calls.)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_init(&amp;whd_driver,<sp/>&amp;whd_init_config_t,<sp/>&amp;whd_resource_source,<sp/>&amp;whd_buffer_funcs,<sp/>&amp;whd_netif_funcs);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Attach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_attach(whd_driver,<sp/>&amp;whd_sdio_cfg,<sp/>&amp;sdhc_obj);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_attach(whd_driver,<sp/>&amp;whd_spi_cfg,<sp/>&amp;spi_obj);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>on<sp/>Wifi,<sp/>download<sp/>firmware<sp/>and<sp/>create<sp/>a<sp/>primary<sp/>interface,<sp/>returns<sp/>whd_interface_t</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_on(whd_driver,<sp/>&amp;ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//11a.<sp/>Join<sp/>to<sp/>AP<sp/>-<sp/>Note<sp/>that<sp/>it<sp/>doesn&apos;t<sp/>take<sp/>whd_driver,<sp/>instead<sp/>whd_interface_t</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_join(ifp<sp/>,<sp/>&quot;AP<sp/>SSID&quot;,<sp/>WHD_SECURITY_OPEN,<sp/>security_key,<sp/>strlen(security_key),<sp/>NULL);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//whd_ifp<sp/>will<sp/>be<sp/>in<sp/>STA<sp/>role<sp/>from<sp/>now<sp/>on</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>or<sp/>11b.<sp/>It<sp/>can<sp/>an<sp/>start<sp/>AP<sp/>also<sp/>here,<sp/>then<sp/>interface<sp/>will<sp/>be<sp/>in<sp/>AP<sp/>role</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//whd_wifi_init_ap(ifp<sp/>..)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//whd_wifi_start_ap(ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Leave<sp/>the<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(ifp<sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>or<sp/>Stop<sp/>the<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//whd_wifi_stop_ap(ifp<sp/>,<sp/>...);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>off<sp/>Wifi</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Detach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_detach(whd_driver);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_detach(whd_driver);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> <linebreak/>
+<heading level="2"><anchor id="_1_WHD_STA+AP_concurrent_mode"/>WHD STA+AP concurrent mode</heading>
+</para>
+<para>The WHD supports STA+AP concurrent mode of operation. There is no support for STA+STA or AP+AP. For concurrent mode of operation, you need to create a secondary interface along with the primary interface. The primary interface must have an STA interface, and the secondary interface must have an AP interface. Running AP in the primary interface and running STA in the secondary interface is invalid. <linebreak/>
+<linebreak/>
+The following example code shows the flow for execution in STA+AP concurrent mode: <programlisting><codeline><highlight class="normal">app_start_whd()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_driver_t<sp/>whd_driver;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_interface_t<sp/>prim_ifp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_interface_t<sp/>sec_ifp;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Each<sp/>wifi<sp/>chip,<sp/>will<sp/>have<sp/>it&apos;s<sp/>own<sp/>instance<sp/>of<sp/>whd_driver</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Each<sp/>whd_driver<sp/>may<sp/>use<sp/>multiple<sp/>instance<sp/>of<sp/>whd_interface_t<sp/>structs<sp/>to<sp/>define<sp/>behavior<sp/>and<sp/>functionality.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Most<sp/>of<sp/>the<sp/>WHD<sp/>function<sp/>calls<sp/>take<sp/>this<sp/>structure<sp/>as<sp/>input.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>The<sp/>default<sp/>primary<sp/>interface<sp/>is<sp/>created<sp/>automatically<sp/>at<sp/>the<sp/>time<sp/>of<sp/>power<sp/>up<sp/>of<sp/>wifi<sp/>chip,<sp/>whd_wifi_on(..).</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Primary<sp/>interface<sp/>is<sp/>STA/AP<sp/>role<sp/>neutral,<sp/>but<sp/>in<sp/>case<sp/>of<sp/>concurrent<sp/>mode<sp/>of<sp/>STA+AP<sp/>mode,<sp/>primary<sp/>interface<sp/>must<sp/>have<sp/>STA<sp/>role<sp/>only.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Call<sp/>whd_init<sp/>per<sp/>wifi<sp/>chip<sp/>(in<sp/>other<sp/>words<sp/>per<sp/>bus<sp/>slot,<sp/>two<sp/>SDIO<sp/>Wifi<sp/>chip<sp/>requires<sp/>two<sp/>calls.)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_init(&amp;whd_driver,<sp/>&amp;whd_init_cfg,<sp/>&amp;whd_resource_source,<sp/>&amp;whd_buffer_funcs,<sp/>&amp;whd_netif_funcs)<sp/>;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Attach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_attach(whd_driver,<sp/>&amp;whd_sdio_cfg,<sp/>&amp;sdhc_obj);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_attach(whd_driver,<sp/>&amp;whd_spi_cfg,<sp/>&amp;spi_obj);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>on<sp/>Wifi,<sp/>download<sp/>firmware<sp/>and<sp/>create<sp/>a<sp/>primary<sp/>interface,<sp/>returns<sp/>whd_interface_t</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_on(whd_driver,<sp/>&amp;prim_ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>the<sp/>secondary<sp/>interface.<sp/>Secondary<sp/>interface<sp/>can<sp/>only<sp/>be<sp/>used<sp/>as<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_add_secondary_interface(whd_driver,<sp/>mac_addr,<sp/>&amp;sec_ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Join<sp/>to<sp/>AP<sp/>-<sp/>Note<sp/>that<sp/>it<sp/>doesn&apos;t<sp/>take<sp/>whd_driver,<sp/>instead<sp/>whd_interface_t</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_join(prim_ifp<sp/>,<sp/>&quot;AP<sp/>SSID&quot;,<sp/>WHD_SECURITY_OPEN,<sp/>security_key,<sp/>strlen(security_key),<sp/>NULL);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>whd_ifp<sp/>will<sp/>be<sp/>in<sp/>STA<sp/>role<sp/>from<sp/>now<sp/>on</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Now<sp/>start<sp/>AP<sp/>in<sp/>secondary<sp/>interface,<sp/>then<sp/>it<sp/>will<sp/>be<sp/>in<sp/>AP<sp/>role</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_init_ap(sec_ifp<sp/>..)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_start_ap(sec_ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Leave<sp/>the<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(prim_ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Stop<sp/>the<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_stop_ap(sec_ifp<sp/>,<sp/>...);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>off<sp/>Wifi</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(prim_ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(prim_ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Detach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_detach(whd_driver);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_detach(whd_driver);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> <linebreak/>
+<heading level="2"><anchor id="_1_WHD_WPA3/WPA2_transition_mode"/>WHD WPA3/WPA2 transition mode</heading>
+</para>
+<para>The WHD supports WPA3/WPA2 transition mode. In this mode, if the WPA3 AP goes down and a WPA2 AP is started with the same SSID, the STA automatically transitions to join the WPA2 AP. This mode requires two security keys for the join to be completed. <linebreak/>
+The security keys can be the same or different,one key is for setting the psk passphrase, and second key is for setting WPA3 password but it is highly recommended to use different passwords. <linebreak/>
+<linebreak/>
+The following example code shows the flow for execution in WPA3/WPA2 transition mode: <programlisting><codeline><highlight class="normal">app_start_whd()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_driver_t<sp/>whd_driver;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_interface_t<sp/>ifp;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Each<sp/>wifi<sp/>chip,<sp/>will<sp/>have<sp/>it&apos;s<sp/>own<sp/>instance<sp/>of<sp/>whd_driver</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Each<sp/>whd_driver<sp/>may<sp/>use<sp/>multiple<sp/>instance<sp/>of<sp/>whd_interface_t<sp/>structs<sp/>to<sp/>define<sp/>behavior<sp/>and<sp/>functionality.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Most<sp/>of<sp/>the<sp/>WHD<sp/>function<sp/>calls<sp/>take<sp/>this<sp/>structure<sp/>as<sp/>input.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>The<sp/>default<sp/>primary<sp/>interface<sp/>is<sp/>created<sp/>automatically<sp/>at<sp/>the<sp/>time<sp/>of<sp/>power<sp/>up<sp/>of<sp/>wifi<sp/>chip,<sp/>whd_wifi_on(..).</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Primary<sp/>interface<sp/>is<sp/>STA/AP<sp/>role<sp/>neutral.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Call<sp/>whd_init<sp/>per<sp/>wifi<sp/>chip<sp/>(in<sp/>other<sp/>words<sp/>per<sp/>bus<sp/>slot,<sp/>two<sp/>SDIO<sp/>Wifi<sp/>chip<sp/>requires<sp/>two<sp/>calls.)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_init(&amp;whd_driver,<sp/>&amp;whd_init_cfg,<sp/>&amp;whd_resource_source,<sp/>&amp;whd_buffer_funcs,<sp/>&amp;whd_netif_funcs);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Attach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_attach(whd_driver,<sp/>&amp;whd_sdio_cfg,<sp/>&amp;sdhc_obj);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_attach(whd_driver,<sp/>&amp;whd_spi_cfg,<sp/>&amp;spi_obj);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>...</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>on<sp/>Wifi,<sp/>download<sp/>firmware<sp/>and<sp/>create<sp/>a<sp/>primary<sp/>interface,<sp/>returns<sp/>whd_interface_t</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_on(whd_driver,<sp/>&amp;ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Enable<sp/>WHD<sp/>internal<sp/>supplicant<sp/>and<sp/>set<sp/>WPA2<sp/>passphrase<sp/>in<sp/>case<sp/>of<sp/>WPA3/WPA2<sp/>transition<sp/>mode</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Here,<sp/>security_key_psk<sp/>is<sp/>WPA2<sp/>passphrase<sp/>for<sp/>WHD_SECURITY_WPA3_WPA2_PSK<sp/>authentication<sp/>type</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_enable_sup_set_passphrase(<sp/>ifp,<sp/>security_key_psk,<sp/>strlen(security_key_psk),<sp/>WHD_SECURITY_WPA3_WPA2_PSK<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//11a.<sp/>Join<sp/>to<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Here,<sp/>security<sp/>key<sp/>is<sp/>WPA3<sp/>password</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_join(ifp<sp/>,<sp/>&quot;AP<sp/>SSID&quot;,<sp/>WHD_SECURITY_WPA3_WPA2_PSK,<sp/>security_key,<sp/>strlen(security_key),<sp/>NULL);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Leave<sp/>the<sp/>AP</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>off<sp/>Wifi</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(ifp<sp/>);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(ifp);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Detach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_detach(whd_driver);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_detach(whd_driver);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><linebreak/>
+ </para>
+</sect1>
+<sect1 id="index_1whd_design">
+<title>Internals of WHD</title>
+<para>The WHD consists of various internal modules as shown in the following diagram and explained in the following sections. Once the WHD is powered up, the WLAN Bus specific init sequence is completed, and the WLAN chip is ready for operation.  <image type="html" name="whd_design.png" inline="yes">></image>
+ <linebreak/>
+ <heading level="2"><bold>FW Download Module</bold></heading>
+</para>
+<para>This module downloads the WLAN Firmware, NVRAM, and CLM file using HAL Resource API. This module does not use the services of control or data path module. It directly accesses the &quot;WHD Bus Interface&quot; to write the resources. After download is completed, this module allows the WLAN firmware to run.<linebreak/>
+<linebreak/>
+ <heading level="2"><bold>WLAN Chip Logging Module</bold></heading>
+</para>
+<para>This module is responsible for obtaining the WLAN Chip logs using the WHD Debug APIs.<linebreak/>
+<linebreak/>
+ <heading level="2"><bold>Control Module</bold></heading>
+</para>
+<para>IOCTLs provide control access to the WLAN Chip, and this module routes all these control messages to/from the WLAN chip.<linebreak/>
+<linebreak/>
+ <heading level="2"><bold>Data Module</bold></heading>
+</para>
+<para>This module handles User Data received in the TCP/IP interface. It also to sends the User Data received from the WLAN Chip.<linebreak/>
+<linebreak/>
+ <heading level="2"><bold>Event Module</bold></heading>
+</para>
+<para>Event module handles the events generated from the WLAN chip. It also exposes a function for the application to register for limited set of events and process them.<linebreak/>
+<linebreak/>
+ <heading level="2"><bold>Protocol Module</bold></heading>
+</para>
+<para>Any packet sent to the WLAN chip needs to have a Protocol Header. Protocol Headers are of two types: <itemizedlist>
+<listitem>
+<para>CDC (for control packet like IOCTL and IOVAR) </para>
+</listitem>
+<listitem>
+<para>BDC (for User Data or ethernet packets from TCP/IP layer)</para>
+</listitem>
+</itemizedlist>
+The protocol layer is bus independent and is required for either SDIO/SPI/USB.</para>
+<para><itemizedlist>
+<listitem>
+<para><bold>CDC Layer</bold> The Control Module sends messages to this CDC layer, which adds a 16-byte header known as CDC header. The following shows the header details:  <image type="html" name="cdc_msg.png" inline="yes">></image>
+ <linebreak/>
+<linebreak/>
+<linebreak/>
+ <programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>cmd;<sp/><sp/><sp/><sp/><sp/>//<sp/>ioctl<sp/>command<sp/>value</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>len;<sp/><sp/><sp/><sp/><sp/>//<sp/>lower<sp/>16:<sp/>output<sp/>buflen;<sp/>upper<sp/>16:<sp/>input<sp/>buflen<sp/>(excludes<sp/>header)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>flags;<sp/><sp/><sp/>//<sp/>flag<sp/>defns<sp/>given<sp/>in<sp/>bcmcdc.h</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>status;<sp/><sp/>//<sp/>status<sp/>code<sp/>returned<sp/>from<sp/>the<sp/>device</highlight></codeline>
+<codeline><highlight class="normal">}cdc_header_t;</highlight></codeline>
+</programlisting> <linebreak/>
+</para>
+</listitem>
+<listitem>
+<para><bold>BDC Layer</bold> The User Data Module sends messages to the BDC Layer. It adds a 4-byte header known as the BDC header. The following shows the header details:  <image type="html" name="bdc_msg.png" inline="yes">></image>
+ <linebreak/>
+<linebreak/>
+<linebreak/>
+ <programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>uint8_t<sp/>flags;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Flags</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>uint8_t<sp/>priority;<sp/><sp/><sp/><sp/><sp/>//<sp/>802.1d<sp/>Priority<sp/>(low<sp/>3<sp/>bits)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>uint8_t<sp/>flags2;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>uint8_t<sp/>data_offset;<sp/><sp/>//<sp/>Offset<sp/>from<sp/>end<sp/>of<sp/>BDC<sp/>header<sp/>to<sp/>packet<sp/>data,<sp/>in<sp/>4-uint8_t<sp/>words.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Leaves<sp/>room<sp/>for<sp/>optional<sp/>headers.</highlight></codeline>
+<codeline><highlight class="normal">}<sp/>bdc_header_t;</highlight></codeline>
+</programlisting> </para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+<heading level="2"><bold>Bus Layer</bold></heading>
+</para>
+<para>The Bus layer provides bus level protocol handling. For SDIO, a bus protocol known as SDPCM is used.<linebreak/>
+ <itemizedlist>
+<listitem>
+<para><bold>SDPCM - SDIO/SPI Bus Layer</bold> SDPCM Layer takes care of:<linebreak/>
+ <itemizedlist>
+<listitem>
+<para>Adding a Sequence number to packet sent to WLAN Chip </para>
+</listitem>
+<listitem>
+<para>Flow control between WHD and WLAN Chip</para>
+</listitem>
+</itemizedlist>
+SDPCM layer adds a fixed 10-byte header and packet format as below: <linebreak/>
+ <image type="html" name="sdpcm_msg.png" inline="yes">></image>
+  <linebreak/>
+<linebreak/>
+<linebreak/>
+<linebreak/>
+</para>
+</listitem>
+<listitem>
+<para><bold>SDPCM Header</bold> <programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint16_t<sp/><sp/>frametag[2];<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>SDPCM<sp/>packet<sp/>size</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>sequence;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Sequence<sp/>number<sp/>of<sp/>pkt</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>channel_and_flags;<sp/><sp/>//<sp/>IOCTL/IOVAR<sp/>or<sp/>User<sp/>Data<sp/>or<sp/>Event</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>next_length;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>header_length;<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Offset<sp/>to<sp/>BDC<sp/>or<sp/>CDC<sp/>header</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>wireless_flow_control;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>bus_data_credit;<sp/><sp/><sp/><sp/>//<sp/>Credit<sp/>from<sp/>WLAN<sp/>Chip</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint8_t<sp/>_reserved[2];</highlight></codeline>
+<codeline><highlight class="normal">}<sp/>sdpcm_header_t;</highlight></codeline>
+</programlisting> <linebreak/>
+</para>
+</listitem>
+<listitem>
+<para><bold>SDIO - SDPCM Flow control</bold> Before sending any data to the WLAN, the SDPCM Layer must wait for credit from WLAN chip. Credit is sent by the WLAN either in a SDPCM header packet or as piggy-banked information in a RX User Data packet. The SDPCM Layer should not send any packet if no credit is available. <linebreak/>
+<linebreak/>
+ <image type="html" name="sdpcm_flow.png" inline="yes">></image>
+ <linebreak/>
+</para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+<heading level="2">Packet Engine</heading>
+</para>
+<para>All the control or User Data is queued in a link list in this layer. Once the credit is available, this layer sends the data to WLAN chip. Also, this layer checks for any RX data from WLAN Chip and sends the data to host TCP/IP stack via its TCP/IP interface.  <linebreak/>
+<image type="html" name="data_flow.png" inline="yes">></image>
+ <linebreak/>
+<linebreak/>
+<linebreak/>
+<linebreak/>
+<linebreak/>
+<linebreak/>
+<linebreak/>
+<linebreak/>
+ <linebreak/>
+<linebreak/>
+<heading level="2">WHD Bus Interface</heading>
+</para>
+<para>This module provides bus independent access functions to the packet engine/sdpcm layer. It is primarily used to keep the access functions common between SDIO/SPI. <linebreak/>
+<linebreak/>
+<heading level="2">SDIO HAL Interface</heading>
+</para>
+<para>Use the CY HAL interface to access the SDIO Host Controller Hardware. It is external to the WHD driver. <linebreak/>
+<linebreak/>
+<heading level="3"><bold>SPI HAL Interface</bold></heading>
+</para>
+<para>Use the CY HAL interface to access the SPI Host Controller Hardware. It is external to the WHD driver <linebreak/>
+ <linebreak/>
+ <linebreak/>
+ </para>
+</sect1>
+<sect1 id="index_1apis">
+<title>WHD API</title>
+<para>The WHD provides services in the form of the WLAN API which can be used by layers above the WHD. Broadly, the WLAN API can be classified into the following: <itemizedlist>
+<listitem>
+<para>Basic API (like scan, join) </para>
+</listitem>
+<listitem>
+<para>Intermediate API (like SoftAP) </para>
+</listitem>
+<listitem>
+<para>Advanced API (to send direct IOCTL to WLAN Chip)</para>
+</listitem>
+</itemizedlist>
+Based on the functionality, APIs can be classified as follows: <itemizedlist>
+<listitem>
+<para><ulink url="group__busapi.html">WHD Bus API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__buffif.html">WHD Buffer Interface API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__netif.html">WHD Network Interface API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__res.html">WHD Resource API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__event.html">WHD Wi-Fi Event handling API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__wifi.html">WHD Wi-Fi API</ulink> <itemizedlist>
+<listitem>
+<para><ulink url="group__wifimanagement.html">WHD Wi-Fi Management API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__wifijoin.html">WHD Wi-Fi Join, Scan and Halt API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__wifiutilities.html">WHD Wi-Fi Utility API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__wifisoftap.html">WHD Wi-Fi SoftAP API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__wifipowersave.html">WHD Wi-Fi Power Save API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__wifiioctl.html">WHD Wi-Fi IOCTL Set/Get API</ulink> </para>
+</listitem>
+<listitem>
+<para><ulink url="group__dbg.html">WHD Wi-Fi Debug API</ulink> </para>
+</listitem>
+</itemizedlist>
+</para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+ </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

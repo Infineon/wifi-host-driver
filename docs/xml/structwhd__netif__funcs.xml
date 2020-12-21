@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__netif__funcs" kind="struct" language="C++" prot="public">
+    <compoundname>whd_netif_funcs</compoundname>
+    <includes local="no">whd_network_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__netif__funcs_1aeb98a45468d1d8f37450617a3388387c" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* whd_network_process_ethernet_data) (whd_interface_t ifp, whd_buffer_t buffer)</definition>
+        <argsstring>)(whd_interface_t ifp, whd_buffer_t buffer)</argsstring>
+        <name>whd_network_process_ethernet_data</name>
+        <briefdescription>
+<para>Called by WHD to pass received data to the network stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Packets received from the Wi-Fi network by WHD are forwarded to by calling function ptr which must be implemented in the network interface. Ethernet headers are present at the start of these packet buffers.</para>
+<para>This function is called asynchronously in the context of the WHD thread whenever new data has arrived. Packet buffers are allocated within WHD, and ownership is transferred to the network stack. The network stack or application is thus responsible for releasing the packet buffers. Most packet buffering systems have a pointer to the &apos;current point&apos; within the packet buffer. When this function is called, the pointer points to the start of the Ethernet header. There is other inconsequential data before the Ethernet header.</para>
+<para>It is preferable that the (whd_network_process_ethernet_data)() function simply puts the received packet on a queue for processing by another thread. This avoids the WHD thread being unnecessarily tied up which would delay other packets being transmitted or received.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interface on which the packet was received. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the packet which has just been received. Responsibility for releasing this buffer is transferred from WHD at this point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="189" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains functions which allows WHD to pass received data to the network stack, to send an ethernet frame to WHD, etc. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="161" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="160" bodyend="190"/>
+    <listofallmembers>
+      <member refid="structwhd__netif__funcs_1aeb98a45468d1d8f37450617a3388387c" prot="public" virt="non-virtual"><scope>whd_netif_funcs</scope><name>whd_network_process_ethernet_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

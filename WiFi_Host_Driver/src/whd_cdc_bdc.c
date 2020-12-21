@@ -266,7 +266,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     cdc_header    = (cdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, cdc_bdc_info->ioctl_response);
     flags         = dtoh32(cdc_header->flags);
 
-    retval = (whd_result_t)(WLAN_ENUM_OFFSET -  dtoh32(cdc_header->status) );
+    retval = (whd_result_t)WHD_RESULT_CREATE( (WLAN_ENUM_OFFSET - dtoh32(cdc_header->status) ) );
 
     /* Check if the caller wants the response */
     if (response_buffer_hnd != NULL)

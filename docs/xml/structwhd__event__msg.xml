@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__event__msg" kind="struct" language="C++" prot="public">
+    <compoundname>whd_event_msg</compoundname>
+    <includes local="no">whd_events.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__event__msg_1ab6d7b6f8c2ceaba7acda80aaf05f4899" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t version</definition>
+        <argsstring></argsstring>
+        <name>version</name>
+        <briefdescription>
+<para>Version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="137" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a1e87af3c18a2fd36c61faf89949bdc3f" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t flags</definition>
+        <argsstring></argsstring>
+        <name>flags</name>
+        <briefdescription>
+<para>see flags below </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="138" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a45def65890de0da17bc0d6e2ca2b3a9f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t event_type</definition>
+        <argsstring></argsstring>
+        <name>event_type</name>
+        <briefdescription>
+<para>Event type indicating a response from firmware for IOCTLs/IOVARs sent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="139" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1ade20423e91627f07e610924cb0081623" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t status</definition>
+        <argsstring></argsstring>
+        <name>status</name>
+        <briefdescription>
+<para>Status code corresponding to any event type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="140" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a5ac0b16c31813f87b98e97cc5bacd64a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t reason</definition>
+        <argsstring></argsstring>
+        <name>reason</name>
+        <briefdescription>
+<para>Reason code associated with the event occurred. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="141" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a6d9c484262d9d2e9fceaa54a2e58b3c0" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t auth_type</definition>
+        <argsstring></argsstring>
+        <name>auth_type</name>
+        <briefdescription>
+<para>WLC_E_AUTH: 802.11 AUTH request. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="142" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a20ef2f8b0dc25d28c0c76be72919a60a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t datalen</definition>
+        <argsstring></argsstring>
+        <name>datalen</name>
+        <briefdescription>
+<para>Length of data in event message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="143" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a7c939001af591772db111e0be822b469" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
+        <definition>whd_mac_t addr</definition>
+        <argsstring></argsstring>
+        <name>addr</name>
+        <briefdescription>
+<para>Station address (if applicable) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="144" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1a6416f2a9886b328d85974b42f5a34ce5" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char ifname[WHD_MSG_IFNAME_MAX]</definition>
+        <argsstring>[WHD_MSG_IFNAME_MAX]</argsstring>
+        <name>ifname</name>
+        <briefdescription>
+<para>name of the incoming packet interface </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="145" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1aee54e454588cb953b7f349e589c2d09f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ifidx</definition>
+        <argsstring></argsstring>
+        <name>ifidx</name>
+        <briefdescription>
+<para>destination OS i/f index </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="146" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event__msg_1aa2c53e1708eb89382779539506cb4359" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t bsscfgidx</definition>
+        <argsstring></argsstring>
+        <name>bsscfgidx</name>
+        <briefdescription>
+<para>source bsscfg index </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="147" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure to store fields after ethernet header in event message. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="24">
+        <label>whd_event_msg</label>
+        <link refid="structwhd__event__msg"/>
+        <childnode refid="25" relation="usage">
+          <edgelabel>addr</edgelabel>
+        </childnode>
+      </node>
+      <node id="25">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="136" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="135" bodyend="148"/>
+    <listofallmembers>
+      <member refid="structwhd__event__msg_1a7c939001af591772db111e0be822b469" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>addr</name></member>
+      <member refid="structwhd__event__msg_1a6d9c484262d9d2e9fceaa54a2e58b3c0" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>auth_type</name></member>
+      <member refid="structwhd__event__msg_1aa2c53e1708eb89382779539506cb4359" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>bsscfgidx</name></member>
+      <member refid="structwhd__event__msg_1a20ef2f8b0dc25d28c0c76be72919a60a" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>datalen</name></member>
+      <member refid="structwhd__event__msg_1a45def65890de0da17bc0d6e2ca2b3a9f" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>event_type</name></member>
+      <member refid="structwhd__event__msg_1a1e87af3c18a2fd36c61faf89949bdc3f" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>flags</name></member>
+      <member refid="structwhd__event__msg_1aee54e454588cb953b7f349e589c2d09f" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>ifidx</name></member>
+      <member refid="structwhd__event__msg_1a6416f2a9886b328d85974b42f5a34ce5" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>ifname</name></member>
+      <member refid="structwhd__event__msg_1a5ac0b16c31813f87b98e97cc5bacd64a" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>reason</name></member>
+      <member refid="structwhd__event__msg_1ade20423e91627f07e610924cb0081623" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>status</name></member>
+      <member refid="structwhd__event__msg_1ab6d7b6f8c2ceaba7acda80aaf05f4899" prot="public" virt="non-virtual"><scope>whd_event_msg</scope><name>version</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

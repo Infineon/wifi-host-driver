@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__buffif" kind="group">
+    <compoundname>buffif</compoundname>
+    <title>WHD Buffer Interface API</title>
+    <innerclass refid="structwhd__buffer__funcs" prot="public">whd_buffer_funcs</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__buffif_1ga44a64c51498b204ceef5555209e29452" prot="public" static="no" strong="no">
+        <type></type>
+        <name>whd_buffer_dir_t</name>
+        <enumvalue id="group__buffif_1gga44a64c51498b204ceef5555209e29452a3d24bf5423cc175fe6ee80bd359dc5bd" prot="public">
+          <name>WHD_NETWORK_TX</name>
+          <briefdescription>
+<para>Transmit direction. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__buffif_1gga44a64c51498b204ceef5555209e29452a11af875b5bd8b18c4a0c878af601d1ca" prot="public">
+          <name>WHD_NETWORK_RX</name>
+          <briefdescription>
+<para>Recieve direction. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Indicates transmit/receive direction that the packet buffer has been used for. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is needed if tx/rx pools are separate. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="35" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="34" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Allows WHD to perform buffer related operations like, allocating, releasing, retrieving the current pointer of and size of a packet buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

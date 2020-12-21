@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__scan__result" kind="struct" language="C++" prot="public">
+    <compoundname>whd_scan_result</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__scan__result_1ae3940d431c3c3ed25294eb70a02c330b" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__ssid__t" kindref="compound">whd_ssid_t</ref></type>
+        <definition>whd_ssid_t SSID</definition>
+        <argsstring></argsstring>
+        <name>SSID</name>
+        <briefdescription>
+<para>Service Set Identification (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Name of Access Point) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="679" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="679" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1acff14471b28062500a2992114ae54765" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
+        <definition>whd_mac_t BSSID</definition>
+        <argsstring></argsstring>
+        <name>BSSID</name>
+        <briefdescription>
+<para>Basic Service Set Identification (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>MAC address of Access Point) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="680" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="680" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1ac303b69da3c469c92299a6ff260e2859" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t signal_strength</definition>
+        <argsstring></argsstring>
+        <name>signal_strength</name>
+        <briefdescription>
+<para>Receive Signal Strength Indication in dBm. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt;-90=Very poor, &gt;-30=Excellent </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="681" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="681" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1a2deb22a1108e6c9371d92d496c07da01" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t max_data_rate</definition>
+        <argsstring></argsstring>
+        <name>max_data_rate</name>
+        <briefdescription>
+<para>Maximum data rate in kilobits/s. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="682" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="682" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1ad1f59c68ce8ec9dad45866f67ee0ef44" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a3070614a06a8989b9eb207e9f1286c5f" kindref="member">whd_bss_type_t</ref></type>
+        <definition>whd_bss_type_t bss_type</definition>
+        <argsstring></argsstring>
+        <name>bss_type</name>
+        <briefdescription>
+<para>Network type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="683" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="683" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1ae8d5baabacdabe6d3590465572849754" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
+        <definition>whd_security_t security</definition>
+        <argsstring></argsstring>
+        <name>security</name>
+        <briefdescription>
+<para>Security type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="684" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="684" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1a715f5cb061d11eb75981741eda4dafcd" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t channel</definition>
+        <argsstring></argsstring>
+        <name>channel</name>
+        <briefdescription>
+<para>Radio channel that the AP beacon was received on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="685" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="685" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1aee4db592d40d1e5a4305eb6ba177c1d7" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85" kindref="member">whd_802_11_band_t</ref></type>
+        <definition>whd_802_11_band_t band</definition>
+        <argsstring></argsstring>
+        <name>band</name>
+        <briefdescription>
+<para>Radio band. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="686" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="686" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1a4f626e97f0f0ea28fea702a7ecaad54f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ccode[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>ccode</name>
+        <briefdescription>
+<para>Two letter ISO country code from AP. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="687" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="687" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1aa2585d779da0ab21273a8d92de9a0ebe" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t flags</definition>
+        <argsstring></argsstring>
+        <name>flags</name>
+        <briefdescription>
+<para>flags </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="688" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="688" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1a98448b39c64ea60aa2166916acc60849" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structwhd__scan__result" kindref="compound">whd_scan_result</ref> *</type>
+        <definition>struct whd_scan_result* next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+<para>Pointer to the next scan result. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="689" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="689" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1a460ec020636ddecd8758543cfa83e101" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* ie_ptr</definition>
+        <argsstring></argsstring>
+        <name>ie_ptr</name>
+        <briefdescription>
+<para>Pointer to received Beacon/Probe Response IE(Information Element) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="690" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="690" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__scan__result_1a5530db0834a2796234ed42c3fcb5c0f4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ie_len</definition>
+        <argsstring></argsstring>
+        <name>ie_len</name>
+        <briefdescription>
+<para>Length of IE(Information Element) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="691" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="691" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for storing scan results. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="47">
+        <label>whd_ssid_t</label>
+        <link refid="structwhd__ssid__t"/>
+      </node>
+      <node id="46">
+        <label>whd_scan_result</label>
+        <link refid="structwhd__scan__result"/>
+        <childnode refid="46" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="47" relation="usage">
+          <edgelabel>SSID</edgelabel>
+        </childnode>
+        <childnode refid="48" relation="usage">
+          <edgelabel>BSSID</edgelabel>
+        </childnode>
+      </node>
+      <node id="48">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="678" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="677" bodyend="692"/>
+    <listofallmembers>
+      <member refid="structwhd__scan__result_1aee4db592d40d1e5a4305eb6ba177c1d7" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>band</name></member>
+      <member refid="structwhd__scan__result_1ad1f59c68ce8ec9dad45866f67ee0ef44" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>bss_type</name></member>
+      <member refid="structwhd__scan__result_1acff14471b28062500a2992114ae54765" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>BSSID</name></member>
+      <member refid="structwhd__scan__result_1a4f626e97f0f0ea28fea702a7ecaad54f" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>ccode</name></member>
+      <member refid="structwhd__scan__result_1a715f5cb061d11eb75981741eda4dafcd" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>channel</name></member>
+      <member refid="structwhd__scan__result_1aa2585d779da0ab21273a8d92de9a0ebe" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>flags</name></member>
+      <member refid="structwhd__scan__result_1a5530db0834a2796234ed42c3fcb5c0f4" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>ie_len</name></member>
+      <member refid="structwhd__scan__result_1a460ec020636ddecd8758543cfa83e101" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>ie_ptr</name></member>
+      <member refid="structwhd__scan__result_1a2deb22a1108e6c9371d92d496c07da01" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>max_data_rate</name></member>
+      <member refid="structwhd__scan__result_1a98448b39c64ea60aa2166916acc60849" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>next</name></member>
+      <member refid="structwhd__scan__result_1ae8d5baabacdabe6d3590465572849754" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>security</name></member>
+      <member refid="structwhd__scan__result_1ac303b69da3c469c92299a6ff260e2859" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>signal_strength</name></member>
+      <member refid="structwhd__scan__result_1ae3940d431c3c3ed25294eb70a02c330b" prot="public" virt="non-virtual"><scope>whd_scan_result</scope><name>SSID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

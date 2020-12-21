@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__listen__interval__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_listen_interval_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__listen__interval__t_1a59de6cdff8214507260f142834f20cee" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t beacon</definition>
+        <argsstring></argsstring>
+        <name>beacon</name>
+        <briefdescription>
+<para>Listen interval in beacon periods. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="755" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="755" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__listen__interval__t_1a011e406e7bba2200194b90d308ea2e82" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t dtim</definition>
+        <argsstring></argsstring>
+        <name>dtim</name>
+        <briefdescription>
+<para>Listen interval in DTIM periods. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="756" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="756" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__listen__interval__t_1af001610277052191979db17c0133c933" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t assoc</definition>
+        <argsstring></argsstring>
+        <name>assoc</name>
+        <briefdescription>
+<para>Listen interval as sent to APs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="757" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="757" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for storing 802.11 powersave listen interval values <linebreak/>
+See <ref refid="group__wifiutilities_1ga5a62f0854ad148dde280b4f75596a309" kindref="member">whd_wifi_get_listen_interval</ref> for more information. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="754" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="753" bodyend="758"/>
+    <listofallmembers>
+      <member refid="structwhd__listen__interval__t_1af001610277052191979db17c0133c933" prot="public" virt="non-virtual"><scope>whd_listen_interval_t</scope><name>assoc</name></member>
+      <member refid="structwhd__listen__interval__t_1a59de6cdff8214507260f142834f20cee" prot="public" virt="non-virtual"><scope>whd_listen_interval_t</scope><name>beacon</name></member>
+      <member refid="structwhd__listen__interval__t_1a011e406e7bba2200194b90d308ea2e82" prot="public" virt="non-virtual"><scope>whd_listen_interval_t</scope><name>dtim</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

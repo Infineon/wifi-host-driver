@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__buffer__funcs" kind="struct" language="C++" prot="public">
+    <compoundname>whd_buffer_funcs</compoundname>
+    <includes local="no">whd_network_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a08be981b01c563df3f34025e463a6a32" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
+        <definition>whd_result_t(* whd_host_buffer_get) (whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long wait)</definition>
+        <argsstring>)(whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long wait)</argsstring>
+        <name>whd_host_buffer_get</name>
+        <briefdescription>
+<para>Allocates a packet buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implemented in the port layer interface which is specific to the buffering scheme in use. Attempts to allocate a packet buffer of the size requested. It can do this by allocating a pre-existing packet from a pool, using a static buffer, or by dynamically allocating memory. The method of allocation does not concern WHD, however it must match the way the network stack expects packet buffers to be allocated. Usually WHD requires packet of size of WHD_LINK_MTU which includes the MTU, other other various header. Refer to <ref refid="whd__types_8h" kindref="compound">whd_types.h</ref> to find the size of WHD_LINK_MTU</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer which receives the allocated packet buffer handle </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates transmit/receive direction that the packet buffer is used for. This may be needed if tx/rx pools are separate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of bytes to allocate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wait</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to wait for a packet buffer to be available</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="66" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* whd_buffer_release) (whd_buffer_t buffer, whd_buffer_dir_t direction)</definition>
+        <argsstring>)(whd_buffer_t buffer, whd_buffer_dir_t direction)</argsstring>
+        <name>whd_buffer_release</name>
+        <briefdescription>
+<para>Releases a packet buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implemented in the port layer interface, which will be specific to the buffering scheme in use. This function is used by WHD to indicate that it no longer requires a packet buffer. The buffer can then be released back into a pool for reuse, or the dynamically allocated memory can be freed, according to how the packet was allocated. Returns void since WHD cannot do anything about failures</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle of the packet buffer to be released </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates transmit/receive direction that the packet buffer has been used for. This might be needed if tx/rx pools are separate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="84" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" prot="public" static="no" mutable="no">
+        <type>uint8_t *(*</type>
+        <definition>uint8_t*(* whd_buffer_get_current_piece_data_pointer) (whd_buffer_t buffer)</definition>
+        <argsstring>)(whd_buffer_t buffer)</argsstring>
+        <name>whd_buffer_get_current_piece_data_pointer</name>
+        <briefdescription>
+<para>Retrieves the current pointer of a packet buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implemented in the port layer interface which is specific to the buffering scheme in use. Since packet buffers usually need to be created with space at the front for additional headers, this function allows WHD to get the current &apos;front&apos; location pointer.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle of the packet buffer whose pointer is to be retrieved</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The packet buffer&apos;s current pointer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="98" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" prot="public" static="no" mutable="no">
+        <type>uint16_t(*</type>
+        <definition>uint16_t(* whd_buffer_get_current_piece_size) (whd_buffer_t buffer)</definition>
+        <argsstring>)(whd_buffer_t buffer)</argsstring>
+        <name>whd_buffer_get_current_piece_size</name>
+        <briefdescription>
+<para>Retrieves the size of a packet buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implemented in the port layer interface which is specific to the buffering scheme in use. Since packet buffers usually need to be created with space at the front for additional headers, the memory block use to contain a packet buffer will often be larger than the current size of the packet buffer data. This function allows WHD to retrieve the current size of a packet buffer&apos;s data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle of the packet buffer whose size is to be retrieved</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The size of the packet buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="113" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
+        <definition>whd_result_t(* whd_buffer_set_size) (whd_buffer_t buffer, unsigned short size)</definition>
+        <argsstring>)(whd_buffer_t buffer, unsigned short size)</argsstring>
+        <name>whd_buffer_set_size</name>
+        <briefdescription>
+<para>Sets the current size of a WHD packet. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implemented in the port layer interface which is specific to the buffering scheme in use. This function sets the current length of a WHD packet buffer</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The packet to be modified </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new size of the packet buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="126" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1ab4c0aef4cb8722f8b22209592a84594a" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
+        <definition>whd_result_t(* whd_buffer_add_remove_at_front) (whd_buffer_t *buffer, int32_t add_remove_amount)</definition>
+        <argsstring>)(whd_buffer_t *buffer, int32_t add_remove_amount)</argsstring>
+        <name>whd_buffer_add_remove_at_front</name>
+        <briefdescription>
+<para>Moves the current pointer of a packet buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implemented in the port layer interface which is specific to the buffering scheme in use.</para>
+<para>Since packet buffers usually need to be created with space at the front for additional headers, this function allows WHD to move the current &apos;front&apos; location pointer so that it has space to add headers to transmit packets, and so that the network stack does not see the internal WHD headers on received packets.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the handle of the current packet buffer for which the current pointer will be moved. On return this may contain a pointer to a newly allocated packet buffer which has been daisy chained to the front of the given packet buffer. This would be the case if the given packet buffer didn&apos;t have enough space at the front. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>add_remove_amount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This is the number of bytes to move the current pointer of the packet buffer - a negative value increases the space for headers at the front of the packet, a positive value decreases the space.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="148" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Allows WHD to perform buffer related operations like, allocating, releasing, retrieving the current pointer of and size of a packet buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="44" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="43" bodyend="149"/>
+    <listofallmembers>
+      <member refid="structwhd__buffer__funcs_1ab4c0aef4cb8722f8b22209592a84594a" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_add_remove_at_front</name></member>
+      <member refid="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_get_current_piece_data_pointer</name></member>
+      <member refid="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_get_current_piece_size</name></member>
+      <member refid="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_release</name></member>
+      <member refid="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_set_size</name></member>
+      <member refid="structwhd__buffer__funcs_1a08be981b01c563df3f34025e463a6a32" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_host_buffer_get</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

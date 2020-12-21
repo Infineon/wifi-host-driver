@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-    <title>Wi-Fi Host Driver (WHD): whd_intr_config Struct Reference</title>
+    <title>Wi-Fi Host Driver (WHD): whd_oob_config Struct Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structwhd__intr__config.html','');});
+$(document).ready(function(){initNavTree('structwhd__oob__config.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -88,32 +88,40 @@ $(document).ready(function(){initNavTree('structwhd__intr__config.html','');});
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">whd_intr_config Struct Reference<div class="ingroups"><a class="el" href="group__busapi.html">WHD Bus API</a></div></div>  </div>
+<div class="title">whd_oob_config Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
-<div class="textblock"><p>Interrupt configuration structure. </p>
+<div class="textblock"><p>Structure for Out-of-band interrupt config parameters which can be set by application during whd power up. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a414a6a3251198a9a72b913b4b35fa21c"><td class="memItemLeft" align="right" valign="top"><a id="a414a6a3251198a9a72b913b4b35fa21c"></a>
-<a class="el" href="group__busapi.html#ga7d2f8c9ca91252bdf352ad77159b3526">whd_dev_gpio_sel_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__intr__config.html#a414a6a3251198a9a72b913b4b35fa21c">dev_gpio_sel</a></td></tr>
-<tr class="memdesc:a414a6a3251198a9a72b913b4b35fa21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi device-side GPIO pin selection. <br /></td></tr>
-<tr class="separator:a414a6a3251198a9a72b913b4b35fa21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c705dc46f1c4249cef91f1fc8a877dc"><td class="memItemLeft" align="right" valign="top"><a id="a6c705dc46f1c4249cef91f1fc8a877dc"></a>
+cyhal_gpio_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__oob__config.html#a6c705dc46f1c4249cef91f1fc8a877dc">host_oob_pin</a></td></tr>
+<tr class="memdesc:a6c705dc46f1c4249cef91f1fc8a877dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Host-side GPIO pin selection. <br /></td></tr>
+<tr class="separator:a6c705dc46f1c4249cef91f1fc8a877dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d83d43c26f20c82203b65cef7cf9d2f"><td class="memItemLeft" align="right" valign="top"><a id="a2d83d43c26f20c82203b65cef7cf9d2f"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__oob__config.html#a2d83d43c26f20c82203b65cef7cf9d2f">dev_gpio_sel</a></td></tr>
+<tr class="memdesc:a2d83d43c26f20c82203b65cef7cf9d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi device-side GPIO pin selection (must be zero) <br /></td></tr>
+<tr class="separator:a2d83d43c26f20c82203b65cef7cf9d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afac6867bb224b40190d70a7bed57b556"><td class="memItemLeft" align="right" valign="top"><a id="afac6867bb224b40190d70a7bed57b556"></a>
-<a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__intr__config.html#afac6867bb224b40190d70a7bed57b556">is_falling_edge</a></td></tr>
+<a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__oob__config.html#afac6867bb224b40190d70a7bed57b556">is_falling_edge</a></td></tr>
 <tr class="memdesc:afac6867bb224b40190d70a7bed57b556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt trigger (polarity) <br /></td></tr>
 <tr class="separator:afac6867bb224b40190d70a7bed57b556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a948130b9ee9aaba4463a9a678c830b2f"><td class="memItemLeft" align="right" valign="top"><a id="a948130b9ee9aaba4463a9a678c830b2f"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__oob__config.html#a948130b9ee9aaba4463a9a678c830b2f">intr_priority</a></td></tr>
+<tr class="memdesc:a948130b9ee9aaba4463a9a678c830b2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">OOB interrupt priority. <br /></td></tr>
+<tr class="separator:a948130b9ee9aaba4463a9a678c830b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="whd__bus__types_8h.html">whd_bus_types.h</a></li>
+<li><a class="el" href="whd__types_8h.html">whd_types.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
     <!-- start footer part -->
     <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
       <ul>
-        <li class="navelem"><a class="el" href="structwhd__intr__config.html">whd_intr_config</a></li>
+        <li class="navelem"><a class="el" href="structwhd__oob__config.html">whd_oob_config</a></li>
         <li class="footer">Copyright Cypress Corporation.</li>
       </ul>
     </div>

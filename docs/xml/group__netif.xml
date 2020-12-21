@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__netif" kind="group">
+    <compoundname>netif</compoundname>
+    <title>WHD Network Interface API</title>
+    <innerclass refid="structwhd__netif__funcs" prot="public">whd_netif_funcs</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__netif_1ga3642a8b0fe0df7449730bec92e09c7d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void whd_network_send_ethernet_data</definition>
+        <argsstring>(whd_interface_t ifp, whd_buffer_t buffer)</argsstring>
+        <name>whd_network_send_ethernet_data</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_buffer_t</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>To send an ethernet frame to WHD (called by the Network Stack) </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes ethernet data from the network stack and queues it for transmission over the wireless network. The function can be called from any thread context as it is thread safe, however it must not be called from interrupt context since it might get blocked while waiting for a lock on the transmit queue.</para>
+<para>This function returns immediately after the packet has been queued for transmit, NOT after it has been transmitted. Packet buffers passed to the WHD are released inside the WHD once they have been transmitted.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the packet buffer to be sent.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="209" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Allows WHD to pass received data to the network stack, to send an ethernet frame to WHD, etc. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

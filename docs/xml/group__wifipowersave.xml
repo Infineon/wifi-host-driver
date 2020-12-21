@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__wifipowersave" kind="group">
+    <compoundname>wifipowersave</compoundname>
+    <title>WHD Wi-Fi Power Save API</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__wifipowersave_1ga05cfafe07ad2c208acfdee29f7c6e626" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_enable_powersave</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_enable_powersave</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Enables powersave mode on specified interface without regard for throughput reduction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function enables (legacy) 802.11 PS-Poll mode and should be used to achieve the lowest power consumption possible when the Wi-Fi device is primarily passively listening to the network</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="562" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1ga6152d966f454fe8e8836472b802401c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_enable_powersave_with_throughput</definition>
+        <argsstring>(whd_interface_t ifp, uint16_t return_to_sleep_delay)</argsstring>
+        <name>whd_wifi_enable_powersave_with_throughput</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>return_to_sleep_delay</declname>
+        </param>
+        <briefdescription>
+<para>Enables powersave mode on specified interface while attempting to maximise throughput. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Network traffic is typically bursty. Reception of a packet often means that another packet will be received shortly afterwards (and vice versa for transmit).</para>
+<para>In high throughput powersave mode, rather then entering powersave mode immediately after receiving or sending a packet, the WLAN chip waits for a timeout period before returning to sleep.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>return_to_sleep_delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The variable to set return to sleep delay. return to sleep delay must be set to a multiple of 10 and not equal to zero.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if power save mode was successfully enabled Error code if power save mode was not successfully enabled </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="582" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1ga3eed267d42020440a077d7649cde0567" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_powersave_mode</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *value)</argsstring>
+        <name>whd_wifi_get_powersave_mode</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Get powersave mode on specified interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of the current powersave state PM1_POWERSAVE_MODE, PM2_POWERSAVE_MODE, NO_POWERSAVE_MODE</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="592" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1gab9af7ef8dac544f2bb8871259f85c437" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_disable_powersave</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_disable_powersave</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Disables 802.11 power save mode on specified interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if power save mode was successfully disabled Error code if power save mode was not successfully disabled </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="602" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wi-Fi functions for WLAN low power modes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

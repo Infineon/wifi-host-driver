@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__event" kind="group">
+    <compoundname>event</compoundname>
+    <title>WHD Event handling API</title>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__event_1ga9c74af353c83a8f77097acbc65362b07" prot="public" static="no">
+        <type>void *(*</type>
+        <definition>typedef void*(* whd_event_handler_t) (whd_interface_t ifp, const whd_event_header_t *event_header, const uint8_t *event_data, void *handler_user_data)</definition>
+        <argsstring>)(whd_interface_t ifp, const whd_event_header_t *event_header, const uint8_t *event_data, void *handler_user_data)</argsstring>
+        <name>whd_event_handler_t</name>
+        <briefdescription>
+<para>Event handler prototype definition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_header</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>whd event header </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>event data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler_user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>semaphore data </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="174" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__event_1ga4175c3ef9bb16601fabc605fadeaf8d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_event_handler</definition>
+        <argsstring>(whd_interface_t ifp, const uint32_t *event_type, whd_event_handler_t handler_func, void *handler_user_data, uint16_t *event_index)</argsstring>
+        <name>whd_wifi_set_event_handler</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>event_type</declname>
+        </param>
+        <param>
+          <type><ref refid="group__event_1ga9c74af353c83a8f77097acbc65362b07" kindref="member">whd_event_handler_t</ref></type>
+          <declname>handler_func</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>handler_user_data</declname>
+        </param>
+        <param>
+          <type>uint16_t *</type>
+          <declname>event_index</declname>
+        </param>
+        <briefdescription>
+<para>Registers a handler to receive event callbacks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function registers a callback handler to be notified when a particular event is received.</para>
+<para><simplesect kind="note"><para>Currently each event may only be registered to one handler and there is a limit to the number of simultaneously registered events. Maximum of 5 event handlers can registered simultaneously, this also includes the internal event handler registration which happens during scan, join and starting an AP.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the event list array </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A function pointer to the handler callback </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler_user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer value which will be passed to the event handler function at the time an event is triggered (NULL is allowed) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Entry where the event handler is registered in the list</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="196" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Functions that allow user applications to receive event callbacks and set event handlers. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

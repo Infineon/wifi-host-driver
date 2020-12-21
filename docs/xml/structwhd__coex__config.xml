@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__coex__config" kind="struct" language="C++" prot="public">
+    <compoundname>whd_coex_config</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__coex__config_1afcc1e187cd7f285de8d56162fbbb52bb" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a98dae084aa15394bf6f8e907e09233a4" kindref="member">whd_btc_lescan_params_t</ref></type>
+        <definition>whd_btc_lescan_params_t le_scan_params</definition>
+        <argsstring></argsstring>
+        <name>le_scan_params</name>
+        <briefdescription>
+<para>LE Scan Parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1007" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1007" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for coex config parameters which can be set by application. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="11">
+        <label>whd_coex_config</label>
+        <link refid="structwhd__coex__config"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>le_scan_params</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>whd_btc_lescan_params</label>
+        <link refid="structwhd__btc__lescan__params"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="1006" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="1005" bodyend="1008"/>
+    <listofallmembers>
+      <member refid="structwhd__coex__config_1afcc1e187cd7f285de8d56162fbbb52bb" prot="public" virt="non-virtual"><scope>whd_coex_config</scope><name>le_scan_params</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

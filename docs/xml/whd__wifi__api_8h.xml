@@ -1,0 +1,4583 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="whd__wifi__api_8h" kind="file" language="C++">
+    <compoundname>whd_wifi_api.h</compoundname>
+    <includes refid="whd_8h" local="yes">whd.h</includes>
+    <includes refid="whd__types_8h" local="yes">whd_types.h</includes>
+    <incdepgraph>
+      <node id="47">
+        <label>whd_types.h</label>
+        <link refid="whd__types_8h"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>whd_wifi_api.h</label>
+        <link refid="whd__wifi__api_8h"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>stdint.h</label>
+      </node>
+      <node id="46">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>cy_result.h</label>
+      </node>
+      <node id="50">
+        <label>cyhal_hw_types.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__wifijoin_1ga9f8c6096922212981dd2101a17aec471" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* whd_scan_result_callback_t) (whd_scan_result_t **result_ptr, void *user_data, whd_scan_status_t status)</definition>
+        <argsstring>)(whd_scan_result_t **result_ptr, void *user_data, whd_scan_status_t status)</argsstring>
+        <name>whd_scan_result_callback_t</name>
+        <briefdescription>
+<para>Scan result callback function pointer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the pointer that indicates where to put the next scan result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>User provided data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Status of scan process </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="184" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__wifimanagement_1ga286dde2ee65ac3ea5ae67a6e6ef25f0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_init</definition>
+        <argsstring>(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_config, whd_resource_source_t *resource_ops, whd_buffer_funcs_t *buffer_ops, whd_netif_funcs_t *network_ops)</argsstring>
+        <name>whd_init</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref> *</type>
+          <declname>whd_driver_ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a933f0025533b9b88ecb77b651db29250" kindref="member">whd_init_config_t</ref> *</type>
+          <declname>whd_init_config</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a05847ad8fa418d69d5f51fe654835b8b" kindref="member">whd_resource_source_t</ref> *</type>
+          <declname>resource_ops</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a44a6e9abc68a4322a3958bdc24ae9981" kindref="member">whd_buffer_funcs_t</ref> *</type>
+          <declname>buffer_ops</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1ac35b975959ed585acf554535b502ce68" kindref="member">whd_netif_funcs_t</ref> *</type>
+          <declname>network_ops</declname>
+        </param>
+        <briefdescription>
+<para>Initialize an instance of the WHD driver. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structwhd__init__config" kindref="compound">whd_init_config</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to configuration data that controls how the driver is initialized </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resource_ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to resource interface to provide resources to the driver initialization process </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a buffer interface to provide buffer related services to the driver instance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>network_ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a whd_netif_funcs_t to provide network stack services to the driver instance</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1ga9f08c5241843cbe2ef06ffa8bfb5118d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_bus_sdio_attach</definition>
+        <argsstring>(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj)</argsstring>
+        <name>whd_bus_sdio_attach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a2b3fb82834e1fbcbbf1f51e83c675edd" kindref="member">whd_sdio_config_t</ref> *</type>
+          <declname>whd_config</declname>
+        </param>
+        <param>
+          <type>cyhal_sdio_t *</type>
+          <declname>sdio_obj</declname>
+        </param>
+        <briefdescription>
+<para>Attach the WLAN Device to a specific SDIO bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>whd_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration for SDIO bus </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sdio_obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SDHC hardware interface, from the Level 3 CY HW APIs</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="69" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1gadeed66e792eed64cbb6a0deef1dbe2da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void whd_bus_sdio_detach</definition>
+        <argsstring>(whd_driver_t whd_driver)</argsstring>
+        <name>whd_bus_sdio_detach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <briefdescription>
+<para>Detach the WLAN Device to a specific SDIO bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1ga16b799bb65db52fb4518e1fbc203fe53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_bus_spi_attach</definition>
+        <argsstring>(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t *spi_obj)</argsstring>
+        <name>whd_bus_spi_attach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a2f5c5d3c7f74ce9a86595fe220c860d3" kindref="member">whd_spi_config_t</ref> *</type>
+          <declname>whd_config</declname>
+        </param>
+        <param>
+          <type>cyhal_spi_t *</type>
+          <declname>spi_obj</declname>
+        </param>
+        <briefdescription>
+<para>Attach the WLAN Device to a specific SPI bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>whd_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration for SPI bus </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spi_obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SPI hardware interface, from the Level 3 CY HW APIs</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="85" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__busapi_1gae83aaeef8c3d922cbb839b75ab289d13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void whd_bus_spi_detach</definition>
+        <argsstring>(whd_driver_t whd_driver)</argsstring>
+        <name>whd_bus_spi_detach</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <briefdescription>
+<para>Detach the WLAN Device to a specific SPI bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="91" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga1c8bf41b593cb947266f8690d495f381" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_on</definition>
+        <argsstring>(whd_driver_t whd_driver, whd_interface_t *ifpp)</argsstring>
+        <name>whd_wifi_on</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_driver</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref> *</type>
+          <declname>ifpp</declname>
+        </param>
+        <briefdescription>
+<para>Turn on the Wi-Fi device. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialise Wi-Fi platform Program various WiFi parameters and modes</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ifpp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if initialization is successful, error code otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="117" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga422587a9b104a871233a42aceb2141d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_off</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_off</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Turn off the Wi-Fi device. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>De-Initialises the required parts of the hardware platform i.e. pins for SDIO/SPI, interrupt, reset, power etc.</para>
+</listitem><listitem><para>De-Initialises the whd thread which arbitrates access to the SDIO/SPI bus</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if deinitialization is successful, Error code otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="132" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1gab7d6e59874922e5646e08e52082e32f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_deinit</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_deinit</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Shutdown this instance of the wifi driver, freeing all used resources. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="140" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga925da3b1ed914d7bb661d3cb2af50680" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_up</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_set_up</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Brings up the Wi-Fi core. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga412c2d4653a7c36329c6cf78be344336" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_down</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_set_down</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Bring down the Wi-Fi core. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>WARNING / NOTE: This brings down the Wi-Fi core and existing network connections will be lost.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifimanagement_1ga553c009e9f6f856dfe243d745e21bbf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_add_secondary_interface</definition>
+        <argsstring>(whd_driver_t whd_drv, whd_mac_t *mac_addr, whd_interface_t *ifpp)</argsstring>
+        <name>whd_add_secondary_interface</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_drv</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>mac_addr</declname>
+        </param>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref> *</type>
+          <declname>ifpp</declname>
+        </param>
+        <briefdescription>
+<para>Creates a secondary interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mac_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MAC address for the interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ifpp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the whd interface pointer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="169" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1gaef3dc76f682c6c193df94897e9d0b71f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_scan_synch</definition>
+        <argsstring>(whd_interface_t ifp, whd_sync_scan_result_t *scan_result, uint32_t count)</argsstring>
+        <name>whd_wifi_scan_synch</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1ab30a697b3ebbf2007dc09194b54b1a1b" kindref="member">whd_sync_scan_result_t</ref> *</type>
+          <declname>scan_result</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Initiates a scan to search for 802.11 networks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This functions returns the scan results with limited sets of parameter in a buffer provided by the caller. It is also a blocking call. It is an simplified version of the <ref refid="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" kindref="member">whd_wifi_scan()</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scan_result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to user requested records buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>No of records user is interested in. If 0 return the total record count.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>When scanning specific channels, devices with a strong signal strength on nearby channels may be detected</para>
+</simplesect>
+<simplesect kind="return"><para>record count or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="200" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_scan</definition>
+        <argsstring>(whd_interface_t ifp, whd_scan_type_t scan_type, whd_bss_type_t bss_type, const whd_ssid_t *optional_ssid, const whd_mac_t *optional_mac, const uint16_t *optional_channel_list, const whd_scan_extended_params_t *optional_extended_params, whd_scan_result_callback_t callback, whd_scan_result_t *result_ptr, void *user_data)</argsstring>
+        <name>whd_wifi_scan</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1af7ac1b0be4ce67f3e82b876c2f27fd3a" kindref="member">whd_scan_type_t</ref></type>
+          <declname>scan_type</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a3070614a06a8989b9eb207e9f1286c5f" kindref="member">whd_bss_type_t</ref></type>
+          <declname>bss_type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__ssid__t" kindref="compound">whd_ssid_t</ref> *</type>
+          <declname>optional_ssid</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>optional_mac</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>optional_channel_list</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__scan__extended__params__t" kindref="compound">whd_scan_extended_params_t</ref> *</type>
+          <declname>optional_extended_params</declname>
+        </param>
+        <param>
+          <type><ref refid="group__wifijoin_1ga9f8c6096922212981dd2101a17aec471" kindref="member">whd_scan_result_callback_t</ref></type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a58298b1b5c2f2425d5aed061de48aaa7" kindref="member">whd_scan_result_t</ref> *</type>
+          <declname>result_ptr</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>user_data</declname>
+        </param>
+        <briefdescription>
+<para>Initiates a scan to search for 802.11 networks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The scan progressively accumulates results over time, and may take between 1 and 10 seconds to complete. The results of the scan will be individually provided to the callback function. Note: The callback function will be executed in the context of the WHD thread and so must not perform any actions that may cause a bus transaction.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scan_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Specifies whether the scan should be Active, Passive or scan Prohibited channels </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bss_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Specifies whether the scan should search for Infrastructure networks (those using an Access Point), Ad-hoc networks, or both types. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optional_ssid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If this is non-Null, then the scan will only search for networks using the specified SSID. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optional_mac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If this is non-Null, then the scan will only search for networks where the BSSID (MAC address of the Access Point) matches the specified MAC address. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optional_channel_list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If this is non-Null, then the scan will only search for networks on the specified channels - array of channel numbers to search, terminated with a zero </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optional_extended_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If this is non-Null, then the scan will obey the specifications about dwell times and number of probes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback function which will receive and process the result data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a pointer to a result storage structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>user specific data that will be passed directly to the callback function</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>- When scanning specific channels, devices with a strong signal strength on nearby channels may be detected<itemizedlist>
+<listitem><para>Callback must not use blocking functions, nor use WHD functions, since it is called from the context of the WHD thread.</para>
+</listitem><listitem><para>The callback, result_ptr and user_data variables will be referenced after the function returns. Those variables must remain valid until the scan is complete.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="235" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1gacf8632bb68cef4d831083a66bee7b8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_stop_scan</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_stop_scan</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Abort a previously issued scan. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="252" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1gac767814ae445f735b51686db20c780be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_join</definition>
+        <argsstring>(whd_interface_t ifp, const whd_ssid_t *ssid, whd_security_t auth_type, const uint8_t *security_key, uint8_t key_length)</argsstring>
+        <name>whd_wifi_join</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__ssid__t" kindref="compound">whd_ssid_t</ref> *</type>
+          <declname>ssid</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
+          <declname>auth_type</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>security_key</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>key_length</declname>
+        </param>
+        <briefdescription>
+<para>Joins a Wi-Fi network. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Scans for, associates and authenticates with a Wi-Fi network. On successful return, the system is ready to send data packets.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ssid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A null terminated string containing the SSID name of the network to join </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>auth_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Authentication type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A byte array containing either the cleartext security key for WPA/WPA2/WPA3 secured networks </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of the security_key in bytes.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>In case of WPA3/WPA2 transition mode, the security_key value is WPA3 password.</para>
+</simplesect>
+<simplesect kind="return"><para>WHD_SUCCESS when the system is joined and ready to send data packets Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="270" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_join_specific</definition>
+        <argsstring>(whd_interface_t ifp, const whd_scan_result_t *ap, const uint8_t *security_key, uint8_t key_length)</argsstring>
+        <name>whd_wifi_join_specific</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="whd__types_8h_1a58298b1b5c2f2425d5aed061de48aaa7" kindref="member">whd_scan_result_t</ref> *</type>
+          <declname>ap</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>security_key</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>key_length</declname>
+        </param>
+        <briefdescription>
+<para>Joins a specific Wi-Fi network. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Associates and authenticates with a specific Wi-Fi access point. On successful return, the system is ready to send data packets.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a whd_scan_result_t structure containing AP details and set ap.channel to 0 for unspecificed channel </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A byte array containing either the cleartext security key for WPA/WPA2 secured networks </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of the security_key in bytes.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS when the system is joined and ready to send data packets Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="288" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga168fb83b839bab61d2c9d3b1f42a6782" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_channel</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t channel)</argsstring>
+        <name>whd_wifi_set_channel</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>channel</declname>
+        </param>
+        <briefdescription>
+<para>Set the current channel on the WLAN radio. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>On most WLAN devices this will set the channel for both AP <emphasis>AND</emphasis> STA (since there is only one radio - it cannot be on two channels simulaneously)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>channel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired channel</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the channel was successfully set Error code if the channel was not successfully set </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="310" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gab81522c25d723fbe18b90871a278ba9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_channel</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *channel)</argsstring>
+        <name>whd_wifi_get_channel</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>channel</declname>
+        </param>
+        <briefdescription>
+<para>Get the current channel on the WLAN radio. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>On most WLAN devices this will get the channel for both AP <emphasis>AND</emphasis> STA (since there is only one radio - it cannot be on two channels simulaneously)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>channel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to receive the current channel</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the channel was successfully retrieved Error code if the channel was not successfully retrieved </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="323" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga893ccaef6ed5d0afe95a96bbe89e8a80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_passphrase</definition>
+        <argsstring>(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length)</argsstring>
+        <name>whd_wifi_set_passphrase</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>security_key</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>key_length</declname>
+        </param>
+        <briefdescription>
+<para>Set the passphrase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The security key (passphrase) which is to be set </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the key</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS when the key is set Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="334" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga977fe2ff7c3f6966ffc40fda0e9694a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_sae_password</definition>
+        <argsstring>(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length)</argsstring>
+        <name>whd_wifi_sae_password</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>security_key</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>key_length</declname>
+        </param>
+        <briefdescription>
+<para>Set the SAE password. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The security key (password) which is to be set </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the key</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS when the key is set Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="345" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gae118219bea1b82ae76a5c1ee5f7f302c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_enable_sup_set_passphrase</definition>
+        <argsstring>(whd_interface_t ifp, const uint8_t *security_key_psk, uint8_t psk_length, whd_security_t auth_type)</argsstring>
+        <name>whd_wifi_enable_sup_set_passphrase</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>security_key_psk</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>psk_length</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
+          <declname>auth_type</declname>
+        </param>
+        <briefdescription>
+<para>Enable WHD internal supplicant and set WPA2 passphrase in case of WPA3/WPA2 transition mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security_key_psk</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The security key (passphrase) which is to be set </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>psk_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the key </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>auth_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Authentication type: <ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059af4d58bc2335113f0c70abdbd3019bb61" kindref="member">WHD_SECURITY_WPA3_WPA2_PSK</ref></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS when the supplicant variable and wpa2 passphrase is set Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="357" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gad2daa1aba4dccd3f0506950ccee42113" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_enable_supplicant</definition>
+        <argsstring>(whd_interface_t ifp, whd_security_t auth_type)</argsstring>
+        <name>whd_wifi_enable_supplicant</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
+          <declname>auth_type</declname>
+        </param>
+        <briefdescription>
+<para>Enable WHD internal supplicant. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>auth_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Authentication type</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS when the supplicant variable is set Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="369" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaf82eda2ff9979b1bc053a6d7f1f4b125" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_rssi</definition>
+        <argsstring>(whd_interface_t ifp, int32_t *rssi)</argsstring>
+        <name>whd_wifi_get_rssi</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>rssi</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve the latest RSSI value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rssi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The location where the RSSI value will be stored</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the RSSI was successfully retrieved Error code if the RSSI was not retrieved </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="379" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gab571b303f19131fd032fba4b744dbf20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_ap_client_rssi</definition>
+        <argsstring>(whd_interface_t ifp, int32_t *rssi, const whd_mac_t *client_mac)</argsstring>
+        <name>whd_wifi_get_ap_client_rssi</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>rssi</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>client_mac</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve the associated STA&apos;s RSSI value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rssi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: The location where the RSSI value will be stored </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>client_mac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to associated client&apos;s MAC address</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS : if the RSSI was successfully retrieved Error code : if the RSSI was not retrieved </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="390" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_leave</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_leave</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Disassociates from a Wi-Fi network. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Applicable only for STA role</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS On successful disassociation from the AP Error code If an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="408" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga8a634822973adc75a61a05eb2b664ef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_mac_address</definition>
+        <argsstring>(whd_interface_t ifp, whd_mac_t *mac)</argsstring>
+        <name>whd_wifi_get_mac_address</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>mac</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the current Media Access Control (MAC) address (or Ethernet hardware address) of the 802.11 device. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a variable that the current MAC address will be written to</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="425" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga52d3190589758d9fd36a7b27a9d08f28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_bssid</definition>
+        <argsstring>(whd_interface_t ifp, whd_mac_t *bssid)</argsstring>
+        <name>whd_wifi_get_bssid</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>bssid</declname>
+        </param>
+        <briefdescription>
+<para>Get the BSSID of the interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the whd_interface_t </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bssid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns the BSSID address (mac address) if associated</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="434" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga647aebc1d86708017fd11029e2e1a51c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_init_ap</definition>
+        <argsstring>(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type, const uint8_t *security_key, uint8_t key_length, uint8_t channel)</argsstring>
+        <name>whd_wifi_init_ap</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__ssid__t" kindref="compound">whd_ssid_t</ref> *</type>
+          <declname>ssid</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
+          <declname>auth_type</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>security_key</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>key_length</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>channel</declname>
+        </param>
+        <briefdescription>
+<para>Initialises an infrastructure WiFi network (SoftAP) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ssid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A null terminated string containing the SSID name of the network to join </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>auth_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Authentication type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A byte array containing the cleartext security key for the network </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of the security_key in bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>channel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>802.11 channel number</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if successfully initialises an AP Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="455" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga3c9aa99add3f6a6d13e9092bd6e1246b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_start_ap</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_start_ap</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Start the infrastructure WiFi network (SoftAP) using the parameter set by <ref refid="group__wifisoftap_1ga647aebc1d86708017fd11029e2e1a51c" kindref="member">whd_wifi_init_ap()</ref> and optionaly by <ref refid="group__wifiutilities_1gaaf7be7d8099507426f52ecff8f716543" kindref="member">whd_wifi_manage_custom_ie()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>WHD_SUCCESS if successfully creates an AP Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="464" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga2c6c28512678dc57dabb641c41e30d41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_stop_ap</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_stop_ap</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Stops an existing infrastructure WiFi network. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the AP is successfully stopped or if the AP has not yet been brought up Error code if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="473" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga32982684d093a173a6e578856b581d29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_ap_get_max_assoc</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *max_assoc)</argsstring>
+        <name>whd_wifi_ap_get_max_assoc</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>max_assoc</declname>
+        </param>
+        <briefdescription>
+<para>Get the maximum number of associations supported by AP interfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_assoc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of associations supported by Soft AP interfaces.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the maximum number of associated clients was successfully read WHD_ERROR if the maximum number of associated clients was not successfully read </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="484" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga9e974ab0fcc24698d01a5abc3e2c1dbb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_associated_client_list</definition>
+        <argsstring>(whd_interface_t ifp, void *client_list_buffer, uint16_t buffer_length)</argsstring>
+        <name>whd_wifi_get_associated_client_list</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>client_list_buffer</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>buffer_length</declname>
+        </param>
+        <briefdescription>
+<para>Gets the current number of active connections. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>client_list_buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to store list of associated clients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of client list buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the active connections was successfully read WHD_ERROR if the active connections was not successfully read </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="495" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1gad9ad2649c18db8773351a5938e7930e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_deauth_sta</definition>
+        <argsstring>(whd_interface_t ifp, whd_mac_t *mac, whd_dot11_reason_code_t reason)</argsstring>
+        <name>whd_wifi_deauth_sta</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>mac</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1ac81b31559ee1db82f01e8acfb8eea55d" kindref="member">whd_dot11_reason_code_t</ref></type>
+          <declname>reason</declname>
+        </param>
+        <briefdescription>
+<para>Deauthenticates a STA which may or may not be associated to SoftAP. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a variable containing the MAC address to which the deauthentication will be sent NULL mac address will deauthenticate all the associated STAs</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reason</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Deauthentication reason code</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS On successful deauthentication of the other STA WHD_ERROR If an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="509" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga95c40af4be45d119b737c0113d9a038e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_ap_info</definition>
+        <argsstring>(whd_interface_t ifp, whd_bss_info_t *ap_info, whd_security_t *security)</argsstring>
+        <name>whd_wifi_get_ap_info</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_bss_info_t *</type>
+          <declname>ap_info</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref> *</type>
+          <declname>security</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves AP information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ap_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns a whd_bss_info_t structure containing AP details </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>security</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Authentication type</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the AP info was successfully retrieved Error code if the AP info was not successfully retrieved </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="520" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1gaf2758fcc1028704d801b16d77b96a345" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_ap_set_beacon_interval</definition>
+        <argsstring>(whd_interface_t ifp, uint16_t interval)</argsstring>
+        <name>whd_wifi_ap_set_beacon_interval</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+<para>Set the beacon interval. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note that the value needs to be set before ap_start in order to beacon interval to take effect.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Beacon interval in time units (Default: 100 time units = 102.4 ms)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="531" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifisoftap_1ga57c57ad4d5acf499e90ff8db020fa2d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_ap_set_dtim_interval</definition>
+        <argsstring>(whd_interface_t ifp, uint16_t interval)</argsstring>
+        <name>whd_wifi_ap_set_dtim_interval</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+<para>Set the DTIM interval. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note that the value needs to be set before ap_start in order to DTIM interval to take effect.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DTIM interval, in unit of beacon interval</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="542" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1ga05cfafe07ad2c208acfdee29f7c6e626" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_enable_powersave</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_enable_powersave</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Enables powersave mode on specified interface without regard for throughput reduction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function enables (legacy) 802.11 PS-Poll mode and should be used to achieve the lowest power consumption possible when the Wi-Fi device is primarily passively listening to the network</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="562" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1ga6152d966f454fe8e8836472b802401c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_enable_powersave_with_throughput</definition>
+        <argsstring>(whd_interface_t ifp, uint16_t return_to_sleep_delay)</argsstring>
+        <name>whd_wifi_enable_powersave_with_throughput</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>return_to_sleep_delay</declname>
+        </param>
+        <briefdescription>
+<para>Enables powersave mode on specified interface while attempting to maximise throughput. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Network traffic is typically bursty. Reception of a packet often means that another packet will be received shortly afterwards (and vice versa for transmit).</para>
+<para>In high throughput powersave mode, rather then entering powersave mode immediately after receiving or sending a packet, the WLAN chip waits for a timeout period before returning to sleep.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>return_to_sleep_delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The variable to set return to sleep delay. return to sleep delay must be set to a multiple of 10 and not equal to zero.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if power save mode was successfully enabled Error code if power save mode was not successfully enabled </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="582" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1ga3eed267d42020440a077d7649cde0567" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_powersave_mode</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *value)</argsstring>
+        <name>whd_wifi_get_powersave_mode</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Get powersave mode on specified interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of the current powersave state PM1_POWERSAVE_MODE, PM2_POWERSAVE_MODE, NO_POWERSAVE_MODE</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="592" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifipowersave_1gab9af7ef8dac544f2bb8871259f85c437" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_disable_powersave</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_disable_powersave</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Disables 802.11 power save mode on specified interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if power save mode was successfully disabled Error code if power save mode was not successfully disabled </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="602" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gab36ff07aa1d825c0366c82ce003dd9f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_register_multicast_address</definition>
+        <argsstring>(whd_interface_t ifp, const whd_mac_t *mac)</argsstring>
+        <name>whd_wifi_register_multicast_address</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>mac</declname>
+        </param>
+        <briefdescription>
+<para>Registers interest in a multicast address. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Once a multicast address has been registered, all packets detected on the medium destined for that address are forwarded to the host. Otherwise they are ignored.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ethernet MAC address</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the address was registered successfully Error code if the address was not registered </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="622" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gad092a543b73e91c7090875ccb940e01f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_unregister_multicast_address</definition>
+        <argsstring>(whd_interface_t ifp, const whd_mac_t *mac)</argsstring>
+        <name>whd_wifi_unregister_multicast_address</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref> *</type>
+          <declname>mac</declname>
+        </param>
+        <briefdescription>
+<para>Unregisters interest in a multicast address. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Once a multicast address has been unregistered, all packets detected on the medium destined for that address are ignored.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ethernet MAC address</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the address was unregistered successfully Error code if the address was not unregistered </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="635" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gac93f69169a725f277e955eec0bf528db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_listen_interval</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t listen_interval, whd_listen_interval_time_unit_t time_unit)</argsstring>
+        <name>whd_wifi_set_listen_interval</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>listen_interval</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a98ac1a2590358bafac6a2da287034638" kindref="member">whd_listen_interval_time_unit_t</ref></type>
+          <declname>time_unit</declname>
+        </param>
+        <briefdescription>
+<para>Sets the 802.11 powersave listen interval for a Wi-Fi client, and communicates the listen interval to the Access Point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The listen interval will be set to (listen_interval x time_unit) seconds.</para>
+<para>The default value for the listen interval is 0. With the default value of 0 set, the Wi-Fi device wakes to listen for AP beacons every DTIM period.</para>
+<para>If the DTIM listen interval is non-zero, the DTIM listen interval will over ride the beacon listen interval value.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>listen_interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired beacon listen interval </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time_unit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The listen interval time unit; options are beacon period or DTIM period.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS If the listen interval was successfully set. Error code If the listen interval was not successfully set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="654" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga5a62f0854ad148dde280b4f75596a309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_listen_interval</definition>
+        <argsstring>(whd_interface_t ifp, whd_listen_interval_t *li)</argsstring>
+        <name>whd_wifi_get_listen_interval</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__listen__interval__t" kindref="compound">whd_listen_interval_t</ref> *</type>
+          <declname>li</declname>
+        </param>
+        <briefdescription>
+<para>Gets the current value of all beacon listen interval variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>li</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Powersave listen interval values<itemizedlist>
+<listitem><para>listen_interval_beacon : The current value of the listen interval set as a multiple of the beacon period</para>
+</listitem><listitem><para>listen_interval_dtim : The current value of the listen interval set as a multiple of the DTIM period</para>
+</listitem><listitem><para>listen_interval_assoc : The current value of the listen interval sent to access points in an association request frame</para>
+</listitem></itemizedlist>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS If all listen interval values are read successfully Error code If at least one of the listen interval values are NOT read successfully </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="668" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga07144bbc68755481708752962538ee6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_is_ready_to_transceive</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_is_ready_to_transceive</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Determines if a particular interface is ready to transceive ethernet packets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the interface is ready to transceive ethernet packets WHD_NOTFOUND no AP with a matching SSID was found WHD_NOT_AUTHENTICATED Matching AP was found but it won&apos;t let you authenticate. This can occur if this device is in the block list on the AP. WHD_NOT_KEYED Device has authenticated and associated but has not completed the key exchange. This can occur if the passphrase is incorrect. Error code if the interface is not ready to transceive ethernet packets </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="682" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gafe61d474712d3ce7e15ef371d87f54e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_acparams</definition>
+        <argsstring>(whd_interface_t ifp, whd_edcf_ac_param_t *acp)</argsstring>
+        <name>whd_wifi_get_acparams</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_edcf_ac_param_t *</type>
+          <declname>acp</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve the latest STA EDCF AC parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieve the latest Station (STA) interface EDCF (Enhanced Distributed Coordination Function) Access Category parameters</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>acp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The location where the array of AC parameters will be stored</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the AC Parameters were successfully retrieved Error code if the AC Parameters were not retrieved </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="697" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaaf7be7d8099507426f52ecff8f716543" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_manage_custom_ie</definition>
+        <argsstring>(whd_interface_t ifp, whd_custom_ie_action_t action, const uint8_t *oui, uint8_t subtype, const void *data, uint16_t length, uint16_t which_packets)</argsstring>
+        <name>whd_wifi_manage_custom_ie</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a8be1026494a86f0ceeebb2dcbf092cbd" kindref="member">whd_custom_ie_action_t</ref></type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>oui</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>subtype</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>which_packets</declname>
+        </param>
+        <briefdescription>
+<para>Manage the addition and removal of custom IEs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the action to take (add or remove IE) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>oui</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the oui of the custom IE </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>subtype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the IE sub-type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to the buffer that hold the custom IE </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the length of the buffer pointed to by &apos;data&apos; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>which_packets</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A mask to indicate in which all packets this IE should be included. See whd_ie_packet_flag_t.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the custom IE action was successful Error code if the custom IE action failed </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="714" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga2cf8ecd7c319660833bd30a060990dca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_send_action_frame</definition>
+        <argsstring>(whd_interface_t ifp, whd_af_params_t *af_params)</argsstring>
+        <name>whd_wifi_send_action_frame</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_af_params_t *</type>
+          <declname>af_params</declname>
+        </param>
+        <briefdescription>
+<para>Send a pre-prepared action frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>af_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a pre-prepared action frame structure</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="725" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga95237c0e6182bfb176519421ac9287b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_coex_config</definition>
+        <argsstring>(whd_interface_t ifp, whd_coex_config_t *coex_config)</argsstring>
+        <name>whd_wifi_set_coex_config</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a1cb4da9972e0e9317a6e26e2fd460902" kindref="member">whd_coex_config_t</ref> *</type>
+          <declname>coex_config</declname>
+        </param>
+        <briefdescription>
+<para>Set coex configuration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coex_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the structure whd_coex_config_t</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="734" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gae6bf707d845518cba9a8256fb5681f4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_version</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *version)</argsstring>
+        <name>whd_arp_version</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>version</declname>
+        </param>
+        <briefdescription>
+<para>Get version of Device (WLAN) Firmware. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">version</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to store version #</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="743" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga2cd55bdc13221177c61310ecaa6f4bd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_peerage_get</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *seconds)</argsstring>
+        <name>whd_arp_peerage_get</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>Get ARP Offload Peer Age from Device (WLAN) Length of time in seconds before aging out an entry in the WLAN processor ARP table. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to store value</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="753" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gab61ae9878853c02b4cf194c2c3a7377f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_peerage_set</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t seconds)</argsstring>
+        <name>whd_arp_peerage_set</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>Set ARP Offload Peer Age in Device (WLAN) Length of time in seconds before aging out an entry in the WLAN processor ARP table. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Seconds to age out IP</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="763" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga22d76514755f2dfde0ee6acbc193787a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_arpoe_get</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *agent_enable)</argsstring>
+        <name>whd_arp_arpoe_get</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>agent_enable</declname>
+        </param>
+        <briefdescription>
+<para>Get ARP Offload Agent Enable from Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">agent_enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to store value</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="772" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaa30d9e2a761de17962312d818f941c05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_arpoe_set</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t agent_enable)</argsstring>
+        <name>whd_arp_arpoe_set</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>agent_enable</declname>
+        </param>
+        <briefdescription>
+<para>Set ARP Offload Agent Enable in Device (WLAN) Set Enable/Disable of ARP Offload Agent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">agent_enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Enable=1 / Disable=0</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="782" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga01ece00a357914d02fa5a181fbddbf8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_cache_clear</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_arp_cache_clear</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Clear ARP Offload cache in Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="790" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga54728d3d6a714ef9264d6e25df9a6722" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_features_get</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *features)</argsstring>
+        <name>whd_arp_features_get</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>features</declname>
+        </param>
+        <briefdescription>
+<para>Get ARP Offload Feature Flags from Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">features</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: ptr to store currently set features - bit flags CY_ARP_OL_AGENT_ENABLE, etc. ARL_OL_AGENT | ARL_OL_SNOOP | ARP_OL_HOST_AUTO_REPLY | ARP_OL_PEER_AUTO_REPLY</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="800" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gab4ebcd7fdd7b328e2f4e10b79197cfca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_features_set</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t features)</argsstring>
+        <name>whd_arp_features_set</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>features</declname>
+        </param>
+        <briefdescription>
+<para>Set ARP Offload Feature Flags in Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">features</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: features to set value (you can OR (&apos;|&apos;) multiple flags) CY_ARP_OL_AGENT_ENABLE, etc. ARL_OL_AGENT | ARL_OL_SNOOP | ARP_OL_HOST_AUTO_REPLY | ARP_OL_PEER_AUTO_REPLY</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="810" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaf70b6becc3e4ecc551f5bf5278d7ad93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_features_print</definition>
+        <argsstring>(uint32_t features, const char *title)</argsstring>
+        <name>whd_arp_features_print</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>features</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+<para>Print ARP Offload Feature Flags in Human readable form to console. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">features</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: feature flags to set (you can OR &apos;|&apos; multiple flags) CY_ARP_OL_AGENT_ENABLE, etc. ARL_OL_AGENT | ARL_OL_SNOOP | ARP_OL_HOST_AUTO_REPLY | ARP_OL_PEER_AUTO_REPLY </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Optional: Title for output (NULL == no title)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="820" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga417b404b9892862a572802a4ea38eb79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_hostip_list_add</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t *host_ipv4_list, uint32_t count)</argsstring>
+        <name>whd_arp_hostip_list_add</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>host_ipv4_list</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Add ARP Offload Host IP Identifier(s) to HostIP List to Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">host_ipv4_list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to host_ip data (IPv4, 1 uint32_t per ip addr) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Number of array elements in host_ip</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="830" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga61135784226a59af098384f4a071af02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_hostip_list_add_string</definition>
+        <argsstring>(whd_interface_t ifp, const char *ip_addr)</argsstring>
+        <name>whd_arp_hostip_list_add_string</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>ip_addr</declname>
+        </param>
+        <briefdescription>
+<para>Add One ARP Offload Host IP Identifier to HostIP List (mbed-style IP string) to Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ip_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to ip string (as returned from mbedos calls)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="839" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga15cfc56bd481a4bc02c6dc93bfa6883c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_hostip_list_clear_id</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t ipv4_addr)</argsstring>
+        <name>whd_arp_hostip_list_clear_id</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ipv4_addr</declname>
+        </param>
+        <briefdescription>
+<para>Clear One ARP Offload Host IP Identifier from Host IP List in Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ipv4_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: ip addr expressed as a uint32_t</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="848" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaa38f97cc9800e7355d96d833b32b1c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_hostip_list_clear_id_string</definition>
+        <argsstring>(whd_interface_t ifp, const char *ip_addr)</argsstring>
+        <name>whd_arp_hostip_list_clear_id_string</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>ip_addr</declname>
+        </param>
+        <briefdescription>
+<para>Clear One ARP Offload Host IP Identifier from Host IP List (mbed-style IP string) in Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ip_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to ip string (as returned from mbedos calls)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="857" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaaf3cec4a4896670049ec3802c91a2d66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_hostip_list_clear</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_arp_hostip_list_clear</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Clear all ARP Offload Host IP Identifier List. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="865" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga4287cc85981a511399ea927c84f61330" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_hostip_list_get</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t count, uint32_t *host_ipv4_list, uint32_t *filled)</argsstring>
+        <name>whd_arp_hostip_list_get</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>host_ipv4_list</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>filled</declname>
+        </param>
+        <briefdescription>
+<para>Get ARP Offload Host IP Identifiers from Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Number of array elements in host_ip </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">host_ipv4_list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to structure array to store host_ip data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">filled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Number of array elements filled by this routine</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="876" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga564e95d3343802ed33d1b2c6fb531aeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_stats_clear</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_arp_stats_clear</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Clear ARP Offload statistics in Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="884" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga9d65fe0a82dee5edf65eb6f1efe9df52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_stats_get</definition>
+        <argsstring>(whd_interface_t ifp, whd_arp_stats_t *stats)</argsstring>
+        <name>whd_arp_stats_get</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_arp_stats_t *</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Get ARP Offload statistics from Device (WLAN) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Ptr to store statistics whd_arp_stats_t</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="893" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga37714a68f350e5a9e24dd6aeaea0ae98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_arp_stats_print</definition>
+        <argsstring>(whd_arp_stats_t *arp_stats, const char *title)</argsstring>
+        <name>whd_arp_stats_print</name>
+        <param>
+          <type>whd_arp_stats_t *</type>
+          <declname>arp_stats</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+<para>Print ARP Offload statistics NOTE: call <ref refid="group__wifiutilities_1ga9d65fe0a82dee5edf65eb6f1efe9df52" kindref="member">whd_arp_stats_get()</ref>, then print them using this function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">arp_stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Ptr to ARP statistics structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Optional: Title for output (NULL == no title)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="903" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gae81aead624f8e374970e1aa3f330ea30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_pf_add_packet_filter</definition>
+        <argsstring>(whd_interface_t ifp, const whd_packet_filter_t *settings)</argsstring>
+        <name>whd_pf_add_packet_filter</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structwhd__packet__filter__t" kindref="compound">whd_packet_filter_t</ref> *</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>A filter must be added (e.g. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>created) before it can be enabled. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Ptr to filter settings <ref refid="structwhd__packet__filter__t" kindref="compound">whd_packet_filter_t</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="910" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaff414d31f3406ec5d1af54b889f4849a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_pf_remove_packet_filter</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t filter_id)</argsstring>
+        <name>whd_pf_remove_packet_filter</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <briefdescription>
+<para>Remove a previously added filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: filter to remove </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="917" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga3e70cd84bf811b869c955d75fa80590d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_pf_enable_packet_filter</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t filter_id)</argsstring>
+        <name>whd_pf_enable_packet_filter</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <briefdescription>
+<para>After a filter has been added it can be enabled or disabled as needed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: filter to enable </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="924" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga6af0c7e202709713fa5d06e71a585e28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_pf_disable_packet_filter</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t filter_id)</argsstring>
+        <name>whd_pf_disable_packet_filter</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <briefdescription>
+<para>After a filter has been added it can be enabled or disabled as needed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: filter to disable </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="931" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga35860e8c45162735f5ef3d93ed262d90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_toggle_packet_filter</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t filter_id, whd_bool_t enable)</argsstring>
+        <name>whd_wifi_toggle_packet_filter</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>After a filter has been added it can be enabled or disabled as needed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: filter to disable/enable </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Enable/Disable Flag </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="939" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gacd9d57c8febb11cc240db23f5de92cd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_pf_get_packet_filter_mask_and_pattern</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t filter_id, uint32_t max_size, uint8_t *mask, uint8_t *pattern, uint32_t *size_out)</argsstring>
+        <name>whd_pf_get_packet_filter_mask_and_pattern</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>max_size</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>mask</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>pattern</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>size_out</declname>
+        </param>
+        <briefdescription>
+<para>Filters are implemented in WLAN subsystem as a bit pattern and matching bit mask that are applied to incoming packets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This API retrieves the pattern and mask. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: which filter to retrieve </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">max_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: size of both mask and pattern buffers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: mask for this filter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pattern for this filter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">size_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: length of both mask and pattern </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="951" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gab3e9371ccaa61f1f40e0246a66db42a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_clear_packet_filter_stats</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t filter_id)</argsstring>
+        <name>whd_wifi_clear_packet_filter_stats</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <briefdescription>
+<para>Clear the packet filter stats associated with a filter id. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: which filter </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="960" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga26172adb5ec181bb8f2009e47eb252cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_pf_get_packet_filter_stats</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t filter_id, whd_pkt_filter_stats_t *stats)</argsstring>
+        <name>whd_pf_get_packet_filter_stats</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>filter_id</declname>
+        </param>
+        <param>
+          <type>whd_pkt_filter_stats_t *</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Return the stats associated with a filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filter_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: which filter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Ptr to store statistics wl_pkt_filter_stats_t </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="968" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga482c8ffcb1166f2f161e4ad67f8ef9d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_tko_param</definition>
+        <argsstring>(whd_interface_t ifp, whd_tko_retry_t *whd_tko_retry, int set)</argsstring>
+        <name>whd_tko_param</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_tko_retry_t *</type>
+          <declname>whd_tko_retry</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>set</declname>
+        </param>
+        <briefdescription>
+<para>Set/Get TKO retry &amp; interval parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">whd_tko_retry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: whd retry &amp; interval parameters structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Set/Get Flag </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="976" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gae6b46bcc1a3c7d708abc71ae6a123481" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_tko_get_status</definition>
+        <argsstring>(whd_interface_t ifp, whd_tko_status_t *tko_status)</argsstring>
+        <name>whd_tko_get_status</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>whd_tko_status_t *</type>
+          <declname>tko_status</declname>
+        </param>
+        <briefdescription>
+<para>Return the tko status for all indexes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">tko_status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Ptr to store tko_status </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="983" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga70cacca6b62ca658882d9070c49b6343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_tko_max_assoc</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t *max)</argsstring>
+        <name>whd_tko_max_assoc</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Return the stats associated with a filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: returns Max TCP connections supported by WLAN Firmware </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="990" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gacc2882e3a308f7b2b938bc5741ab43c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_tko_get_FW_connect</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t index, whd_tko_connect_t *whd_connect, uint16_t buflen)</argsstring>
+        <name>whd_tko_get_FW_connect</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>whd_tko_connect_t *</type>
+          <declname>whd_connect</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>buflen</declname>
+        </param>
+        <briefdescription>
+<para>Return the stats associated with a filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: index for TCP offload connection </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">whd_connect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: tko_connect structure buffer from Firmware </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buflen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Buffer given for tko_connect </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="999" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga189ed043d5ce9cf8d1a0845484a96d6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_tko_toggle</definition>
+        <argsstring>(whd_interface_t ifp, whd_bool_t enable)</argsstring>
+        <name>whd_tko_toggle</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Return the stats associated with a filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: Enable/Disable TCP Keepalive offload </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1007" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiioctl_1gad54ac84589a14cc97429bf138fa32639" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_ioctl_value</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t ioctl, uint32_t value)</argsstring>
+        <name>whd_wifi_set_ioctl_value</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ioctl</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sends an IOCTL command - CDC_SET IOCTL value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ioctl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CDC_SET - To set the I/O control </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data value to be sent</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1025" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiioctl_1ga817655c1372b8c87608b204105f06937" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_ioctl_value</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t ioctl, uint32_t *value)</argsstring>
+        <name>whd_wifi_get_ioctl_value</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ioctl</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sends an IOCTL command - CDC_GET IOCTL value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ioctl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CDC_GET - To get the I/O control </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to receive the data value</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1035" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiioctl_1ga5d7aec7622caacf4a0642cf1da1fa647" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_ioctl_buffer</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t ioctl, void *buffer, uint16_t buffer_length)</argsstring>
+        <name>whd_wifi_set_ioctl_buffer</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ioctl</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>buffer_length</declname>
+        </param>
+        <briefdescription>
+<para>Sends an IOCTL command - CDC_SET IOCTL buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ioctl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CDC_SET - To set the I/O control </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle for a packet buffer containing the data value to be sent. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1046" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiioctl_1gab1a4c2ae9163408ae92b3f292ee2807f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_ioctl_buffer</definition>
+        <argsstring>(whd_interface_t ifp, uint32_t ioctl, uint8_t *out_buffer, uint16_t out_length)</argsstring>
+        <name>whd_wifi_get_ioctl_buffer</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ioctl</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>out_buffer</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>out_length</declname>
+        </param>
+        <briefdescription>
+<para>Sends an IOCTL command - CDC_GET IOCTL buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ioctl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CDC_GET - To get the I/O control </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to receive the handle for the packet buffer containing the response data value received </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of out_buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1057" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiioctl_1ga2b1cdfc36df80ca4700076fd2747b34e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_iovar_buffer_with_param</definition>
+        <argsstring>(whd_interface_t ifp, const char *iovar_name, void *param, uint32_t paramlen, uint8_t *out_buffer, uint32_t out_length)</argsstring>
+        <name>whd_wifi_get_iovar_buffer_with_param</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>iovar_name</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>param</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>paramlen</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>out_buffer</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>out_length</declname>
+        </param>
+        <briefdescription>
+<para>Sends an IOVAR command. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iovar_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SDPCM_GET - To get the I/O Variable </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>param</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Paramater to be passed for the IOVAR </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>paramlen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Paramter length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to receive the handle for the packet buffer containing the response data value received </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of out_buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1071" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1ga334e8f04bdbc06da6eadf29cea997b99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_wifi_version</definition>
+        <argsstring>(whd_interface_t ifp, char *version, uint8_t length)</argsstring>
+        <name>whd_wifi_get_wifi_version</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>version</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the WLAN firmware version. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>version</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a buffer that version information will be written to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1089" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1ga1e8a85564910052e82332a89db4d9ff5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_clm_version</definition>
+        <argsstring>(whd_interface_t ifp, char *version, uint8_t length)</argsstring>
+        <name>whd_wifi_get_clm_version</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>version</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the WLAN CLM version. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>version</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a buffer that version information will be written to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1099" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1ga7f089a4c933c9c05a61e2cfc00fcb4f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_read_wlan_log</definition>
+        <argsstring>(whd_driver_t whd_drv, char *buffer, uint32_t buffer_size)</argsstring>
+        <name>whd_wifi_read_wlan_log</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_drv</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>buffer_size</declname>
+        </param>
+        <briefdescription>
+<para>To print whd log information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to store read log results </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Variable to store size of the buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1109" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1ga6435c76ac1eae5af952053d76d9c67ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_print_whd_log</definition>
+        <argsstring>(whd_driver_t whd_drv)</argsstring>
+        <name>whd_wifi_print_whd_log</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_drv</declname>
+        </param>
+        <briefdescription>
+<para>To print whd log information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1117" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1ga01abfdd80ff65c7cac64e0d7c2f93c60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_network_get_ifidx_from_ifp</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t *ifidx)</argsstring>
+        <name>whd_network_get_ifidx_from_ifp</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>ifidx</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the ifidx from interface pointer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>ifidx is a unique value and be used to identify a instance of tcp/ip stack</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the whd_interface_t </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ifidx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to ifidx</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1127" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1ga84376c0830fbdb04c67812243539d4c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_network_get_bsscfgidx_from_ifp</definition>
+        <argsstring>(whd_interface_t ifp, uint8_t *bsscfgidx)</argsstring>
+        <name>whd_network_get_bsscfgidx_from_ifp</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>bsscfgidx</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the bsscfgidx from interface pointer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be used to send IOCTL with requires bsscfgidx</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bsscfgidx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to bsscfgidx</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1138" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1gab4a8c97085b18321d8d682b1578edf7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_bss_info</definition>
+        <argsstring>(whd_interface_t ifp, wl_bss_info_t *bi)</argsstring>
+        <name>whd_wifi_get_bss_info</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a92c6377f96c792ee4d94bb36b7777ea6" kindref="member">wl_bss_info_t</ref> *</type>
+          <declname>bi</declname>
+        </param>
+        <briefdescription>
+<para>Retrives the bss info. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the structure wl_bss_info_t</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dbg_1gab6dca3a6d7a90a1f9d8fb18660048c18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_print_stats</definition>
+        <argsstring>(whd_driver_t whd_drv, whd_bool_t reset_after_print)</argsstring>
+        <name>whd_print_stats</name>
+        <param>
+          <type><ref refid="whd_8h_1ac45015d82e65db891b463066873eca4f" kindref="member">whd_driver_t</ref></type>
+          <declname>whd_drv</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+          <declname>reset_after_print</declname>
+        </param>
+        <briefdescription>
+<para>Prints WHD stats. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reset_after_print</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool variable to decide if whd_stats to be reset</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="1157" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Prototypes of functions for controlling the Wi-Fi system. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This file provides prototypes for end-user functions which allow actions such as scanning for Wi-Fi networks, joining Wi-Fi networks, getting the MAC address, etc </para>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__init__config" kind="struct" language="C++" prot="public">
+    <compoundname>whd_init_config</compoundname>
+    <includes local="no">whd.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__init__config_1a52591d0d84b73dea8ca0a25c486f62c7" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* thread_stack_start</definition>
+        <argsstring></argsstring>
+        <name>thread_stack_start</name>
+        <briefdescription>
+<para>Pointer to the WHD thread stack. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="59" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__init__config_1a6aa2c0bcb2024f1e4c38f9e8f6769c09" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t thread_stack_size</definition>
+        <argsstring></argsstring>
+        <name>thread_stack_size</name>
+        <briefdescription>
+<para>Size of the WHD thread stack. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="60" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__init__config_1abd05090115efa85f6e47087351cc502a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t thread_priority</definition>
+        <argsstring></argsstring>
+        <name>thread_priority</name>
+        <briefdescription>
+<para>Priority to be set to WHD Thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="61" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__init__config_1a7c552f1f715c8aa245f40d4be48b0fc9" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a5adb0953a8527552bc47001673830602" kindref="member">whd_country_code_t</ref></type>
+        <definition>whd_country_code_t country</definition>
+        <argsstring></argsstring>
+        <name>country</name>
+        <briefdescription>
+<para>Variable to strore country code information. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="62" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for storing WHD init configurations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="58" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="57" bodyend="63"/>
+    <listofallmembers>
+      <member refid="structwhd__init__config_1a7c552f1f715c8aa245f40d4be48b0fc9" prot="public" virt="non-virtual"><scope>whd_init_config</scope><name>country</name></member>
+      <member refid="structwhd__init__config_1abd05090115efa85f6e47087351cc502a" prot="public" virt="non-virtual"><scope>whd_init_config</scope><name>thread_priority</name></member>
+      <member refid="structwhd__init__config_1a6aa2c0bcb2024f1e4c38f9e8f6769c09" prot="public" virt="non-virtual"><scope>whd_init_config</scope><name>thread_stack_size</name></member>
+      <member refid="structwhd__init__config_1a52591d0d84b73dea8ca0a25c486f62c7" prot="public" virt="non-virtual"><scope>whd_init_config</scope><name>thread_stack_start</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

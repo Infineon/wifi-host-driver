@@ -1,0 +1,920 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="whd__events_8h" kind="file" language="C++">
+    <compoundname>whd_events.h</compoundname>
+    <includes refid="whd_8h" local="yes">whd.h</includes>
+    <incdepgraph>
+      <node id="14">
+        <label>whd_types.h</label>
+        <link refid="whd__types_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>stdint.h</label>
+      </node>
+      <node id="13">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>whd_events.h</label>
+        <link refid="whd__events_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>cy_result.h</label>
+      </node>
+      <node id="17">
+        <label>cyhal_hw_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structwhd__event__eth__hdr" prot="public">whd_event_eth_hdr</innerclass>
+    <innerclass refid="structwhd__event__ether__header" prot="public">whd_event_ether_header</innerclass>
+    <innerclass refid="structwhd__event__msg" prot="public">whd_event_msg</innerclass>
+    <innerclass refid="structwhd__event" prot="public">whd_event</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="whd__events_8h_1a5608426af7320ce9e54a8a500fc044e9" prot="public" static="no">
+        <name>WLC_E_NONE</name>
+        <initializer>(0x7FFFFFFE)</initializer>
+        <briefdescription>
+<para>Indicates the end of the event array list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="22" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ae370e84bd9ed3b3cde25919287673298" prot="public" static="no">
+        <name>WLC_E_SET_SSID</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Indicates status of set SSID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This event occurs when STA tries to join the AP </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="24" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a2e0540e8fe3f44be75575247648e1c7f" prot="public" static="no">
+        <name>WLC_E_AUTH</name>
+        <initializer>3</initializer>
+        <briefdescription>
+<para>802.11 AUTH request event occurs when STA tries to get authenticated with the AP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="25" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a04b3c3a873e93afd4a51643707a20120" prot="public" static="no">
+        <name>WLC_E_DEAUTH</name>
+        <initializer>5</initializer>
+        <briefdescription>
+<para>802.11 DEAUTH request event occurs when the the SOFTAP is stopped to deuthenticate the connected stations </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="26" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a6fbce5e7ab3f5f4cde0ef8c11ff90e05" prot="public" static="no">
+        <name>WLC_E_DEAUTH_IND</name>
+        <initializer>6</initializer>
+        <briefdescription>
+<para>802.11 DEAUTH indication event occurs when the STA gets deauthenticated by the AP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="27" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a8c9fd116781000929a8b09de58f6288e" prot="public" static="no">
+        <name>WLC_E_ASSOC</name>
+        <initializer>7</initializer>
+        <briefdescription>
+<para>802.11 ASSOC request event occurs when STA joins the AP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="28" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1adfb692b8b02e3082657cefc92f6f216d" prot="public" static="no">
+        <name>WLC_E_ASSOC_IND</name>
+        <initializer>8</initializer>
+        <briefdescription>
+<para>802.11 ASSOC indication occurs when a station joins the SOFTAP that is started </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="29" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a87f949345de32ebd84030a1cc9c9159f" prot="public" static="no">
+        <name>WLC_E_REASSOC</name>
+        <initializer>9</initializer>
+        <briefdescription>
+<para>802.11 REASSOC request event when the STA again gets associated with the AP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="30" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a8ddd3a253d9fd56a5704d9f3b1dd9b8a" prot="public" static="no">
+        <name>WLC_E_REASSOC_IND</name>
+        <initializer>10</initializer>
+        <briefdescription>
+<para>802.11 REASSOC indication occurs when a station again reassociates with the SOFTAP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="31" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a9b9413ac981ea6e20b8f0f80523235c0" prot="public" static="no">
+        <name>WLC_E_DISASSOC</name>
+        <initializer>11</initializer>
+        <briefdescription>
+<para>802.11 DISASSOC request occurs when the STA the tries to leave the AP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="32" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ae9c1ad1200aaa8eec7c96e4fc3438593" prot="public" static="no">
+        <name>WLC_E_DISASSOC_IND</name>
+        <initializer>12</initializer>
+        <briefdescription>
+<para>802.11 DISASSOC indication occurs when the connected station gets disassociates from SOFTAP, also when STA gets diassociated by the AP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="34" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1adf984d77e19b6e3a023dd27216599456" prot="public" static="no">
+        <name>WLC_E_LINK</name>
+        <initializer>16</initializer>
+        <briefdescription>
+<para>generic link indication </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="35" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a26d330cb0796c551edda9c848f1d826c" prot="public" static="no">
+        <name>WLC_E_PROBREQ_MSG</name>
+        <initializer>44</initializer>
+        <briefdescription>
+<para>Indicates probe request received for the SOFTAP started. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="36" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a73ab299b66cc3915b300b6f9360ae4be" prot="public" static="no">
+        <name>WLC_E_PSK_SUP</name>
+        <initializer>46</initializer>
+        <briefdescription>
+<para>WPA Handshake fail during association. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="37" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a3c6a8365f82bedb7412bebde8311bee4" prot="public" static="no">
+        <name>WLC_E_ACTION_FRAME</name>
+        <initializer>59</initializer>
+        <briefdescription>
+<para>Indicates Action frame Rx. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="38" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a5741fe8a095d2c7721fd5126b8acea56" prot="public" static="no">
+        <name>WLC_E_ACTION_FRAME_COMPLETE</name>
+        <initializer>60</initializer>
+        <briefdescription>
+<para>Indicates Action frame Tx complete. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="39" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a1b04aa17aa56325d7ac03dbf6495d53b" prot="public" static="no">
+        <name>WLC_E_ESCAN_RESULT</name>
+        <initializer>69</initializer>
+        <briefdescription>
+<para>escan result event occurs when we scan for the networks </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="40" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a36a1db14fab1a7d56c5d9c2a57cf030f" prot="public" static="no">
+        <name>WLC_E_STATUS_SUCCESS</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>operation was successful </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="43" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a7bbe432d919eb9e29cca5bbeff6f2d22" prot="public" static="no">
+        <name>WLC_E_STATUS_FAIL</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>operation failed </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="44" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a59959134916adbb98a9875a8c7462474" prot="public" static="no">
+        <name>WLC_E_STATUS_TIMEOUT</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>operation timed out </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="45" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a3ba3ab746af65eea3d54945c491e75b5" prot="public" static="no">
+        <name>WLC_E_STATUS_NO_NETWORKS</name>
+        <initializer>3</initializer>
+        <briefdescription>
+<para>failed due to no matching network found </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="46" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a7efd6bc08b75e44e74cfad92084020c3" prot="public" static="no">
+        <name>WLC_E_STATUS_ABORT</name>
+        <initializer>4</initializer>
+        <briefdescription>
+<para>operation was aborted </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="47" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a88664d38d341c3cc57dfd901f6bb6010" prot="public" static="no">
+        <name>WLC_E_STATUS_NO_ACK</name>
+        <initializer>5</initializer>
+        <briefdescription>
+<para>protocol failure: packet not ack&apos;d </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="48" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a5a7e4c4f047fff0443e0e7037e35babe" prot="public" static="no">
+        <name>WLC_E_STATUS_UNSOLICITED</name>
+        <initializer>6</initializer>
+        <briefdescription>
+<para>AUTH or ASSOC packet was unsolicited. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="49" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ae66d4ccc84bc98c3018b049d865a4e56" prot="public" static="no">
+        <name>WLC_E_STATUS_ATTEMPT</name>
+        <initializer>7</initializer>
+        <briefdescription>
+<para>attempt to assoc to an auto auth configuration </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="50" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1aec78b245d5a001d341e370f9a246542a" prot="public" static="no">
+        <name>WLC_E_STATUS_PARTIAL</name>
+        <initializer>8</initializer>
+        <briefdescription>
+<para>scan results are incomplete </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="51" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ace9d1ee71e3e6a1fd0e5c816347cef85" prot="public" static="no">
+        <name>WLC_E_STATUS_NEWSCAN</name>
+        <initializer>9</initializer>
+        <briefdescription>
+<para>scan aborted by another scan </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="52" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ac60199a213be6784ece10816f189e6df" prot="public" static="no">
+        <name>WLC_E_STATUS_NEWASSOC</name>
+        <initializer>10</initializer>
+        <briefdescription>
+<para>scan aborted due to assoc in progress </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="53" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a0ff5a599549f180cca6ae50f4c404bb9" prot="public" static="no">
+        <name>WLC_E_STATUS_11HQUIET</name>
+        <initializer>11</initializer>
+        <briefdescription>
+<para>802.11h quiet period started </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="54" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a95517d8b374126d53040e871e0430299" prot="public" static="no">
+        <name>WLC_E_STATUS_SUPPRESS</name>
+        <initializer>12</initializer>
+        <briefdescription>
+<para>user disabled scanning (WLC_SET_SCANSUPPRESS) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="55" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1a8f01683977e56ff6cf81c9dbef1cb1b5" prot="public" static="no">
+        <name>WLC_E_STATUS_NOCHANS</name>
+        <initializer>13</initializer>
+        <briefdescription>
+<para>no allowable channels to scan </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="56" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ac2937cd5a00b77988fdeb91aa06e0542" prot="public" static="no">
+        <name>WLC_E_STATUS_CCXFASTRM</name>
+        <initializer>14</initializer>
+        <briefdescription>
+<para>scan aborted due to CCX fast roam </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="57" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ad7ce31ac63e0e91bca76c2f0bbc0e92c" prot="public" static="no">
+        <name>WLC_E_STATUS_CS_ABORT</name>
+        <initializer>15</initializer>
+        <briefdescription>
+<para>abort channel select </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="58" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ab5a63329b542569285c035ec864322b8" prot="public" static="no">
+        <name>WLC_E_STATUS_ERROR</name>
+        <initializer>16</initializer>
+        <briefdescription>
+<para>request failed due to error </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="59" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ac597fcbff37082363669370113a7628b" prot="public" static="no">
+        <name>WLC_E_STATUS_INVALID</name>
+        <initializer>0xff</initializer>
+        <briefdescription>
+<para>Invalid status code to init variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="60" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ac97c29fe35bab5af9cc08a9eb1fedffc" prot="public" static="no">
+        <name>WLC_SUP_STATUS_OFFSET</name>
+        <initializer>(256)</initializer>
+        <briefdescription>
+<para>Status offset added to the status codes to match the values from firmware. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="62" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__events_8h_1ac94cc32da29a68641af2b000d883cd6a" prot="public" static="no">
+        <name>WHD_MSG_IFNAME_MAX</name>
+        <initializer>16</initializer>
+        <briefdescription>
+<para>Max length of Interface name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="105" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4c" prot="public" static="no" strong="no">
+        <type></type>
+        <name>sup_auth_status</name>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680" prot="public">
+          <name>WLC_SUP_DISCONNECTED</name>
+          <initializer>= 0 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Disconnected. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147" prot="public">
+          <name>WLC_SUP_CONNECTING</name>
+          <initializer>= 1 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Connecting. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce" prot="public">
+          <name>WLC_SUP_IDREQUIRED</name>
+          <initializer>= 2 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>ID Required. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce" prot="public">
+          <name>WLC_SUP_AUTHENTICATING</name>
+          <initializer>= 3 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Authenticating. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e" prot="public">
+          <name>WLC_SUP_AUTHENTICATED</name>
+          <initializer>= 4 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Authenticated. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938" prot="public">
+          <name>WLC_SUP_KEYXCHANGE</name>
+          <initializer>= 5 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Key Exchange. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a" prot="public">
+          <name>WLC_SUP_KEYED</name>
+          <initializer>= 6 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Key Exchanged. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240" prot="public">
+          <name>WLC_SUP_TIMEOUT</name>
+          <initializer>= 7 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Timeout. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df" prot="public">
+          <name>WLC_SUP_LAST_BASIC_STATE</name>
+          <initializer>= 8 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Last Basic State. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe" prot="public">
+          <name>WLC_SUP_KEYXCHANGE_WAIT_M1</name>
+          <initializer>= WLC_SUP_AUTHENTICATED</initializer>
+          <briefdescription>
+<para>Waiting to receive handshake msg M1. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623" prot="public">
+          <name>WLC_SUP_KEYXCHANGE_PREP_M2</name>
+          <initializer>= WLC_SUP_KEYXCHANGE</initializer>
+          <briefdescription>
+<para>Preparing to send handshake msg M2. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6" prot="public">
+          <name>WLC_SUP_KEYXCHANGE_WAIT_M3</name>
+          <initializer>= WLC_SUP_LAST_BASIC_STATE</initializer>
+          <briefdescription>
+<para>Waiting to receive handshake msg M3. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772" prot="public">
+          <name>WLC_SUP_KEYXCHANGE_PREP_M4</name>
+          <initializer>= 9 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Preparing to send handshake msg M4. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a" prot="public">
+          <name>WLC_SUP_KEYXCHANGE_WAIT_G1</name>
+          <initializer>= 10 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Waiting to receive handshake msg G1. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303" prot="public">
+          <name>WLC_SUP_KEYXCHANGE_PREP_G2</name>
+          <initializer>= 11 + WLC_SUP_STATUS_OFFSET</initializer>
+          <briefdescription>
+<para>Preparing to send handshake msg G2. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Status code for event WLC_E_PSK_SUP. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>-Basic supplicant authentication states</para>
+<para><itemizedlist>
+<listitem><para>WLC_SUP_DISCONNECTED<itemizedlist>
+<listitem><para>WLC_SUP_CONNECTING</para>
+</listitem><listitem><para>WLC_SUP_IDREQUIRED</para>
+</listitem><listitem><para>WLC_SUP_AUTHENTICATING</para>
+</listitem><listitem><para>WLC_SUP_AUTHENTICATED</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE</para>
+</listitem><listitem><para>WLC_SUP_KEYED</para>
+</listitem><listitem><para>WLC_SUP_TIMEOUT</para>
+</listitem><listitem><para>WLC_SUP_LAST_BASIC_STATE -Extended supplicant authentication states</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_WAIT_M1</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_PREP_M2</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_WAIT_M3</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_PREP_M4</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_WAIT_G1</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_PREP_G2 </para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="88" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="87" bodyend="104"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="whd__events_8h_1a4c17ec19ca52ebe4bbad3ea977108d0b" prot="public" static="no">
+        <type>enum <ref refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4c" kindref="member">sup_auth_status</ref></type>
+        <definition>typedef enum sup_auth_status  sup_auth_status_t</definition>
+        <argsstring></argsstring>
+        <name>sup_auth_status_t</name>
+        <briefdescription>
+<para>Status code for event WLC_E_PSK_SUP. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>-Basic supplicant authentication states</para>
+<para><itemizedlist>
+<listitem><para>WLC_SUP_DISCONNECTED<itemizedlist>
+<listitem><para>WLC_SUP_CONNECTING</para>
+</listitem><listitem><para>WLC_SUP_IDREQUIRED</para>
+</listitem><listitem><para>WLC_SUP_AUTHENTICATING</para>
+</listitem><listitem><para>WLC_SUP_AUTHENTICATED</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE</para>
+</listitem><listitem><para>WLC_SUP_KEYED</para>
+</listitem><listitem><para>WLC_SUP_TIMEOUT</para>
+</listitem><listitem><para>WLC_SUP_LAST_BASIC_STATE -Extended supplicant authentication states</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_WAIT_M1</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_PREP_M2</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_WAIT_M3</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_PREP_M4</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_WAIT_G1</para>
+</listitem><listitem><para>WLC_SUP_KEYXCHANGE_PREP_G2 </para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="104" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd__events_8h_1a8e7e9d5ab8841a160aa9e2420c636864" prot="public" static="no">
+        <type>struct <ref refid="structwhd__event__eth__hdr" kindref="compound">whd_event_eth_hdr</ref></type>
+        <definition>typedef struct whd_event_eth_hdr  whd_event_eth_hdr_t</definition>
+        <argsstring></argsstring>
+        <name>whd_event_eth_hdr_t</name>
+        <briefdescription>
+<para>Structure to store ethernet header fields in event packets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="120" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd__events_8h_1a31915a18541e6182e926247a3b8ed3dc" prot="public" static="no">
+        <type>struct <ref refid="structwhd__event__ether__header" kindref="compound">whd_event_ether_header</ref></type>
+        <definition>typedef struct whd_event_ether_header  whd_event_ether_header_t</definition>
+        <argsstring></argsstring>
+        <name>whd_event_ether_header_t</name>
+        <briefdescription>
+<para>Structure to store ethernet destination, source and ethertype in event packets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="130" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd__events_8h_1a9d6929e68c05572695ee040da171d508" prot="public" static="no">
+        <type>struct <ref refid="structwhd__event" kindref="compound">whd_event</ref></type>
+        <definition>typedef struct whd_event  whd_event_t</definition>
+        <argsstring></argsstring>
+        <name>whd_event_t</name>
+        <briefdescription>
+<para>Event structure used by driver msgs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__event_1ga9c74af353c83a8f77097acbc65362b07" prot="public" static="no">
+        <type>void *(*</type>
+        <definition>typedef void*(* whd_event_handler_t) (whd_interface_t ifp, const whd_event_header_t *event_header, const uint8_t *event_data, void *handler_user_data)</definition>
+        <argsstring>)(whd_interface_t ifp, const whd_event_header_t *event_header, const uint8_t *event_data, void *handler_user_data)</argsstring>
+        <name>whd_event_handler_t</name>
+        <briefdescription>
+<para>Event handler prototype definition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_header</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>whd event header </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>event data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler_user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>semaphore data </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="174" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__event_1ga4175c3ef9bb16601fabc605fadeaf8d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_event_handler</definition>
+        <argsstring>(whd_interface_t ifp, const uint32_t *event_type, whd_event_handler_t handler_func, void *handler_user_data, uint16_t *event_index)</argsstring>
+        <name>whd_wifi_set_event_handler</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>event_type</declname>
+        </param>
+        <param>
+          <type><ref refid="group__event_1ga9c74af353c83a8f77097acbc65362b07" kindref="member">whd_event_handler_t</ref></type>
+          <declname>handler_func</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>handler_user_data</declname>
+        </param>
+        <param>
+          <type>uint16_t *</type>
+          <declname>event_index</declname>
+        </param>
+        <briefdescription>
+<para>Registers a handler to receive event callbacks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function registers a callback handler to be notified when a particular event is received.</para>
+<para><simplesect kind="note"><para>Currently each event may only be registered to one handler and there is a limit to the number of simultaneously registered events. Maximum of 5 event handlers can registered simultaneously, this also includes the internal event handler registration which happens during scan, join and starting an AP.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the event list array </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A function pointer to the handler callback </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler_user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer value which will be passed to the event handler function at the time an event is triggered (NULL is allowed) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Entry where the event handler is registered in the list</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="196" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="whd__events_8h_1ae415f1f3fcbbfe506aa0e656bf8debb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_deregister_event_handler</definition>
+        <argsstring>(whd_interface_t ifp, uint16_t event_index)</argsstring>
+        <name>whd_wifi_deregister_event_handler</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>event_index</declname>
+        </param>
+        <briefdescription>
+<para>Delete/Deregister the event entry where callback is registered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Event index obtained during registration by whd_wifi_set_event_handler</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="208" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Header for Event detection. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides constants and prototypes for functions that allow user applications to receive event callbacks and set event handlers </para>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h"/>
+  </compounddef>
+</doxygen>

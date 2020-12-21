@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__mac__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_mac_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__mac__t_1abc3755f1f66dea95fce153ee4f49e907" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t octet[6]</definition>
+        <argsstring>[6]</argsstring>
+        <name>octet</name>
+        <briefdescription>
+<para>Unique 6-byte MAC address. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="374" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for storing a MAC address (Wi-Fi Media Access Control address). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="373" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="372" bodyend="375"/>
+    <listofallmembers>
+      <member refid="structwhd__mac__t_1abc3755f1f66dea95fce153ee4f49e907" prot="public" virt="non-virtual"><scope>whd_mac_t</scope><name>octet</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

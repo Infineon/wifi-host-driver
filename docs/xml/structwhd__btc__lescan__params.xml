@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__btc__lescan__params" kind="struct" language="C++" prot="public">
+    <compoundname>whd_btc_lescan_params</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__btc__lescan__params_1a0815784d41b3c13d42ce22367abfba1d" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t priority</definition>
+        <argsstring></argsstring>
+        <name>priority</name>
+        <briefdescription>
+<para>LE scan priority. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="994" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="994" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__btc__lescan__params_1ad0362052c89424bf11eb63b726b05182" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t duty_cycle</definition>
+        <argsstring></argsstring>
+        <name>duty_cycle</name>
+        <briefdescription>
+<para>LE scan duty cycle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="995" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="995" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__btc__lescan__params_1a531bd65b280391995c4497112ca4e9c3" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t max_win</definition>
+        <argsstring></argsstring>
+        <name>max_win</name>
+        <briefdescription>
+<para>LE Max Scan window. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="996" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="996" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__btc__lescan__params_1a8dcea8fcf19e2facaf59891ab47375d9" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t int_grant</definition>
+        <argsstring></argsstring>
+        <name>int_grant</name>
+        <briefdescription>
+<para>LE Small Interval Grant. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="997" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="997" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__btc__lescan__params_1ab9fbbe93d8ab19fa81bebf4ade2deddd" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t scan_int</definition>
+        <argsstring></argsstring>
+        <name>scan_int</name>
+        <briefdescription>
+<para>LE scan interval. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="998" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="998" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__btc__lescan__params_1a02d72a917cfb65e36cd0527ed472bf8f" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t scan_win</definition>
+        <argsstring></argsstring>
+        <name>scan_win</name>
+        <briefdescription>
+<para>LE scan Window. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="999" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="999" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for LE Scan parameters. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="993" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="992" bodyend="1000"/>
+    <listofallmembers>
+      <member refid="structwhd__btc__lescan__params_1ad0362052c89424bf11eb63b726b05182" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>duty_cycle</name></member>
+      <member refid="structwhd__btc__lescan__params_1a8dcea8fcf19e2facaf59891ab47375d9" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>int_grant</name></member>
+      <member refid="structwhd__btc__lescan__params_1a531bd65b280391995c4497112ca4e9c3" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>max_win</name></member>
+      <member refid="structwhd__btc__lescan__params_1a0815784d41b3c13d42ce22367abfba1d" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>priority</name></member>
+      <member refid="structwhd__btc__lescan__params_1ab9fbbe93d8ab19fa81bebf4ade2deddd" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>scan_int</name></member>
+      <member refid="structwhd__btc__lescan__params_1a02d72a917cfb65e36cd0527ed472bf8f" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>scan_win</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="whd__version_8h" kind="file" language="C++">
+    <compoundname>whd_version.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="whd__version_8h_1a1f84e800f5fc36084bc2a62ec548a6e4" prot="public" static="no">
+        <name>WHD_VERSION</name>
+        <initializer>&quot;v1.92.0-26-gad2be100-dirty&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h" line="1" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h" bodystart="1" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__version_8h_1aede39c4ef2dc97af2e6cf7dbb234cc00" prot="public" static="no">
+        <name>WHD_BRANCH</name>
+        <initializer>&quot;master&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h" line="2" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h" bodystart="2" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__version_8h_1a72ac7562c9bf2de30cf70466f21190b4" prot="public" static="no">
+        <name>WHD_DATE</name>
+        <initializer>&quot;2020-10-21 11:26:29 +0530&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h" line="3" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_version.h"/>
+  </compounddef>
+</doxygen>

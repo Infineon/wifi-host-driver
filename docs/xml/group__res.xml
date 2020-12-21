@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__res" kind="group">
+    <compoundname>res</compoundname>
+    <title>WHD Resource API</title>
+    <innerclass refid="structwhd__resource__source" prot="public">whd_resource_source</innerclass>
+    <briefdescription>
+<para>Functions that enable WHD to download WLAN firmware, NVRAM and CLM BLOB on a particular hardware platform. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

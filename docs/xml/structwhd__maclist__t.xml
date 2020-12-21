@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__maclist__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_maclist_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__maclist__t_1a86988a65e0d3ece7990c032c159786d6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <briefdescription>
+<para>Number of MAC addresses in the list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="922" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="922" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__maclist__t_1a789742dac11adf87a322501f5f81dbb2" prot="public" static="no" mutable="no">
+        <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
+        <definition>whd_mac_t mac_list[1]</definition>
+        <argsstring>[1]</argsstring>
+        <name>mac_list</name>
+        <briefdescription>
+<para>Variable length array of MAC addresses. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="923" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="923" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure describing a list of associated softAP clients. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="34">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+      <node id="33">
+        <label>whd_maclist_t</label>
+        <link refid="structwhd__maclist__t"/>
+        <childnode refid="34" relation="usage">
+          <edgelabel>mac_list</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="921" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="920" bodyend="924"/>
+    <listofallmembers>
+      <member refid="structwhd__maclist__t_1a86988a65e0d3ece7990c032c159786d6" prot="public" virt="non-virtual"><scope>whd_maclist_t</scope><name>count</name></member>
+      <member refid="structwhd__maclist__t_1a789742dac11adf87a322501f5f81dbb2" prot="public" virt="non-virtual"><scope>whd_maclist_t</scope><name>mac_list</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

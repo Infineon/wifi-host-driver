@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__wep__key__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_wep_key_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__wep__key__t_1aae5a12e607d0f782506d9e6ec6179c64" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <briefdescription>
+<para>WEP key index [0/1/2/3]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="938" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="938" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__wep__key__t_1ab2b3adeb2a67e656ff030b56727fd0ac" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <briefdescription>
+<para>WEP key length. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Either 5 bytes (40-bits) or 13-bytes (104-bits) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="939" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="939" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__wep__key__t_1a6460a21fbea84550b8bf9c7ce257e4ed" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t data[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>WEP key as values NOT characters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="940" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="940" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for storing a WEP key. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="937" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="936" bodyend="941"/>
+    <listofallmembers>
+      <member refid="structwhd__wep__key__t_1a6460a21fbea84550b8bf9c7ce257e4ed" prot="public" virt="non-virtual"><scope>whd_wep_key_t</scope><name>data</name></member>
+      <member refid="structwhd__wep__key__t_1aae5a12e607d0f782506d9e6ec6179c64" prot="public" virt="non-virtual"><scope>whd_wep_key_t</scope><name>index</name></member>
+      <member refid="structwhd__wep__key__t_1ab2b3adeb2a67e656ff030b56727fd0ac" prot="public" virt="non-virtual"><scope>whd_wep_key_t</scope><name>length</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

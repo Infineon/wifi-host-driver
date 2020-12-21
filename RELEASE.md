@@ -1,5 +1,5 @@
-# Wi-Fi Host Driver (WHD)  v1.92.0
-Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html) for a complete description of the Wi-Fi Host Driver.
+# Wi-Fi Host Driver (WHD)  v1.92.1
+Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
 * Supports Out-of-Band (OOB)
@@ -11,20 +11,18 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.91.2
+## Changes since v1.92.0
 ### New Features
-* Support 4373 on mbed-os
-* Update Nvram for CY8CKIT_064B0S2_4343W and CY8CKIT_064S0S2_4343W
-* Define WHD_PRINT_DISABLE MACRO to disable print
+* Supports xml document
 
 ### Defect Fixes
-* Add key length check
-* Fix CMD53 error on PSoc6 + 4343w
 * Fix the compilation error in ModusToolbox
-* Fix semaphore timeout when stopping concurrent AP
+* Fix memory leak when calling wifi_off()
+* Fix app crash when calling whd_wifi_set_coex_config()
+* Fix incorrect WHD_WLAN error code value
 
 ### Known Issues
-* Memory leak when calling wifi_Off()
+* Allocate memory failure from Lw_IP when do test for wifi on/off over 878 times on mbed-os
 
 ### Firmware Changes
 #### CYW4343W
@@ -67,7 +65,7 @@ This version of the WHD was validated for compatibility with the following softw
 
 ## More Information
 * [Wi-Fi Host Driver README File](./README.md)
-* [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/API/index.html)
+* [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)
 * [Cypress Semiconductor](http://www.cypress.com)
 
 ---

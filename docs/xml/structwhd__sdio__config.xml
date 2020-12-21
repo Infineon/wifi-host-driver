@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__sdio__config" kind="struct" language="C++" prot="public">
+    <compoundname>whd_sdio_config</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__sdio__config_1aaf50e6ef7ee9717f104ced9db86efd6a" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+        <definition>whd_bool_t sdio_1bit_mode</definition>
+        <argsstring></argsstring>
+        <name>sdio_1bit_mode</name>
+        <briefdescription>
+<para>Default is false, means SDIO operates under 4 bit mode. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="960" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="960" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__sdio__config_1aa23e026ad94f9606f2a0e5fef47df13d" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+        <definition>whd_bool_t high_speed_sdio_clock</definition>
+        <argsstring></argsstring>
+        <name>high_speed_sdio_clock</name>
+        <briefdescription>
+<para>Default is false, means SDIO operates in normal clock rate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="961" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="961" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__sdio__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1ac07b13dcb5ec0e66a707dcf8a539c97e" kindref="member">whd_oob_config_t</ref></type>
+        <definition>whd_oob_config_t oob_config</definition>
+        <argsstring></argsstring>
+        <name>oob_config</name>
+        <briefdescription>
+<para>Out-of-band interrupt configuration (required when bus can sleep) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="962" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="962" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for SDIO config parameters which can be set by application during whd power up. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="51">
+        <label>whd_oob_config</label>
+        <link refid="structwhd__oob__config"/>
+      </node>
+      <node id="50">
+        <label>whd_sdio_config</label>
+        <link refid="structwhd__sdio__config"/>
+        <childnode refid="51" relation="usage">
+          <edgelabel>oob_config</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="958" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="957" bodyend="963"/>
+    <listofallmembers>
+      <member refid="structwhd__sdio__config_1aa23e026ad94f9606f2a0e5fef47df13d" prot="public" virt="non-virtual"><scope>whd_sdio_config</scope><name>high_speed_sdio_clock</name></member>
+      <member refid="structwhd__sdio__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" virt="non-virtual"><scope>whd_sdio_config</scope><name>oob_config</name></member>
+      <member refid="structwhd__sdio__config_1aaf50e6ef7ee9717f104ced9db86efd6a" prot="public" virt="non-virtual"><scope>whd_sdio_config</scope><name>sdio_1bit_mode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

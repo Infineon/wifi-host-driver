@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="whd__resource__api_8h" kind="file" language="C++">
+    <compoundname>whd_resource_api.h</compoundname>
+    <includes refid="whd_8h" local="yes">whd.h</includes>
+    <incdepgraph>
+      <node id="28">
+        <label>whd_types.h</label>
+        <link refid="whd__types_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>stdint.h</label>
+      </node>
+      <node id="27">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>whd_resource_api.h</label>
+        <link refid="whd__resource__api_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>cy_result.h</label>
+      </node>
+      <node id="31">
+        <label>cyhal_hw_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structwhd__resource__source" prot="public">whd_resource_source</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="whd__resource__api_8h_1ad51ded0bbd705f02f73fc60c0b721ced" prot="public" static="no">
+        <name>BLOCK_SIZE</name>
+        <initializer>1024</initializer>
+        <briefdescription>
+<para>Size of the block. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="22" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="whd__resource__api_8h_1a26c678527cf0cb5196be511d9ad62c0c" prot="public" static="no" strong="no">
+        <type></type>
+        <name>whd_resource_type_t</name>
+        <enumvalue id="whd__resource__api_8h_1a26c678527cf0cb5196be511d9ad62c0caf1635251dcc37bfa67af783a53f0acf3" prot="public">
+          <name>WHD_RESOURCE_WLAN_FIRMWARE</name>
+          <briefdescription>
+<para>Resource type: WLAN Firmware. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__resource__api_8h_1a26c678527cf0cb5196be511d9ad62c0ca397297fd6225d6eae30e7fa0d40a94f7" prot="public">
+          <name>WHD_RESOURCE_WLAN_NVRAM</name>
+          <briefdescription>
+<para>Resource type: NVRAM file. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__resource__api_8h_1a26c678527cf0cb5196be511d9ad62c0cad763d3e34be0df4a36b630bb7c37e51c" prot="public">
+          <name>WHD_RESOURCE_WLAN_CLM</name>
+          <briefdescription>
+<para>Resource type: CLM_BLOB file. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Type of resources. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h" bodystart="26" bodyend="31"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Prototypes of functions for providing external resources to the radio driver. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This file provides prototypes for functions which allow WHD to download firmware, NVRAM and CLM BLOB on a particular hardware platform. </para>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_resource_api.h"/>
+  </compounddef>
+</doxygen>

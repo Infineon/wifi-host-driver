@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__event" kind="struct" language="C++" prot="public">
+    <compoundname>whd_event</compoundname>
+    <includes local="no">whd_events.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__event_1ae36ac55a3c73f9f7dfa065165130b39e" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__events_8h_1a31915a18541e6182e926247a3b8ed3dc" kindref="member">whd_event_ether_header_t</ref></type>
+        <definition>whd_event_ether_header_t eth</definition>
+        <argsstring></argsstring>
+        <name>eth</name>
+        <briefdescription>
+<para>Variable to store ethernet destination, source and ethertype in event packets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="155" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event_1a304eef8ceefeab88f71947f57df3d61b" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__events_8h_1a8e7e9d5ab8841a160aa9e2420c636864" kindref="member">whd_event_eth_hdr_t</ref></type>
+        <definition>whd_event_eth_hdr_t eth_evt_hdr</definition>
+        <argsstring></argsstring>
+        <name>eth_evt_hdr</name>
+        <briefdescription>
+<para>Variable to store ethernet header fields in event message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="156" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__event_1aaca5889552f0d7a52f681e7b96d53720" prot="public" static="no" mutable="no">
+        <type>whd_event_header_t</type>
+        <definition>whd_event_header_t whd_event</definition>
+        <argsstring></argsstring>
+        <name>whd_event</name>
+        <briefdescription>
+<para>Variable to store rest of the event packet fields after ethernet header. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="157" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Event structure used by driver msgs. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="17">
+        <label>whd_event_eth_hdr</label>
+        <link refid="structwhd__event__eth__hdr"/>
+      </node>
+      <node id="16">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+      <node id="15">
+        <label>whd_event_ether_header</label>
+        <link refid="structwhd__event__ether__header"/>
+        <childnode refid="16" relation="usage">
+          <edgelabel>source_address</edgelabel>
+          <edgelabel>destination_address</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>whd_event</label>
+        <link refid="structwhd__event"/>
+        <childnode refid="15" relation="usage">
+          <edgelabel>eth</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>eth_evt_hdr</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" line="154" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_events.h" bodystart="153" bodyend="159"/>
+    <listofallmembers>
+      <member refid="structwhd__event_1ae36ac55a3c73f9f7dfa065165130b39e" prot="public" virt="non-virtual"><scope>whd_event</scope><name>eth</name></member>
+      <member refid="structwhd__event_1a304eef8ceefeab88f71947f57df3d61b" prot="public" virt="non-virtual"><scope>whd_event</scope><name>eth_evt_hdr</name></member>
+      <member refid="structwhd__event_1aaca5889552f0d7a52f681e7b96d53720" prot="public" virt="non-virtual"><scope>whd_event</scope><name>whd_event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

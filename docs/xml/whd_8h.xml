@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="whd_8h" kind="file" language="C++">
+    <compoundname>whd.h</compoundname>
+    <includes refid="whd__types_8h" local="yes">whd_types.h</includes>
+    <includedby refid="whd__events_8h" local="yes">whd_events.h</includedby>
+    <includedby refid="whd__network__types_8h" local="yes">whd_network_types.h</includedby>
+    <includedby refid="whd__resource__api_8h" local="yes">whd_resource_api.h</includedby>
+    <includedby refid="whd__wifi__api_8h" local="yes">whd_wifi_api.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>whd_types.h</label>
+        <link refid="whd__types_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdint.h</label>
+      </node>
+      <node id="2">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cy_result.h</label>
+      </node>
+      <node id="6">
+        <label>cyhal_hw_types.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="11">
+        <label>whd_wifi_api.h</label>
+        <link refid="whd__wifi__api_8h"/>
+      </node>
+      <node id="7">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>whd_resource_api.h</label>
+        <link refid="whd__resource__api_8h"/>
+      </node>
+      <node id="8">
+        <label>whd_events.h</label>
+        <link refid="whd__events_8h"/>
+      </node>
+      <node id="9">
+        <label>whd_network_types.h</label>
+        <link refid="whd__network__types_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structwhd__init__config" prot="public">whd_init_config</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="whd_8h_1a54c1a5e4a019c5fa6df104ada4031b1a" prot="public" static="no">
+        <name>INCLUDED_WHD_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="12" column="9" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="whd_8h_1ac45015d82e65db891b463066873eca4f" prot="public" static="no">
+        <type>struct whd_driver *</type>
+        <definition>typedef struct whd_driver* whd_driver_t</definition>
+        <argsstring></argsstring>
+        <name>whd_driver_t</name>
+        <briefdescription>
+<para>Abstract pointer type that acts as a handle to an instance of the driver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="22" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" prot="public" static="no">
+        <type>struct whd_interface *</type>
+        <definition>typedef struct whd_interface* whd_interface_t</definition>
+        <argsstring></argsstring>
+        <name>whd_interface_t</name>
+        <briefdescription>
+<para>Abstract pointer type to handle instance of whd interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1a44a6e9abc68a4322a3958bdc24ae9981" prot="public" static="no">
+        <type>struct <ref refid="structwhd__buffer__funcs" kindref="compound">whd_buffer_funcs</ref></type>
+        <definition>typedef struct whd_buffer_funcs whd_buffer_funcs_t</definition>
+        <argsstring></argsstring>
+        <name>whd_buffer_funcs_t</name>
+        <briefdescription>
+<para>Abstract type that acts as a handle to an instance of a buffer function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1ac35b975959ed585acf554535b502ce68" prot="public" static="no">
+        <type>struct <ref refid="structwhd__netif__funcs" kindref="compound">whd_netif_funcs</ref></type>
+        <definition>typedef struct whd_netif_funcs whd_netif_funcs_t</definition>
+        <argsstring></argsstring>
+        <name>whd_netif_funcs_t</name>
+        <briefdescription>
+<para>Abstract type that acts as a handle to an instance of a network interface function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1a05847ad8fa418d69d5f51fe654835b8b" prot="public" static="no">
+        <type>struct <ref refid="structwhd__resource__source" kindref="compound">whd_resource_source</ref></type>
+        <definition>typedef struct whd_resource_source whd_resource_source_t</definition>
+        <argsstring></argsstring>
+        <name>whd_resource_source_t</name>
+        <briefdescription>
+<para>Abstract type that acts as a handle to an instance of a resource function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1af5e9a147a89968d2026fd7720a519bbd" prot="public" static="no">
+        <type>struct whd_bus_funcs</type>
+        <definition>typedef struct whd_bus_funcs whd_sdio_funcs_t</definition>
+        <argsstring></argsstring>
+        <name>whd_sdio_funcs_t</name>
+        <briefdescription>
+<para>Abstract type that acts as a handle to an instance of a bus function used for SDIO specific functionality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1a7373cb0b0ef75e1b740fd53c77bda5e4" prot="public" static="no">
+        <type>struct whd_bus_funcs</type>
+        <definition>typedef struct whd_bus_funcs whd_spi_funcs_t</definition>
+        <argsstring></argsstring>
+        <name>whd_spi_funcs_t</name>
+        <briefdescription>
+<para>Abstract type that acts as a handle to an instance of a bus function used for SPI specific functionality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="27" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd_8h_1a933f0025533b9b88ecb77b651db29250" prot="public" static="no">
+        <type>struct <ref refid="structwhd__init__config" kindref="compound">whd_init_config</ref></type>
+        <definition>typedef struct whd_init_config  whd_init_config_t</definition>
+        <argsstring></argsstring>
+        <name>whd_init_config_t</name>
+        <briefdescription>
+<para>Structure for storing WHD init configurations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h" line="63" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides abstract pointer type to act as instance for: driver, interface, buffer funcs, network funcs, resource funcs and bus funcs. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="group__wifi" kind="group">
+    <compoundname>wifi</compoundname>
+    <title>WHD Wi-Fi API</title>
+    <innergroup refid="group__wifimanagement">WHD Wi-Fi Management API</innergroup>
+    <innergroup refid="group__wifijoin">WHD Wi-Fi Join, Scan and Halt API</innergroup>
+    <innergroup refid="group__wifiutilities">WHD Wi-Fi Utility API</innergroup>
+    <innergroup refid="group__wifisoftap">WHD Wi-Fi SoftAP API</innergroup>
+    <innergroup refid="group__wifipowersave">WHD Wi-Fi Power Save API</innergroup>
+    <innergroup refid="group__wifiioctl">WHD Wi-Fi IOCTL Set/Get API</innergroup>
+    <innergroup refid="group__dbg">WHD Wi-Fi Debug API</innergroup>
+    <briefdescription>
+<para>APIs for controlling the Wi-Fi system. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>
