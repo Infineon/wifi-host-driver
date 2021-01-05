@@ -1904,15 +1904,18 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
             }
             if (akm_suite_list_item == (uint32_t)WHD_AKM_8021X)
             {
+                record->security |= WPA2_SECURITY;
                 record->security |= ENTERPRISE_ENABLED;
             }
             if (akm_suite_list_item == (uint32_t)WHD_AKM_FT_8021X)
             {
+                record->security |= WPA2_SECURITY;
                 record->security |= FBT_ENABLED;
                 record->security |= ENTERPRISE_ENABLED;
             }
             if (akm_suite_list_item == (uint32_t)WHD_AKM_FT_PSK)
             {
+                record->security |= WPA2_SECURITY;
                 record->security |= FBT_ENABLED;
             }
         }

@@ -24,6 +24,10 @@
 extern "C" {
 #endif
 
+#define WHD_BACKPLAIN_BUF_TIMEOUT   (0xFFFFFFFF)
+#define WHD_RX_BUF_TIMEOUT          (10)
+
+
 struct whd_bus_common_info;
 
 void whd_bus_common_info_init(whd_driver_t whd_driver);

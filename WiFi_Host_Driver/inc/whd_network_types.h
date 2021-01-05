@@ -67,17 +67,17 @@ struct whd_buffer_funcs
      *  which includes the MTU, other other various header. Refer to whd_types.h
      *  to find the size of WHD_LINK_MTU
      *
-     *  @param buffer     A pointer which receives the allocated packet buffer handle
-     *  @param direction  Indicates transmit/receive direction that the packet buffer is
-     *                    used for. This may be needed if tx/rx pools are separate.
-     *  @param size       The number of bytes to allocate.
-     *  @param wait       Whether to wait for a packet buffer to be available
+     *  @param buffer      A pointer which receives the allocated packet buffer handle
+     *  @param direction   Indicates transmit/receive direction that the packet buffer is
+     *                     used for. This may be needed if tx/rx pools are separate.
+     *  @param size        The number of bytes to allocate.
+     *  @param timeout_ms  Maximum period to block for available buffer
      *
-     *  @return           WHD_SUCCESS or error code
+     *  @return            WHD_SUCCESS or error code
      *
      */
     whd_result_t (*whd_host_buffer_get)(whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size,
-                                        unsigned long wait);
+                                        unsigned long timeout_ms);
 
     /** Releases a packet buffer
      *

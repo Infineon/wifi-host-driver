@@ -415,7 +415,8 @@ whd_result_t whd_bus_spi_read_frame(whd_driver_t whd_driver, whd_buffer_t *buffe
 
     /* Allocate a suitable buffer */
     result = whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_RX,
-                                 (unsigned short)(whd_gspi_bytes_pending + WHD_BUS_GSPI_PACKET_OVERHEAD), WHD_FALSE);
+                                 (unsigned short)(whd_gspi_bytes_pending + WHD_BUS_GSPI_PACKET_OVERHEAD),
+                                 (whd_sdpcm_has_tx_packet(whd_driver) ? 0 : WHD_RX_BUF_TIMEOUT) );
 
     if (result != WHD_SUCCESS)
     {

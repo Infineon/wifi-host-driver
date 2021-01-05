@@ -224,6 +224,13 @@ extern "C" {
 #define SBSDIO_SLPCSR_KEEP_SDIO_ON           ( (uint32_t)(1 << 0) ) /* KeepSdioOn bit */
 #define SBSDIO_SLPCSR_DEVICE_ON              ( (uint32_t)(1 << 1) ) /* DeviceOn bit */
 
+/* To hostmail box data */
+#define I_HMB_DATA_NAKHANDLED       0x0001  /* retransmit NAK'd frame */
+#define I_HMB_DATA_DEVREADY         0x0002  /* talk to host after enable */
+#define I_HMB_DATA_FC               0x0004  /* per prio flowcontrol update flag */
+#define I_HMB_DATA_FWREADY          0x0008  /* fw ready for protocol activity */
+#define I_HMB_DATA_FWHALT           0x0010  /* firmware halted */
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

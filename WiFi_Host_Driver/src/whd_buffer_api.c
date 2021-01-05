@@ -51,21 +51,21 @@
  *  concern WHD, however it must match the way the network stack expects packet
  *  buffers to be allocated.
  *
- *  @param buffer    : A pointer which receives the allocated packet buffer handle
- *  @param direction : Indicates transmit/receive direction that the packet buffer is
- *                    used for. This may be needed if tx/rx pools are separate.
- *  @param size      : The number of bytes to allocate.
- *  @param wait      : Whether to wait for a packet buffer to be available
+ *  @param buffer     : A pointer which receives the allocated packet buffer handle
+ *  @param direction  : Indicates transmit/receive direction that the packet buffer is
+ *                      used for. This may be needed if tx/rx pools are separate.
+ *  @param size       : The number of bytes to allocate.
+ *  @param timeout_ms : Maximum period to block for available buffer
  *
- *  @return          : WHD_SUCCESS or error code
+ *  @return           : WHD_SUCCESS or error code
  *
  */
 whd_result_t whd_host_buffer_get(whd_driver_t whd_driver, whd_buffer_t *buffer, whd_buffer_dir_t direction,
-                                 uint16_t size, uint32_t wait)
+                                 uint16_t size, uint32_t timeout_ms)
 {
     if (whd_driver->buffer_if->whd_host_buffer_get)
     {
-        return whd_driver->buffer_if->whd_host_buffer_get(buffer, direction, size, wait);
+        return whd_driver->buffer_if->whd_host_buffer_get(buffer, direction, size, timeout_ms);
     }
     else
     {
