@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -281,6 +281,9 @@ static void whd_thread_func(whd_thread_arg_t thread_input)
     int8_t rx_status;
     int8_t tx_status;
     uint8_t rx_cnt;
+    uint8_t bus_fail = 0;
+    uint8_t error_type;
+    uint32_t status;
 
     whd_driver_t whd_driver = ( whd_driver_t )thread_input;
     whd_thread_info_t *thread_info = &whd_driver->thread_info;
@@ -300,7 +303,8 @@ static void whd_thread_func(whd_thread_arg_t thread_input)
             thread_info->bus_interrupt = WHD_FALSE;
 
             /* Check if the interrupt indicated there is a packet to read */
-            if (whd_bus_packet_available_to_read(whd_driver) != 0)
+            status = whd_bus_packet_available_to_read(whd_driver);
+            if ( (status != 0) && (status != WHD_BUS_FAIL) )
             {
                 /* Receive all available packets */
                 do
@@ -308,6 +312,14 @@ static void whd_thread_func(whd_thread_arg_t thread_input)
                     rx_status = whd_thread_receive_one_packet(whd_driver);
                     rx_cnt++;
                 } while (rx_status != 0 && rx_cnt < WHD_THREAD_RX_BOUND);
+                bus_fail = 0;
+            }
+            else
+            {
+                if (status == WHD_BUS_FAIL)
+                {
+                    bus_fail++;
+                }
             }
         }
 
@@ -321,6 +333,12 @@ static void whd_thread_func(whd_thread_arg_t thread_input)
         {
             thread_info->bus_interrupt = WHD_TRUE;
             continue;
+        }
+        if (bus_fail > WHD_MAX_BUS_FAIL)
+        {
+            WPRINT_WHD_ERROR( ("%s: Error bus_fail over %d times\n", __FUNCTION__, WHD_MAX_BUS_FAIL) );
+            error_type = WLC_ERR_BUS;
+            whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
 
         /* Sleep till WLAN do something */

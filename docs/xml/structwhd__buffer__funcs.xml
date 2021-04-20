@@ -4,10 +4,10 @@
     <compoundname>whd_buffer_funcs</compoundname>
     <includes local="no">whd_network_types.h</includes>
       <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structwhd__buffer__funcs_1a08be981b01c563df3f34025e463a6a32" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a3b1eac8632117521e5ef7e0dd332106d" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
-        <definition>whd_result_t(* whd_host_buffer_get) (whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long wait)</definition>
-        <argsstring>)(whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long wait)</argsstring>
+        <definition>whd_result_t(* whd_host_buffer_get) (whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long timeout_ms)</definition>
+        <argsstring>)(whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long timeout_ms)</argsstring>
         <name>whd_host_buffer_get</name>
         <briefdescription>
 <para>Allocates a packet buffer. </para>
@@ -40,10 +40,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>wait</parametername>
+<parametername>timeout_ms</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Whether to wait for a packet buffer to be available</para>
+<para>Maximum period to block for available buffer</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="66" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="66" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="66" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" prot="public" static="no" mutable="no">
         <type>void(*</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="84" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="84" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="84" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" prot="public" static="no" mutable="no">
         <type>uint8_t *(*</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="98" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="98" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="98" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" prot="public" static="no" mutable="no">
         <type>uint16_t(*</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="113" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="113" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="113" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="126" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="126" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="126" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__buffer__funcs_1ab4c0aef4cb8722f8b22209592a84594a" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="148" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="148" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="148" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -219,14 +219,14 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" line="44" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_network_types.h" bodystart="43" bodyend="149"/>
+    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" line="44" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_network_types.h" bodystart="43" bodyend="149"/>
     <listofallmembers>
       <member refid="structwhd__buffer__funcs_1ab4c0aef4cb8722f8b22209592a84594a" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_add_remove_at_front</name></member>
       <member refid="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_get_current_piece_data_pointer</name></member>
       <member refid="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_get_current_piece_size</name></member>
       <member refid="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_release</name></member>
       <member refid="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_set_size</name></member>
-      <member refid="structwhd__buffer__funcs_1a08be981b01c563df3f34025e463a6a32" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_host_buffer_get</name></member>
+      <member refid="structwhd__buffer__funcs_1a3b1eac8632117521e5ef7e0dd332106d" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_host_buffer_get</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

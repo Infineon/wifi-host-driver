@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,6 @@ typedef enum chip_var
     SOCSRAM_WRAPPER_BASE_ADDRESS,
     SDIOD_CORE_BASE_ADDRESS,
     PMU_BASE_ADDRESS,
-    BUS_CREDIT_DIFF,
     CHIP_RAM_SIZE,
     ATCM_RAM_BASE_ADDRESS,
     SOCRAM_SRMEM_SIZE,
@@ -63,7 +62,6 @@ whd_result_t get_arm_core_base_address(uint16_t, uint32_t *);
 whd_result_t get_socsram_base_address(uint16_t, uint32_t *, whd_bool_t);
 whd_result_t get_sdiod_core_base_address(uint16_t, uint32_t *);
 whd_result_t get_pmu_base_address(uint16_t, uint32_t *);
-whd_result_t get_chip_max_bus_data_credit_diff(uint16_t, uint32_t *);
 whd_result_t get_chip_ram_size(uint16_t, uint32_t *);
 whd_result_t get_atcm_ram_base_address(uint16_t, uint32_t *);
 whd_result_t get_socsram_srmem_size(uint16_t, uint32_t *);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -159,6 +159,91 @@ whd_result_t whd_management_set_event_handler_locally(whd_interface_t ifp, const
     else
     {
         WPRINT_WHD_ERROR( ("Event handler callback function is NULL/not provided to register\n") );
+        return WHD_BADARG;
+    }
+
+    return WHD_SUCCESS;
+}
+
+/* Registers locally a handler to receive error callbacks.
+ * Does not notify Wi-Fi about event subscription change.
+ * Can be used to refresh local callbacks (e.g. after deep-sleep)
+ * if Wi-Fi is already notified about them.
+ *
+ * This function registers a callback handler to be notified when
+ * a particular event is received.
+ *
+ * @note : Currently there is a limit to the number of simultaneously
+ *         registered events
+ *
+ * @param whd_driver          Pointer to handle instance of driver
+ * @param error_nums          An error types that is to trigger the handler.
+ *                            See @ref whd_error_num_t for available events
+ * @param handler_func        A function pointer to the new handler callback,
+ *                            or NULL if callbacks are to be disabled for the given event type
+ * @param handler_user_data   A pointer value which will be passed to the event handler function
+ *                            at the time an event is triggered (NULL is allowed)
+ * @param[out] *error_index   entry where the error handler is registered in the list
+ *
+ * @return WHD result code
+ */
+whd_result_t whd_set_error_handler_locally(whd_driver_t whd_driver, const uint8_t *error_nums,
+                                           whd_error_handler_t handler_func,
+                                           void *handler_user_data, uint16_t *error_index)
+{
+    uint16_t entry = (uint16_t)0xFF;
+    uint16_t i;
+    whd_result_t res;
+    whd_error_info_t *error_info = &whd_driver->error_info;
+
+
+    /* Find an existing matching entry OR the next empty entry */
+    for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
+    {
+        uint8_t events = error_info->whd_event_list[i].events;
+        /* Find a matching event list OR the first empty event entry */
+        if (events & *error_nums)
+        {
+            /* Check if all the data already matches */
+            if (error_info->whd_event_list[i].handler != NULL)
+            {
+                handler_func = error_info->whd_event_list[i].handler;
+                handler_user_data = error_info->whd_event_list[i].handler_user_data;
+                res = cy_rtos_get_semaphore(&error_info->event_list_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE);
+                if (res != WHD_SUCCESS)
+                {
+                    return res;
+                }
+                handler_func(whd_driver, error_nums, NULL, handler_user_data);
+                CHECK_RETURN(cy_rtos_set_semaphore(&error_info->event_list_mutex, WHD_FALSE) );
+                return WHD_SUCCESS;
+            }
+        }
+        else if ( (entry == (uint16_t)0xFF) && (error_info->whd_event_list[i].event_set == WHD_FALSE) )
+        {
+            entry = i;
+        }
+    }
+    /* Check if handler function was provided */
+    if (handler_func != NULL)
+    {
+        /* Check if an empty entry was not found */
+        if (entry == (uint16_t)0xFF)
+        {
+            WPRINT_WHD_DEBUG( ("Out of space in error handlers table - try increasing WHD_EVENT_HANDLER_LIST_SIZE\n") );
+            return WHD_OUT_OF_EVENT_HANDLER_SPACE;
+        }
+        /* Add the new handler in at the free space */
+        error_info->whd_event_list[entry].events            = *error_nums;
+        error_info->whd_event_list[entry].handler           = handler_func;
+        error_info->whd_event_list[entry].handler_user_data = handler_user_data;
+        error_info->whd_event_list[entry].event_set         = WHD_TRUE;
+        /* send back the entry where the handler is added */
+        *error_index = entry;
+    }
+    else
+    {
+        WPRINT_WHD_ERROR( ("Error handler callback function is NULL/not provided to register\n") );
         return WHD_BADARG;
     }
 
@@ -442,6 +527,65 @@ set_event_handler_exit:
     return res;
 }
 
+/**
+ * Registers a handler to receive error callbacks.
+ * Subscribe locally and notify Wi-Fi about subscription.
+ *
+ * This function registers a callback handler to be notified when
+ * a particular event is received.
+ *
+ * @note : Currently there is a limit to the number of simultaneously
+ *         registered events
+ *
+ * @param ifp                 Pointer to handle instance of whd interface
+ * @param event_nums          An numbers of event type that is to trigger the handler.
+ *                            See @ref whd_error_num_t for available events
+ * @param handler_func        A function pointer to the new handler callback
+ * @param handler_user_data   A pointer value which will be passed to the event handler function
+ *                            at the time an event is triggered (NULL is allowed)
+ * @param[out] *error_index   entry where the error handler is registered in the list
+ *
+ * @return WHD result code
+ */
+whd_result_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_nums,
+                                        whd_error_handler_t handler_func,
+                                        void *handler_user_data, uint16_t *error_index)
+{
+    whd_result_t res;
+    whd_driver_t whd_driver;
+    whd_interface_t prim_ifp;
+    if (ifp == NULL)
+    {
+        return WHD_UNKNOWN_INTERFACE;
+    }
+
+    if (!error_nums || !error_index)
+    {
+        WPRINT_WHD_ERROR( ("Error list to be registered is NULL/Error index is NULL \n") );
+        return WHD_BADARG;
+    }
+
+    whd_driver = ifp->whd_driver;
+    prim_ifp = whd_get_primary_interface(whd_driver);
+    if (prim_ifp == NULL)
+    {
+        return WHD_UNKNOWN_INTERFACE;
+    }
+
+    /* Set event handler locally  */
+    res = whd_set_error_handler_locally(whd_driver, error_nums, handler_func, handler_user_data,
+                                        error_index);
+    if (res != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Error in setting event handler locally, %s failed at %d \n", __func__, __LINE__) );
+        return res;
+    }
+
+
+    return WHD_SUCCESS;
+
+}
+
 uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index)
 {
     whd_driver_t whd_driver;
@@ -470,5 +614,35 @@ uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_i
         return WHD_SUCCESS;
     }
     WPRINT_WHD_DEBUG( ("Invalid event index received to deregister the event handler \n") );
+    return WHD_BADARG;
+}
+
+uint32_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index)
+{
+    whd_driver_t whd_driver;
+    whd_error_info_t *error_info;
+
+    if (ifp == NULL)
+    {
+        return WHD_UNKNOWN_INTERFACE;
+    }
+
+    whd_driver = ifp->whd_driver;
+    error_info = &whd_driver->error_info;
+
+    if (error_index < WHD_EVENT_HANDLER_LIST_SIZE)
+    {
+        error_info->whd_event_list[error_index].events  = 0;
+        error_info->whd_event_list[error_index].handler = NULL;
+        error_info->whd_event_list[error_index].handler_user_data = NULL;
+        error_info->whd_event_list[error_index].event_set = WHD_FALSE;
+        return WHD_SUCCESS;
+    }
+    if (error_index == 0xFF)
+    {
+        WPRINT_WHD_INFO( ("Error handler not registered \n") );
+        return WHD_SUCCESS;
+    }
+    WPRINT_WHD_DEBUG( ("Invalid error index received to deregister the event handler \n") );
     return WHD_BADARG;
 }

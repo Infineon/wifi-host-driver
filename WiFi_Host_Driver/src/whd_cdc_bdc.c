@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -97,6 +97,7 @@ static uint8_t whd_map_dscp_to_priority(whd_driver_t whd_driver, uint8_t val)
 void whd_cdc_bdc_info_deinit(whd_driver_t whd_driver)
 {
     whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
+    whd_error_info_t *error_info = &whd_driver->error_info;
 
     /* Delete the sleep mutex */
     (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_sleep);
@@ -106,11 +107,15 @@ void whd_cdc_bdc_info_deinit(whd_driver_t whd_driver)
 
     /* Delete the event list management mutex */
     (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->event_list_mutex);
+
+    /* Delete the error list management mutex */
+    (void)cy_rtos_deinit_semaphore(&error_info->event_list_mutex);
 }
 
 whd_result_t whd_cdc_bdc_info_init(whd_driver_t whd_driver)
 {
     whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
+    whd_error_info_t *error_info = &whd_driver->error_info;
 
     /* Create the mutex protecting the packet send queue */
     if (cy_rtos_init_semaphore(&cdc_bdc_info->ioctl_mutex, 1, 0) != WHD_SUCCESS)
@@ -146,6 +151,21 @@ whd_result_t whd_cdc_bdc_info_init(whd_driver_t whd_driver)
     /* Initialise the list of event handler functions */
     memset(cdc_bdc_info->whd_event_list, 0, sizeof(cdc_bdc_info->whd_event_list) );
 
+    /* Create semaphore to protect event list management */
+    if (cy_rtos_init_semaphore(&error_info->event_list_mutex, 1, 0) != WHD_SUCCESS)
+    {
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    if (cy_rtos_set_semaphore(&error_info->event_list_mutex, WHD_FALSE) != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    /* Initialise the list of error handler functions */
+    memset(error_info->whd_event_list, 0, sizeof(error_info->whd_event_list) );
+
     return WHD_SUCCESS;
 }
 
@@ -177,6 +197,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     uint32_t data_length;
     uint32_t flags;
     uint32_t requested_ioctl_id;
+    uint32_t status;
     whd_result_t retval;
     control_header_t *send_packet;
     cdc_header_t *cdc_header;
@@ -265,9 +286,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
 
     cdc_header    = (cdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, cdc_bdc_info->ioctl_response);
     flags         = dtoh32(cdc_header->flags);
-
-    retval = (whd_result_t)WHD_RESULT_CREATE( (WLAN_ENUM_OFFSET - dtoh32(cdc_header->status) ) );
-
+    status        = dtoh32(cdc_header->status);
     /* Check if the caller wants the response */
     if (response_buffer_hnd != NULL)
     {
@@ -292,8 +311,10 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
             CHECK_RETURN(whd_buffer_release(whd_driver, *response_buffer_hnd, WHD_NETWORK_RX) );
             *response_buffer_hnd = NULL;
         }
-        whd_minor_assert("IOCTL failed\n", 0 != 0);
-        return retval;
+        if (status)
+            return WHD_RESULT_CREATE( (WLAN_ENUM_OFFSET - status) );
+        else
+            return WHD_IOCTL_FAIL;
     }
 
     return WHD_SUCCESS;

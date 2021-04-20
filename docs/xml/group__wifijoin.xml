@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="184" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" bodystart="184" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="184" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" bodystart="184" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="200" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="200" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="235" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="235" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gacf8632bb68cef4d831083a66bee7b8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="252" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="252" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gac767814ae445f735b51686db20c780be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -357,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="270" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="270" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -424,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="288" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="288" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -455,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_wifi_api.h" line="408" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="408" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

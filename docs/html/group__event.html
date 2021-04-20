@@ -87,25 +87,131 @@ $(document).ready(function(){initNavTree('group__event.html','');});
 <div class="header">
   <div class="summary">
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enumval-members">Enumerator</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">WHD Event handling API</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
 <p>Functions that allow user applications to receive event callbacks and set event handlers. </p>
+<p>Functions that allow user applications to receive error callbacks and set error handlers.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga9c74af353c83a8f77097acbc65362b07"><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga9c74af353c83a8f77097acbc65362b07">whd_event_handler_t</a>) (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const whd_event_header_t *event_header, const uint8_t *event_data, void *handler_user_data)</td></tr>
 <tr class="memdesc:ga9c74af353c83a8f77097acbc65362b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler prototype definition.  <a href="#ga9c74af353c83a8f77097acbc65362b07">More...</a><br /></td></tr>
 <tr class="separator:ga9c74af353c83a8f77097acbc65362b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad693f00ea3008fa9645582df236ad7e2"><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2">whd_error_handler_t</a>) (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_driver, const uint8_t *error_type, const uint8_t *event_data, void *handler_user_data)</td></tr>
+<tr class="memdesc:gad693f00ea3008fa9645582df236ad7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error handler prototype definition.  <a href="#gad693f00ea3008fa9645582df236ad7e2">More...</a><br /></td></tr>
+<tr class="separator:gad693f00ea3008fa9645582df236ad7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga4175c3ef9bb16601fabc605fadeaf8d8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga4175c3ef9bb16601fabc605fadeaf8d8">whd_wifi_set_event_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const uint32_t *event_type, <a class="el" href="group__event.html#ga9c74af353c83a8f77097acbc65362b07">whd_event_handler_t</a> handler_func, void *handler_user_data, uint16_t *event_index)</td></tr>
 <tr class="memdesc:ga4175c3ef9bb16601fabc605fadeaf8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a handler to receive event callbacks.  <a href="#ga4175c3ef9bb16601fabc605fadeaf8d8">More...</a><br /></td></tr>
 <tr class="separator:ga4175c3ef9bb16601fabc605fadeaf8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2072e91b840217584cfd60ad540b3146"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga2072e91b840217584cfd60ad540b3146">whd_wifi_set_error_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const uint8_t *error_nums, <a class="el" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2">whd_error_handler_t</a> handler_func, void *handler_user_data, uint16_t *error_index)</td></tr>
+<tr class="memdesc:ga2072e91b840217584cfd60ad540b3146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a handler to receive error callbacks.  <a href="#ga2072e91b840217584cfd60ad540b3146">More...</a><br /></td></tr>
+<tr class="separator:ga2072e91b840217584cfd60ad540b3146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae415f1f3fcbbfe506aa0e656bf8debb3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gae415f1f3fcbbfe506aa0e656bf8debb3">whd_wifi_deregister_event_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint16_t event_index)</td></tr>
+<tr class="memdesc:gae415f1f3fcbbfe506aa0e656bf8debb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete/Deregister the event entry where callback is registered.  <a href="#gae415f1f3fcbbfe506aa0e656bf8debb3">More...</a><br /></td></tr>
+<tr class="separator:gae415f1f3fcbbfe506aa0e656bf8debb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa7f28d32a8c06c7df471636de6f4dec6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaa7f28d32a8c06c7df471636de6f4dec6">whd_wifi_deregister_error_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint16_t error_index)</td></tr>
+<tr class="memdesc:gaa7f28d32a8c06c7df471636de6f4dec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete/Deregister the error entry where callback is registered.  <a href="#gaa7f28d32a8c06c7df471636de6f4dec6">More...</a><br /></td></tr>
+<tr class="separator:gaa7f28d32a8c06c7df471636de6f4dec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gac5d9ab8403fb9ca24facc32b821dd53b"><td class="memItemLeft" align="right" valign="top"><a id="gac5d9ab8403fb9ca24facc32b821dd53b"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gac5d9ab8403fb9ca24facc32b821dd53b">subtype</a></td></tr>
+<tr class="memdesc:gac5d9ab8403fb9ca24facc32b821dd53b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vendor specific..32769. <br /></td></tr>
+<tr class="separator:gac5d9ab8403fb9ca24facc32b821dd53b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1892eba2086d12ac2b09005aeb09ea3b"><td class="memItemLeft" align="right" valign="top"><a id="ga1892eba2086d12ac2b09005aeb09ea3b"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga1892eba2086d12ac2b09005aeb09ea3b">length</a></td></tr>
+<tr class="memdesc:ga1892eba2086d12ac2b09005aeb09ea3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of ethernet header. <br /></td></tr>
+<tr class="separator:ga1892eba2086d12ac2b09005aeb09ea3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab22abc2906422da61885ac6c8e6a1a59"><td class="memItemLeft" align="right" valign="top"><a id="gab22abc2906422da61885ac6c8e6a1a59"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gab22abc2906422da61885ac6c8e6a1a59">version</a></td></tr>
+<tr class="memdesc:gab22abc2906422da61885ac6c8e6a1a59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version is 0. <br /></td></tr>
+<tr class="separator:gab22abc2906422da61885ac6c8e6a1a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5d81eb4d4b4a5b8d3a89be061d06b64d"><td class="memItemLeft" align="right" valign="top"><a id="ga5d81eb4d4b4a5b8d3a89be061d06b64d"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga5d81eb4d4b4a5b8d3a89be061d06b64d">oui</a> [3]</td></tr>
+<tr class="memdesc:ga5d81eb4d4b4a5b8d3a89be061d06b64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Organizationally Unique Identifier. <br /></td></tr>
+<tr class="separator:ga5d81eb4d4b4a5b8d3a89be061d06b64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9ad9911fe2a5dc5789001a2b48d5c9d"><td class="memItemLeft" align="right" valign="top"><a id="gae9ad9911fe2a5dc5789001a2b48d5c9d"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gae9ad9911fe2a5dc5789001a2b48d5c9d">usr_subtype</a></td></tr>
+<tr class="memdesc:gae9ad9911fe2a5dc5789001a2b48d5c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">User specific data. <br /></td></tr>
+<tr class="separator:gae9ad9911fe2a5dc5789001a2b48d5c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaecece25a401285d039a6f30991dad78e"><td class="memItemLeft" align="right" valign="top"><a id="gaecece25a401285d039a6f30991dad78e"></a>
+<a class="el" href="structwhd__mac__t.html">whd_mac_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaecece25a401285d039a6f30991dad78e">destination_address</a></td></tr>
+<tr class="memdesc:gaecece25a401285d039a6f30991dad78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ethernet destination address. <br /></td></tr>
+<tr class="separator:gaecece25a401285d039a6f30991dad78e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaceb7473ccdf9d41c5b6aee7a0264972a"><td class="memItemLeft" align="right" valign="top"><a id="gaceb7473ccdf9d41c5b6aee7a0264972a"></a>
+<a class="el" href="structwhd__mac__t.html">whd_mac_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaceb7473ccdf9d41c5b6aee7a0264972a">source_address</a></td></tr>
+<tr class="memdesc:gaceb7473ccdf9d41c5b6aee7a0264972a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ethernet source address. <br /></td></tr>
+<tr class="separator:gaceb7473ccdf9d41c5b6aee7a0264972a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa9296c58dc24c63c4ee927db394a97d7"><td class="memItemLeft" align="right" valign="top"><a id="gaa9296c58dc24c63c4ee927db394a97d7"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaa9296c58dc24c63c4ee927db394a97d7">ethertype</a></td></tr>
+<tr class="memdesc:gaa9296c58dc24c63c4ee927db394a97d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ethertype for identifying event packets. <br /></td></tr>
+<tr class="separator:gaa9296c58dc24c63c4ee927db394a97d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab6d7b6f8c2ceaba7acda80aaf05f4899"><td class="memItemLeft" align="right" valign="top"><a id="gab6d7b6f8c2ceaba7acda80aaf05f4899"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gab6d7b6f8c2ceaba7acda80aaf05f4899">version</a></td></tr>
+<tr class="memdesc:gab6d7b6f8c2ceaba7acda80aaf05f4899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version. <br /></td></tr>
+<tr class="separator:gab6d7b6f8c2ceaba7acda80aaf05f4899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e87af3c18a2fd36c61faf89949bdc3f"><td class="memItemLeft" align="right" valign="top"><a id="ga1e87af3c18a2fd36c61faf89949bdc3f"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga1e87af3c18a2fd36c61faf89949bdc3f">flags</a></td></tr>
+<tr class="memdesc:ga1e87af3c18a2fd36c61faf89949bdc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">see flags below <br /></td></tr>
+<tr class="separator:ga1e87af3c18a2fd36c61faf89949bdc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga45def65890de0da17bc0d6e2ca2b3a9f"><td class="memItemLeft" align="right" valign="top"><a id="ga45def65890de0da17bc0d6e2ca2b3a9f"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga45def65890de0da17bc0d6e2ca2b3a9f">event_type</a></td></tr>
+<tr class="memdesc:ga45def65890de0da17bc0d6e2ca2b3a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event type indicating a response from firmware for IOCTLs/IOVARs sent. <br /></td></tr>
+<tr class="separator:ga45def65890de0da17bc0d6e2ca2b3a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gade20423e91627f07e610924cb0081623"><td class="memItemLeft" align="right" valign="top"><a id="gade20423e91627f07e610924cb0081623"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gade20423e91627f07e610924cb0081623">status</a></td></tr>
+<tr class="memdesc:gade20423e91627f07e610924cb0081623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status code corresponding to any event type. <br /></td></tr>
+<tr class="separator:gade20423e91627f07e610924cb0081623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ac0b16c31813f87b98e97cc5bacd64a"><td class="memItemLeft" align="right" valign="top"><a id="ga5ac0b16c31813f87b98e97cc5bacd64a"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga5ac0b16c31813f87b98e97cc5bacd64a">reason</a></td></tr>
+<tr class="memdesc:ga5ac0b16c31813f87b98e97cc5bacd64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reason code associated with the event occurred. <br /></td></tr>
+<tr class="separator:ga5ac0b16c31813f87b98e97cc5bacd64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d9c484262d9d2e9fceaa54a2e58b3c0"><td class="memItemLeft" align="right" valign="top"><a id="ga6d9c484262d9d2e9fceaa54a2e58b3c0"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga6d9c484262d9d2e9fceaa54a2e58b3c0">auth_type</a></td></tr>
+<tr class="memdesc:ga6d9c484262d9d2e9fceaa54a2e58b3c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">WLC_E_AUTH: 802.11 AUTH request. <br /></td></tr>
+<tr class="separator:ga6d9c484262d9d2e9fceaa54a2e58b3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga20ef2f8b0dc25d28c0c76be72919a60a"><td class="memItemLeft" align="right" valign="top"><a id="ga20ef2f8b0dc25d28c0c76be72919a60a"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga20ef2f8b0dc25d28c0c76be72919a60a">datalen</a></td></tr>
+<tr class="memdesc:ga20ef2f8b0dc25d28c0c76be72919a60a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of data in event message. <br /></td></tr>
+<tr class="separator:ga20ef2f8b0dc25d28c0c76be72919a60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c939001af591772db111e0be822b469"><td class="memItemLeft" align="right" valign="top"><a id="ga7c939001af591772db111e0be822b469"></a>
+<a class="el" href="structwhd__mac__t.html">whd_mac_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga7c939001af591772db111e0be822b469">addr</a></td></tr>
+<tr class="memdesc:ga7c939001af591772db111e0be822b469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Station address (if applicable) <br /></td></tr>
+<tr class="separator:ga7c939001af591772db111e0be822b469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6416f2a9886b328d85974b42f5a34ce5"><td class="memItemLeft" align="right" valign="top"><a id="ga6416f2a9886b328d85974b42f5a34ce5"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga6416f2a9886b328d85974b42f5a34ce5">ifname</a> [<a class="el" href="whd__events_8h.html#ac94cc32da29a68641af2b000d883cd6a">WHD_MSG_IFNAME_MAX</a>]</td></tr>
+<tr class="memdesc:ga6416f2a9886b328d85974b42f5a34ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of the incoming packet interface <br /></td></tr>
+<tr class="separator:ga6416f2a9886b328d85974b42f5a34ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaee54e454588cb953b7f349e589c2d09f"><td class="memItemLeft" align="right" valign="top"><a id="gaee54e454588cb953b7f349e589c2d09f"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaee54e454588cb953b7f349e589c2d09f">ifidx</a></td></tr>
+<tr class="memdesc:gaee54e454588cb953b7f349e589c2d09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">destination OS i/f index <br /></td></tr>
+<tr class="separator:gaee54e454588cb953b7f349e589c2d09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2c53e1708eb89382779539506cb4359"><td class="memItemLeft" align="right" valign="top"><a id="gaa2c53e1708eb89382779539506cb4359"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaa2c53e1708eb89382779539506cb4359">bsscfgidx</a></td></tr>
+<tr class="memdesc:gaa2c53e1708eb89382779539506cb4359"><td class="mdescLeft">&#160;</td><td class="mdescRight">source bsscfg index <br /></td></tr>
+<tr class="separator:gaa2c53e1708eb89382779539506cb4359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae36ac55a3c73f9f7dfa065165130b39e"><td class="memItemLeft" align="right" valign="top"><a id="gae36ac55a3c73f9f7dfa065165130b39e"></a>
+<a class="el" href="whd__events_8h.html#a31915a18541e6182e926247a3b8ed3dc">whd_event_ether_header_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gae36ac55a3c73f9f7dfa065165130b39e">eth</a></td></tr>
+<tr class="memdesc:gae36ac55a3c73f9f7dfa065165130b39e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable to store ethernet destination, source and ethertype in event packets. <br /></td></tr>
+<tr class="separator:gae36ac55a3c73f9f7dfa065165130b39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga304eef8ceefeab88f71947f57df3d61b"><td class="memItemLeft" align="right" valign="top"><a id="ga304eef8ceefeab88f71947f57df3d61b"></a>
+<a class="el" href="whd__events_8h.html#a8e7e9d5ab8841a160aa9e2420c636864">whd_event_eth_hdr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga304eef8ceefeab88f71947f57df3d61b">eth_evt_hdr</a></td></tr>
+<tr class="memdesc:ga304eef8ceefeab88f71947f57df3d61b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable to store ethernet header fields in event message. <br /></td></tr>
+<tr class="separator:ga304eef8ceefeab88f71947f57df3d61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaca5889552f0d7a52f681e7b96d53720"><td class="memItemLeft" align="right" valign="top"><a id="gaaca5889552f0d7a52f681e7b96d53720"></a>
+whd_event_header_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaaca5889552f0d7a52f681e7b96d53720">whd_event</a></td></tr>
+<tr class="memdesc:gaaca5889552f0d7a52f681e7b96d53720"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable to store rest of the event packet fields after ethernet header. <br /></td></tr>
+<tr class="separator:gaaca5889552f0d7a52f681e7b96d53720"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga9c74af353c83a8f77097acbc65362b07"></a>
@@ -125,6 +231,31 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
     <tr><td class="paramname">event_header</td><td>whd event header </td></tr>
+    <tr><td class="paramname">event_data</td><td>event data </td></tr>
+    <tr><td class="paramname">handler_user_data</td><td>semaphore data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gad693f00ea3008fa9645582df236ad7e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad693f00ea3008fa9645582df236ad7e2">&#9670;&nbsp;</a></span>whd_error_handler_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void*(* whd_error_handler_t) (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_driver, const uint8_t *error_type, const uint8_t *event_data, void *handler_user_data)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Error handler prototype definition. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">whd_driver</td><td>Pointer to handle instance of whd driver </td></tr>
+    <tr><td class="paramname">error_type</td><td>whd error type </td></tr>
     <tr><td class="paramname">event_data</td><td>event data </td></tr>
     <tr><td class="paramname">handler_user_data</td><td>semaphore data </td></tr>
   </table>
@@ -188,6 +319,143 @@ Functions</h2></td></tr>
     <tr><td class="paramname">handler_func</td><td>A function pointer to the handler callback </td></tr>
     <tr><td class="paramname">handler_user_data</td><td>A pointer value which will be passed to the event handler function at the time an event is triggered (NULL is allowed) </td></tr>
     <tr><td class="paramname">event_index</td><td>Entry where the event handler is registered in the list</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga2072e91b840217584cfd60ad540b3146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2072e91b840217584cfd60ad540b3146">&#9670;&nbsp;</a></span>whd_wifi_set_error_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_set_error_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>error_nums</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2">whd_error_handler_t</a>&#160;</td>
+          <td class="paramname"><em>handler_func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>handler_user_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>error_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Registers a handler to receive error callbacks. </p>
+<p>This function registers a callback handler to be notified when a particular event is received.</p>
+<dl class="section note"><dt>Note</dt><dd>Currently each event may only be registered to one handler and there is a limit to the number of simultaneously registered events. Maximum of 5 event handlers can registered simultaneously, this also includes the internal event handler registration which happens during scan, join and starting an AP.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">error_nums</td><td>Pointer to the event list as WLC_ERR_BUS and WLC_ERR_FW </td></tr>
+    <tr><td class="paramname">handler_func</td><td>A function pointer to the handler callback </td></tr>
+    <tr><td class="paramname">handler_user_data</td><td>A pointer value which will be passed to the event handler function at the time an event is triggered (NULL is allowed) </td></tr>
+    <tr><td class="paramname">error_index</td><td>Entry where the error handler is registered in the list</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="gae415f1f3fcbbfe506aa0e656bf8debb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae415f1f3fcbbfe506aa0e656bf8debb3">&#9670;&nbsp;</a></span>whd_wifi_deregister_event_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_deregister_event_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>event_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete/Deregister the event entry where callback is registered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">event_index</td><td>Event index obtained during registration by whd_wifi_set_event_handler</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="gaa7f28d32a8c06c7df471636de6f4dec6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa7f28d32a8c06c7df471636de6f4dec6">&#9670;&nbsp;</a></span>whd_wifi_deregister_error_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_deregister_error_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>error_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete/Deregister the error entry where callback is registered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">error_index</td><td>Error index obtained during registration by whd_wifi_set_error_handler</td></tr>
   </table>
   </dd>
 </dl>

@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.93.0
+# Wi-Fi Host Driver (WHD)  v1.93.1
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,14 +11,14 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.92.1
+## Changes since v1.93.0
 ### New Features
-* Add nvram for CYBSYSKIT-DEV-01
-* Print FW log buffer and IOCTL logs when getting trap indicator
+* Supports error handling callback for BUS error or FW halt.
+* Support different maximum credit numbers for different firmware
 
 ### Defect Fixes
-* Fix the enterprise scanresults parsing and printing
-* Fix Kitprog3 reset failed after downloading image
+* Fix unknown security type in scan result
+* Fix test_wifi_set_ioctl_value failure
 
 ### Known Issues
 

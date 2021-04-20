@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -171,6 +171,16 @@ typedef enum
     WLC_E_TKO = 151,                /* TCP Keep Alive Offload Event */
     WLC_E_LAST = 152,               /* highest val + 1 for range checking */
 } whd_event_num_t;
+
+/**
+ * Enumerated list of error types
+ */
+typedef enum
+{
+    WLC_ERR_NONE = 0x00,
+    WLC_ERR_BUS  = 0x01,     /** indicates BUS got wrong */
+    WLC_ERR_FW   = 0x02,     /** FW halt or crash */
+}  whd_error_num_t;
 
 #define WLC_SUP_STATUS_OFFSET      (256)
 #define WLC_DOT11_SC_STATUS_OFFSET (512)
@@ -371,7 +381,16 @@ typedef void *(*whd_event_handler_t)(whd_interface_t ifp, const whd_event_header
                                      const uint8_t *event_data, void *handler_user_data);
 /** @endcond */
 
-
+/**
+ * Error handler prototype definition
+ *
+ * @param[out] uint8_t           : error_type
+ * @param[out] uint8_t*           : event data
+ * @param[out] handler_user_data  : semaphore data
+ */
+typedef void *(*whd_error_handler_t)(whd_driver_t whd_driver, const uint8_t *error_type,
+                                     const uint8_t *event_data, void *handler_user_data);
+/** @endcond */
 extern whd_result_t whd_management_set_event_handler_locally(whd_interface_t ifp,
                                                              const whd_event_num_t *event_nums,
                                                              whd_event_handler_t handler_func,
@@ -386,6 +405,16 @@ extern uint32_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *
                                            void *handler_user_data, uint16_t *event_index);
 
 extern uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index);
+
+extern whd_result_t whd_set_error_handler_locally(whd_driver_t whd_driver, const uint8_t *error_nums,
+                                                  whd_error_handler_t handler_func,
+                                                  void *handler_user_data, uint16_t *error_index);
+
+extern whd_result_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_type,
+                                               whd_error_handler_t handler_func,
+                                               void *handler_user_data, uint16_t *error_index);
+
+extern uint32_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index);
 
 /** @cond */
 

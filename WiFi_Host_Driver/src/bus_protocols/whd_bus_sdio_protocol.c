@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -540,6 +540,7 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
 {
     uint32_t int_status = 0;
     uint32_t hmb_data = 0;
+    uint8_t error_type = 0;
 
     /* Ensure the wlan backplane bus is up */
     CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
@@ -550,7 +551,7 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
     {
         WPRINT_WHD_ERROR( ("%s: Error reading interrupt status\n", __FUNCTION__) );
         int_status = 0;
-        goto exit;
+        return WHD_BUS_FAIL;
     }
 
     if ( (I_HMB_HOST_INT & int_status) != 0 )
@@ -567,6 +568,8 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
         {
             WPRINT_WHD_ERROR( ("%s: mailbox indicates firmware halted\n", __FUNCTION__) );
             whd_wifi_print_whd_log(whd_driver);
+            error_type = WLC_ERR_FW;
+            whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
     }
 

@@ -282,28 +282,31 @@ typedef struct <a class="el" href="structwhd__event.html">whd_event</a>&#160;</t
 <tr class="memitem:ga9c74af353c83a8f77097acbc65362b07"><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga9c74af353c83a8f77097acbc65362b07">whd_event_handler_t</a>) (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const whd_event_header_t *event_header, const uint8_t *event_data, void *handler_user_data)</td></tr>
 <tr class="memdesc:ga9c74af353c83a8f77097acbc65362b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler prototype definition.  <a href="group__event.html#ga9c74af353c83a8f77097acbc65362b07">More...</a><br /></td></tr>
 <tr class="separator:ga9c74af353c83a8f77097acbc65362b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad693f00ea3008fa9645582df236ad7e2"><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2">whd_error_handler_t</a>) (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_driver, const uint8_t *error_type, const uint8_t *event_data, void *handler_user_data)</td></tr>
+<tr class="memdesc:gad693f00ea3008fa9645582df236ad7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error handler prototype definition.  <a href="group__event.html#gad693f00ea3008fa9645582df236ad7e2">More...</a><br /></td></tr>
+<tr class="separator:gad693f00ea3008fa9645582df236ad7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:aba9543ff6a1542d81c7adc66bb339c4c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4c">sup_auth_status</a> { <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680">WLC_SUP_DISCONNECTED</a> = 0 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147">WLC_SUP_CONNECTING</a> = 1 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce">WLC_SUP_IDREQUIRED</a> = 2 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce">WLC_SUP_AUTHENTICATING</a> = 3 + WLC_SUP_STATUS_OFFSET,
+&#160;&#160;<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680">WLC_SUP_DISCONNECTED</a> = 0 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147">WLC_SUP_CONNECTING</a> = 1 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce">WLC_SUP_IDREQUIRED</a> = 2 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce">WLC_SUP_AUTHENTICATING</a> = 3 + WLC_SUP_STATUS_OFFSET,
 <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e">WLC_SUP_AUTHENTICATED</a> = 4 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938">WLC_SUP_KEYXCHANGE</a> = 5 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a">WLC_SUP_KEYED</a> = 6 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240">WLC_SUP_TIMEOUT</a> = 7 + WLC_SUP_STATUS_OFFSET,
+&#160;&#160;<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e">WLC_SUP_AUTHENTICATED</a> = 4 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938">WLC_SUP_KEYXCHANGE</a> = 5 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a">WLC_SUP_KEYED</a> = 6 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240">WLC_SUP_TIMEOUT</a> = 7 + WLC_SUP_STATUS_OFFSET,
 <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df">WLC_SUP_LAST_BASIC_STATE</a> = 8 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe">WLC_SUP_KEYXCHANGE_WAIT_M1</a> = WLC_SUP_AUTHENTICATED,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623">WLC_SUP_KEYXCHANGE_PREP_M2</a> = WLC_SUP_KEYXCHANGE,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6">WLC_SUP_KEYXCHANGE_WAIT_M3</a> = WLC_SUP_LAST_BASIC_STATE,
+&#160;&#160;<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df">WLC_SUP_LAST_BASIC_STATE</a> = 8 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe">WLC_SUP_KEYXCHANGE_WAIT_M1</a> = WLC_SUP_AUTHENTICATED,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623">WLC_SUP_KEYXCHANGE_PREP_M2</a> = WLC_SUP_KEYXCHANGE,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6">WLC_SUP_KEYXCHANGE_WAIT_M3</a> = WLC_SUP_LAST_BASIC_STATE,
 <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772">WLC_SUP_KEYXCHANGE_PREP_M4</a> = 9 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a">WLC_SUP_KEYXCHANGE_WAIT_G1</a> = 10 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303">WLC_SUP_KEYXCHANGE_PREP_G2</a> = 11 + WLC_SUP_STATUS_OFFSET
+&#160;&#160;<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772">WLC_SUP_KEYXCHANGE_PREP_M4</a> = 9 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a">WLC_SUP_KEYXCHANGE_WAIT_G1</a> = 10 + WLC_SUP_STATUS_OFFSET,
+<a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303">WLC_SUP_KEYXCHANGE_PREP_G2</a> = 11 + WLC_SUP_STATUS_OFFSET
 <br />
  }</td></tr>
 <tr class="memdesc:aba9543ff6a1542d81c7adc66bb339c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status code for event WLC_E_PSK_SUP.  <a href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4c">More...</a><br /></td></tr>
@@ -314,9 +317,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ga4175c3ef9bb16601fabc605fadeaf8d8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga4175c3ef9bb16601fabc605fadeaf8d8">whd_wifi_set_event_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const uint32_t *event_type, <a class="el" href="group__event.html#ga9c74af353c83a8f77097acbc65362b07">whd_event_handler_t</a> handler_func, void *handler_user_data, uint16_t *event_index)</td></tr>
 <tr class="memdesc:ga4175c3ef9bb16601fabc605fadeaf8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a handler to receive event callbacks.  <a href="group__event.html#ga4175c3ef9bb16601fabc605fadeaf8d8">More...</a><br /></td></tr>
 <tr class="separator:ga4175c3ef9bb16601fabc605fadeaf8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae415f1f3fcbbfe506aa0e656bf8debb3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__events_8h.html#ae415f1f3fcbbfe506aa0e656bf8debb3">whd_wifi_deregister_event_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint16_t event_index)</td></tr>
-<tr class="memdesc:ae415f1f3fcbbfe506aa0e656bf8debb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete/Deregister the event entry where callback is registered.  <a href="#ae415f1f3fcbbfe506aa0e656bf8debb3">More...</a><br /></td></tr>
-<tr class="separator:ae415f1f3fcbbfe506aa0e656bf8debb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2072e91b840217584cfd60ad540b3146"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#ga2072e91b840217584cfd60ad540b3146">whd_wifi_set_error_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const uint8_t *error_nums, <a class="el" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2">whd_error_handler_t</a> handler_func, void *handler_user_data, uint16_t *error_index)</td></tr>
+<tr class="memdesc:ga2072e91b840217584cfd60ad540b3146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a handler to receive error callbacks.  <a href="group__event.html#ga2072e91b840217584cfd60ad540b3146">More...</a><br /></td></tr>
+<tr class="separator:ga2072e91b840217584cfd60ad540b3146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae415f1f3fcbbfe506aa0e656bf8debb3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gae415f1f3fcbbfe506aa0e656bf8debb3">whd_wifi_deregister_event_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint16_t event_index)</td></tr>
+<tr class="memdesc:gae415f1f3fcbbfe506aa0e656bf8debb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete/Deregister the event entry where callback is registered.  <a href="group__event.html#gae415f1f3fcbbfe506aa0e656bf8debb3">More...</a><br /></td></tr>
+<tr class="separator:gae415f1f3fcbbfe506aa0e656bf8debb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa7f28d32a8c06c7df471636de6f4dec6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__event.html#gaa7f28d32a8c06c7df471636de6f4dec6">whd_wifi_deregister_error_handler</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint16_t error_index)</td></tr>
+<tr class="memdesc:gaa7f28d32a8c06c7df471636de6f4dec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete/Deregister the error entry where callback is registered.  <a href="group__event.html#gaa7f28d32a8c06c7df471636de6f4dec6">More...</a><br /></td></tr>
+<tr class="separator:gaa7f28d32a8c06c7df471636de6f4dec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ae370e84bd9ed3b3cde25919287673298"></a>
@@ -440,76 +449,37 @@ Functions</h2></td></tr>
 </li>
 </ul>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680"></a>WLC_SUP_DISCONNECTED&#160;</td><td class="fielddoc"><p>Disconnected. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680"></a>WLC_SUP_DISCONNECTED&#160;</td><td class="fielddoc"><p>Disconnected. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147"></a>WLC_SUP_CONNECTING&#160;</td><td class="fielddoc"><p>Connecting. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147"></a>WLC_SUP_CONNECTING&#160;</td><td class="fielddoc"><p>Connecting. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce"></a>WLC_SUP_IDREQUIRED&#160;</td><td class="fielddoc"><p>ID Required. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce"></a>WLC_SUP_IDREQUIRED&#160;</td><td class="fielddoc"><p>ID Required. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce"></a>WLC_SUP_AUTHENTICATING&#160;</td><td class="fielddoc"><p>Authenticating. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce"></a>WLC_SUP_AUTHENTICATING&#160;</td><td class="fielddoc"><p>Authenticating. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e"></a>WLC_SUP_AUTHENTICATED&#160;</td><td class="fielddoc"><p>Authenticated. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e"></a>WLC_SUP_AUTHENTICATED&#160;</td><td class="fielddoc"><p>Authenticated. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938"></a>WLC_SUP_KEYXCHANGE&#160;</td><td class="fielddoc"><p>Key Exchange. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938"></a>WLC_SUP_KEYXCHANGE&#160;</td><td class="fielddoc"><p>Key Exchange. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a"></a>WLC_SUP_KEYED&#160;</td><td class="fielddoc"><p>Key Exchanged. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a"></a>WLC_SUP_KEYED&#160;</td><td class="fielddoc"><p>Key Exchanged. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240"></a>WLC_SUP_TIMEOUT&#160;</td><td class="fielddoc"><p>Timeout. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240"></a>WLC_SUP_TIMEOUT&#160;</td><td class="fielddoc"><p>Timeout. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df"></a>WLC_SUP_LAST_BASIC_STATE&#160;</td><td class="fielddoc"><p>Last Basic State. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df"></a>WLC_SUP_LAST_BASIC_STATE&#160;</td><td class="fielddoc"><p>Last Basic State. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe"></a>WLC_SUP_KEYXCHANGE_WAIT_M1&#160;</td><td class="fielddoc"><p>Waiting to receive handshake msg M1. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe"></a>WLC_SUP_KEYXCHANGE_WAIT_M1&#160;</td><td class="fielddoc"><p>Waiting to receive handshake msg M1. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623"></a>WLC_SUP_KEYXCHANGE_PREP_M2&#160;</td><td class="fielddoc"><p>Preparing to send handshake msg M2. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623"></a>WLC_SUP_KEYXCHANGE_PREP_M2&#160;</td><td class="fielddoc"><p>Preparing to send handshake msg M2. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6"></a>WLC_SUP_KEYXCHANGE_WAIT_M3&#160;</td><td class="fielddoc"><p>Waiting to receive handshake msg M3. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6"></a>WLC_SUP_KEYXCHANGE_WAIT_M3&#160;</td><td class="fielddoc"><p>Waiting to receive handshake msg M3. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772"></a>WLC_SUP_KEYXCHANGE_PREP_M4&#160;</td><td class="fielddoc"><p>Preparing to send handshake msg M4. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772"></a>WLC_SUP_KEYXCHANGE_PREP_M4&#160;</td><td class="fielddoc"><p>Preparing to send handshake msg M4. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a"></a>WLC_SUP_KEYXCHANGE_WAIT_G1&#160;</td><td class="fielddoc"><p>Waiting to receive handshake msg G1. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a"></a>WLC_SUP_KEYXCHANGE_WAIT_G1&#160;</td><td class="fielddoc"><p>Waiting to receive handshake msg G1. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303"></a>WLC_SUP_KEYXCHANGE_PREP_G2&#160;</td><td class="fielddoc"><p>Preparing to send handshake msg G2. </p>
+<tr><td class="fieldname"><a id="gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303"></a>WLC_SUP_KEYXCHANGE_PREP_G2&#160;</td><td class="fielddoc"><p>Preparing to send handshake msg G2. </p>
 </td></tr>
 </table>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ae415f1f3fcbbfe506aa0e656bf8debb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae415f1f3fcbbfe506aa0e656bf8debb3">&#9670;&nbsp;</a></span>whd_wifi_deregister_event_handler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t whd_wifi_deregister_event_handler </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
-          <td class="paramname"><em>ifp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>event_index</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete/Deregister the event entry where callback is registered. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
-    <tr><td class="paramname">event_index</td><td>Event index obtained during registration by whd_wifi_set_event_handler</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
 
 </div>
 </div>

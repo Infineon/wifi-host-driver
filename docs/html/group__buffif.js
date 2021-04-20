@@ -1,7 +1,7 @@
 var group__buffif =
 [
     [ "whd_buffer_funcs", "structwhd__buffer__funcs.html", [
-      [ "whd_host_buffer_get", "structwhd__buffer__funcs.html#a08be981b01c563df3f34025e463a6a32", null ],
+      [ "whd_host_buffer_get", "structwhd__buffer__funcs.html#a3b1eac8632117521e5ef7e0dd332106d", null ],
       [ "whd_buffer_release", "structwhd__buffer__funcs.html#a25e0a4f8235603094896917b3421baac", null ],
       [ "whd_buffer_get_current_piece_data_pointer", "structwhd__buffer__funcs.html#a5c2483392b61c9f4619e5fc83ec48601", null ],
       [ "whd_buffer_get_current_piece_size", "structwhd__buffer__funcs.html#a720960b687167d7ab440ee432e048f9d", null ],

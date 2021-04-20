@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -118,6 +118,28 @@ typedef struct whd_cdc_info
     cy_semaphore_t ioctl_sleep;
 
 } whd_cdc_bdc_info_t;
+/** Error list element structure
+ *
+ * events : set event of error type
+ * handler: A pointer to the whd_error_handler_t function that will receive the event
+ * handler_user_data : User provided data that will be passed to the handler when a matching event occurs
+ */
+typedef struct
+{
+    whd_error_handler_t handler;
+    void *handler_user_data;
+    whd_bool_t event_set;
+    uint8_t events;
+} error_list_elem_t;
+
+/** @endcond */
+
+typedef struct whd_error_info
+{
+    /* Event list variables */
+    error_list_elem_t whd_event_list[WHD_EVENT_HANDLER_LIST_SIZE];
+    cy_semaphore_t event_list_mutex;
+} whd_error_info_t;
 
 /******************************************************
 *               Function Declarations

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -86,6 +86,7 @@ struct whd_driver
 
     whd_thread_info_t thread_info;
     whd_cdc_bdc_info_t cdc_bdc_info;
+    whd_error_info_t error_info;
     whd_sdpcm_info_t sdpcm_info;
     whd_internal_info_t internal_info;
     whd_ap_int_info_t ap_info;

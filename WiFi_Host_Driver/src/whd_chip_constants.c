@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,9 +58,6 @@ uint32_t get_whd_var(whd_driver_t whd_driver, chip_var_t var)
             break;
         case PMU_BASE_ADDRESS:
             CHECK_RETURN(get_pmu_base_address(wlan_chip_id, &val) );
-            break;
-        case BUS_CREDIT_DIFF:
-            CHECK_RETURN(get_chip_max_bus_data_credit_diff(wlan_chip_id, &val) );
             break;
         case CHIP_RAM_SIZE:
             CHECK_RETURN(get_chip_ram_size(wlan_chip_id, &val) );
@@ -182,24 +179,6 @@ whd_result_t get_pmu_base_address(uint16_t wlan_chip_id, uint32_t *addr)
             break;
         default:
             return WHD_BADARG;
-    }
-    return WHD_SUCCESS;
-}
-
-whd_result_t get_chip_max_bus_data_credit_diff(uint16_t wlan_chip_id, uint32_t *credit_diff)
-{
-    *credit_diff = 0;
-    if (wlan_chip_id == 43362)
-    {
-        *credit_diff = 7;
-    }
-    else if (wlan_chip_id == 0x4373)
-    {
-        *credit_diff = 50;
-    }
-    else
-    {
-        *credit_diff = 20;
     }
     return WHD_SUCCESS;
 }

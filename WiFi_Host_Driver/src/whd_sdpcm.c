@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -244,11 +244,8 @@ void whd_sdpcm_bus_vars_init(whd_driver_t whd_driver)
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
 
     /* Bus data credit variables */
-    sdpcm_info->credit_diff                     = 0;
-    sdpcm_info->largest_credit_diff             = 0;
-
-    sdpcm_info->packet_transmit_sequence_number = 0;
-    sdpcm_info->last_bus_data_credit            = (uint8_t)1;
+    sdpcm_info->tx_seq = 0;
+    sdpcm_info->tx_max = (uint8_t)1;
 }
 
 /** Initialises the SDPCM protocol handler
@@ -279,22 +276,18 @@ void whd_sdpcm_update_credit(whd_driver_t whd_driver, uint8_t *data)
 {
     sdpcm_sw_header_t *header = (sdpcm_sw_header_t *)(data + 4);
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
+    uint8_t tx_seq_max;
 
     if ( (header->channel_and_flags & 0x0f) < (uint8_t)3 )
     {
-        sdpcm_info->credit_diff = (uint8_t)(header->bus_data_credit - sdpcm_info->last_bus_data_credit);
-        WPRINT_WHD_DATA_LOG( ("credit update =%d\n ", header->bus_data_credit) );
-        if (sdpcm_info->credit_diff <= GET_C_VAR(whd_driver, BUS_CREDIT_DIFF) )
+        tx_seq_max = header->bus_data_credit;
+        WPRINT_WHD_DATA_LOG( ("credit update to %d\n ", tx_seq_max) );
+        if (tx_seq_max - sdpcm_info->tx_seq > 0x40)
         {
-            sdpcm_info->last_bus_data_credit = header->bus_data_credit;
+            WPRINT_WHD_ERROR( ("update credit error\n") );
+            tx_seq_max = sdpcm_info->tx_seq + 2;
         }
-        else
-        {
-            if (sdpcm_info->credit_diff > sdpcm_info->largest_credit_diff)
-            {
-                sdpcm_info->largest_credit_diff = sdpcm_info->credit_diff;
-            }
-        }
+        sdpcm_info->tx_max = tx_seq_max;
     }
 
     whd_bus_set_flow_control(whd_driver, header->wireless_flow_control);
@@ -470,7 +463,8 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
         }
 
         /* Check if we have enough bus data credits spare */
-        if (sdpcm_info->packet_transmit_sequence_number == sdpcm_info->last_bus_data_credit)
+        if ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) == 0 ) ||
+             ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) & 0x80 ) != 0 ) )
         {
             WHD_STATS_INCREMENT_VARIABLE(whd_driver, no_credit);
             return WHD_NO_CREDITS;
@@ -499,9 +493,9 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
         /* Set the sequence number */
         packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
         memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
-        sdpcm_header.sw_header.sequence = sdpcm_info->packet_transmit_sequence_number;
+        sdpcm_header.sw_header.sequence = sdpcm_info->tx_seq;
         memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
-        sdpcm_info->packet_transmit_sequence_number++;
+        sdpcm_info->tx_seq++;
 
         return WHD_SUCCESS;
     }
@@ -517,8 +511,13 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
  */
 uint8_t whd_sdpcm_get_available_credits(whd_driver_t whd_driver)
 {
-    return (uint8_t)(whd_driver->sdpcm_info.last_bus_data_credit -
-                     whd_driver->sdpcm_info.packet_transmit_sequence_number);
+    uint8_t tx_max = whd_driver->sdpcm_info.tx_max;
+    uint8_t tx_seq = whd_driver->sdpcm_info.tx_seq;
+    if ( ( (uint8_t)(tx_max - tx_seq) & 0x80 ) != 0 )
+    {
+        return 0;
+    }
+    return (uint8_t)(tx_max - tx_seq);
 }
 
 /** Writes SDPCM headers and sends packet to WHD Thread

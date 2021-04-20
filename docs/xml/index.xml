@@ -25,7 +25,7 @@
     <member refid="structwhd__btc__lescan__params_1a02d72a917cfb65e36cd0527ed472bf8f" kind="variable"><name>scan_win</name></member>
   </compound>
   <compound refid="structwhd__buffer__funcs" kind="struct"><name>whd_buffer_funcs</name>
-    <member refid="structwhd__buffer__funcs_1a08be981b01c563df3f34025e463a6a32" kind="variable"><name>whd_host_buffer_get</name></member>
+    <member refid="structwhd__buffer__funcs_1a3b1eac8632117521e5ef7e0dd332106d" kind="variable"><name>whd_host_buffer_get</name></member>
     <member refid="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" kind="variable"><name>whd_buffer_release</name></member>
     <member refid="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" kind="variable"><name>whd_buffer_get_current_piece_data_pointer</name></member>
     <member refid="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" kind="variable"><name>whd_buffer_get_current_piece_size</name></member>
@@ -36,34 +36,34 @@
     <member refid="structwhd__coex__config_1afcc1e187cd7f285de8d56162fbbb52bb" kind="variable"><name>le_scan_params</name></member>
   </compound>
   <compound refid="structwhd__event" kind="struct"><name>whd_event</name>
-    <member refid="structwhd__event_1ae36ac55a3c73f9f7dfa065165130b39e" kind="variable"><name>eth</name></member>
-    <member refid="structwhd__event_1a304eef8ceefeab88f71947f57df3d61b" kind="variable"><name>eth_evt_hdr</name></member>
-    <member refid="structwhd__event_1aaca5889552f0d7a52f681e7b96d53720" kind="variable"><name>whd_event</name></member>
+    <member refid="group__event_1gae36ac55a3c73f9f7dfa065165130b39e" kind="variable"><name>eth</name></member>
+    <member refid="group__event_1ga304eef8ceefeab88f71947f57df3d61b" kind="variable"><name>eth_evt_hdr</name></member>
+    <member refid="group__event_1gaaca5889552f0d7a52f681e7b96d53720" kind="variable"><name>whd_event</name></member>
   </compound>
   <compound refid="structwhd__event__eth__hdr" kind="struct"><name>whd_event_eth_hdr</name>
-    <member refid="structwhd__event__eth__hdr_1ac5d9ab8403fb9ca24facc32b821dd53b" kind="variable"><name>subtype</name></member>
-    <member refid="structwhd__event__eth__hdr_1a1892eba2086d12ac2b09005aeb09ea3b" kind="variable"><name>length</name></member>
-    <member refid="structwhd__event__eth__hdr_1ab22abc2906422da61885ac6c8e6a1a59" kind="variable"><name>version</name></member>
-    <member refid="structwhd__event__eth__hdr_1a5d81eb4d4b4a5b8d3a89be061d06b64d" kind="variable"><name>oui</name></member>
-    <member refid="structwhd__event__eth__hdr_1ae9ad9911fe2a5dc5789001a2b48d5c9d" kind="variable"><name>usr_subtype</name></member>
+    <member refid="group__event_1gac5d9ab8403fb9ca24facc32b821dd53b" kind="variable"><name>subtype</name></member>
+    <member refid="group__event_1ga1892eba2086d12ac2b09005aeb09ea3b" kind="variable"><name>length</name></member>
+    <member refid="group__event_1gab22abc2906422da61885ac6c8e6a1a59" kind="variable"><name>version</name></member>
+    <member refid="group__event_1ga5d81eb4d4b4a5b8d3a89be061d06b64d" kind="variable"><name>oui</name></member>
+    <member refid="group__event_1gae9ad9911fe2a5dc5789001a2b48d5c9d" kind="variable"><name>usr_subtype</name></member>
   </compound>
   <compound refid="structwhd__event__ether__header" kind="struct"><name>whd_event_ether_header</name>
-    <member refid="structwhd__event__ether__header_1aecece25a401285d039a6f30991dad78e" kind="variable"><name>destination_address</name></member>
-    <member refid="structwhd__event__ether__header_1aceb7473ccdf9d41c5b6aee7a0264972a" kind="variable"><name>source_address</name></member>
-    <member refid="structwhd__event__ether__header_1aa9296c58dc24c63c4ee927db394a97d7" kind="variable"><name>ethertype</name></member>
+    <member refid="group__event_1gaecece25a401285d039a6f30991dad78e" kind="variable"><name>destination_address</name></member>
+    <member refid="group__event_1gaceb7473ccdf9d41c5b6aee7a0264972a" kind="variable"><name>source_address</name></member>
+    <member refid="group__event_1gaa9296c58dc24c63c4ee927db394a97d7" kind="variable"><name>ethertype</name></member>
   </compound>
   <compound refid="structwhd__event__msg" kind="struct"><name>whd_event_msg</name>
-    <member refid="structwhd__event__msg_1ab6d7b6f8c2ceaba7acda80aaf05f4899" kind="variable"><name>version</name></member>
-    <member refid="structwhd__event__msg_1a1e87af3c18a2fd36c61faf89949bdc3f" kind="variable"><name>flags</name></member>
-    <member refid="structwhd__event__msg_1a45def65890de0da17bc0d6e2ca2b3a9f" kind="variable"><name>event_type</name></member>
-    <member refid="structwhd__event__msg_1ade20423e91627f07e610924cb0081623" kind="variable"><name>status</name></member>
-    <member refid="structwhd__event__msg_1a5ac0b16c31813f87b98e97cc5bacd64a" kind="variable"><name>reason</name></member>
-    <member refid="structwhd__event__msg_1a6d9c484262d9d2e9fceaa54a2e58b3c0" kind="variable"><name>auth_type</name></member>
-    <member refid="structwhd__event__msg_1a20ef2f8b0dc25d28c0c76be72919a60a" kind="variable"><name>datalen</name></member>
-    <member refid="structwhd__event__msg_1a7c939001af591772db111e0be822b469" kind="variable"><name>addr</name></member>
-    <member refid="structwhd__event__msg_1a6416f2a9886b328d85974b42f5a34ce5" kind="variable"><name>ifname</name></member>
-    <member refid="structwhd__event__msg_1aee54e454588cb953b7f349e589c2d09f" kind="variable"><name>ifidx</name></member>
-    <member refid="structwhd__event__msg_1aa2c53e1708eb89382779539506cb4359" kind="variable"><name>bsscfgidx</name></member>
+    <member refid="group__event_1gab6d7b6f8c2ceaba7acda80aaf05f4899" kind="variable"><name>version</name></member>
+    <member refid="group__event_1ga1e87af3c18a2fd36c61faf89949bdc3f" kind="variable"><name>flags</name></member>
+    <member refid="group__event_1ga45def65890de0da17bc0d6e2ca2b3a9f" kind="variable"><name>event_type</name></member>
+    <member refid="group__event_1gade20423e91627f07e610924cb0081623" kind="variable"><name>status</name></member>
+    <member refid="group__event_1ga5ac0b16c31813f87b98e97cc5bacd64a" kind="variable"><name>reason</name></member>
+    <member refid="group__event_1ga6d9c484262d9d2e9fceaa54a2e58b3c0" kind="variable"><name>auth_type</name></member>
+    <member refid="group__event_1ga20ef2f8b0dc25d28c0c76be72919a60a" kind="variable"><name>datalen</name></member>
+    <member refid="group__event_1ga7c939001af591772db111e0be822b469" kind="variable"><name>addr</name></member>
+    <member refid="group__event_1ga6416f2a9886b328d85974b42f5a34ce5" kind="variable"><name>ifname</name></member>
+    <member refid="group__event_1gaee54e454588cb953b7f349e589c2d09f" kind="variable"><name>ifidx</name></member>
+    <member refid="group__event_1gaa2c53e1708eb89382779539506cb4359" kind="variable"><name>bsscfgidx</name></member>
   </compound>
   <compound refid="structwhd__init__config" kind="struct"><name>whd_init_config</name>
     <member refid="structwhd__init__config_1a52591d0d84b73dea8ca0a25c486f62c7" kind="variable"><name>thread_stack_start</name></member>
@@ -232,28 +232,31 @@
     <member refid="whd__events_8h_1ac97c29fe35bab5af9cc08a9eb1fedffc" kind="define"><name>WLC_SUP_STATUS_OFFSET</name></member>
     <member refid="whd__events_8h_1ac94cc32da29a68641af2b000d883cd6a" kind="define"><name>WHD_MSG_IFNAME_MAX</name></member>
     <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4c" kind="enum"><name>sup_auth_status</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680" kind="enumvalue"><name>WLC_SUP_DISCONNECTED</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147" kind="enumvalue"><name>WLC_SUP_CONNECTING</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce" kind="enumvalue"><name>WLC_SUP_IDREQUIRED</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce" kind="enumvalue"><name>WLC_SUP_AUTHENTICATING</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e" kind="enumvalue"><name>WLC_SUP_AUTHENTICATED</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a" kind="enumvalue"><name>WLC_SUP_KEYED</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240" kind="enumvalue"><name>WLC_SUP_TIMEOUT</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df" kind="enumvalue"><name>WLC_SUP_LAST_BASIC_STATE</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_WAIT_M1</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_PREP_M2</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_WAIT_M3</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_PREP_M4</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_WAIT_G1</name></member>
-    <member refid="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_PREP_G2</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680" kind="enumvalue"><name>WLC_SUP_DISCONNECTED</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147" kind="enumvalue"><name>WLC_SUP_CONNECTING</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce" kind="enumvalue"><name>WLC_SUP_IDREQUIRED</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce" kind="enumvalue"><name>WLC_SUP_AUTHENTICATING</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e" kind="enumvalue"><name>WLC_SUP_AUTHENTICATED</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a" kind="enumvalue"><name>WLC_SUP_KEYED</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240" kind="enumvalue"><name>WLC_SUP_TIMEOUT</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df" kind="enumvalue"><name>WLC_SUP_LAST_BASIC_STATE</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_WAIT_M1</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_PREP_M2</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_WAIT_M3</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_PREP_M4</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_WAIT_G1</name></member>
+    <member refid="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303" kind="enumvalue"><name>WLC_SUP_KEYXCHANGE_PREP_G2</name></member>
     <member refid="whd__events_8h_1a4c17ec19ca52ebe4bbad3ea977108d0b" kind="typedef"><name>sup_auth_status_t</name></member>
     <member refid="whd__events_8h_1a8e7e9d5ab8841a160aa9e2420c636864" kind="typedef"><name>whd_event_eth_hdr_t</name></member>
     <member refid="whd__events_8h_1a31915a18541e6182e926247a3b8ed3dc" kind="typedef"><name>whd_event_ether_header_t</name></member>
     <member refid="whd__events_8h_1a9d6929e68c05572695ee040da171d508" kind="typedef"><name>whd_event_t</name></member>
     <member refid="group__event_1ga9c74af353c83a8f77097acbc65362b07" kind="typedef"><name>whd_event_handler_t</name></member>
+    <member refid="group__event_1gad693f00ea3008fa9645582df236ad7e2" kind="typedef"><name>whd_error_handler_t</name></member>
     <member refid="group__event_1ga4175c3ef9bb16601fabc605fadeaf8d8" kind="function"><name>whd_wifi_set_event_handler</name></member>
-    <member refid="whd__events_8h_1ae415f1f3fcbbfe506aa0e656bf8debb3" kind="function"><name>whd_wifi_deregister_event_handler</name></member>
+    <member refid="group__event_1ga2072e91b840217584cfd60ad540b3146" kind="function"><name>whd_wifi_set_error_handler</name></member>
+    <member refid="group__event_1gae415f1f3fcbbfe506aa0e656bf8debb3" kind="function"><name>whd_wifi_deregister_event_handler</name></member>
+    <member refid="group__event_1gaa7f28d32a8c06c7df471636de6f4dec6" kind="function"><name>whd_wifi_deregister_error_handler</name></member>
   </compound>
   <compound refid="whd__network__types_8h" kind="file"><name>whd_network_types.h</name>
     <member refid="group__buffif_1ga44a64c51498b204ceef5555209e29452" kind="enum"><name>whd_buffer_dir_t</name></member>
@@ -898,7 +901,33 @@
   </compound>
   <compound refid="group__event" kind="group"><name>event</name>
     <member refid="group__event_1ga9c74af353c83a8f77097acbc65362b07" kind="typedef"><name>whd_event_handler_t</name></member>
+    <member refid="group__event_1gad693f00ea3008fa9645582df236ad7e2" kind="typedef"><name>whd_error_handler_t</name></member>
+    <member refid="group__event_1gac5d9ab8403fb9ca24facc32b821dd53b" kind="variable"><name>subtype</name></member>
+    <member refid="group__event_1ga1892eba2086d12ac2b09005aeb09ea3b" kind="variable"><name>length</name></member>
+    <member refid="group__event_1gab22abc2906422da61885ac6c8e6a1a59" kind="variable"><name>version</name></member>
+    <member refid="group__event_1ga5d81eb4d4b4a5b8d3a89be061d06b64d" kind="variable"><name>oui</name></member>
+    <member refid="group__event_1gae9ad9911fe2a5dc5789001a2b48d5c9d" kind="variable"><name>usr_subtype</name></member>
+    <member refid="group__event_1gaecece25a401285d039a6f30991dad78e" kind="variable"><name>destination_address</name></member>
+    <member refid="group__event_1gaceb7473ccdf9d41c5b6aee7a0264972a" kind="variable"><name>source_address</name></member>
+    <member refid="group__event_1gaa9296c58dc24c63c4ee927db394a97d7" kind="variable"><name>ethertype</name></member>
+    <member refid="group__event_1gab6d7b6f8c2ceaba7acda80aaf05f4899" kind="variable"><name>version</name></member>
+    <member refid="group__event_1ga1e87af3c18a2fd36c61faf89949bdc3f" kind="variable"><name>flags</name></member>
+    <member refid="group__event_1ga45def65890de0da17bc0d6e2ca2b3a9f" kind="variable"><name>event_type</name></member>
+    <member refid="group__event_1gade20423e91627f07e610924cb0081623" kind="variable"><name>status</name></member>
+    <member refid="group__event_1ga5ac0b16c31813f87b98e97cc5bacd64a" kind="variable"><name>reason</name></member>
+    <member refid="group__event_1ga6d9c484262d9d2e9fceaa54a2e58b3c0" kind="variable"><name>auth_type</name></member>
+    <member refid="group__event_1ga20ef2f8b0dc25d28c0c76be72919a60a" kind="variable"><name>datalen</name></member>
+    <member refid="group__event_1ga7c939001af591772db111e0be822b469" kind="variable"><name>addr</name></member>
+    <member refid="group__event_1ga6416f2a9886b328d85974b42f5a34ce5" kind="variable"><name>ifname</name></member>
+    <member refid="group__event_1gaee54e454588cb953b7f349e589c2d09f" kind="variable"><name>ifidx</name></member>
+    <member refid="group__event_1gaa2c53e1708eb89382779539506cb4359" kind="variable"><name>bsscfgidx</name></member>
+    <member refid="group__event_1gae36ac55a3c73f9f7dfa065165130b39e" kind="variable"><name>eth</name></member>
+    <member refid="group__event_1ga304eef8ceefeab88f71947f57df3d61b" kind="variable"><name>eth_evt_hdr</name></member>
+    <member refid="group__event_1gaaca5889552f0d7a52f681e7b96d53720" kind="variable"><name>whd_event</name></member>
     <member refid="group__event_1ga4175c3ef9bb16601fabc605fadeaf8d8" kind="function"><name>whd_wifi_set_event_handler</name></member>
+    <member refid="group__event_1ga2072e91b840217584cfd60ad540b3146" kind="function"><name>whd_wifi_set_error_handler</name></member>
+    <member refid="group__event_1gae415f1f3fcbbfe506aa0e656bf8debb3" kind="function"><name>whd_wifi_deregister_event_handler</name></member>
+    <member refid="group__event_1gaa7f28d32a8c06c7df471636de6f4dec6" kind="function"><name>whd_wifi_deregister_error_handler</name></member>
   </compound>
   <compound refid="group__buffif" kind="group"><name>buffif</name>
     <member refid="group__buffif_1ga44a64c51498b204ceef5555209e29452" kind="enum"><name>whd_buffer_dir_t</name></member>

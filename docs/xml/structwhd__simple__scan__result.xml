@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="700" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="700" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="700" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="700" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__simple__scan__result_1acff14471b28062500a2992114ae54765" prot="public" static="no" mutable="no">
         <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="701" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="701" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="701" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="701" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__simple__scan__result_1ac303b69da3c469c92299a6ff260e2859" prot="public" static="no" mutable="no">
         <type>int16_t</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="702" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="702" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="702" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="702" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__simple__scan__result_1ae8d5baabacdabe6d3590465572849754" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="703" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="703" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="703" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="703" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__simple__scan__result_1a715f5cb061d11eb75981741eda4dafcd" prot="public" static="no" mutable="no">
         <type>uint8_t</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="704" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="704" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="704" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="704" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -103,7 +103,7 @@
         <link refid="structwhd__mac__t"/>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" line="699" column="1" bodyfile="C:/Users/JIAC/Documents/08.SRC/whd/inc/whd_types.h" bodystart="698" bodyend="705"/>
+    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="699" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="698" bodyend="705"/>
     <listofallmembers>
       <member refid="structwhd__simple__scan__result_1acff14471b28062500a2992114ae54765" prot="public" virt="non-virtual"><scope>whd_simple_scan_result</scope><name>BSSID</name></member>
       <member refid="structwhd__simple__scan__result_1a715f5cb061d11eb75981741eda4dafcd" prot="public" virt="non-virtual"><scope>whd_simple_scan_result</scope><name>channel</name></member>

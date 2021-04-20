@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -1778,6 +1778,9 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
 
     /* Safe to access *whd_scan_result_ptr, as whd_scan_result_ptr == NULL case is handled above */
     record = (whd_scan_result_t *)(whd_driver->internal_info.whd_scan_result_ptr);
+
+    /* Clear the last scan result data */
+    memset(record, 0, sizeof(whd_scan_result_t) );
 
     /*
      * Totally ignore off channel results.  This can only happen with DSSS (1 and 2 Mb).  It is better to

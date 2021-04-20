@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,10 +59,9 @@ typedef enum
 typedef struct whd_sdpcm_info
 {
     /* Bus data credit variables */
-    uint8_t packet_transmit_sequence_number;
-    uint8_t last_bus_data_credit;
-    uint8_t credit_diff;
-    uint8_t largest_credit_diff;
+    uint8_t tx_seq;
+    uint8_t tx_max;
+
 
     /* Packet send queue variables */
     cy_semaphore_t send_queue_mutex;

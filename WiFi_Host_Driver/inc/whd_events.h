@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -185,7 +185,19 @@ typedef struct whd_event
  */
 typedef void *(*whd_event_handler_t)(whd_interface_t ifp, const whd_event_header_t *event_header,
                                      const uint8_t *event_data, void *handler_user_data);
-
+/** @addtogroup event WHD Error handling API
+ *  Functions that allow user applications to receive error callbacks and set error handlers
+ *  @{
+ */
+/** Error handler prototype definition
+ *
+ *  @param  whd_driver           Pointer to handle instance of whd driver
+ *  @param  error_type           whd error type
+ *  @param  event_data           event data
+ *  @param  handler_user_data    semaphore data
+ */
+typedef void *(*whd_error_handler_t)(whd_driver_t whd_driver, const uint8_t *error_type,
+                                     const uint8_t *event_data, void *handler_user_data);
 /** Registers a handler to receive event callbacks.
  *
  *  This function registers a callback handler to be notified when
@@ -207,6 +219,28 @@ typedef void *(*whd_event_handler_t)(whd_interface_t ifp, const whd_event_header
  */
 uint32_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *event_type, whd_event_handler_t handler_func,
                                     void *handler_user_data, uint16_t *event_index);
+/** Registers a handler to receive error callbacks.
+ *
+ *  This function registers a callback handler to be notified when
+ *  a particular event is received.
+ *
+ *
+ *  @note   Currently each event may only be registered to one handler and there is a limit to the number of simultaneously
+ *          registered events. Maximum of 5 event handlers can registered simultaneously, this also includes the internal
+ *          event handler registration which happens during scan, join and starting an AP.
+ *
+ *  @param  ifp                Pointer to handle instance of whd interface
+ *  @param  error_nums         Pointer to the event list as WLC_ERR_BUS and WLC_ERR_FW
+ *  @param  handler_func       A function pointer to the handler callback
+ *  @param  handler_user_data  A pointer value which will be passed to the event handler function
+ *                             at the time an event is triggered (NULL is allowed)
+ *  @param  error_index        Entry where the error handler is registered in the list
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+uint32_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_nums, whd_error_handler_t handler_func,
+                                    void *handler_user_data, uint16_t *error_index);
+
 /*  @} */
 
 /** Delete/Deregister the event entry where callback is registered
@@ -218,6 +252,15 @@ uint32_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *event_t
  */
 
 uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index);
+/** Delete/Deregister the error entry where callback is registered
+ *
+ *  @param  ifp                Pointer to handle instance of whd interface
+ *  @param  error_index        Error index obtained during registration by whd_wifi_set_error_handler
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+
+uint32_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index);
 
 #ifdef __cplusplus
 } /* extern "C" */

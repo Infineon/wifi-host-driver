@@ -96,9 +96,9 @@ $(document).ready(function(){initNavTree('structwhd__buffer__funcs.html','');});
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a08be981b01c563df3f34025e463a6a32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__buffer__funcs.html#a08be981b01c563df3f34025e463a6a32">whd_host_buffer_get</a> )(whd_buffer_t *buffer, <a class="el" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">whd_buffer_dir_t</a> direction, unsigned short size, unsigned long wait)</td></tr>
-<tr class="memdesc:a08be981b01c563df3f34025e463a6a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a packet buffer.  <a href="#a08be981b01c563df3f34025e463a6a32">More...</a><br /></td></tr>
-<tr class="separator:a08be981b01c563df3f34025e463a6a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1eac8632117521e5ef7e0dd332106d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__buffer__funcs.html#a3b1eac8632117521e5ef7e0dd332106d">whd_host_buffer_get</a> )(whd_buffer_t *buffer, <a class="el" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">whd_buffer_dir_t</a> direction, unsigned short size, unsigned long timeout_ms)</td></tr>
+<tr class="memdesc:a3b1eac8632117521e5ef7e0dd332106d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a packet buffer.  <a href="#a3b1eac8632117521e5ef7e0dd332106d">More...</a><br /></td></tr>
+<tr class="separator:a3b1eac8632117521e5ef7e0dd332106d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25e0a4f8235603094896917b3421baac"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__buffer__funcs.html#a25e0a4f8235603094896917b3421baac">whd_buffer_release</a> )(whd_buffer_t buffer, <a class="el" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">whd_buffer_dir_t</a> direction)</td></tr>
 <tr class="memdesc:a25e0a4f8235603094896917b3421baac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases a packet buffer.  <a href="#a25e0a4f8235603094896917b3421baac">More...</a><br /></td></tr>
 <tr class="separator:a25e0a4f8235603094896917b3421baac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,14 +116,14 @@ Data Fields</h2></td></tr>
 <tr class="separator:ab4c0aef4cb8722f8b22209592a84594a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="a08be981b01c563df3f34025e463a6a32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08be981b01c563df3f34025e463a6a32">&#9670;&nbsp;</a></span>whd_host_buffer_get</h2>
+<a id="a3b1eac8632117521e5ef7e0dd332106d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b1eac8632117521e5ef7e0dd332106d">&#9670;&nbsp;</a></span>whd_host_buffer_get</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>(* whd_host_buffer_get) (whd_buffer_t *buffer, <a class="el" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">whd_buffer_dir_t</a> direction, unsigned short size, unsigned long wait)</td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>(* whd_host_buffer_get) (whd_buffer_t *buffer, <a class="el" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">whd_buffer_dir_t</a> direction, unsigned short size, unsigned long timeout_ms)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -135,7 +135,7 @@ Data Fields</h2></td></tr>
     <tr><td class="paramname">buffer</td><td>A pointer which receives the allocated packet buffer handle </td></tr>
     <tr><td class="paramname">direction</td><td>Indicates transmit/receive direction that the packet buffer is used for. This may be needed if tx/rx pools are separate. </td></tr>
     <tr><td class="paramname">size</td><td>The number of bytes to allocate. </td></tr>
-    <tr><td class="paramname">wait</td><td>Whether to wait for a packet buffer to be available</td></tr>
+    <tr><td class="paramname">timeout_ms</td><td>Maximum period to block for available buffer</td></tr>
   </table>
   </dd>
 </dl>

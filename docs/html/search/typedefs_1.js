@@ -6,6 +6,7 @@ var searchData=
   ['whd_5fbuffer_5fqueue_5fptr_5ft',['whd_buffer_queue_ptr_t',['../whd__types_8h.html#a0767ab3fb805f164a11b58473c308053',1,'whd_types.h']]],
   ['whd_5fcoex_5fconfig_5ft',['whd_coex_config_t',['../whd__types_8h.html#a1cb4da9972e0e9317a6e26e2fd460902',1,'whd_types.h']]],
   ['whd_5fdriver_5ft',['whd_driver_t',['../whd_8h.html#ac45015d82e65db891b463066873eca4f',1,'whd.h']]],
+  ['whd_5ferror_5fhandler_5ft',['whd_error_handler_t',['../group__event.html#gad693f00ea3008fa9645582df236ad7e2',1,'whd_events.h']]],
   ['whd_5fevent_5feth_5fhdr_5ft',['whd_event_eth_hdr_t',['../whd__events_8h.html#a8e7e9d5ab8841a160aa9e2420c636864',1,'whd_events.h']]],
   ['whd_5fevent_5fether_5fheader_5ft',['whd_event_ether_header_t',['../whd__events_8h.html#a31915a18541e6182e926247a3b8ed3dc',1,'whd_events.h']]],
   ['whd_5fevent_5fhandler_5ft',['whd_event_handler_t',['../group__event.html#ga9c74af353c83a8f77097acbc65362b07',1,'whd_events.h']]],

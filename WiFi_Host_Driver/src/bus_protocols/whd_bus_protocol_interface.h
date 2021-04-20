@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Cypress Semiconductor Corporation
+ * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,6 +41,7 @@ typedef enum
 } whd_bus_function_t;
 
 #define BUS_FUNCTION_MASK (0x3) /* Update this if adding functions */
+#define WHD_BUS_FAIL                             (0xFFFFFFFF)
 
 /******************************************************
 *             Macros
