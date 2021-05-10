@@ -69,7 +69,8 @@ extern "C" {
 #define CY_SECTION_WHD(name)    __attribute__ ( (section(name) ) )
 #endif
 #elif defined (__ICCARM__)
-#define CY_SECTION_WHD(name)    CY_PRAGMA(location = name)
+#define CY_PRAGMA_WHD(x)        _Pragma(#x)
+#define CY_SECTION_WHD(name)    CY_PRAGMA_WHD(location = name)
 #else
 #error "An unsupported toolchain"
 #endif /* (__ARMCC_VERSION) */

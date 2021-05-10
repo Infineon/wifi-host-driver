@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.93.1
+# Wi-Fi Host Driver (WHD)  v1.94.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -13,10 +13,14 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 
 ## Changes since v1.93.0
 ### New Features
+* Support Nvram for LAIRD_LWB5PM2
 * Supports error handling callback for BUS error or FW halt.
 * Support different maximum credit numbers for different firmware
 
 ### Defect Fixes
+* Update structure of counters
+* Build failure with IAR toolchain
+* Fix the return of the unexpected value
 * Fix unknown security type in scan result
 * Fix test_wifi_set_ioctl_value failure
 
@@ -24,37 +28,38 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 
 ### Firmware Changes
 #### CYW4343W
+* --- 7.45.98.117 ---
+* Security fixes
+* Memory usage reduction by disabling debug features
 * --- 7.45.98.110 ---
-* Fixed zero stall on UDP
-* Fixed Tx traffic too less then RX
-* --- 7.45.98.95 ---
 
 #### CYW43012
+* --- 13.10.271.265 ---
+* Security fixes
+* Fix BT coex throughput for DOS
+* Fix for roam failure when we miss reassociation response from AP at range edge
+* iLPO related changes
+* Beacon collision fix
+* Porting protection frame enhancement
+* RSA signature verification implementation
+* SHA implementation in blocks and MGF function needed for RSA PKCS2.1
+* SHA implementation rework
+* Addition of RSA test files and cleanup
+* Fix for crash during WPA3 join
+* Handle window overflow and tx queue depth errors in AT command.
+* No-memcpy optimization for UDP server mode operation
 * --- 13.10.271.253 ---
-* Fix SoftAP low throughput issue under 80211 PS  mode
-* Support DPP feature
-* Support Coex security design of DOS
-* Support to account for drift in LPO frequency
-* Enhence power saving mechanism for Tx direction
-* Fixed 11n certification 5.2.27 issue
-* Fixed ATE FW crash in repeated RxPER tests
-* Supported WPA3/SAE Softap
-* Roaming enhancement
-* Fixed roaming issue with password mismatch
-* Fixed firmware trap caused by Big hammer
-* --- 13.10.271.218 ---
 
 #### CYW4373
-* --- 13.10.246.242 ---
+* --- 13.10.246.252 ---
+* VSDB support of AP+STA usecase
+* Security fixes
+* Fix beacon loss issue
+* Fix USB livelock
 * Fix flow control to allow for the host to send new traffic
 * Allow SAE password length of 128 characters
 * Prevent device from responding to broadcast probe req when hidden ssid is set
-* DOS: Coex Security design for DOS
-* Fix for WiFi P2P cert 4.2.2.
-* Ucode fix to avoid setting Multicast bit in non-DTIM Beacon
-* DPP feature support enable
-* PTK rotation WAR for EPSON
-* --- 13.10.246.234 ---
+* --- 13.10.246.242 ---
 
 Note: [r] is regulatory-related
 
