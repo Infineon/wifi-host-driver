@@ -1028,7 +1028,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
 
     if (whd_is_fw_sr_capable(whd_driver) == WHD_TRUE)
     {
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 0x4345) )
         {
             /* Configure WakeupCtrl register to set AlpAvail request bit in chipClockCSR register
              * after the sdiod core is powered on.
@@ -1057,7 +1057,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
          */
         CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, (uint32_t)SDIOD_CCCR_BRCM_CARDCAP,
                                                   (uint8_t)1, SDIOD_CCCR_BRCM_CARDCAP_CMD_NODEC) );
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 0x4345) )
         {
             CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_CHIP_CLOCK_CSR,
                                                       (uint8_t)1, SBSDIO_HT_AVAIL_REQ) );
@@ -1069,7 +1069,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
         }
 
         /* Enable KeepSdioOn (KSO) bit for normal operation */
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 0x4345) )
         {
             CHECK_RETURN(whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                      (uint8_t)sizeof(data), &data) );
@@ -1082,7 +1082,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
         if ( (data & SBSDIO_SLPCSR_KEEP_SDIO_ON) == 0 )
         {
             data |= SBSDIO_SLPCSR_KEEP_SDIO_ON;
-            if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+            if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 0x4345) )
             {
                 CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                           (uint8_t)sizeof(data), data) );

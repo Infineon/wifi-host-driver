@@ -1549,7 +1549,7 @@ uint32_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_result_t *ap
 
             CHECK_RETURN(whd_wifi_join_wait_for_complete(ifp, &join_semaphore) );
 
-            if (chip_id == 0x4373)
+            if ( (chip_id == 0x4373) || (chip_id == 0x4345) )
             {
                 /* For 11 AC MAX throughput set the frame burst and MPDU per AMPDU */
                 CHECK_RETURN(whd_wifi_set_iovar_value(ifp, IOVAR_STR_MPDU_PER_AMPDU, 64) );

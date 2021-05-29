@@ -118,6 +118,7 @@ whd_result_t get_arm_core_base_address(uint16_t wlan_chip_id, uint32_t *addr)
     switch (wlan_chip_id)
     {
         case 0x4373:
+        case 0x4345:
             *addr = 0x18002000 + WRAPPER_REGISTER_OFFSET;
             break;
         case 43012:
@@ -156,6 +157,9 @@ whd_result_t get_sdiod_core_base_address(uint16_t wlan_chip_id, uint32_t *addr)
         case 0x4373:
             *addr = 0x18005000;
             break;
+        case 0x4345:
+            *addr = 0x18004000;
+            break;
         case 43012:
         case 43430:
             *addr = 0x18002000;
@@ -171,6 +175,7 @@ whd_result_t get_pmu_base_address(uint16_t wlan_chip_id, uint32_t *addr)
     switch (wlan_chip_id)
     {
         case 0x4373:
+        case 0x4345:
         case 43430:
             *addr = CHIPCOMMON_BASE_ADDRESS;
             break;
@@ -206,6 +211,10 @@ whd_result_t get_chip_ram_size(uint16_t wlan_chip_id, uint32_t *size)
     {
         *size = 0xE0000;
     }
+    else if (wlan_chip_id == 0x4345)
+    {
+        *size = 0xC8000;
+    }
     else
     {
         *size = 0x80000;
@@ -219,6 +228,10 @@ whd_result_t get_atcm_ram_base_address(uint16_t wlan_chip_id, uint32_t *size)
     if (wlan_chip_id == 0x4373)
     {
         *size = 0x160000;
+    }
+    else if (wlan_chip_id == 0x4345)
+    {
+        *size = 0x198000;
     }
     else
     {
