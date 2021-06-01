@@ -121,7 +121,8 @@ static whd_result_t whd_bus_common_download_resource(whd_driver_t whd_driver, wh
     uint32_t i;
     uint32_t size_out;
     uint32_t reset_instr = 0;
-
+    uint32_t write_addr= address;
+    
     result = whd_resource_size(whd_driver, resource, &image_size);
 
     if (result != WHD_SUCCESS)
@@ -150,18 +151,18 @@ static whd_result_t whd_bus_common_download_resource(whd_driver_t whd_driver, wh
     for (i = 0; i < blocks_count; i++)
     {
         CHECK_RETURN(whd_get_resource_block(whd_driver, resource, i, (const uint8_t **)&image, &size_out) );
-        if ( (resource == WHD_RESOURCE_WLAN_FIRMWARE) && (reset_instr == 0) )
+        if ( (address != 0) && (resource == WHD_RESOURCE_WLAN_FIRMWARE) && (reset_instr == 0) )
         {
             /* Copy the starting address of the firmware into a global variable */
             reset_instr = *( (uint32_t *)(&image[0]) );
         }
-        result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_WRITE, address, size_out, &image[0]);
+        result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_WRITE, write_addr, size_out, &image[0]);
         if (result != WHD_SUCCESS)
         {
             WPRINT_WHD_ERROR( ("%s: Failed to write firmware image\n", __FUNCTION__) );
             goto exit;
         }
-        address += size_out;
+        write_addr += size_out;
     }
 
     /* Below part of the code is applicable to arm_CR4 type chips only
