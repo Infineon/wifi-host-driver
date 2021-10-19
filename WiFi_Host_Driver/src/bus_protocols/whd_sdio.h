@@ -112,6 +112,7 @@ extern "C" {
 #define I_HMB_SW_MASK                 ( (uint32_t)0x000000F0 )
 #define I_HMB_FRAME_IND               (1 << 6)
 #define I_HMB_HOST_INT                (1 << 7)
+#define I_HMB_FC_CHANGE               (1 << 5)
 #define FRAME_AVAILABLE_MASK          I_HMB_SW_MASK
 
 /******************************************************

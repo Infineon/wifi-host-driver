@@ -4,36 +4,41 @@
     <compoundname>whd_network_types.h</compoundname>
     <includes refid="whd_8h" local="yes">whd.h</includes>
     <incdepgraph>
-      <node id="22">
+      <node id="24">
         <label>stdint.h</label>
       </node>
-      <node id="21">
+      <node id="23">
         <label>whd_types.h</label>
         <link refid="whd__types_8h"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
         <childnode refid="24" relation="include">
         </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
-      <node id="19">
+      <node id="21">
         <label>whd_network_types.h</label>
         <link refid="whd__network__types_8h"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="26">
         <label>cy_result.h</label>
       </node>
-      <node id="24">
+      <node id="27">
         <label>cyhal_hw_types.h</label>
       </node>
-      <node id="20">
+      <node id="22">
         <label>whd.h</label>
         <link refid="whd_8h"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
+      </node>
+      <node id="25">
+        <label>cybsp.h</label>
       </node>
     </incdepgraph>
     <innerclass refid="structwhd__buffer__funcs" prot="public">whd_buffer_funcs</innerclass>
@@ -70,9 +75,9 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__netif_1ga3642a8b0fe0df7449730bec92e09c7d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void whd_network_send_ethernet_data</definition>
+      <memberdef kind="function" id="group__netif_1gafdfee8583f09d475ae4eafee5386f1b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_network_send_ethernet_data</definition>
         <argsstring>(whd_interface_t ifp, whd_buffer_t buffer)</argsstring>
         <name>whd_network_send_ethernet_data</name>
         <param>

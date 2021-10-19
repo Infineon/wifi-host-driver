@@ -67,7 +67,7 @@ typedef struct whd_sdpcm_info
     cy_semaphore_t send_queue_mutex;
     whd_buffer_t send_queue_head;
     whd_buffer_t send_queue_tail;
-
+    uint32_t npkt_in_q;
 } whd_sdpcm_info_t;
 
 typedef struct
@@ -108,8 +108,8 @@ extern uint8_t whd_sdpcm_get_available_credits(whd_driver_t whd_driver);
 extern void whd_update_host_interface_to_bss_index_mapping(whd_driver_t whd_driver, whd_interface_t interface,
                                                            uint32_t bssid_index);
 
-extern void whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
-                            sdpcm_header_type_t header_type);
+extern whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
+                                    sdpcm_header_type_t header_type, uint8_t prio);
 
 /******************************************************
 *             Global variables

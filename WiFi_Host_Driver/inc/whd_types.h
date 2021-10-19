@@ -21,6 +21,8 @@
  */
 
 #include <stdint.h>
+
+#include "cybsp.h"
 #include "cy_result.h"
 #include "cyhal_hw_types.h"
 
@@ -88,6 +90,7 @@ typedef struct whd_tko_status whd_tko_status_t;
 ******************************************************/
 
 #define WIFI_IE_OUI_LENGTH    (3)    /**< OUI length for Information Element */
+#define VNDR_IE_MAX_LEN       255    /**< vendor IE max length, without ID and len */
 
 /* Below constants are used to allocate the buffer pool by the application */
 
@@ -100,7 +103,15 @@ typedef struct whd_tko_status whd_tko_status_t;
 
 #define SDPCM_HEADER (8 + 4)  /**< SDPCM SW header + Frame tag */
 
-#define MAX_BUS_HEADER_SIZE 4 /**< Max bus header size for all bus types (sdio/spi) */
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
+#define MAX_BUS_HEADER_SIZE 4 /**< Max bus header size for all bus types (sdio) */
+#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
+#define MAX_BUS_HEADER_SIZE 4 /**< Max bus header size for all bus types (spi) */
+#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
+#define MAX_BUS_HEADER_SIZE 8 /**< Max bus header size for all bus types (m2m) */
+#else
+#error "CYBSP_WIFI_INTERFACE_TYPE is not defined"
+#endif
 
 #define BUFFER_OVERHEAD 4 /**< Buffer overhead, sizeof(void *) */
 
@@ -371,6 +382,17 @@ typedef enum
     WHD_IOVAR_GET_LISTEN_INTERVAL,          /**< Get Listen Interval value */
     WHD_IOVAR_GET_MAC_ADDRESS,              /**< Get mac address */
 } whd_usr_iovar_get_list_t;
+
+/**
+ * Enumeration of bus type
+ */
+typedef enum
+{
+    WHD_BUS_SDIO = 0,
+    WHD_BUS_SPI,
+    WHD_BUS_M2M,
+    WHD_BUS_NO_DEFINE = 0xff,
+} whd_bus_type_t;
 
 /******************************************************
 *                 Type Definitions
@@ -854,6 +876,7 @@ typedef uint32_t whd_result_t;
 #define WHD_CLM_BLOB_DLOAD_ERROR         WHD_RESULT_CREATE(1068)   /**< CLM blob download failed */
 #define WHD_HAL_ERROR                    WHD_RESULT_CREATE(1069)   /**< WHD HAL Error */
 #define WHD_RTOS_STATIC_MEM_LIMIT        WHD_RESULT_CREATE(1070)   /**< Exceeding the RTOS static objects memory */
+#define WHD_NO_REGISTER_FUNCTION_POINTER WHD_RESULT_CREATE(1071)   /**< No register function pointer */
 
 #define WLAN_ENUM_OFFSET 2000            /**< WLAN enum offset for WHD_WLAN error processing */
 
@@ -986,6 +1009,16 @@ typedef struct whd_spi_config
 } whd_spi_config_t;
 
 /**
+ * Structure for M2M config parameters which can be set by application during whd power up
+ */
+typedef struct whd_m2m_config
+{
+    /* Bus config */
+    whd_bool_t is_normal_mode; /**< Default is false */
+} whd_m2m_config_t;
+
+
+/**
  * Enumeration of applicable packet mask bits for custom Information Elements (IEs)
  */
 typedef enum
@@ -996,7 +1029,10 @@ typedef enum
     VENDOR_IE_AUTH_RESPONSE = 0x8,  /**< Denotes authentication response packet */
     VENDOR_IE_PROBE_REQUEST = 0x10, /**< Denotes probe request packet           */
     VENDOR_IE_ASSOC_REQUEST = 0x20, /**< Denotes association request packet     */
-    VENDOR_IE_CUSTOM = 0x100        /**< Denotes a custom IE(Information Element) identifier */
+    VENDOR_IE_CUSTOM = 0x100,       /**< Denotes a custom IE(Information Element) identifier */
+    VENDOR_IE_UNKNOWN = ~(VENDOR_IE_BEACON | VENDOR_IE_PROBE_RESPONSE | VENDOR_IE_ASSOC_RESPONSE | \
+                          VENDOR_IE_AUTH_RESPONSE | VENDOR_IE_PROBE_REQUEST | VENDOR_IE_ASSOC_REQUEST | \
+                          VENDOR_IE_CUSTOM)
 } whd_ie_packet_flag_t;
 
 /**

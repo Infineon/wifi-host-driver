@@ -140,6 +140,10 @@ typedef struct bcm_event
 /******************************************************
 *             Static Variables
 ******************************************************/
+/* Set the pkt threshold for each WMM categories
+ * BE:64 BK:128 VI:192 VO:256
+ */
+static const uint32_t prio_to_qthreshold[8] = {64, 128, 128, 64, 192, 192, 256, 256};
 
 /******************************************************
 *             SDPCM Logging
@@ -232,6 +236,7 @@ whd_result_t whd_sdpcm_init(whd_driver_t whd_driver)
     /* Packet send queue variables */
     sdpcm_info->send_queue_head   = (whd_buffer_t)NULL;
     sdpcm_info->send_queue_tail   = (whd_buffer_t)NULL;
+    sdpcm_info->npkt_in_q = 0;
 
     whd_sdpcm_bus_vars_init(whd_driver);
 
@@ -270,6 +275,7 @@ void whd_sdpcm_quit(whd_driver_t whd_driver)
             WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
         sdpcm_info->send_queue_head = buf;
     }
+    sdpcm_info->npkt_in_q = 0;
 }
 
 void whd_sdpcm_update_credit(whd_driver_t whd_driver, uint8_t *data)
@@ -313,7 +319,7 @@ void whd_sdpcm_process_rx_packet(whd_driver_t whd_driver, whd_buffer_t buffer)
     whd_result_t result;
 
     packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
-
+    CHECK_PACKET_WITH_NULL_RETURN(packet);
     memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
 
     sdpcm_header.frametag[0] = dtoh16(sdpcm_header.frametag[0]);
@@ -485,6 +491,7 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
         {
             sdpcm_info->send_queue_tail = NULL;
         }
+        sdpcm_info->npkt_in_q--;
         result = cy_rtos_set_semaphore(&sdpcm_info->send_queue_mutex, WHD_FALSE);
         if (result != WHD_SUCCESS)
             WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
@@ -492,6 +499,7 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
 
         /* Set the sequence number */
         packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
+        CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
         memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
         sdpcm_header.sw_header.sequence = sdpcm_info->tx_seq;
         memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
@@ -529,18 +537,20 @@ uint8_t whd_sdpcm_get_available_credits(whd_driver_t whd_driver)
  *
  *  @param buffer     : The handle of the packet buffer to send
  *  @param header_type  : DATA_HEADER, ASYNCEVENT_HEADER or CONTROL_HEADER - indicating what type of SDPCM packet this is.
+ *
+ *  @return WHD result code
  */
-
-void whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
-                     sdpcm_header_type_t header_type)
+whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
+                             sdpcm_header_type_t header_type, uint8_t prio)
 {
     uint16_t size;
+    uint8_t *data = NULL;
     bus_common_header_t *packet =
         (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     sdpcm_header_t sdpcm_header;
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
     whd_result_t result;
-
+    CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
     size = whd_buffer_get_current_piece_size(whd_driver, buffer);
 
     size = (uint16_t)(size - (uint16_t)sizeof(whd_buffer_header_t) );
@@ -555,10 +565,11 @@ void whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     sdpcm_header.frametag[1] = (uint16_t) ~size;
 
     memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
-
+    data = whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
+    CHECK_PACKET_NULL(data, WHD_NO_REGISTER_FUNCTION_POINTER);
     add_sdpcm_log_entry(LOG_TX, (header_type == DATA_HEADER) ? DATA : (header_type == CONTROL_HEADER) ? IOCTL : EVENT,
                         whd_buffer_get_current_piece_size(whd_driver, buffer),
-                        (char *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer) );
+                        (char *)data);
 
     /* Add the length of the SDPCM header and pass "down" */
     if (cy_rtos_get_semaphore(&sdpcm_info->send_queue_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) != WHD_SUCCESS)
@@ -567,8 +578,30 @@ void whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
         /* Fatal error */
         result = whd_buffer_release(whd_driver, buffer, WHD_NETWORK_TX);
         if (result != WHD_SUCCESS)
-            WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) )
-            return;
+            WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    /* The input priority should not higher than 7 */
+    if (prio > 7)
+    {
+        prio = 7;
+    }
+
+    if ( (header_type == DATA_HEADER) && (sdpcm_info->npkt_in_q > prio_to_qthreshold[prio]) )
+    {
+        result = whd_buffer_release(whd_driver, buffer, WHD_NETWORK_TX);
+        if (result != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
+        }
+        result = cy_rtos_set_semaphore(&sdpcm_info->send_queue_mutex, WHD_FALSE);
+        if (result != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+        }
+        whd_thread_notify(whd_driver);
+        return WHD_BUFFER_ALLOC_FAIL;
     }
 
     whd_sdpcm_set_next_buffer_in_queue(whd_driver, NULL, buffer);
@@ -581,11 +614,14 @@ void whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     {
         sdpcm_info->send_queue_head = buffer;
     }
+    sdpcm_info->npkt_in_q++;
     result = cy_rtos_set_semaphore(&sdpcm_info->send_queue_mutex, WHD_FALSE);
     if (result != WHD_SUCCESS)
         WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
 
     whd_thread_notify(whd_driver);
+
+    return WHD_SUCCESS;
 }
 
 /******************************************************

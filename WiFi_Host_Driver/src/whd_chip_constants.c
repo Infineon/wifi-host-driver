@@ -122,7 +122,13 @@ whd_result_t get_arm_core_base_address(uint16_t wlan_chip_id, uint32_t *addr)
             break;
         case 43012:
         case 43430:
+        case 43439:
             *addr = 0x18003000 + WRAPPER_REGISTER_OFFSET;
+            break;
+        case 43909:
+        case 43907:
+        case 54907:
+            *addr = 0x18011000 + WRAPPER_REGISTER_OFFSET;
             break;
         default:
             return WHD_BADARG;
@@ -141,6 +147,7 @@ whd_result_t get_socsram_base_address(uint16_t wlan_chip_id, uint32_t *addr, whd
     {
         case 43012:
         case 43430:
+        case 43439:
             *addr = 0x18004000 + offset;
             break;
         default:
@@ -158,6 +165,7 @@ whd_result_t get_sdiod_core_base_address(uint16_t wlan_chip_id, uint32_t *addr)
             break;
         case 43012:
         case 43430:
+        case 43439:
             *addr = 0x18002000;
             break;
         default:
@@ -172,10 +180,16 @@ whd_result_t get_pmu_base_address(uint16_t wlan_chip_id, uint32_t *addr)
     {
         case 0x4373:
         case 43430:
+        case 43439:
             *addr = CHIPCOMMON_BASE_ADDRESS;
             break;
         case 43012:
             *addr = 0x18012000;
+            break;
+        case 43909:
+        case 43907:
+        case 54907:
+            *addr = 0x18011000;
             break;
         default:
             return WHD_BADARG;
@@ -186,7 +200,8 @@ whd_result_t get_pmu_base_address(uint16_t wlan_chip_id, uint32_t *addr)
 whd_result_t get_chip_ram_size(uint16_t wlan_chip_id, uint32_t *size)
 {
     *size = 0;
-    if ( (wlan_chip_id == 4334) || (wlan_chip_id == 43340) || (wlan_chip_id == 43342) || (wlan_chip_id == 43430) )
+    if ( (wlan_chip_id == 4334) || (wlan_chip_id == 43340) || (wlan_chip_id == 43342) || (wlan_chip_id == 43430) ||
+         (wlan_chip_id == 43439) )
     {
         *size = (512 * 1024);
     }
@@ -194,7 +209,7 @@ whd_result_t get_chip_ram_size(uint16_t wlan_chip_id, uint32_t *size)
     {
         *size = 0x3C000;
     }
-    else if (wlan_chip_id == 43909)
+    else if ( (wlan_chip_id == 43909) || (wlan_chip_id == 43907) || (wlan_chip_id == 54907) )
     {
         *size = 0x90000;
     }
@@ -220,6 +235,10 @@ whd_result_t get_atcm_ram_base_address(uint16_t wlan_chip_id, uint32_t *size)
     {
         *size = 0x160000;
     }
+    else if ( (wlan_chip_id == 43909) || (wlan_chip_id == 43907) || (wlan_chip_id == 54907) )
+    {
+        *size = 0x1B0000;
+    }
     else
     {
         *size = 0;
@@ -234,7 +253,7 @@ whd_result_t get_socsram_srmem_size(uint16_t wlan_chip_id, uint32_t *mem_size)
     {
         *mem_size = (32 * 1024);
     }
-    else if (wlan_chip_id == 43430)
+    else if ( (wlan_chip_id == 43430) || (wlan_chip_id == 43439) )
     {
         *mem_size = (64 * 1024);
     }

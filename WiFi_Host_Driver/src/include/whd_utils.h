@@ -93,6 +93,7 @@ char *whd_ssid_to_string(uint8_t *value, uint8_t length, char *ssid_buf, uint8_t
 const char *whd_status_to_string(whd_event_status_t status);
 const char *whd_reason_to_string(whd_event_reason_t reason);
 char *whd_ether_ntoa(const uint8_t *ea, char *buf, uint8_t buf_len);
+const char *whd_ioctl_to_string(uint32_t ioctl);
 #endif /* ifdef WPRINT_ENABLE_WHD_DEBUG */
 
 /**
@@ -123,7 +124,7 @@ extern void whd_convert_security_type_to_string(whd_security_t security, char *o
  *
  * @result
  */
-void whd_ioctl_to_string(uint32_t cmd, char *ioctl_str, uint16_t ioctl_str_len);
+void whd_ioctl_info_to_string(uint32_t cmd, char *ioctl_str, uint16_t ioctl_str_len);
 
 /*!
  ******************************************************************************

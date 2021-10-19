@@ -20,6 +20,7 @@
 #include "whd.h"
 #include "whd_network_types.h"
 #include "whd_types_int.h"
+#include "whd_resource_api.h"
 
 #ifndef INCLUDED_WHD_BUS_PROTOCOL_INTERFACE_H_
 #define INCLUDED_WHD_BUS_PROTOCOL_INTERFACE_H_
@@ -72,11 +73,25 @@ typedef void (*whd_bus_irq_callback_t)(void *handler_arg, uint32_t event);
 *             Function declarations
 ******************************************************/
 
+/* Share bus to BT */
+extern whd_result_t whd_bus_write_reg_value(whd_driver_t whd_driver, uint32_t address,
+                                            uint8_t value_length, uint32_t value);
+extern whd_result_t whd_bus_read_reg_value(whd_driver_t whd_driver, uint32_t address,
+                                           uint8_t value_length, uint8_t *value);
+extern whd_result_t whd_bus_mem_bytes(whd_driver_t whd_driver, uint8_t direct,
+                                      uint32_t address, uint32_t size, uint8_t *data);
+extern whd_driver_t whd_bt_get_whd_driver(void);
+extern whd_result_t whd_bus_share_bt_init(whd_driver_t whd_driver);
+extern whd_result_t whd_bus_bt_attach(whd_driver_t whd_driver, void *btdata,
+                                      void (*bt_int_fun)(void *data) );
+extern void whd_bus_bt_detach(whd_driver_t whd_driver);
+extern uint32_t whd_get_bt_info(whd_driver_t whd_drv, whd_bt_info_t bt_info);
 /* Initialisation functions */
 extern whd_result_t whd_bus_init(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_deinit(whd_driver_t whd_driver);
 
 /* Device register access functions */
+extern whd_result_t whd_bus_set_backplane_window(whd_driver_t whd_driver, uint32_t addr);
 extern whd_result_t whd_bus_write_backplane_value(whd_driver_t whd_driver, uint32_t address, uint8_t register_length,
                                                   uint32_t value);
 extern whd_result_t whd_bus_read_backplane_value(whd_driver_t whd_driver, uint32_t address, uint8_t register_length,
@@ -117,6 +132,8 @@ extern whd_result_t whd_bus_print_stats(whd_driver_t whd_driver, whd_bool_t rese
 extern whd_result_t whd_bus_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_from_firmware);
 extern whd_result_t whd_bus_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
 extern whd_result_t whd_bus_irq_register(whd_driver_t whd_driver);
+extern whd_result_t whd_bus_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+											  whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
 /******************************************************
 *             Global variables
 ******************************************************/

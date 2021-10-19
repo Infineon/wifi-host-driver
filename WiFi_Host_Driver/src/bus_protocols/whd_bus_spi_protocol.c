@@ -26,6 +26,10 @@
 #include <stdlib.h>
 #include <string.h>  /* For memcpy */
 
+#include "cybsp.h"
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
+
+
 #include "cy_result.h"
 #include "cyabs_rtos.h"
 #include "cyhal_gpio.h"
@@ -45,7 +49,7 @@
 #include "whd_buffer_api.h"
 #include "whd_debug.h"
 #include "whd_types_int.h"
-
+#include "whd_resource_if.h"
 
 
 /******************************************************
@@ -87,6 +91,10 @@
 
 #define WHD_THREAD_POKE_TIMEOUT      (100)
 
+#define HOSTINTMASK (I_HMB_SW_MASK)
+
+#define BT_POLLING_TIME            (100)
+#define ALIGNED_ADDRESS            ( (uint32_t)0x3 )
 typedef enum
 {
     GSPI_INCREMENT_ADDRESS = 1, GSPI_FIXED_ADDRESS = 0
@@ -139,16 +147,27 @@ struct whd_bus_priv
 static whd_result_t whd_spi_download_firmware(whd_driver_t whd_driver);
 static whd_result_t whd_bus_spi_transfer_buffer(whd_driver_t whd_driver, whd_bus_transfer_direction_t direction,
                                                 whd_bus_function_t function, uint32_t address, whd_buffer_t buffer);
-
+static whd_result_t whd_bus_spi_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+                                                  whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
+static whd_result_t whd_bus_spi_write_wifi_nvram_image(whd_driver_t whd_driver);
+static whd_result_t whd_bus_spi_set_backplane_window(whd_driver_t whd_driver, uint32_t addr, uint32_t *curbase);
 /******************************************************
 *             Global Function definitions
 ******************************************************/
+uint32_t whd_bus_spi_bt_packet_available_to_read(whd_driver_t whd_driver);
 
 uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_config, cyhal_spi_t *spi_obj)
 {
     struct whd_bus_info *whd_bus_info;
 
-    if (whd_driver->bus_priv->spi_config.oob_config.host_oob_pin == CYHAL_NC_PIN_VALUE)
+    if (!whd_driver || !whd_spi_config)
+    {
+        WPRINT_WHD_ERROR( ("Invalid param in func %s at line %d \n",
+                           __func__, __LINE__) );
+        return WHD_WLAN_BADARG;
+    }
+
+    if (whd_spi_config->oob_config.host_oob_pin == CYHAL_NC_PIN_VALUE)
     {
         WPRINT_WHD_ERROR( ("OOB interrupt pin argument must be provided in %s\n", __FUNCTION__) );
         return WHD_BADARG;
@@ -211,6 +230,8 @@ uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_c
     whd_bus_info->whd_bus_reinit_stats_fptr = whd_bus_spi_reinit_stats;
     whd_bus_info->whd_bus_irq_register_fptr = whd_bus_spi_irq_register;
     whd_bus_info->whd_bus_irq_enable_fptr = whd_bus_spi_irq_enable;
+    whd_bus_info->whd_bus_download_resource_fptr = whd_bus_spi_download_resource;
+    whd_bus_info->whd_bus_set_backplane_window_fptr = whd_bus_spi_set_backplane_window;
 
     return WHD_SUCCESS;
 }
@@ -249,31 +270,16 @@ whd_result_t whd_bus_spi_send_buffer(whd_driver_t whd_driver, whd_buffer_t buffe
 static whd_result_t whd_bus_spi_transfer_buffer(whd_driver_t whd_driver, whd_bus_transfer_direction_t direction,
                                                 whd_bus_function_t function, uint32_t address, whd_buffer_t buffer)
 {
-    uint32_t *temp;
+    uint32_t *temp, addr;
     whd_result_t result;
     uint16_t newsize;
     whd_buffer_header_t *header = (whd_buffer_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
-    whd_bus_gspi_header_t *gspi_header =
-        (whd_bus_gspi_header_t *)( (char *)header->bus_header + MAX_BUS_HEADER_SIZE - sizeof(whd_bus_gspi_header_t) );
+    whd_buffer_header_t *aligned_header = (whd_buffer_header_t *)whd_driver->aligned_addr;
+    whd_bus_gspi_header_t *gspi_header;
     size_t transfer_size;
 
     uint16_t size = ( uint16_t )(whd_buffer_get_current_piece_size(whd_driver, buffer) - sizeof(whd_buffer_header_t) );
-
-    /* Form the gSPI header */
-    *gspi_header =
-        ( whd_bus_gspi_header_t )( ( uint32_t )( (whd_bus_gspi_command_mapping[(int)direction] & 0x1) << 31 ) |
-                                   ( uint32_t )( (GSPI_INCREMENT_ADDRESS & 0x1) << 30 ) |
-                                   ( uint32_t )( (function & 0x3) << 28 ) |
-                                   ( uint32_t )( (address & 0x1FFFF) << 11 ) | ( uint32_t )( (size & 0x7FF) << 0 ) );
-
-    /* Reshuffle the bits if we're not in 32 bit mode */
-    if (whd_driver->bus_gspi_32bit == WHD_FALSE)
-    {
-        /* Note: This typecast should always be valid if the buffer containing the GSpi packet has been correctly declared as 32-bit aligned */
-        temp = (uint32_t *)gspi_header;
-        *temp = H32TO16LE(*temp);
-    }
-
+    CHECK_PACKET_NULL(header, WHD_NO_REGISTER_FUNCTION_POINTER);
     /* Round size up to 32-bit alignment */
     newsize = (uint16_t)ROUND_UP(size, 4);
 
@@ -308,12 +314,46 @@ static whd_result_t whd_bus_spi_transfer_buffer(whd_driver_t whd_driver, whd_bus
     }
 
     transfer_size = (size_t)(newsize + sizeof(whd_bus_gspi_header_t) );
+    gspi_header =
+        (whd_bus_gspi_header_t *)( (char *)header->bus_header + MAX_BUS_HEADER_SIZE -
+                                   sizeof(whd_bus_gspi_header_t) );
+    /* Form the gSPI header */
+    addr = (uint32_t )header;
+    /* check 4byte alignment */
+    if ( (addr & ALIGNED_ADDRESS) )
+    {
+        if (aligned_header)
+        {
+            /* use memcpy to get aligned event message */
+            memcpy(aligned_header, header, sizeof(*aligned_header) + size);
+            gspi_header =
+                (whd_bus_gspi_header_t *)( (char *)aligned_header->bus_header + MAX_BUS_HEADER_SIZE -
+                                           sizeof(whd_bus_gspi_header_t) );
+        }
+    }
+    /* Form the gSPI header */
+    *gspi_header =
+        ( whd_bus_gspi_header_t )( ( uint32_t )( (whd_bus_gspi_command_mapping[(int)direction] & 0x1) << 31 ) |
+                                   ( uint32_t )( (GSPI_INCREMENT_ADDRESS & 0x1) << 30 ) |
+                                   ( uint32_t )( (function & 0x3) << 28 ) |
+                                   ( uint32_t )( (address & 0x1FFFF) << 11 ) | ( uint32_t )( (size & 0x7FF) << 0 ) );
+
+    /* Reshuffle the bits if we're not in 32 bit mode */
+    if (whd_driver->bus_gspi_32bit == WHD_FALSE)
+    {
+        /* Note: This typecast should always be valid if the buffer containing the GSpi packet has been correctly declared as 32-bit aligned */
+        temp = (uint32_t *)gspi_header;
+        *temp = H32TO16LE(*temp);
+    }
 
     /* Send the data */
     if (direction == BUS_READ)
     {
-        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, 0, (uint8_t *)gspi_header,
-                                    transfer_size, 0);
+        result =  cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL,
+                                     sizeof(whd_bus_gspi_header_t),
+                                     (uint8_t *)gspi_header,
+                                     transfer_size, 0);
+
     }
     else
     {
@@ -334,12 +374,44 @@ whd_result_t whd_bus_spi_ack_interrupt(whd_driver_t whd_driver, uint32_t intstat
     return whd_bus_write_register_value(whd_driver, BUS_FUNCTION, SPI_INTERRUPT_REGISTER, (uint8_t)2, intstatus);
 }
 
+uint32_t whd_bus_spi_bt_packet_available_to_read(whd_driver_t whd_driver)
+{
+    whd_bt_dev_t btdev = whd_driver->bt_dev;
+    uint32_t int_status = 0;
+
+    if (btdev && btdev->bt_int_cb)
+    {
+        if (whd_bus_spi_read_backplane_value(whd_driver, (uint32_t)SDIO_INT_STATUS(whd_driver), (uint8_t)4,
+                                             (uint8_t *)&int_status) != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("%s: Error reading interrupt status\n", __FUNCTION__) );
+            int_status = 0;
+        }
+
+        if ( (I_HMB_FC_CHANGE & int_status) != 0 )
+        {
+
+            if (whd_bus_spi_write_backplane_value(whd_driver, (uint32_t)SDIO_INT_STATUS(whd_driver), (uint8_t)4,
+                                                  int_status & I_HMB_FC_CHANGE)  != WHD_SUCCESS)
+            {
+                WPRINT_WHD_ERROR( ("%s: Error write interrupt status\n", __FUNCTION__) );
+                int_status = 0;
+            }
+            btdev->bt_int_cb(btdev->bt_data);
+        }
+    }
+
+    return 0;
+}
+
 uint32_t whd_bus_spi_packet_available_to_read(whd_driver_t whd_driver)
 {
     uint16_t interrupt_register;
+    uint32_t int_status = 0;
 
     CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
 
+    whd_bus_spi_bt_packet_available_to_read(whd_driver);
     /* Read the interrupt register */
     if (whd_bus_spi_read_register_value(whd_driver, BUS_FUNCTION, SPI_INTERRUPT_REGISTER, (uint8_t)2,
                                         (uint8_t *)&interrupt_register) != WHD_SUCCESS)
@@ -352,7 +424,25 @@ uint32_t whd_bus_spi_packet_available_to_read(whd_driver_t whd_driver)
         /* Error condition detected */
         WPRINT_WHD_DEBUG( ("Bus error condition detected\n") );
     }
+    /* Read the IntStatus */
+    if (whd_bus_spi_read_backplane_value(whd_driver, (uint32_t)SDIO_INT_STATUS(whd_driver), (uint8_t)4,
+                                         (uint8_t *)&int_status) != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("%s: Error reading interrupt status\n", __FUNCTION__) );
+        int_status = 0;
+        goto return_with_error;
+    }
 
+    if ( (HOSTINTMASK & int_status) != 0 )
+    {
+        if (whd_bus_spi_write_backplane_value(whd_driver, (uint32_t)SDIO_INT_STATUS(whd_driver), (uint8_t)4,
+                                              int_status & HOSTINTMASK)  != WHD_SUCCESS)
+        {
+            int_status = 0;
+            goto return_with_error;
+        }
+
+    }
     /* Clear interrupt register */
     if (interrupt_register != 0)
     {
@@ -415,7 +505,7 @@ whd_result_t whd_bus_spi_read_frame(whd_driver_t whd_driver, whd_buffer_t *buffe
 
     /* Allocate a suitable buffer */
     result = whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_RX,
-                                 (unsigned short)(whd_gspi_bytes_pending + WHD_BUS_GSPI_PACKET_OVERHEAD),
+                                 (uint16_t)(whd_gspi_bytes_pending + WHD_BUS_GSPI_PACKET_OVERHEAD),
                                  (whd_sdpcm_has_tx_packet(whd_driver) ? 0 : WHD_RX_BUF_TIMEOUT) );
 
     if (result != WHD_SUCCESS)
@@ -461,6 +551,7 @@ whd_result_t whd_bus_spi_init(whd_driver_t whd_driver)
     uint32_t interrupt_polarity = 0;
     uint16_t chip_id;
     size_t transfer_size = 12;
+    uint8_t *aligned_addr = NULL;
     whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
 
     whd_driver->bus_gspi_32bit = WHD_FALSE;
@@ -491,7 +582,8 @@ whd_result_t whd_bus_spi_init(whd_driver_t whd_driver)
                                                                 (uint32_t)( (SPI_READ_TEST_REGISTER & 0x1FFFFu) <<
                                                                             11 ) |
                                                                 (uint32_t)( (4u /*size*/ & 0x7FFu) << 0 ) ) );
-        CHECK_RETURN(cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, 0, init_data, transfer_size, 0) );
+        CHECK_RETURN(cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, sizeof(whd_bus_gspi_header_t),
+                                        init_data, transfer_size, 0) );
         loop_count++;
     } while ( (NULL == memchr(&init_data[4], SPI_READ_TEST_REG_LSB, (size_t)8) ) &&
               (NULL == memchr(&init_data[4], SPI_READ_TEST_REG_LSB_SFT1, (size_t)8) ) &&
@@ -627,10 +719,29 @@ whd_result_t whd_bus_spi_init(whd_driver_t whd_driver)
         WPRINT_WHD_ERROR( ("Timeout while waiting for function 2 to be ready\n") );
         return WHD_TIMEOUT;
     }
-
-    CHECK_RETURN(whd_chip_specific_init(whd_driver) );
-    CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
-
+    if (whd_driver->aligned_addr == NULL)
+    {
+        if ( (aligned_addr = malloc(WHD_LINK_MTU) ) == NULL )
+        {
+            WPRINT_WHD_ERROR( ("Memory allocation failed for aligned_addr in %s \n", __FUNCTION__) );
+            return WHD_MALLOC_FAILURE;
+        }
+        whd_driver->aligned_addr = aligned_addr;
+    }
+    result = whd_chip_specific_init(whd_driver);
+    if (result != WHD_SUCCESS)
+    {
+        free(whd_driver->aligned_addr);
+        whd_driver->aligned_addr = NULL;
+    }
+    CHECK_RETURN(result);
+    result = whd_ensure_wlan_bus_is_up(whd_driver);
+    if (result != WHD_SUCCESS)
+    {
+        free(whd_driver->aligned_addr);
+        whd_driver->aligned_addr = NULL;
+    }
+    CHECK_RETURN(result);
     return result;
 }
 
@@ -640,6 +751,11 @@ whd_result_t whd_bus_spi_deinit(whd_driver_t whd_driver)
 
     /* put device in reset. */
     //host_platform_reset_wifi (WHD_TRUE);
+    if (whd_driver->aligned_addr)
+    {
+        free(whd_driver->aligned_addr);
+        whd_driver->aligned_addr = NULL;
+    }
     whd_bus_set_resource_download_halt(whd_driver, WHD_FALSE);
     DELAYED_BUS_RELEASE_SCHEDULE (whd_driver, WHD_FALSE);
     return WHD_SUCCESS;
@@ -655,6 +771,7 @@ whd_result_t whd_bus_spi_wait_for_wlan_event(whd_driver_t whd_driver, cy_semapho
 {
     whd_result_t result = WHD_SUCCESS;
     uint32_t timeout_ms = 1;
+    whd_bt_dev_t btdev = whd_driver->bt_dev;
     uint32_t delayed_release_timeout_ms;
 
     REFERENCE_DEBUG_ONLY_VARIABLE(result);
@@ -663,6 +780,11 @@ whd_result_t whd_bus_spi_wait_for_wlan_event(whd_driver_t whd_driver, cy_semapho
     if (delayed_release_timeout_ms != 0)
     {
         timeout_ms = delayed_release_timeout_ms;
+    }
+    else if ( (btdev && !btdev->intr) )
+    {
+        timeout_ms = BT_POLLING_TIME;
+        whd_driver->thread_info.bus_interrupt = WHD_TRUE;
     }
     else
     {
@@ -706,7 +828,7 @@ whd_result_t whd_bus_spi_wait_for_wlan_event(whd_driver_t whd_driver, cy_semapho
 whd_result_t whd_bus_spi_write_register_value(whd_driver_t whd_driver, whd_bus_function_t function, uint32_t address,
                                               uint8_t value_length, uint32_t value)
 {
-    char gspi_internal_buffer[MAX_BUS_HEADER_SIZE + sizeof(uint32_t) + sizeof(uint32_t)];
+    char gspi_internal_buffer[MAX_BUS_HEADER_SIZE + sizeof(uint32_t) + sizeof(uint32_t)] = {0};
     whd_transfer_bytes_packet_t *internal_gspi_packet = (whd_transfer_bytes_packet_t *)gspi_internal_buffer;
 
     /* Flip the bytes if we're not in 32 bit mode */
@@ -732,7 +854,7 @@ whd_result_t whd_bus_spi_read_register_value(whd_driver_t whd_driver, whd_bus_fu
     whd_result_t result;
     uint8_t padding = 0;
 
-    char gspi_internal_buffer[MAX_BUS_HEADER_SIZE + sizeof(uint32_t) + sizeof(uint32_t)];
+    char gspi_internal_buffer[MAX_BUS_HEADER_SIZE + sizeof(uint32_t) + sizeof(uint32_t)] = {0};
 
     /* Clear the receiving part of memory and set the value_length */
     if (function == BACKPLANE_FUNCTION)
@@ -808,6 +930,7 @@ whd_result_t whd_bus_spi_transfer_bytes(whd_driver_t whd_driver, whd_bus_transfe
         (whd_bus_gspi_header_t *)( (char *)packet->data - sizeof(whd_bus_gspi_header_t) );
     ENABLE_COMPILER_WARNING(diag_suppress = Pa039)
     size_t transfer_size;
+
     *gspi_header =
         ( whd_bus_gspi_header_t )( ( uint32_t )( (whd_bus_gspi_command_mapping[(int)direction] & 0x1) << 31 ) |
                                    ( uint32_t )( (GSPI_INCREMENT_ADDRESS & 0x1) << 30 ) |
@@ -871,7 +994,9 @@ whd_result_t whd_bus_spi_transfer_bytes(whd_driver_t whd_driver, whd_bus_transfe
     /* Send the data */
     if (direction == BUS_READ)
     {
-        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL, 0, (uint8_t *)gspi_header,
+        result = cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, NULL,
+                                    sizeof(whd_bus_gspi_header_t),
+                                    (uint8_t *)gspi_header,
                                     transfer_size, 0);
     }
     else
@@ -901,7 +1026,7 @@ static whd_result_t whd_spi_download_firmware(whd_driver_t whd_driver)
     CHECK_RETURN(whd_chip_specific_socsram_init(whd_driver) );
 
     CHECK_RETURN(whd_bus_write_wifi_firmware_image(whd_driver) );
-    CHECK_RETURN(whd_bus_write_wifi_nvram_image(whd_driver) );
+    CHECK_RETURN(whd_bus_spi_write_wifi_nvram_image(whd_driver) );
 
     /* Take the ARM core out of reset */
     CHECK_RETURN(whd_reset_device_core(whd_driver, WLAN_ARM_CORE, WLAN_CORE_FLAG_NONE) );
@@ -967,7 +1092,29 @@ whd_result_t whd_bus_spi_sleep(whd_driver_t whd_driver)
 
 void whd_bus_spi_init_stats(whd_driver_t whd_driver)
 {
+    whd_bt_dev_t btdev = whd_driver->bt_dev;
 
+    if (btdev && btdev->intr)
+    {
+        whd_result_t res;
+        /* Enable F1 INT in order to receive interrupt from BT FW with HMB_FC_CHANGED in SPI */
+        res = whd_bus_write_register_value(whd_driver, BUS_FUNCTION, (uint32_t)SPI_INTERRUPT_ENABLE_REGISTER,
+                                           (uint8_t)2,
+                                           ( uint32_t )(F1_INTR | F2_F3_FIFO_RD_UNDERFLOW | F2_F3_FIFO_WR_OVERFLOW |
+                                                        COMMAND_ERROR | DATA_ERROR | F2_PACKET_AVAILABLE |
+                                                        F1_OVERFLOW) );
+        if (res != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("spi interrupt register failed to enable\n") );
+        }
+
+        res = whd_bus_spi_write_backplane_value(whd_driver, SDIO_INT_HOST_MASK(
+                                                    whd_driver), (uint8_t)4, I_HMB_FC_CHANGE);
+        if (res != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("sdio int host mask failed to enable\n") );
+        }
+    }
 }
 
 whd_result_t whd_bus_spi_print_stats(whd_driver_t whd_driver, whd_bool_t reset_after_print)
@@ -996,13 +1143,21 @@ uint32_t whd_bus_spi_get_max_transfer_size(whd_driver_t whd_driver)
     return WHD_BUS_SPI_MAX_BACKPLANE_TRANSFER_SIZE;
 }
 
+#if (CYHAL_API_VERSION >= 2)
+static void whd_bus_spi_oob_irq_handler(void *arg, cyhal_gpio_event_t event)
+#else
 static void whd_bus_spi_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event)
+#endif
 {
     whd_driver_t whd_driver = (whd_driver_t)arg;
     const whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
+#if (CYHAL_API_VERSION >= 2)
+    const cyhal_gpio_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
+                                              ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
+#else
     const cyhal_gpio_irq_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
                                                   ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-
+#endif
     if (event != expected_event)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
@@ -1020,20 +1175,195 @@ whd_result_t whd_bus_spi_irq_register(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
 
-    cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_ANALOG, 0);
+    cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_ANALOG,
+                    (config->is_falling_edge == WHD_TRUE) ? 1 : 0);
+#if (CYHAL_API_VERSION >= 2)
+    static cyhal_gpio_callback_data_t cbdata;
+    cbdata.callback = whd_bus_spi_oob_irq_handler;
+    cbdata.callback_arg = whd_driver;
+    cyhal_gpio_register_callback(config->host_oob_pin, &cbdata);
+#else
     cyhal_gpio_register_irq(config->host_oob_pin, WLAN_INTR_PRIORITY, whd_bus_spi_oob_irq_handler,
                             whd_driver);
-
+#endif
     return WHD_TRUE;
 }
 
 whd_result_t whd_bus_spi_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
+#if (CYHAL_API_VERSION >= 2)
+    const cyhal_gpio_event_t event =
+        (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
+
+    cyhal_gpio_enable_event(config->host_oob_pin, event, WLAN_INTR_PRIORITY, (enable == WHD_TRUE) ? true : false);
+#else
     const cyhal_gpio_irq_event_t event =
         (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
 
     cyhal_gpio_irq_enable(config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
-
+#endif
     return WHD_TRUE;
 }
+
+static whd_result_t whd_bus_spi_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+                                                  whd_bool_t direct_resource, uint32_t address, uint32_t image_size)
+{
+    whd_result_t result = WHD_SUCCESS;
+    uint8_t *image;
+    uint32_t blocks_count = 0;
+    uint32_t i;
+    uint32_t size_out;
+    uint32_t reset_instr = 0;
+
+    result = whd_get_resource_no_of_blocks(whd_driver, resource, &blocks_count);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Fatal error: download_resource blocks count not known, %s failed at line %d \n", __func__,
+                           __LINE__) );
+        goto exit;
+    }
+
+    for (i = 0; i < blocks_count; i++)
+    {
+        CHECK_RETURN(whd_get_resource_block(whd_driver, resource, i, (const uint8_t **)&image, &size_out) );
+        if ( (resource == WHD_RESOURCE_WLAN_FIRMWARE) && (reset_instr == 0) )
+        {
+            /* Copy the starting address of the firmware into a global variable */
+            reset_instr = *( (uint32_t *)(&image[0]) );
+        }
+        result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_WRITE, address, size_out, &image[0]);
+        if (result != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("%s: Failed to write firmware image\n", __FUNCTION__) );
+            goto exit;
+        }
+        address += size_out;
+    }
+
+    /* Below part of the code is applicable to arm_CR4 type chips only
+     * The CR4 chips by default firmware is not loaded at 0. So we need
+     * load the first 32 bytes with the offset of the firmware load address
+     * which is been copied before during the firmware download
+     */
+    if ( (address != 0) && (reset_instr != 0) )
+    {
+        /* write address 0 with reset instruction */
+        result = whd_bus_write_backplane_value(whd_driver, 0, sizeof(reset_instr), reset_instr);
+
+        if (result == WHD_SUCCESS)
+        {
+            uint32_t tmp;
+
+            /* verify reset instruction value */
+            result = whd_bus_read_backplane_value(whd_driver, 0, sizeof(tmp), (uint8_t *)&tmp);
+
+            if ( (result == WHD_SUCCESS) && (tmp != reset_instr) )
+            {
+                WPRINT_WHD_ERROR( ("%s: Failed to write 0x%08" PRIx32 " to addr 0\n", __FUNCTION__, reset_instr) );
+                WPRINT_WHD_ERROR( ("%s: contents of addr 0 is 0x%08" PRIx32 "\n", __FUNCTION__, tmp) );
+                return WHD_WLAN_SDIO_ERROR;
+            }
+        }
+    }
+exit: return result;
+}
+
+static whd_result_t whd_bus_spi_write_wifi_nvram_image(whd_driver_t whd_driver)
+{
+    uint32_t img_base;
+    uint32_t img_end;
+    uint32_t image_size;
+
+    /* Get the size of the variable image */
+    CHECK_RETURN(whd_resource_size(whd_driver, WHD_RESOURCE_WLAN_NVRAM, &image_size) );
+
+    /* Round up the size of the image */
+    image_size = ROUND_UP(image_size, 4);
+
+    /* Write image */
+    img_end = GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4;
+    img_base = (img_end - image_size);
+    img_base += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
+
+    CHECK_RETURN(whd_bus_spi_download_resource(whd_driver, WHD_RESOURCE_WLAN_NVRAM, WHD_FALSE, img_base, image_size) );
+
+    /* Write the variable image size at the end */
+    image_size = (~(image_size / 4) << 16) | (image_size / 4);
+
+    img_end += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
+
+    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, (uint32_t)img_end, 4, image_size) );
+    return WHD_SUCCESS;
+}
+
+/*
+ * Update the backplane window registers
+ */
+static whd_result_t whd_bus_spi_set_backplane_window(whd_driver_t whd_driver, uint32_t addr, uint32_t *curbase)
+{
+    whd_result_t result = WHD_BUS_WRITE_REGISTER_ERROR;
+    uint32_t base = addr & ( (uint32_t) ~BACKPLANE_ADDRESS_MASK );
+    const uint32_t upper_32bit_mask = 0xFF000000;
+    const uint32_t upper_middle_32bit_mask = 0x00FF0000;
+    const uint32_t lower_middle_32bit_mask = 0x0000FF00;
+
+    if (base == *curbase)
+    {
+        return WHD_SUCCESS;
+    }
+    if ( (base & upper_32bit_mask) != (*curbase & upper_32bit_mask) )
+    {
+        if (WHD_SUCCESS !=
+            (result = whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_BACKPLANE_ADDRESS_HIGH,
+                                                   (uint8_t)1, (base >> 24) ) ) )
+        {
+            WPRINT_WHD_ERROR( ("Failed to write register value to the bus, %s failed at %d \n", __func__,
+                               __LINE__) );
+            return result;
+        }
+        /* clear old */
+        *curbase &= ~upper_32bit_mask;
+        /* set new */
+        *curbase |= (base & upper_32bit_mask);
+    }
+
+    if ( (base & upper_middle_32bit_mask) !=
+         (*curbase & upper_middle_32bit_mask) )
+    {
+        if (WHD_SUCCESS !=
+            (result = whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_BACKPLANE_ADDRESS_MID,
+                                                   (uint8_t)1, (base >> 16) ) ) )
+        {
+            WPRINT_WHD_ERROR( ("Failed to write register value to the bus, %s failed at %d \n", __func__,
+                               __LINE__) );
+            return result;
+        }
+        /* clear old */
+        *curbase &= ~upper_middle_32bit_mask;
+        /* set new */
+        *curbase |= (base & upper_middle_32bit_mask);
+    }
+
+    if ( (base & lower_middle_32bit_mask) !=
+         (*curbase & lower_middle_32bit_mask) )
+    {
+        if (WHD_SUCCESS !=
+            (result = whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_BACKPLANE_ADDRESS_LOW,
+                                                   (uint8_t)1, (base >> 8) ) ) )
+        {
+            WPRINT_WHD_ERROR( ("Failed to write register value to the bus, %s failed at %d \n", __func__,
+                               __LINE__) );
+            return result;
+        }
+
+        /* clear old */
+        *curbase &= ~lower_middle_32bit_mask;
+        /* set new */
+        *curbase |= (base & lower_middle_32bit_mask);
+    }
+
+    return WHD_SUCCESS;
+}
+
+#endif /* (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE) */

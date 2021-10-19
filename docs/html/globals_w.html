@@ -27,9 +27,8 @@
           <tr style="height:20px"><td>&nbsp;</td></tr>
           <tr style="border-collapse: collapse; padding: 0;">
             <td style="width:20px"></td>
-            <td style="width:117px"><img src="cypress_logo.png" alt="Cypress Logo" /></td>
-            <td style="width:20px;background-image:url('cypresslogo_line.png');"></td>
-            <td style="vertical-align:middle; text-align:center; font: bold 25px/100% Verdana, Arial, Helvetica, sans-serif;background-image:url('cypresslogo_line.png');">
+            <td style="width:117px"><img src="ifx_logo.png" alt="Infineon Logo" /></td>
+            <td style="vertical-align:middle; text-align:center; font: bold 25px/100% Verdana, Arial, Helvetica, sans-serif;">
               Wi-Fi Host Driver (WHD) Public API Reference Guide
             </td>
           </tr>
@@ -196,6 +195,12 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>WHD_BSS_TYPE_UNKNOWN
 : <a class="el" href="whd__types_8h.html#a3070614a06a8989b9eb207e9f1286c5fa6711a29485a893344ddebf8fa099ec48">whd_types.h</a>
 </li>
+<li>whd_bt_dev_t
+: <a class="el" href="whd_8h.html#ad739b6e984d3734516e40194e903f94e">whd.h</a>
+</li>
+<li>whd_bt_info_t
+: <a class="el" href="whd_8h.html#abb71e6e14de31e2b2da19bfb425a590e">whd.h</a>
+</li>
 <li>whd_btc_lescan_params_t
 : <a class="el" href="whd__types_8h.html#a98dae084aa15394bf6f8e907e09233a4">whd_types.h</a>
 </li>
@@ -232,14 +237,11 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>whd_bus_sdio_detach()
 : <a class="el" href="group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da">whd_wifi_api.h</a>
 </li>
-<li>whd_bus_spi_attach()
-: <a class="el" href="group__busapi.html#ga16b799bb65db52fb4518e1fbc203fe53">whd_wifi_api.h</a>
-</li>
-<li>whd_bus_spi_detach()
-: <a class="el" href="group__busapi.html#gae83aaeef8c3d922cbb839b75ab289d13">whd_wifi_api.h</a>
-</li>
 <li>whd_bus_transfer_direction_t
 : <a class="el" href="whd__types_8h.html#afc8e8073d434bf124933526a8184313a">whd_types.h</a>
+</li>
+<li>whd_bus_type_t
+: <a class="el" href="whd__types_8h.html#a6158197f83b368e63fa825eb34602dcd">whd_types.h</a>
 </li>
 <li>WHD_BUS_WRITE_REGISTER_ERROR
 : <a class="el" href="whd__types_8h.html#a659306d5da66cf4bb2d2a5a8c7f530a2">whd_types.h</a>
@@ -1102,6 +1104,9 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>whd_listen_interval_time_unit_t
 : <a class="el" href="whd__types_8h.html#a98ac1a2590358bafac6a2da287034638">whd_types.h</a>
 </li>
+<li>whd_m2m_config_t
+: <a class="el" href="whd__types_8h.html#ab5fa3b42c3b6290fc944c79deb812c8c">whd_types.h</a>
+</li>
 <li>WHD_MALLOC_FAILURE
 : <a class="el" href="whd__types_8h.html#a6450f155199992d564d036f64963cd54">whd_types.h</a>
 </li>
@@ -1124,7 +1129,7 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 : <a class="el" href="group__buffif.html#gga44a64c51498b204ceef5555209e29452a11af875b5bd8b18c4a0c878af601d1ca">whd_network_types.h</a>
 </li>
 <li>whd_network_send_ethernet_data()
-: <a class="el" href="group__netif.html#ga3642a8b0fe0df7449730bec92e09c7d4">whd_network_types.h</a>
+: <a class="el" href="group__netif.html#gafdfee8583f09d475ae4eafee5386f1b6">whd_network_types.h</a>
 </li>
 <li>WHD_NETWORK_TX
 : <a class="el" href="group__buffif.html#gga44a64c51498b204ceef5555209e29452a3d24bf5423cc175fe6ee80bd359dc5bd">whd_network_types.h</a>
@@ -1137,6 +1142,9 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 </li>
 <li>WHD_NO_PACKET_TO_SEND
 : <a class="el" href="whd__types_8h.html#a1e3927ec83cfaac801196210b8a9af45">whd_types.h</a>
+</li>
+<li>WHD_NO_REGISTER_FUNCTION_POINTER
+: <a class="el" href="whd__types_8h.html#ab05f43e01bbb9228b3ccf13f30861d07">whd_types.h</a>
 </li>
 <li>WHD_NOT_AUTHENTICATED
 : <a class="el" href="whd__types_8h.html#ac2e279a3f388f66c076d4dd73310a27b">whd_types.h</a>
@@ -1430,7 +1438,7 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 : <a class="el" href="group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343">whd_wifi_api.h</a>
 </li>
 <li>whd_tko_param()
-: <a class="el" href="group__wifiutilities.html#ga482c8ffcb1166f2f161e4ad67f8ef9d5">whd_wifi_api.h</a>
+: <a class="el" href="group__wifiutilities.html#gaf6c70f49c254a8d7ef7397e7d83e0c9b">whd_wifi_api.h</a>
 </li>
 <li>whd_tko_toggle()
 : <a class="el" href="group__wifiutilities.html#ga189ed043d5ce9cf8d1a0845484a96d6b">whd_wifi_api.h</a>
@@ -1487,10 +1495,10 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 : <a class="el" href="group__wifisoftap.html#gad9ad2649c18db8773351a5938e7930e4">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_deregister_error_handler()
-: <a class="el" href="group__event.html#gaa7f28d32a8c06c7df471636de6f4dec6">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aa7f28d32a8c06c7df471636de6f4dec6">whd_events.h</a>
 </li>
 <li>whd_wifi_deregister_event_handler()
-: <a class="el" href="group__event.html#gae415f1f3fcbbfe506aa0e656bf8debb3">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#ae415f1f3fcbbfe506aa0e656bf8debb3">whd_events.h</a>
 </li>
 <li>whd_wifi_disable_powersave()
 : <a class="el" href="group__wifipowersave.html#gab9af7ef8dac544f2bb8871259f85c437">whd_wifi_api.h</a>
@@ -1595,7 +1603,7 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 : <a class="el" href="group__wifijoin.html#ga82d8c980d15acf0e6e18b56423f4e52b">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_scan_synch()
-: <a class="el" href="group__wifijoin.html#gaef3dc76f682c6c193df94897e9d0b71f">whd_wifi_api.h</a>
+: <a class="el" href="group__wifijoin.html#ga2752d761f639411027fffa67038d8a61">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_send_action_frame()
 : <a class="el" href="group__wifiutilities.html#ga2cf8ecd7c319660833bd30a060990dca">whd_wifi_api.h</a>
@@ -1610,10 +1618,10 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 : <a class="el" href="group__wifimanagement.html#ga412c2d4653a7c36329c6cf78be344336">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_set_error_handler()
-: <a class="el" href="group__event.html#ga2072e91b840217584cfd60ad540b3146">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#a2072e91b840217584cfd60ad540b3146">whd_events.h</a>
 </li>
 <li>whd_wifi_set_event_handler()
-: <a class="el" href="group__event.html#ga4175c3ef9bb16601fabc605fadeaf8d8">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#a4175c3ef9bb16601fabc605fadeaf8d8">whd_events.h</a>
 </li>
 <li>whd_wifi_set_ioctl_buffer()
 : <a class="el" href="group__wifiioctl.html#ga5d7aec7622caacf4a0642cf1da1fa647">whd_wifi_api.h</a>
@@ -1913,52 +1921,52 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 : <a class="el" href="whd__events_8h.html#a5a7e4c4f047fff0443e0e7037e35babe">whd_events.h</a>
 </li>
 <li>WLC_SUP_AUTHENTICATED
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e">whd_events.h</a>
 </li>
 <li>WLC_SUP_AUTHENTICATING
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce">whd_events.h</a>
 </li>
 <li>WLC_SUP_CONNECTING
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147">whd_events.h</a>
 </li>
 <li>WLC_SUP_DISCONNECTED
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680">whd_events.h</a>
 </li>
 <li>WLC_SUP_IDREQUIRED
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYED
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE_PREP_G2
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE_PREP_M2
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE_PREP_M4
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE_WAIT_G1
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE_WAIT_M1
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe">whd_events.h</a>
 </li>
 <li>WLC_SUP_KEYXCHANGE_WAIT_M3
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6">whd_events.h</a>
 </li>
 <li>WLC_SUP_LAST_BASIC_STATE
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df">whd_events.h</a>
 </li>
 <li>WLC_SUP_STATUS_OFFSET
 : <a class="el" href="whd__events_8h.html#ac97c29fe35bab5af9cc08a9eb1fedffc">whd_events.h</a>
 </li>
 <li>WLC_SUP_TIMEOUT
-: <a class="el" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240">whd_events.h</a>
+: <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240">whd_events.h</a>
 </li>
 <li>WPA2_SECURITY
 : <a class="el" href="whd__types_8h.html#a8875737a0403d2136a69bbc96401cccf">whd_types.h</a>
@@ -1978,7 +1986,7 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
     <!-- start footer part -->
     <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
       <ul>
-        <li class="footer">Copyright Cypress Corporation.</li>
+        <li class="footer">Copyright Infineon Technologies.</li>
       </ul>
     </div>
   </body>

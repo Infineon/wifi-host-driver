@@ -77,6 +77,13 @@ typedef struct
     void *empty;
 } cyhal_spi_t;
 
+/** M2M/DMA object */
+typedef struct
+{
+    /* TODO: replace with port specific items */
+    void *empty;
+} cyhal_m2m_t;
+
 /** \} group_hal_hw_types_data_structures */
 
 #if defined(__cplusplus)

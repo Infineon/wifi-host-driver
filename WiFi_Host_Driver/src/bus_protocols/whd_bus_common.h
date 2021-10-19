@@ -60,7 +60,6 @@ extern void whd_delayed_bus_release_schedule_update(whd_driver_t whd_driver, whd
 /* handle delayed sleep of bus */
 extern uint32_t     whd_bus_handle_delayed_release(whd_driver_t whd_driver);
 whd_bool_t whd_bus_platform_mcu_power_save_deep_sleep_enabled(whd_driver_t whd_driver);
-
 #ifdef __cplusplus
 } /*extern "C" */
 #endif

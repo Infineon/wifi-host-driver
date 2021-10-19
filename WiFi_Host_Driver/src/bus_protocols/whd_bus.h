@@ -20,6 +20,7 @@
  */
 
 #include "whd_bus_protocol_interface.h"
+#include "whd_resource_api.h"
 
 #ifndef INCLUDED_WHD_BUS_H_
 #define INCLUDED_WHD_BUS_H_
@@ -45,6 +46,7 @@ typedef whd_bool_t (*whd_bus_wake_interrupt_present_t)(whd_driver_t whd_driver);
 typedef uint32_t (*whd_bus_packet_available_to_read_t)(whd_driver_t whd_driver);
 typedef whd_result_t (*whd_bus_read_frame_t)(whd_driver_t whd_driver, whd_buffer_t *buffer);
 
+typedef whd_result_t (*whd_bus_set_backplane_window_t)(whd_driver_t whd_driver, uint32_t addr, uint32_t *cur_base_addr);
 typedef whd_result_t (*whd_bus_write_backplane_value_t)(whd_driver_t whd_driver, uint32_t address,
                                                         uint8_t register_length, uint32_t value);
 typedef whd_result_t (*whd_bus_read_backplane_value_t)(whd_driver_t whd_driver, uint32_t address,
@@ -75,6 +77,9 @@ typedef whd_result_t (*whd_bus_print_stats_t)(whd_driver_t whd_driver, whd_bool_
 typedef whd_result_t (*whd_bus_reinit_stats_t)(whd_driver_t whd_driver, whd_bool_t wake_from_firmware);
 typedef whd_result_t (*whd_bus_irq_register_t)(whd_driver_t whd_driver);
 typedef whd_result_t (*whd_bus_irq_enable_t)(whd_driver_t whd_driver, whd_bool_t enable);
+typedef whd_result_t (*whd_bus_download_resource_t)(whd_driver_t whd_driver, whd_resource_type_t resource,
+                                                    whd_bool_t direct_resource, uint32_t address,
+                                                    uint32_t image_size);
 
 typedef struct whd_bus_info
 {
@@ -88,6 +93,7 @@ typedef struct whd_bus_info
     whd_bus_packet_available_to_read_t whd_bus_packet_available_to_read_fptr;
     whd_bus_read_frame_t whd_bus_read_frame_fptr;
 
+    whd_bus_set_backplane_window_t whd_bus_set_backplane_window_fptr;
     whd_bus_write_backplane_value_t whd_bus_write_backplane_value_fptr;
     whd_bus_read_backplane_value_t whd_bus_read_backplane_value_fptr;
 
@@ -113,6 +119,7 @@ typedef struct whd_bus_info
     whd_bus_reinit_stats_t whd_bus_reinit_stats_fptr;
     whd_bus_irq_register_t whd_bus_irq_register_fptr;
     whd_bus_irq_enable_t whd_bus_irq_enable_fptr;
+    whd_bus_download_resource_t whd_bus_download_resource_fptr;
 } whd_bus_info_t;
 
 

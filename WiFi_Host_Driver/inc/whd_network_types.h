@@ -219,7 +219,7 @@ struct whd_netif_funcs
  *  @return WHD_SUCCESS or Error code
  *
  */
-extern void whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer);
+extern whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer);
 /*  @} */
 
 

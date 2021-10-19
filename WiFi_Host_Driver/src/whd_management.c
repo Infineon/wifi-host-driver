@@ -176,13 +176,23 @@ uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_conf
 uint32_t whd_deinit(whd_interface_t ifp)
 {
     uint8_t i;
-    whd_driver_t whd_driver = ifp->whd_driver;
+    whd_driver_t whd_driver;
 
-    if (whd_driver->internal_info.whd_wlan_status.state == WLAN_UP)
+    CHECK_IFP_NULL(ifp);
+    whd_driver = ifp->whd_driver;
+
+    if (whd_driver->internal_info.whd_wlan_status.state != WLAN_OFF)
     {
-        CHECK_RETURN(whd_wifi_set_ioctl_buffer(ifp, WLC_DOWN, NULL, 0) );
-        whd_driver->internal_info.whd_wlan_status.state = WLAN_DOWN;
+        WPRINT_WHD_ERROR( ("Could not deinit whd because wifi power is on\n") );
+        return WHD_WLAN_NOTDOWN;
     }
+
+    if ( (whd_driver->bus_priv != NULL) || (whd_driver->bus_if != NULL) )
+    {
+        WPRINT_WHD_ERROR( ("Could not deinit whd because bus is attaced\n") );
+        return WHD_WLAN_NOTDOWN;
+    }
+
     for (i = 0; i < WHD_INTERFACE_MAX; i++)
     {
         if (whd_driver->iflist[i] != NULL)
@@ -194,12 +204,6 @@ uint32_t whd_deinit(whd_interface_t ifp)
 
     whd_cdc_bdc_info_deinit(whd_driver);
     whd_bus_common_info_deinit(whd_driver);
-#ifdef WLAN_BUS_TYPE_SDIO
-    whd_bus_sdio_detach(whd_driver);
-#endif
-#ifdef WLAN_BUS_TYPE_SPI
-    whd_bus_spi_detach(whd_driver);
-#endif
     free(whd_driver);
 
     return WHD_SUCCESS;
@@ -311,6 +315,11 @@ uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
         return retval;
     }
 
+    retval = whd_bus_share_bt_init(whd_driver);
+    if (retval != WHD_SUCCESS)
+    {
+        WPRINT_WHD_INFO( ("Shared bus for bt is fail\n") );
+    }
     /* Turn off SDPCM TX Glomming */
     /* Note: This is only required for later chips.
      * The 4319 has glomming off by default however the 43362 has it on by default.
@@ -460,6 +469,10 @@ uint32_t whd_wifi_off(whd_interface_t ifp)
     {
         return WHD_SUCCESS;
     }
+
+    /* Set wlc down before turning off the device */
+    CHECK_RETURN(whd_wifi_set_ioctl_buffer(ifp, WLC_DOWN, NULL, 0) );
+    whd_driver->internal_info.whd_wlan_status.state = WLAN_DOWN;
 
     /* Disable SDIO/SPI interrupt */
     whd_bus_irq_enable(whd_driver, WHD_FALSE);

@@ -48,7 +48,7 @@
 /******************************************************
 *             Static Function Prototypes
 ******************************************************/
-static void whd_thread_func(whd_thread_arg_t thread_input);
+static void whd_thread_func(cy_thread_arg_t thread_input);
 
 /******************************************************
 *             Global Functions
@@ -276,11 +276,11 @@ void whd_thread_notify(whd_driver_t whd_driver)
  * @param thread_input  : unused parameter needed to match thread prototype.
  *
  */
-static void whd_thread_func(whd_thread_arg_t thread_input)
+static void whd_thread_func(cy_thread_arg_t thread_input)
 {
     int8_t rx_status;
     int8_t tx_status;
-    uint8_t rx_cnt;
+    uint8_t rx_cnt, rx_over_bound = 0;
     uint8_t bus_fail = 0;
     uint8_t error_type;
     uint32_t status;
@@ -304,8 +304,9 @@ static void whd_thread_func(whd_thread_arg_t thread_input)
 
             /* Check if the interrupt indicated there is a packet to read */
             status = whd_bus_packet_available_to_read(whd_driver);
-            if ( (status != 0) && (status != WHD_BUS_FAIL) )
+            if ( ( (status != 0) && (status != WHD_BUS_FAIL) ) || rx_over_bound )
             {
+                rx_over_bound = 0;
                 /* Receive all available packets */
                 do
                 {
@@ -332,6 +333,7 @@ static void whd_thread_func(whd_thread_arg_t thread_input)
         if (rx_cnt >= WHD_THREAD_RX_BOUND)
         {
             thread_info->bus_interrupt = WHD_TRUE;
+            rx_over_bound = 1;
             continue;
         }
         if (bus_fail > WHD_MAX_BUS_FAIL)

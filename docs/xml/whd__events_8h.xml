@@ -4,36 +4,41 @@
     <compoundname>whd_events.h</compoundname>
     <includes refid="whd_8h" local="yes">whd.h</includes>
     <incdepgraph>
-      <node id="15">
+      <node id="16">
         <label>stdint.h</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>whd_types.h</label>
         <link refid="whd__types_8h"/>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-      </node>
-      <node id="12">
-        <label>whd_events.h</label>
-        <link refid="whd__events_8h"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
-      </node>
-      <node id="16">
-        <label>cy_result.h</label>
-      </node>
-      <node id="17">
-        <label>cyhal_hw_types.h</label>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
       <node id="13">
-        <label>whd.h</label>
-        <link refid="whd_8h"/>
+        <label>whd_events.h</label>
+        <link refid="whd__events_8h"/>
         <childnode refid="14" relation="include">
         </childnode>
+      </node>
+      <node id="18">
+        <label>cy_result.h</label>
+      </node>
+      <node id="19">
+        <label>cyhal_hw_types.h</label>
+      </node>
+      <node id="14">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>cybsp.h</label>
       </node>
     </incdepgraph>
     <innerclass refid="structwhd__event__eth__hdr" prot="public">whd_event_eth_hdr</innerclass>
@@ -491,7 +496,7 @@
       <memberdef kind="enum" id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4c" prot="public" static="no" strong="no">
         <type></type>
         <name>sup_auth_status</name>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680" prot="public">
           <name>WLC_SUP_DISCONNECTED</name>
           <initializer>= 0 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -500,7 +505,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147" prot="public">
           <name>WLC_SUP_CONNECTING</name>
           <initializer>= 1 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -509,7 +514,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce" prot="public">
           <name>WLC_SUP_IDREQUIRED</name>
           <initializer>= 2 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -518,7 +523,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce" prot="public">
           <name>WLC_SUP_AUTHENTICATING</name>
           <initializer>= 3 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -527,7 +532,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e" prot="public">
           <name>WLC_SUP_AUTHENTICATED</name>
           <initializer>= 4 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -536,7 +541,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938" prot="public">
           <name>WLC_SUP_KEYXCHANGE</name>
           <initializer>= 5 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -545,7 +550,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a" prot="public">
           <name>WLC_SUP_KEYED</name>
           <initializer>= 6 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -554,7 +559,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240" prot="public">
           <name>WLC_SUP_TIMEOUT</name>
           <initializer>= 7 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -563,7 +568,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df" prot="public">
           <name>WLC_SUP_LAST_BASIC_STATE</name>
           <initializer>= 8 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -572,7 +577,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe" prot="public">
           <name>WLC_SUP_KEYXCHANGE_WAIT_M1</name>
           <initializer>= WLC_SUP_AUTHENTICATED</initializer>
           <briefdescription>
@@ -581,7 +586,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623" prot="public">
           <name>WLC_SUP_KEYXCHANGE_PREP_M2</name>
           <initializer>= WLC_SUP_KEYXCHANGE</initializer>
           <briefdescription>
@@ -590,7 +595,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6" prot="public">
           <name>WLC_SUP_KEYXCHANGE_WAIT_M3</name>
           <initializer>= WLC_SUP_LAST_BASIC_STATE</initializer>
           <briefdescription>
@@ -599,7 +604,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772" prot="public">
           <name>WLC_SUP_KEYXCHANGE_PREP_M4</name>
           <initializer>= 9 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -608,7 +613,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a" prot="public">
           <name>WLC_SUP_KEYXCHANGE_WAIT_G1</name>
           <initializer>= 10 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -617,7 +622,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="whd__events_8h_1gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303" prot="public">
+        <enumvalue id="whd__events_8h_1aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303" prot="public">
           <name>WLC_SUP_KEYXCHANGE_PREP_G2</name>
           <initializer>= 11 + WLC_SUP_STATUS_OFFSET</initializer>
           <briefdescription>
@@ -829,11 +834,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="187" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" bodystart="187" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="183" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" bodystart="183" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__event_1ga4175c3ef9bb16601fabc605fadeaf8d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="whd__events_8h_1a4175c3ef9bb16601fabc605fadeaf8d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
         <definition>uint32_t whd_wifi_set_event_handler</definition>
         <argsstring>(whd_interface_t ifp, const uint32_t *event_type, whd_event_handler_t handler_func, void *handler_user_data, uint16_t *event_index)</argsstring>
@@ -912,9 +917,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="208" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="205" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__event_1ga2072e91b840217584cfd60ad540b3146" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="whd__events_8h_1a2072e91b840217584cfd60ad540b3146" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
         <definition>uint32_t whd_wifi_set_error_handler</definition>
         <argsstring>(whd_interface_t ifp, const uint8_t *error_nums, whd_error_handler_t handler_func, void *handler_user_data, uint16_t *error_index)</argsstring>
@@ -993,9 +998,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="229" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="226" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__event_1gae415f1f3fcbbfe506aa0e656bf8debb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="whd__events_8h_1ae415f1f3fcbbfe506aa0e656bf8debb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
         <definition>uint32_t whd_wifi_deregister_event_handler</definition>
         <argsstring>(whd_interface_t ifp, uint16_t event_index)</argsstring>
@@ -1035,9 +1040,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="242" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="237" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__event_1gaa7f28d32a8c06c7df471636de6f4dec6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="whd__events_8h_1aa7f28d32a8c06c7df471636de6f4dec6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
         <definition>uint32_t whd_wifi_deregister_error_handler</definition>
         <argsstring>(whd_interface_t ifp, uint16_t error_index)</argsstring>
@@ -1077,7 +1082,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="251" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_events.h" line="246" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

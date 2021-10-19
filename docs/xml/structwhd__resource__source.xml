@@ -188,6 +188,72 @@
         </inbodydescription>
         <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" line="106" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" bodystart="106" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structwhd__resource__source_1a0c9a11dcc9c8fd71189a97c3747c3e62" prot="public" static="no" mutable="no">
+        <type>uint32_t(*</type>
+        <definition>uint32_t(* whd_resource_read) (whd_driver_t whd_drv, whd_resource_type_t type, uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer)</definition>
+        <argsstring>)(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer)</argsstring>
+        <name>whd_resource_read</name>
+        <briefdescription>
+<para>Gets the resource for specified resource type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>whd_drv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of the driver </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of resource - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>offset address to store buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a size of buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to store size of buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a buffer</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" line="120" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Interface to a data source that provides external resources to the radio driver. </para>
@@ -196,11 +262,12 @@
 <para>This data structure defines a source for data generally intended to be downloaded to the radio device.</para>
 <para>The data is assumed to be available as a set of blocks that are all the same size with the exception of the last block. The whd_get_resource_block_size function returns this block size. The whd_get_resource_block call returns a pointer to a block of data. The actual storage for the data block is owned by the data source, so only a pointer to the block is returned. There are two predominate use cases. If the data is stored in the internal flash memory, then whd_get_resource_no_of_blocks will return 1 and a call to whd_get_resource_block will return a pointer to the data image with the size being the size of the data image. If the data is stored in an external flash of some type, each block of data can be read from the external flash one at a time. whd_get_resource_no_of_blocks will return the physical number of blocks in the data and each call to whd_get_resource_block will read data from the external memory and make it available via an internal buffer. </para>
     </detaileddescription>
-    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" line="59" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" bodystart="58" bodyend="107"/>
+    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" line="59" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" bodystart="58" bodyend="122"/>
     <listofallmembers>
       <member refid="structwhd__resource__source_1a621cec3fecb5491d46d3534a59b6862b" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_block</name></member>
       <member refid="structwhd__resource__source_1af7ac61e99cc2504e39dfb220a34b8d39" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_block_size</name></member>
       <member refid="structwhd__resource__source_1a2645315e933c6e65046bec5dad04b8e4" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_no_of_blocks</name></member>
+      <member refid="structwhd__resource__source_1a0c9a11dcc9c8fd71189a97c3747c3e62" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_resource_read</name></member>
       <member refid="structwhd__resource__source_1ab2a3bf0a36362b733939361143158e02" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_resource_size</name></member>
     </listofallmembers>
   </compounddef>

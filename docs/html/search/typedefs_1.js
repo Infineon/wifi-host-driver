@@ -1,6 +1,8 @@
 var searchData=
 [
   ['whd_5fap_5finfo_5ft',['whd_ap_info_t',['../whd__types_8h.html#ab850fbf60dfa93cd732f4e36a1e134cf',1,'whd_types.h']]],
+  ['whd_5fbt_5fdev_5ft',['whd_bt_dev_t',['../whd_8h.html#ad739b6e984d3734516e40194e903f94e',1,'whd.h']]],
+  ['whd_5fbt_5finfo_5ft',['whd_bt_info_t',['../whd_8h.html#abb71e6e14de31e2b2da19bfb425a590e',1,'whd.h']]],
   ['whd_5fbtc_5flescan_5fparams_5ft',['whd_btc_lescan_params_t',['../whd__types_8h.html#a98dae084aa15394bf6f8e907e09233a4',1,'whd_types.h']]],
   ['whd_5fbuffer_5ffuncs_5ft',['whd_buffer_funcs_t',['../whd_8h.html#a44a6e9abc68a4322a3958bdc24ae9981',1,'whd.h']]],
   ['whd_5fbuffer_5fqueue_5fptr_5ft',['whd_buffer_queue_ptr_t',['../whd__types_8h.html#a0767ab3fb805f164a11b58473c308053',1,'whd_types.h']]],
@@ -13,6 +15,7 @@ var searchData=
   ['whd_5fevent_5ft',['whd_event_t',['../whd__events_8h.html#a9d6929e68c05572695ee040da171d508',1,'whd_events.h']]],
   ['whd_5finit_5fconfig_5ft',['whd_init_config_t',['../whd_8h.html#a933f0025533b9b88ecb77b651db29250',1,'whd.h']]],
   ['whd_5finterface_5ft',['whd_interface_t',['../whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0',1,'whd.h']]],
+  ['whd_5fm2m_5fconfig_5ft',['whd_m2m_config_t',['../whd__types_8h.html#ab5fa3b42c3b6290fc944c79deb812c8c',1,'whd_types.h']]],
   ['whd_5fnetif_5ffuncs_5ft',['whd_netif_funcs_t',['../whd_8h.html#ac35b975959ed585acf554535b502ce68',1,'whd.h']]],
   ['whd_5foob_5fconfig_5ft',['whd_oob_config_t',['../whd__types_8h.html#ac07b13dcb5ec0e66a707dcf8a539c97e',1,'whd_types.h']]],
   ['whd_5fresource_5fsource_5ft',['whd_resource_source_t',['../whd_8h.html#a05847ad8fa418d69d5f51fe654835b8b',1,'whd.h']]],

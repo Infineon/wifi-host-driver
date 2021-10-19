@@ -5,6 +5,7 @@ var searchData=
   ['whd_5fbss_5ftype_5ft',['whd_bss_type_t',['../whd__types_8h.html#a3070614a06a8989b9eb207e9f1286c5f',1,'whd_types.h']]],
   ['whd_5fbuffer_5fdir_5ft',['whd_buffer_dir_t',['../group__buffif.html#ga44a64c51498b204ceef5555209e29452',1,'whd_network_types.h']]],
   ['whd_5fbus_5ftransfer_5fdirection_5ft',['whd_bus_transfer_direction_t',['../whd__types_8h.html#afc8e8073d434bf124933526a8184313a',1,'whd_types.h']]],
+  ['whd_5fbus_5ftype_5ft',['whd_bus_type_t',['../whd__types_8h.html#a6158197f83b368e63fa825eb34602dcd',1,'whd_types.h']]],
   ['whd_5fcountry_5fcode_5ft',['whd_country_code_t',['../whd__types_8h.html#a5adb0953a8527552bc47001673830602',1,'whd_types.h']]],
   ['whd_5fcustom_5fie_5faction_5ft',['whd_custom_ie_action_t',['../whd__types_8h.html#a8be1026494a86f0ceeebb2dcbf092cbd',1,'whd_types.h']]],
   ['whd_5fdot11_5freason_5fcode_5ft',['whd_dot11_reason_code_t',['../whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55d',1,'whd_types.h']]],

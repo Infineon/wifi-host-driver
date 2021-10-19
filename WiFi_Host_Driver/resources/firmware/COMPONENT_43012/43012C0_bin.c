@@ -15,6 +15,7 @@
  */
 #include "wiced_resource.h"
 
+#ifndef WLAN_MFG_FIRMWARE
 #if defined(CY_STORAGE_WIFI_DATA)
 CY_SECTION_WHD(CY_STORAGE_WIFI_DATA) __attribute__((used))
 #endif
@@ -26535,3 +26536,4 @@ const unsigned char wifi_firmware_image_data[452290] = {
         102, 48, 54, 98, 55, 49, 98
 };
 const resource_hnd_t wifi_firmware_image = { RESOURCE_IN_MEMORY, 452290, {.mem = { (const char *) wifi_firmware_image_data }}};
+#endif /* !WLAN_MFG_FIRMWARE */

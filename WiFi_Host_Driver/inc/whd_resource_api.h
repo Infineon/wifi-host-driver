@@ -117,6 +117,21 @@ struct whd_resource_source
      *
      */
     uint32_t (*whd_get_resource_block_size)(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out);
+
+    /** Gets the resource for specified resource type
+     *
+     *  @param whd_drv     Pointer to handle instance of the driver
+     *  @param type        Type of resource - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM
+     *  @param offset      offset address to store buffer
+     *  @param size        Pointer to a size of buffer
+     *  @param size_out    Pointer to store size of buffer
+     *  @param buffer      Pointer to a buffer
+     *
+     *  @return            WHD_SUCCESS or error code
+     *
+     */
+    uint32_t (*whd_resource_read)(whd_driver_t whd_drv, whd_resource_type_t type,
+                                  uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer);
 };
 
 /** @} */

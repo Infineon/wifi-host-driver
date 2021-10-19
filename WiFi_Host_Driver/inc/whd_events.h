@@ -185,10 +185,6 @@ typedef struct whd_event
  */
 typedef void *(*whd_event_handler_t)(whd_interface_t ifp, const whd_event_header_t *event_header,
                                      const uint8_t *event_data, void *handler_user_data);
-/** @addtogroup event WHD Error handling API
- *  Functions that allow user applications to receive error callbacks and set error handlers
- *  @{
- */
 /** Error handler prototype definition
  *
  *  @param  whd_driver           Pointer to handle instance of whd driver
@@ -198,6 +194,7 @@ typedef void *(*whd_event_handler_t)(whd_interface_t ifp, const whd_event_header
  */
 typedef void *(*whd_error_handler_t)(whd_driver_t whd_driver, const uint8_t *error_type,
                                      const uint8_t *event_data, void *handler_user_data);
+/* @} */
 /** Registers a handler to receive event callbacks.
  *
  *  This function registers a callback handler to be notified when
@@ -240,8 +237,6 @@ uint32_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *event_t
  */
 uint32_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_nums, whd_error_handler_t handler_func,
                                     void *handler_user_data, uint16_t *error_index);
-
-/*  @} */
 
 /** Delete/Deregister the event entry where callback is registered
  *

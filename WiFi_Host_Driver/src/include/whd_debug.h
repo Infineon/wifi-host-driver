@@ -133,6 +133,16 @@ typedef struct
 #define whd_print_logbuffer()
 #endif /* WHD_LOGGING_BUFFER_ENABLE */
 
+#ifdef WHD_IOCTL_LOG_ENABLE
+#define WHD_IOCTL_LOG_ADD(x, y, z) whd_ioctl_log_add(x, y, z)
+#define WHD_IOCTL_LOG_ADD_EVENT(w, x, y, z) whd_ioctl_log_add_event(w, x, y, z)
+#define WHD_IOCTL_PRINT(x) whd_ioctl_print(x)
+#else
+#define WHD_IOCTL_LOG_ADD(x, y, z)
+#define WHD_IOCTL_LOG_ADD_EVENT(w, x, y, z)
+#define WHD_IOCTL_PRINT(x)
+#endif
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

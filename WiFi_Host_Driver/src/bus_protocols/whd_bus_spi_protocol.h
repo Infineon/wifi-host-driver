@@ -87,8 +87,11 @@ extern whd_bool_t whd_bus_spi_use_status_report_scheme(whd_driver_t whd_driver);
 extern uint32_t whd_bus_spi_get_max_transfer_size(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_spi_irq_register(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_spi_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
+#if (CYHAL_API_VERSION >= 2)
+extern void whd_bus_spi_irq_handler(void *handler_arg, cyhal_spi_event_t event);
+#else
 extern void whd_bus_spi_irq_handler(void *handler_arg, cyhal_spi_irq_event_t event);
-
+#endif
 /******************************************************
 *             Global variables
 ******************************************************/

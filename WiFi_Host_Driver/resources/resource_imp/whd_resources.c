@@ -19,6 +19,7 @@
  * Defines WHD resource functions for BCM943340WCD1 platform
  */
 #include "resources.h"
+#include "clm_resources.h"
 #include "wifi_nvram_image.h"
 #include "whd_resource_api.h"
 #include "whd_debug.h"
@@ -63,7 +64,8 @@ uint32_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_
 uint32_t host_get_resource_block_size(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out);
 resource_result_t resource_read(const resource_hnd_t *resource, uint32_t offset, uint32_t maxsize, uint32_t *size,
                                 void *buffer);
-
+uint32_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
+                            uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer);
 /******************************************************
 *               Variable Definitions
 ******************************************************/
@@ -310,10 +312,42 @@ uint32_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_
     return WHD_SUCCESS;
 }
 
+uint32_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
+                            uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer)
+{
+    uint32_t result;
+
+    if (type == WHD_RESOURCE_WLAN_FIRMWARE)
+    {
+#ifdef WLAN_MFG_FIRMWARE
+        result = resource_read( (const resource_hnd_t *)&wifi_mfg_firmware_image, offset, size,
+                                size_out, buffer );
+#else
+        result = resource_read( (const resource_hnd_t *)&wifi_firmware_image, offset, size,
+                                size_out, buffer );
+#endif /* WLAN_MFG_FIRMWARE */
+
+        if (result != WHD_SUCCESS)
+            return result;
+
+    }
+    else if (type == WHD_RESOURCE_WLAN_NVRAM)
+    {
+        if (size != sizeof(wifi_nvram_image) )
+        {
+            return WHD_BUFFER_SIZE_SET_ERROR;
+        }
+        memcpy( (uint8_t *)buffer, wifi_nvram_image, sizeof(wifi_nvram_image) );
+        *size_out = sizeof(wifi_nvram_image);
+    }
+    return WHD_SUCCESS;
+}
+
 whd_resource_source_t resource_ops =
 {
     .whd_resource_size = host_platform_resource_size,
     .whd_get_resource_block_size = host_get_resource_block_size,
     .whd_get_resource_no_of_blocks = host_get_resource_no_of_blocks,
-    .whd_get_resource_block = host_get_resource_block
+    .whd_get_resource_block = host_get_resource_block,
+    .whd_resource_read = host_resource_read
 };

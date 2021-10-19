@@ -160,7 +160,7 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
                                whd_buffer_t *buffer,
                                uint16_t data_length,
                                const char *name);
-void whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer);
+whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer);
 
 void *whd_cdc_get_ioctl_buffer(whd_driver_t whd_driver,
                                whd_buffer_t *buffer,

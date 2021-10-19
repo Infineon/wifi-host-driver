@@ -48,6 +48,7 @@ TOOLCHAIN_NAME ?= GCC
 
 HAL_DIRS := External/hal
 HAL_DIRS += External/rtos
+HAL_DIRS += External/bsp
 INC_DIRS := . WiFi_Host_Driver/src WiFi_Host_Driver/src/include
 INC_DIRS += WiFi_Host_Driver/inc
 INC_DIRS += $(HAL_DIRS)

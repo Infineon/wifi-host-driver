@@ -11,6 +11,7 @@ var searchData=
   ['whd_5fevent_5fmsg',['whd_event_msg',['../structwhd__event__msg.html',1,'']]],
   ['whd_5finit_5fconfig',['whd_init_config',['../structwhd__init__config.html',1,'']]],
   ['whd_5flisten_5finterval_5ft',['whd_listen_interval_t',['../structwhd__listen__interval__t.html',1,'']]],
+  ['whd_5fm2m_5fconfig',['whd_m2m_config',['../structwhd__m2m__config.html',1,'']]],
   ['whd_5fmac_5ft',['whd_mac_t',['../structwhd__mac__t.html',1,'']]],
   ['whd_5fmaclist_5ft',['whd_maclist_t',['../structwhd__maclist__t.html',1,'']]],
   ['whd_5fnetif_5ffuncs',['whd_netif_funcs',['../structwhd__netif__funcs.html',1,'']]],

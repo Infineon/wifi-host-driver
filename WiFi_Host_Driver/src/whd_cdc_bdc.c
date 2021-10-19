@@ -230,7 +230,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
                    sizeof(cdc_header_t) );
 
     send_packet = (control_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, send_buffer_hnd);
-
+    CHECK_PACKET_NULL(send_packet, WHD_NO_REGISTER_FUNCTION_POINTER);
     WHD_IOCTL_LOG_ADD(ifp->whd_driver, command, send_buffer_hnd);
 
     /* Check if IOCTL is actually IOVAR */
@@ -272,7 +272,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     }
 
     /* Store the length of the data and the IO control header and pass "down" */
-    whd_send_to_bus(whd_driver, send_buffer_hnd, CONTROL_HEADER);
+    CHECK_RETURN(whd_send_to_bus(whd_driver, send_buffer_hnd, CONTROL_HEADER, 0) );
 
 
     /* Wait till response has been received  */
@@ -285,6 +285,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     }
 
     cdc_header    = (cdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, cdc_bdc_info->ioctl_response);
+    CHECK_PACKET_NULL(cdc_header, WHD_NO_REGISTER_FUNCTION_POINTER);
     flags         = dtoh32(cdc_header->flags);
     status        = dtoh32(cdc_header->status);
     /* Check if the caller wants the response */
@@ -367,10 +368,12 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
     uint32_t name_length_alignment_offset = (64 - name_length) % sizeof(uint32_t);
 
     if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX,
-                            (unsigned short)(IOCTL_OFFSET + data_length + name_length + name_length_alignment_offset),
-                            (unsigned long)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
+                            (uint16_t)(IOCTL_OFFSET + data_length + name_length + name_length_alignment_offset),
+                            (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
     {
-        uint8_t *data = (whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) + IOCTL_OFFSET);
+        uint8_t *data = whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
+        CHECK_PACKET_NULL(data, NULL);
+        data = data + IOCTL_OFFSET;
         memset(data, 0, name_length_alignment_offset);
         memcpy(data + name_length_alignment_offset, name, name_length);
         return (data + name_length + name_length_alignment_offset);
@@ -392,9 +395,9 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
  * @param buffer  : The ethernet packet buffer to be sent
  * @param interface : the interface over which to send the packet (AP or STA)
  *
+ * @return    WHD result code
  */
-/* Returns immediately - whd_buffer_tx_completed will be called once the transmission has finished */
-void whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
+whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
 {
     data_header_t *packet;
     whd_result_t result;
@@ -405,7 +408,7 @@ void whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
     ethernet_header_t *ethernet_header = (ethernet_header_t *)whd_buffer_get_current_piece_data_pointer(
         whd_driver, buffer);
     uint16_t ether_type;
-
+    CHECK_PACKET_NULL(ethernet_header, WHD_NO_REGISTER_FUNCTION_POINTER);
     ether_type = ntoh16(ethernet_header->ethertype);
     if ( (ether_type == WHD_ETHERTYPE_IPv4) || (ether_type == WHD_ETHERTYPE_DOT1AS) )
     {
@@ -424,18 +427,18 @@ void whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
         result = whd_buffer_release(ifp->whd_driver, buffer, WHD_NETWORK_TX);
         if (result != WHD_SUCCESS)
             WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
-        return;
+        return WHD_BUFFER_ALLOC_FAIL;
     }
 
     packet = (data_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
-
+    CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
     if (ifp->bsscfgidx > WHD_INTERFACE_MAX)
     {
         WPRINT_WHD_DEBUG( ("No interface for packet send\n") );
         result = whd_buffer_release(ifp->whd_driver, buffer, WHD_NETWORK_TX);
         if (result != WHD_SUCCESS)
             WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
-        return;
+        return WHD_UNKNOWN_INTERFACE;
     }
 
     /* Prepare the BDC header */
@@ -464,7 +467,7 @@ void whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
     packet->bdc_header.data_offset = 0;
 
     /* Add the length of the BDC header and pass "down" */
-    whd_send_to_bus(whd_driver, buffer, DATA_HEADER);
+    return whd_send_to_bus(whd_driver, buffer, DATA_HEADER, packet->bdc_header.priority);
 
 }
 
@@ -484,8 +487,8 @@ void *whd_cdc_get_ioctl_buffer(whd_driver_t whd_driver,
         WPRINT_WHD_ERROR( ("The reserved ioctl buffer length is over %u\n", USHRT_MAX) );
         return NULL;
     }
-    if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX, (unsigned short)(IOCTL_OFFSET + data_length),
-                            (unsigned long)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
+    if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX, (uint16_t)(IOCTL_OFFSET + data_length),
+                            (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
     {
         return (whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) + IOCTL_OFFSET);
     }
@@ -510,7 +513,7 @@ void whd_process_cdc(whd_driver_t whd_driver, whd_buffer_t buffer)
     whd_result_t result;
     cdc_header_t *cdc_header = (cdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     whd_result_t ioctl_mutex_res;
-
+    CHECK_PACKET_WITH_NULL_RETURN(cdc_header);
     flags         = dtoh32(cdc_header->flags);
     id            = (uint16_t)( (flags & CDCF_IOC_ID_MASK) >> CDCF_IOC_ID_SHIFT );
 
@@ -567,7 +570,7 @@ void whd_process_bdc(whd_driver_t whd_driver, whd_buffer_t buffer)
     whd_interface_t ifp;
     whd_result_t result;
     bdc_header_t *bdc_header = (bdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
-
+    CHECK_PACKET_WITH_NULL_RETURN(bdc_header);
     /* Calculate where the payload is */
     headers_len_below_payload =
         (int32_t)( (int32_t)BDC_HEADER_LEN + (int32_t)(bdc_header->data_offset << 2) );
@@ -614,13 +617,15 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
 {
     uint16_t ether_type;
     whd_event_header_t *whd_event;
-    whd_event_t *event;
+    whd_event_t *event, *aligned_event = (whd_event_t *)whd_driver->aligned_addr;
     whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
     whd_result_t result;
     bdc_header_t *bdc_header = (bdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     uint16_t i;
     uint16_t j;
+    uint32_t datalen;
 
+    CHECK_PACKET_WITH_NULL_RETURN(bdc_header);
     event = (whd_event_t *)&bdc_header[bdc_header->data_offset + 1];
 
     ether_type = ntoh16(event->eth.ethertype);
@@ -706,6 +711,16 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
         return;
     }
 
+    datalen = whd_event->datalen;
+    /* use memcpy to get aligned event message */
+    if (aligned_event)
+    {
+        memcpy(aligned_event, event, sizeof(*event) + datalen);
+    }
+    else
+    {
+        aligned_event = event;
+    }
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
         if (cdc_bdc_info->whd_event_list[i].event_set)
@@ -720,7 +735,7 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
                         cdc_bdc_info->whd_event_list[i].handler(whd_driver->iflist[whd_event->bsscfgidx],
                                                                 whd_event,
                                                                 (uint8_t *)DATA_AFTER_HEADER(
-                                                                    event),
+                                                                    aligned_event),
                                                                 cdc_bdc_info->whd_event_list[i].handler_user_data);
                     break;
                 }

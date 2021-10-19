@@ -8,13 +8,16 @@
     <detaileddescription>
 <sect1 id="index_1overview">
 <title>WHD Overview</title>
-<para>The WHD is an independent, embedded Wi-Fi Host Driver that provides a set of APIs to interact with Cypress WLAN chips. The WHD is an independent firmware product that is easily portable to any embedded software environment, including popular IOT frameworks like Mbed OS, Amazon FreeRTOS, etc. Hence, the WHD includes hooks for RTOS and TCP/IP network abstraction layers. <linebreak/>
+<para>The WHD is an independent, embedded Wi-Fi Host Driver that provides a set of APIs to interact with Infineon WLAN chips. The WHD is an independent firmware product that is easily portable to any embedded software environment, including popular IOT frameworks like Mbed OS, Amazon FreeRTOS, etc. Hence, the WHD includes hooks for RTOS and TCP/IP network abstraction layers. <linebreak/>
  The WHD requires the following services: <itemizedlist>
 <listitem>
 <para><bold>HAL:</bold> High-level abstraction layer that provides access to hardware like SDIO/SPI host controllers within the platform. </para>
 </listitem>
 <listitem>
-<para><bold>RTOS:</bold> The WHD uses the abstraction layer to access RTOS functionality like threads, semaphores etc. This is the same interface that the Cypress Middleware uses. </para>
+<para><bold>RTOS:</bold> The WHD uses the abstraction layer to access RTOS functionality like threads, semaphores etc. This is the same interface that the Infineon Middleware uses. </para>
+</listitem>
+<listitem>
+<para><bold>BSP:</bold> The WHD uses the bus definitions to specify whether the board should use SDIO, SPI or M2M. The definition are the same as Infineon BSP uses. </para>
 </listitem>
 </itemizedlist>
 <linebreak/>
@@ -489,19 +492,20 @@ You must implement these functions in your code. See <bold><ulink url="cyhal_sdh
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//whd_wifi_start_ap(ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Leave<sp/>the<sp/>AP</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(ifp<sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(ifp);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>or<sp/>Stop<sp/>the<sp/>AP</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//whd_wifi_stop_ap(ifp<sp/>,<sp/>...);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>off<sp/>Wifi</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(ifp<sp/>);</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(ifp);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Detach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_detach(whd_driver);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_detach(whd_driver);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(ifp);</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting> <linebreak/>
 <heading level="2"><anchor id="_1_WHD_STA+AP_concurrent_mode"/>WHD STA+AP concurrent mode</heading>
@@ -545,20 +549,21 @@ The following example code shows the flow for execution in STA+AP concurrent mod
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_start_ap(sec_ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Leave<sp/>the<sp/>AP</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(prim_ifp<sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(prim_ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Stop<sp/>the<sp/>AP</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_stop_ap(sec_ifp<sp/>,<sp/>...);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>off<sp/>Wifi</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(prim_ifp<sp/>);</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(prim_ifp);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(prim_ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Detach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_detach(whd_driver);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_detach(whd_driver);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(prim_ifp);</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting> <linebreak/>
 <heading level="2"><anchor id="_1_WHD_WPA3/WPA2_transition_mode"/>WHD WPA3/WPA2 transition mode</heading>
@@ -596,17 +601,18 @@ The following example code shows the flow for execution in WPA3/WPA2 transition 
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_join(ifp<sp/>,<sp/>&quot;AP<sp/>SSID&quot;,<sp/>WHD_SECURITY_WPA3_WPA2_PSK,<sp/>security_key,<sp/>strlen(security_key),<sp/>NULL);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Leave<sp/>the<sp/>AP</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(ifp<sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_leave(ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Switch<sp/>off<sp/>Wifi</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(ifp<sp/>);</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(ifp);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_wifi_off(ifp);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Detach<sp/>a<sp/>bus<sp/>SDIO<sp/>or<sp/>SPI</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_bus_sdio_detach(whd_driver);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//or<sp/>whd_bus_spi_detach(whd_driver);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Deletes<sp/>all<sp/>the<sp/>interface<sp/>and<sp/>De-init<sp/>the<sp/>whd,<sp/>free<sp/>whd_driver<sp/>memory</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>whd_deinit(ifp);</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
 <para><linebreak/>
@@ -653,7 +659,8 @@ The protocol layer is bus independent and is required for either SDIO/SPI/USB.</
  <linebreak/>
 <linebreak/>
 <linebreak/>
- <programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
+</para>
+<para><programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
 <codeline><highlight class="normal">{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>cmd;<sp/><sp/><sp/><sp/><sp/>//<sp/>ioctl<sp/>command<sp/>value</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>len;<sp/><sp/><sp/><sp/><sp/>//<sp/>lower<sp/>16:<sp/>output<sp/>buflen;<sp/>upper<sp/>16:<sp/>input<sp/>buflen<sp/>(excludes<sp/>header)</highlight></codeline>
@@ -668,7 +675,8 @@ The protocol layer is bus independent and is required for either SDIO/SPI/USB.</
  <linebreak/>
 <linebreak/>
 <linebreak/>
- <programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
+</para>
+<para><programlisting><codeline><highlight class="normal">typedef<sp/>struct</highlight></codeline>
 <codeline><highlight class="normal">{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>uint8_t<sp/>flags;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Flags</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>uint8_t<sp/>priority;<sp/><sp/><sp/><sp/><sp/>//<sp/>802.1d<sp/>Priority<sp/>(low<sp/>3<sp/>bits)</highlight></codeline>

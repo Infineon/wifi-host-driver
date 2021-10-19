@@ -299,10 +299,6 @@ typedef struct
 #define WHD_IOVAR_STRING_SIZE 128
 #define WHD_MAX_DATA_SIZE 64
 
-#define WHD_IOCTL_LOG_ADD(x, y, z) whd_ioctl_log_add(x, y, z)
-#define WHD_IOCTL_LOG_ADD_EVENT(w, x, y, z) whd_ioctl_log_add_event(w, x, y, z)
-#define WHD_IOCTL_PRINT(x) whd_ioctl_print(x)
-
 typedef struct
 {
     uint32_t ioct_log;

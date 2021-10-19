@@ -68,6 +68,21 @@ struct whd_interface
     uint8_t event_reg_list[WHD_EVENT_ENTRY_MAX];
     whd_bool_t state;
 };
+struct whd_bt_dev
+{
+    void     *bt_data;
+    void (*bt_int_cb)(void *data);
+    uint32_t bt_use_count;
+    whd_bool_t intr;
+};
+
+struct whd_bt_info
+{
+    uint32_t bt_buf_reg_addr;
+    uint32_t host_ctrl_reg_addr;
+    uint32_t bt_ctrl_reg_addr;
+    uint32_t wlan_buf_addr;
+};
 
 struct whd_driver
 {
@@ -78,9 +93,12 @@ struct whd_driver
     struct whd_bus_info *bus_if;
     struct whd_bus_priv *bus_priv;
     struct whd_bus_common_info *bus_common_info;
+    whd_bt_dev_t bt_dev;
+
     whd_buffer_funcs_t *buffer_if;
     whd_netif_funcs_t *network_if;
     whd_resource_source_t *resource_if;
+    uint8_t *aligned_addr;
 
     whd_bool_t bus_gspi_32bit;
 

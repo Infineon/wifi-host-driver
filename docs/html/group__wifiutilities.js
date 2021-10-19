@@ -45,7 +45,7 @@ var group__wifiutilities =
     [ "whd_pf_get_packet_filter_mask_and_pattern", "group__wifiutilities.html#gacd9d57c8febb11cc240db23f5de92cd9", null ],
     [ "whd_wifi_clear_packet_filter_stats", "group__wifiutilities.html#gab3e9371ccaa61f1f40e0246a66db42a6", null ],
     [ "whd_pf_get_packet_filter_stats", "group__wifiutilities.html#ga26172adb5ec181bb8f2009e47eb252cf", null ],
-    [ "whd_tko_param", "group__wifiutilities.html#ga482c8ffcb1166f2f161e4ad67f8ef9d5", null ],
+    [ "whd_tko_param", "group__wifiutilities.html#gaf6c70f49c254a8d7ef7397e7d83e0c9b", null ],
     [ "whd_tko_get_status", "group__wifiutilities.html#gae6b46bcc1a3c7d708abc71ae6a123481", null ],
     [ "whd_tko_max_assoc", "group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343", null ],
     [ "whd_tko_get_FW_connect", "group__wifiutilities.html#gacc2882e3a308f7b2b938bc5741ab43c3", null ],

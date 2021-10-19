@@ -3,6 +3,8 @@ var whd_8h =
     [ "whd_init_config", "structwhd__init__config.html", "structwhd__init__config" ],
     [ "INCLUDED_WHD_H", "whd_8h.html#a54c1a5e4a019c5fa6df104ada4031b1a", null ],
     [ "whd_driver_t", "whd_8h.html#ac45015d82e65db891b463066873eca4f", null ],
+    [ "whd_bt_info_t", "whd_8h.html#abb71e6e14de31e2b2da19bfb425a590e", null ],
+    [ "whd_bt_dev_t", "whd_8h.html#ad739b6e984d3734516e40194e903f94e", null ],
     [ "whd_interface_t", "whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0", null ],
     [ "whd_buffer_funcs_t", "whd_8h.html#a44a6e9abc68a4322a3958bdc24ae9981", null ],
     [ "whd_netif_funcs_t", "whd_8h.html#ac35b975959ed585acf554535b502ce68", null ],

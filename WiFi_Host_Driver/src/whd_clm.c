@@ -37,11 +37,12 @@
 /*
    Generic interface for downloading required data onto the dongle
  */
-static int whd_download_wifi_clm_image(whd_interface_t ifp, const char *iovar, uint16_t flag, uint16_t dload_type,
-                                       unsigned char *dload_buf, uint32_t len)
+static whd_result_t
+whd_download_wifi_clm_image(whd_interface_t ifp, const char *iovar, uint16_t flag, uint16_t dload_type,
+                            unsigned char *dload_buf, uint32_t len)
 {
     wl_dload_data_t *dload_ptr = (wl_dload_data_t *)dload_buf;
-    unsigned int dload_data_offset;
+    uint32_t dload_data_offset;
     whd_buffer_t buffer;
     uint8_t *iov_data;
     whd_driver_t whd_driver = ifp->whd_driver;
@@ -67,16 +68,16 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
 {
     whd_result_t ret = WHD_SUCCESS;
     uint32_t clm_blob_size;
-    unsigned int size2alloc, data_offset;
+    uint32_t size2alloc, data_offset;
     unsigned char *chunk_buf;
     uint16_t dl_flag = DL_BEGIN;
-    unsigned int chunk_len;
+    uint32_t chunk_len;
     uint32_t size_read;
     uint8_t *image;
     uint32_t blocks_count = 0;
     uint16_t datalen = 0;
     uint32_t i, j, num_buff;
-    unsigned int transfer_progress;
+    uint32_t transfer_progress;
     whd_driver_t whd_driver = ifp->whd_driver;
 
     /* clm file size is the initial datalen value which is decremented */
@@ -116,7 +117,7 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
                 if (size_read >= BLOCK_SIZE)
                     chunk_len = BLOCK_SIZE;
                 else
-                    chunk_len = (int)size_read;
+                    chunk_len = size_read;
                 memcpy(chunk_buf + data_offset, &image[transfer_progress], chunk_len);
 
                 if (datalen + chunk_len == clm_blob_size)

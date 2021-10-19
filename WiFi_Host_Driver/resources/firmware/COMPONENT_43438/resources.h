@@ -19,13 +19,13 @@
 #define INCLUDED_RESOURCES_H_
 #include "wiced_resource.h"
 
+#ifndef WLAN_MFG_FIRMWARE
 extern const resource_hnd_t wifi_firmware_image;
 extern const unsigned char wifi_firmware_image_data[419799];
-extern const resource_hnd_t wifi_firmware_clm_blob;
-extern const unsigned char wifi_firmware_clm_blob_data[7222];
+#endif /* !WLAN_MFG_FIRMWARE */
+#ifdef WLAN_MFG_FIRMWARE
 extern const resource_hnd_t wifi_mfg_firmware_image;
 extern const unsigned char wifi_mfg_firmware_image_data[396322];
-extern const resource_hnd_t wifi_mfg_firmware_clm_blob;
-extern const unsigned char wifi_mfg_firmware_clm_blob_data[7222];
+#endif /* WLAN_MFG_FIRMWARE */
 
 #endif /* ifndef INCLUDED_RESOURCES_H_ */

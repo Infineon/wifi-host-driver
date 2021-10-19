@@ -24,6 +24,7 @@
  *
  */
 
+#include "cybsp.h"
 #include "whd.h"
 #include "whd_types.h"
 
@@ -71,6 +72,7 @@ extern uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_in
  *  @{
  */
 
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
 /** Attach the WLAN Device to a specific SDIO bus
  *
  *  @param  whd_driver         Pointer to handle instance of the driver
@@ -87,6 +89,7 @@ extern uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *
  */
 extern void whd_bus_sdio_detach(whd_driver_t whd_driver);
 
+#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
 /** Attach the WLAN Device to a specific SPI bus
  *
  *  @param  whd_driver        Pointer to handle instance of the driver
@@ -102,6 +105,27 @@ extern uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *wh
  *  @param  whd_driver         Pointer to handle instance of the driver
  */
 extern void whd_bus_spi_detach(whd_driver_t whd_driver);
+
+#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
+/** Attach the WLAN Device to M2M bus
+ *
+ *  @param  whd_driver        Pointer to handle instance of the driver
+ *  @param  whd_config        Configuration for M2M bus
+ *  @param  m2m_obj           The M2M hardware interface, from the Level 3 CY HW APIs
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern uint32_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_config, cyhal_m2m_t *m2m_obj);
+
+/** Detach the WLAN Device to a specific M2M bus
+ *
+ *  @param  whd_driver         Pointer to handle instance of the driver
+ */
+extern void whd_bus_m2m_detach(whd_driver_t whd_driver);
+
+#else
+error "CYBSP_WIFI_INTERFACE_TYPE is not defined"
+#endif
 
 /*  @} */
 
@@ -202,17 +226,16 @@ typedef void (*whd_scan_result_callback_t)(whd_scan_result_t **result_ptr, void 
  *  It is also a blocking call. It is an simplified version of the whd_wifi_scan().
  *
  *  @param   ifp                       Pointer to handle instance of whd interface
- *  @param   scan_result               pointer to user requested records buffer.
- *  @param   count                     No of records user is interested in.
- *                                     If 0 return the total record count.
+ *  @param   scan_result               Pointer to user requested records buffer.
+ *  @param   count                     Pointer to the no of records user is interested in, and also to the no of record received.
  *
  *  @note    When scanning specific channels, devices with a strong signal strength on nearby channels may be detected
  *
- *  @return record count or Error code
+ *  @return  WHD_SUCCESS or Error code
  */
 extern uint32_t whd_wifi_scan_synch(whd_interface_t ifp,
                                     whd_sync_scan_result_t *scan_result,
-                                    uint32_t count
+                                    uint32_t *count
                                     );
 
 /** Initiates a scan to search for 802.11 networks.
@@ -983,10 +1006,10 @@ whd_result_t whd_pf_get_packet_filter_stats(whd_interface_t ifp, uint8_t filter_
 /** Set/Get TKO retry & interval parameters
  * @param[in]    ifp            : Pointer to handle instance of whd interface
  * @param[in]    whd_tko_retry  : whd retry & interval parameters structure
- * @param[in]    set            : Set/Get Flag
+ * @param[in]    set            : Set(1)/Get(0) Flag
  * @return whd_result_t
  */
-whd_result_t whd_tko_param(whd_interface_t ifp, whd_tko_retry_t *whd_tko_retry, int set);
+whd_result_t whd_tko_param(whd_interface_t ifp, whd_tko_retry_t *whd_tko_retry, uint8_t set);
 
 /** Return the tko status for all indexes
  * @param[in]    ifp        : Pointer to handle instance of whd interface

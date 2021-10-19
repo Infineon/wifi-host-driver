@@ -11,6 +11,7 @@ var annotated_dup =
     [ "whd_event_msg", "structwhd__event__msg.html", "structwhd__event__msg" ],
     [ "whd_init_config", "structwhd__init__config.html", "structwhd__init__config" ],
     [ "whd_listen_interval_t", "structwhd__listen__interval__t.html", "structwhd__listen__interval__t" ],
+    [ "whd_m2m_config", "structwhd__m2m__config.html", "structwhd__m2m__config" ],
     [ "whd_mac_t", "structwhd__mac__t.html", "structwhd__mac__t" ],
     [ "whd_maclist_t", "structwhd__maclist__t.html", "structwhd__maclist__t" ],
     [ "whd_netif_funcs", "structwhd__netif__funcs.html", "structwhd__netif__funcs" ],

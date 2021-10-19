@@ -24,6 +24,9 @@
  */
 
 #include <stdlib.h>
+#include "cybsp.h"
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
+
 #include "cyabs_rtos.h"
 #include "cyhal_sdio.h"
 #include "cyhal_gpio.h"
@@ -82,6 +85,12 @@ struct whd_bus_priv
 
 };
 
+/* For BSP backward compatible, should be removed the macro once 1.0 is not supported */
+#if (CYHAL_API_VERSION >= 2)
+typedef cyhal_sdio_transfer_type_t cyhal_sdio_transfer_t;
+#else
+typedef cyhal_transfer_t cyhal_sdio_transfer_t;
+#endif
 /******************************************************
 *             Variables
 ******************************************************/
@@ -105,10 +114,13 @@ static whd_result_t whd_bus_sdio_abort_read(whd_driver_t whd_driver, whd_bool_t 
 static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver);
 
 static whd_result_t whd_bus_sdio_set_oob_interrupt(whd_driver_t whd_driver, uint8_t gpio_pin_number);
-
+#if (CYHAL_API_VERSION >= 2)
+static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_event_t event);
+static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_event_t event);
+#else
 static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t event);
 static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event);
-
+#endif
 static whd_result_t whd_bus_sdio_irq_register(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
 static whd_result_t whd_bus_sdio_init_oob_intr(whd_driver_t whd_driver);
@@ -116,7 +128,9 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_unregister_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_enable_oob_intr(whd_driver_t whd_driver, whd_bool_t enable);
-
+static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+                                                   whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
+static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver);
 /******************************************************
 *             Global Function definitions
 ******************************************************/
@@ -188,7 +202,8 @@ uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdi
     whd_bus_info->whd_bus_reinit_stats_fptr = whd_bus_sdio_reinit_stats;
     whd_bus_info->whd_bus_irq_register_fptr = whd_bus_sdio_irq_register;
     whd_bus_info->whd_bus_irq_enable_fptr = whd_bus_sdio_irq_enable;
-
+    whd_bus_info->whd_bus_download_resource_fptr = whd_bus_sdio_download_resource;
+    whd_bus_info->whd_bus_set_backplane_window_fptr = whd_bus_sdio_set_backplane_window;
     return WHD_SUCCESS;
 }
 
@@ -479,7 +494,12 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 
     CHECK_RETURN(whd_chip_specific_init(whd_driver) );
     CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
+#if (CYHAL_API_VERSION >= 2)
+    cyhal_sdio_enable_event(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, CYHAL_ISR_PRIORITY_DEFAULT,
+                            WHD_TRUE);
+#else
     cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_TRUE);
+#endif
     UNUSED_PARAMETER(elapsed_time);
     return result;
 }
@@ -487,8 +507,12 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 whd_result_t whd_bus_sdio_deinit(whd_driver_t whd_driver)
 {
     CHECK_RETURN(whd_bus_sdio_deinit_oob_intr(whd_driver) );
-
+#if (CYHAL_API_VERSION >= 2)
+    cyhal_sdio_enable_event(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, CYHAL_ISR_PRIORITY_DEFAULT,
+                            WHD_TRUE);
+#else
     cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_FALSE);
+#endif
 
     CHECK_RETURN(whd_allow_wlan_bus_to_sleep(whd_driver) );
 
@@ -541,6 +565,7 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
     uint32_t int_status = 0;
     uint32_t hmb_data = 0;
     uint8_t error_type = 0;
+    whd_bt_dev_t btdev = whd_driver->bt_dev;
 
     /* Ensure the wlan backplane bus is up */
     CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
@@ -572,6 +597,14 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
             whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
     }
+    if (btdev && btdev->bt_int_cb)
+    {
+        if ( (I_HMB_FC_CHANGE & int_status) != 0 )
+        {
+            btdev->bt_int_cb(btdev->bt_data);
+            int_status = 0;
+        }
+    }
 
     if ( (HOSTINTMASK & int_status) != 0 )
     {
@@ -601,6 +634,7 @@ whd_result_t whd_bus_sdio_read_frame(whd_driver_t whd_driver, whd_buffer_t *buff
     uint16_t hwtag[8];
     uint16_t extra_space_required;
     whd_result_t result;
+    uint8_t *data = NULL;
 
     *buffer = NULL;
 
@@ -652,10 +686,8 @@ whd_result_t whd_bus_sdio_read_frame(whd_driver_t whd_driver, whd_buffer_t *buff
     }
 
     /* Allocate a suitable buffer */
-    result = whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_RX, (unsigned short)( (uint16_t)INITIAL_READ +
-                                                                                       extra_space_required +
-                                                                                       (uint16_t)sizeof(
-                                                                                           whd_buffer_header_t) ),
+    result = whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_RX,
+                                 (uint16_t)(INITIAL_READ + extra_space_required + sizeof(whd_buffer_header_t) ),
                                  (whd_sdpcm_has_tx_packet(whd_driver) ? 0 : WHD_RX_BUF_TIMEOUT) );
     if (result != WHD_SUCCESS)
     {
@@ -679,21 +711,23 @@ whd_result_t whd_bus_sdio_read_frame(whd_driver_t whd_driver, whd_buffer_t *buff
         WPRINT_WHD_ERROR( ("Failed to allocate a buffer to receive into, %s failed at %d \n", __func__, __LINE__) );
         return WHD_RX_BUFFER_ALLOC_FAIL;
     }
-
+    data = whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
+    CHECK_PACKET_NULL(data, WHD_NO_REGISTER_FUNCTION_POINTER);
     /* Copy the data already read */
-    memcpy(whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) + sizeof(whd_buffer_header_t), hwtag,
-           (size_t)INITIAL_READ);
+    memcpy(data + sizeof(whd_buffer_header_t), hwtag, (size_t)INITIAL_READ);
 
     /* Read the rest of the data */
     if (extra_space_required > 0)
     {
+        data = whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
+        CHECK_PACKET_NULL(data, WHD_NO_REGISTER_FUNCTION_POINTER);
         result = whd_bus_sdio_transfer(whd_driver, BUS_READ, WLAN_FUNCTION, 0, extra_space_required,
-                                       whd_buffer_get_current_piece_data_pointer(whd_driver,
-                                                                                 *buffer) + sizeof(whd_buffer_header_t) +
+                                       data + sizeof(whd_buffer_header_t) +
                                        INITIAL_READ, RESPONSE_NEEDED);
+
         if (result != WHD_SUCCESS)
         {
-            (void)whd_bus_sdio_abort_read(whd_driver, WHD_FALSE);    /* ignore return - not much can be done if this fails */
+            (void)whd_bus_sdio_abort_read(whd_driver, WHD_FALSE);     /* ignore return - not much can be done if this fails */
             CHECK_RETURN(whd_buffer_release(whd_driver, *buffer, WHD_NETWORK_RX) );
             WPRINT_WHD_ERROR( ("Error during SDIO receive, %s failed at %d \n", __func__, __LINE__) );
             return WHD_SDIO_RX_FAIL;
@@ -821,13 +855,13 @@ static whd_result_t whd_bus_sdio_cmd52(whd_driver_t whd_driver, whd_bus_transfer
     whd_result_t result;
     sdio_cmd_argument_t arg;
     arg.value = 0;
-    arg.cmd52.function_number = (unsigned int)(function & BUS_FUNCTION_MASK);
-    arg.cmd52.register_address = (unsigned int)(address & 0x00001ffff);
-    arg.cmd52.rw_flag = (unsigned int)( (direction == BUS_WRITE) ? 1 : 0 );
+    arg.cmd52.function_number = (uint32_t)(function & BUS_FUNCTION_MASK);
+    arg.cmd52.register_address = (uint32_t)(address & 0x00001ffff);
+    arg.cmd52.rw_flag = (uint32_t)( (direction == BUS_WRITE) ? 1 : 0 );
     arg.cmd52.write_data = value;
 
     WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, cmd52);
-    result = cyhal_sdio_send_cmd(whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction,
+    result = cyhal_sdio_send_cmd(whd_driver->bus_priv->sdio_obj, (cyhal_sdio_transfer_t)direction,
                                  CYHAL_SDIO_CMD_IO_RW_DIRECT, arg.value,
                                  &sdio_response);
     WHD_BUS_STATS_CONDITIONAL_INCREMENT_VARIABLE(whd_driver->bus_priv, (result != WHD_SUCCESS), cmd52_fail);
@@ -837,11 +871,8 @@ static whd_result_t whd_bus_sdio_cmd52(whd_driver_t whd_driver, whd_bus_transfer
         *response = (uint8_t)(sdio_response & 0x00000000ff);
     }
 
-    if (result == CY_RSLT_SUCCESS)
-        return WHD_SUCCESS;
-    else
-        return WHD_HAL_ERROR;
-
+    CHECK_RETURN(result);
+    return WHD_SUCCESS;
 }
 
 static whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer_direction_t direction,
@@ -858,18 +889,18 @@ static whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer
     }
 
     arg.value = 0;
-    arg.cmd53.function_number = (unsigned int)(function & BUS_FUNCTION_MASK);
-    arg.cmd53.register_address = (unsigned int)(address & BIT_MASK(17) );
-    arg.cmd53.op_code = (unsigned int)1;
-    arg.cmd53.rw_flag = (unsigned int)( (direction == BUS_WRITE) ? 1 : 0 );
+    arg.cmd53.function_number = (uint32_t)(function & BUS_FUNCTION_MASK);
+    arg.cmd53.register_address = (uint32_t)(address & BIT_MASK(17) );
+    arg.cmd53.op_code = (uint32_t)1;
+    arg.cmd53.rw_flag = (uint32_t)( (direction == BUS_WRITE) ? 1 : 0 );
 
     if (mode == SDIO_BYTE_MODE)
     {
         whd_assert("whd_bus_sdio_cmd53: data_size > 512 for byte mode", (data_size <= (uint16_t )512) );
-        arg.cmd53.count = (unsigned int)(data_size & 0x1FF);
+        arg.cmd53.count = (uint32_t)(data_size & 0x1FF);
 
         result =
-            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction, arg.value,
+            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_sdio_transfer_t)direction, arg.value,
                                      (uint32_t *)data, data_size, response);
 
         if (result != CY_RSLT_SUCCESS)
@@ -880,15 +911,15 @@ static whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer
     }
     else
     {
-        arg.cmd53.count = (unsigned int)( (data_size / (uint16_t)SDIO_64B_BLOCK) & BIT_MASK(9) );
+        arg.cmd53.count = (uint32_t)( (data_size / (uint16_t)SDIO_64B_BLOCK) & BIT_MASK(9) );
         if ( (uint32_t)(arg.cmd53.count * (uint16_t)SDIO_64B_BLOCK) < data_size )
         {
             ++arg.cmd53.count;
         }
-        arg.cmd53.block_mode = (unsigned int)1;
+        arg.cmd53.block_mode = (uint32_t)1;
 
         result =
-            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_transfer_t)direction, arg.value,
+            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_sdio_transfer_t)direction, arg.value,
                                      (uint32_t *)data, data_size, response);
 
         if (result != CY_RSLT_SUCCESS)
@@ -910,10 +941,8 @@ done:
     WHD_BUS_STATS_CONDITIONAL_INCREMENT_VARIABLE(whd_driver->bus_priv,
                                                  ( (result != WHD_SUCCESS) && (direction == BUS_WRITE) ),
                                                  cmd53_write_fail);
-    if (result == CY_RSLT_SUCCESS)
-        return WHD_SUCCESS;
-    else
-        return WHD_HAL_ERROR;
+    CHECK_RETURN(result);
+    return WHD_SUCCESS;
 }
 
 static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver)
@@ -960,7 +989,7 @@ static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver)
         return result;
     }
 
-    CHECK_RETURN(whd_bus_write_wifi_nvram_image(whd_driver) );
+    CHECK_RETURN(whd_bus_sdio_write_wifi_nvram_image(whd_driver) );
 
     /* Take the ARM core out of reset */
     if (ram_start_address != 0)
@@ -1358,7 +1387,11 @@ uint32_t whd_bus_sdio_get_max_transfer_size(whd_driver_t whd_driver)
     return WHD_BUS_SDIO_MAX_BACKPLANE_TRANSFER_SIZE;
 }
 
+#if (CYHAL_API_VERSION >= 2)
+static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_event_t event)
+#else
 static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t event)
+#endif
 {
     whd_driver_t whd_driver = (whd_driver_t)handler_arg;
 
@@ -1378,23 +1411,40 @@ static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t e
 
 whd_result_t whd_bus_sdio_irq_register(whd_driver_t whd_driver)
 {
+#if (CYHAL_API_VERSION >= 2)
+    cyhal_sdio_register_callback(whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
+#else
     cyhal_sdio_register_irq(whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
+#endif
     return WHD_SUCCESS;
 }
 
 whd_result_t whd_bus_sdio_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
 {
+#if (CYHAL_API_VERSION >= 2)
+    cyhal_sdio_enable_event(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, CYHAL_ISR_PRIORITY_DEFAULT,
+                            enable);
+#else
     cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, enable);
+#endif
     return WHD_SUCCESS;
 }
 
+#if (CYHAL_API_VERSION >= 2)
+static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_event_t event)
+#else
 static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event)
+#endif
 {
     whd_driver_t whd_driver = (whd_driver_t)arg;
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
+#if (CYHAL_API_VERSION >= 2)
+    const cyhal_gpio_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
+                                              ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
+#else
     const cyhal_gpio_irq_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
                                                   ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-
+#endif
     if (event != expected_event)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
@@ -1413,29 +1463,43 @@ static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver)
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
 
     cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_NONE, 0);
+#if (CYHAL_API_VERSION >= 2)
+    static cyhal_gpio_callback_data_t cbdata;
+    cbdata.callback = whd_bus_sdio_oob_irq_handler;
+    cbdata.callback_arg = whd_driver;
+    cyhal_gpio_register_callback(config->host_oob_pin, &cbdata);
+#else
     cyhal_gpio_register_irq(config->host_oob_pin, config->intr_priority, whd_bus_sdio_oob_irq_handler,
                             whd_driver);
-
+#endif
     return WHD_SUCCESS;
 }
 
 static whd_result_t whd_bus_sdio_unregister_oob_intr(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
-
+#if (CYHAL_API_VERSION >= 2)
+    cyhal_gpio_register_callback(config->host_oob_pin, NULL);
+#else
     cyhal_gpio_register_irq(config->host_oob_pin, config->intr_priority, NULL, NULL);
-
+#endif
     return WHD_SUCCESS;
 }
 
 static whd_result_t whd_bus_sdio_enable_oob_intr(whd_driver_t whd_driver, whd_bool_t enable)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
+#if (CYHAL_API_VERSION >= 2)
+    const cyhal_gpio_event_t event =
+        (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
+
+    cyhal_gpio_enable_event(config->host_oob_pin, event, config->intr_priority, (enable == WHD_TRUE) ? true : false);
+#else
     const cyhal_gpio_irq_event_t event =
         (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
 
     cyhal_gpio_irq_enable(config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
-
+#endif
     return WHD_SUCCESS;
 }
 
@@ -1486,3 +1550,165 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver)
 
     return WHD_SUCCESS;
 }
+
+static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+                                                   whd_bool_t direct_resource, uint32_t address, uint32_t image_size)
+{
+    whd_result_t result = WHD_SUCCESS;
+    uint8_t *image;
+    uint32_t blocks_count = 0;
+    uint32_t i;
+    uint32_t size_out;
+    uint32_t reset_instr = 0;
+
+    result = whd_get_resource_no_of_blocks(whd_driver, resource, &blocks_count);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Fatal error: download_resource blocks count not known, %s failed at line %d \n", __func__,
+                           __LINE__) );
+        goto exit;
+    }
+
+    for (i = 0; i < blocks_count; i++)
+    {
+        CHECK_RETURN(whd_get_resource_block(whd_driver, resource, i, (const uint8_t **)&image, &size_out) );
+        if ( (resource == WHD_RESOURCE_WLAN_FIRMWARE) && (reset_instr == 0) )
+        {
+            /* Copy the starting address of the firmware into a global variable */
+            reset_instr = *( (uint32_t *)(&image[0]) );
+        }
+        result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_WRITE, address, size_out, &image[0]);
+        if (result != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("%s: Failed to write firmware image\n", __FUNCTION__) );
+            goto exit;
+        }
+        address += size_out;
+    }
+
+    /* Below part of the code is applicable to arm_CR4 type chips only
+     * The CR4 chips by default firmware is not loaded at 0. So we need
+     * load the first 32 bytes with the offset of the firmware load address
+     * which is been copied before during the firmware download
+     */
+    if ( (address != 0) && (reset_instr != 0) )
+    {
+        /* write address 0 with reset instruction */
+        result = whd_bus_write_backplane_value(whd_driver, 0, sizeof(reset_instr), reset_instr);
+
+        if (result == WHD_SUCCESS)
+        {
+            uint32_t tmp;
+
+            /* verify reset instruction value */
+            result = whd_bus_read_backplane_value(whd_driver, 0, sizeof(tmp), (uint8_t *)&tmp);
+
+            if ( (result == WHD_SUCCESS) && (tmp != reset_instr) )
+            {
+                WPRINT_WHD_ERROR( ("%s: Failed to write 0x%08" PRIx32 " to addr 0\n", __FUNCTION__, reset_instr) );
+                WPRINT_WHD_ERROR( ("%s: contents of addr 0 is 0x%08" PRIx32 "\n", __FUNCTION__, tmp) );
+                return WHD_WLAN_SDIO_ERROR;
+            }
+        }
+    }
+exit: return result;
+}
+
+static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
+{
+    uint32_t img_base;
+    uint32_t img_end;
+    uint32_t image_size;
+
+    /* Get the size of the variable image */
+    CHECK_RETURN(whd_resource_size(whd_driver, WHD_RESOURCE_WLAN_NVRAM, &image_size) );
+
+    /* Round up the size of the image */
+    image_size = ROUND_UP(image_size, 4);
+
+    /* Write image */
+    img_end = GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4;
+    img_base = (img_end - image_size);
+    img_base += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
+
+    CHECK_RETURN(whd_bus_sdio_download_resource(whd_driver, WHD_RESOURCE_WLAN_NVRAM, WHD_FALSE, img_base, image_size) );
+
+    /* Write the variable image size at the end */
+    image_size = (~(image_size / 4) << 16) | (image_size / 4);
+
+    img_end += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
+
+    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, (uint32_t)img_end, 4, image_size) );
+    return WHD_SUCCESS;
+}
+
+/*
+ * Update the backplane window registers
+ */
+whd_result_t whd_bus_sdio_set_backplane_window(whd_driver_t whd_driver, uint32_t addr, uint32_t *curbase)
+{
+    whd_result_t result = WHD_BUS_WRITE_REGISTER_ERROR;
+    uint32_t base = addr & ( (uint32_t) ~BACKPLANE_ADDRESS_MASK );
+    const uint32_t upper_32bit_mask = 0xFF000000;
+    const uint32_t upper_middle_32bit_mask = 0x00FF0000;
+    const uint32_t lower_middle_32bit_mask = 0x0000FF00;
+
+    if (base == *curbase)
+    {
+        return WHD_SUCCESS;
+    }
+    if ( (base & upper_32bit_mask) != (*curbase & upper_32bit_mask) )
+    {
+        if (WHD_SUCCESS !=
+            (result = whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_BACKPLANE_ADDRESS_HIGH,
+                                                   (uint8_t)1, (base >> 24) ) ) )
+        {
+            WPRINT_WHD_ERROR( ("Failed to write register value to the bus, %s failed at %d \n", __func__,
+                               __LINE__) );
+            return result;
+        }
+        /* clear old */
+        *curbase &= ~upper_32bit_mask;
+        /* set new */
+        *curbase |= (base & upper_32bit_mask);
+    }
+
+    if ( (base & upper_middle_32bit_mask) !=
+         (*curbase & upper_middle_32bit_mask) )
+    {
+        if (WHD_SUCCESS !=
+            (result = whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_BACKPLANE_ADDRESS_MID,
+                                                   (uint8_t)1, (base >> 16) ) ) )
+        {
+            WPRINT_WHD_ERROR( ("Failed to write register value to the bus, %s failed at %d \n", __func__,
+                               __LINE__) );
+            return result;
+        }
+        /* clear old */
+        *curbase &= ~upper_middle_32bit_mask;
+        /* set new */
+        *curbase |= (base & upper_middle_32bit_mask);
+    }
+
+    if ( (base & lower_middle_32bit_mask) !=
+         (*curbase & lower_middle_32bit_mask) )
+    {
+        if (WHD_SUCCESS !=
+            (result = whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_BACKPLANE_ADDRESS_LOW,
+                                                   (uint8_t)1, (base >> 8) ) ) )
+        {
+            WPRINT_WHD_ERROR( ("Failed to write register value to the bus, %s failed at %d \n", __func__,
+                               __LINE__) );
+            return result;
+        }
+
+        /* clear old */
+        *curbase &= ~lower_middle_32bit_mask;
+        /* set new */
+        *curbase |= (base & lower_middle_32bit_mask);
+    }
+
+    return WHD_SUCCESS;
+}
+
+#endif /* (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */

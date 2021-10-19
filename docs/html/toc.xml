@@ -12,47 +12,6 @@
     <topic label="WHD Event handling API" href="group__event.html">
       <topic label="whd_event_handler_t" href="group__event.html#ga9c74af353c83a8f77097acbc65362b07"/>
       <topic label="whd_error_handler_t" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2"/>
-      <topic label="WLC_SUP_DISCONNECTED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680"/>
-      <topic label="WLC_SUP_CONNECTING" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147"/>
-      <topic label="WLC_SUP_IDREQUIRED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce"/>
-      <topic label="WLC_SUP_AUTHENTICATING" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce"/>
-      <topic label="WLC_SUP_AUTHENTICATED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e"/>
-      <topic label="WLC_SUP_KEYXCHANGE" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938"/>
-      <topic label="WLC_SUP_KEYED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a"/>
-      <topic label="WLC_SUP_TIMEOUT" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240"/>
-      <topic label="WLC_SUP_LAST_BASIC_STATE" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df"/>
-      <topic label="WLC_SUP_KEYXCHANGE_WAIT_M1" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe"/>
-      <topic label="WLC_SUP_KEYXCHANGE_PREP_M2" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623"/>
-      <topic label="WLC_SUP_KEYXCHANGE_WAIT_M3" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6"/>
-      <topic label="WLC_SUP_KEYXCHANGE_PREP_M4" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772"/>
-      <topic label="WLC_SUP_KEYXCHANGE_WAIT_G1" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a"/>
-      <topic label="WLC_SUP_KEYXCHANGE_PREP_G2" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303"/>
-      <topic label="whd_wifi_set_event_handler" href="group__event.html#ga4175c3ef9bb16601fabc605fadeaf8d8"/>
-      <topic label="whd_wifi_set_error_handler" href="group__event.html#ga2072e91b840217584cfd60ad540b3146"/>
-      <topic label="whd_wifi_deregister_event_handler" href="group__event.html#gae415f1f3fcbbfe506aa0e656bf8debb3"/>
-      <topic label="whd_wifi_deregister_error_handler" href="group__event.html#gaa7f28d32a8c06c7df471636de6f4dec6"/>
-      <topic label="subtype" href="group__event.html#gac5d9ab8403fb9ca24facc32b821dd53b"/>
-      <topic label="length" href="group__event.html#ga1892eba2086d12ac2b09005aeb09ea3b"/>
-      <topic label="version" href="group__event.html#gab22abc2906422da61885ac6c8e6a1a59"/>
-      <topic label="oui" href="group__event.html#ga5d81eb4d4b4a5b8d3a89be061d06b64d"/>
-      <topic label="usr_subtype" href="group__event.html#gae9ad9911fe2a5dc5789001a2b48d5c9d"/>
-      <topic label="destination_address" href="group__event.html#gaecece25a401285d039a6f30991dad78e"/>
-      <topic label="source_address" href="group__event.html#gaceb7473ccdf9d41c5b6aee7a0264972a"/>
-      <topic label="ethertype" href="group__event.html#gaa9296c58dc24c63c4ee927db394a97d7"/>
-      <topic label="version" href="group__event.html#gab6d7b6f8c2ceaba7acda80aaf05f4899"/>
-      <topic label="flags" href="group__event.html#ga1e87af3c18a2fd36c61faf89949bdc3f"/>
-      <topic label="event_type" href="group__event.html#ga45def65890de0da17bc0d6e2ca2b3a9f"/>
-      <topic label="status" href="group__event.html#gade20423e91627f07e610924cb0081623"/>
-      <topic label="reason" href="group__event.html#ga5ac0b16c31813f87b98e97cc5bacd64a"/>
-      <topic label="auth_type" href="group__event.html#ga6d9c484262d9d2e9fceaa54a2e58b3c0"/>
-      <topic label="datalen" href="group__event.html#ga20ef2f8b0dc25d28c0c76be72919a60a"/>
-      <topic label="addr" href="group__event.html#ga7c939001af591772db111e0be822b469"/>
-      <topic label="ifname" href="group__event.html#ga6416f2a9886b328d85974b42f5a34ce5"/>
-      <topic label="ifidx" href="group__event.html#gaee54e454588cb953b7f349e589c2d09f"/>
-      <topic label="bsscfgidx" href="group__event.html#gaa2c53e1708eb89382779539506cb4359"/>
-      <topic label="eth" href="group__event.html#gae36ac55a3c73f9f7dfa065165130b39e"/>
-      <topic label="eth_evt_hdr" href="group__event.html#ga304eef8ceefeab88f71947f57df3d61b"/>
-      <topic label="whd_event" href="group__event.html#gaaca5889552f0d7a52f681e7b96d53720"/>
     </topic>
     <topic label="WHD Buffer Interface API" href="group__buffif.html">
       <topic label="whd_buffer_funcs" href="structwhd__buffer__funcs.html">
@@ -72,7 +31,7 @@
       <topic label="whd_netif_funcs" href="structwhd__netif__funcs.html">
         <topic label="whd_network_process_ethernet_data" href="structwhd__netif__funcs.html#aeb98a45468d1d8f37450617a3388387c"/>
       </topic>
-      <topic label="whd_network_send_ethernet_data" href="group__netif.html#ga3642a8b0fe0df7449730bec92e09c7d4"/>
+      <topic label="whd_network_send_ethernet_data" href="group__netif.html#gafdfee8583f09d475ae4eafee5386f1b6"/>
     </topic>
     <topic label="WHD Resource API" href="group__res.html">
       <topic label="whd_resource_source" href="structwhd__resource__source.html">
@@ -80,6 +39,7 @@
         <topic label="whd_get_resource_block" href="structwhd__resource__source.html#a621cec3fecb5491d46d3534a59b6862b"/>
         <topic label="whd_get_resource_no_of_blocks" href="structwhd__resource__source.html#a2645315e933c6e65046bec5dad04b8e4"/>
         <topic label="whd_get_resource_block_size" href="structwhd__resource__source.html#af7ac61e99cc2504e39dfb220a34b8d39"/>
+        <topic label="whd_resource_read" href="structwhd__resource__source.html#a0c9a11dcc9c8fd71189a97c3747c3e62"/>
       </topic>
     </topic>
     <topic label="WHD Wi-Fi API" href="group__wifi.html">
@@ -94,7 +54,7 @@
       </topic>
       <topic label="WHD Wi-Fi Join, Scan and Halt API" href="group__wifijoin.html">
         <topic label="whd_scan_result_callback_t" href="group__wifijoin.html#ga9f8c6096922212981dd2101a17aec471"/>
-        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#gaef3dc76f682c6c193df94897e9d0b71f"/>
+        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#ga2752d761f639411027fffa67038d8a61"/>
         <topic label="whd_wifi_scan" href="group__wifijoin.html#ga82d8c980d15acf0e6e18b56423f4e52b"/>
         <topic label="whd_wifi_stop_scan" href="group__wifijoin.html#gacf8632bb68cef4d831083a66bee7b8fa"/>
         <topic label="whd_wifi_join" href="group__wifijoin.html#gac767814ae445f735b51686db20c780be"/>
@@ -147,7 +107,7 @@
         <topic label="whd_pf_get_packet_filter_mask_and_pattern" href="group__wifiutilities.html#gacd9d57c8febb11cc240db23f5de92cd9"/>
         <topic label="whd_wifi_clear_packet_filter_stats" href="group__wifiutilities.html#gab3e9371ccaa61f1f40e0246a66db42a6"/>
         <topic label="whd_pf_get_packet_filter_stats" href="group__wifiutilities.html#ga26172adb5ec181bb8f2009e47eb252cf"/>
-        <topic label="whd_tko_param" href="group__wifiutilities.html#ga482c8ffcb1166f2f161e4ad67f8ef9d5"/>
+        <topic label="whd_tko_param" href="group__wifiutilities.html#gaf6c70f49c254a8d7ef7397e7d83e0c9b"/>
         <topic label="whd_tko_get_status" href="group__wifiutilities.html#gae6b46bcc1a3c7d708abc71ae6a123481"/>
         <topic label="whd_tko_max_assoc" href="group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343"/>
         <topic label="whd_tko_get_FW_connect" href="group__wifiutilities.html#gacc2882e3a308f7b2b938bc5741ab43c3"/>
@@ -191,8 +151,6 @@
     <topic label="WHD Bus API" href="group__busapi.html">
       <topic label="whd_bus_sdio_attach" href="group__busapi.html#ga9f08c5241843cbe2ef06ffa8bfb5118d"/>
       <topic label="whd_bus_sdio_detach" href="group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da"/>
-      <topic label="whd_bus_spi_attach" href="group__busapi.html#ga16b799bb65db52fb4518e1fbc203fe53"/>
-      <topic label="whd_bus_spi_detach" href="group__busapi.html#gae83aaeef8c3d922cbb839b75ab289d13"/>
     </topic>
   </topic>
   <topic label="Data Structures" href="annotated.html">
@@ -233,34 +191,34 @@
         <topic label="le_scan_params" href="structwhd__coex__config.html#afcc1e187cd7f285de8d56162fbbb52bb"/>
       </topic>
       <topic label="whd_event" href="structwhd__event.html">
-        <topic label="eth" href="group__event.html#gae36ac55a3c73f9f7dfa065165130b39e"/>
-        <topic label="eth_evt_hdr" href="group__event.html#ga304eef8ceefeab88f71947f57df3d61b"/>
-        <topic label="whd_event" href="group__event.html#gaaca5889552f0d7a52f681e7b96d53720"/>
+        <topic label="eth" href="structwhd__event.html#ae36ac55a3c73f9f7dfa065165130b39e"/>
+        <topic label="eth_evt_hdr" href="structwhd__event.html#a304eef8ceefeab88f71947f57df3d61b"/>
+        <topic label="whd_event" href="structwhd__event.html#aaca5889552f0d7a52f681e7b96d53720"/>
       </topic>
       <topic label="whd_event_eth_hdr" href="structwhd__event__eth__hdr.html">
-        <topic label="subtype" href="group__event.html#gac5d9ab8403fb9ca24facc32b821dd53b"/>
-        <topic label="length" href="group__event.html#ga1892eba2086d12ac2b09005aeb09ea3b"/>
-        <topic label="version" href="group__event.html#gab22abc2906422da61885ac6c8e6a1a59"/>
-        <topic label="oui" href="group__event.html#ga5d81eb4d4b4a5b8d3a89be061d06b64d"/>
-        <topic label="usr_subtype" href="group__event.html#gae9ad9911fe2a5dc5789001a2b48d5c9d"/>
+        <topic label="subtype" href="structwhd__event__eth__hdr.html#ac5d9ab8403fb9ca24facc32b821dd53b"/>
+        <topic label="length" href="structwhd__event__eth__hdr.html#a1892eba2086d12ac2b09005aeb09ea3b"/>
+        <topic label="version" href="structwhd__event__eth__hdr.html#ab22abc2906422da61885ac6c8e6a1a59"/>
+        <topic label="oui" href="structwhd__event__eth__hdr.html#a5d81eb4d4b4a5b8d3a89be061d06b64d"/>
+        <topic label="usr_subtype" href="structwhd__event__eth__hdr.html#ae9ad9911fe2a5dc5789001a2b48d5c9d"/>
       </topic>
       <topic label="whd_event_ether_header" href="structwhd__event__ether__header.html">
-        <topic label="destination_address" href="group__event.html#gaecece25a401285d039a6f30991dad78e"/>
-        <topic label="source_address" href="group__event.html#gaceb7473ccdf9d41c5b6aee7a0264972a"/>
-        <topic label="ethertype" href="group__event.html#gaa9296c58dc24c63c4ee927db394a97d7"/>
+        <topic label="destination_address" href="structwhd__event__ether__header.html#aecece25a401285d039a6f30991dad78e"/>
+        <topic label="source_address" href="structwhd__event__ether__header.html#aceb7473ccdf9d41c5b6aee7a0264972a"/>
+        <topic label="ethertype" href="structwhd__event__ether__header.html#aa9296c58dc24c63c4ee927db394a97d7"/>
       </topic>
       <topic label="whd_event_msg" href="structwhd__event__msg.html">
-        <topic label="version" href="group__event.html#gab6d7b6f8c2ceaba7acda80aaf05f4899"/>
-        <topic label="flags" href="group__event.html#ga1e87af3c18a2fd36c61faf89949bdc3f"/>
-        <topic label="event_type" href="group__event.html#ga45def65890de0da17bc0d6e2ca2b3a9f"/>
-        <topic label="status" href="group__event.html#gade20423e91627f07e610924cb0081623"/>
-        <topic label="reason" href="group__event.html#ga5ac0b16c31813f87b98e97cc5bacd64a"/>
-        <topic label="auth_type" href="group__event.html#ga6d9c484262d9d2e9fceaa54a2e58b3c0"/>
-        <topic label="datalen" href="group__event.html#ga20ef2f8b0dc25d28c0c76be72919a60a"/>
-        <topic label="addr" href="group__event.html#ga7c939001af591772db111e0be822b469"/>
-        <topic label="ifname" href="group__event.html#ga6416f2a9886b328d85974b42f5a34ce5"/>
-        <topic label="ifidx" href="group__event.html#gaee54e454588cb953b7f349e589c2d09f"/>
-        <topic label="bsscfgidx" href="group__event.html#gaa2c53e1708eb89382779539506cb4359"/>
+        <topic label="version" href="structwhd__event__msg.html#ab6d7b6f8c2ceaba7acda80aaf05f4899"/>
+        <topic label="flags" href="structwhd__event__msg.html#a1e87af3c18a2fd36c61faf89949bdc3f"/>
+        <topic label="event_type" href="structwhd__event__msg.html#a45def65890de0da17bc0d6e2ca2b3a9f"/>
+        <topic label="status" href="structwhd__event__msg.html#ade20423e91627f07e610924cb0081623"/>
+        <topic label="reason" href="structwhd__event__msg.html#a5ac0b16c31813f87b98e97cc5bacd64a"/>
+        <topic label="auth_type" href="structwhd__event__msg.html#a6d9c484262d9d2e9fceaa54a2e58b3c0"/>
+        <topic label="datalen" href="structwhd__event__msg.html#a20ef2f8b0dc25d28c0c76be72919a60a"/>
+        <topic label="addr" href="structwhd__event__msg.html#a7c939001af591772db111e0be822b469"/>
+        <topic label="ifname" href="structwhd__event__msg.html#a6416f2a9886b328d85974b42f5a34ce5"/>
+        <topic label="ifidx" href="structwhd__event__msg.html#aee54e454588cb953b7f349e589c2d09f"/>
+        <topic label="bsscfgidx" href="structwhd__event__msg.html#aa2c53e1708eb89382779539506cb4359"/>
       </topic>
       <topic label="whd_init_config" href="structwhd__init__config.html">
         <topic label="thread_stack_start" href="structwhd__init__config.html#a52591d0d84b73dea8ca0a25c486f62c7"/>
@@ -272,6 +230,9 @@
         <topic label="beacon" href="structwhd__listen__interval__t.html#a59de6cdff8214507260f142834f20cee"/>
         <topic label="dtim" href="structwhd__listen__interval__t.html#a011e406e7bba2200194b90d308ea2e82"/>
         <topic label="assoc" href="structwhd__listen__interval__t.html#af001610277052191979db17c0133c933"/>
+      </topic>
+      <topic label="whd_m2m_config" href="structwhd__m2m__config.html">
+        <topic label="is_normal_mode" href="structwhd__m2m__config.html#afde40b36899b604612feb3b6c39b00ed"/>
       </topic>
       <topic label="whd_mac_t" href="structwhd__mac__t.html">
         <topic label="octet" href="structwhd__mac__t.html#abc3755f1f66dea95fce153ee4f49e907"/>
@@ -303,6 +264,7 @@
         <topic label="whd_get_resource_block" href="structwhd__resource__source.html#a621cec3fecb5491d46d3534a59b6862b"/>
         <topic label="whd_get_resource_no_of_blocks" href="structwhd__resource__source.html#a2645315e933c6e65046bec5dad04b8e4"/>
         <topic label="whd_get_resource_block_size" href="structwhd__resource__source.html#af7ac61e99cc2504e39dfb220a34b8d39"/>
+        <topic label="whd_resource_read" href="structwhd__resource__source.html#a0c9a11dcc9c8fd71189a97c3747c3e62"/>
       </topic>
       <topic label="whd_scan_extended_params_t" href="structwhd__scan__extended__params__t.html">
         <topic label="number_of_probes_per_channel" href="structwhd__scan__extended__params__t.html#ae142c15dcc2633a4ab09a282fc942186"/>
@@ -394,6 +356,8 @@
         </topic>
         <topic label="INCLUDED_WHD_H" href="whd_8h.html#a54c1a5e4a019c5fa6df104ada4031b1a"/>
         <topic label="whd_driver_t" href="whd_8h.html#ac45015d82e65db891b463066873eca4f"/>
+        <topic label="whd_bt_info_t" href="whd_8h.html#abb71e6e14de31e2b2da19bfb425a590e"/>
+        <topic label="whd_bt_dev_t" href="whd_8h.html#ad739b6e984d3734516e40194e903f94e"/>
         <topic label="whd_interface_t" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0"/>
         <topic label="whd_buffer_funcs_t" href="whd_8h.html#a44a6e9abc68a4322a3958bdc24ae9981"/>
         <topic label="whd_netif_funcs_t" href="whd_8h.html#ac35b975959ed585acf554535b502ce68"/>
@@ -404,34 +368,34 @@
       </topic>
       <topic label="whd_events.h" href="whd__events_8h.html">
         <topic label="whd_event_eth_hdr" href="structwhd__event__eth__hdr.html">
-          <topic label="subtype" href="group__event.html#gac5d9ab8403fb9ca24facc32b821dd53b"/>
-          <topic label="length" href="group__event.html#ga1892eba2086d12ac2b09005aeb09ea3b"/>
-          <topic label="version" href="group__event.html#gab22abc2906422da61885ac6c8e6a1a59"/>
-          <topic label="oui" href="group__event.html#ga5d81eb4d4b4a5b8d3a89be061d06b64d"/>
-          <topic label="usr_subtype" href="group__event.html#gae9ad9911fe2a5dc5789001a2b48d5c9d"/>
+          <topic label="subtype" href="structwhd__event__eth__hdr.html#ac5d9ab8403fb9ca24facc32b821dd53b"/>
+          <topic label="length" href="structwhd__event__eth__hdr.html#a1892eba2086d12ac2b09005aeb09ea3b"/>
+          <topic label="version" href="structwhd__event__eth__hdr.html#ab22abc2906422da61885ac6c8e6a1a59"/>
+          <topic label="oui" href="structwhd__event__eth__hdr.html#a5d81eb4d4b4a5b8d3a89be061d06b64d"/>
+          <topic label="usr_subtype" href="structwhd__event__eth__hdr.html#ae9ad9911fe2a5dc5789001a2b48d5c9d"/>
         </topic>
         <topic label="whd_event_ether_header" href="structwhd__event__ether__header.html">
-          <topic label="destination_address" href="group__event.html#gaecece25a401285d039a6f30991dad78e"/>
-          <topic label="source_address" href="group__event.html#gaceb7473ccdf9d41c5b6aee7a0264972a"/>
-          <topic label="ethertype" href="group__event.html#gaa9296c58dc24c63c4ee927db394a97d7"/>
+          <topic label="destination_address" href="structwhd__event__ether__header.html#aecece25a401285d039a6f30991dad78e"/>
+          <topic label="source_address" href="structwhd__event__ether__header.html#aceb7473ccdf9d41c5b6aee7a0264972a"/>
+          <topic label="ethertype" href="structwhd__event__ether__header.html#aa9296c58dc24c63c4ee927db394a97d7"/>
         </topic>
         <topic label="whd_event_msg" href="structwhd__event__msg.html">
-          <topic label="version" href="group__event.html#gab6d7b6f8c2ceaba7acda80aaf05f4899"/>
-          <topic label="flags" href="group__event.html#ga1e87af3c18a2fd36c61faf89949bdc3f"/>
-          <topic label="event_type" href="group__event.html#ga45def65890de0da17bc0d6e2ca2b3a9f"/>
-          <topic label="status" href="group__event.html#gade20423e91627f07e610924cb0081623"/>
-          <topic label="reason" href="group__event.html#ga5ac0b16c31813f87b98e97cc5bacd64a"/>
-          <topic label="auth_type" href="group__event.html#ga6d9c484262d9d2e9fceaa54a2e58b3c0"/>
-          <topic label="datalen" href="group__event.html#ga20ef2f8b0dc25d28c0c76be72919a60a"/>
-          <topic label="addr" href="group__event.html#ga7c939001af591772db111e0be822b469"/>
-          <topic label="ifname" href="group__event.html#ga6416f2a9886b328d85974b42f5a34ce5"/>
-          <topic label="ifidx" href="group__event.html#gaee54e454588cb953b7f349e589c2d09f"/>
-          <topic label="bsscfgidx" href="group__event.html#gaa2c53e1708eb89382779539506cb4359"/>
+          <topic label="version" href="structwhd__event__msg.html#ab6d7b6f8c2ceaba7acda80aaf05f4899"/>
+          <topic label="flags" href="structwhd__event__msg.html#a1e87af3c18a2fd36c61faf89949bdc3f"/>
+          <topic label="event_type" href="structwhd__event__msg.html#a45def65890de0da17bc0d6e2ca2b3a9f"/>
+          <topic label="status" href="structwhd__event__msg.html#ade20423e91627f07e610924cb0081623"/>
+          <topic label="reason" href="structwhd__event__msg.html#a5ac0b16c31813f87b98e97cc5bacd64a"/>
+          <topic label="auth_type" href="structwhd__event__msg.html#a6d9c484262d9d2e9fceaa54a2e58b3c0"/>
+          <topic label="datalen" href="structwhd__event__msg.html#a20ef2f8b0dc25d28c0c76be72919a60a"/>
+          <topic label="addr" href="structwhd__event__msg.html#a7c939001af591772db111e0be822b469"/>
+          <topic label="ifname" href="structwhd__event__msg.html#a6416f2a9886b328d85974b42f5a34ce5"/>
+          <topic label="ifidx" href="structwhd__event__msg.html#aee54e454588cb953b7f349e589c2d09f"/>
+          <topic label="bsscfgidx" href="structwhd__event__msg.html#aa2c53e1708eb89382779539506cb4359"/>
         </topic>
         <topic label="whd_event" href="structwhd__event.html">
-          <topic label="eth" href="group__event.html#gae36ac55a3c73f9f7dfa065165130b39e"/>
-          <topic label="eth_evt_hdr" href="group__event.html#ga304eef8ceefeab88f71947f57df3d61b"/>
-          <topic label="whd_event" href="group__event.html#gaaca5889552f0d7a52f681e7b96d53720"/>
+          <topic label="eth" href="structwhd__event.html#ae36ac55a3c73f9f7dfa065165130b39e"/>
+          <topic label="eth_evt_hdr" href="structwhd__event.html#a304eef8ceefeab88f71947f57df3d61b"/>
+          <topic label="whd_event" href="structwhd__event.html#aaca5889552f0d7a52f681e7b96d53720"/>
         </topic>
         <topic label="WLC_E_NONE" href="whd__events_8h.html#a5608426af7320ce9e54a8a500fc044e9"/>
         <topic label="WLC_E_SET_SSID" href="whd__events_8h.html#ae370e84bd9ed3b3cde25919287673298"/>
@@ -477,33 +441,33 @@
         <topic label="whd_event_handler_t" href="group__event.html#ga9c74af353c83a8f77097acbc65362b07"/>
         <topic label="whd_error_handler_t" href="group__event.html#gad693f00ea3008fa9645582df236ad7e2"/>
         <topic label="sup_auth_status" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4c">
-          <topic label="WLC_SUP_DISCONNECTED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680"/>
-          <topic label="WLC_SUP_CONNECTING" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147"/>
-          <topic label="WLC_SUP_IDREQUIRED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce"/>
-          <topic label="WLC_SUP_AUTHENTICATING" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce"/>
-          <topic label="WLC_SUP_AUTHENTICATED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e"/>
-          <topic label="WLC_SUP_KEYXCHANGE" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938"/>
-          <topic label="WLC_SUP_KEYED" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a"/>
-          <topic label="WLC_SUP_TIMEOUT" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240"/>
-          <topic label="WLC_SUP_LAST_BASIC_STATE" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df"/>
-          <topic label="WLC_SUP_KEYXCHANGE_WAIT_M1" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe"/>
-          <topic label="WLC_SUP_KEYXCHANGE_PREP_M2" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623"/>
-          <topic label="WLC_SUP_KEYXCHANGE_WAIT_M3" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6"/>
-          <topic label="WLC_SUP_KEYXCHANGE_PREP_M4" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772"/>
-          <topic label="WLC_SUP_KEYXCHANGE_WAIT_G1" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a"/>
-          <topic label="WLC_SUP_KEYXCHANGE_PREP_G2" href="group__event.html#gaba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303"/>
+          <topic label="WLC_SUP_DISCONNECTED" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680"/>
+          <topic label="WLC_SUP_CONNECTING" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147"/>
+          <topic label="WLC_SUP_IDREQUIRED" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce"/>
+          <topic label="WLC_SUP_AUTHENTICATING" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce"/>
+          <topic label="WLC_SUP_AUTHENTICATED" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e"/>
+          <topic label="WLC_SUP_KEYXCHANGE" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938"/>
+          <topic label="WLC_SUP_KEYED" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a"/>
+          <topic label="WLC_SUP_TIMEOUT" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240"/>
+          <topic label="WLC_SUP_LAST_BASIC_STATE" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df"/>
+          <topic label="WLC_SUP_KEYXCHANGE_WAIT_M1" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe"/>
+          <topic label="WLC_SUP_KEYXCHANGE_PREP_M2" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623"/>
+          <topic label="WLC_SUP_KEYXCHANGE_WAIT_M3" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6"/>
+          <topic label="WLC_SUP_KEYXCHANGE_PREP_M4" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772"/>
+          <topic label="WLC_SUP_KEYXCHANGE_WAIT_G1" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a"/>
+          <topic label="WLC_SUP_KEYXCHANGE_PREP_G2" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303"/>
         </topic>
-        <topic label="whd_wifi_set_event_handler" href="group__event.html#ga4175c3ef9bb16601fabc605fadeaf8d8"/>
-        <topic label="whd_wifi_set_error_handler" href="group__event.html#ga2072e91b840217584cfd60ad540b3146"/>
-        <topic label="whd_wifi_deregister_event_handler" href="group__event.html#gae415f1f3fcbbfe506aa0e656bf8debb3"/>
-        <topic label="whd_wifi_deregister_error_handler" href="group__event.html#gaa7f28d32a8c06c7df471636de6f4dec6"/>
+        <topic label="whd_wifi_set_event_handler" href="whd__events_8h.html#a4175c3ef9bb16601fabc605fadeaf8d8"/>
+        <topic label="whd_wifi_set_error_handler" href="whd__events_8h.html#a2072e91b840217584cfd60ad540b3146"/>
+        <topic label="whd_wifi_deregister_event_handler" href="whd__events_8h.html#ae415f1f3fcbbfe506aa0e656bf8debb3"/>
+        <topic label="whd_wifi_deregister_error_handler" href="whd__events_8h.html#aa7f28d32a8c06c7df471636de6f4dec6"/>
       </topic>
       <topic label="whd_network_types.h" href="whd__network__types_8h.html">
         <topic label="whd_buffer_dir_t" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">
           <topic label="WHD_NETWORK_TX" href="group__buffif.html#gga44a64c51498b204ceef5555209e29452a3d24bf5423cc175fe6ee80bd359dc5bd"/>
           <topic label="WHD_NETWORK_RX" href="group__buffif.html#gga44a64c51498b204ceef5555209e29452a11af875b5bd8b18c4a0c878af601d1ca"/>
         </topic>
-        <topic label="whd_network_send_ethernet_data" href="group__netif.html#ga3642a8b0fe0df7449730bec92e09c7d4"/>
+        <topic label="whd_network_send_ethernet_data" href="group__netif.html#gafdfee8583f09d475ae4eafee5386f1b6"/>
       </topic>
       <topic label="whd_resource_api.h" href="whd__resource__api_8h.html">
         <topic label="BLOCK_SIZE" href="whd__resource__api_8h.html#ad51ded0bbd705f02f73fc60c0b721ced"/>
@@ -621,6 +585,9 @@
           <topic label="is_spi_normal_mode" href="structwhd__spi__config.html#a65649e24a48dbfcf74a6e3b0ea729181"/>
           <topic label="oob_config" href="structwhd__spi__config.html#a5fa87ee1769d21a2bf8a871ab7f4d1bb"/>
         </topic>
+        <topic label="whd_m2m_config" href="structwhd__m2m__config.html">
+          <topic label="is_normal_mode" href="structwhd__m2m__config.html#afde40b36899b604612feb3b6c39b00ed"/>
+        </topic>
         <topic label="whd_btc_lescan_params" href="structwhd__btc__lescan__params.html">
           <topic label="priority" href="structwhd__btc__lescan__params.html#a0815784d41b3c13d42ce22367abfba1d"/>
           <topic label="duty_cycle" href="structwhd__btc__lescan__params.html#ad0362052c89424bf11eb63b726b05182"/>
@@ -661,6 +628,7 @@
         <topic label="UNUSED_VARIABLE" href="whd__types_8h.html#a4048bf3892868ded8a28f8cbdd339c09"/>
         <topic label="REFERENCE_DEBUG_ONLY_VARIABLE" href="whd__types_8h.html#a1491cb4c4adc44f22a91f18609dfb2f7"/>
         <topic label="WIFI_IE_OUI_LENGTH" href="whd__types_8h.html#ae6328bba53e322f1332e7b7b2d7cc128"/>
+        <topic label="VNDR_IE_MAX_LEN" href="whd__types_8h.html#a7ccccfd0b93f11b672f4627277f9153f"/>
         <topic label="BDC_HEADER_WITH_PAD" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943"/>
         <topic label="BDC_HEADER_OFFSET_TO_DATA" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717"/>
         <topic label="SDPCM_HEADER" href="whd__types_8h.html#aaf73ac170e07969ed067a6cd5088044f"/>
@@ -747,6 +715,7 @@
         <topic label="WHD_CLM_BLOB_DLOAD_ERROR" href="whd__types_8h.html#a6dd36bd14965f3601fee55c6e799dfa1"/>
         <topic label="WHD_HAL_ERROR" href="whd__types_8h.html#a68e4cdc07dccd14d0cc6c6216ff37fb2"/>
         <topic label="WHD_RTOS_STATIC_MEM_LIMIT" href="whd__types_8h.html#a6499f6328208f184b4f716a910d7cdf6"/>
+        <topic label="WHD_NO_REGISTER_FUNCTION_POINTER" href="whd__types_8h.html#ab05f43e01bbb9228b3ccf13f30861d07"/>
         <topic label="WLAN_ENUM_OFFSET" href="whd__types_8h.html#a01539df5d3e26227c354161d9eda58f8"/>
         <topic label="WHD_WLAN_ERROR" href="whd__types_8h.html#ac23d24b8da4c424644151d0893c83a6d"/>
         <topic label="WHD_WLAN_BADARG" href="whd__types_8h.html#a8014f6266d91d9393e04bbc9a9b9080b"/>
@@ -808,6 +777,7 @@
         <topic label="whd_oob_config_t" href="whd__types_8h.html#ac07b13dcb5ec0e66a707dcf8a539c97e"/>
         <topic label="whd_sdio_config_t" href="whd__types_8h.html#a2b3fb82834e1fbcbbf1f51e83c675edd"/>
         <topic label="whd_spi_config_t" href="whd__types_8h.html#a2f5c5d3c7f74ce9a86595fe220c860d3"/>
+        <topic label="whd_m2m_config_t" href="whd__types_8h.html#ab5fa3b42c3b6290fc944c79deb812c8c"/>
         <topic label="whd_btc_lescan_params_t" href="whd__types_8h.html#a98dae084aa15394bf6f8e907e09233a4"/>
         <topic label="whd_coex_config_t" href="whd__types_8h.html#a1cb4da9972e0e9317a6e26e2fd460902"/>
         <topic label="whd_dot11_reason_code_t" href="whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55d">
@@ -930,6 +900,12 @@
           <topic label="WHD_IOVAR_GET_AMPDU_MPDU" href="whd__types_8h.html#adc3a23bad78e0110546c9edc00456dafa7f4a2991b98ce6ac5a6cc892662f1cbd"/>
           <topic label="WHD_IOVAR_GET_LISTEN_INTERVAL" href="whd__types_8h.html#adc3a23bad78e0110546c9edc00456dafa335ed12c48af483e1c930e5c7b9f5d57"/>
           <topic label="WHD_IOVAR_GET_MAC_ADDRESS" href="whd__types_8h.html#adc3a23bad78e0110546c9edc00456dafa5ebc26219966e0db67e2cdbb8f89d986"/>
+        </topic>
+        <topic label="whd_bus_type_t" href="whd__types_8h.html#a6158197f83b368e63fa825eb34602dcd">
+          <topic label="WHD_BUS_SDIO" href="whd__types_8h.html#a6158197f83b368e63fa825eb34602dcda933b8592a349f873bb0e2751308c6f8b"/>
+          <topic label="WHD_BUS_SPI" href="whd__types_8h.html#a6158197f83b368e63fa825eb34602dcdabe76310f2a424db26f41811896ffeaa4"/>
+          <topic label="WHD_BUS_M2M" href="whd__types_8h.html#a6158197f83b368e63fa825eb34602dcda2c48ff3a53028dbf4b0d5812ea81cdc4"/>
+          <topic label="WHD_BUS_NO_DEFINE" href="whd__types_8h.html#a6158197f83b368e63fa825eb34602dcda9ee38b405f20578758c1dbf65f8b89fa"/>
         </topic>
         <topic label="whd_country_code_t" href="whd__types_8h.html#a5adb0953a8527552bc47001673830602">
           <topic label="WHD_COUNTRY_AFGHANISTAN" href="whd__types_8h.html#a5adb0953a8527552bc47001673830602ae770f53071110d4c62c45f3185212a2c"/>
@@ -1178,6 +1154,7 @@
           <topic label="VENDOR_IE_PROBE_REQUEST" href="whd__types_8h.html#a07b4f24f4e2abacc45a9ad29f008488fa49f0a957e4f09c15c7fb0d8cc7aa6ec4"/>
           <topic label="VENDOR_IE_ASSOC_REQUEST" href="whd__types_8h.html#a07b4f24f4e2abacc45a9ad29f008488faaef0a32dac2a32e2c0c2487494f75a69"/>
           <topic label="VENDOR_IE_CUSTOM" href="whd__types_8h.html#a07b4f24f4e2abacc45a9ad29f008488fa470a17144a803cdfc1571b0fcc3f616f"/>
+          <topic label="VENDOR_IE_UNKNOWN" href="whd__types_8h.html#a07b4f24f4e2abacc45a9ad29f008488fadb54e31649be7a9a80ad7cc34c2c4394"/>
         </topic>
         <topic label="whd_packet_filter_rule_t" href="whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038">
           <topic label="WHD_PACKET_FILTER_RULE_POSITIVE_MATCHING" href="whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038a75352695a5824e5b1759743869bca6d9"/>
@@ -1189,15 +1166,13 @@
         <topic label="whd_init" href="group__wifimanagement.html#ga286dde2ee65ac3ea5ae67a6e6ef25f0a"/>
         <topic label="whd_bus_sdio_attach" href="group__busapi.html#ga9f08c5241843cbe2ef06ffa8bfb5118d"/>
         <topic label="whd_bus_sdio_detach" href="group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da"/>
-        <topic label="whd_bus_spi_attach" href="group__busapi.html#ga16b799bb65db52fb4518e1fbc203fe53"/>
-        <topic label="whd_bus_spi_detach" href="group__busapi.html#gae83aaeef8c3d922cbb839b75ab289d13"/>
         <topic label="whd_wifi_on" href="group__wifimanagement.html#ga1c8bf41b593cb947266f8690d495f381"/>
         <topic label="whd_wifi_off" href="group__wifimanagement.html#ga422587a9b104a871233a42aceb2141d2"/>
         <topic label="whd_deinit" href="group__wifimanagement.html#gab7d6e59874922e5646e08e52082e32f5"/>
         <topic label="whd_wifi_set_up" href="group__wifimanagement.html#ga925da3b1ed914d7bb661d3cb2af50680"/>
         <topic label="whd_wifi_set_down" href="group__wifimanagement.html#ga412c2d4653a7c36329c6cf78be344336"/>
         <topic label="whd_add_secondary_interface" href="group__wifimanagement.html#ga553c009e9f6f856dfe243d745e21bbf9"/>
-        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#gaef3dc76f682c6c193df94897e9d0b71f"/>
+        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#ga2752d761f639411027fffa67038d8a61"/>
         <topic label="whd_wifi_scan" href="group__wifijoin.html#ga82d8c980d15acf0e6e18b56423f4e52b"/>
         <topic label="whd_wifi_stop_scan" href="group__wifijoin.html#gacf8632bb68cef4d831083a66bee7b8fa"/>
         <topic label="whd_wifi_join" href="group__wifijoin.html#gac767814ae445f735b51686db20c780be"/>
@@ -1261,7 +1236,7 @@
         <topic label="whd_pf_get_packet_filter_mask_and_pattern" href="group__wifiutilities.html#gacd9d57c8febb11cc240db23f5de92cd9"/>
         <topic label="whd_wifi_clear_packet_filter_stats" href="group__wifiutilities.html#gab3e9371ccaa61f1f40e0246a66db42a6"/>
         <topic label="whd_pf_get_packet_filter_stats" href="group__wifiutilities.html#ga26172adb5ec181bb8f2009e47eb252cf"/>
-        <topic label="whd_tko_param" href="group__wifiutilities.html#ga482c8ffcb1166f2f161e4ad67f8ef9d5"/>
+        <topic label="whd_tko_param" href="group__wifiutilities.html#gaf6c70f49c254a8d7ef7397e7d83e0c9b"/>
         <topic label="whd_tko_get_status" href="group__wifiutilities.html#gae6b46bcc1a3c7d708abc71ae6a123481"/>
         <topic label="whd_tko_max_assoc" href="group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343"/>
         <topic label="whd_tko_get_FW_connect" href="group__wifiutilities.html#gacc2882e3a308f7b2b938bc5741ab43c3"/>

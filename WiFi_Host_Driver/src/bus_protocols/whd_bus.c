@@ -19,8 +19,88 @@
  *
  */
 
+#include <stdlib.h>
 #include "whd_bus.h"
 #include "whd_int.h"
+
+
+whd_driver_t g_bt_whd_driver;
+
+whd_result_t whd_bus_write_reg_value(whd_driver_t whd_driver, uint32_t address,
+                                     uint8_t value_length, uint32_t value)
+{
+    CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
+    return whd_bus_write_backplane_value(whd_driver, address, value_length, value);
+
+}
+
+whd_result_t whd_bus_read_reg_value(whd_driver_t whd_driver, uint32_t address,
+                                    uint8_t value_length, uint8_t *value)
+{
+    CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
+    return whd_bus_read_backplane_value(whd_driver, address, value_length, value);
+
+}
+
+whd_result_t whd_bus_share_bt_init(whd_driver_t whd_driver)
+{
+    if (!whd_driver)
+        return WHD_WLAN_ERROR;
+    g_bt_whd_driver = whd_driver;
+    return WHD_SUCCESS;
+}
+
+whd_driver_t whd_bt_get_whd_driver(void)
+{
+    if (g_bt_whd_driver)
+        return g_bt_whd_driver;
+    else
+        return NULL;
+}
+
+whd_result_t whd_bus_bt_attach(whd_driver_t whd_driver, void *btdata,
+                               void (*bt_int_fun)(void *data) )
+{
+    whd_bt_dev_t btdev;
+    if (whd_driver->bt_dev)
+    {
+        return WHD_SUCCESS;
+    }
+    /* Allocate bt dev */
+    btdev = (whd_bt_dev_t)malloc(sizeof(struct whd_bt_dev) );
+    if (btdev == NULL)
+    {
+        WPRINT_WHD_ERROR( ("Memory allocation failed for whd_bt_dev_t in %s\n", __FUNCTION__) );
+        return WHD_BUFFER_UNAVAILABLE_PERMANENT;
+    }
+    btdev->bt_data = btdata;
+    btdev->intr = WHD_TRUE;
+    whd_driver->bt_dev = btdev;
+    whd_bus_init_stats(whd_driver);
+    btdev->bt_int_cb = bt_int_fun;
+    if (!btdev->bt_int_cb)
+    {
+        btdev->intr = WHD_FALSE;
+    }
+    return WHD_SUCCESS;
+}
+
+void whd_bus_bt_detach(whd_driver_t whd_driver)
+{
+    whd_bt_dev_t btdev = whd_driver->bt_dev;
+    if (btdev)
+    {
+        if (btdev->bt_data)
+            btdev->bt_data = NULL;
+        if (btdev->bt_int_cb)
+            btdev->bt_int_cb = NULL;
+        if (whd_driver->bt_dev)
+        {
+            whd_driver->bt_dev = NULL;
+            free(btdev);
+        }
+    }
+}
 
 whd_result_t whd_bus_init(whd_driver_t whd_driver)
 {
@@ -141,4 +221,10 @@ whd_result_t whd_bus_irq_register(whd_driver_t whd_driver)
 whd_result_t whd_bus_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
 {
     return whd_driver->bus_if->whd_bus_irq_enable_fptr(whd_driver, enable);
+}
+
+whd_result_t whd_bus_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+        whd_bool_t direct_resource, uint32_t address, uint32_t image_size)
+{
+	return whd_driver->bus_if->whd_bus_download_resource_fptr(whd_driver, resource, direct_resource, address, image_size);
 }

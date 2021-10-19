@@ -35,8 +35,6 @@ extern "C"
 /******************************************************
 *                      Macros
 ******************************************************/
-#define MAX_BUS_HEADER_SIZE 4
-
 /**
  * The size of an Ethernet header
  */
@@ -73,6 +71,16 @@ extern "C"
                                       NULL){ WPRINT_WHD_ERROR( ("Buffer alloc failed in function %s at line %d \n", \
                                                                 __func__, __LINE__) ); \
                                              return WHD_BUFFER_ALLOC_FAIL; }
+#define CHECK_PACKET_NULL(buff, err)  if (buff == \
+                                          NULL){ WPRINT_WHD_ERROR( ("No register function pointer in %s at line %d \n", \
+                                                                    __func__, __LINE__) ); \
+                                                 return err;}
+#define CHECK_PACKET_WITH_NULL_RETURN(buff)  if (buff == \
+                                                 NULL){ WPRINT_WHD_ERROR( ( \
+                                                                              "No register function pointer in %s at line %d \n", \
+                                                                              __func__, __LINE__) ); \
+                                                        return;}
+
 #define CHECK_RETURN(expr)  { \
         whd_result_t check_res = (expr); \
         if (check_res != WHD_SUCCESS) \

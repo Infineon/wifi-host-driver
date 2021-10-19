@@ -678,6 +678,7 @@ typedef struct eventmsgs_ext
     uint8_t mask[1];
 } eventmsgs_ext_t;
 
+#define IOVAR_STR_BTADDR                 "bus:btsdiobufaddr"
 #define IOVAR_STR_ACTFRAME               "actframe"
 #define IOVAR_STR_BSS                    "bss"
 #define IOVAR_STR_BSS_RATESET            "bss_rateset"

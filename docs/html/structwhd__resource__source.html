@@ -27,9 +27,8 @@
           <tr style="height:20px"><td>&nbsp;</td></tr>
           <tr style="border-collapse: collapse; padding: 0;">
             <td style="width:20px"></td>
-            <td style="width:117px"><img src="cypress_logo.png" alt="Cypress Logo" /></td>
-            <td style="width:20px;background-image:url('cypresslogo_line.png');"></td>
-            <td style="vertical-align:middle; text-align:center; font: bold 25px/100% Verdana, Arial, Helvetica, sans-serif;background-image:url('cypresslogo_line.png');">
+            <td style="width:117px"><img src="ifx_logo.png" alt="Infineon Logo" /></td>
+            <td style="vertical-align:middle; text-align:center; font: bold 25px/100% Verdana, Arial, Helvetica, sans-serif;">
               Wi-Fi Host Driver (WHD) Public API Reference Guide
             </td>
           </tr>
@@ -110,6 +109,9 @@ Data Fields</h2></td></tr>
 <tr class="memitem:af7ac61e99cc2504e39dfb220a34b8d39"><td class="memItemLeft" align="right" valign="top">uint32_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__resource__source.html#af7ac61e99cc2504e39dfb220a34b8d39">whd_get_resource_block_size</a> )(<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, <a class="el" href="whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0c">whd_resource_type_t</a> type, uint32_t *size_out)</td></tr>
 <tr class="memdesc:af7ac61e99cc2504e39dfb220a34b8d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets block size for the specified resource_type.  <a href="#af7ac61e99cc2504e39dfb220a34b8d39">More...</a><br /></td></tr>
 <tr class="separator:af7ac61e99cc2504e39dfb220a34b8d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c9a11dcc9c8fd71189a97c3747c3e62"><td class="memItemLeft" align="right" valign="top">uint32_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__resource__source.html#a0c9a11dcc9c8fd71189a97c3747c3e62">whd_resource_read</a> )(<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, <a class="el" href="whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0c">whd_resource_type_t</a> type, uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer)</td></tr>
+<tr class="memdesc:a0c9a11dcc9c8fd71189a97c3747c3e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resource for specified resource type.  <a href="#a0c9a11dcc9c8fd71189a97c3747c3e62">More...</a><br /></td></tr>
+<tr class="separator:a0c9a11dcc9c8fd71189a97c3747c3e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Field Documentation</h2>
 <a id="ab2a3bf0a36362b733939361143158e02"></a>
@@ -214,6 +216,34 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a0c9a11dcc9c8fd71189a97c3747c3e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c9a11dcc9c8fd71189a97c3747c3e62">&#9670;&nbsp;</a></span>whd_resource_read</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t(* whd_resource_read) (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, <a class="el" href="whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0c">whd_resource_type_t</a> type, uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the resource for specified resource type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">whd_drv</td><td>Pointer to handle instance of the driver </td></tr>
+    <tr><td class="paramname">type</td><td>Type of resource - WHD_RESOURCE_WLAN_FIRMWARE, WHD_RESOURCE_WLAN_NVRAM, WHD_RESOURCE_WLAN_CLM </td></tr>
+    <tr><td class="paramname">offset</td><td>offset address to store buffer </td></tr>
+    <tr><td class="paramname">size</td><td>Pointer to a size of buffer </td></tr>
+    <tr><td class="paramname">size_out</td><td>Pointer to store size of buffer </td></tr>
+    <tr><td class="paramname">buffer</td><td>Pointer to a buffer</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or error code </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="whd__resource__api_8h.html">whd_resource_api.h</a></li>
 </ul>
@@ -223,7 +253,7 @@ Data Fields</h2></td></tr>
     <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
       <ul>
         <li class="navelem"><a class="el" href="structwhd__resource__source.html">whd_resource_source</a></li>
-        <li class="footer">Copyright Cypress Corporation.</li>
+        <li class="footer">Copyright Infineon Technologies.</li>
       </ul>
     </div>
   </body>

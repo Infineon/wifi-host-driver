@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v1.94.0
+# Wi-Fi Host Driver (WHD)  v2.0.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,55 +11,67 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.93.0
+## Changes since v1.94.0
 ### New Features
-* Support Nvram for LAIRD_LWB5PM2
-* Supports error handling callback for BUS error or FW halt.
-* Support different maximum credit numbers for different firmware
+* Support BSP v2.0 only
+* 43439 support
+* Supports new nvram folder structure
+* Supports for sharing bus to BT
+* Optimized memory for the unused firmware.
+* Enable 4373 oob interrupt
 
 ### Defect Fixes
-* Update structure of counters
-* Build failure with IAR toolchain
-* Fix the return of the unexpected value
-* Fix unknown security type in scan result
-* Fix test_wifi_set_ioctl_value failure
+* Fix the failed build for 43438 and 43364
+* Update the mechanism of the aliged address
+* Changed macro to variable for polling mode
+* Fix the length of the custom ie in api
+* Fix the NULL pointer of btdev in whd_allow_wlan_bus_to_sleep
+* Remove bus detach API from whd_deinit
+* Fix the data is not synced in 64bit platform
+* Add returns for the APIs of sending packed to WHD
+* Fix the unknown charater in nvram file
+* Fix the reading console log from 4373 FW
+* Remove WEP support
+* Fix out of memory due to meany packets in send queue
+* Fix null pointer dereference during scanning
+
+### API Changes
+* whd_wifi_scan_synch
+Input argument "count" is now a pointer which also indicates the no of record received when returning.
+* whd_tko_param
+The variable type of parameter "set" is changed from int to uint8_t.
+* whd_network_send_ethernet_data
+Use whd_result_t return type for returning WHD_SUCCESS or Error code.
+* Remove WEP connection (WHD_SECURITY_WEP_PSK / WHD_SECURITY_WEP_SHARED) support
+* WHD de-initialization sequence changed to below:
+```
+      whd_wifi_leave(ifp);
+      whd_wifi_off(ifp);
+      whd_bus_sdio_detach(whd_driver);
+      whd_deinit(ifp);
+```
 
 ### Known Issues
 
-### Firmware Changes
+
 #### CYW4343W
+* --- 7.45.98.120 ---
+* Fix pmk caching
 * --- 7.45.98.117 ---
-* Security fixes
-* Memory usage reduction by disabling debug features
-* --- 7.45.98.110 ---
 
 #### CYW43012
 * --- 13.10.271.265 ---
-* Security fixes
-* Fix BT coex throughput for DOS
-* Fix for roam failure when we miss reassociation response from AP at range edge
-* iLPO related changes
-* Beacon collision fix
-* Porting protection frame enhancement
-* RSA signature verification implementation
-* SHA implementation in blocks and MGF function needed for RSA PKCS2.1
-* SHA implementation rework
-* Addition of RSA test files and cleanup
-* Fix for crash during WPA3 join
-* Handle window overflow and tx queue depth errors in AT command.
-* No-memcpy optimization for UDP server mode operation
-* --- 13.10.271.253 ---
 
 #### CYW4373
+* --- 13.10.246.254 ---
+* TCP keepalive support
+* Fix for crash during automated sw diversity test.
+* Porting dos changes for counterring dos attacks during coex.
+* Throughput fixs
 * --- 13.10.246.252 ---
-* VSDB support of AP+STA usecase
-* Security fixes
-* Fix beacon loss issue
-* Fix USB livelock
-* Fix flow control to allow for the host to send new traffic
-* Allow SAE password length of 128 characters
-* Prevent device from responding to broadcast probe req when hidden ssid is set
-* --- 13.10.246.242 ---
+
+#### CYW43439
+* --- 7.95.39 ---
 
 Note: [r] is regulatory-related
 
@@ -79,7 +91,7 @@ This version of the WHD was validated for compatibility with the following softw
 ## More Information
 * [Wi-Fi Host Driver README File](./README.md)
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)
-* [Cypress Semiconductor](http://www.cypress.com)
+* [Infineon Technologies](http://www.infineon.com)
 
 ---
-© Cypress Semiconductor Corporation, 2019.
+© Infineon Technologies, 2019.

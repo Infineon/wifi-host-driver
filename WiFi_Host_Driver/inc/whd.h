@@ -33,7 +33,14 @@ extern "C"
  * Abstract pointer type that acts as a handle to an instance of the driver
  */
 typedef struct whd_driver *whd_driver_t;
-
+/**
+ * Abstract pointer type that acts as a handle to an instance of the bt base address
+ */
+typedef struct whd_bt_info *whd_bt_info_t;
+/**
+ * Abstract pointer type that acts as a handle to an instance of the bt device
+ */
+typedef struct whd_bt_dev *whd_bt_dev_t;
 /**
  * Abstract pointer type to handle instance of whd interface
  */

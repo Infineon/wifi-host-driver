@@ -47,6 +47,9 @@ uint32_t whd_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_t
 uint32_t whd_get_resource_block(whd_driver_t whd_driver, whd_resource_type_t type,
                                 uint32_t blockno, const uint8_t **data, uint32_t *size_out);
 
+uint32_t whd_resource_read(whd_driver_t whd_driver, whd_resource_type_t type, uint32_t offset,
+                           uint32_t size, uint32_t *size_out, void *buffer);
+
 #ifdef __cplusplus
 } /*extern "C" */
 #endif

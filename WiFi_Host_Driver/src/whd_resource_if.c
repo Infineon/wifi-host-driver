@@ -100,3 +100,18 @@ uint32_t whd_get_resource_block(whd_driver_t whd_driver, whd_resource_type_t typ
 
     return WHD_WLAN_NOFUNCTION;
 }
+
+uint32_t whd_resource_read(whd_driver_t whd_driver, whd_resource_type_t type, uint32_t offset,
+                           uint32_t size, uint32_t *size_out, void *buffer)
+{
+    if (whd_driver->resource_if->whd_resource_read)
+    {
+        return whd_driver->resource_if->whd_resource_read(whd_driver, type, offset, size, size_out, buffer);
+    }
+    else
+    {
+        WPRINT_WHD_ERROR( ("Function pointers not provided .\n") );
+    }
+
+    return WHD_WLAN_NOFUNCTION;
+}
