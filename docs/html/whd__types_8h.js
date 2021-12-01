@@ -2,6 +2,7 @@ var whd__types_8h =
 [
     [ "whd_band_list_t", "structwhd__band__list__t.html", "structwhd__band__list__t" ],
     [ "whd_mac_t", "structwhd__mac__t.html", "structwhd__mac__t" ],
+    [ "whd_list_t", "structwhd__list__t.html", "structwhd__list__t" ],
     [ "whd_ssid_t", "structwhd__ssid__t.html", "structwhd__ssid__t" ],
     [ "whd_scan_extended_params_t", "structwhd__scan__extended__params__t.html", "structwhd__scan__extended__params__t" ],
     [ "whd_scan_result", "structwhd__scan__result.html", "structwhd__scan__result" ],

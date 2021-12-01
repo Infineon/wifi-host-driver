@@ -5,7 +5,7 @@
       <sectiondef kind="define">
       <memberdef kind="define" id="whd__version_8h_1a1f84e800f5fc36084bc2a62ec548a6e4" prot="public" static="no">
         <name>WHD_VERSION</name>
-        <initializer>&quot;v1.95.0-62-gd69bad11-dirty&quot;</initializer>
+        <initializer>&quot;v2.1.0-3-g858aed1d-dirty&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -16,7 +16,7 @@
       </memberdef>
       <memberdef kind="define" id="whd__version_8h_1aede39c4ef2dc97af2e6cf7dbb234cc00" prot="public" static="no">
         <name>WHD_BRANCH</name>
-        <initializer>&quot;topic/jiac_fix_over_rx_bound&quot;</initializer>
+        <initializer>&quot;topic/jiac-add-dump-channels&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -27,7 +27,7 @@
       </memberdef>
       <memberdef kind="define" id="whd__version_8h_1a72ac7562c9bf2de30cf70466f21190b4" prot="public" static="no">
         <name>WHD_DATE</name>
-        <initializer>&quot;2021-09-03 10:51:07 +0800&quot;</initializer>
+        <initializer>&quot;2021-10-26 10:01:17 +0800&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

@@ -60,17 +60,23 @@ extern "C"
 /**
  * Suppress unused parameter warning
  */
+#ifndef UNUSED_PARAMETER
 #define UNUSED_PARAMETER(x) ( (void)(x) )
+#endif
 
 /**
  * Suppress unused variable warning
  */
+#ifndef UNUSED_VARIABLE
 #define UNUSED_VARIABLE(x) ( (void)(x) )
+#endif
 
 /**
  * Suppress unused variable warning occurring due to an assert which is disabled in release mode
  */
+#ifndef REFERENCE_DEBUG_ONLY_VARIABLE
 #define REFERENCE_DEBUG_ONLY_VARIABLE(x) ( (void)(x) )
+#endif
 
 /******************************************************
 *@cond               Type Definitions
@@ -408,6 +414,15 @@ typedef struct
 {
     uint8_t octet[6]; /**< Unique 6-byte MAC address */
 } whd_mac_t;
+
+/**
+ * Structure for storing the supported channels.
+ */
+typedef struct
+{
+    uint32_t count;
+    uint32_t element[1];
+} whd_list_t;
 
 /**
  * Structure for storing a Service Set Identifier (i.e. Name of Access Point)

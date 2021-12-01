@@ -39,7 +39,7 @@
 #include "whd_types.h"
 #include "whd_thread_internal.h"
 #include "whd_resource_if.h"
-
+#include "whd_wlioctl.h"
 
 /******************************************************
 *             Constants
@@ -47,9 +47,8 @@
 
 #define WHD_BUS_M2M_BACKPLANE_READ_PADD_SIZE    (0)
 #define WHD_BUS_M2M_MAX_BACKPLANE_TRANSFER_SIZE (WHD_PAYLOAD_MTU)
-#define PLATFORM_BACKPLANE_ON_CPU_CLOCK_ENABLE  (0)
 #define BOOT_WLAN_WAIT_TIME                     (5)     /* 5ms wait time */
-#define M2M_DMA_RX_BUFFER_SIZE                  (WHD_LINK_MTU)
+#define M2M_DMA_RX_BUFFER_SIZE                  (WHD_PHYSICAL_HEADER + WLC_IOCTL_MEDLEN)
 
 #define ARMCR4_SW_INT0                      (0x1 << 0)
 
@@ -220,6 +219,26 @@ static whd_result_t whd_bus_m2m_init(whd_driver_t whd_driver)
 
 static whd_result_t whd_bus_m2m_deinit(whd_driver_t whd_driver)
 {
+    //PLATFORM_WLAN_POWERSAVE_RES_UP();
+
+    /* Down M2M and WLAN */
+    CHECK_RETURN(whd_disable_device_core(whd_driver, WLAN_ARM_CORE, WLAN_CORE_FLAG_CPU_HALT) );
+    cyhal_m2m_free(whd_driver->bus_priv->m2m_obj);
+
+    /* Put WLAN to reset. */
+    //host_platform_reset_wifi( WICED_TRUE );
+
+    //PLATFORM_WLAN_POWERSAVE_RES_DOWN( NULL, WICED_FALSE );
+
+    /* Force resource down even if resource up/down is unbalanced */
+    //PLATFORM_WLAN_POWERSAVE_RES_DOWN( NULL, WICED_TRUE );
+
+    CHECK_RETURN(whd_allow_wlan_bus_to_sleep(whd_driver) );
+
+    whd_bus_set_resource_download_halt(whd_driver, WHD_FALSE);
+
+    DELAYED_BUS_RELEASE_SCHEDULE(whd_driver, WHD_FALSE);
+
     return WHD_SUCCESS;
 }
 

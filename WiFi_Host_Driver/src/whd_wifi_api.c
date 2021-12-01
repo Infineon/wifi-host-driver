@@ -3021,6 +3021,50 @@ uint32_t whd_wifi_get_acparams(whd_interface_t ifp, edcf_acparam_t *acp)
     return WHD_SUCCESS;
 }
 
+uint32_t whd_wifi_get_channels(whd_interface_t ifp, whd_list_t *channel_list)
+{
+    whd_buffer_t buffer;
+    whd_buffer_t response;
+    whd_list_t *list;
+    whd_driver_t whd_driver;
+    uint16_t buffer_length;
+
+    if (!ifp || !channel_list)
+    {
+        WPRINT_WHD_ERROR( ("Invalid param in func %s at line %d \n",
+                           __func__, __LINE__) );
+        return WHD_WLAN_BADARG;
+    }
+    if (!channel_list->count)
+    {
+        WPRINT_WHD_ERROR( ("channel_list->count is zero and max channel is %d in func %s at line %d \n",
+                           WL_NUMCHANNELS, __func__, __LINE__) );
+        return WHD_WLAN_BADARG;
+    }
+
+    whd_driver = ifp->whd_driver;
+
+    CHECK_DRIVER_NULL(whd_driver);
+
+    buffer_length = sizeof(uint32_t) * (WL_NUMCHANNELS + 1);
+
+    list = (whd_list_t *)whd_cdc_get_ioctl_buffer(whd_driver, &buffer, buffer_length);
+    CHECK_IOCTL_BUFFER(list);
+
+    memset(list, 0, buffer_length);
+    list->count = htod32(WL_NUMCHANNELS);
+    CHECK_RETURN(whd_cdc_send_ioctl(ifp, CDC_GET, WLC_GET_VALID_CHANNELS, buffer, &response) );
+
+    list = (whd_list_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, response);
+    memcpy(channel_list, list,
+           (size_t)MIN_OF(whd_buffer_get_current_piece_size(whd_driver, response),
+                          (sizeof(uint32_t) * (channel_list->count + 1) ) ) );
+
+    whd_buffer_release(whd_driver, response, WHD_NETWORK_RX);
+
+    return WHD_SUCCESS;
+}
+
 uint32_t whd_wifi_manage_custom_ie(whd_interface_t ifp, whd_custom_ie_action_t action, const uint8_t *oui,
                                    uint8_t subtype, const void *data, uint16_t length, uint16_t which_packets)
 {

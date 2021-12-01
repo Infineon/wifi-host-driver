@@ -57,6 +57,7 @@ var searchData=
   ['whd_5fwifi_5fget_5fbss_5finfo',['whd_wifi_get_bss_info',['../group__dbg.html#gab4a8c97085b18321d8d682b1578edf7d',1,'whd_wifi_api.h']]],
   ['whd_5fwifi_5fget_5fbssid',['whd_wifi_get_bssid',['../group__wifiutilities.html#ga52d3190589758d9fd36a7b27a9d08f28',1,'whd_wifi_api.h']]],
   ['whd_5fwifi_5fget_5fchannel',['whd_wifi_get_channel',['../group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d',1,'whd_wifi_api.h']]],
+  ['whd_5fwifi_5fget_5fchannels',['whd_wifi_get_channels',['../group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6',1,'whd_wifi_api.h']]],
   ['whd_5fwifi_5fget_5fclm_5fversion',['whd_wifi_get_clm_version',['../group__dbg.html#ga1e8a85564910052e82332a89db4d9ff5',1,'whd_wifi_api.h']]],
   ['whd_5fwifi_5fget_5fioctl_5fbuffer',['whd_wifi_get_ioctl_buffer',['../group__wifiioctl.html#gab1a4c2ae9163408ae92b3f292ee2807f',1,'whd_wifi_api.h']]],
   ['whd_5fwifi_5fget_5fioctl_5fvalue',['whd_wifi_get_ioctl_value',['../group__wifiioctl.html#ga817655c1372b8c87608b204105f06937',1,'whd_wifi_api.h']]],

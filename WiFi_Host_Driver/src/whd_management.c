@@ -33,6 +33,7 @@
 #include "whd_clm.h"
 #include "whd_wlioctl.h"
 #include "whd_types_int.h"
+#include "whd_chip_constants.h"
 
 /******************************************************
 *             Constants
@@ -278,6 +279,7 @@ uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
     uint32_t *data;
     uint32_t counter;
     whd_interface_t ifp;
+    uint16_t wlan_chip_id = 0;
 
     if (!whd_driver || !ifpp)
     {
@@ -426,7 +428,28 @@ uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
     /* Send UP command */
     CHECK_RETURN(whd_wifi_set_up(ifp) );
 
-    whd_wifi_enable_powersave_with_throughput(ifp, DEFAULT_PM2_SLEEP_RET_TIME);
+    wlan_chip_id = whd_chip_get_chip_id(whd_driver);
+    /* WAR: Disable WLAN PM/mpc for 43907 low power issue */
+    if ( (wlan_chip_id == 43909) || (wlan_chip_id == 43907) || (wlan_chip_id == 54907) )
+    {
+        retval = whd_wifi_disable_powersave(ifp);
+        if (retval != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("Failed to disable PM for 43907\n") );
+            return retval;
+        }
+        retval = whd_wifi_set_iovar_value(ifp, IOVAR_STR_MPC, 0);
+        if (retval != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("Failed to disable mpc for 43907\n") );
+            return retval;
+        }
+    }
+    else
+    {
+        whd_wifi_enable_powersave_with_throughput(ifp, DEFAULT_PM2_SLEEP_RET_TIME);
+    }
+
     /* Set the GMode */
     data = (uint32_t *)whd_cdc_get_ioctl_buffer(whd_driver, &buffer, (uint16_t)4);
     if (data == NULL)

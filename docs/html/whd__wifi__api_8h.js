@@ -17,6 +17,7 @@ var whd__wifi__api_8h =
     [ "whd_wifi_join_specific", "group__wifijoin.html#gae41c4ab0b2f3ecc433a6c4e89238b066", null ],
     [ "whd_wifi_set_channel", "group__wifiutilities.html#ga168fb83b839bab61d2c9d3b1f42a6782", null ],
     [ "whd_wifi_get_channel", "group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d", null ],
+    [ "whd_wifi_get_channels", "group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6", null ],
     [ "whd_wifi_set_passphrase", "group__wifiutilities.html#ga893ccaef6ed5d0afe95a96bbe89e8a80", null ],
     [ "whd_wifi_sae_password", "group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8", null ],
     [ "whd_wifi_enable_sup_set_passphrase", "group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c", null ],

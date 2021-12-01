@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v2.0.0
+# Wi-Fi Host Driver (WHD)  v2.1.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,16 +11,15 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v1.94.0
+## Changes since v2.0.0
 ### New Features
-* Support BSP v2.0 only
-* 43439 support
-* Supports new nvram folder structure
-* Supports for sharing bus to BT
-* Optimized memory for the unused firmware.
-* Enable 4373 oob interrupt
+* Support 43907/54907(CYW43909) without power saving mode
+* Support MURATA-1YN for 43439
+* Support API for getting the supported channel
 
 ### Defect Fixes
+* Fixed IOCTL counters error
+* Update laird's clm for country code XX
 * Fix the failed build for 43438 and 43364
 * Update the mechanism of the aliged address
 * Changed macro to variable for polling mode
@@ -72,6 +71,9 @@ Use whd_result_t return type for returning WHD_SUCCESS or Error code.
 
 #### CYW43439
 * --- 7.95.39 ---
+
+#### CYW43909
+* --- 7.15.168.155 ---
 
 Note: [r] is regulatory-related
 

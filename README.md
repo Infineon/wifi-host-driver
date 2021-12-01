@@ -6,11 +6,12 @@ The WHD is an independent, embedded Wi-Fi Host Driver that provides a set of API
 The [release notes](./RELEASE.md) detail the current release. You can also find information about previous versions.
 
 ### Supported bus interface
---------------------------------------------
-|  Interface  |4343W|43438|4373 |43012|43439|
-|:-----------:|:---:|:---:|:---:|:---:|:---:|
-|  SDIO       |  O  |  O  |  O  |  O  |     |
-|  SPI        |  O  |  O  |     |     |  0  |
+---------------------------------------------------
+|  Interface  |4343W|43438|4373 |43012|43439|43907|
+|:-----------:|:---:|:---:|:---:|:---:|:---:|:---:|
+|  SDIO       |  O  |  O  |  O  |  O  |  O  |     |
+|  SPI        |  O  |  O  |     |     |  O  |     |
+|  M2M        |     |     |     |     |     |  O  |
 
 ### More information
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)

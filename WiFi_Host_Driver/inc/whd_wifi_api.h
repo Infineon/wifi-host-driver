@@ -358,6 +358,18 @@ extern uint32_t whd_wifi_set_channel(whd_interface_t ifp, uint32_t channel);
  */
 extern uint32_t whd_wifi_get_channel(whd_interface_t ifp, uint32_t *channel);
 
+/** Gets the supported channels
+ *
+ *  @param   ifp                 Pointer to handle instance of whd interface
+ *  @param   channel_list        Buffer to store list of the supported channels
+ *                               and max channel is WL_NUMCHANNELS
+ *
+ *  @return  WHD_SUCCESS         if the active connections was successfully read
+ *           WHD_ERROR           if the active connections was not successfully read
+ */
+extern uint32_t whd_wifi_get_channels(whd_interface_t ifp, whd_list_t *channel_list);
+
+
 /** Set the passphrase
  *
  *  @param   ifp            Pointer to handle instance of whd interface

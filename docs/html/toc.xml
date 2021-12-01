@@ -64,6 +64,7 @@
       <topic label="WHD Wi-Fi Utility API" href="group__wifiutilities.html">
         <topic label="whd_wifi_set_channel" href="group__wifiutilities.html#ga168fb83b839bab61d2c9d3b1f42a6782"/>
         <topic label="whd_wifi_get_channel" href="group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d"/>
+        <topic label="whd_wifi_get_channels" href="group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"/>
         <topic label="whd_wifi_set_passphrase" href="group__wifiutilities.html#ga893ccaef6ed5d0afe95a96bbe89e8a80"/>
         <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8"/>
         <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c"/>
@@ -225,6 +226,10 @@
         <topic label="thread_stack_size" href="structwhd__init__config.html#a6aa2c0bcb2024f1e4c38f9e8f6769c09"/>
         <topic label="thread_priority" href="structwhd__init__config.html#abd05090115efa85f6e47087351cc502a"/>
         <topic label="country" href="structwhd__init__config.html#a7c552f1f715c8aa245f40d4be48b0fc9"/>
+      </topic>
+      <topic label="whd_list_t" href="structwhd__list__t.html">
+        <topic label="count" href="structwhd__list__t.html#a86988a65e0d3ece7990c032c159786d6"/>
+        <topic label="element" href="structwhd__list__t.html#a7d6d79addae128e4b877e3bce54876dd"/>
       </topic>
       <topic label="whd_listen_interval_t" href="structwhd__listen__interval__t.html">
         <topic label="beacon" href="structwhd__listen__interval__t.html#a59de6cdff8214507260f142834f20cee"/>
@@ -485,6 +490,10 @@
         </topic>
         <topic label="whd_mac_t" href="structwhd__mac__t.html">
           <topic label="octet" href="structwhd__mac__t.html#abc3755f1f66dea95fce153ee4f49e907"/>
+        </topic>
+        <topic label="whd_list_t" href="structwhd__list__t.html">
+          <topic label="count" href="structwhd__list__t.html#a86988a65e0d3ece7990c032c159786d6"/>
+          <topic label="element" href="structwhd__list__t.html#a7d6d79addae128e4b877e3bce54876dd"/>
         </topic>
         <topic label="whd_ssid_t" href="structwhd__ssid__t.html">
           <topic label="length" href="structwhd__ssid__t.html#ab2b3adeb2a67e656ff030b56727fd0ac"/>
@@ -1179,6 +1188,7 @@
         <topic label="whd_wifi_join_specific" href="group__wifijoin.html#gae41c4ab0b2f3ecc433a6c4e89238b066"/>
         <topic label="whd_wifi_set_channel" href="group__wifiutilities.html#ga168fb83b839bab61d2c9d3b1f42a6782"/>
         <topic label="whd_wifi_get_channel" href="group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d"/>
+        <topic label="whd_wifi_get_channels" href="group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"/>
         <topic label="whd_wifi_set_passphrase" href="group__wifiutilities.html#ga893ccaef6ed5d0afe95a96bbe89e8a80"/>
         <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8"/>
         <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c"/>

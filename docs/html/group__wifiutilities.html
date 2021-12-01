@@ -101,6 +101,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gab81522c25d723fbe18b90871a278ba9d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d">whd_wifi_get_channel</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint32_t *channel)</td></tr>
 <tr class="memdesc:gab81522c25d723fbe18b90871a278ba9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current channel on the WLAN radio.  <a href="#gab81522c25d723fbe18b90871a278ba9d">More...</a><br /></td></tr>
 <tr class="separator:gab81522c25d723fbe18b90871a278ba9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6">whd_wifi_get_channels</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__list__t.html">whd_list_t</a> *channel_list)</td></tr>
+<tr class="memdesc:ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the supported channels.  <a href="#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6">More...</a><br /></td></tr>
+<tr class="separator:ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga893ccaef6ed5d0afe95a96bbe89e8a80"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga893ccaef6ed5d0afe95a96bbe89e8a80">whd_wifi_set_passphrase</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const uint8_t *security_key, uint8_t key_length)</td></tr>
 <tr class="memdesc:ga893ccaef6ed5d0afe95a96bbe89e8a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the passphrase.  <a href="#ga893ccaef6ed5d0afe95a96bbe89e8a80">More...</a><br /></td></tr>
 <tr class="separator:ga893ccaef6ed5d0afe95a96bbe89e8a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -322,6 +325,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS if the channel was successfully retrieved Error code if the channel was not successfully retrieved </dd></dl>
+
+</div>
+</div>
+<a id="ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6">&#9670;&nbsp;</a></span>whd_wifi_get_channels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_get_channels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__list__t.html">whd_list_t</a> *&#160;</td>
+          <td class="paramname"><em>channel_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the supported channels. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">channel_list</td><td>Buffer to store list of the supported channels and max channel is WL_NUMCHANNELS</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS if the active connections was successfully read WHD_ERROR if the active connections was not successfully read </dd></dl>
 
 </div>
 </div>

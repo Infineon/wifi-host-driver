@@ -10,6 +10,7 @@ var annotated_dup =
     [ "whd_event_ether_header", "structwhd__event__ether__header.html", "structwhd__event__ether__header" ],
     [ "whd_event_msg", "structwhd__event__msg.html", "structwhd__event__msg" ],
     [ "whd_init_config", "structwhd__init__config.html", "structwhd__init__config" ],
+    [ "whd_list_t", "structwhd__list__t.html", "structwhd__list__t" ],
     [ "whd_listen_interval_t", "structwhd__listen__interval__t.html", "structwhd__listen__interval__t" ],
     [ "whd_m2m_config", "structwhd__m2m__config.html", "structwhd__m2m__config" ],
     [ "whd_mac_t", "structwhd__mac__t.html", "structwhd__mac__t" ],
