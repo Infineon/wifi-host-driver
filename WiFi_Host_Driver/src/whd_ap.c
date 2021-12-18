@@ -41,7 +41,7 @@
 #define AMPDU_AP_DEFAULT_BA_WSIZE   8
 #define AMPDU_STA_DEFAULT_BA_WSIZE  8
 #define AMPDU_STA_DEFAULT_MPDU      4   /* STA default num MPDU per AMPDU */
-
+#define PWE_LOOP_COUNT              5
 /******************************************************
 **                   Enumerations
 *******************************************************/
@@ -191,6 +191,7 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
     uint32_t *data;
     uint32_t bss_index;
     uint16_t wlan_chip_id;
+    uint32_t auth_mfp = WL_MFP_NONE;
     uint16_t event_entry = (uint16_t)0xFF;
 
 
@@ -200,10 +201,20 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
 
     CHECK_DRIVER_NULL(whd_driver);
 
+    /* Get the Chip Number */
+    wlan_chip_id = whd_chip_get_chip_id(whd_driver);
+
     if ( (auth_type & WEP_ENABLED) != 0 )
     {
         WPRINT_WHD_ERROR( ("WEP auth type is not allowed , %s failed at line %d \n", __func__, __LINE__) );
         return WHD_WEP_NOT_ALLOWED;
+    }
+
+    if ( (auth_type & WPA3_SECURITY) &&
+         ( (wlan_chip_id == 43430) || (wlan_chip_id == 43909) || (wlan_chip_id == 43907) || (wlan_chip_id == 54907) ) )
+    {
+        WPRINT_WHD_ERROR( ("WPA3 is not supported, %s failed at line %d \n", __func__, __LINE__) );
+        return WHD_UNSUPPORTED;
     }
 
     ap = &whd_driver->ap_info;
@@ -238,22 +249,21 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
     }
 
     bss_index = ifp->bsscfgidx;
-    /* Get the Chip Number */
-    wlan_chip_id = whd_chip_get_chip_id(whd_driver);
 
     ifp->role = WHD_AP_ROLE;
 
     if ( ( (auth_type == WHD_SECURITY_WPA_TKIP_PSK) || (auth_type == WHD_SECURITY_WPA2_AES_PSK) ||
            (auth_type == WHD_SECURITY_WPA2_MIXED_PSK) ) &&
-         ( (key_length < (uint8_t)8) || (key_length > (uint8_t)64) ) )
+         ( (key_length < (uint8_t)WSEC_MIN_PSK_LEN) || (key_length > (uint8_t)WSEC_MAX_PSK_LEN) ) )
     {
-        WPRINT_WHD_INFO( ("Error: WPA security key length must be between 8 and 64\n") );
+        WPRINT_WHD_ERROR( ("Error: WPA security key length must be between %d and %d\n", WSEC_MIN_PSK_LEN,
+                           WSEC_MAX_PSK_LEN) );
         return WHD_WPA_KEYLEN_BAD;
     }
 
     if ( (whd_wifi_get_ap_is_up(whd_driver) == WHD_TRUE) )
     {
-        WPRINT_WHD_INFO( ("Error: Soft AP or Wi-Fi Direct group owner already up\n") );
+        WPRINT_WHD_ERROR( ("Error: Soft AP or Wi-Fi Direct group owner already up\n") );
         return WHD_AP_ALREADY_UP;
     }
 
@@ -417,9 +427,20 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
     }
     else
     {
-        data[1] = htod32( (uint32_t)auth_type );
+        data[1] = htod32( (uint32_t)auth_type & 0xFF );
     }
     CHECK_RETURN_WITH_SEMAPHORE(whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0), &ap->whd_wifi_sleep_flag);
+    if (auth_type == WHD_SECURITY_WPA3_SAE)
+    {
+        auth_mfp = WL_MFP_REQUIRED;
+
+    }
+    else if (auth_type == WHD_SECURITY_WPA3_WPA2_PSK)
+    {
+        auth_mfp = WL_MFP_CAPABLE;
+    }
+    CHECK_RETURN(whd_wifi_set_iovar_value(ifp, IOVAR_STR_MFP, auth_mfp) );
+
     if (wlan_chip_id == 4334)
     {
         if (auth_type != WHD_SECURITY_OPEN)
@@ -465,9 +486,19 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
             {
                 data[0] = htod32(bss_index);
             }
-            data[1] =
-                htod32( (uint32_t)(auth_type ==
-                                   WHD_SECURITY_WPA_TKIP_PSK) ? (WPA_AUTH_PSK) : (WPA2_AUTH_PSK | WPA_AUTH_PSK) );
+            if ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) )
+            {
+                data[1] =
+                    htod32( (uint32_t)( (auth_type ==
+                                         WHD_SECURITY_WPA3_SAE) ? (WPA3_AUTH_SAE_PSK) : (WPA3_AUTH_SAE_PSK |
+                                                                                         WPA2_AUTH_PSK) ) );
+            }
+            else
+            {
+                data[1] =
+                    htod32( (uint32_t)(auth_type ==
+                                       WHD_SECURITY_WPA_TKIP_PSK) ? (WPA_AUTH_PSK) : (WPA2_AUTH_PSK | WPA_AUTH_PSK) );
+            }
             if ( (wlan_chip_id == 43340) || (wlan_chip_id == 43342) )
             {
                 CHECK_RETURN_WITH_SEMAPHORE(whd_cdc_send_iovar(ifp, CDC_SET, buffer, 0), &ap->whd_wifi_sleep_flag);
@@ -477,17 +508,39 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
                 CHECK_RETURN_WITH_SEMAPHORE(whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0),
                                             &ap->whd_wifi_sleep_flag);
             }
+            if (auth_type == WHD_SECURITY_WPA3_SAE)
+            {
+                whd_wifi_sae_password(ifp, security_key, key_length);
+            }
+            else
+            {
+                if (auth_type == WHD_SECURITY_WPA3_WPA2_PSK)
+                {
+                    whd_wifi_sae_password(ifp, security_key, key_length);
+                }
+                /* Set the passphrase */
+                psk = (wsec_pmk_t *)whd_cdc_get_ioctl_buffer(whd_driver, &buffer, sizeof(wsec_pmk_t) );
+                CHECK_IOCTL_BUFFER_WITH_SEMAPHORE(psk, &ap->whd_wifi_sleep_flag);
+                memcpy(psk->key, security_key, key_length);
+                psk->key_len = htod16(key_length);
+                psk->flags = htod16( (uint16_t)WSEC_PASSPHRASE );
+                CHECK_RETURN(cy_rtos_delay_milliseconds(1) );
+                /* Delay required to allow radio firmware to be ready to receive PMK and avoid intermittent failure */
+                CHECK_RETURN_WITH_SEMAPHORE(whd_cdc_send_ioctl(ifp, CDC_SET, WLC_SET_WSEC_PMK, buffer,
+                                                               0), &ap->whd_wifi_sleep_flag);
+            }
+        }
+    }
 
-            /* Set the passphrase */
-            psk = (wsec_pmk_t *)whd_cdc_get_ioctl_buffer(whd_driver, &buffer, sizeof(wsec_pmk_t) );
-            CHECK_IOCTL_BUFFER_WITH_SEMAPHORE(psk, &ap->whd_wifi_sleep_flag);
-            memcpy(psk->key, security_key, key_length);
-            psk->key_len = htod16(key_length);
-            psk->flags = htod16( (uint16_t)WSEC_PASSPHRASE );
-            CHECK_RETURN(cy_rtos_delay_milliseconds(1) );
-            /* Delay required to allow radio firmware to be ready to receive PMK and avoid intermittent failure */
-            CHECK_RETURN_WITH_SEMAPHORE(whd_cdc_send_ioctl(ifp, CDC_SET, WLC_SET_WSEC_PMK, buffer,
-                                                           0), &ap->whd_wifi_sleep_flag);
+    /* Adjust PWE Loop Count(WPA3-R1 Compatibility Issue) */
+    if (auth_type & WPA3_SECURITY)
+    {
+        data = (uint32_t *)whd_cdc_get_iovar_buffer(whd_driver, &buffer, (uint16_t)4, IOVAR_STR_SAE_PWE_LOOP);
+        CHECK_IOCTL_BUFFER(data);
+        *data = htod32( (uint32_t)PWE_LOOP_COUNT );
+        if (whd_cdc_send_iovar(ifp, CDC_SET, buffer, NULL) != WHD_SUCCESS)
+        {
+            WPRINT_WHD_DEBUG( ("Some chipsets might not support PWE_LOOP_CNT..Ignore result\n") );
         }
     }
 

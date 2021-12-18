@@ -65,9 +65,10 @@ typedef struct whd_sdpcm_info
 
     /* Packet send queue variables */
     cy_semaphore_t send_queue_mutex;
-    whd_buffer_t send_queue_head;
-    whd_buffer_t send_queue_tail;
-    uint32_t npkt_in_q;
+    whd_buffer_t send_queue_head[4];
+    whd_buffer_t send_queue_tail[4];
+    uint32_t npkt_in_q[4];
+    uint32_t totpkt_in_q;
 } whd_sdpcm_info_t;
 
 typedef struct

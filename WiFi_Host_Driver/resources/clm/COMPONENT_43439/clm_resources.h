@@ -28,4 +28,4 @@ extern const resource_hnd_t wifi_mfg_firmware_clm_blob;
 extern const unsigned char wifi_mfg_firmware_clm_blob_data[4752];
 #endif /* WLAN_MFG_FIRMWARE */
 
-#endif /* ifndef INCLUDED_RESOURCES_H_ */
+#endif /* ifndef INCLUDED_CLM_RESOURCES_H_ */

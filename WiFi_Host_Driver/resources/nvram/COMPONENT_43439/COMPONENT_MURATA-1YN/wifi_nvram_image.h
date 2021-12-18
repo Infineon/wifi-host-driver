@@ -76,7 +76,7 @@ static const char wifi_nvram_image[] =
         "muxenab=0x1"                                                        "\x00"
         "spurconfig=0x3"                                                     "\x00"
         "glitch_based_crsmin=1"                                              "\x00"
-        "btc_mode=0"                                                         "\x00"
+        "btc_mode=1"                                                         "\x00"
         "bt_default_ant=0"                                                   "\x00"
         "\x00\x00";
 #ifdef __cplusplus

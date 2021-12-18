@@ -56,6 +56,11 @@
 #define WLC_EVENT_MSG_UNKBSS    (0x08)    /** unknown source bsscfg */
 #define WLC_EVENT_MSG_UNKIF     (0x10)    /** unknown source OS i/f */
 
+/* WMM constants */
+#define MAX_8021P_PRIO 7
+#define MAX_WMM_AC     3
+#define AC_QUEUE_SIZE  64
+
 /******************************************************
 *             Macros
 ******************************************************/
@@ -140,10 +145,14 @@ typedef struct bcm_event
 /******************************************************
 *             Static Variables
 ******************************************************/
-/* Set the pkt threshold for each WMM categories
- * BE:64 BK:128 VI:192 VO:256
+/** 802.1p Priority to WMM AC Mapping
+ *
+ *  prio 0, 3: Background(0)
+ *  prio 1, 2: Best Effor(1)
+ *  prio 4, 5: Video(2)
+ *  prio 6, 7: Voice(3)
  */
-static const uint32_t prio_to_qthreshold[8] = {64, 128, 128, 64, 192, 192, 256, 256};
+static const uint8_t prio_to_ac[8] = {1, 0, 0, 1, 2, 2, 3, 3};
 
 /******************************************************
 *             SDPCM Logging
@@ -221,6 +230,7 @@ extern void whd_wifi_log_event(whd_driver_t whd_driver, const whd_event_header_t
 whd_result_t whd_sdpcm_init(whd_driver_t whd_driver)
 {
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
+    int ac;
 
     /* Create the sdpcm packet queue semaphore */
     if (cy_rtos_init_semaphore(&sdpcm_info->send_queue_mutex, 1, 0) != WHD_SUCCESS)
@@ -234,9 +244,13 @@ whd_result_t whd_sdpcm_init(whd_driver_t whd_driver)
     }
 
     /* Packet send queue variables */
-    sdpcm_info->send_queue_head   = (whd_buffer_t)NULL;
-    sdpcm_info->send_queue_tail   = (whd_buffer_t)NULL;
-    sdpcm_info->npkt_in_q = 0;
+    for (ac = 0; ac <= MAX_WMM_AC; ac++)
+    {
+        sdpcm_info->send_queue_head[ac] = (whd_buffer_t)NULL;
+        sdpcm_info->send_queue_tail[ac] = (whd_buffer_t)NULL;
+        sdpcm_info->npkt_in_q[ac] = 0;
+    }
+    sdpcm_info->totpkt_in_q = 0;
 
     whd_sdpcm_bus_vars_init(whd_driver);
 
@@ -262,20 +276,25 @@ void whd_sdpcm_quit(whd_driver_t whd_driver)
 {
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
     whd_result_t result;
+    int ac;
 
     /* Delete the SDPCM queue mutex */
     (void)cy_rtos_deinit_semaphore(&sdpcm_info->send_queue_mutex);    /* Ignore return - not much can be done about failure */
 
     /* Free any left over packets in the queue */
-    while (sdpcm_info->send_queue_head != NULL)
+    for (ac = 0; ac <= MAX_WMM_AC; ac++)
     {
-        whd_buffer_t buf = whd_sdpcm_get_next_buffer_in_queue(whd_driver, sdpcm_info->send_queue_head);
-        result = whd_buffer_release(whd_driver, sdpcm_info->send_queue_head, WHD_NETWORK_TX);
-        if (result != WHD_SUCCESS)
-            WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
-        sdpcm_info->send_queue_head = buf;
+        while (sdpcm_info->send_queue_head[ac] != NULL)
+        {
+            whd_buffer_t buf = whd_sdpcm_get_next_buffer_in_queue(whd_driver, sdpcm_info->send_queue_head[ac]);
+            result = whd_buffer_release(whd_driver, sdpcm_info->send_queue_head[ac], WHD_NETWORK_TX);
+            if (result != WHD_SUCCESS)
+                WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
+            sdpcm_info->send_queue_head[ac] = buf;
+        }
+        sdpcm_info->npkt_in_q[ac] = 0;
     }
-    sdpcm_info->npkt_in_q = 0;
+    sdpcm_info->totpkt_in_q = 0;
 }
 
 void whd_sdpcm_update_credit(whd_driver_t whd_driver, uint8_t *data)
@@ -444,7 +463,7 @@ void whd_sdpcm_process_rx_packet(whd_driver_t whd_driver, whd_buffer_t buffer)
 
 whd_bool_t whd_sdpcm_has_tx_packet(whd_driver_t whd_driver)
 {
-    if (whd_driver->sdpcm_info.send_queue_head != NULL)
+    if (whd_driver->sdpcm_info.totpkt_in_q > 0)
     {
         return WHD_TRUE;
     }
@@ -458,59 +477,72 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
     sdpcm_header_t sdpcm_header;
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
     whd_result_t result;
+    int ac;
 
-    if (sdpcm_info->send_queue_head != NULL)
-    {
-        /* Check if we're being flow controlled */
-        if (whd_bus_is_flow_controlled(whd_driver) == WHD_TRUE)
-        {
-            WHD_STATS_INCREMENT_VARIABLE(whd_driver, flow_control);
-            return WHD_FLOW_CONTROLLED;
-        }
-
-        /* Check if we have enough bus data credits spare */
-        if ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) == 0 ) ||
-             ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) & 0x80 ) != 0 ) )
-        {
-            WHD_STATS_INCREMENT_VARIABLE(whd_driver, no_credit);
-            return WHD_NO_CREDITS;
-        }
-
-        /* There is a packet waiting to be sent - send it then fix up queue and release packet */
-        if (cy_rtos_get_semaphore(&sdpcm_info->send_queue_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) != WHD_SUCCESS)
-        {
-            /* Could not obtain mutex, push back the flow control semaphore */
-            WPRINT_WHD_ERROR( ("Error manipulating a semaphore, %s failed at %d \n", __func__, __LINE__) );
-            return WHD_SEMAPHORE_ERROR;
-        }
-
-        /* Pop the head off and set the new send_queue head */
-        *buffer = sdpcm_info->send_queue_head;
-        sdpcm_info->send_queue_head = whd_sdpcm_get_next_buffer_in_queue(whd_driver, *buffer);
-        if (sdpcm_info->send_queue_head == NULL)
-        {
-            sdpcm_info->send_queue_tail = NULL;
-        }
-        sdpcm_info->npkt_in_q--;
-        result = cy_rtos_set_semaphore(&sdpcm_info->send_queue_mutex, WHD_FALSE);
-        if (result != WHD_SUCCESS)
-            WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
-
-
-        /* Set the sequence number */
-        packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
-        CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
-        memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
-        sdpcm_header.sw_header.sequence = sdpcm_info->tx_seq;
-        memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
-        sdpcm_info->tx_seq++;
-
-        return WHD_SUCCESS;
-    }
-    else
+    if (sdpcm_info->totpkt_in_q <= 0)
     {
         return WHD_NO_PACKET_TO_SEND;
     }
+
+    /* Check if we're being flow controlled */
+    if (whd_bus_is_flow_controlled(whd_driver) == WHD_TRUE)
+    {
+        WHD_STATS_INCREMENT_VARIABLE(whd_driver, flow_control);
+        return WHD_FLOW_CONTROLLED;
+    }
+
+    /* Check if we have enough bus data credits spare */
+    if ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) == 0 ) ||
+            ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) & 0x80 ) != 0 ) )
+    {
+        WHD_STATS_INCREMENT_VARIABLE(whd_driver, no_credit);
+        return WHD_NO_CREDITS;
+    }
+
+    /* There is a packet waiting to be sent - send it then fix up queue and release packet */
+    if (cy_rtos_get_semaphore(&sdpcm_info->send_queue_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) != WHD_SUCCESS)
+    {
+        /* Could not obtain mutex, push back the flow control semaphore */
+        WPRINT_WHD_ERROR( ("Error manipulating a semaphore, %s failed at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    for (ac = MAX_WMM_AC; ac >= 0; ac--)
+    {
+        if (sdpcm_info->send_queue_head[ac] != NULL)
+        {
+            break;
+        }
+    }
+    if (ac < 0)
+    {
+        WPRINT_WHD_ERROR( ("NO pkt available in queue, %s failed at %d\n", __func__, __LINE__) );
+        return WHD_NO_PACKET_TO_SEND;
+    }
+    /* Pop the head off and set the new send_queue head */
+    *buffer = sdpcm_info->send_queue_head[ac];
+    sdpcm_info->send_queue_head[ac] = whd_sdpcm_get_next_buffer_in_queue(whd_driver, *buffer);
+    if (sdpcm_info->send_queue_head[ac] == NULL)
+    {
+        sdpcm_info->send_queue_tail[ac] = NULL;
+    }
+    sdpcm_info->npkt_in_q[ac]--;
+    sdpcm_info->totpkt_in_q--;
+    result = cy_rtos_set_semaphore(&sdpcm_info->send_queue_mutex, WHD_FALSE);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+    }
+
+    /* Set the sequence number */
+    packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
+    CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
+    memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
+    sdpcm_header.sw_header.sequence = sdpcm_info->tx_seq;
+    memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
+    sdpcm_info->tx_seq++;
+
+    return WHD_SUCCESS;
 }
 
 /** Returns the number of bus credits available
@@ -550,6 +582,8 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     sdpcm_header_t sdpcm_header;
     whd_sdpcm_info_t *sdpcm_info = &whd_driver->sdpcm_info;
     whd_result_t result;
+    int ac;
+
     CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
     size = whd_buffer_get_current_piece_size(whd_driver, buffer);
 
@@ -582,13 +616,14 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
         return WHD_SEMAPHORE_ERROR;
     }
 
-    /* The input priority should not higher than 7 */
-    if (prio > 7)
+    /* The input priority should not higher than MAX_8021P_PRIO(7) */
+    if (prio > MAX_8021P_PRIO)
     {
-        prio = 7;
+        prio = MAX_8021P_PRIO;
     }
+    ac = prio_to_ac[prio];
 
-    if ( (header_type == DATA_HEADER) && (sdpcm_info->npkt_in_q > prio_to_qthreshold[prio]) )
+    if ( (header_type == DATA_HEADER) && (sdpcm_info->npkt_in_q[ac] > AC_QUEUE_SIZE) )
     {
         result = whd_buffer_release(whd_driver, buffer, WHD_NETWORK_TX);
         if (result != WHD_SUCCESS)
@@ -605,16 +640,17 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     }
 
     whd_sdpcm_set_next_buffer_in_queue(whd_driver, NULL, buffer);
-    if (sdpcm_info->send_queue_tail != NULL)
+    if (sdpcm_info->send_queue_tail[ac] != NULL)
     {
-        whd_sdpcm_set_next_buffer_in_queue(whd_driver, buffer, sdpcm_info->send_queue_tail);
+        whd_sdpcm_set_next_buffer_in_queue(whd_driver, buffer, sdpcm_info->send_queue_tail[ac]);
     }
-    sdpcm_info->send_queue_tail = buffer;
-    if (sdpcm_info->send_queue_head == NULL)
+    sdpcm_info->send_queue_tail[ac] = buffer;
+    if (sdpcm_info->send_queue_head[ac] == NULL)
     {
-        sdpcm_info->send_queue_head = buffer;
+        sdpcm_info->send_queue_head[ac] = buffer;
     }
-    sdpcm_info->npkt_in_q++;
+    sdpcm_info->npkt_in_q[ac]++;
+    sdpcm_info->totpkt_in_q++;
     result = cy_rtos_set_semaphore(&sdpcm_info->send_queue_mutex, WHD_FALSE);
     if (result != WHD_SUCCESS)
         WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );

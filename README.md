@@ -13,6 +13,12 @@ The [release notes](./RELEASE.md) detail the current release. You can also find 
 |  SPI        |  O  |  O  |     |     |  O  |     |
 |  M2M        |     |     |     |     |     |  O  |
 
+### WPA3 AP mode support
+---------------------------------------------------
+|  Security   |4343W|43438|4373 |43012|43439|43907|
+|:-----------:|:---:|:---:|:---:|:---:|:---:|:---:|
+|  WPA3       |     |     |  O  |  O  |  O  |     |
+
 ### More information
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)
 * [Wi-Fi Host Driver Release Notes](./RELEASE.md)

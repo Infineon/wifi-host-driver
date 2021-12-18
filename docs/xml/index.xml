@@ -169,20 +169,25 @@
     <member refid="structwl__bss__info__struct_1a4d6a7cc78819fe901fa45a1b51266e18" kind="variable"><name>capability</name></member>
     <member refid="structwl__bss__info__struct_1a7eafb3bd3419add91d9d532df5dcf63e" kind="variable"><name>SSID_len</name></member>
     <member refid="structwl__bss__info__struct_1a337a4a90b9c8cb320d1232cf9f88fa90" kind="variable"><name>SSID</name></member>
+    <member refid="structwl__bss__info__struct_1a7fba6723172880a05e6988822c001f4c" kind="variable"><name>reserved1</name></member>
     <member refid="structwl__bss__info__struct_1a86988a65e0d3ece7990c032c159786d6" kind="variable"><name>count</name></member>
     <member refid="structwl__bss__info__struct_1a686551a9eef0a3911a371e315bb24d36" kind="variable"><name>rates</name></member>
     <member refid="structwl__bss__info__struct_1aee32c70ea369b8be44e5cf2b9a1184a2" kind="variable"><name>rateset</name></member>
     <member refid="structwl__bss__info__struct_1aa5d9886a989c0e36349581e3f06cd4c0" kind="variable"><name>chanspec</name></member>
     <member refid="structwl__bss__info__struct_1a1bec52968a72b2101def88458f0371ec" kind="variable"><name>atim_window</name></member>
     <member refid="structwl__bss__info__struct_1a2817cb129e69f6ce5a24dfb2dd8706cc" kind="variable"><name>dtim_period</name></member>
+    <member refid="structwl__bss__info__struct_1ae39bd5611d234ea12bb62b76b3c8be5b" kind="variable"><name>reserved2</name></member>
     <member refid="structwl__bss__info__struct_1ae45c71dee229890b4401a4c0105d73cf" kind="variable"><name>RSSI</name></member>
     <member refid="structwl__bss__info__struct_1a85ba569dec5085a93016434929bbf7d1" kind="variable"><name>phy_noise</name></member>
     <member refid="structwl__bss__info__struct_1aaa58323f8c11ee56cc8d8c2e66938230" kind="variable"><name>n_cap</name></member>
+    <member refid="structwl__bss__info__struct_1a8a4214260978fa319bf24fbbf55d862e" kind="variable"><name>reserved3</name></member>
     <member refid="structwl__bss__info__struct_1aafd41688d55159e60c6970dddbfdf4ba" kind="variable"><name>nbss_cap</name></member>
     <member refid="structwl__bss__info__struct_1aaba7272626229ace409b150bb1981044" kind="variable"><name>ctl_ch</name></member>
+    <member refid="structwl__bss__info__struct_1ade0bf892b2f892cf886c158a883be259" kind="variable"><name>reserved4</name></member>
     <member refid="structwl__bss__info__struct_1ae3f4b5f7822024fbf0bea3a8845c67c4" kind="variable"><name>reserved32</name></member>
     <member refid="structwl__bss__info__struct_1aa2585d779da0ab21273a8d92de9a0ebe" kind="variable"><name>flags</name></member>
-    <member refid="structwl__bss__info__struct_1a72aca6ea6d8153b28ea8f139b932ec3e" kind="variable"><name>reserved</name></member>
+    <member refid="structwl__bss__info__struct_1a976e20571e358fe5c69ae988701102dc" kind="variable"><name>vht_cap</name></member>
+    <member refid="structwl__bss__info__struct_1ae246f770626a62a766cfc67e91724efe" kind="variable"><name>reserved5</name></member>
     <member refid="structwl__bss__info__struct_1a7efd75a130623350ac4a98d3688ee791" kind="variable"><name>basic_mcs</name></member>
     <member refid="structwl__bss__info__struct_1a67b93773e8da423543b703cad84da5a5" kind="variable"><name>ie_offset</name></member>
     <member refid="structwl__bss__info__struct_1a5312679515b5ee9c1875196c703a8a52" kind="variable"><name>ie_length</name></member>

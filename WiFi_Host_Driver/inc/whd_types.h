@@ -771,6 +771,7 @@ typedef struct wl_bss_info_struct
     uint16_t capability;           /**< Capability information */
     uint8_t SSID_len;              /**< SSID length */
     uint8_t SSID[32];              /**< Array to store SSID */
+    uint8_t reserved1[1];          /**< Reserved(padding) */
     struct
     {
         uint32_t count;            /**< Count of rates in this set */
@@ -779,15 +780,19 @@ typedef struct wl_bss_info_struct
     wl_chanspec_t chanspec;        /**< Channel specification for basic service set */
     uint16_t atim_window;          /**< Announcement traffic indication message window size. Units are Kusec */
     uint8_t dtim_period;           /**< Delivery traffic indication message period */
+    uint8_t reserved2[1];          /**< Reserved(padding) */
     int16_t RSSI;                  /**< receive signal strength (in dBm) */
     int8_t phy_noise;              /**< noise (in dBm) */
 
     uint8_t n_cap;                 /**< BSS is 802.11N Capable */
+    uint8_t reserved3[2];          /**< Reserved(padding) */
     uint32_t nbss_cap;             /**< 802.11N BSS Capabilities (based on HT_CAP_*) */
     uint8_t ctl_ch;                /**< 802.11N BSS control channel number */
+    uint8_t reserved4[3];          /**< Reserved(padding) */
     uint32_t reserved32[1];        /**< Reserved for expansion of BSS properties */
     uint8_t flags;                 /**< flags */
-    uint8_t reserved[3];           /**< Reserved for expansion of BSS properties */
+    uint8_t vht_cap;               /**< BSS is vht capable */
+    uint8_t reserved5[2];          /**< Reserved(padding) */
     uint8_t basic_mcs[MCSSET_LEN]; /**< 802.11N BSS required MCS set */
 
     uint16_t ie_offset;            /**< offset at which IEs start, from beginning */

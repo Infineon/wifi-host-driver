@@ -849,6 +849,7 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_WD_DISABLE             "wd_disable"
 #define IOVAR_STR_DLTRO                  "dltro"
 #define IOVAR_STR_SAE_PASSWORD           "sae_password"
+#define IOVAR_STR_SAE_PWE_LOOP           "sae_max_pwe_loop"
 
 #define IOVAR_STR_BTC_LESCAN_PARAMS      "btc_lescan_params"
 

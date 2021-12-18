@@ -325,20 +325,25 @@
         <topic label="capability" href="structwl__bss__info__struct.html#a4d6a7cc78819fe901fa45a1b51266e18"/>
         <topic label="SSID_len" href="structwl__bss__info__struct.html#a7eafb3bd3419add91d9d532df5dcf63e"/>
         <topic label="SSID" href="structwl__bss__info__struct.html#a337a4a90b9c8cb320d1232cf9f88fa90"/>
+        <topic label="reserved1" href="structwl__bss__info__struct.html#a7fba6723172880a05e6988822c001f4c"/>
         <topic label="count" href="structwl__bss__info__struct.html#a86988a65e0d3ece7990c032c159786d6"/>
         <topic label="rates" href="structwl__bss__info__struct.html#a686551a9eef0a3911a371e315bb24d36"/>
         <topic label="rateset" href="structwl__bss__info__struct.html#aee32c70ea369b8be44e5cf2b9a1184a2"/>
         <topic label="chanspec" href="structwl__bss__info__struct.html#aa5d9886a989c0e36349581e3f06cd4c0"/>
         <topic label="atim_window" href="structwl__bss__info__struct.html#a1bec52968a72b2101def88458f0371ec"/>
         <topic label="dtim_period" href="structwl__bss__info__struct.html#a2817cb129e69f6ce5a24dfb2dd8706cc"/>
+        <topic label="reserved2" href="structwl__bss__info__struct.html#ae39bd5611d234ea12bb62b76b3c8be5b"/>
         <topic label="RSSI" href="structwl__bss__info__struct.html#ae45c71dee229890b4401a4c0105d73cf"/>
         <topic label="phy_noise" href="structwl__bss__info__struct.html#a85ba569dec5085a93016434929bbf7d1"/>
         <topic label="n_cap" href="structwl__bss__info__struct.html#aaa58323f8c11ee56cc8d8c2e66938230"/>
+        <topic label="reserved3" href="structwl__bss__info__struct.html#a8a4214260978fa319bf24fbbf55d862e"/>
         <topic label="nbss_cap" href="structwl__bss__info__struct.html#aafd41688d55159e60c6970dddbfdf4ba"/>
         <topic label="ctl_ch" href="structwl__bss__info__struct.html#aaba7272626229ace409b150bb1981044"/>
+        <topic label="reserved4" href="structwl__bss__info__struct.html#ade0bf892b2f892cf886c158a883be259"/>
         <topic label="reserved32" href="structwl__bss__info__struct.html#ae3f4b5f7822024fbf0bea3a8845c67c4"/>
         <topic label="flags" href="structwl__bss__info__struct.html#aa2585d779da0ab21273a8d92de9a0ebe"/>
-        <topic label="reserved" href="structwl__bss__info__struct.html#a72aca6ea6d8153b28ea8f139b932ec3e"/>
+        <topic label="vht_cap" href="structwl__bss__info__struct.html#a976e20571e358fe5c69ae988701102dc"/>
+        <topic label="reserved5" href="structwl__bss__info__struct.html#ae246f770626a62a766cfc67e91724efe"/>
         <topic label="basic_mcs" href="structwl__bss__info__struct.html#a7efd75a130623350ac4a98d3688ee791"/>
         <topic label="ie_offset" href="structwl__bss__info__struct.html#a67b93773e8da423543b703cad84da5a5"/>
         <topic label="ie_length" href="structwl__bss__info__struct.html#a5312679515b5ee9c1875196c703a8a52"/>
@@ -535,20 +540,25 @@
           <topic label="capability" href="structwl__bss__info__struct.html#a4d6a7cc78819fe901fa45a1b51266e18"/>
           <topic label="SSID_len" href="structwl__bss__info__struct.html#a7eafb3bd3419add91d9d532df5dcf63e"/>
           <topic label="SSID" href="structwl__bss__info__struct.html#a337a4a90b9c8cb320d1232cf9f88fa90"/>
+          <topic label="reserved1" href="structwl__bss__info__struct.html#a7fba6723172880a05e6988822c001f4c"/>
           <topic label="count" href="structwl__bss__info__struct.html#a86988a65e0d3ece7990c032c159786d6"/>
           <topic label="rates" href="structwl__bss__info__struct.html#a686551a9eef0a3911a371e315bb24d36"/>
           <topic label="rateset" href="structwl__bss__info__struct.html#aee32c70ea369b8be44e5cf2b9a1184a2"/>
           <topic label="chanspec" href="structwl__bss__info__struct.html#aa5d9886a989c0e36349581e3f06cd4c0"/>
           <topic label="atim_window" href="structwl__bss__info__struct.html#a1bec52968a72b2101def88458f0371ec"/>
           <topic label="dtim_period" href="structwl__bss__info__struct.html#a2817cb129e69f6ce5a24dfb2dd8706cc"/>
+          <topic label="reserved2" href="structwl__bss__info__struct.html#ae39bd5611d234ea12bb62b76b3c8be5b"/>
           <topic label="RSSI" href="structwl__bss__info__struct.html#ae45c71dee229890b4401a4c0105d73cf"/>
           <topic label="phy_noise" href="structwl__bss__info__struct.html#a85ba569dec5085a93016434929bbf7d1"/>
           <topic label="n_cap" href="structwl__bss__info__struct.html#aaa58323f8c11ee56cc8d8c2e66938230"/>
+          <topic label="reserved3" href="structwl__bss__info__struct.html#a8a4214260978fa319bf24fbbf55d862e"/>
           <topic label="nbss_cap" href="structwl__bss__info__struct.html#aafd41688d55159e60c6970dddbfdf4ba"/>
           <topic label="ctl_ch" href="structwl__bss__info__struct.html#aaba7272626229ace409b150bb1981044"/>
+          <topic label="reserved4" href="structwl__bss__info__struct.html#ade0bf892b2f892cf886c158a883be259"/>
           <topic label="reserved32" href="structwl__bss__info__struct.html#ae3f4b5f7822024fbf0bea3a8845c67c4"/>
           <topic label="flags" href="structwl__bss__info__struct.html#aa2585d779da0ab21273a8d92de9a0ebe"/>
-          <topic label="reserved" href="structwl__bss__info__struct.html#a72aca6ea6d8153b28ea8f139b932ec3e"/>
+          <topic label="vht_cap" href="structwl__bss__info__struct.html#a976e20571e358fe5c69ae988701102dc"/>
+          <topic label="reserved5" href="structwl__bss__info__struct.html#ae246f770626a62a766cfc67e91724efe"/>
           <topic label="basic_mcs" href="structwl__bss__info__struct.html#a7efd75a130623350ac4a98d3688ee791"/>
           <topic label="ie_offset" href="structwl__bss__info__struct.html#a67b93773e8da423543b703cad84da5a5"/>
           <topic label="ie_length" href="structwl__bss__info__struct.html#a5312679515b5ee9c1875196c703a8a52"/>
