@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +30,16 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * Get the offset (in bytes) of a member within a structure
+ */
+#define OFFSET(type, member)                          ( (uint32_t)&( (type *)0 )->member )
+
+/**
+ * determine size (number of elements) in an array
+ */
+#define ARRAY_SIZE(a)                                 (sizeof(a) / sizeof(a[0]) )
 
 /** Searches for a specific WiFi Information Element in a byte array
  *

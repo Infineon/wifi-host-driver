@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="1063" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="1063" bodyend="-1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1128" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1128" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -25,19 +25,19 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="11">
+      <node id="24">
         <label>whd_coex_config</label>
         <link refid="structwhd__coex__config"/>
-        <childnode refid="12" relation="usage">
+        <childnode refid="25" relation="usage">
           <edgelabel>le_scan_params</edgelabel>
         </childnode>
       </node>
-      <node id="12">
+      <node id="25">
         <label>whd_btc_lescan_params</label>
         <link refid="structwhd__btc__lescan__params"/>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" line="1062" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_types.h" bodystart="1061" bodyend="1064"/>
+    <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1127" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1126" bodyend="1129"/>
     <listofallmembers>
       <member refid="structwhd__coex__config_1afcc1e187cd7f285de8d56162fbbb52bb" prot="public" virt="non-virtual"><scope>whd_coex_config</scope><name>le_scan_params</name></member>
     </listofallmembers>

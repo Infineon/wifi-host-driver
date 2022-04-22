@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -322,6 +322,14 @@ uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
     {
         WPRINT_WHD_INFO( ("Shared bus for bt is fail\n") );
     }
+
+    /* Get FW Capability */
+    retval = whd_wifi_read_fw_capabilities(ifp);
+    if (retval != WHD_SUCCESS)
+    {
+        WPRINT_WHD_INFO( ("Get FW Capabilities Fail\n") );
+    }
+
     /* Turn off SDPCM TX Glomming */
     /* Note: This is only required for later chips.
      * The 4319 has glomming off by default however the 43362 has it on by default.

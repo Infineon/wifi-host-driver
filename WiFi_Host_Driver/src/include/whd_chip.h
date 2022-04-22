@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -117,8 +117,14 @@ typedef struct whd_chip_info
 {
     uint16_t chip_id;
     whd_bool_t save_restore_enable;
-
+    uint32_t fwcap_flags;
 } whd_chip_info_t;
+
+typedef struct whd_fwcap
+{
+    whd_fwcap_id_t feature;
+    const char *const fwcap_name;
+} whd_fwcap_t;
 
 typedef struct
 {
@@ -201,6 +207,16 @@ typedef struct
     uint16_t akm_suite_count;
     uint32_t akm_suite_list[1];
 } akm_suite_portion_t;
+
+/* RSNX IE */
+typedef struct
+{
+    whd_tlv8_header_t tlv_header; /* id, length */
+    uint8_t data[1];
+} rsnx_ie_t;
+
+#define DOT11_RSNX_CAP_LEN 1 /* Extended RSN Capabilities length in octets (1 octet) */
+#define DOT11_RSNX_SAE_H2E 5 /* Extended RSN Capabilities */
 
 typedef struct
 {
@@ -333,7 +349,7 @@ typedef struct whd_internal_info
     uint con_lastpos;
     whd_bool_t whd_wifi_p2p_go_is_up;
     uint32_t whd_join_status[3];
-
+    whd_auth_result_callback_t auth_result_callback;
 } whd_internal_info_t;
 
 #pragma pack(1)
@@ -376,7 +392,7 @@ extern whd_result_t whd_wifi_read_wlan_log(whd_driver_t whd_driver, char *buffer
 extern whd_result_t whd_wifi_print_whd_log(whd_driver_t whd_driver);
 extern whd_result_t whd_wifi_read_wlan_log_unsafe(whd_driver_t whd_driver, uint32_t wlan_shared_address, char *buffer,
                                                   uint32_t buffer_size);
-
+extern whd_result_t whd_wifi_read_fw_capabilities(whd_interface_t ifp);
 extern void whd_wifi_peek(whd_driver_t whd_driver, uint32_t address, uint8_t register_length, uint8_t *value);
 extern void whd_wifi_poke(whd_driver_t whd_driver, uint32_t address, uint8_t register_length, uint32_t value);
 extern uint32_t whd_wifi_get_btc_params(whd_driver_t whd_driver, uint32_t address, whd_interface_t interface);

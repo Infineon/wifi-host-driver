@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -211,7 +211,8 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
     }
 
     if ( (auth_type & WPA3_SECURITY) &&
-         ( (wlan_chip_id == 43430) || (wlan_chip_id == 43909) || (wlan_chip_id == 43907) || (wlan_chip_id == 54907) ) )
+         ( (wlan_chip_id == 43430) || (wlan_chip_id == 43909) || (wlan_chip_id == 43907) || (wlan_chip_id == 54907) ||
+           (wlan_chip_id == 43012) ) )
     {
         WPRINT_WHD_ERROR( ("WPA3 is not supported, %s failed at line %d \n", __func__, __LINE__) );
         return WHD_UNSUPPORTED;
@@ -508,13 +509,14 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
                 CHECK_RETURN_WITH_SEMAPHORE(whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0),
                                             &ap->whd_wifi_sleep_flag);
             }
-            if (auth_type == WHD_SECURITY_WPA3_SAE)
+            if ( (auth_type == WHD_SECURITY_WPA3_SAE) && (whd_driver->chip_info.fwcap_flags & (1 << WHD_FWCAP_SAE) ) )
             {
                 whd_wifi_sae_password(ifp, security_key, key_length);
             }
             else
             {
-                if (auth_type == WHD_SECURITY_WPA3_WPA2_PSK)
+                if ( (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) &&
+                     (whd_driver->chip_info.fwcap_flags & (1 << WHD_FWCAP_SAE) ) )
                 {
                     whd_wifi_sae_password(ifp, security_key, key_length);
                 }

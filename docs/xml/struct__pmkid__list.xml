@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="struct__pmkid__list" kind="struct" language="C++" prot="public">
+    <compoundname>_pmkid_list</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct__pmkid__list_1a32ad6657f812be13479ac99afd21d9da" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t npmkid</definition>
+        <argsstring></argsstring>
+        <name>npmkid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1003" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1003" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct__pmkid__list_1a4b8f03d735b97a1aecb8867be75bec60" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a41a5921cae8749f8c7b96f216ff318a3" kindref="member">pmkid_t</ref></type>
+        <definition>pmkid_t pmkid[1]</definition>
+        <argsstring>[1]</argsstring>
+        <name>pmkid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1004" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1004" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>_pmkid</label>
+        <link refid="struct__pmkid"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>BSSID</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>_pmkid_list</label>
+        <link refid="struct__pmkid__list"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pmkid</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>whd_mac_t</label>
+        <link refid="structwhd__mac__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1002" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1001" bodyend="1005"/>
+    <listofallmembers>
+      <member refid="struct__pmkid__list_1a32ad6657f812be13479ac99afd21d9da" prot="public" virt="non-virtual"><scope>_pmkid_list</scope><name>npmkid</name></member>
+      <member refid="struct__pmkid__list_1a4b8f03d735b97a1aecb8867be75bec60" prot="public" virt="non-virtual"><scope>_pmkid_list</scope><name>pmkid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

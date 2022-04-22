@@ -132,8 +132,19 @@ See <a class="el" href="group__wifiutilities.html#ga5a62f0854ad148dde280b4f75596
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__maclist__t.html">whd_maclist_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure describing a list of associated softAP clients.  <a href="structwhd__maclist__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__pmkid.html">_pmkid</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure describing a list of PMKID.  <a href="struct__pmkid.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__pmkid__list.html">_pmkid_list</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__auth__req__status.html">whd_auth_req_status</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure used by both dongle and host dongle asks host to start auth(SAE), host updates auth status to dongle.  <a href="structwhd__auth__req__status.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__wep__key__t.html">whd_wep_key_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for storing a WEP key.  <a href="structwhd__wep__key__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__auth__params.html">whd_auth_params</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for management frame(auth) params.  <a href="structwhd__auth__params.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__oob__config.html">whd_oob_config</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for Out-of-band interrupt config parameters which can be set by application during whd power up.  <a href="structwhd__oob__config.html#details">More...</a><br /></td></tr>
@@ -223,6 +234,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a287bbd4f521f0d1cf44165bc617cebf5">NO_POWERSAVE_MODE</a>&#160;&#160;&#160;(0)</td></tr>
 <tr class="memdesc:a287bbd4f521f0d1cf44165bc617cebf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">No Powersave mode. <br /></td></tr>
 <tr class="separator:a287bbd4f521f0d1cf44165bc617cebf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2ce8126dc46ee1d9d3beda3e1003193"><td class="memItemLeft" align="right" valign="top"><a id="af2ce8126dc46ee1d9d3beda3e1003193"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#af2ce8126dc46ee1d9d3beda3e1003193">PMKID_LEN</a>&#160;&#160;&#160;(16)</td></tr>
+<tr class="memdesc:af2ce8126dc46ee1d9d3beda3e1003193"><td class="mdescLeft">&#160;</td><td class="mdescRight">PMKID LENGTH. <br /></td></tr>
+<tr class="separator:af2ce8126dc46ee1d9d3beda3e1003193"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c95a90e7806e4b0d21edfae15b73465"><td class="memItemLeft" align="right" valign="top"><a id="a3c95a90e7806e4b0d21edfae15b73465"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a3c95a90e7806e4b0d21edfae15b73465">UNUSED_PARAMETER</a>(x)&#160;&#160;&#160;( (void)(x) )</td></tr>
 <tr class="memdesc:a3c95a90e7806e4b0d21edfae15b73465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suppress unused parameter warning. <br /></td></tr>
@@ -814,10 +829,25 @@ typedef whd_buffer_t&#160;</td><td class="memItemRight" valign="bottom"><a class
 typedef struct <a class="el" href="structwhd__ap__info.html">whd_ap_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#ab850fbf60dfa93cd732f4e36a1e134cf">whd_ap_info_t</a></td></tr>
 <tr class="memdesc:ab850fbf60dfa93cd732f4e36a1e134cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for storing AP information. <br /></td></tr>
 <tr class="separator:ab850fbf60dfa93cd732f4e36a1e134cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41a5921cae8749f8c7b96f216ff318a3"><td class="memItemLeft" align="right" valign="top"><a id="a41a5921cae8749f8c7b96f216ff318a3"></a>
+typedef struct <a class="el" href="struct__pmkid.html">_pmkid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a41a5921cae8749f8c7b96f216ff318a3">pmkid_t</a></td></tr>
+<tr class="memdesc:a41a5921cae8749f8c7b96f216ff318a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure describing a list of PMKID. <br /></td></tr>
+<tr class="separator:a41a5921cae8749f8c7b96f216ff318a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd1ad2146ecc43341e64fda630f2d9d"><td class="memItemLeft" align="right" valign="top"><a id="a7fd1ad2146ecc43341e64fda630f2d9d"></a>
+typedef struct <a class="el" href="struct__pmkid__list.html">_pmkid_list</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pmkid_list_t</b></td></tr>
+<tr class="separator:a7fd1ad2146ecc43341e64fda630f2d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30e2e99a6c6f124f4f7a200e31f7a8cc"><td class="memItemLeft" align="right" valign="top"><a id="a30e2e99a6c6f124f4f7a200e31f7a8cc"></a>
+typedef struct <a class="el" href="structwhd__auth__req__status.html">whd_auth_req_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a30e2e99a6c6f124f4f7a200e31f7a8cc">whd_auth_req_status_t</a></td></tr>
+<tr class="memdesc:a30e2e99a6c6f124f4f7a200e31f7a8cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure used by both dongle and host dongle asks host to start auth(SAE), host updates auth status to dongle. <br /></td></tr>
+<tr class="separator:a30e2e99a6c6f124f4f7a200e31f7a8cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf5901182e9ac5462ba6d4ada56e54d0"><td class="memItemLeft" align="right" valign="top"><a id="aaf5901182e9ac5462ba6d4ada56e54d0"></a>
 typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#aaf5901182e9ac5462ba6d4ada56e54d0">whd_time_t</a></td></tr>
 <tr class="memdesc:aaf5901182e9ac5462ba6d4ada56e54d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time value in milliseconds. <br /></td></tr>
 <tr class="separator:aaf5901182e9ac5462ba6d4ada56e54d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f2ad68c18064e7129ad1828429f4b08"><td class="memItemLeft" align="right" valign="top"><a id="a8f2ad68c18064e7129ad1828429f4b08"></a>
+typedef struct <a class="el" href="structwhd__auth__params.html">whd_auth_params</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a8f2ad68c18064e7129ad1828429f4b08">whd_auth_params_t</a></td></tr>
+<tr class="memdesc:a8f2ad68c18064e7129ad1828429f4b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for management frame(auth) params. <br /></td></tr>
+<tr class="separator:a8f2ad68c18064e7129ad1828429f4b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac07b13dcb5ec0e66a707dcf8a539c97e"><td class="memItemLeft" align="right" valign="top"><a id="ac07b13dcb5ec0e66a707dcf8a539c97e"></a>
 typedef struct <a class="el" href="structwhd__oob__config.html">whd_oob_config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#ac07b13dcb5ec0e66a707dcf8a539c97e">whd_oob_config_t</a></td></tr>
 <tr class="memdesc:ac07b13dcb5ec0e66a707dcf8a539c97e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for Out-of-band interrupt config parameters which can be set by application during whd power up. <br /></td></tr>
@@ -939,8 +969,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a34d5a5749a0bcc00b7249108a8670ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for storing scan status.  <a href="whd__types_8h.html#a34d5a5749a0bcc00b7249108a8670ada">More...</a><br /></td></tr>
 <tr class="separator:a34d5a5749a0bcc00b7249108a8670ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853c6ba0cbd32dd7ec37dac9f8ccbfa7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7">whd_auth_status_t</a> { <a class="el" href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7a6606b130dda52724a82b7f9dd5d6be00">WHD_AUTH_EXT_REQ</a>,
+<a class="el" href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7a703b63662397aeaaa8e7646a49618280">WHD_AUTH_EXT_FRAME_RX</a>
+ }</td></tr>
+<tr class="memdesc:a853c6ba0cbd32dd7ec37dac9f8ccbfa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for storing status of auth event.  <a href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7">More...</a><br /></td></tr>
+<tr class="separator:a853c6ba0cbd32dd7ec37dac9f8ccbfa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb9a3034dfb9a44507ef6201842edb7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a4bb9a3034dfb9a44507ef6201842edb7">whd_scan_result_flag_t</a> { <a class="el" href="whd__types_8h.html#a4bb9a3034dfb9a44507ef6201842edb7a5239fb226233ffc16252907b91fa8be7">WHD_SCAN_RESULT_FLAG_RSSI_OFF_CHANNEL</a> = 0x01,
-<a class="el" href="whd__types_8h.html#a4bb9a3034dfb9a44507ef6201842edb7a7c6e2726f436bdc8b7d45f7cc34c504b">WHD_SCAN_RESULT_FLAG_BEACON</a> = 0x02
+<a class="el" href="whd__types_8h.html#a4bb9a3034dfb9a44507ef6201842edb7a7c6e2726f436bdc8b7d45f7cc34c504b">WHD_SCAN_RESULT_FLAG_BEACON</a> = 0x02,
+<a class="el" href="whd__types_8h.html#a4bb9a3034dfb9a44507ef6201842edb7a77413ed939411ad38673e2f5dcec5b49">WHD_SCAN_RESULT_FLAG_SAE_H2E</a> = 0x04
  }</td></tr>
 <tr class="memdesc:a4bb9a3034dfb9a44507ef6201842edb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of scan result flags.  <a href="whd__types_8h.html#a4bb9a3034dfb9a44507ef6201842edb7">More...</a><br /></td></tr>
 <tr class="separator:a4bb9a3034dfb9a44507ef6201842edb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1019,6 +1055,11 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a6158197f83b368e63fa825eb34602dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of bus type. <br /></td></tr>
 <tr class="separator:a6158197f83b368e63fa825eb34602dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ad9330854aaa61a7433a165fd57683"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683">whd_fwcap_id_t</a> { <a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683aa1b32f572128596bbfcd0b9ee037cde5">WHD_FWCAP_SAE</a> = 0,
+<a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683a0bc5289c89080c2d3cabde3b2b965c86">WHD_FWCAP_SAE_EXT</a> = 1
+ }</td></tr>
+<tr class="memdesc:a71ad9330854aaa61a7433a165fd57683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand fw capabilities list to enumeration.  <a href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683">More...</a><br /></td></tr>
+<tr class="separator:a71ad9330854aaa61a7433a165fd57683"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5adb0953a8527552bc47001673830602"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a5adb0953a8527552bc47001673830602">whd_country_code_t</a> { <br />
 &#160;&#160;<a class="el" href="whd__types_8h.html#a5adb0953a8527552bc47001673830602ae770f53071110d4c62c45f3185212a2c">WHD_COUNTRY_AFGHANISTAN</a> = MK_CNTRY('A', 'F', 0),
 <a class="el" href="whd__types_8h.html#a5adb0953a8527552bc47001673830602ad6f4894e386515835c1754f164e9bcc6">WHD_COUNTRY_ALBANIA</a> = MK_CNTRY('A', 'L', 0),
@@ -1369,10 +1410,10 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a> + <a class="code" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a> + \</div><div class="line">                         SDPCM_HEADER + <a class="code" href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a> + <a class="code" href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a>)</div><div class="ttc" id="whd__types_8h_html_aab3fad8b23f2db6d6c985134359bec0d"><div class="ttname"><a href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a></div><div class="ttdeci">#define MAX_BUS_HEADER_SIZE</div><div class="ttdoc">Max bus header size for all bus types (sdio)</div><div class="ttdef"><b>Definition:</b> whd_types.h:100</div></div>
-<div class="ttc" id="whd__types_8h_html_a50f830e25a5ac6d7d0e3eb8d23e90943"><div class="ttname"><a href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a></div><div class="ttdeci">#define BDC_HEADER_WITH_PAD</div><div class="ttdoc">BDC Header with padding 4 + 2.</div><div class="ttdef"><b>Definition:</b> whd_types.h:90</div></div>
-<div class="ttc" id="whd__types_8h_html_a9b159bb86ca28f2200f30661441f232e"><div class="ttname"><a href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a></div><div class="ttdeci">#define BUFFER_OVERHEAD</div><div class="ttdoc">Buffer overhead, sizeof(void *)</div><div class="ttdef"><b>Definition:</b> whd_types.h:109</div></div>
-<div class="ttc" id="whd__types_8h_html_a559655385d80ca97754fafa29ac87717"><div class="ttname"><a href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a></div><div class="ttdeci">#define BDC_HEADER_OFFSET_TO_DATA</div><div class="ttdoc">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).</div><div class="ttdef"><b>Definition:</b> whd_types.h:95</div></div>
+<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a> + <a class="code" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a> + \</div><div class="line">                         SDPCM_HEADER + <a class="code" href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a> + <a class="code" href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a>)</div><div class="ttc" id="whd__types_8h_html_aab3fad8b23f2db6d6c985134359bec0d"><div class="ttname"><a href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a></div><div class="ttdeci">#define MAX_BUS_HEADER_SIZE</div><div class="ttdoc">Max bus header size for all bus types (sdio)</div><div class="ttdef"><b>Definition:</b> whd_types.h:102</div></div>
+<div class="ttc" id="whd__types_8h_html_a50f830e25a5ac6d7d0e3eb8d23e90943"><div class="ttname"><a href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a></div><div class="ttdeci">#define BDC_HEADER_WITH_PAD</div><div class="ttdoc">BDC Header with padding 4 + 2.</div><div class="ttdef"><b>Definition:</b> whd_types.h:92</div></div>
+<div class="ttc" id="whd__types_8h_html_a9b159bb86ca28f2200f30661441f232e"><div class="ttname"><a href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a></div><div class="ttdeci">#define BUFFER_OVERHEAD</div><div class="ttdoc">Buffer overhead, sizeof(void *)</div><div class="ttdef"><b>Definition:</b> whd_types.h:111</div></div>
+<div class="ttc" id="whd__types_8h_html_a559655385d80ca97754fafa29ac87717"><div class="ttname"><a href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a></div><div class="ttdeci">#define BDC_HEADER_OFFSET_TO_DATA</div><div class="ttdoc">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).</div><div class="ttdef"><b>Definition:</b> whd_types.h:97</div></div>
 </div><!-- fragment -->
 <p>The maximum space in bytes required for headers in front of the Ethernet header. </p>
 <p>6 + (8 + 4) + 4 + 4 + 4 = 30 bytes </p>
@@ -1782,6 +1823,28 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
+<a id="a853c6ba0cbd32dd7ec37dac9f8ccbfa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a853c6ba0cbd32dd7ec37dac9f8ccbfa7">&#9670;&nbsp;</a></span>whd_auth_status_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7">whd_auth_status_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Structure for storing status of auth event. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a853c6ba0cbd32dd7ec37dac9f8ccbfa7a6606b130dda52724a82b7f9dd5d6be00"></a>WHD_AUTH_EXT_REQ&#160;</td><td class="fielddoc"><p>Request authentication received. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a853c6ba0cbd32dd7ec37dac9f8ccbfa7a703b63662397aeaaa8e7646a49618280"></a>WHD_AUTH_EXT_FRAME_RX&#160;</td><td class="fielddoc"><p>Authentication frame received. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="a4bb9a3034dfb9a44507ef6201842edb7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4bb9a3034dfb9a44507ef6201842edb7">&#9670;&nbsp;</a></span>whd_scan_result_flag_t</h2>
 
@@ -1799,6 +1862,8 @@ Enumerations</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4bb9a3034dfb9a44507ef6201842edb7a5239fb226233ffc16252907b91fa8be7"></a>WHD_SCAN_RESULT_FLAG_RSSI_OFF_CHANNEL&#160;</td><td class="fielddoc"><p>RSSI came from an off channel DSSS (1 or 1 Mb) Rx. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a4bb9a3034dfb9a44507ef6201842edb7a7c6e2726f436bdc8b7d45f7cc34c504b"></a>WHD_SCAN_RESULT_FLAG_BEACON&#160;</td><td class="fielddoc"><p>Beacon (vs probe response) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4bb9a3034dfb9a44507ef6201842edb7a77413ed939411ad38673e2f5dcec5b49"></a>WHD_SCAN_RESULT_FLAG_SAE_H2E&#160;</td><td class="fielddoc"><p>BSS is H2E(Hash-to-Element) </p>
 </td></tr>
 </table>
 
@@ -1845,6 +1910,28 @@ Enumerations</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adc3a23bad78e0110546c9edc00456dafa335ed12c48af483e1c930e5c7b9f5d57"></a>WHD_IOVAR_GET_LISTEN_INTERVAL&#160;</td><td class="fielddoc"><p>Get Listen Interval value. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="adc3a23bad78e0110546c9edc00456dafa5ebc26219966e0db67e2cdbb8f89d986"></a>WHD_IOVAR_GET_MAC_ADDRESS&#160;</td><td class="fielddoc"><p>Get mac address. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a71ad9330854aaa61a7433a165fd57683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ad9330854aaa61a7433a165fd57683">&#9670;&nbsp;</a></span>whd_fwcap_id_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683">whd_fwcap_id_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Expand fw capabilities list to enumeration. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a71ad9330854aaa61a7433a165fd57683aa1b32f572128596bbfcd0b9ee037cde5"></a>WHD_FWCAP_SAE&#160;</td><td class="fielddoc"><p>Internal SAE. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a71ad9330854aaa61a7433a165fd57683a0bc5289c89080c2d3cabde3b2b965c86"></a>WHD_FWCAP_SAE_EXT&#160;</td><td class="fielddoc"><p>External SAE. </p>
 </td></tr>
 </table>
 

@@ -1,6 +1,10 @@
 var annotated_dup =
 [
+    [ "_pmkid", "struct__pmkid.html", "struct__pmkid" ],
+    [ "_pmkid_list", "struct__pmkid__list.html", "struct__pmkid__list" ],
     [ "whd_ap_info", "structwhd__ap__info.html", "structwhd__ap__info" ],
+    [ "whd_auth_params", "structwhd__auth__params.html", "structwhd__auth__params" ],
+    [ "whd_auth_req_status", "structwhd__auth__req__status.html", "structwhd__auth__req__status" ],
     [ "whd_band_list_t", "structwhd__band__list__t.html", "structwhd__band__list__t" ],
     [ "whd_btc_lescan_params", "structwhd__btc__lescan__params.html", "structwhd__btc__lescan__params" ],
     [ "whd_buffer_funcs", "structwhd__buffer__funcs.html", "structwhd__buffer__funcs" ],

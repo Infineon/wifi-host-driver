@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sup_5fauth_5fstatus_5ft',['sup_auth_status_t',['../whd__events_8h.html#a4c17ec19ca52ebe4bbad3ea977108d0b',1,'whd_events.h']]]
+  ['pmkid_5ft',['pmkid_t',['../whd__types_8h.html#a41a5921cae8749f8c7b96f216ff318a3',1,'whd_types.h']]]
 ];

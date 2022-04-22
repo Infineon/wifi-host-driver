@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -418,13 +418,17 @@ whd_result_t whd_management_set_event_handler(whd_interface_t ifp, const whd_eve
         }
     }
 
-    /* set the event_list_mutex from calling thread before sending iovar
-     * as the RX thread also waits on this Mutex when an ASYNC Event received
-     * causing deadlock
+    res = whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0);
+    if (res != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("%s: send event_msgs(iovar) failed\n", __func__) );
+    }
+
+    /* set the event_list_mutex here after sending iovar.
+     * we get event_list_mutex -> ioctl_mutex, make sure we didn't have any thread, having ioctl_mutex -> event_list_mutex path.
+     * Otherwise it may cause deadlock
      */
     CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) );
-
-    CHECK_RETURN(whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0) );
 
     /* The wlan chip can sleep from now on */
     WHD_WLAN_LET_SLEEP(whd_driver);
@@ -510,13 +514,17 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
         }
     }
 
-    /* set the event_list_mutex from calling thread before sending iovar
-     * as the RX thread also waits on this Mutex when an ASYNC Event received
-     * causing deadlock
+    res = whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0);
+    if (res != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("%s: send event_msgs(iovar) failed\n", __func__) );
+    }
+
+    /* set the event_list_mutex here after sending iovar.
+     * we get event_list_mutex -> ioctl_mutex, make sure we didn't have any thread, having ioctl_mutex -> event_list_mutex path.
+     * Otherwise it may cause deadlock
      */
     CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) );
-
-    CHECK_RETURN(whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0) );
 
     /* The wlan chip can sleep from now on */
     WHD_WLAN_LET_SLEEP(whd_driver);

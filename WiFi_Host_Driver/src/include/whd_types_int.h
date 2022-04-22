@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -63,6 +63,7 @@ extern "C"
 
 #define HT_CAPABILITIES_IE_LENGTH       (26)
 #define DOT11_OUI_LEN                   (3)/** Length in bytes of 802.11 OUI*/
+#define DOT11_MGMT_HDR_LEN              (24) /* dot11 management header len */
 
 #define WHD_ETHER_ADDR_STR_LEN          (18)
 #define WHD_ETHER_ADDR_LEN              (6)
@@ -329,8 +330,32 @@ typedef enum
     DOT11_IE_ID_MCCAOP_ADVERTISMENT_OVERVIEW         = 174,
     /* 175-220 Reserved */
     DOT11_IE_ID_VENDOR_SPECIFIC                      = 221,
-    /* 222-255 Reserved */
+    /* 222-223 Reserved */
+    DOT11_IE_ID_RSNX                                 = 244,
+    /* 225-255 Reserved */
 } dot11_ie_id_t;
+
+/* 802.11 Status Code */
+typedef enum
+{
+    DOT11_SC_SUCCESS                                 = 0,
+    DOT11_SC_FAILURE                                 = 1,
+    DOT11_SC_TDLS_WAKEUP_SCH_ALT                     = 2,
+    DOT11_SC_TDLS_WAKEUP_SCH_REJ                     = 3,
+    /* 4 Reserved */
+    DOT11_SC_TDLS_SEC_DISABLED                       = 5,
+    DOT11_SC_LIFETIME_REJ                            = 6,
+    DOT11_SC_NOT_SAME_BSS                            = 7,
+    /* 8-9 Reserved */
+    DOT11_SC_CAP_MISMATCH                            = 10,
+    DOT11_SC_REASSOC_FAIL                            = 11,
+    DOT11_SC_ASSOC_FAIL                              = 12,
+    DOT11_SC_AUTH_MISMATCH                           = 13,
+    DOT11_SC_AUTH_SEQ                                = 14,
+    DOT11_SC_AUTH_CHALLENGE_FAIL                     = 15,
+    DOT11_SC_AUTH_TIMEOUT                            = 16,
+    /* 17-255 Reserved */
+} dot11_sc_t;
 
 uint32_t whd_wifi_get_iovar_value(whd_interface_t ifp, const char *iovar, uint32_t *value);
 uint32_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,

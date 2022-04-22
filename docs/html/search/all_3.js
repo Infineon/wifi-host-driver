@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['data',['data',['../structwhd__wep__key__t.html#a6460a21fbea84550b8bf9c7ce257e4ed',1,'whd_wep_key_t']]],
-  ['datalen',['datalen',['../structwhd__event__msg.html#a20ef2f8b0dc25d28c0c76be72919a60a',1,'whd_event_msg']]],
-  ['destination_5faddress',['destination_address',['../structwhd__event__ether__header.html#aecece25a401285d039a6f30991dad78e',1,'whd_event_ether_header']]],
-  ['dev_5fgpio_5fsel',['dev_gpio_sel',['../structwhd__oob__config.html#a2d83d43c26f20c82203b65cef7cf9d2f',1,'whd_oob_config']]],
-  ['dtim',['dtim',['../structwhd__listen__interval__t.html#a011e406e7bba2200194b90d308ea2e82',1,'whd_listen_interval_t']]],
-  ['dtim_5fperiod',['dtim_period',['../structwl__bss__info__struct.html#a2817cb129e69f6ce5a24dfb2dd8706cc',1,'wl_bss_info_struct']]],
-  ['duty_5fcycle',['duty_cycle',['../structwhd__btc__lescan__params.html#ad0362052c89424bf11eb63b726b05182',1,'whd_btc_lescan_params']]]
+  ['capability',['capability',['../structwl__bss__info__struct.html#a4d6a7cc78819fe901fa45a1b51266e18',1,'wl_bss_info_struct']]],
+  ['ccode',['ccode',['../structwhd__scan__result.html#a4f626e97f0f0ea28fea702a7ecaad54f',1,'whd_scan_result']]],
+  ['channel',['channel',['../structwhd__scan__result.html#a715f5cb061d11eb75981741eda4dafcd',1,'whd_scan_result::channel()'],['../structwhd__simple__scan__result.html#a715f5cb061d11eb75981741eda4dafcd',1,'whd_simple_scan_result::channel()'],['../structwhd__ap__info.html#a715f5cb061d11eb75981741eda4dafcd',1,'whd_ap_info::channel()']]],
+  ['chanspec',['chanspec',['../structwl__bss__info__struct.html#aa5d9886a989c0e36349581e3f06cd4c0',1,'wl_bss_info_struct']]],
+  ['count',['count',['../structwl__bss__info__struct.html#a86988a65e0d3ece7990c032c159786d6',1,'wl_bss_info_struct::count()'],['../structwhd__maclist__t.html#a86988a65e0d3ece7990c032c159786d6',1,'whd_maclist_t::count()']]],
+  ['country',['country',['../structwhd__init__config.html#a7c552f1f715c8aa245f40d4be48b0fc9',1,'whd_init_config']]],
+  ['ctl_5fch',['ctl_ch',['../structwl__bss__info__struct.html#aaba7272626229ace409b150bb1981044',1,'wl_bss_info_struct']]],
+  ['current_5fband',['current_band',['../structwhd__band__list__t.html#aed8b81544ada7366584d9cdea48639f9',1,'whd_band_list_t']]]
 ];

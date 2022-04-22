@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,8 +57,8 @@
 #define WLC_EVENT_MSG_UNKIF     (0x10)    /** unknown source OS i/f */
 
 /* WMM constants */
-#define MAX_8021P_PRIO 7
-#define MAX_WMM_AC     3
+#define MAX_8021P_PRIO 8
+#define MAX_WMM_AC     4
 #define AC_QUEUE_SIZE  64
 
 /******************************************************
@@ -151,8 +151,9 @@ typedef struct bcm_event
  *  prio 1, 2: Best Effor(1)
  *  prio 4, 5: Video(2)
  *  prio 6, 7: Voice(3)
+ *  prio 8   : Control(4)(ex: IOVAR/IOCTL)
  */
-static const uint8_t prio_to_ac[8] = {1, 0, 0, 1, 2, 2, 3, 3};
+static const uint8_t prio_to_ac[9] = {1, 0, 0, 1, 2, 2, 3, 3, 4};
 
 /******************************************************
 *             SDPCM Logging
@@ -484,8 +485,8 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
         return WHD_NO_PACKET_TO_SEND;
     }
 
-    /* Check if we're being flow controlled */
-    if (whd_bus_is_flow_controlled(whd_driver) == WHD_TRUE)
+    /* Check if we're being flow controlled for Data packet only. */
+    if ( (whd_bus_is_flow_controlled(whd_driver) == WHD_TRUE) && (sdpcm_info->npkt_in_q[MAX_WMM_AC] == 0) )
     {
         WHD_STATS_INCREMENT_VARIABLE(whd_driver, flow_control);
         return WHD_FLOW_CONTROLLED;
@@ -493,7 +494,7 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
 
     /* Check if we have enough bus data credits spare */
     if ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) == 0 ) ||
-            ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) & 0x80 ) != 0 ) )
+         ( ( (uint8_t)(sdpcm_info->tx_max - sdpcm_info->tx_seq) & 0x80 ) != 0 ) )
     {
         WHD_STATS_INCREMENT_VARIABLE(whd_driver, no_credit);
         return WHD_NO_CREDITS;

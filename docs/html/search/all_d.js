@@ -1,15 +1,12 @@
 var searchData=
 [
-  ['rates',['rates',['../structwl__bss__info__struct.html#a686551a9eef0a3911a371e315bb24d36',1,'wl_bss_info_struct']]],
-  ['rateset',['rateset',['../structwl__bss__info__struct.html#aee32c70ea369b8be44e5cf2b9a1184a2',1,'wl_bss_info_struct']]],
-  ['reason',['reason',['../structwhd__event__msg.html#a5ac0b16c31813f87b98e97cc5bacd64a',1,'whd_event_msg']]],
-  ['reference_5fdebug_5fonly_5fvariable',['REFERENCE_DEBUG_ONLY_VARIABLE',['../whd__types_8h.html#a1491cb4c4adc44f22a91f18609dfb2f7',1,'whd_types.h']]],
-  ['reserved1',['reserved1',['../structwl__bss__info__struct.html#a7fba6723172880a05e6988822c001f4c',1,'wl_bss_info_struct']]],
-  ['reserved2',['reserved2',['../structwl__bss__info__struct.html#ae39bd5611d234ea12bb62b76b3c8be5b',1,'wl_bss_info_struct']]],
-  ['reserved3',['reserved3',['../structwl__bss__info__struct.html#a8a4214260978fa319bf24fbbf55d862e',1,'wl_bss_info_struct']]],
-  ['reserved32',['reserved32',['../structwl__bss__info__struct.html#ae3f4b5f7822024fbf0bea3a8845c67c4',1,'wl_bss_info_struct']]],
-  ['reserved4',['reserved4',['../structwl__bss__info__struct.html#ade0bf892b2f892cf886c158a883be259',1,'wl_bss_info_struct']]],
-  ['reserved5',['reserved5',['../structwl__bss__info__struct.html#ae246f770626a62a766cfc67e91724efe',1,'wl_bss_info_struct']]],
-  ['rssi',['RSSI',['../structwl__bss__info__struct.html#ae45c71dee229890b4401a4c0105d73cf',1,'wl_bss_info_struct']]],
-  ['rule',['rule',['../structwhd__packet__filter__t.html#a6b5d1db53f323ed75aaaa1ecaabe4533',1,'whd_packet_filter_t']]]
+  ['packet_5ffilter_5flist_5fbuffer_5fmax_5flen',['PACKET_FILTER_LIST_BUFFER_MAX_LEN',['../whd__types_8h.html#a1905b69d7646a2d2e21da7042bd14374',1,'whd_types.h']]],
+  ['pattern',['pattern',['../structwhd__packet__filter__t.html#af42a55e4e3cdd2ea57e52a29a0d77ce3',1,'whd_packet_filter_t']]],
+  ['phy_5fnoise',['phy_noise',['../structwl__bss__info__struct.html#a85ba569dec5085a93016434929bbf7d1',1,'wl_bss_info_struct']]],
+  ['pm1_5fpowersave_5fmode',['PM1_POWERSAVE_MODE',['../whd__types_8h.html#a32f56429462855603066fea3723c5217',1,'whd_types.h']]],
+  ['pm2_5fpowersave_5fmode',['PM2_POWERSAVE_MODE',['../whd__types_8h.html#af29e5543837b68c29417a7d15e3228b7',1,'whd_types.h']]],
+  ['pmkid_5flen',['PMKID_LEN',['../whd__types_8h.html#af2ce8126dc46ee1d9d3beda3e1003193',1,'whd_types.h']]],
+  ['pmkid_5ft',['pmkid_t',['../whd__types_8h.html#a41a5921cae8749f8c7b96f216ff318a3',1,'whd_types.h']]],
+  ['port_5ffilter_5flen',['PORT_FILTER_LEN',['../whd__types_8h.html#a7d8ed7e88b85772d09799ca87a27370d',1,'whd_types.h']]],
+  ['priority',['priority',['../structwhd__btc__lescan__params.html#a0815784d41b3c13d42ce22367abfba1d',1,'whd_btc_lescan_params']]]
 ];

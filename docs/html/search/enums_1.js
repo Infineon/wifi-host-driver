@@ -1,6 +1,7 @@
 var searchData=
 [
   ['whd_5f802_5f11_5fband_5ft',['whd_802_11_band_t',['../whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85',1,'whd_types.h']]],
+  ['whd_5fauth_5fstatus_5ft',['whd_auth_status_t',['../whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7',1,'whd_types.h']]],
   ['whd_5fbool_5ft',['whd_bool_t',['../whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac',1,'whd_types.h']]],
   ['whd_5fbss_5ftype_5ft',['whd_bss_type_t',['../whd__types_8h.html#a3070614a06a8989b9eb207e9f1286c5f',1,'whd_types.h']]],
   ['whd_5fbuffer_5fdir_5ft',['whd_buffer_dir_t',['../group__buffif.html#ga44a64c51498b204ceef5555209e29452',1,'whd_network_types.h']]],
@@ -9,6 +10,7 @@ var searchData=
   ['whd_5fcountry_5fcode_5ft',['whd_country_code_t',['../whd__types_8h.html#a5adb0953a8527552bc47001673830602',1,'whd_types.h']]],
   ['whd_5fcustom_5fie_5faction_5ft',['whd_custom_ie_action_t',['../whd__types_8h.html#a8be1026494a86f0ceeebb2dcbf092cbd',1,'whd_types.h']]],
   ['whd_5fdot11_5freason_5fcode_5ft',['whd_dot11_reason_code_t',['../whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55d',1,'whd_types.h']]],
+  ['whd_5ffwcap_5fid_5ft',['whd_fwcap_id_t',['../whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683',1,'whd_types.h']]],
   ['whd_5fie_5fpacket_5fflag_5ft',['whd_ie_packet_flag_t',['../whd__types_8h.html#a07b4f24f4e2abacc45a9ad29f008488f',1,'whd_types.h']]],
   ['whd_5flisten_5finterval_5ftime_5funit_5ft',['whd_listen_interval_time_unit_t',['../whd__types_8h.html#a98ac1a2590358bafac6a2da287034638',1,'whd_types.h']]],
   ['whd_5fpacket_5ffilter_5frule_5ft',['whd_packet_filter_rule_t',['../whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038',1,'whd_types.h']]],

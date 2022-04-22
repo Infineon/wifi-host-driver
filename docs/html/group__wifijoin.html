@@ -99,6 +99,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga9f8c6096922212981dd2101a17aec471"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#ga9f8c6096922212981dd2101a17aec471">whd_scan_result_callback_t</a>) (<a class="el" href="whd__types_8h.html#a58298b1b5c2f2425d5aed061de48aaa7">whd_scan_result_t</a> **result_ptr, void *user_data, <a class="el" href="whd__types_8h.html#a34d5a5749a0bcc00b7249108a8670ada">whd_scan_status_t</a> status)</td></tr>
 <tr class="memdesc:ga9f8c6096922212981dd2101a17aec471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan result callback function pointer type.  <a href="#ga9f8c6096922212981dd2101a17aec471">More...</a><br /></td></tr>
 <tr class="separator:ga9f8c6096922212981dd2101a17aec471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2604c8dec9eff39e79b3281496da2611"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#ga2604c8dec9eff39e79b3281496da2611">whd_auth_result_callback_t</a>) (void *result_ptr, uint32_t len, <a class="el" href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7">whd_auth_status_t</a> status, uint8_t *flag, void *user_data)</td></tr>
+<tr class="memdesc:ga2604c8dec9eff39e79b3281496da2611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auth result callback function pointer type.  <a href="#ga2604c8dec9eff39e79b3281496da2611">More...</a><br /></td></tr>
+<tr class="separator:ga2604c8dec9eff39e79b3281496da2611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -111,6 +114,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gacf8632bb68cef4d831083a66bee7b8fa"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#gacf8632bb68cef4d831083a66bee7b8fa">whd_wifi_stop_scan</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
 <tr class="memdesc:gacf8632bb68cef4d831083a66bee7b8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort a previously issued scan.  <a href="#gacf8632bb68cef4d831083a66bee7b8fa">More...</a><br /></td></tr>
 <tr class="separator:gacf8632bb68cef4d831083a66bee7b8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga58ef7de14079c4b2b879e786a5e15c24"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#ga58ef7de14079c4b2b879e786a5e15c24">whd_wifi_external_auth_request</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="group__wifijoin.html#ga2604c8dec9eff39e79b3281496da2611">whd_auth_result_callback_t</a> callback, void *result_ptr, void *user_data)</td></tr>
+<tr class="memdesc:ga58ef7de14079c4b2b879e786a5e15c24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiates SAE auth.  <a href="#ga58ef7de14079c4b2b879e786a5e15c24">More...</a><br /></td></tr>
+<tr class="separator:ga58ef7de14079c4b2b879e786a5e15c24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab5bc462251b6849ebd8e708a2560066d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#gab5bc462251b6849ebd8e708a2560066d">whd_wifi_stop_external_auth_request</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
+<tr class="memdesc:gab5bc462251b6849ebd8e708a2560066d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort authentication request.  <a href="#gab5bc462251b6849ebd8e708a2560066d">More...</a><br /></td></tr>
+<tr class="separator:gab5bc462251b6849ebd8e708a2560066d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac767814ae445f735b51686db20c780be"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#gac767814ae445f735b51686db20c780be">whd_wifi_join</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const <a class="el" href="structwhd__ssid__t.html">whd_ssid_t</a> *ssid, <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059">whd_security_t</a> auth_type, const uint8_t *security_key, uint8_t key_length)</td></tr>
 <tr class="memdesc:gac767814ae445f735b51686db20c780be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joins a Wi-Fi network.  <a href="#gac767814ae445f735b51686db20c780be">More...</a><br /></td></tr>
 <tr class="separator:gac767814ae445f735b51686db20c780be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +149,32 @@ Functions</h2></td></tr>
     <tr><td class="paramname">result_ptr</td><td>A pointer to the pointer that indicates where to put the next scan result </td></tr>
     <tr><td class="paramname">user_data</td><td>User provided data </td></tr>
     <tr><td class="paramname">status</td><td>Status of scan process </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2604c8dec9eff39e79b3281496da2611"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2604c8dec9eff39e79b3281496da2611">&#9670;&nbsp;</a></span>whd_auth_result_callback_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* whd_auth_result_callback_t) (void *result_ptr, uint32_t len, <a class="el" href="whd__types_8h.html#a853c6ba0cbd32dd7ec37dac9f8ccbfa7">whd_auth_status_t</a> status, uint8_t *flag, void *user_data)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Auth result callback function pointer type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result_prt</td><td>A pointer to the pointer that indicates where to put the auth result </td></tr>
+    <tr><td class="paramname">len</td><td>the size of result </td></tr>
+    <tr><td class="paramname">status</td><td>Status of auth process </td></tr>
+    <tr><td class="paramname">flag</td><td>flag of h2e will be indicated in auth request event, otherwise is NULL. </td></tr>
+    <tr><td class="paramname">user_data</td><td>user specific data that will be passed directly to the callback function </td></tr>
   </table>
   </dd>
 </dl>
@@ -311,6 +346,90 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Abort a previously issued scan. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga58ef7de14079c4b2b879e786a5e15c24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga58ef7de14079c4b2b879e786a5e15c24">&#9670;&nbsp;</a></span>whd_wifi_external_auth_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_external_auth_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__wifijoin.html#ga2604c8dec9eff39e79b3281496da2611">whd_auth_result_callback_t</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>result_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initiates SAE auth. </p>
+<p>The results of the auth will be individually provided to the callback function. Note: The callback function will be executed in the context of the WHD thread and so must not perform any actions that may cause a bus transaction.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback function which will receive and process the result data. </td></tr>
+    <tr><td class="paramname">data</td><td>Pointer to a pointer to a result storage structure. </td></tr>
+    <tr><td class="paramname">user_data</td><td>user specific data that will be passed directly to the callback function</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>- Callback must not use blocking functions, nor use WHD functions, since it is called from the context of the WHD thread.<ul>
+<li>The callback, result_ptr and user_data variables will be referenced after the function returns. Those variables must remain valid until the scan is complete.</li>
+</ul>
+</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="gab5bc462251b6849ebd8e708a2560066d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab5bc462251b6849ebd8e708a2560066d">&#9670;&nbsp;</a></span>whd_wifi_stop_external_auth_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_stop_external_auth_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abort authentication request. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface</td></tr>

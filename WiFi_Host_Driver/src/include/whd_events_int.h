@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -165,11 +165,14 @@ typedef enum
     WLC_E_PROBREQ_MSG_RX = 137,     /* probe req with wl_event_rx_frame_data_t header */
     WLC_E_PFN_SCAN_COMPLETE = 138,     /* PFN completed scan of network list */
     WLC_E_RMC_EVENT = 139,     /* RMC Event */
-    WLC_E_DPSTA_INTF_IND = 140,     /* DPSTA interface indication */
-    WLC_E_RRM = 141,                /* RRM Event */
-    WLC_E_ULP = 146,                /* ULP entry event */
-    WLC_E_TKO = 151,                /* TCP Keep Alive Offload Event */
-    WLC_E_LAST = 152,               /* highest val + 1 for range checking */
+    WLC_E_DPSTA_INTF_IND = 140,      /* DPSTA interface indication */
+    WLC_E_RRM = 141,                 /* RRM Event */
+    WLC_E_ULP = 146,                 /* ULP entry event */
+    WLC_E_TKO = 151,                 /* TCP Keep Alive Offload Event */
+    WLC_E_EXT_AUTH_REQ = 187,        /* authentication request received */
+    WLC_E_EXT_AUTH_FRAME_RX = 188,   /* authentication request received */
+    WLC_E_MGMT_FRAME_TXSTATUS = 189, /* mgmt frame Tx complete */
+    WLC_E_LAST = 190,                /* highest val + 1 for range checking */
 } whd_event_num_t;
 
 /**
@@ -370,6 +373,12 @@ typedef enum
 
 } whd_nan_events_t;
 
+/* Reason codes for LINK */
+#define WLC_E_LINK_BCN_LOSS     1 /** Link down because of beacon loss */
+#define WLC_E_LINK_DISASSOC     2 /** Link down because of disassoc */
+#define WLC_E_LINK_ASSOC_REC    3 /** Link down because assoc recreate failed */
+#define WLC_E_LINK_BSSCFG_DIS   4 /** Link down due to bsscfg down */
+
 /**
  * Event handler prototype definition
  *
@@ -436,6 +445,7 @@ typedef enum
     WHD_JOIN_EVENT_ENTRY,
     WHD_AP_EVENT_ENTRY,
     WHD_P2P_EVENT_ENTRY,
+    WHD_AUTH_EVENT_ENTRY,
     WHD_EVENT_ENTRY_MAX
 } whd_event_entry_t;
 

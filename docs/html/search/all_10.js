@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['unused_5fparameter',['UNUSED_PARAMETER',['../whd__types_8h.html#a3c95a90e7806e4b0d21edfae15b73465',1,'whd_types.h']]],
-  ['unused_5fvariable',['UNUSED_VARIABLE',['../whd__types_8h.html#a4048bf3892868ded8a28f8cbdd339c09',1,'whd_types.h']]],
-  ['usr_5fsubtype',['usr_subtype',['../structwhd__event__eth__hdr.html#ae9ad9911fe2a5dc5789001a2b48d5c9d',1,'whd_event_eth_hdr']]]
+  ['thread_5fpriority',['thread_priority',['../structwhd__init__config.html#abd05090115efa85f6e47087351cc502a',1,'whd_init_config']]],
+  ['thread_5fstack_5fsize',['thread_stack_size',['../structwhd__init__config.html#a6aa2c0bcb2024f1e4c38f9e8f6769c09',1,'whd_init_config']]],
+  ['thread_5fstack_5fstart',['thread_stack_start',['../structwhd__init__config.html#a52591d0d84b73dea8ca0a25c486f62c7',1,'whd_init_config']]],
+  ['tkip_5fenabled',['TKIP_ENABLED',['../whd__types_8h.html#a20f0d7118c2d35a688bcdc5b8b0920d9',1,'whd_types.h']]],
+  ['tko_5fdata_5foffset',['TKO_DATA_OFFSET',['../whd__types_8h.html#a3e98ad24780d89cefbec71da9fac2da6',1,'whd_types.h']]]
 ];

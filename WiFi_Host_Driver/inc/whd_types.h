@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,6 +56,8 @@ extern "C"
 #define PM1_POWERSAVE_MODE          (1) /**< Powersave mode on specified interface without regard for throughput reduction */
 #define PM2_POWERSAVE_MODE          (2) /**< Powersave mode on specified interface with High throughput */
 #define NO_POWERSAVE_MODE           (0) /**< No Powersave mode */
+
+#define PMKID_LEN                   (16) /**< PMKID LENGTH */
 
 /**
  * Suppress unused parameter warning
@@ -294,6 +296,15 @@ typedef enum
 } whd_scan_status_t;
 
 /**
+ * Structure for storing status of auth event
+ */
+typedef enum
+{
+    WHD_AUTH_EXT_REQ,           /**< Request authentication received */
+    WHD_AUTH_EXT_FRAME_RX,      /**< Authentication frame received */
+} whd_auth_status_t;
+
+/**
  * Structure for storing radio band list information
  */
 typedef struct
@@ -309,7 +320,8 @@ typedef struct
 typedef enum
 {
     WHD_SCAN_RESULT_FLAG_RSSI_OFF_CHANNEL = 0x01, /**< RSSI came from an off channel DSSS (1 or 1 Mb) Rx */
-    WHD_SCAN_RESULT_FLAG_BEACON = 0x02            /**< Beacon (vs probe response)                        */
+    WHD_SCAN_RESULT_FLAG_BEACON = 0x02,           /**< Beacon (vs probe response)                        */
+    WHD_SCAN_RESULT_FLAG_SAE_H2E = 0x04,          /**< BSS is H2E(Hash-to-Element)                       */
 } whd_scan_result_flag_t;
 
 /**
@@ -399,6 +411,15 @@ typedef enum
     WHD_BUS_M2M,
     WHD_BUS_NO_DEFINE = 0xff,
 } whd_bus_type_t;
+
+/**
+ * Expand fw capabilities list to enumeration
+ */
+typedef enum
+{
+    WHD_FWCAP_SAE = 0,     /**< Internal SAE */
+    WHD_FWCAP_SAE_EXT = 1, /**< External SAE */
+} whd_fwcap_id_t;
 
 /******************************************************
 *                 Type Definitions
@@ -982,6 +1003,34 @@ typedef struct
 #pragma pack()
 
 /**
+ * Structure describing a list of PMKID
+ */
+typedef struct _pmkid
+{
+    whd_mac_t BSSID;
+    uint8_t PMKID[PMKID_LEN];
+} pmkid_t;
+
+typedef struct _pmkid_list
+{
+    uint32_t npmkid;
+    pmkid_t pmkid[1];
+} pmkid_list_t;
+
+/**
+ * Structure used by both dongle and host
+ * dongle asks host to start auth(SAE), host updates auth status to dongle.
+ */
+typedef struct whd_auth_req_status
+{
+    uint16_t flags;
+    whd_mac_t peer_mac; /* peer mac address */
+    uint32_t ssid_len;
+    uint8_t ssid[SSID_NAME_SIZE];
+    uint8_t pmkid[PMKID_LEN];
+} whd_auth_req_status_t;
+
+/**
  * Time value in milliseconds
  */
 typedef uint32_t whd_time_t;
@@ -995,6 +1044,22 @@ typedef struct
     uint8_t length;   /**< WEP key length. Either 5 bytes (40-bits) or 13-bytes (104-bits) */
     uint8_t data[32]; /**< WEP key as values NOT characters                                */
 } whd_wep_key_t;
+
+/**
+ * Structure for management frame(auth) params
+ */
+typedef struct whd_auth_params
+{
+    uint32_t version;
+    uint32_t dwell_time;
+    uint16_t len; /* Len includes Len(MAC Headers) + Len(Contents) */
+    uint16_t fc;
+    uint16_t channel;
+    whd_mac_t da;
+    whd_mac_t bssid;
+    uint32_t packetId;
+    uint8_t data[1];  /* It contains MAC Headers + Contexts*/
+} whd_auth_params_t;
 
 /**
  * Structure for Out-of-band interrupt config parameters which can be set by application during whd power up

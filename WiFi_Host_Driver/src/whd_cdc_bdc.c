@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -272,7 +272,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     }
 
     /* Store the length of the data and the IO control header and pass "down" */
-    CHECK_RETURN(whd_send_to_bus(whd_driver, send_buffer_hnd, CONTROL_HEADER, 7) );
+    CHECK_RETURN(whd_send_to_bus(whd_driver, send_buffer_hnd, CONTROL_HEADER, 8) );
 
 
     /* Wait till response has been received  */

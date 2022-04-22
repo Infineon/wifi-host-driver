@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,6 +51,9 @@ extern "C"
 #define WLC_E_ACTION_FRAME                59 /**< Indicates Action frame Rx */
 #define WLC_E_ACTION_FRAME_COMPLETE       60 /**< Indicates Action frame Tx complete */
 #define WLC_E_ESCAN_RESULT                69 /**< escan result event occurs when we scan for the networks */
+#define WLC_E_EXT_AUTH_REQ               187 /**< authentication request received */
+#define WLC_E_EXT_AUTH_FRAME_RX          188 /**< authentication request received */
+#define WLC_E_MGMT_FRAME_TXSTATUS        189 /**< mgmt frame Tx complete */
 
 /* List of status codes - Applicable for any event type */
 #define WLC_E_STATUS_SUCCESS        0   /**< operation was successful */
@@ -79,7 +82,7 @@ extern "C"
  *
  * -Basic supplicant authentication states
  *
- + WLC_SUP_DISCONNECTED
+ *     + WLC_SUP_DISCONNECTED
  *     + WLC_SUP_CONNECTING
  *     + WLC_SUP_IDREQUIRED
  *     + WLC_SUP_AUTHENTICATING
@@ -88,7 +91,9 @@ extern "C"
  *     + WLC_SUP_KEYED
  *     + WLC_SUP_TIMEOUT
  *     + WLC_SUP_LAST_BASIC_STATE
- *  -Extended supplicant authentication states
+ *
+ * -Extended supplicant authentication states
+ *
  *     + WLC_SUP_KEYXCHANGE_WAIT_M1
  *     + WLC_SUP_KEYXCHANGE_PREP_M2
  *     + WLC_SUP_KEYXCHANGE_WAIT_M3
@@ -116,6 +121,12 @@ typedef enum sup_auth_status
 } sup_auth_status_t;
 
 #define WHD_MSG_IFNAME_MAX 16 /**< Max length of Interface name */
+
+/* Reason codes for LINK */
+#define WLC_E_LINK_BCN_LOSS     1 /**< Link down because of beacon loss */
+#define WLC_E_LINK_DISASSOC     2 /**< Link down because of disassoc */
+#define WLC_E_LINK_ASSOC_REC    3 /**< Link down because assoc recreate failed */
+#define WLC_E_LINK_BSSCFG_DIS   4 /**< Link down due to bsscfg down */
 
 #pragma pack(1)
 

@@ -22,23 +22,23 @@
       <node id="34">
         <label>cy_result.h</label>
       </node>
-      <node id="35">
-        <label>cyhal_hw_types.h</label>
-      </node>
       <node id="30">
         <label>whd.h</label>
         <link refid="whd_8h"/>
         <childnode refid="31" relation="include">
         </childnode>
       </node>
+      <node id="35">
+        <label>cyhal_hw_types.h</label>
+      </node>
+      <node id="33">
+        <label>cybsp.h</label>
+      </node>
       <node id="29">
         <label>whd_resource_api.h</label>
         <link refid="whd__resource__api_8h"/>
         <childnode refid="30" relation="include">
         </childnode>
-      </node>
-      <node id="33">
-        <label>cybsp.h</label>
       </node>
     </incdepgraph>
     <innerclass refid="structwhd__resource__source" prot="public">whd_resource_source</innerclass>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" line="22" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" bodystart="22" bodyend="-1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_resource_api.h" line="22" column="9" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_resource_api.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" line="27" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h" bodystart="26" bodyend="31"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_resource_api.h" line="27" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_resource_api.h" bodystart="26" bodyend="31"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -100,6 +100,6 @@
     <detaileddescription>
 <para>This file provides prototypes for functions which allow WHD to download firmware, NVRAM and CLM BLOB on a particular hardware platform. </para>
     </detaileddescription>
-    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_resource_api.h"/>
+    <location file="C:/Users/chanchihhsia/whd/inc/whd_resource_api.h"/>
   </compounddef>
 </doxygen>

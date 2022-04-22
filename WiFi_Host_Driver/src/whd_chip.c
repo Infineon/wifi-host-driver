@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,6 +53,7 @@
 #define KSO_WAIT_MS                 (1)
 #define KSO_WAKE_MS                 (3)
 #define MAX_KSO_ATTEMPTS            (64)
+#define MAX_CAPS_BUFFER_SIZE        (768)
 
 #define AI_IOCTRL_OFFSET            (0x408)
 #define SICF_FGC                    (0x0002)
@@ -73,7 +74,11 @@
 /******************************************************
 *             Variables
 ******************************************************/
-
+static const whd_fwcap_t whd_fwcap_map[] =
+{
+    {WHD_FWCAP_SAE, "sae "},
+    {WHD_FWCAP_SAE_EXT, "sae_ext "},
+};
 
 /******************************************************
 *             Static Function Declarations
@@ -609,6 +614,7 @@ void whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffe
     data = whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     CHECK_PACKET_WITH_NULL_RETURN(data);
     data = data + IOCTL_OFFSET;
+    data_size = data_size - IOCTL_OFFSET;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].ioct_log = cmd;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].is_this_event = 0;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data_size = MIN_OF(
@@ -646,6 +652,7 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
         if ( (whd_driver->whd_ioctl_log[i].ioct_log == WLC_SET_VAR) ||
              (whd_driver->whd_ioctl_log[i].ioct_log == WLC_GET_VAR) )
         {
+            /* refer to whd_cdc_get_iovar_buffer() */
             while (!*data)
             {
                 whd_driver->whd_ioctl_log[i].data_size--;
@@ -657,8 +664,8 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
 
             iovar_string_size = strlen( (const char *)data );
             iovar[iovar_string_size] = '\0';
-            data += iovar_string_size;
-            whd_driver->whd_ioctl_log[i].data_size -= iovar_string_size;
+            data += (iovar_string_size + 1);
+            whd_driver->whd_ioctl_log[i].data_size -= (iovar_string_size + 1);
         }
         if (whd_driver->whd_ioctl_log[i].is_this_event == 1)
         {
@@ -878,6 +885,30 @@ uint32_t whd_wifi_print_whd_log(whd_driver_t whd_driver)
     free(buffer);
     CHECK_RETURN(result);
     return result;
+}
+
+whd_result_t whd_wifi_read_fw_capabilities(whd_interface_t ifp)
+{
+    whd_result_t result;
+    char caps[MAX_CAPS_BUFFER_SIZE];
+    whd_fwcap_id_t id;
+
+    CHECK_IFP_NULL(ifp);
+    whd_driver_t whd_driver = ifp->whd_driver;
+
+    result = whd_wifi_get_iovar_buffer(ifp, IOVAR_STR_CAP, (uint8_t *)caps, sizeof(caps) );
+    CHECK_RETURN(result);
+
+    for (uint32_t i = 0; i < ARRAY_SIZE(whd_fwcap_map); i++)
+    {
+        if (strstr(caps, whd_fwcap_map[i].fwcap_name) )
+        {
+            id = whd_fwcap_map[i].feature;
+            WPRINT_WHD_DEBUG( ("Enabling FW Capabilities: %s\n", whd_fwcap_map[i].fwcap_name) );
+            whd_driver->chip_info.fwcap_flags |= (1 << id);
+        }
+    }
+    return WHD_SUCCESS;
 }
 
 whd_result_t whd_ensure_wlan_bus_is_up(whd_driver_t whd_driver)

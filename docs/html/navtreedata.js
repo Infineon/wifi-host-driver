@@ -49,7 +49,7 @@ var NAVTREE =
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", "globals_eval" ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ]
   ] ]
@@ -58,10 +58,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structwhd__ap__info.html",
-"whd__types_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba0843901f508ccc7996257015fb07c850",
-"whd__types_8h.html#a5adb0953a8527552bc47001673830602aab8168ab9ea38a7873e32eed16e3e8b3",
-"whd__types_8h.html#adc3a23bad78e0110546c9edc00456dafa5ebc26219966e0db67e2cdbb8f89d986"
+"group__wifiutilities.html#gae81aead624f8e374970e1aa3f330ea30",
+"whd__events_8h.html#a65f3167258d644f0a70fab9454330b56",
+"whd__types_8h.html#a5adb0953a8527552bc47001673830602a62b82918fc05f1161b649ba7868b9cb1",
+"whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a602d04db8143c505cc674c738bf20150"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

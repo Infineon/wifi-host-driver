@@ -42,7 +42,63 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="208" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" bodystart="208" bodyend="-1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="208" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__wifijoin_1ga2604c8dec9eff39e79b3281496da2611" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* whd_auth_result_callback_t) (void *result_ptr, uint32_t len, whd_auth_status_t status, uint8_t *flag, void *user_data)</definition>
+        <argsstring>)(void *result_ptr, uint32_t len, whd_auth_status_t status, uint8_t *flag, void *user_data)</argsstring>
+        <name>whd_auth_result_callback_t</name>
+        <briefdescription>
+<para>Auth result callback function pointer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result_prt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the pointer that indicates where to put the auth result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the size of result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Status of auth process </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag of h2e will be indicated in auth request event, otherwise is NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>user specific data that will be passed directly to the callback function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="286" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" bodystart="286" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -101,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="223" column="1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="223" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -246,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="258" column="1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="258" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gacf8632bb68cef4d831083a66bee7b8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -276,7 +332,109 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="275" column="1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="275" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1ga58ef7de14079c4b2b879e786a5e15c24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_external_auth_request</definition>
+        <argsstring>(whd_interface_t ifp, whd_auth_result_callback_t callback, void *result_ptr, void *user_data)</argsstring>
+        <name>whd_wifi_external_auth_request</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="group__wifijoin_1ga2604c8dec9eff39e79b3281496da2611" kindref="member">whd_auth_result_callback_t</ref></type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>result_ptr</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>user_data</declname>
+        </param>
+        <briefdescription>
+<para>Initiates SAE auth. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The results of the auth will be individually provided to the callback function. Note: The callback function will be executed in the context of the WHD thread and so must not perform any actions that may cause a bus transaction.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback function which will receive and process the result data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a pointer to a result storage structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>user_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>user specific data that will be passed directly to the callback function</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>- Callback must not use blocking functions, nor use WHD functions, since it is called from the context of the WHD thread.<itemizedlist>
+<listitem><para>The callback, result_ptr and user_data variables will be referenced after the function returns. Those variables must remain valid until the scan is complete.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="307" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1gab5bc462251b6849ebd8e708a2560066d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_stop_external_auth_request</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_stop_external_auth_request</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Abort authentication request. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="317" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gac767814ae445f735b51686db20c780be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -357,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="293" column="1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="335" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -424,7 +582,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="311" column="1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="353" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -455,7 +613,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd/inc/whd_wifi_api.h" line="443" column="1"/>
+        <location file="C:/Users/chanchihhsia/whd/inc/whd_wifi_api.h" line="504" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
