@@ -874,6 +874,7 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_ARP_STATS              "arp_stats"
 #define IOVAR_STR_ARP_STATS_CLEAR        "arp_stats_clear"
 #define IOVAR_STR_TKO                    "tko"
+#define IOVAR_STR_ROAM_TIME_THRESH       "roam_time_thresh"
 
 /* This value derived from the above strings, which appear maxed out in the 20s */
 #define IOVAR_NAME_STR_MAX_SIZE          32
@@ -1512,7 +1513,7 @@ typedef struct tx_inst_power
 #define WL_WDS_WPA_ROLE_AUTH    0
 #define WL_WDS_WPA_ROLE_SUP    1
 #define WL_WDS_WPA_ROLE_AUTO    255
-#define WL_EVENTING_MASK_LEN    ( (WLC_E_LAST + 7) / 8 )
+#define WL_EVENTING_MASK_LEN    16
 
 #define VNDR_IE_CMD_LEN        4
 #define VNDR_IE_BEACON_FLAG    0x1

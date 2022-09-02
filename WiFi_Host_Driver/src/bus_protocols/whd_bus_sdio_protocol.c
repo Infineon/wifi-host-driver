@@ -299,6 +299,7 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
     whd_time_t elapsed_time, current_time;
     uint32_t wifi_firmware_image_size = 0;
     uint16_t chip_id;
+    uint8_t *aligned_addr = NULL;
 
     whd_bus_set_flow_control(whd_driver, WHD_FALSE);
 
@@ -491,9 +492,29 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
         /* Reachable after hitting assert */
         return WHD_TIMEOUT;
     }
-
-    CHECK_RETURN(whd_chip_specific_init(whd_driver) );
-    CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
+    if (whd_driver->aligned_addr == NULL)
+    {
+        if ( (aligned_addr = malloc(WHD_LINK_MTU) ) == NULL )
+        {
+            WPRINT_WHD_ERROR( ("Memory allocation failed for aligned_addr in %s \n", __FUNCTION__) );
+            return WHD_MALLOC_FAILURE;
+        }
+        whd_driver->aligned_addr = aligned_addr;
+    }
+    result = whd_chip_specific_init(whd_driver);
+    if (result != WHD_SUCCESS)
+    {
+        free(whd_driver->aligned_addr);
+        whd_driver->aligned_addr = NULL;
+    }
+    CHECK_RETURN(result);
+    result = whd_ensure_wlan_bus_is_up(whd_driver);
+    if (result != WHD_SUCCESS)
+    {
+        free(whd_driver->aligned_addr);
+        whd_driver->aligned_addr = NULL;
+    }
+    CHECK_RETURN(result);
 #if (CYHAL_API_VERSION >= 2)
     cyhal_sdio_enable_event(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, CYHAL_ISR_PRIORITY_DEFAULT,
                             WHD_TRUE);
@@ -506,16 +527,21 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 
 whd_result_t whd_bus_sdio_deinit(whd_driver_t whd_driver)
 {
+    if (whd_driver->aligned_addr)
+    {
+        free(whd_driver->aligned_addr);
+        whd_driver->aligned_addr = NULL;
+    }
+
     CHECK_RETURN(whd_bus_sdio_deinit_oob_intr(whd_driver) );
 #if (CYHAL_API_VERSION >= 2)
     cyhal_sdio_enable_event(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, CYHAL_ISR_PRIORITY_DEFAULT,
-                            WHD_TRUE);
+                            WHD_FALSE);
 #else
     cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_FALSE);
 #endif
 
     CHECK_RETURN(whd_allow_wlan_bus_to_sleep(whd_driver) );
-
     whd_bus_set_resource_download_halt(whd_driver, WHD_FALSE);
 
     DELAYED_BUS_RELEASE_SCHEDULE(whd_driver, WHD_FALSE);
@@ -869,6 +895,12 @@ static whd_result_t whd_bus_sdio_cmd52(whd_driver_t whd_driver, whd_bus_transfer
     if (response != NULL)
     {
         *response = (uint8_t)(sdio_response & 0x00000000ff);
+    }
+
+    /* Possibly device might not respond to this cmd. So, don't check return value here */
+    if ( (result != WHD_SUCCESS) && (address == SDIO_SLEEP_CSR) )
+    {
+        return result;
     }
 
     CHECK_RETURN(result);
@@ -1551,6 +1583,52 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver)
     return WHD_SUCCESS;
 }
 
+#ifdef WPRINT_ENABLE_WHD_DEBUG
+#define WHD_BLOCK_SIZE       (1024)
+static whd_result_t whd_bus_sdio_verify_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
+                                                 whd_bool_t direct_resource, uint32_t address, uint32_t image_size)
+{
+    whd_result_t result = WHD_SUCCESS;
+    uint8_t *image;
+    uint8_t *cmd_img = NULL;
+    uint32_t blocks_count = 0;
+    uint32_t i;
+    uint32_t size_out;
+
+    result = whd_get_resource_no_of_blocks(whd_driver, resource, &blocks_count);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Fatal error: download_resource blocks count not known, %s failed at line %d \n", __func__,
+                           __LINE__) );
+        goto exit;
+    }
+    cmd_img = malloc(WHD_BLOCK_SIZE);
+    if (cmd_img != NULL)
+    {
+        for (i = 0; i < blocks_count; i++)
+        {
+            CHECK_RETURN(whd_get_resource_block(whd_driver, resource, i, (const uint8_t **)&image, &size_out) );
+            result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_READ, address, size_out, cmd_img);
+            if (result != WHD_SUCCESS)
+            {
+                WPRINT_WHD_ERROR( ("%s: Failed to read firmware image\n", __FUNCTION__) );
+                goto exit;
+            }
+            if (memcmp(cmd_img, &image[0], size_out) )
+            {
+                WPRINT_WHD_ERROR( ("%s: Downloaded image is corrupted, address is %d, len is %d, resource is %d \n",
+                                   __FUNCTION__, (int)address, (int)size_out, (int)resource) );
+            }
+            address += size_out;
+        }
+    }
+exit:
+    if (cmd_img)
+        free(cmd_img);
+    return WHD_SUCCESS;
+}
+
+#endif
 static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
                                                    whd_bool_t direct_resource, uint32_t address, uint32_t image_size)
 {
@@ -1560,6 +1638,9 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
     uint32_t i;
     uint32_t size_out;
     uint32_t reset_instr = 0;
+#ifdef WPRINT_ENABLE_WHD_DEBUG
+    uint32_t pre_addr = address;
+#endif
 
     result = whd_get_resource_no_of_blocks(whd_driver, resource, &blocks_count);
     if (result != WHD_SUCCESS)
@@ -1585,7 +1666,9 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
         }
         address += size_out;
     }
-
+#ifdef WPRINT_ENABLE_WHD_DEBUG
+    whd_bus_sdio_verify_resource(whd_driver, resource, direct_resource, pre_addr, image_size);
+#endif
     /* Below part of the code is applicable to arm_CR4 type chips only
      * The CR4 chips by default firmware is not loaded at 0. So we need
      * load the first 32 bytes with the offset of the firmware load address

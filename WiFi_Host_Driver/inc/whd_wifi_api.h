@@ -458,6 +458,16 @@ extern uint32_t whd_wifi_enable_sup_set_passphrase(whd_interface_t ifp, const ui
  */
 extern whd_result_t whd_wifi_set_pmk(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length);
 
+/** Set the Roam time threshold
+ *
+ *  @param ifp                  Pointer to handle instance of whd interface
+ *  @param roam_time_threshold  The maximum roam time threshold which is to be set
+ *
+ *  @return  WHD_SUCCESS    when the roam_time_threshold is set
+ *           Error code     if an error occurred
+ */
+extern whd_result_t whd_wifi_set_roam_time_threshold(whd_interface_t ifp, uint32_t roam_time_threshold);
+
 /** Enable WHD internal supplicant
  *
  *  @param   ifp            Pointer to handle instance of whd interface
@@ -486,6 +496,16 @@ extern whd_result_t whd_wifi_set_pmksa(whd_interface_t ifp, const pmkid_t *pmkid
  *           Error code    if the RSSI was not retrieved
  */
 extern uint32_t whd_wifi_get_rssi(whd_interface_t ifp, int32_t *rssi);
+
+/** Retrieve the latest Roam time threshold value
+ *
+ *  @param   ifp                  Pointer to handle instance of whd interface
+ *  @param   roam_time_threshold  The location where the roam time threshold value will be stored
+ *
+ *  @return  WHD_SUCCESS   if the roam time threshold was successfully retrieved
+ *    	     Error code    if the roam time threshold was not retrieved
+ */
+extern uint32_t whd_wifi_get_roam_time_threshold(whd_interface_t ifp, uint32_t *roam_time_threshold);
 
 /** Retrieve the associated STA's RSSI value
  *

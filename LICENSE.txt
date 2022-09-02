@@ -23,7 +23,7 @@ PURCHASER.
     "Development Tools" means software that is intended to be installed on a
       personal computer and used to create programming code for Firmware,
       Drivers, or Host Applications.  Examples of Development Tools are
-      Cypress's PSoC Creator software, Cypress's WICED SDKs, and Cypress's
+      Cypress's PSoC Creator software, Cypress's AIROC SDKs, and Cypress's
       ModusToolbox software.
 
     "Firmware" means software that executes on a Cypress hardware product.
@@ -87,11 +87,12 @@ Software is subject to the applicable license agreement and not this
 Agreement.  If you are entitled to receive the source code from Cypress for
 any Third Party Software included with the Software, either the source code
 will  be included with the Software or you may obtain the source code at no
-charge from <http://www.cypress.com/go/opensource>.  The applicable license
-terms will accompany each source code package.  To review the license terms
-applicable to any Third Party Software for which Cypress is not required to
-provide you with source code, please see the Software's installation directory
-on your computer.
+charge from
+<https://www.infineon.com/cms/en/design-support/software/free-and-open-source-software-foss/>.
+The applicable license terms will accompany each source code package.  To
+review the license terms applicable to any Third Party Software for which
+Cypress is not required to provide you with source code, please see the
+Software's installation directory on your computer.
 
 4. Proprietary Rights; Ownership.  The Software, including all intellectual
 property rights therein, is and will remain the sole and exclusive property of
@@ -182,10 +183,10 @@ Software shall be only those set forth in this Agreement.
 registration on Cypress IoT Community Forum or other Cypress websites,
 including contact information or other personal information, may be collected
 and used by Cypress consistent with its Data Privacy Policy
-(www.cypress.com/privacy-policy), as updated or revised from time to time, and
-may be provided to its third party sales representatives, distributors and
-other entities conducting sales activities for Cypress for sales-related and
-other business purposes.
+(https://www.infineon.com/cms/en/about-infineon/privacy-policy/), as updated
+or revised from time to time, and may be provided to its third party sales
+representatives, distributors and other entities conducting sales activities
+for Cypress for sales-related and other business purposes.
 
 12. General.  This Agreement will bind and inure to the benefit of each
 party's successors and assigns, provided that you may not assign or transfer

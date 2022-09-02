@@ -45,6 +45,7 @@
 #define WHD_IOCTL_PACKET_TIMEOUT      (0xFFFFFFFF)
 #define WHD_IOCTL_TIMEOUT_MS         (5000)     /** Need to give enough time for coming out of Deep sleep (was 400) */
 #define WHD_IOCTL_MAX_TX_PKT_LEN     (1500)
+#define ALIGNED_ADDRESS            ( (uint32_t)0x3 )
 
 /******************************************************
 *             Macros
@@ -623,7 +624,7 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
     bdc_header_t *bdc_header = (bdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     uint16_t i;
     uint16_t j;
-    uint32_t datalen;
+    uint32_t datalen, addr;
 
     CHECK_PACKET_WITH_NULL_RETURN(bdc_header);
     event = (whd_event_t *)&bdc_header[bdc_header->data_offset + 1];
@@ -713,13 +714,14 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
 
     datalen = whd_event->datalen;
     /* use memcpy to get aligned event message */
-    if (aligned_event)
+    addr = (uint32_t )DATA_AFTER_HEADER(event);
+    if (aligned_event && (addr & ALIGNED_ADDRESS) )
     {
-        memcpy(aligned_event, event, sizeof(*event) + datalen);
+        memcpy(aligned_event, (whd_event_t *)addr, datalen);
     }
     else
     {
-        aligned_event = event;
+        aligned_event = (whd_event_t *)addr;
     }
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
@@ -734,8 +736,7 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
                     cdc_bdc_info->whd_event_list[i].handler_user_data =
                         cdc_bdc_info->whd_event_list[i].handler(whd_driver->iflist[whd_event->bsscfgidx],
                                                                 whd_event,
-                                                                (uint8_t *)DATA_AFTER_HEADER(
-                                                                    aligned_event),
+                                                                (uint8_t *)aligned_event,
                                                                 cdc_bdc_info->whd_event_list[i].handler_user_data);
                     break;
                 }

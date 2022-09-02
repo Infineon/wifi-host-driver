@@ -782,6 +782,25 @@ whd_result_t whd_wifi_set_pmksa(whd_interface_t ifp, const pmkid_t *pmkid)
     RETURN_WITH_ASSERT(whd_cdc_send_iovar(ifp, CDC_SET, buffer, NULL) );
 }
 
+whd_result_t whd_wifi_set_roam_time_threshold(whd_interface_t ifp, uint32_t roam_time_threshold)
+{
+	if (!ifp || !roam_time_threshold)
+	{
+		WPRINT_WHD_ERROR( ("Invalid param in func %s at line %d \n",
+			 __func__, __LINE__) );
+		return WHD_WLAN_BADARG;
+	}
+
+	return whd_wifi_set_iovar_value(ifp, IOVAR_STR_ROAM_TIME_THRESH, roam_time_threshold);
+}
+
+whd_result_t whd_wifi_get_roam_time_threshold(whd_interface_t ifp, uint32_t *roam_time_threshold)
+{
+	CHECK_IFP_NULL(ifp);
+
+	return whd_wifi_get_iovar_value(ifp, IOVAR_STR_ROAM_TIME_THRESH, roam_time_threshold);
+}
+
 uint32_t whd_wifi_get_rssi(whd_interface_t ifp, int32_t *rssi)
 {
     CHECK_IFP_NULL(ifp);

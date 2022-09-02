@@ -72,9 +72,11 @@
         <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8"/>
         <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c"/>
         <topic label="whd_wifi_set_pmk" href="group__wifiutilities.html#gae9d18a43c3e8e09f38ecb5adbda450b9"/>
+        <topic label="whd_wifi_set_roam_time_threshold" href="group__wifiutilities.html#ga96d5646b67b4ae5ec78f1a23789caca1"/>
         <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gad2daa1aba4dccd3f0506950ccee42113"/>
         <topic label="whd_wifi_set_pmksa" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8"/>
         <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125"/>
+        <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga6ac8ec63a66fc046979bae1e809b0d25"/>
         <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gab571b303f19131fd032fba4b744dbf20"/>
         <topic label="whd_wifi_get_mac_address" href="group__wifiutilities.html#ga8a634822973adc75a61a05eb2b664ef5"/>
         <topic label="whd_wifi_get_bssid" href="group__wifiutilities.html#ga52d3190589758d9fd36a7b27a9d08f28"/>
@@ -1287,9 +1289,11 @@
         <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8"/>
         <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c"/>
         <topic label="whd_wifi_set_pmk" href="group__wifiutilities.html#gae9d18a43c3e8e09f38ecb5adbda450b9"/>
+        <topic label="whd_wifi_set_roam_time_threshold" href="group__wifiutilities.html#ga96d5646b67b4ae5ec78f1a23789caca1"/>
         <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gad2daa1aba4dccd3f0506950ccee42113"/>
         <topic label="whd_wifi_set_pmksa" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8"/>
         <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125"/>
+        <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga6ac8ec63a66fc046979bae1e809b0d25"/>
         <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gab571b303f19131fd032fba4b744dbf20"/>
         <topic label="whd_wifi_leave" href="group__wifijoin.html#ga971ed7d8e459c715aa9bf3c52b563d8b"/>
         <topic label="whd_wifi_get_mac_address" href="group__wifiutilities.html#ga8a634822973adc75a61a05eb2b664ef5"/>

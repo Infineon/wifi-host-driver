@@ -867,11 +867,6 @@
     <member refid="whd__types_8h_1a98dae084aa15394bf6f8e907e09233a4" kind="typedef"><name>whd_btc_lescan_params_t</name></member>
     <member refid="whd__types_8h_1a1cb4da9972e0e9317a6e26e2fd460902" kind="typedef"><name>whd_coex_config_t</name></member>
   </compound>
-  <compound refid="whd__version_8h" kind="file"><name>whd_version.h</name>
-    <member refid="whd__version_8h_1a1f84e800f5fc36084bc2a62ec548a6e4" kind="define"><name>WHD_VERSION</name></member>
-    <member refid="whd__version_8h_1aede39c4ef2dc97af2e6cf7dbb234cc00" kind="define"><name>WHD_BRANCH</name></member>
-    <member refid="whd__version_8h_1a72ac7562c9bf2de30cf70466f21190b4" kind="define"><name>WHD_DATE</name></member>
-  </compound>
   <compound refid="whd__wifi__api_8h" kind="file"><name>whd_wifi_api.h</name>
     <member refid="group__wifijoin_1ga9f8c6096922212981dd2101a17aec471" kind="typedef"><name>whd_scan_result_callback_t</name></member>
     <member refid="group__wifijoin_1ga2604c8dec9eff39e79b3281496da2611" kind="typedef"><name>whd_auth_result_callback_t</name></member>
@@ -898,9 +893,11 @@
     <member refid="group__wifiutilities_1ga977fe2ff7c3f6966ffc40fda0e9694a8" kind="function"><name>whd_wifi_sae_password</name></member>
     <member refid="group__wifiutilities_1gae118219bea1b82ae76a5c1ee5f7f302c" kind="function"><name>whd_wifi_enable_sup_set_passphrase</name></member>
     <member refid="group__wifiutilities_1gae9d18a43c3e8e09f38ecb5adbda450b9" kind="function"><name>whd_wifi_set_pmk</name></member>
+    <member refid="group__wifiutilities_1ga96d5646b67b4ae5ec78f1a23789caca1" kind="function"><name>whd_wifi_set_roam_time_threshold</name></member>
     <member refid="group__wifiutilities_1gad2daa1aba4dccd3f0506950ccee42113" kind="function"><name>whd_wifi_enable_supplicant</name></member>
     <member refid="group__wifiutilities_1gaff1c3d13edc4ceee2bebaeb93ec7a9c8" kind="function"><name>whd_wifi_set_pmksa</name></member>
     <member refid="group__wifiutilities_1gaf82eda2ff9979b1bc053a6d7f1f4b125" kind="function"><name>whd_wifi_get_rssi</name></member>
+    <member refid="group__wifiutilities_1ga6ac8ec63a66fc046979bae1e809b0d25" kind="function"><name>whd_wifi_get_roam_time_threshold</name></member>
     <member refid="group__wifiutilities_1gab571b303f19131fd032fba4b744dbf20" kind="function"><name>whd_wifi_get_ap_client_rssi</name></member>
     <member refid="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" kind="function"><name>whd_wifi_leave</name></member>
     <member refid="group__wifiutilities_1ga8a634822973adc75a61a05eb2b664ef5" kind="function"><name>whd_wifi_get_mac_address</name></member>
@@ -1024,9 +1021,11 @@
     <member refid="group__wifiutilities_1ga977fe2ff7c3f6966ffc40fda0e9694a8" kind="function"><name>whd_wifi_sae_password</name></member>
     <member refid="group__wifiutilities_1gae118219bea1b82ae76a5c1ee5f7f302c" kind="function"><name>whd_wifi_enable_sup_set_passphrase</name></member>
     <member refid="group__wifiutilities_1gae9d18a43c3e8e09f38ecb5adbda450b9" kind="function"><name>whd_wifi_set_pmk</name></member>
+    <member refid="group__wifiutilities_1ga96d5646b67b4ae5ec78f1a23789caca1" kind="function"><name>whd_wifi_set_roam_time_threshold</name></member>
     <member refid="group__wifiutilities_1gad2daa1aba4dccd3f0506950ccee42113" kind="function"><name>whd_wifi_enable_supplicant</name></member>
     <member refid="group__wifiutilities_1gaff1c3d13edc4ceee2bebaeb93ec7a9c8" kind="function"><name>whd_wifi_set_pmksa</name></member>
     <member refid="group__wifiutilities_1gaf82eda2ff9979b1bc053a6d7f1f4b125" kind="function"><name>whd_wifi_get_rssi</name></member>
+    <member refid="group__wifiutilities_1ga6ac8ec63a66fc046979bae1e809b0d25" kind="function"><name>whd_wifi_get_roam_time_threshold</name></member>
     <member refid="group__wifiutilities_1gab571b303f19131fd032fba4b744dbf20" kind="function"><name>whd_wifi_get_ap_client_rssi</name></member>
     <member refid="group__wifiutilities_1ga8a634822973adc75a61a05eb2b664ef5" kind="function"><name>whd_wifi_get_mac_address</name></member>
     <member refid="group__wifiutilities_1ga52d3190589758d9fd36a7b27a9d08f28" kind="function"><name>whd_wifi_get_bssid</name></member>

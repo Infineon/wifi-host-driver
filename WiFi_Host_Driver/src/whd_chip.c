@@ -92,7 +92,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver);
 /******************************************************
 *             Function definitions
 ******************************************************/
-void whd_internal_info_init(whd_driver_t whd_driver)
+whd_result_t whd_internal_info_init(whd_driver_t whd_driver)
 {
     whd_internal_info_t *internal_info = &whd_driver->internal_info;
 
@@ -107,6 +107,25 @@ void whd_internal_info_init(whd_driver_t whd_driver)
     internal_info->active_join_semaphore = NULL;
     internal_info->con_lastpos = 0;
     internal_info->whd_wifi_p2p_go_is_up = WHD_FALSE;
+
+    /* Create the mutex protecting whd_log structure */
+    if (cy_rtos_init_semaphore(&whd_driver->whd_log_mutex, 1, 0) != WHD_SUCCESS)
+    {
+        return WHD_SEMAPHORE_ERROR;
+    }
+    if (cy_rtos_set_semaphore(&whd_driver->whd_log_mutex, WHD_FALSE) != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
+    }
+    return WHD_SUCCESS;
+}
+
+whd_result_t whd_internal_info_deinit(whd_driver_t whd_driver)
+{
+    /* Delete the whd_log mutex */
+    (void)cy_rtos_deinit_semaphore(&whd_driver->whd_log_mutex);
+    return WHD_SUCCESS;
 }
 
 /*
@@ -606,13 +625,14 @@ void whd_wifi_poke(whd_driver_t whd_driver, uint32_t address, uint8_t register_l
     WHD_WLAN_LET_SLEEP(whd_driver);
 }
 
-void whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer)
+whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer)
 {
     uint8_t *data = NULL;
     size_t data_size = whd_buffer_get_current_piece_size(whd_driver, buffer);
 
     data = whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
-    CHECK_PACKET_WITH_NULL_RETURN(data);
+    CHECK_IOCTL_BUFFER(data);
+    CHECK_RETURN(cy_rtos_get_semaphore(&whd_driver->whd_log_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) );
     data = data + IOCTL_OFFSET;
     data_size = data_size - IOCTL_OFFSET;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].ioct_log = cmd;
@@ -625,17 +645,21 @@ void whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffe
            whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data_size);
 
     whd_driver->whd_ioctl_log_index++;
+    CHECK_RETURN(cy_rtos_set_semaphore(&whd_driver->whd_log_mutex, WHD_FALSE) );
+    return WHD_SUCCESS;
 }
 
-void whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t reason)
+whd_result_t whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t reason)
 {
+    CHECK_RETURN(cy_rtos_get_semaphore(&whd_driver->whd_log_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) );
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].is_this_event = 1;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].ioct_log = cmd;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].flag = flag;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].reason = reason;
 
     whd_driver->whd_ioctl_log_index++;
-
+    CHECK_RETURN(cy_rtos_set_semaphore(&whd_driver->whd_log_mutex, WHD_FALSE) );
+    return WHD_SUCCESS;
 }
 
 whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
@@ -644,6 +668,7 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
     uint8_t *data = NULL;
     size_t iovar_string_size = 0;
 
+    CHECK_RETURN(cy_rtos_get_semaphore(&whd_driver->whd_log_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) );
     for (i = 0; i < WHD_IOCTL_LOG_SIZE; i++)
     {
         char iovar[WHD_IOVAR_STRING_SIZE] = {0};
@@ -695,6 +720,7 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
 
     memset(whd_driver->whd_ioctl_log, 0, sizeof(whd_driver->whd_ioctl_log) );
     whd_driver->whd_ioctl_log_index = 0;
+    CHECK_RETURN(cy_rtos_set_semaphore(&whd_driver->whd_log_mutex, WHD_FALSE) );
     return WHD_SUCCESS;
 }
 
@@ -796,7 +822,7 @@ whd_result_t whd_allow_wlan_bus_to_sleep(whd_driver_t whd_driver)
             }
             else
             {
-                if (btdev->bt_int_cb)
+                if (btdev && btdev->bt_int_cb)
                 {
                     return WHD_SUCCESS;
                 }

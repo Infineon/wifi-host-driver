@@ -204,6 +204,7 @@ uint32_t whd_deinit(whd_interface_t ifp)
     }
 
     whd_cdc_bdc_info_deinit(whd_driver);
+    whd_internal_info_deinit(whd_driver);
     whd_bus_common_info_deinit(whd_driver);
     free(whd_driver);
 

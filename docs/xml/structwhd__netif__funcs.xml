@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/chanchihhsia/whd/inc/whd_network_types.h" line="189" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_network_types.h" bodystart="189" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" line="189" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" bodystart="189" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -45,7 +45,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/chanchihhsia/whd/inc/whd_network_types.h" line="161" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_network_types.h" bodystart="160" bodyend="190"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" line="161" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" bodystart="160" bodyend="190"/>
     <listofallmembers>
       <member refid="structwhd__netif__funcs_1aeb98a45468d1d8f37450617a3388387c" prot="public" virt="non-virtual"><scope>whd_netif_funcs</scope><name>whd_network_process_ethernet_data</name></member>
     </listofallmembers>

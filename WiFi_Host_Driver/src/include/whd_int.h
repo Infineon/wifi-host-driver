@@ -115,6 +115,7 @@ struct whd_driver
 
     whd_ioctl_log_t whd_ioctl_log[WHD_IOCTL_LOG_SIZE];
     int whd_ioctl_log_index;
+    cy_semaphore_t whd_log_mutex;
 };
 
 whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8_t ifidx,

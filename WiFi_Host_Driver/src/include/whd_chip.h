@@ -325,8 +325,8 @@ typedef struct
     uint32_t reason;
 }whd_ioctl_log_t;
 
-void whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer);
-void whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t data);
+whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer);
+whd_result_t whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t data);
 
 whd_result_t whd_ioctl_print(whd_driver_t whd_driver);
 
@@ -363,7 +363,8 @@ typedef struct
 
 #pragma pack()
 
-void whd_internal_info_init(whd_driver_t whd_driver);
+whd_result_t whd_internal_info_init(whd_driver_t whd_driver);
+whd_result_t whd_internal_info_deinit(whd_driver_t whd_driver);
 
 /******************************************************
 *               Function Declarations

@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v2.3.0
+# Wi-Fi Host Driver (WHD)  v2.4.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -13,8 +13,12 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 
 ## Changes since v2.3.0
 ### New Features
+* Support API for roaming threshold setting
 
 ### Defect Fixes
+* Remove deprecated resources
+* Fix SDIO warning error
+* Fix current issue on power saving mode
 * Fix external SAE connection issue
 
 ### Known Issues
@@ -22,35 +26,22 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 
 #### CYW4343W
 * --- 7.45.98.120 ---
-* Fix pmk caching
-* --- 7.45.98.117 ---
 
 #### CYW43012
 * --- 13.10.271.287 ---
-* Fix cert 5.6.1
-* Fix external SAE issue
-* Fix WPA3_R1 Compatibility Issue
-* --- 13.10.271.277 ---
 
 #### CYW4373
+* --- 13.10.246.279 ---
+* Enable BCN_LOSS_WAR flag
 * --- 13.10.246.264 ---
-* FIX WPA3 Transition Mode Issue
-* WPA3-R3 STA support
-* WFA aggregation CVE fix
-* Enable OKC, FBT and Voice Enterprise features in FW
-* --- 13.10.246.254 ---
 
 #### CYW43439
+* --- 7.95.54 ---
+* Beacon loss Addition
 * --- 7.95.50 ---
-* Fix WPA3 Transition Mode Issue
-* Fix WPA3_R1 Compatibility Issue
-* WPA3_R3 Support
-* --- 7.95.39 ---
 
 #### CYW43909
 * --- 7.15.168.156 ---
-* Fix WPA3 conneciton regression
-* --- 7.15.168.155 ---
 
 Note: [r] is regulatory-related
 

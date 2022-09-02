@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1128" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1128" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1128" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1128" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -37,7 +37,7 @@
         <link refid="structwhd__btc__lescan__params"/>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/chanchihhsia/whd/inc/whd_types.h" line="1127" column="1" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_types.h" bodystart="1126" bodyend="1129"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1127" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1126" bodyend="1129"/>
     <listofallmembers>
       <member refid="structwhd__coex__config_1afcc1e187cd7f285de8d56162fbbb52bb" prot="public" virt="non-virtual"><scope>whd_coex_config</scope><name>le_scan_params</name></member>
     </listofallmembers>
