@@ -76,8 +76,8 @@ struct whd_buffer_funcs
      *  @return            WHD_SUCCESS or error code
      *
      */
-    whd_result_t (*whd_host_buffer_get)(whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size,
-                                        unsigned long timeout_ms);
+    whd_result_t (*whd_host_buffer_get)(whd_buffer_t *buffer, whd_buffer_dir_t direction, uint16_t size,
+                                        uint32_t timeout_ms);
 
     /** Releases a packet buffer
      *
@@ -136,7 +136,7 @@ struct whd_buffer_funcs
      *
      *  @return        WHD_SUCCESS or error code
      */
-    whd_result_t (*whd_buffer_set_size)(whd_buffer_t buffer, unsigned short size);
+    whd_result_t (*whd_buffer_set_size)(whd_buffer_t buffer, uint16_t size);
 
     /** Moves the current pointer of a packet buffer
      *

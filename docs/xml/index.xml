@@ -51,11 +51,11 @@
     <member refid="structwhd__btc__lescan__params_1a02d72a917cfb65e36cd0527ed472bf8f" kind="variable"><name>scan_win</name></member>
   </compound>
   <compound refid="structwhd__buffer__funcs" kind="struct"><name>whd_buffer_funcs</name>
-    <member refid="structwhd__buffer__funcs_1a3b1eac8632117521e5ef7e0dd332106d" kind="variable"><name>whd_host_buffer_get</name></member>
+    <member refid="structwhd__buffer__funcs_1ab30db243f3933eac39624c7cfa448abc" kind="variable"><name>whd_host_buffer_get</name></member>
     <member refid="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" kind="variable"><name>whd_buffer_release</name></member>
     <member refid="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" kind="variable"><name>whd_buffer_get_current_piece_data_pointer</name></member>
     <member refid="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" kind="variable"><name>whd_buffer_get_current_piece_size</name></member>
-    <member refid="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" kind="variable"><name>whd_buffer_set_size</name></member>
+    <member refid="structwhd__buffer__funcs_1a5b22cc6ad30a5430bbe4c3a137d7b3cc" kind="variable"><name>whd_buffer_set_size</name></member>
     <member refid="structwhd__buffer__funcs_1ab4c0aef4cb8722f8b22209592a84594a" kind="variable"><name>whd_buffer_add_remove_at_front</name></member>
   </compound>
   <compound refid="structwhd__coex__config" kind="struct"><name>whd_coex_config</name>
@@ -866,6 +866,11 @@
     <member refid="whd__types_8h_1ab5fa3b42c3b6290fc944c79deb812c8c" kind="typedef"><name>whd_m2m_config_t</name></member>
     <member refid="whd__types_8h_1a98dae084aa15394bf6f8e907e09233a4" kind="typedef"><name>whd_btc_lescan_params_t</name></member>
     <member refid="whd__types_8h_1a1cb4da9972e0e9317a6e26e2fd460902" kind="typedef"><name>whd_coex_config_t</name></member>
+  </compound>
+  <compound refid="whd__version_8h" kind="file"><name>whd_version.h</name>
+    <member refid="whd__version_8h_1a1f84e800f5fc36084bc2a62ec548a6e4" kind="define"><name>WHD_VERSION</name></member>
+    <member refid="whd__version_8h_1aede39c4ef2dc97af2e6cf7dbb234cc00" kind="define"><name>WHD_BRANCH</name></member>
+    <member refid="whd__version_8h_1a72ac7562c9bf2de30cf70466f21190b4" kind="define"><name>WHD_DATE</name></member>
   </compound>
   <compound refid="whd__wifi__api_8h" kind="file"><name>whd_wifi_api.h</name>
     <member refid="group__wifijoin_1ga9f8c6096922212981dd2101a17aec471" kind="typedef"><name>whd_scan_result_callback_t</name></member>

@@ -4,10 +4,10 @@
     <compoundname>whd_buffer_funcs</compoundname>
     <includes local="no">whd_network_types.h</includes>
       <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structwhd__buffer__funcs_1a3b1eac8632117521e5ef7e0dd332106d" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1ab30db243f3933eac39624c7cfa448abc" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
-        <definition>whd_result_t(* whd_host_buffer_get) (whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long timeout_ms)</definition>
-        <argsstring>)(whd_buffer_t *buffer, whd_buffer_dir_t direction, unsigned short size, unsigned long timeout_ms)</argsstring>
+        <definition>whd_result_t(* whd_host_buffer_get) (whd_buffer_t *buffer, whd_buffer_dir_t direction, uint16_t size, uint32_t timeout_ms)</definition>
+        <argsstring>)(whd_buffer_t *buffer, whd_buffer_dir_t direction, uint16_t size, uint32_t timeout_ms)</argsstring>
         <name>whd_host_buffer_get</name>
         <briefdescription>
 <para>Allocates a packet buffer. </para>
@@ -142,10 +142,10 @@
         </inbodydescription>
         <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" line="113" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" bodystart="113" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structwhd__buffer__funcs_1a5b22cc6ad30a5430bbe4c3a137d7b3cc" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref>(*</type>
-        <definition>whd_result_t(* whd_buffer_set_size) (whd_buffer_t buffer, unsigned short size)</definition>
-        <argsstring>)(whd_buffer_t buffer, unsigned short size)</argsstring>
+        <definition>whd_result_t(* whd_buffer_set_size) (whd_buffer_t buffer, uint16_t size)</definition>
+        <argsstring>)(whd_buffer_t buffer, uint16_t size)</argsstring>
         <name>whd_buffer_set_size</name>
         <briefdescription>
 <para>Sets the current size of a WHD packet. </para>
@@ -225,8 +225,8 @@
       <member refid="structwhd__buffer__funcs_1a5c2483392b61c9f4619e5fc83ec48601" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_get_current_piece_data_pointer</name></member>
       <member refid="structwhd__buffer__funcs_1a720960b687167d7ab440ee432e048f9d" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_get_current_piece_size</name></member>
       <member refid="structwhd__buffer__funcs_1a25e0a4f8235603094896917b3421baac" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_release</name></member>
-      <member refid="structwhd__buffer__funcs_1a2dc10ed21175617bb9f20f34827d16e7" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_set_size</name></member>
-      <member refid="structwhd__buffer__funcs_1a3b1eac8632117521e5ef7e0dd332106d" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_host_buffer_get</name></member>
+      <member refid="structwhd__buffer__funcs_1a5b22cc6ad30a5430bbe4c3a137d7b3cc" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_buffer_set_size</name></member>
+      <member refid="structwhd__buffer__funcs_1ab30db243f3933eac39624c7cfa448abc" prot="public" virt="non-virtual"><scope>whd_buffer_funcs</scope><name>whd_host_buffer_get</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

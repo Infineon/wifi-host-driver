@@ -7,6 +7,7 @@
     <innerfile refid="whd__network__types_8h">whd_network_types.h</innerfile>
     <innerfile refid="whd__resource__api_8h">whd_resource_api.h</innerfile>
     <innerfile refid="whd__types_8h">whd_types.h</innerfile>
+    <innerfile refid="whd__version_8h">whd_version.h</innerfile>
     <innerfile refid="whd__wifi__api_8h">whd_wifi_api.h</innerfile>
     <briefdescription>
     </briefdescription>

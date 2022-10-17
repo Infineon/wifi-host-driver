@@ -5,42 +5,42 @@
       <sectiondef kind="define">
       <memberdef kind="define" id="whd__version_8h_1a1f84e800f5fc36084bc2a62ec548a6e4" prot="public" static="no">
         <name>WHD_VERSION</name>
-        <initializer>&quot;pico-43439-v2.0.0-2-g3810d567-dirty&quot;</initializer>
+        <initializer>&quot;v2.4.0&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/chanchihhsia/whd/inc/whd_version.h" line="1" column="9" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_version.h" bodystart="1" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h" line="1" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h" bodystart="1" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__version_8h_1aede39c4ef2dc97af2e6cf7dbb234cc00" prot="public" static="no">
         <name>WHD_BRANCH</name>
-        <initializer>&quot;topic/kevinchan-btfail&quot;</initializer>
+        <initializer>&quot;master&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/chanchihhsia/whd/inc/whd_version.h" line="2" column="9" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_version.h" bodystart="2" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h" line="2" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h" bodystart="2" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__version_8h_1a72ac7562c9bf2de30cf70466f21190b4" prot="public" static="no">
         <name>WHD_DATE</name>
-        <initializer>&quot;2022-02-23 16:59:03 +0800&quot;</initializer>
+        <initializer>&quot;2022-06-20 08:58:33 +0800&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/chanchihhsia/whd/inc/whd_version.h" line="3" column="9" bodyfile="C:/Users/chanchihhsia/whd/inc/whd_version.h" bodystart="3" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h" line="3" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h" bodystart="3" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/chanchihhsia/whd/inc/whd_version.h"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_version.h"/>
   </compounddef>
 </doxygen>
