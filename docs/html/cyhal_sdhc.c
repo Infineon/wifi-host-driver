@@ -331,3 +331,4 @@ void cyhal_sdio_irq_enable(cyhal_sdio_t *obj, cyhal_sdio_irq_event_t event, bool
     Cy_SD_Host_SetNormalInterruptMask(obj->base, interruptMask);
     Cy_SD_Host_SetNormalInterruptEnable(obj->base, interruptEnable);
 }
+

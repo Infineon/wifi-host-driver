@@ -1,13 +1,13 @@
 /*
- * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -81,6 +81,13 @@ typedef struct wl_rx_mgmt_data
 #define WL_EXTAUTH_ABORT      2
 #define WL_EXTAUTH_FAIL       3
 #define WL_EXTAUTH_SUCCESS    4
+
+typedef struct whd_xtlv
+{
+    uint16_t id;
+    uint16_t len;
+    uint8_t data[1];
+} whd_xtlv_t;
 
 /* ether types */
 #define ETHER_TYPE_LEN      2
@@ -860,6 +867,7 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_SAE_PASSWORD           "sae_password"
 #define IOVAR_STR_SAE_PWE_LOOP           "sae_max_pwe_loop"
 #define IOVAR_STR_PMKID_INFO             "pmkid_info"
+#define IOVAR_STR_PMKID_CLEAR            "pmkid_clear"
 #define IOVAR_STR_AUTH_STATUS            "auth_status"
 
 #define IOVAR_STR_BTC_LESCAN_PARAMS      "btc_lescan_params"
@@ -4009,3 +4017,4 @@ struct whd_tko_connect
 #endif
 
 #endif
+

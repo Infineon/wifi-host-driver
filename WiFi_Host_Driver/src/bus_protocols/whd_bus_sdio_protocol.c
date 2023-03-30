@@ -1,13 +1,13 @@
 /*
- * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -1493,8 +1493,12 @@ static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event
 static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
+	whd_result_t result;
 
-    cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_NONE, 0);
+    result = cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, config->drive_mode, config->init_drive_state);
+    if (result != CY_RSLT_SUCCESS)
+		WPRINT_WHD_ERROR( ("%s: Failed at cyhal_gpio_init for host_oob_pin, result code = %u \n", __func__, (unsigned int)result) );
+
 #if (CYHAL_API_VERSION >= 2)
     static cyhal_gpio_callback_data_t cbdata;
     cbdata.callback = whd_bus_sdio_oob_irq_handler;
@@ -1707,7 +1711,7 @@ static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
     CHECK_RETURN(whd_resource_size(whd_driver, WHD_RESOURCE_WLAN_NVRAM, &image_size) );
 
     /* Round up the size of the image */
-    image_size = ROUND_UP(image_size, 4);
+    image_size = ROUND_UP(image_size, NVM_IMAGE_SIZE_ALIGNMENT);
 
     /* Write image */
     img_end = GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4;
@@ -1795,3 +1799,4 @@ whd_result_t whd_bus_sdio_set_backplane_window(whd_driver_t whd_driver, uint32_t
 }
 
 #endif /* (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */
+

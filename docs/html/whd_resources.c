@@ -170,3 +170,4 @@ whd_resource_source_t resource_ops =
     .whd_get_resource_no_of_blocks = host_get_resource_no_of_blocks,
     .whd_get_resource_block = host_get_resource_block
 };
+

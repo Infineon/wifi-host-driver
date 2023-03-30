@@ -75,6 +75,7 @@
         <topic label="whd_wifi_set_roam_time_threshold" href="group__wifiutilities.html#ga96d5646b67b4ae5ec78f1a23789caca1"/>
         <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gad2daa1aba4dccd3f0506950ccee42113"/>
         <topic label="whd_wifi_set_pmksa" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8"/>
+        <topic label="whd_wifi_pmkid_clear" href="group__wifiutilities.html#ga112a1fa7274b896e41ee98f88f943c62"/>
         <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125"/>
         <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga6ac8ec63a66fc046979bae1e809b0d25"/>
         <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gab571b303f19131fd032fba4b744dbf20"/>
@@ -89,6 +90,13 @@
         <topic label="whd_wifi_manage_custom_ie" href="group__wifiutilities.html#gaaf7be7d8099507426f52ecff8f716543"/>
         <topic label="whd_wifi_send_action_frame" href="group__wifiutilities.html#ga2cf8ecd7c319660833bd30a060990dca"/>
         <topic label="whd_wifi_send_auth_frame" href="group__wifiutilities.html#ga48cd0946d2277a26ff6ddb4e601d7601"/>
+        <topic label="whd_wifi_he_omi" href="group__wifiutilities.html#gaae1e930cb505d3cd13d46cd8b77c841b"/>
+        <topic label="whd_wifi_bss_max_idle" href="group__wifiutilities.html#ga7190d986953fe92012bb973495c87f48"/>
+        <topic label="whd_wifi_itwt_setup" href="group__wifiutilities.html#ga54322c21ea7d6ee27db7cc921084ecbe"/>
+        <topic label="whd_wifi_btwt_join" href="group__wifiutilities.html#ga2dacd5151ab077f23ff2197ad033ae63"/>
+        <topic label="whd_wifi_twt_teardown" href="group__wifiutilities.html#ga81c6e1f320c6403816e9c56f91bbe4d4"/>
+        <topic label="whd_wifi_twt_information_frame" href="group__wifiutilities.html#ga74a103b9c2302f6c61515127e1401829"/>
+        <topic label="whd_wifi_btwt_config" href="group__wifiutilities.html#ga963f841413cd793138ef2451d0e68a49"/>
         <topic label="whd_wifi_set_coex_config" href="group__wifiutilities.html#ga95237c0e6182bfb176519421ac9287b4"/>
         <topic label="whd_wifi_set_auth_status" href="group__wifiutilities.html#gafad0f635db3968da01437542c13c91db"/>
         <topic label="whd_wifi_get_fwcap" href="group__wifiutilities.html#ga1441ae647ff194b94413cbe2016be113"/>
@@ -216,6 +224,26 @@
         <topic label="scan_int" href="structwhd__btc__lescan__params.html#ab9fbbe93d8ab19fa81bebf4ade2deddd"/>
         <topic label="scan_win" href="structwhd__btc__lescan__params.html#a02d72a917cfb65e36cd0527ed472bf8f"/>
       </topic>
+      <topic label="whd_btwt_config_params_t" href="structwhd__btwt__config__params__t.html">
+        <topic label="setup_cmd" href="structwhd__btwt__config__params__t.html#a1848c250921d04fa3d577e7ccef005a5"/>
+        <topic label="trigger" href="structwhd__btwt__config__params__t.html#ad47e9b879c95a25ce124bd5611ff9497"/>
+        <topic label="flow_type" href="structwhd__btwt__config__params__t.html#ab212cf1aed2334d31e9a0a7a28da0493"/>
+        <topic label="bid" href="structwhd__btwt__config__params__t.html#a89a3d1c53afa0e41518688c829f89381"/>
+        <topic label="wake_duration" href="structwhd__btwt__config__params__t.html#a3ac172613c3145c8a25146425371318d"/>
+        <topic label="exponent" href="structwhd__btwt__config__params__t.html#af05d5abe7656953548edfb3eb5117659"/>
+        <topic label="mantissa" href="structwhd__btwt__config__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
+      </topic>
+      <topic label="whd_btwt_join_params_t" href="structwhd__btwt__join__params__t.html">
+        <topic label="setup_cmd" href="structwhd__btwt__join__params__t.html#a1848c250921d04fa3d577e7ccef005a5"/>
+        <topic label="trigger" href="structwhd__btwt__join__params__t.html#ad47e9b879c95a25ce124bd5611ff9497"/>
+        <topic label="flow_type" href="structwhd__btwt__join__params__t.html#ab212cf1aed2334d31e9a0a7a28da0493"/>
+        <topic label="bid" href="structwhd__btwt__join__params__t.html#a89a3d1c53afa0e41518688c829f89381"/>
+        <topic label="wake_duration" href="structwhd__btwt__join__params__t.html#a3ac172613c3145c8a25146425371318d"/>
+        <topic label="exponent" href="structwhd__btwt__join__params__t.html#af05d5abe7656953548edfb3eb5117659"/>
+        <topic label="mantissa" href="structwhd__btwt__join__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
+        <topic label="wake_time_h" href="structwhd__btwt__join__params__t.html#aa19d40094f177173b777582d3e0a0c65"/>
+        <topic label="wake_time_l" href="structwhd__btwt__join__params__t.html#a4b99597d91ed77eed387c7cc602effd2"/>
+      </topic>
       <topic label="whd_buffer_funcs" href="structwhd__buffer__funcs.html">
         <topic label="whd_host_buffer_get" href="structwhd__buffer__funcs.html#ab30db243f3933eac39624c7cfa448abc"/>
         <topic label="whd_buffer_release" href="structwhd__buffer__funcs.html#a25e0a4f8235603094896917b3421baac"/>
@@ -257,11 +285,32 @@
         <topic label="ifidx" href="structwhd__event__msg.html#aee54e454588cb953b7f349e589c2d09f"/>
         <topic label="bsscfgidx" href="structwhd__event__msg.html#aa2c53e1708eb89382779539506cb4359"/>
       </topic>
+      <topic label="whd_he_omi_params_t" href="structwhd__he__omi__params__t.html">
+        <topic label="rx_nss" href="structwhd__he__omi__params__t.html#a02d4b1bb9ebce7933dca166e6c59ad72"/>
+        <topic label="chnl_wdth" href="structwhd__he__omi__params__t.html#a5df421a20f2821d0ce81478c8c11bb0b"/>
+        <topic label="ul_mu_dis" href="structwhd__he__omi__params__t.html#aee0037068654d53ce2ce55338a52ed90"/>
+        <topic label="tx_nsts" href="structwhd__he__omi__params__t.html#ad21d1c8c1dd9a31bae717843cd5dbd8f"/>
+        <topic label="er_su_dis" href="structwhd__he__omi__params__t.html#a81cf87b47a5fb58278da7003d7b4da7c"/>
+        <topic label="dl_mu_resound" href="structwhd__he__omi__params__t.html#afa64b804ed606b1550c9a8a460ab4b9b"/>
+        <topic label="ul_mu_data_dis" href="structwhd__he__omi__params__t.html#a193657b2c50cdca71ed48e3459597836"/>
+        <topic label="reserved" href="structwhd__he__omi__params__t.html#acb7bc06bed6f6408d719334fc41698c7"/>
+      </topic>
       <topic label="whd_init_config" href="structwhd__init__config.html">
         <topic label="thread_stack_start" href="structwhd__init__config.html#a52591d0d84b73dea8ca0a25c486f62c7"/>
         <topic label="thread_stack_size" href="structwhd__init__config.html#a6aa2c0bcb2024f1e4c38f9e8f6769c09"/>
         <topic label="thread_priority" href="structwhd__init__config.html#abd05090115efa85f6e47087351cc502a"/>
         <topic label="country" href="structwhd__init__config.html#a7c552f1f715c8aa245f40d4be48b0fc9"/>
+      </topic>
+      <topic label="whd_itwt_setup_params_t" href="structwhd__itwt__setup__params__t.html">
+        <topic label="setup_cmd" href="structwhd__itwt__setup__params__t.html#a1848c250921d04fa3d577e7ccef005a5"/>
+        <topic label="trigger" href="structwhd__itwt__setup__params__t.html#ad47e9b879c95a25ce124bd5611ff9497"/>
+        <topic label="flow_type" href="structwhd__itwt__setup__params__t.html#ab212cf1aed2334d31e9a0a7a28da0493"/>
+        <topic label="flow_id" href="structwhd__itwt__setup__params__t.html#acee83b30aaad37cab91b52874e5636a8"/>
+        <topic label="wake_duration" href="structwhd__itwt__setup__params__t.html#a3ac172613c3145c8a25146425371318d"/>
+        <topic label="exponent" href="structwhd__itwt__setup__params__t.html#af05d5abe7656953548edfb3eb5117659"/>
+        <topic label="mantissa" href="structwhd__itwt__setup__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
+        <topic label="wake_time_h" href="structwhd__itwt__setup__params__t.html#aa19d40094f177173b777582d3e0a0c65"/>
+        <topic label="wake_time_l" href="structwhd__itwt__setup__params__t.html#a4b99597d91ed77eed387c7cc602effd2"/>
       </topic>
       <topic label="whd_list_t" href="structwhd__list__t.html">
         <topic label="count" href="structwhd__list__t.html#a86988a65e0d3ece7990c032c159786d6"/>
@@ -290,6 +339,8 @@
         <topic label="dev_gpio_sel" href="structwhd__oob__config.html#a2d83d43c26f20c82203b65cef7cf9d2f"/>
         <topic label="is_falling_edge" href="structwhd__oob__config.html#afac6867bb224b40190d70a7bed57b556"/>
         <topic label="intr_priority" href="structwhd__oob__config.html#a948130b9ee9aaba4463a9a678c830b2f"/>
+        <topic label="drive_mode" href="structwhd__oob__config.html#af5188a951c3c040753b3b9cf141fc771"/>
+        <topic label="init_drive_state" href="structwhd__oob__config.html#ac84963ec3ea0999b1468ae20aae9ebbf"/>
       </topic>
       <topic label="whd_packet_filter_t" href="structwhd__packet__filter__t.html">
         <topic label="id" href="structwhd__packet__filter__t.html#abaabdc509cdaba7df9f56c6c76f3ae19"/>
@@ -347,6 +398,18 @@
       <topic label="whd_ssid_t" href="structwhd__ssid__t.html">
         <topic label="length" href="structwhd__ssid__t.html#ab2b3adeb2a67e656ff030b56727fd0ac"/>
         <topic label="value" href="structwhd__ssid__t.html#aa88a4115b417ed84082f85ab347f4b02"/>
+      </topic>
+      <topic label="whd_twt_information_params_t" href="structwhd__twt__information__params__t.html">
+        <topic label="flow_id" href="structwhd__twt__information__params__t.html#acee83b30aaad37cab91b52874e5636a8"/>
+        <topic label="suspend" href="structwhd__twt__information__params__t.html#a27149b154c5955e8589c000caca205f7"/>
+        <topic label="resume_time" href="structwhd__twt__information__params__t.html#a5c0a2ec64326ecfecb3f572a343c8d05"/>
+        <topic label="reserved" href="structwhd__twt__information__params__t.html#acb7bc06bed6f6408d719334fc41698c7"/>
+      </topic>
+      <topic label="whd_twt_teardown_params_t" href="structwhd__twt__teardown__params__t.html">
+        <topic label="negotiation_type" href="structwhd__twt__teardown__params__t.html#a00b0b7668f09b778654a9151d1417e18"/>
+        <topic label="flow_id" href="structwhd__twt__teardown__params__t.html#acee83b30aaad37cab91b52874e5636a8"/>
+        <topic label="bcast_twt_id" href="structwhd__twt__teardown__params__t.html#a509004b6c52d585d85e5cbeb8f5a9756"/>
+        <topic label="teardown_all_twt" href="structwhd__twt__teardown__params__t.html#a8237f0d388772980fb70505101b49fde"/>
       </topic>
       <topic label="whd_wep_key_t" href="structwhd__wep__key__t.html">
         <topic label="index" href="structwhd__wep__key__t.html#aae5a12e607d0f782506d9e6ec6179c64"/>
@@ -524,6 +587,7 @@
       </topic>
       <topic label="whd_resource_api.h" href="whd__resource__api_8h.html">
         <topic label="BLOCK_SIZE" href="whd__resource__api_8h.html#ad51ded0bbd705f02f73fc60c0b721ced"/>
+        <topic label="NVM_IMAGE_SIZE_ALIGNMENT" href="whd__resource__api_8h.html#adc19ff8217ab10b1bdf1dcbdd3fe8aaf"/>
         <topic label="whd_resource_type_t" href="whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0c">
           <topic label="WHD_RESOURCE_WLAN_FIRMWARE" href="whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0caf1635251dcc37bfa67af783a53f0acf3"/>
           <topic label="WHD_RESOURCE_WLAN_NVRAM" href="whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0ca397297fd6225d6eae30e7fa0d40a94f7"/>
@@ -658,11 +722,66 @@
           <topic label="packetId" href="structwhd__auth__params.html#a097d1daa9ed2d399b5d9436402744098"/>
           <topic label="data" href="structwhd__auth__params.html#aa86e1085c6a16f60258f29c9d5fc2144"/>
         </topic>
+        <topic label="whd_he_omi_params_t" href="structwhd__he__omi__params__t.html">
+          <topic label="rx_nss" href="structwhd__he__omi__params__t.html#a02d4b1bb9ebce7933dca166e6c59ad72"/>
+          <topic label="chnl_wdth" href="structwhd__he__omi__params__t.html#a5df421a20f2821d0ce81478c8c11bb0b"/>
+          <topic label="ul_mu_dis" href="structwhd__he__omi__params__t.html#aee0037068654d53ce2ce55338a52ed90"/>
+          <topic label="tx_nsts" href="structwhd__he__omi__params__t.html#ad21d1c8c1dd9a31bae717843cd5dbd8f"/>
+          <topic label="er_su_dis" href="structwhd__he__omi__params__t.html#a81cf87b47a5fb58278da7003d7b4da7c"/>
+          <topic label="dl_mu_resound" href="structwhd__he__omi__params__t.html#afa64b804ed606b1550c9a8a460ab4b9b"/>
+          <topic label="ul_mu_data_dis" href="structwhd__he__omi__params__t.html#a193657b2c50cdca71ed48e3459597836"/>
+          <topic label="reserved" href="structwhd__he__omi__params__t.html#acb7bc06bed6f6408d719334fc41698c7"/>
+        </topic>
+        <topic label="whd_itwt_setup_params_t" href="structwhd__itwt__setup__params__t.html">
+          <topic label="setup_cmd" href="structwhd__itwt__setup__params__t.html#a1848c250921d04fa3d577e7ccef005a5"/>
+          <topic label="trigger" href="structwhd__itwt__setup__params__t.html#ad47e9b879c95a25ce124bd5611ff9497"/>
+          <topic label="flow_type" href="structwhd__itwt__setup__params__t.html#ab212cf1aed2334d31e9a0a7a28da0493"/>
+          <topic label="flow_id" href="structwhd__itwt__setup__params__t.html#acee83b30aaad37cab91b52874e5636a8"/>
+          <topic label="wake_duration" href="structwhd__itwt__setup__params__t.html#a3ac172613c3145c8a25146425371318d"/>
+          <topic label="exponent" href="structwhd__itwt__setup__params__t.html#af05d5abe7656953548edfb3eb5117659"/>
+          <topic label="mantissa" href="structwhd__itwt__setup__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
+          <topic label="wake_time_h" href="structwhd__itwt__setup__params__t.html#aa19d40094f177173b777582d3e0a0c65"/>
+          <topic label="wake_time_l" href="structwhd__itwt__setup__params__t.html#a4b99597d91ed77eed387c7cc602effd2"/>
+        </topic>
+        <topic label="whd_btwt_join_params_t" href="structwhd__btwt__join__params__t.html">
+          <topic label="setup_cmd" href="structwhd__btwt__join__params__t.html#a1848c250921d04fa3d577e7ccef005a5"/>
+          <topic label="trigger" href="structwhd__btwt__join__params__t.html#ad47e9b879c95a25ce124bd5611ff9497"/>
+          <topic label="flow_type" href="structwhd__btwt__join__params__t.html#ab212cf1aed2334d31e9a0a7a28da0493"/>
+          <topic label="bid" href="structwhd__btwt__join__params__t.html#a89a3d1c53afa0e41518688c829f89381"/>
+          <topic label="wake_duration" href="structwhd__btwt__join__params__t.html#a3ac172613c3145c8a25146425371318d"/>
+          <topic label="exponent" href="structwhd__btwt__join__params__t.html#af05d5abe7656953548edfb3eb5117659"/>
+          <topic label="mantissa" href="structwhd__btwt__join__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
+          <topic label="wake_time_h" href="structwhd__btwt__join__params__t.html#aa19d40094f177173b777582d3e0a0c65"/>
+          <topic label="wake_time_l" href="structwhd__btwt__join__params__t.html#a4b99597d91ed77eed387c7cc602effd2"/>
+        </topic>
+        <topic label="whd_twt_teardown_params_t" href="structwhd__twt__teardown__params__t.html">
+          <topic label="negotiation_type" href="structwhd__twt__teardown__params__t.html#a00b0b7668f09b778654a9151d1417e18"/>
+          <topic label="flow_id" href="structwhd__twt__teardown__params__t.html#acee83b30aaad37cab91b52874e5636a8"/>
+          <topic label="bcast_twt_id" href="structwhd__twt__teardown__params__t.html#a509004b6c52d585d85e5cbeb8f5a9756"/>
+          <topic label="teardown_all_twt" href="structwhd__twt__teardown__params__t.html#a8237f0d388772980fb70505101b49fde"/>
+        </topic>
+        <topic label="whd_btwt_config_params_t" href="structwhd__btwt__config__params__t.html">
+          <topic label="setup_cmd" href="structwhd__btwt__config__params__t.html#a1848c250921d04fa3d577e7ccef005a5"/>
+          <topic label="trigger" href="structwhd__btwt__config__params__t.html#ad47e9b879c95a25ce124bd5611ff9497"/>
+          <topic label="flow_type" href="structwhd__btwt__config__params__t.html#ab212cf1aed2334d31e9a0a7a28da0493"/>
+          <topic label="bid" href="structwhd__btwt__config__params__t.html#a89a3d1c53afa0e41518688c829f89381"/>
+          <topic label="wake_duration" href="structwhd__btwt__config__params__t.html#a3ac172613c3145c8a25146425371318d"/>
+          <topic label="exponent" href="structwhd__btwt__config__params__t.html#af05d5abe7656953548edfb3eb5117659"/>
+          <topic label="mantissa" href="structwhd__btwt__config__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
+        </topic>
+        <topic label="whd_twt_information_params_t" href="structwhd__twt__information__params__t.html">
+          <topic label="flow_id" href="structwhd__twt__information__params__t.html#acee83b30aaad37cab91b52874e5636a8"/>
+          <topic label="suspend" href="structwhd__twt__information__params__t.html#a27149b154c5955e8589c000caca205f7"/>
+          <topic label="resume_time" href="structwhd__twt__information__params__t.html#a5c0a2ec64326ecfecb3f572a343c8d05"/>
+          <topic label="reserved" href="structwhd__twt__information__params__t.html#acb7bc06bed6f6408d719334fc41698c7"/>
+        </topic>
         <topic label="whd_oob_config" href="structwhd__oob__config.html">
           <topic label="host_oob_pin" href="structwhd__oob__config.html#a6c705dc46f1c4249cef91f1fc8a877dc"/>
           <topic label="dev_gpio_sel" href="structwhd__oob__config.html#a2d83d43c26f20c82203b65cef7cf9d2f"/>
           <topic label="is_falling_edge" href="structwhd__oob__config.html#afac6867bb224b40190d70a7bed57b556"/>
           <topic label="intr_priority" href="structwhd__oob__config.html#a948130b9ee9aaba4463a9a678c830b2f"/>
+          <topic label="drive_mode" href="structwhd__oob__config.html#af5188a951c3c040753b3b9cf141fc771"/>
+          <topic label="init_drive_state" href="structwhd__oob__config.html#ac84963ec3ea0999b1468ae20aae9ebbf"/>
         </topic>
         <topic label="whd_sdio_config" href="structwhd__sdio__config.html">
           <topic label="sdio_1bit_mode" href="structwhd__sdio__config.html#aaf50e6ef7ee9717f104ced9db86efd6a"/>
@@ -703,6 +822,7 @@
         <topic label="SHARED_ENABLED" href="whd__types_8h.html#a4d4a4586c264fe8e4acb0bf7169b7b0f"/>
         <topic label="WPA_SECURITY" href="whd__types_8h.html#aa7ccd472bacbd8ee01f31f0f0e2ce3dc"/>
         <topic label="WPA2_SECURITY" href="whd__types_8h.html#a8875737a0403d2136a69bbc96401cccf"/>
+        <topic label="WPA2_SHA256_SECURITY" href="whd__types_8h.html#aebc69eacd8308e6a6549c40d069a92ef"/>
         <topic label="WPA3_SECURITY" href="whd__types_8h.html#ad175824d1581f69f5a725e4c9171aa79"/>
         <topic label="SECURITY_MASK" href="whd__types_8h.html#a537103c16413b65ffb4d9ee0156248f5"/>
         <topic label="ENTERPRISE_ENABLED" href="whd__types_8h.html#ada6d6331053c0f88c63d77ba8d2019c8"/>
@@ -713,6 +833,7 @@
         <topic label="PM2_POWERSAVE_MODE" href="whd__types_8h.html#af29e5543837b68c29417a7d15e3228b7"/>
         <topic label="NO_POWERSAVE_MODE" href="whd__types_8h.html#a287bbd4f521f0d1cf44165bc617cebf5"/>
         <topic label="PMKID_LEN" href="whd__types_8h.html#af2ce8126dc46ee1d9d3beda3e1003193"/>
+        <topic label="WHD_OOB_CONFIG_VERSION" href="whd__types_8h.html#a113e5523834b14dff04ab2f9de618aec"/>
         <topic label="UNUSED_PARAMETER" href="whd__types_8h.html#a3c95a90e7806e4b0d21edfae15b73465"/>
         <topic label="UNUSED_VARIABLE" href="whd__types_8h.html#a4048bf3892868ded8a28f8cbdd339c09"/>
         <topic label="REFERENCE_DEBUG_ONLY_VARIABLE" href="whd__types_8h.html#a1491cb4c4adc44f22a91f18609dfb2f7"/>
@@ -893,6 +1014,7 @@
           <topic label="WHD_SECURITY_WPA_AES_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a8905c2aea364d45edf8496e5190effd0"/>
           <topic label="WHD_SECURITY_WPA_MIXED_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059afd3dd8c5b97f85f737177097fc0481b4"/>
           <topic label="WHD_SECURITY_WPA2_AES_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a81b7002ff8c0d488af8525ae614b6cf5"/>
+          <topic label="WHD_SECURITY_WPA2_AES_PSK_SHA256" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a5add5a77365265bc4f698ea64c854d92"/>
           <topic label="WHD_SECURITY_WPA2_TKIP_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a901ffc3e307d8b44bc80150e7cea8fbb"/>
           <topic label="WHD_SECURITY_WPA2_MIXED_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a602d04db8143c505cc674c738bf20150"/>
           <topic label="WHD_SECURITY_WPA2_FBT_PSK" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059ae380b414a2bc8a9343d0a6f4a71c0c0c"/>
@@ -1292,6 +1414,7 @@
         <topic label="whd_wifi_set_roam_time_threshold" href="group__wifiutilities.html#ga96d5646b67b4ae5ec78f1a23789caca1"/>
         <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gad2daa1aba4dccd3f0506950ccee42113"/>
         <topic label="whd_wifi_set_pmksa" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8"/>
+        <topic label="whd_wifi_pmkid_clear" href="group__wifiutilities.html#ga112a1fa7274b896e41ee98f88f943c62"/>
         <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125"/>
         <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga6ac8ec63a66fc046979bae1e809b0d25"/>
         <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gab571b303f19131fd032fba4b744dbf20"/>
@@ -1320,6 +1443,13 @@
         <topic label="whd_wifi_manage_custom_ie" href="group__wifiutilities.html#gaaf7be7d8099507426f52ecff8f716543"/>
         <topic label="whd_wifi_send_action_frame" href="group__wifiutilities.html#ga2cf8ecd7c319660833bd30a060990dca"/>
         <topic label="whd_wifi_send_auth_frame" href="group__wifiutilities.html#ga48cd0946d2277a26ff6ddb4e601d7601"/>
+        <topic label="whd_wifi_he_omi" href="group__wifiutilities.html#gaae1e930cb505d3cd13d46cd8b77c841b"/>
+        <topic label="whd_wifi_bss_max_idle" href="group__wifiutilities.html#ga7190d986953fe92012bb973495c87f48"/>
+        <topic label="whd_wifi_itwt_setup" href="group__wifiutilities.html#ga54322c21ea7d6ee27db7cc921084ecbe"/>
+        <topic label="whd_wifi_btwt_join" href="group__wifiutilities.html#ga2dacd5151ab077f23ff2197ad033ae63"/>
+        <topic label="whd_wifi_twt_teardown" href="group__wifiutilities.html#ga81c6e1f320c6403816e9c56f91bbe4d4"/>
+        <topic label="whd_wifi_twt_information_frame" href="group__wifiutilities.html#ga74a103b9c2302f6c61515127e1401829"/>
+        <topic label="whd_wifi_btwt_config" href="group__wifiutilities.html#ga963f841413cd793138ef2451d0e68a49"/>
         <topic label="whd_wifi_set_coex_config" href="group__wifiutilities.html#ga95237c0e6182bfb176519421ac9287b4"/>
         <topic label="whd_wifi_set_auth_status" href="group__wifiutilities.html#gafad0f635db3968da01437542c13c91db"/>
         <topic label="whd_wifi_get_fwcap" href="group__wifiutilities.html#ga1441ae647ff194b94413cbe2016be113"/>

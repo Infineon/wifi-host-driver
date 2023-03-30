@@ -1,13 +1,13 @@
 /*
- * Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,6 +25,7 @@
 #include "cybsp.h"
 #include "cy_result.h"
 #include "cyhal_hw_types.h"
+#include "cyhal_gpio.h"
 
 #ifndef INCLUDED_WHD_TYPES_H_
 #define INCLUDED_WHD_TYPES_H_
@@ -45,6 +46,7 @@ extern "C"
 #define SHARED_ENABLED     0x00008000  /**< Flag to enable Shared key Security */
 #define WPA_SECURITY       0x00200000  /**< Flag to enable WPA Security        */
 #define WPA2_SECURITY      0x00400000  /**< Flag to enable WPA2 Security       */
+#define WPA2_SHA256_SECURITY 0x00800000 /**< Flag to enable WPA2 SHA256 Security */
 #define WPA3_SECURITY      0x01000000  /**< Flag to enable WPA3 PSK Security   */
 #define SECURITY_MASK      (WEP_ENABLED | TKIP_ENABLED | AES_ENABLED) /**< Flag to Security mask */
 
@@ -58,6 +60,8 @@ extern "C"
 #define NO_POWERSAVE_MODE           (0) /**< No Powersave mode */
 
 #define PMKID_LEN                   (16) /**< PMKID LENGTH */
+
+#define WHD_OOB_CONFIG_VERSION      (2) /**< Indicate the version for whd_oob_config structure */
 
 /**
  * Suppress unused parameter warning
@@ -207,6 +211,7 @@ typedef enum
     WHD_SECURITY_WPA_AES_PSK      = (WPA_SECURITY | AES_ENABLED),                                      /**< WPA PSK Security with AES                             */
     WHD_SECURITY_WPA_MIXED_PSK    = (WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),                       /**< WPA PSK Security with AES & TKIP                      */
     WHD_SECURITY_WPA2_AES_PSK     = (WPA2_SECURITY | AES_ENABLED),                                     /**< WPA2 PSK Security with AES                            */
+    WHD_SECURITY_WPA2_AES_PSK_SHA256 = (WPA2_SECURITY | WPA2_SHA256_SECURITY | AES_ENABLED),           /**< WPA2 PSK SHA256 Security with AES                     */
     WHD_SECURITY_WPA2_TKIP_PSK    = (WPA2_SECURITY | TKIP_ENABLED),                                    /**< WPA2 PSK Security with TKIP                           */
     WHD_SECURITY_WPA2_MIXED_PSK   = (WPA2_SECURITY | AES_ENABLED | TKIP_ENABLED),                      /**< WPA2 PSK Security with AES & TKIP                     */
     WHD_SECURITY_WPA2_FBT_PSK     = (WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),                       /**< WPA2 FBT PSK Security with AES & TKIP */
@@ -1062,14 +1067,99 @@ typedef struct whd_auth_params
 } whd_auth_params_t;
 
 /**
+ * Structure for he_omi params
+ */
+typedef struct
+{
+    uint8_t rx_nss;
+    uint8_t chnl_wdth;
+    uint8_t ul_mu_dis;
+    uint8_t tx_nsts;
+    uint8_t er_su_dis;
+    uint8_t dl_mu_resound;
+    uint8_t ul_mu_data_dis;
+    uint8_t reserved;
+} whd_he_omi_params_t;
+
+/**
+ * Structure for itwt_setup params
+ */
+typedef struct
+{
+    uint8_t setup_cmd;
+    uint8_t trigger;
+    uint8_t flow_type; /* Un-Announced or Announced */
+    uint8_t flow_id; /* 0xFF means any */
+    uint8_t wake_duration; /* Minimum TWT wake duration in units of 256 usec */
+    uint8_t exponent; /* Used to compute TWT wake interval */
+    uint16_t mantissa; /* Used to compute TWT wake interval */
+    uint32_t wake_time_h; /* target wake time - BSS TSF (us) */
+    uint32_t wake_time_l;
+} whd_itwt_setup_params_t;
+
+/**
+ * Structure for btwt_join params
+ */
+typedef struct
+{
+    uint8_t setup_cmd;
+    uint8_t trigger;
+    uint8_t flow_type; /* Un-Announced or Announced */
+    uint8_t bid; /* bTWT ID */
+    uint8_t wake_duration; /* Minimum TWT wake duration in units of 256 usec */
+    uint8_t exponent; /* Used to compute TWT wake interval */
+    uint16_t mantissa; /* Used to compute TWT wake interval */
+    uint32_t wake_time_h; /* target wake time - BSS TSF (us) */
+    uint32_t wake_time_l;
+} whd_btwt_join_params_t;
+
+/**
+ * Structure for twt_teardown params
+ */
+typedef struct
+{
+    uint8_t negotiation_type;
+    uint8_t flow_id;
+    uint8_t bcast_twt_id;
+    uint8_t teardown_all_twt;
+} whd_twt_teardown_params_t;
+
+/**
+ * Structure for btwt_config params
+ */
+typedef struct
+{
+    uint8_t setup_cmd;
+    uint8_t trigger;
+    uint8_t flow_type; /* Un-Announced or Announced */
+    uint8_t bid; /* bTWT ID */
+    uint8_t wake_duration; /* Minimum TWT wake duration in units of 256 usec */
+    uint8_t exponent; /* Used to compute TWT wake interval */
+    uint16_t mantissa; /* Used to compute TWT wake interval */
+} whd_btwt_config_params_t;
+
+/**
+ * Structure for twt_information params
+ */
+typedef struct
+{
+    uint8_t flow_id;
+    uint8_t suspend; /* 1: suspend, 0: resume */
+    uint8_t resume_time; /* 0 ~ 4095 seconds */
+    uint8_t reserved;
+} whd_twt_information_params_t;
+
+/**
  * Structure for Out-of-band interrupt config parameters which can be set by application during whd power up
  */
 typedef struct whd_oob_config
 {
-    cyhal_gpio_t host_oob_pin;   /**< Host-side GPIO pin selection */
-    uint8_t dev_gpio_sel;        /**< WiFi device-side GPIO pin selection (must be zero) */
-    whd_bool_t is_falling_edge;  /**< Interrupt trigger (polarity) */
-    uint8_t intr_priority;       /**< OOB interrupt priority */
+    cyhal_gpio_t host_oob_pin;          /**< Host-side GPIO pin selection */
+    uint8_t dev_gpio_sel;               /**< WiFi device-side GPIO pin selection (must be zero) */
+    whd_bool_t is_falling_edge;         /**< Interrupt trigger (polarity) */
+    uint8_t intr_priority;              /**< OOB interrupt priority */
+    cyhal_gpio_drive_mode_t drive_mode; /**< Host-side GPIO pin drive mode */
+    whd_bool_t init_drive_state;        /**< Host-side GPIO pin initial drive state */
 } whd_oob_config_t;
 
 /**
@@ -1172,3 +1262,4 @@ typedef struct
 }     /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_WHD_TYPES_H_ */
+

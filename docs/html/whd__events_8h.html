@@ -59,7 +59,7 @@ $(function() {
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -78,7 +78,7 @@ $(document).ready(function(){initNavTree('whd__events_8h.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -316,23 +316,23 @@ typedef struct <a class="el" href="structwhd__event.html">whd_event</a>&#160;</t
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:aba9543ff6a1542d81c7adc66bb339c4c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4c">sup_auth_status</a> { <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680">WLC_SUP_DISCONNECTED</a> = 0 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147">WLC_SUP_CONNECTING</a> = 1 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce">WLC_SUP_IDREQUIRED</a> = 2 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce">WLC_SUP_AUTHENTICATING</a> = 3 + WLC_SUP_STATUS_OFFSET,
+&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cac9bc0eb3bd21bc5189a4a46793ea7680">WLC_SUP_DISCONNECTED</a> = 0 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8ac4d7e7fb55b33bb65316c9ba42f147">WLC_SUP_CONNECTING</a> = 1 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca6d0a906929483eb4d9633c875cffd6ce">WLC_SUP_IDREQUIRED</a> = 2 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab0fea5debce5e8abf993c6a4e6aa2cce">WLC_SUP_AUTHENTICATING</a> = 3 + WLC_SUP_STATUS_OFFSET, 
 <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e">WLC_SUP_AUTHENTICATED</a> = 4 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938">WLC_SUP_KEYXCHANGE</a> = 5 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a">WLC_SUP_KEYED</a> = 6 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240">WLC_SUP_TIMEOUT</a> = 7 + WLC_SUP_STATUS_OFFSET,
+&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa4fb668202b9e57bbfaedf0b20304a6e">WLC_SUP_AUTHENTICATED</a> = 4 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca47709bf89f9482d964fb8f80110b9938">WLC_SUP_KEYXCHANGE</a> = 5 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4cab04882e234f679807f486fcd34ee9a1a">WLC_SUP_KEYED</a> = 6 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca9e0cfe079f25369646bb199aba3f1240">WLC_SUP_TIMEOUT</a> = 7 + WLC_SUP_STATUS_OFFSET, 
 <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df">WLC_SUP_LAST_BASIC_STATE</a> = 8 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe">WLC_SUP_KEYXCHANGE_WAIT_M1</a> = WLC_SUP_AUTHENTICATED,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623">WLC_SUP_KEYXCHANGE_PREP_M2</a> = WLC_SUP_KEYXCHANGE,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6">WLC_SUP_KEYXCHANGE_WAIT_M3</a> = WLC_SUP_LAST_BASIC_STATE,
+&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca949fb8270a4429fe0bdd53eb654d10df">WLC_SUP_LAST_BASIC_STATE</a> = 8 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca05d3731c95722d8e0499673a12697abe">WLC_SUP_KEYXCHANGE_WAIT_M1</a> = WLC_SUP_AUTHENTICATED, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca82ffd4e7e1eda9cde4a2e4f93a625623">WLC_SUP_KEYXCHANGE_PREP_M2</a> = WLC_SUP_KEYXCHANGE, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caefe14a3fa955320276622a8c2a3df3f6">WLC_SUP_KEYXCHANGE_WAIT_M3</a> = WLC_SUP_LAST_BASIC_STATE, 
 <br />
-&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772">WLC_SUP_KEYXCHANGE_PREP_M4</a> = 9 + WLC_SUP_STATUS_OFFSET,
-<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a">WLC_SUP_KEYXCHANGE_WAIT_G1</a> = 10 + WLC_SUP_STATUS_OFFSET,
+&#160;&#160;<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caf6103c24206afe80f6f3918a5f139772">WLC_SUP_KEYXCHANGE_PREP_M4</a> = 9 + WLC_SUP_STATUS_OFFSET, 
+<a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a">WLC_SUP_KEYXCHANGE_WAIT_G1</a> = 10 + WLC_SUP_STATUS_OFFSET, 
 <a class="el" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303">WLC_SUP_KEYXCHANGE_PREP_G2</a> = 11 + WLC_SUP_STATUS_OFFSET
 <br />
  }</td></tr>
@@ -433,7 +433,7 @@ Functions</h2></td></tr>
 + WLC_SUP_KEYXCHANGE_PREP_M4
 + WLC_SUP_KEYXCHANGE_WAIT_G1
 + WLC_SUP_KEYXCHANGE_PREP_G2
-</pre>
+</pre> 
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>

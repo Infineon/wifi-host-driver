@@ -90,3 +90,4 @@ whd_netif_funcs_t netif_ops =
 {
     .whd_network_process_ethernet_data = host_network_process_ethernet_data,
 };
+

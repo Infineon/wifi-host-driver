@@ -27,7 +27,7 @@ extern "C" {
 
 /**
  * Character array of NVRAM image
- * Generated from brcmfmac43439-sdio.txt
+ * Generated from cyfmac43439-sdio.1YN.txt
  */
 
 static const char wifi_nvram_image[] =
@@ -52,12 +52,13 @@ static const char wifi_nvram_image[] =
         "extpagain2g=0"                                                      "\x00"
         "pa2ga0=-168,6777,-789"                                              "\x00"
         "AvVmid_c0=0x0,0xc8"                                                 "\x00"
+        "AvVmidIQcal=0x2,0xa8"                                               "\x00"
         "cckpwroffset0=5"                                                    "\x00"
-        "maxp2ga0=84"                                                        "\x00"
+        "maxp2ga0=74"                                                        "\x00"
         "txpwrbckof=6"                                                       "\x00"
         "cckbw202gpo=0"                                                      "\x00"
-        "legofdmbw202gpo=0x66111111"                                         "\x00"
-        "mcsbw202gpo=0x77711111"                                             "\x00"
+        "legofdmbw202gpo=0x88888888"                                         "\x00"
+        "mcsbw202gpo=0xaaaaaaaa"                                             "\x00"
         "propbw202gpo=0xdd"                                                  "\x00"
         "ofdmdigfilttype=18"                                                 "\x00"
         "ofdmdigfilttypebe=18"                                               "\x00"
@@ -73,10 +74,10 @@ static const char wifi_nvram_image[] =
         "il0macaddr=00:90:4c:c5:12:38"                                       "\x00"
         "wl0id=0x431b"                                                       "\x00"
         "deadman_to=0xffffffff"                                              "\x00"
-        "muxenab=0x11"                                                       "\x00"
+        "muxenab=0x11"                                                       "\x00" //Note: muxenab=0x11 to enable the mask for UART and HOSTWAKE [DRIVERS-9095]
         "spurconfig=0x3"                                                     "\x00"
         "glitch_based_crsmin=1"                                              "\x00"
-        "btc_mode=1"                                                         "\x00"
+        "btc_mode=0"                                                         "\x00"
         "bt_default_ant=0"                                                   "\x00"
         "\x00\x00";
 #ifdef __cplusplus

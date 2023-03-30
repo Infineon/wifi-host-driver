@@ -13,7 +13,7 @@ The [release notes](./RELEASE.md) detail the current release. You can also find 
 |  SPI        |  O  |  O  |     |     |  O  |     |
 |  M2M        |     |     |     |     |     |  O  |
 
-### WPA3 AP mode support
+### WPA3 AP mode support 
 ---------------------------------------------------
 |  Security   |4343W|43438|4373 |43012|43439|43907|
 |:-----------:|:---:|:---:|:---:|:---:|:---:|:---:|

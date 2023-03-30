@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1089" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1089" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" line="1179" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" bodystart="1179" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -24,7 +24,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1087" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1086" bodyend="1090"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" line="1177" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" bodystart="1176" bodyend="1180"/>
     <listofallmembers>
       <member refid="structwhd__m2m__config_1afde40b36899b604612feb3b6c39b00ed" prot="public" virt="non-virtual"><scope>whd_m2m_config</scope><name>is_normal_mode</name></member>
     </listofallmembers>

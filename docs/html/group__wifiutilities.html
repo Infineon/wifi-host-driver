@@ -59,7 +59,7 @@ $(function() {
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -78,7 +78,7 @@ $(document).ready(function(){initNavTree('group__wifiutilities.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -125,6 +125,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaff1c3d13edc4ceee2bebaeb93ec7a9c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8">whd_wifi_set_pmksa</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const <a class="el" href="whd__types_8h.html#a41a5921cae8749f8c7b96f216ff318a3">pmkid_t</a> *pmkid)</td></tr>
 <tr class="memdesc:gaff1c3d13edc4ceee2bebaeb93ec7a9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set PMKID in Device (WLAN)  <a href="#gaff1c3d13edc4ceee2bebaeb93ec7a9c8">More...</a><br /></td></tr>
 <tr class="separator:gaff1c3d13edc4ceee2bebaeb93ec7a9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga112a1fa7274b896e41ee98f88f943c62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga112a1fa7274b896e41ee98f88f943c62">whd_wifi_pmkid_clear</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
+<tr class="memdesc:ga112a1fa7274b896e41ee98f88f943c62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all PMKIDs in Device (WLAN), especially the PMKIDs in Supplicant module.  <a href="#ga112a1fa7274b896e41ee98f88f943c62">More...</a><br /></td></tr>
+<tr class="separator:ga112a1fa7274b896e41ee98f88f943c62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf82eda2ff9979b1bc053a6d7f1f4b125"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125">whd_wifi_get_rssi</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, int32_t *rssi)</td></tr>
 <tr class="memdesc:gaf82eda2ff9979b1bc053a6d7f1f4b125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the latest RSSI value.  <a href="#gaf82eda2ff9979b1bc053a6d7f1f4b125">More...</a><br /></td></tr>
 <tr class="separator:gaf82eda2ff9979b1bc053a6d7f1f4b125"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,6 +170,27 @@ Functions</h2></td></tr>
 <tr class="memitem:ga48cd0946d2277a26ff6ddb4e601d7601"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga48cd0946d2277a26ff6ddb4e601d7601">whd_wifi_send_auth_frame</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#a8f2ad68c18064e7129ad1828429f4b08">whd_auth_params_t</a> *auth_params)</td></tr>
 <tr class="memdesc:ga48cd0946d2277a26ff6ddb4e601d7601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a pre-prepared authentication frame.  <a href="#ga48cd0946d2277a26ff6ddb4e601d7601">More...</a><br /></td></tr>
 <tr class="separator:ga48cd0946d2277a26ff6ddb4e601d7601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae1e930cb505d3cd13d46cd8b77c841b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#gaae1e930cb505d3cd13d46cd8b77c841b">whd_wifi_he_omi</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__he__omi__params__t.html">whd_he_omi_params_t</a> *he_omi_params)</td></tr>
+<tr class="memdesc:gaae1e930cb505d3cd13d46cd8b77c841b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure HE OM Control.  <a href="#gaae1e930cb505d3cd13d46cd8b77c841b">More...</a><br /></td></tr>
+<tr class="separator:gaae1e930cb505d3cd13d46cd8b77c841b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7190d986953fe92012bb973495c87f48"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga7190d986953fe92012bb973495c87f48">whd_wifi_bss_max_idle</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint16_t period)</td></tr>
+<tr class="memdesc:ga7190d986953fe92012bb973495c87f48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure BSS Max Idle Time.  <a href="#ga7190d986953fe92012bb973495c87f48">More...</a><br /></td></tr>
+<tr class="separator:ga7190d986953fe92012bb973495c87f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga54322c21ea7d6ee27db7cc921084ecbe"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga54322c21ea7d6ee27db7cc921084ecbe">whd_wifi_itwt_setup</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__itwt__setup__params__t.html">whd_itwt_setup_params_t</a> *twt_params)</td></tr>
+<tr class="memdesc:ga54322c21ea7d6ee27db7cc921084ecbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger individual TWT session(used by STA)  <a href="#ga54322c21ea7d6ee27db7cc921084ecbe">More...</a><br /></td></tr>
+<tr class="separator:ga54322c21ea7d6ee27db7cc921084ecbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2dacd5151ab077f23ff2197ad033ae63"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga2dacd5151ab077f23ff2197ad033ae63">whd_wifi_btwt_join</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__btwt__join__params__t.html">whd_btwt_join_params_t</a> *twt_params)</td></tr>
+<tr class="memdesc:ga2dacd5151ab077f23ff2197ad033ae63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger Join broadcast TWT session(used by STA)  <a href="#ga2dacd5151ab077f23ff2197ad033ae63">More...</a><br /></td></tr>
+<tr class="separator:ga2dacd5151ab077f23ff2197ad033ae63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81c6e1f320c6403816e9c56f91bbe4d4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga81c6e1f320c6403816e9c56f91bbe4d4">whd_wifi_twt_teardown</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__twt__teardown__params__t.html">whd_twt_teardown_params_t</a> *twt_params)</td></tr>
+<tr class="memdesc:ga81c6e1f320c6403816e9c56f91bbe4d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger teardown all individual or broadcast TWT sessions.  <a href="#ga81c6e1f320c6403816e9c56f91bbe4d4">More...</a><br /></td></tr>
+<tr class="separator:ga81c6e1f320c6403816e9c56f91bbe4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74a103b9c2302f6c61515127e1401829"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga74a103b9c2302f6c61515127e1401829">whd_wifi_twt_information_frame</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__twt__information__params__t.html">whd_twt_information_params_t</a> *twt_params)</td></tr>
+<tr class="memdesc:ga74a103b9c2302f6c61515127e1401829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger TWT information frame(used by STA)  <a href="#ga74a103b9c2302f6c61515127e1401829">More...</a><br /></td></tr>
+<tr class="separator:ga74a103b9c2302f6c61515127e1401829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga963f841413cd793138ef2451d0e68a49"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga963f841413cd793138ef2451d0e68a49">whd_wifi_btwt_config</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="structwhd__btwt__config__params__t.html">whd_btwt_config_params_t</a> *twt_params)</td></tr>
+<tr class="memdesc:ga963f841413cd793138ef2451d0e68a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure TWT IE in beacon(used by AP)  <a href="#ga963f841413cd793138ef2451d0e68a49">More...</a><br /></td></tr>
+<tr class="separator:ga963f841413cd793138ef2451d0e68a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga95237c0e6182bfb176519421ac9287b4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifiutilities.html#ga95237c0e6182bfb176519421ac9287b4">whd_wifi_set_coex_config</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#a1cb4da9972e0e9317a6e26e2fd460902">whd_coex_config_t</a> *coex_config)</td></tr>
 <tr class="memdesc:ga95237c0e6182bfb176519421ac9287b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set coex configuration.  <a href="#ga95237c0e6182bfb176519421ac9287b4">More...</a><br /></td></tr>
 <tr class="separator:ga95237c0e6182bfb176519421ac9287b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -681,6 +705,33 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
     <tr><td class="paramname">pmkid</td><td>Pointer to BSSID and PMKID(16 bytes)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whd_result_t </dd></dl>
+
+</div>
+</div>
+<a id="ga112a1fa7274b896e41ee98f88f943c62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga112a1fa7274b896e41ee98f88f943c62">&#9670;&nbsp;</a></span>whd_wifi_pmkid_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_pmkid_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear all PMKIDs in Device (WLAN), especially the PMKIDs in Supplicant module. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface</td></tr>
   </table>
   </dd>
 </dl>
@@ -1262,6 +1313,272 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
     <tr><td class="paramname">auth_params</td><td>pointer to a pre-prepared authentication frame structure</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="gaae1e930cb505d3cd13d46cd8b77c841b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae1e930cb505d3cd13d46cd8b77c841b">&#9670;&nbsp;</a></span>whd_wifi_he_omi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_he_omi </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__he__omi__params__t.html">whd_he_omi_params_t</a> *&#160;</td>
+          <td class="paramname"><em>he_omi_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure HE OM Control. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">he_omi_params</td><td>pointer to he_omi parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga7190d986953fe92012bb973495c87f48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7190d986953fe92012bb973495c87f48">&#9670;&nbsp;</a></span>whd_wifi_bss_max_idle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_bss_max_idle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure BSS Max Idle Time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">period</td><td>The bss max idle period time unit(seconds)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga54322c21ea7d6ee27db7cc921084ecbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54322c21ea7d6ee27db7cc921084ecbe">&#9670;&nbsp;</a></span>whd_wifi_itwt_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_itwt_setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__itwt__setup__params__t.html">whd_itwt_setup_params_t</a> *&#160;</td>
+          <td class="paramname"><em>twt_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trigger individual TWT session(used by STA) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">twt_params</td><td>pointer to itwt_setup parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga2dacd5151ab077f23ff2197ad033ae63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2dacd5151ab077f23ff2197ad033ae63">&#9670;&nbsp;</a></span>whd_wifi_btwt_join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_btwt_join </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__btwt__join__params__t.html">whd_btwt_join_params_t</a> *&#160;</td>
+          <td class="paramname"><em>twt_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trigger Join broadcast TWT session(used by STA) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">twt_params</td><td>pointer to btwt_join parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga81c6e1f320c6403816e9c56f91bbe4d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81c6e1f320c6403816e9c56f91bbe4d4">&#9670;&nbsp;</a></span>whd_wifi_twt_teardown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_twt_teardown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__twt__teardown__params__t.html">whd_twt_teardown_params_t</a> *&#160;</td>
+          <td class="paramname"><em>twt_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trigger teardown all individual or broadcast TWT sessions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">twt_params</td><td>pointer to twt_taerdown parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga74a103b9c2302f6c61515127e1401829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga74a103b9c2302f6c61515127e1401829">&#9670;&nbsp;</a></span>whd_wifi_twt_information_frame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_twt_information_frame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__twt__information__params__t.html">whd_twt_information_params_t</a> *&#160;</td>
+          <td class="paramname"><em>twt_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trigger TWT information frame(used by STA) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">twt_params</td><td>pointer to twt_information parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga963f841413cd793138ef2451d0e68a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga963f841413cd793138ef2451d0e68a49">&#9670;&nbsp;</a></span>whd_wifi_btwt_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_btwt_config </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structwhd__btwt__config__params__t.html">whd_btwt_config_params_t</a> *&#160;</td>
+          <td class="paramname"><em>twt_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure TWT IE in beacon(used by AP) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">twt_params</td><td>pointer to btwt_config parameters</td></tr>
   </table>
   </dd>
 </dl>

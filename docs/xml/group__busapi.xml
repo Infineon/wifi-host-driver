@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="71" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="71" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__busapi_1gadeed66e792eed64cbb6a0deef1dbe2da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="77" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="77" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

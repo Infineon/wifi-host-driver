@@ -1,18 +1,18 @@
 /*
  * $ Copyright Broadcom Corporation $
- */
+ */
 #ifndef INCLUDED_NVRAM_IMAGE_H_
-#define INCLUDED_NVRAM_IMAGE_H_
+#define INCLUDED_NVRAM_IMAGE_H_
 #include <string.h>
 #include <stdint.h>
-#include "../generated_mac_address.txt"
+#include "../generated_mac_address.txt"
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif
 /**
  * Character array of NVRAM image
  * Generated from cyw943439m2ipa1_rev1_0.txt
- */
+ */
 static const char wifi_nvram_image[] =
         "NVRAMRev=$Rev$"                                                     "\x00"
         "manfid=0x2d0"                                                       "\x00"
@@ -64,7 +64,7 @@ static const char wifi_nvram_image[] =
         "\x00\x00";
 #ifdef __cplusplus
 } /*extern "C" */
-#endif
-#else /* ifndef INCLUDED_NVRAM_IMAGE_H_ */
-#error Wi-Fi NVRAM image included twice
-#endif /* ifndef INCLUDED_NVRAM_IMAGE_H_ */
+#endif
+#else /* ifndef INCLUDED_NVRAM_IMAGE_H_ */
+#error Wi-Fi NVRAM image included twice
+#endif /* ifndef INCLUDED_NVRAM_IMAGE_H_ */

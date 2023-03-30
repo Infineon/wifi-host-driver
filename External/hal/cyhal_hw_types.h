@@ -91,3 +91,4 @@ typedef struct
 #endif /* __cplusplus */
 
 /** \} group_hal_hw_types */
+

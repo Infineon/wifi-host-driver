@@ -48,6 +48,7 @@ var searchData=
   ['whd_5fnot_5fauthenticated',['WHD_NOT_AUTHENTICATED',['../whd__types_8h.html#ac2e279a3f388f66c076d4dd73310a27b',1,'whd_types.h']]],
   ['whd_5fnot_5fkeyed',['WHD_NOT_KEYED',['../whd__types_8h.html#a4377fd0c321dbebed159e8c84858a1e4',1,'whd_types.h']]],
   ['whd_5fnull_5fptr_5farg',['WHD_NULL_PTR_ARG',['../whd__types_8h.html#ab7612a8165b6e28255c4a2ef78627454',1,'whd_types.h']]],
+  ['whd_5foob_5fconfig_5fversion',['WHD_OOB_CONFIG_VERSION',['../whd__types_8h.html#a113e5523834b14dff04ab2f9de618aec',1,'whd_types.h']]],
   ['whd_5fout_5fof_5fevent_5fhandler_5fspace',['WHD_OUT_OF_EVENT_HANDLER_SPACE',['../whd__types_8h.html#a24f120d05f15b5c5564c8fc7098516f3',1,'whd_types.h']]],
   ['whd_5fpartial_5fresults',['WHD_PARTIAL_RESULTS',['../whd__types_8h.html#a1b8d28e95bef4c55d0cdbc2ffc6c9ef7',1,'whd_types.h']]],
   ['whd_5fpayload_5fmtu',['WHD_PAYLOAD_MTU',['../whd__types_8h.html#a90b4f488c8f53596cffcb88fe6111fcc',1,'whd_types.h']]],
@@ -174,6 +175,7 @@ var searchData=
   ['wlc_5fe_5fstatus_5funsolicited',['WLC_E_STATUS_UNSOLICITED',['../whd__events_8h.html#a5a7e4c4f047fff0443e0e7037e35babe',1,'whd_events.h']]],
   ['wlc_5fsup_5fstatus_5foffset',['WLC_SUP_STATUS_OFFSET',['../whd__events_8h.html#ac97c29fe35bab5af9cc08a9eb1fedffc',1,'whd_events.h']]],
   ['wpa2_5fsecurity',['WPA2_SECURITY',['../whd__types_8h.html#a8875737a0403d2136a69bbc96401cccf',1,'whd_types.h']]],
+  ['wpa2_5fsha256_5fsecurity',['WPA2_SHA256_SECURITY',['../whd__types_8h.html#aebc69eacd8308e6a6549c40d069a92ef',1,'whd_types.h']]],
   ['wpa3_5fsecurity',['WPA3_SECURITY',['../whd__types_8h.html#ad175824d1581f69f5a725e4c9171aa79',1,'whd_types.h']]],
   ['wpa_5fsecurity',['WPA_SECURITY',['../whd__types_8h.html#aa7ccd472bacbd8ee01f31f0f0e2ce3dc',1,'whd_types.h']]],
   ['wps_5fenabled',['WPS_ENABLED',['../whd__types_8h.html#aaae7e8a0eb357cae8f130f9099d8e7b8',1,'whd_types.h']]]

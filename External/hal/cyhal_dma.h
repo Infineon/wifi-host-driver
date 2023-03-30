@@ -397,3 +397,4 @@ void _cyhal_system_sw0_enable_irq(void);
 #endif
 
 /** \} group_hal_dma */
+

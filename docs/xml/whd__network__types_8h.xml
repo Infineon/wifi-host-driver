@@ -4,40 +4,45 @@
     <compoundname>whd_network_types.h</compoundname>
     <includes refid="whd_8h" local="yes">whd.h</includes>
     <incdepgraph>
-      <node id="24">
+      <node id="26">
         <label>stdint.h</label>
       </node>
-      <node id="21">
+      <node id="23">
         <label>whd_network_types.h</label>
         <link refid="whd__network__types_8h"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-      </node>
-      <node id="26">
-        <label>cy_result.h</label>
-      </node>
-      <node id="22">
-        <label>whd.h</label>
-        <link refid="whd_8h"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>cyhal_hw_types.h</label>
-      </node>
-      <node id="23">
-        <label>whd_types.h</label>
-        <link refid="whd__types_8h"/>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
+      </node>
+      <node id="25">
+        <label>whd_types.h</label>
+        <link refid="whd__types_8h"/>
         <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
       </node>
-      <node id="25">
+      <node id="28">
+        <label>cy_result.h</label>
+      </node>
+      <node id="24">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>cyhal_hw_types.h</label>
+      </node>
+      <node id="30">
+        <label>cyhal_gpio.h</label>
+      </node>
+      <node id="27">
         <label>cybsp.h</label>
       </node>
     </incdepgraph>
@@ -71,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" line="35" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" bodystart="34" bodyend="38"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_network_types.h" line="35" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_network_types.h" bodystart="34" bodyend="38"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -117,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h" line="209" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_network_types.h" line="209" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -130,6 +135,6 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_network_types.h"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_network_types.h"/>
   </compounddef>
 </doxygen>

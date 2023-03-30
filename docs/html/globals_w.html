@@ -59,7 +59,7 @@ $(function() {
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -78,7 +78,7 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -1185,6 +1185,9 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>whd_oob_config_t
 : <a class="el" href="whd__types_8h.html#ac07b13dcb5ec0e66a707dcf8a539c97e">whd_types.h</a>
 </li>
+<li>WHD_OOB_CONFIG_VERSION
+: <a class="el" href="whd__types_8h.html#a113e5523834b14dff04ab2f9de618aec">whd_types.h</a>
+</li>
 <li>WHD_OUT_OF_EVENT_HANDLER_SPACE
 : <a class="el" href="whd__types_8h.html#a24f120d05f15b5c5564c8fc7098516f3">whd_types.h</a>
 </li>
@@ -1362,6 +1365,9 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>WHD_SECURITY_WPA2_AES_PSK
 : <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a81b7002ff8c0d488af8525ae614b6cf5">whd_types.h</a>
 </li>
+<li>WHD_SECURITY_WPA2_AES_PSK_SHA256
+: <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a5add5a77365265bc4f698ea64c854d92">whd_types.h</a>
+</li>
 <li>WHD_SECURITY_WPA2_FBT_ENT
 : <a class="el" href="whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a843c4f3ffe1f3e006cde49b7bdee5a09">whd_types.h</a>
 </li>
@@ -1518,6 +1524,15 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>whd_wifi_ap_set_dtim_interval()
 : <a class="el" href="group__wifisoftap.html#ga57c57ad4d5acf499e90ff8db020fa2d9">whd_wifi_api.h</a>
 </li>
+<li>whd_wifi_bss_max_idle()
+: <a class="el" href="group__wifiutilities.html#ga7190d986953fe92012bb973495c87f48">whd_wifi_api.h</a>
+</li>
+<li>whd_wifi_btwt_config()
+: <a class="el" href="group__wifiutilities.html#ga963f841413cd793138ef2451d0e68a49">whd_wifi_api.h</a>
+</li>
+<li>whd_wifi_btwt_join()
+: <a class="el" href="group__wifiutilities.html#ga2dacd5151ab077f23ff2197ad033ae63">whd_wifi_api.h</a>
+</li>
 <li>whd_wifi_clear_packet_filter_stats()
 : <a class="el" href="group__wifiutilities.html#gab3e9371ccaa61f1f40e0246a66db42a6">whd_wifi_api.h</a>
 </li>
@@ -1605,11 +1620,17 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 <li>whd_wifi_get_wifi_version()
 : <a class="el" href="group__dbg.html#ga334e8f04bdbc06da6eadf29cea997b99">whd_wifi_api.h</a>
 </li>
+<li>whd_wifi_he_omi()
+: <a class="el" href="group__wifiutilities.html#gaae1e930cb505d3cd13d46cd8b77c841b">whd_wifi_api.h</a>
+</li>
 <li>whd_wifi_init_ap()
 : <a class="el" href="group__wifisoftap.html#ga647aebc1d86708017fd11029e2e1a51c">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_is_ready_to_transceive()
 : <a class="el" href="group__wifiutilities.html#ga07144bbc68755481708752962538ee6f">whd_wifi_api.h</a>
+</li>
+<li>whd_wifi_itwt_setup()
+: <a class="el" href="group__wifiutilities.html#ga54322c21ea7d6ee27db7cc921084ecbe">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_join()
 : <a class="el" href="group__wifijoin.html#gac767814ae445f735b51686db20c780be">whd_wifi_api.h</a>
@@ -1628,6 +1649,9 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 </li>
 <li>whd_wifi_on()
 : <a class="el" href="group__wifimanagement.html#ga1c8bf41b593cb947266f8690d495f381">whd_wifi_api.h</a>
+</li>
+<li>whd_wifi_pmkid_clear()
+: <a class="el" href="group__wifiutilities.html#ga112a1fa7274b896e41ee98f88f943c62">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_print_whd_log()
 : <a class="el" href="group__dbg.html#ga6435c76ac1eae5af952053d76d9c67ab">whd_wifi_api.h</a>
@@ -1709,6 +1733,12 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 </li>
 <li>whd_wifi_toggle_packet_filter()
 : <a class="el" href="group__wifiutilities.html#ga35860e8c45162735f5ef3d93ed262d90">whd_wifi_api.h</a>
+</li>
+<li>whd_wifi_twt_information_frame()
+: <a class="el" href="group__wifiutilities.html#ga74a103b9c2302f6c61515127e1401829">whd_wifi_api.h</a>
+</li>
+<li>whd_wifi_twt_teardown()
+: <a class="el" href="group__wifiutilities.html#ga81c6e1f320c6403816e9c56f91bbe4d4">whd_wifi_api.h</a>
 </li>
 <li>whd_wifi_unregister_multicast_address()
 : <a class="el" href="group__wifiutilities.html#gad092a543b73e91c7090875ccb940e01f">whd_wifi_api.h</a>
@@ -2051,6 +2081,9 @@ $(document).ready(function(){initNavTree('globals_w.html','');});
 </li>
 <li>WPA2_SECURITY
 : <a class="el" href="whd__types_8h.html#a8875737a0403d2136a69bbc96401cccf">whd_types.h</a>
+</li>
+<li>WPA2_SHA256_SECURITY
+: <a class="el" href="whd__types_8h.html#aebc69eacd8308e6a6549c40d069a92ef">whd_types.h</a>
 </li>
 <li>WPA3_SECURITY
 : <a class="el" href="whd__types_8h.html#ad175824d1581f69f5a725e4c9171aa79">whd_types.h</a>

@@ -4,40 +4,45 @@
     <compoundname>whd_resource_api.h</compoundname>
     <includes refid="whd_8h" local="yes">whd.h</includes>
     <incdepgraph>
-      <node id="32">
+      <node id="35">
         <label>stdint.h</label>
       </node>
-      <node id="29">
+      <node id="32">
         <label>whd_resource_api.h</label>
         <link refid="whd__resource__api_8h"/>
-        <childnode refid="30" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
       <node id="34">
-        <label>cy_result.h</label>
-      </node>
-      <node id="30">
-        <label>whd.h</label>
-        <link refid="whd_8h"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>cyhal_hw_types.h</label>
-      </node>
-      <node id="31">
         <label>whd_types.h</label>
         <link refid="whd__types_8h"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
         <childnode refid="35" relation="include">
         </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>cy_result.h</label>
       </node>
       <node id="33">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>cyhal_hw_types.h</label>
+      </node>
+      <node id="39">
+        <label>cyhal_gpio.h</label>
+      </node>
+      <node id="36">
         <label>cybsp.h</label>
       </node>
     </incdepgraph>
@@ -53,7 +58,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_resource_api.h" line="22" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_resource_api.h" bodystart="22" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h" line="22" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__resource__api_8h_1adc19ff8217ab10b1bdf1dcbdd3fe8aaf" prot="public" static="no">
+        <name>NVM_IMAGE_SIZE_ALIGNMENT</name>
+        <initializer>4</initializer>
+        <briefdescription>
+<para>The alignment size of NVRAM image. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h" line="25" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">
@@ -91,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_resource_api.h" line="27" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_resource_api.h" bodystart="26" bodyend="31"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h" line="32" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="31" bodyend="36"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -100,6 +117,6 @@
     <detaileddescription>
 <para>This file provides prototypes for functions which allow WHD to download firmware, NVRAM and CLM BLOB on a particular hardware platform. </para>
     </detaileddescription>
-    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_resource_api.h"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_resource_api.h"/>
   </compounddef>
 </doxygen>

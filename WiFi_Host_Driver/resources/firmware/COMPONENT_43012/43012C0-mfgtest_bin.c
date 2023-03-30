@@ -29395,3 +29395,4 @@ const unsigned char wifi_mfg_firmware_image_data[498728] = {
 };
 const resource_hnd_t wifi_mfg_firmware_image = { RESOURCE_IN_MEMORY, 498728, {.mem = { (const char *) wifi_mfg_firmware_image_data }}};
 #endif /* WLAN_MFG_FIRMWARE */
+

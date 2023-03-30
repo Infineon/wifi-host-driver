@@ -408,3 +408,4 @@ const unsigned char wifi_mfg_firmware_clm_blob_data[7341] =
 const resource_hnd_t wifi_mfg_firmware_clm_blob =
 { RESOURCE_IN_MEMORY, 7341, {.mem = { (const char *)wifi_mfg_firmware_clm_blob_data }}};
 #endif /* WLAN_MFG_FIRMWARE */
+

@@ -84,3 +84,4 @@ whd_result_t cy_buffer_add_remove_at_front(whd_buffer_t *buffer, int32_t add_rem
 
     return WHD_SUCCESS;
 }
+

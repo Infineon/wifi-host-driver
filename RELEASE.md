@@ -1,8 +1,8 @@
-# Wi-Fi Host Driver (WHD)  v2.5.0
+# Wi-Fi Host Driver (WHD)  v2.6.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
-* Supports Out-of-Band (OOB)
+* Supports Out-of-Band (OOB) 
 * Provides API functions for ARP, packet filters
 * Supports Wi-Fi Station (STA) and AP mode of operation
 * Supports concurrent operation of STA and AP interface
@@ -11,12 +11,15 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v2.4.0
+## Changes since v2.5.0
 ### New Features
-
+* Supports WPA2 with SHA256
+* Add support MURATA-1YN, MURATA-2AE and MURATA-2BC modules
+* Make NVRAM image size alighment configurable for supporting the specific MCU
+* Configurable for drive mode in OOB pin
 
 ### Defect Fixes
-* Fix build errors on IAR toolchain
+
 
 ### Known Issues
 
@@ -25,21 +28,19 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * --- 7.45.98.120 ---
 
 #### CYW43012
+* --- 13.10.271.293 ---
+* Add Clear PMKID Cache API
 * --- 13.10.271.289 ---
-* Apply SUTD Security Patches
-* --- 13.10.271.287 ---
 
 #### CYW4373
 * --- 13.10.246.286 ---
-* Apply SUTD Security Patches
-* --- 13.10.246.279 ---
 
 #### CYW43439
 * --- 7.95.55 ---
-* Apply SUTD Security Patches
-* --- 7.95.54 ---
 
 #### CYW43909
+* --- 7.15.168.159 ---
+* Supports WPA3 R3 in STA mode
 * --- 7.15.168.156 ---
 
 Note: [r] is regulatory-related
@@ -60,7 +61,7 @@ This version of the WHD was validated for compatibility with the following softw
 ## More Information
 * [Wi-Fi Host Driver README File](./README.md)
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)
-* [Infineon Technologies](http://www.infineon.com)
+* [Infineon Technologies](http://www.infineon.com) 
 
 ---
 © Infineon Technologies, 2019.

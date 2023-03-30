@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="375" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="375" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gab81522c25d723fbe18b90871a278ba9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="388" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="388" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="399" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="399" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga893ccaef6ed5d0afe95a96bbe89e8a80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="411" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="411" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga977fe2ff7c3f6966ffc40fda0e9694a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="422" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="422" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gae118219bea1b82ae76a5c1ee5f7f302c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -306,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="434" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="434" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gae9d18a43c3e8e09f38ecb5adbda450b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="446" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="446" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga96d5646b67b4ae5ec78f1a23789caca1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -402,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="456" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="456" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gad2daa1aba4dccd3f0506950ccee42113" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -444,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="466" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="466" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaff1c3d13edc4ceee2bebaeb93ec7a9c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -486,7 +486,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="475" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="475" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga112a1fa7274b896e41ee98f88f943c62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_pmkid_clear</definition>
+        <argsstring>(whd_interface_t ifp)</argsstring>
+        <name>whd_wifi_pmkid_clear</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <briefdescription>
+<para>Clear all PMKIDs in Device (WLAN), especially the PMKIDs in Supplicant module. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whd_result_t </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="483" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaf82eda2ff9979b1bc053a6d7f1f4b125" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -528,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="485" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="493" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga6ac8ec63a66fc046979bae1e809b0d25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -570,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="495" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="503" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gab571b303f19131fd032fba4b744dbf20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -624,7 +654,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="506" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="514" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga8a634822973adc75a61a05eb2b664ef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -666,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="541" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="549" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga52d3190589758d9fd36a7b27a9d08f28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -708,7 +738,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="550" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="558" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gab36ff07aa1d825c0366c82ce003dd9f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -751,7 +781,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="738" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="746" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gad092a543b73e91c7090875ccb940e01f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -794,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="751" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="759" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gac93f69169a725f277e955eec0bf528db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -851,7 +881,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="770" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="778" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga5a62f0854ad148dde280b4f75596a309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -898,7 +928,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="784" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="792" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga07144bbc68755481708752962538ee6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -928,7 +958,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="798" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="806" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gafe61d474712d3ce7e15ef371d87f54e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -971,7 +1001,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="813" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="821" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaaf7be7d8099507426f52ecff8f716543" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -1073,7 +1103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="830" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="838" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga2cf8ecd7c319660833bd30a060990dca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -1115,7 +1145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="841" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="849" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga48cd0946d2277a26ff6ddb4e601d7601" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1157,7 +1187,301 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="850" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="858" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1gaae1e930cb505d3cd13d46cd8b77c841b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_he_omi</definition>
+        <argsstring>(whd_interface_t ifp, whd_he_omi_params_t *he_omi_params)</argsstring>
+        <name>whd_wifi_he_omi</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__he__omi__params__t" kindref="compound">whd_he_omi_params_t</ref> *</type>
+          <declname>he_omi_params</declname>
+        </param>
+        <briefdescription>
+<para>Configure HE OM Control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>he_omi_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to he_omi parameters</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="867" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga7190d986953fe92012bb973495c87f48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_bss_max_idle</definition>
+        <argsstring>(whd_interface_t ifp, uint16_t period)</argsstring>
+        <name>whd_wifi_bss_max_idle</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+<para>Configure BSS Max Idle Time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bss max idle period time unit(seconds)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="876" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga54322c21ea7d6ee27db7cc921084ecbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_itwt_setup</definition>
+        <argsstring>(whd_interface_t ifp, whd_itwt_setup_params_t *twt_params)</argsstring>
+        <name>whd_wifi_itwt_setup</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__itwt__setup__params__t" kindref="compound">whd_itwt_setup_params_t</ref> *</type>
+          <declname>twt_params</declname>
+        </param>
+        <briefdescription>
+<para>Trigger individual TWT session(used by STA) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>twt_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to itwt_setup parameters</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="885" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga2dacd5151ab077f23ff2197ad033ae63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_btwt_join</definition>
+        <argsstring>(whd_interface_t ifp, whd_btwt_join_params_t *twt_params)</argsstring>
+        <name>whd_wifi_btwt_join</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__btwt__join__params__t" kindref="compound">whd_btwt_join_params_t</ref> *</type>
+          <declname>twt_params</declname>
+        </param>
+        <briefdescription>
+<para>Trigger Join broadcast TWT session(used by STA) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>twt_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to btwt_join parameters</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="894" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga81c6e1f320c6403816e9c56f91bbe4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_twt_teardown</definition>
+        <argsstring>(whd_interface_t ifp, whd_twt_teardown_params_t *twt_params)</argsstring>
+        <name>whd_wifi_twt_teardown</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__twt__teardown__params__t" kindref="compound">whd_twt_teardown_params_t</ref> *</type>
+          <declname>twt_params</declname>
+        </param>
+        <briefdescription>
+<para>Trigger teardown all individual or broadcast TWT sessions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>twt_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to twt_taerdown parameters</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="903" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga74a103b9c2302f6c61515127e1401829" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_twt_information_frame</definition>
+        <argsstring>(whd_interface_t ifp, whd_twt_information_params_t *twt_params)</argsstring>
+        <name>whd_wifi_twt_information_frame</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__twt__information__params__t" kindref="compound">whd_twt_information_params_t</ref> *</type>
+          <declname>twt_params</declname>
+        </param>
+        <briefdescription>
+<para>Trigger TWT information frame(used by STA) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>twt_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to twt_information parameters</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="913" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifiutilities_1ga963f841413cd793138ef2451d0e68a49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_btwt_config</definition>
+        <argsstring>(whd_interface_t ifp, whd_btwt_config_params_t *twt_params)</argsstring>
+        <name>whd_wifi_btwt_config</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="structwhd__btwt__config__params__t" kindref="compound">whd_btwt_config_params_t</ref> *</type>
+          <declname>twt_params</declname>
+        </param>
+        <briefdescription>
+<para>Configure TWT IE in beacon(used by AP) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>twt_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to btwt_config parameters</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS or Error code </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="922" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga95237c0e6182bfb176519421ac9287b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -1199,7 +1523,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="859" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="931" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gafad0f635db3968da01437542c13c91db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1241,7 +1565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="868" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="940" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga1441ae647ff194b94413cbe2016be113" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1283,7 +1607,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="877" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="949" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gae6bf707d845518cba9a8256fb5681f4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1325,7 +1649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="886" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="958" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga2cd55bdc13221177c61310ecaa6f4bd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1367,7 +1691,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="896" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="968" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gab61ae9878853c02b4cf194c2c3a7377f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1409,7 +1733,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="906" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="978" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga22d76514755f2dfde0ee6acbc193787a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1451,7 +1775,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="915" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="987" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaa30d9e2a761de17962312d818f941c05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1493,7 +1817,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="925" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="997" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga01ece00a357914d02fa5a181fbddbf8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1523,7 +1847,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="933" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1005" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga54728d3d6a714ef9264d6e25df9a6722" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1565,7 +1889,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="943" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1015" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gab4ebcd7fdd7b328e2f4e10b79197cfca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1607,7 +1931,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="953" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1025" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaf70b6becc3e4ecc551f5bf5278d7ad93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1649,7 +1973,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="963" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1035" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga417b404b9892862a572802a4ea38eb79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1703,7 +2027,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="973" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1045" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga61135784226a59af098384f4a071af02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1745,7 +2069,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="982" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1054" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga15cfc56bd481a4bc02c6dc93bfa6883c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1787,7 +2111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="991" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1063" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaa38f97cc9800e7355d96d833b32b1c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1829,7 +2153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1000" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1072" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaaf3cec4a4896670049ec3802c91a2d66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1859,7 +2183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1008" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1080" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga4287cc85981a511399ea927c84f61330" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1925,7 +2249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1019" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1091" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga564e95d3343802ed33d1b2c6fb531aeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1955,7 +2279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1027" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1099" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga9d65fe0a82dee5edf65eb6f1efe9df52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -1997,7 +2321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1036" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1108" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga37714a68f350e5a9e24dd6aeaea0ae98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2039,7 +2363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1046" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1118" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gae81aead624f8e374970e1aa3f330ea30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2081,7 +2405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1053" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1125" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaff414d31f3406ec5d1af54b889f4849a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2123,7 +2447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1060" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1132" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga3e70cd84bf811b869c955d75fa80590d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2165,7 +2489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1067" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1139" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga6af0c7e202709713fa5d06e71a585e28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2207,7 +2531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1074" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1146" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga35860e8c45162735f5ef3d93ed262d90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2261,7 +2585,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1082" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1154" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gacd9d57c8febb11cc240db23f5de92cd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2351,7 +2675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1094" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1166" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gab3e9371ccaa61f1f40e0246a66db42a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2393,7 +2717,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1103" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1175" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga26172adb5ec181bb8f2009e47eb252cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2447,7 +2771,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1111" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1183" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gaf6c70f49c254a8d7ef7397e7d83e0c9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2501,7 +2825,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1119" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1191" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gae6b46bcc1a3c7d708abc71ae6a123481" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2543,7 +2867,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1126" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1198" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga70cacca6b62ca658882d9070c49b6343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2585,7 +2909,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1133" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1205" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1gacc2882e3a308f7b2b938bc5741ab43c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2651,7 +2975,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1142" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1214" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiutilities_1ga189ed043d5ce9cf8d1a0845484a96d6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
@@ -2693,7 +3017,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="1150" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1222" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
