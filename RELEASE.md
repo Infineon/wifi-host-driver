@@ -36,7 +36,7 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * --- 13.10.246.286 ---
 
 #### CYW43439
-* --- 7.95.55 ---
+* --- 7.95.62 ---
 
 #### CYW43909
 * --- 7.15.168.159 ---
