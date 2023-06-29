@@ -1,5 +1,5 @@
-# Wi-Fi Host Driver (WHD)  v2.6.0
-Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
+# Wi-Fi Host Driver (WHD)  v2.6.1
+Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
 * Supports Out-of-Band (OOB) 
@@ -37,6 +37,8 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 
 #### CYW43439
 * --- 7.95.62 ---
+* Fixed EVM issue
+* --- 7.95.55 ---
 
 #### CYW43909
 * --- 7.15.168.159 ---
@@ -60,7 +62,7 @@ This version of the WHD was validated for compatibility with the following softw
 
 ## More Information
 * [Wi-Fi Host Driver README File](./README.md)
-* [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)
+* [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://infineon.github.io/wifi-host-driver/html/index.html)
 * [Infineon Technologies](http://www.infineon.com) 
 
 ---

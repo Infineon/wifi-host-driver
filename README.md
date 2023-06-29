@@ -20,7 +20,7 @@ The [release notes](./RELEASE.md) detail the current release. You can also find 
 |  WPA3       |     |     |  O  |     |  O  |     |
 
 ### More information
-* [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://cypresssemiconductorco.github.io/wifi-host-driver/html/index.html)
+* [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://infineon.github.io/wifi-host-driver/html/index.html)
 * [Wi-Fi Host Driver Release Notes](./RELEASE.md)
 * [Infineon Technologies](http://www.infineon.com)
 

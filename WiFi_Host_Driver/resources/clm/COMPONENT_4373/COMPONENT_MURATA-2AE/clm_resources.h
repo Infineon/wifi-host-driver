@@ -15,17 +15,17 @@
  */
 /* Automatically generated file - this comment ensures resources.h file creation */
 /* Auto-generated header file. Do not edit */
-#ifndef INCLUDED_CLM_RESOURCES_H_
-#define INCLUDED_CLM_RESOURCES_H_
+#ifndef INCLUDED_RESOURCES_H_
+#define INCLUDED_RESOURCES_H_
 #include "wiced_resource.h"
 
 #ifndef WLAN_MFG_FIRMWARE
 extern const resource_hnd_t wifi_firmware_clm_blob;
-extern const unsigned char wifi_firmware_clm_blob_data[1688];
+extern const unsigned char wifi_firmware_clm_blob_data[1292];
 #endif /* !WLAN_MFG_FIRMWARE */
 #ifdef WLAN_MFG_FIRMWARE
 extern const resource_hnd_t wifi_mfg_firmware_clm_blob;
 extern const unsigned char wifi_mfg_firmware_clm_blob_data[7341];
 #endif /* WLAN_MFG_FIRMWARE */
 
-#endif /* ifndef INCLUDED_CLM_RESOURCES_H_ */
+#endif /* ifndef INCLUDED_RESOURCES_H_ */
