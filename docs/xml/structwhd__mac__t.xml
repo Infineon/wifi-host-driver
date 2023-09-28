@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" line="428" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" bodystart="428" bodyend="-1"/>
+        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="428" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="428" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -24,7 +24,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" line="427" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_types.h" bodystart="426" bodyend="429"/>
+    <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="427" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="426" bodyend="429"/>
     <listofallmembers>
       <member refid="structwhd__mac__t_1abc3755f1f66dea95fce153ee4f49e907" prot="public" virt="non-virtual"><scope>whd_mac_t</scope><name>octet</name></member>
     </listofallmembers>

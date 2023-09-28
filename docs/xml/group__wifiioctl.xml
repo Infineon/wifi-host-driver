@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1240" column="1"/>
+        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="1240" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiioctl_1ga817655c1372b8c87608b204105f06937" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1250" column="1"/>
+        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="1250" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiioctl_1ga5d7aec7622caacf4a0642cf1da1fa647" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1261" column="1"/>
+        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="1261" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiioctl_1gab1a4c2ae9163408ae92b3f292ee2807f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1272" column="1"/>
+        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="1272" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifiioctl_1ga2b1cdfc36df80ca4700076fd2747b34e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/WHD/mclass/whd/inc/whd_wifi_api.h" line="1286" column="1"/>
+        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="1286" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

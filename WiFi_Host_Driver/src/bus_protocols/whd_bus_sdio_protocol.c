@@ -60,7 +60,7 @@
 #define F2_AVAIL_TIMEOUT_MS   (500)
 #define F2_READY_TIMEOUT_MS   (1000)
 #define ALP_AVAIL_TIMEOUT_MS  (100)
-#define HT_AVAIL_TIMEOUT_MS   (500)
+#define HT_AVAIL_TIMEOUT_MS   (2500)
 #define ABORT_TIMEOUT_MS      (100)
 /* Taken from FALCON_5_90_195_26 dhd/sys/dhd_sdio.c. */
 #define SDIO_F2_WATERMARK     (8)
