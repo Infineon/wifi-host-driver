@@ -23,7 +23,6 @@
  *  sending/receiving raw packets etc
  */
 
-#include <stdlib.h>
 #include <string.h>  /* For memcpy */
 
 #include "cybsp.h"
@@ -50,7 +49,8 @@
 #include "whd_debug.h"
 #include "whd_types_int.h"
 #include "whd_resource_if.h"
-
+#include "whd_proto.h"
+#include "whd_utils.h"
 
 /******************************************************
 *             Constants
@@ -133,7 +133,6 @@ struct whd_bus_priv
 {
     whd_spi_config_t spi_config;
     cyhal_spi_t *spi_obj;
-
 };
 
 /******************************************************
@@ -147,6 +146,7 @@ struct whd_bus_priv
 static whd_result_t whd_spi_download_firmware(whd_driver_t whd_driver);
 static whd_result_t whd_bus_spi_transfer_buffer(whd_driver_t whd_driver, whd_bus_transfer_direction_t direction,
                                                 whd_bus_function_t function, uint32_t address, whd_buffer_t buffer);
+static whd_result_t whd_bus_spi_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
 static whd_result_t whd_bus_spi_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
                                                   whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
 static whd_result_t whd_bus_spi_write_wifi_nvram_image(whd_driver_t whd_driver);
@@ -173,7 +173,7 @@ uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_c
         return WHD_BADARG;
     }
 
-    whd_bus_info = (whd_bus_info_t *)malloc(sizeof(whd_bus_info_t) );
+    whd_bus_info = (whd_bus_info_t *)whd_mem_malloc(sizeof(whd_bus_info_t) );
 
     if (whd_bus_info == NULL)
     {
@@ -184,7 +184,7 @@ uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_c
 
     whd_driver->bus_if = whd_bus_info;
 
-    whd_driver->bus_priv = (struct whd_bus_priv *)malloc(sizeof(struct whd_bus_priv) );
+    whd_driver->bus_priv = (struct whd_bus_priv *)whd_mem_malloc(sizeof(struct whd_bus_priv) );
 
     if (whd_driver->bus_priv == NULL)
     {
@@ -196,6 +196,8 @@ uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_c
     /* Pass the SPI object to bus private spi_obj pointer */
     whd_driver->bus_priv->spi_obj = spi_obj;
     whd_driver->bus_priv->spi_config = *whd_spi_config;
+
+    whd_driver->proto_type = WHD_PROTO_BCDC;
 
     whd_bus_info->whd_bus_init_fptr = whd_bus_spi_init;
     whd_bus_info->whd_bus_deinit_fptr = whd_bus_spi_deinit;
@@ -230,6 +232,7 @@ uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_c
     whd_bus_info->whd_bus_reinit_stats_fptr = whd_bus_spi_reinit_stats;
     whd_bus_info->whd_bus_irq_register_fptr = whd_bus_spi_irq_register;
     whd_bus_info->whd_bus_irq_enable_fptr = whd_bus_spi_irq_enable;
+    whd_bus_info->whd_bus_blhs_fptr = whd_bus_spi_blhs;
     whd_bus_info->whd_bus_download_resource_fptr = whd_bus_spi_download_resource;
     whd_bus_info->whd_bus_set_backplane_window_fptr = whd_bus_spi_set_backplane_window;
 
@@ -240,12 +243,12 @@ void whd_bus_spi_detach(whd_driver_t whd_driver)
 {
     if (whd_driver->bus_if != NULL)
     {
-        free(whd_driver->bus_if);
+        whd_mem_free(whd_driver->bus_if);
         whd_driver->bus_if = NULL;
     }
     if (whd_driver->bus_priv != NULL)
     {
-        free(whd_driver->bus_priv);
+        whd_mem_free(whd_driver->bus_priv);
         whd_driver->bus_priv = NULL;
     }
 }
@@ -721,7 +724,7 @@ whd_result_t whd_bus_spi_init(whd_driver_t whd_driver)
     }
     if (whd_driver->aligned_addr == NULL)
     {
-        if ( (aligned_addr = malloc(WHD_LINK_MTU) ) == NULL )
+        if ( (aligned_addr = whd_mem_malloc(WHD_LINK_MTU) ) == NULL )
         {
             WPRINT_WHD_ERROR( ("Memory allocation failed for aligned_addr in %s \n", __FUNCTION__) );
             return WHD_MALLOC_FAILURE;
@@ -731,17 +734,18 @@ whd_result_t whd_bus_spi_init(whd_driver_t whd_driver)
     result = whd_chip_specific_init(whd_driver);
     if (result != WHD_SUCCESS)
     {
-        free(whd_driver->aligned_addr);
+        whd_mem_free(whd_driver->aligned_addr);
         whd_driver->aligned_addr = NULL;
     }
     CHECK_RETURN(result);
     result = whd_ensure_wlan_bus_is_up(whd_driver);
     if (result != WHD_SUCCESS)
     {
-        free(whd_driver->aligned_addr);
+        whd_mem_free(whd_driver->aligned_addr);
         whd_driver->aligned_addr = NULL;
     }
     CHECK_RETURN(result);
+
     return result;
 }
 
@@ -753,7 +757,7 @@ whd_result_t whd_bus_spi_deinit(whd_driver_t whd_driver)
     //host_platform_reset_wifi (WHD_TRUE);
     if (whd_driver->aligned_addr)
     {
-        free(whd_driver->aligned_addr);
+        whd_mem_free(whd_driver->aligned_addr);
         whd_driver->aligned_addr = NULL;
     }
     whd_bus_set_resource_download_halt(whd_driver, WHD_FALSE);
@@ -1204,6 +1208,11 @@ whd_result_t whd_bus_spi_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
     cyhal_gpio_irq_enable(config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
 #endif
     return WHD_TRUE;
+}
+
+static whd_result_t whd_bus_spi_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage)
+{
+    return WHD_SUCCESS;
 }
 
 static whd_result_t whd_bus_spi_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,

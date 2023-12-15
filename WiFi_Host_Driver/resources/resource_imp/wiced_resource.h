@@ -226,4 +226,3 @@ extern resource_result_t resource_free_readonly_buffer(const resource_hnd_t *han
 #endif
 
 #endif /* ifndef INCLUDED_RESOURCE_H_ */
-

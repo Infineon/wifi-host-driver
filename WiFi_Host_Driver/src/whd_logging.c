@@ -109,4 +109,3 @@ void whd_print_logbuffer(void)
 }
 
 #endif /* ifdef WHD_LOGGING_BUFFER_ENABLE */
-

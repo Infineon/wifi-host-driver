@@ -21,6 +21,7 @@
 
 #include "whd_debug.h"
 #include "whd_network_if.h"
+#include "whd_proto.h"
 
 /******************************************************
  *  * @cond               Constants
@@ -83,3 +84,14 @@ whd_result_t whd_network_process_ethernet_data(whd_interface_t ifp, whd_buffer_t
     return WHD_WLAN_NOFUNCTION;
 }
 
+/** Sends a data packet.
+ *
+ * @param buffer  : The ethernet packet buffer to be sent
+ * @param interface : the interface over which to send the packet (AP or STA)
+ *
+ * @return    WHD result code
+ */
+whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
+{
+    return whd_proto_tx_queue_data(ifp, buffer);
+}

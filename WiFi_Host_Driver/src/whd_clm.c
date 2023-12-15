@@ -19,16 +19,19 @@
  *  Provides generic clm blob file download functionality
  */
 
-#include <stdlib.h>
 #include "whd_clm.h"
 #include "whd_wlioctl.h"
+#ifndef PROTO_MSGBUF
 #include "whd_cdc_bdc.h"
+#endif /* PROTO_MSGBUF */
 #include "whd_debug.h"
 #include "whd_int.h"
 #include "whd_buffer_api.h"
 #include "whd_resource_if.h"
 #include "whd_resource_api.h"
 #include "whd_types_int.h"
+#include "whd_proto.h"
+#include "whd_utils.h"
 
 /******************************************************
 * @cond       Constants
@@ -57,10 +60,10 @@ whd_download_wifi_clm_image(whd_interface_t ifp, const char *iovar, uint16_t fla
     whd_assert("dload buffer too large", len < 0xffffffff - 8);
     len = len + 8 - (len % 8);
 
-    iov_data = (uint8_t *)whd_cdc_get_iovar_buffer(whd_driver, &buffer, (uint16_t)len, iovar);
+    iov_data = (uint8_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, (uint16_t)len, iovar);
     CHECK_IOCTL_BUFFER(iov_data);
     memcpy(iov_data, (uint8_t *)dload_ptr, len);
-    CHECK_RETURN(whd_cdc_send_iovar(ifp, CDC_SET, buffer, NULL) );
+    CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
     return WHD_SUCCESS;
 }
 
@@ -88,6 +91,11 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
         WPRINT_WHD_ERROR( ("Fatal error: download_resource doesn't exist\n") );
         return ret;
     }
+    else if (clm_blob_size == 0)
+    {
+        WPRINT_WHD_INFO( ("No loading CLM blob file\n") );
+        return WHD_SUCCESS;
+    }
 
     ret = whd_get_resource_no_of_blocks(whd_driver, WHD_RESOURCE_WLAN_CLM, &blocks_count);
     if (ret != WHD_SUCCESS)
@@ -100,7 +108,7 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
     size2alloc = data_offset + BLOCK_SIZE;
 
 
-    if ( (chunk_buf = (unsigned char *)malloc(size2alloc) ) != NULL )
+    if ( (chunk_buf = (unsigned char *)whd_mem_malloc(size2alloc) ) != NULL )
     {
         memset(chunk_buf, 0, size2alloc);
         transfer_progress = 0;
@@ -134,7 +142,7 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
             }
         }
 
-        free(chunk_buf);
+        whd_mem_free(chunk_buf);
         if (ret != WHD_SUCCESS)
         {
             whd_result_t ret_clmload_status;
@@ -144,9 +152,9 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
 
             WPRINT_WHD_DEBUG( ("clmload (%" PRIu32 " byte file) failed with return %" PRIu32 "; ", clm_blob_size,
                                ret) );
-            data = (int *)whd_cdc_get_iovar_buffer(whd_driver, &buffer, 4, IOVAR_STR_CLMLOAD_STATUS);
+            data = (int *)whd_proto_get_iovar_buffer(whd_driver, &buffer, 4, IOVAR_STR_CLMLOAD_STATUS);
             CHECK_IOCTL_BUFFER(data);
-            ret_clmload_status = whd_cdc_send_iovar(ifp, CDC_GET, buffer, &response);
+            ret_clmload_status = whd_proto_get_iovar(ifp, buffer, &response);
             if (ret_clmload_status != WHD_SUCCESS)
             {
                 WPRINT_WHD_DEBUG( ("clmload_status failed with return %lu\n", ret_clmload_status) );
@@ -170,4 +178,3 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
 
     return ret;
 }
-

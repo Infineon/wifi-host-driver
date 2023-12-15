@@ -126,6 +126,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gae41c4ab0b2f3ecc433a6c4e89238b066"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#gae41c4ab0b2f3ecc433a6c4e89238b066">whd_wifi_join_specific</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, const <a class="el" href="whd__types_8h.html#a58298b1b5c2f2425d5aed061de48aaa7">whd_scan_result_t</a> *ap, const uint8_t *security_key, uint8_t key_length)</td></tr>
 <tr class="memdesc:gae41c4ab0b2f3ecc433a6c4e89238b066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joins a specific Wi-Fi network.  <a href="#gae41c4ab0b2f3ecc433a6c4e89238b066">More...</a><br /></td></tr>
 <tr class="separator:gae41c4ab0b2f3ecc433a6c4e89238b066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga99f5e49ef124d6522fb5290c913cd838"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#ga99f5e49ef124d6522fb5290c913cd838">whd_wifi_set_chanspec</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#ac2f5aa33ad4da263645133854e489c76">wl_chanspec_t</a> chanspec)</td></tr>
+<tr class="memdesc:ga99f5e49ef124d6522fb5290c913cd838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current chanspec on the WLAN radio.  <a href="#ga99f5e49ef124d6522fb5290c913cd838">More...</a><br /></td></tr>
+<tr class="separator:ga99f5e49ef124d6522fb5290c913cd838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga971ed7d8e459c715aa9bf3c52b563d8b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__wifijoin.html#ga971ed7d8e459c715aa9bf3c52b563d8b">whd_wifi_leave</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp)</td></tr>
 <tr class="memdesc:ga971ed7d8e459c715aa9bf3c52b563d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassociates from a Wi-Fi network.  <a href="#ga971ed7d8e459c715aa9bf3c52b563d8b">More...</a><br /></td></tr>
 <tr class="separator:ga971ed7d8e459c715aa9bf3c52b563d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -551,6 +554,45 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS when the system is joined and ready to send data packets Error code if an error occurred </dd></dl>
+
+</div>
+</div>
+<a id="ga99f5e49ef124d6522fb5290c913cd838"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga99f5e49ef124d6522fb5290c913cd838">&#9670;&nbsp;</a></span>whd_wifi_set_chanspec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t whd_wifi_set_chanspec </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="whd__types_8h.html#ac2f5aa33ad4da263645133854e489c76">wl_chanspec_t</a>&#160;</td>
+          <td class="paramname"><em>chanspec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the current chanspec on the WLAN radio. </p>
+<dl class="section note"><dt>Note</dt><dd>On most WLAN devices this will set the chanspec for both AP <em>AND</em> STA (since there is only one radio - it cannot be on two chanspec simulaneously)</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">chanspec</td><td>The desired chanspec</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS if the chanspec was successfully set Error code if the chanspec was not successfully set </dd></dl>
 
 </div>
 </div>

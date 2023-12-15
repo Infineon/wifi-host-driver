@@ -59,9 +59,17 @@ extern "C"
 #define PM2_POWERSAVE_MODE          (2) /**< Powersave mode on specified interface with High throughput */
 #define NO_POWERSAVE_MODE           (0) /**< No Powersave mode */
 
+#define ULP_BUSWIDTH_INTR_MODE      (0) /**< Use BUS Width Interrupt method, when device is in DS2 state Exit */
+#define ULP_OOB_INTR_MODE           (1) /**< Use OOB interrupt method, when device is in DS2 state Exit */
+#define ULP_ASYNC_INTR_MODE         (2) /**< Use Asynchronous method, when device is in DS2 state Exit */
+
 #define PMKID_LEN                   (16) /**< PMKID LENGTH */
 
+#define ULP_NO_SUPPORT              (0) /* Flag to disable ULP in 43022 */
+#define ULP_DS1_SUPPORT             (1) /* Flag to enable DS1 mode in 43022 */
+#define ULP_DS2_SUPPORT             (2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */
 #define WHD_OOB_CONFIG_VERSION      (2) /**< Indicate the version for whd_oob_config structure */
+#define WHD_SAP_USE_CHANSPEC        (1) /**< Define this macro as any value indicate whd_wifi_init_ap api uses chanspec instead of channel */
 
 /**
  * Suppress unused parameter warning
@@ -108,6 +116,8 @@ typedef struct whd_tko_status whd_tko_status_t;
 
 #define BDC_HEADER_WITH_PAD 6  /**< BDC Header with padding 4 + 2 */
 
+#define MSGBUF_OVERHEAD_WITH_PAD 6  /**< Overhaed Space with padding 4 + 2 */
+
 /** From bdc header, Ethernet data starts after an offset of (bdc_header->data_offset<<2).
  * It is variable, but usually 4.
  */
@@ -121,18 +131,28 @@ typedef struct whd_tko_status whd_tko_status_t;
 #define MAX_BUS_HEADER_SIZE 4 /**< Max bus header size for all bus types (spi) */
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
 #define MAX_BUS_HEADER_SIZE 8 /**< Max bus header size for all bus types (m2m) */
+#elif defined(COMPONENT_WIFI_INTERFACE_OCI)
+#define MAX_BUS_HEADER_SIZE 8 /**< Max bus header size for all bus types (custom/oci) */
 #else
-#error "CYBSP_WIFI_INTERFACE_TYPE is not defined"
+#error "CYBSP_WIFI_INTERFACE_TYPE or COMPONENT_WIFI_INTERFACE_OCI is not defined"
 #endif
 
 #define BUFFER_OVERHEAD 4 /**< Buffer overhead, sizeof(void *) */
 
+#ifndef PROTO_MSGBUF
 /**
  * The maximum space in bytes required for headers in front of the Ethernet header.
  * 6 + (8 + 4) + 4 + 4 + 4 = 30 bytes
  */
 #define WHD_LINK_HEADER (BDC_HEADER_WITH_PAD + BDC_HEADER_OFFSET_TO_DATA + \
                          SDPCM_HEADER + MAX_BUS_HEADER_SIZE + BUFFER_OVERHEAD)
+#else
+/*
+ * In nx_user.h NX_PHYSICAL_HEADER is (14(Ethernet) + 4(Overhaed) + 2(pad)),
+ * so we are doing the similar here -> 4(hedaer) + 2(pad) in front of ethernet header
+ */
+#define WHD_LINK_HEADER (MSGBUF_OVERHEAD_WITH_PAD)
+#endif /* PROTO_MSGBUF */
 
 /**
  * The size of an Ethernet header
@@ -268,7 +288,8 @@ typedef enum
 typedef enum
 {
     WHD_802_11_BAND_5GHZ   = 0, /**< Denotes 5GHz radio band   */
-    WHD_802_11_BAND_2_4GHZ = 1  /**< Denotes 2.4GHz radio band */
+    WHD_802_11_BAND_2_4GHZ = 1, /**< Denotes 2.4GHz radio band */
+    WHD_802_11_BAND_6GHZ   = 2  /**< Denotes 6GHz radio band   */
 } whd_802_11_band_t;
 
 /**
@@ -315,8 +336,8 @@ typedef enum
 typedef struct
 {
     int32_t number_of_bands; /**< Number of bands supported, currently 1 or 2      */
-    int32_t current_band;    /**< Current band type: WLC_BAND_2G or WLC_BAND_5G   */
-    int32_t other_band;      /**< If value of number_of_bands parameter is 2, then this member specifies the 2nd band */
+    int32_t current_band;    /**< Current band type: WLC_BAND_2G or WLC_BAND_5G or WLC_BAND_6G   */
+    int32_t other_band[2];   /**< If value of number_of_bands parameter is 2, then this member specifies the 2nd band */
 } whd_band_list_t;
 
 /**
@@ -422,8 +443,10 @@ typedef enum
  */
 typedef enum
 {
-    WHD_FWCAP_SAE = 0,     /**< Internal SAE */
-    WHD_FWCAP_SAE_EXT = 1, /**< External SAE */
+    WHD_FWCAP_SAE = 0,        /**< Internal SAE */
+    WHD_FWCAP_SAE_EXT = 1,    /**< External SAE */
+    WHD_FWCAP_OFFLOADS = 2,   /**< Offload config */
+    WHD_FWCAP_GCMP = 3,       /**< GCMP */
 } whd_fwcap_id_t;
 
 /******************************************************
@@ -923,6 +946,10 @@ typedef uint32_t whd_result_t;
 #define WHD_HAL_ERROR                    WHD_RESULT_CREATE(1069)   /**< WHD HAL Error */
 #define WHD_RTOS_STATIC_MEM_LIMIT        WHD_RESULT_CREATE(1070)   /**< Exceeding the RTOS static objects memory */
 #define WHD_NO_REGISTER_FUNCTION_POINTER WHD_RESULT_CREATE(1071)   /**< No register function pointer */
+#define WHD_BLHS_VALIDATE_FAILED         WHD_RESULT_CREATE(1072)   /**< Bootloader handshake validation failed */
+#define WHD_BUS_UP_FAIL                  WHD_RESULT_CREATE(1073)   /**< bus failed to come up */
+#define WHD_BUS_MEM_RESERVE_FAIL         WHD_RESULT_CREATE(1074)   /**< commonring reserve for write failed */
+#define WHD_NO_PKT_ID_AVAILABLE          WHD_RESULT_CREATE(1075)   /**< commonring reserve for write failed */
 
 #define WLAN_ENUM_OFFSET 2000            /**< WLAN enum offset for WHD_WLAN error processing */
 
@@ -1155,11 +1182,11 @@ typedef struct
 typedef struct whd_oob_config
 {
     cyhal_gpio_t host_oob_pin;          /**< Host-side GPIO pin selection */
+    cyhal_gpio_drive_mode_t drive_mode; /**< Host-side GPIO pin drive mode */
+    whd_bool_t init_drive_state;        /**< Host-side GPIO pin initial drive state */
     uint8_t dev_gpio_sel;               /**< WiFi device-side GPIO pin selection (must be zero) */
     whd_bool_t is_falling_edge;         /**< Interrupt trigger (polarity) */
     uint8_t intr_priority;              /**< OOB interrupt priority */
-    cyhal_gpio_drive_mode_t drive_mode; /**< Host-side GPIO pin drive mode */
-    whd_bool_t init_drive_state;        /**< Host-side GPIO pin initial drive state */
 } whd_oob_config_t;
 
 /**
@@ -1192,6 +1219,14 @@ typedef struct whd_m2m_config
     whd_bool_t is_normal_mode; /**< Default is false */
 } whd_m2m_config_t;
 
+/**
+ * Structure for OCI config parameters which can be set by application during whd power up
+ */
+typedef struct whd_oci_config
+{
+    /* Bus config */
+    whd_bool_t is_normal_mode; /**< Default is false */
+} whd_oci_config_t;
 
 /**
  * Enumeration of applicable packet mask bits for custom Information Elements (IEs)

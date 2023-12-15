@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+#ifndef PROTO_MSGBUF
 #include <limits.h>
 #include "whd_int.h"
 #include "whd_cdc_bdc.h"
@@ -26,6 +27,8 @@
 #include "whd_thread_internal.h"
 #include "whd_buffer_api.h"
 #include "whd_network_if.h"
+#include "whd_proto.h"
+#include "whd_utils.h"
 
 /******************************************************
 *        Constants
@@ -95,79 +98,32 @@ static uint8_t whd_map_dscp_to_priority(whd_driver_t whd_driver, uint8_t val)
     return dscp_to_wmm_qos[dscp_val];
 }
 
-void whd_cdc_bdc_info_deinit(whd_driver_t whd_driver)
+static whd_result_t whd_cdc_set_ioctl(whd_interface_t ifp, uint32_t command,
+                                      whd_buffer_t send_buffer_hnd,
+                                      whd_buffer_t *response_buffer_hnd)
 {
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
-    whd_error_info_t *error_info = &whd_driver->error_info;
-
-    /* Delete the sleep mutex */
-    (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_sleep);
-
-    /* Delete the queue mutex.  */
-    (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_mutex);
-
-    /* Delete the event list management mutex */
-    (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->event_list_mutex);
-
-    /* Delete the error list management mutex */
-    (void)cy_rtos_deinit_semaphore(&error_info->event_list_mutex);
+    return whd_cdc_send_ioctl(ifp, CDC_SET, command, send_buffer_hnd, response_buffer_hnd);
 }
 
-whd_result_t whd_cdc_bdc_info_init(whd_driver_t whd_driver)
+static whd_result_t whd_cdc_get_ioctl(whd_interface_t ifp, uint32_t command,
+                                      whd_buffer_t send_buffer_hnd,
+                                      whd_buffer_t *response_buffer_hnd)
 {
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
-    whd_error_info_t *error_info = &whd_driver->error_info;
+    return whd_cdc_send_ioctl(ifp, CDC_GET, command, send_buffer_hnd, response_buffer_hnd);
+}
 
-    /* Create the mutex protecting the packet send queue */
-    if (cy_rtos_init_semaphore(&cdc_bdc_info->ioctl_mutex, 1, 0) != WHD_SUCCESS)
-    {
-        return WHD_SEMAPHORE_ERROR;
-    }
-    if (cy_rtos_set_semaphore(&cdc_bdc_info->ioctl_mutex, WHD_FALSE) != WHD_SUCCESS)
-    {
-        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
-        return WHD_SEMAPHORE_ERROR;
-    }
+static whd_result_t whd_cdc_set_iovar(whd_interface_t ifp,
+                                      whd_buffer_t send_buffer_hnd,
+                                      whd_buffer_t *response_buffer_hnd)
+{
+    return whd_cdc_send_iovar(ifp, CDC_SET, send_buffer_hnd, response_buffer_hnd);
+}
 
-    /* Create the event flag which signals the whd thread needs to wake up */
-    if (cy_rtos_init_semaphore(&cdc_bdc_info->ioctl_sleep, 1, 0) != WHD_SUCCESS)
-    {
-        cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_mutex);
-        return WHD_SEMAPHORE_ERROR;
-    }
-
-    /* Create semaphore to protect event list management */
-    if (cy_rtos_init_semaphore(&cdc_bdc_info->event_list_mutex, 1, 0) != WHD_SUCCESS)
-    {
-        cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_sleep);
-        cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_mutex);
-        return WHD_SEMAPHORE_ERROR;
-    }
-    if (cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) != WHD_SUCCESS)
-    {
-        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
-        return WHD_SEMAPHORE_ERROR;
-    }
-
-    /* Initialise the list of event handler functions */
-    memset(cdc_bdc_info->whd_event_list, 0, sizeof(cdc_bdc_info->whd_event_list) );
-
-    /* Create semaphore to protect event list management */
-    if (cy_rtos_init_semaphore(&error_info->event_list_mutex, 1, 0) != WHD_SUCCESS)
-    {
-        return WHD_SEMAPHORE_ERROR;
-    }
-
-    if (cy_rtos_set_semaphore(&error_info->event_list_mutex, WHD_FALSE) != WHD_SUCCESS)
-    {
-        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
-        return WHD_SEMAPHORE_ERROR;
-    }
-
-    /* Initialise the list of error handler functions */
-    memset(error_info->whd_event_list, 0, sizeof(error_info->whd_event_list) );
-
-    return WHD_SUCCESS;
+static whd_result_t whd_cdc_get_iovar(whd_interface_t ifp,
+                                      whd_buffer_t send_buffer_hnd,
+                                      whd_buffer_t *response_buffer_hnd)
+{
+    return whd_cdc_send_iovar(ifp, CDC_GET, send_buffer_hnd, response_buffer_hnd);
 }
 
 /** Sends an IOCTL command
@@ -204,7 +160,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     cdc_header_t *cdc_header;
     uint32_t bss_index = ifp->bsscfgidx;
     whd_driver_t whd_driver = ifp->whd_driver;
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
+    whd_cdc_bdc_info_t *cdc_bdc_info = whd_driver->proto->pd;
 
     /* Validate the command value */
     if (command > INT_MAX)
@@ -281,6 +237,7 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     if (retval != WHD_SUCCESS)
     {
         /* Release the mutex since ioctl response will no longer be referenced. */
+        WPRINT_WHD_DEBUG(("Release the mutex since ioctl response will no longer be referenced !\n"));
         CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->ioctl_mutex, WHD_FALSE) );
         return retval;
     }
@@ -386,6 +343,34 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
     }
 }
 
+/** A helper function to easily acquire and initialise a buffer destined for use as an ioctl
+ *
+ * @param  buffer      : A pointer to a whd_buffer_t object where the created buffer will be stored
+ * @param  data_length : The length of space reserved for user data
+ *
+ * @return A pointer to the start of user data with data_length space available
+ */
+void *whd_cdc_get_ioctl_buffer(whd_driver_t whd_driver,
+                               whd_buffer_t *buffer,
+                               uint16_t data_length)
+{
+    if ( (uint32_t)IOCTL_OFFSET + data_length > USHRT_MAX )
+    {
+        WPRINT_WHD_ERROR( ("The reserved ioctl buffer length is over %u\n", USHRT_MAX) );
+        return NULL;
+    }
+    if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX, (uint16_t)(IOCTL_OFFSET + data_length),
+                            (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
+    {
+        return (whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) + IOCTL_OFFSET);
+    }
+    else
+    {
+        WPRINT_WHD_ERROR( ("Error - failed to allocate a packet buffer for IOCTL\n") );
+        return NULL;
+    }
+}
+
 /** Sends a data packet.
  *
  *  This function should be called by the bottom of the network stack in order for it
@@ -398,7 +383,7 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
  *
  * @return    WHD result code
  */
-whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
+whd_result_t whd_cdc_tx_queue_data(whd_interface_t ifp, whd_buffer_t buffer)
 {
     data_header_t *packet;
     whd_result_t result;
@@ -472,32 +457,97 @@ whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t bu
 
 }
 
-/** A helper function to easily acquire and initialise a buffer destined for use as an ioctl
- *
- * @param  buffer      : A pointer to a whd_buffer_t object where the created buffer will be stored
- * @param  data_length : The length of space reserved for user data
- *
- * @return A pointer to the start of user data with data_length space available
- */
-void *whd_cdc_get_ioctl_buffer(whd_driver_t whd_driver,
-                               whd_buffer_t *buffer,
-                               uint16_t data_length)
+void whd_cdc_bdc_info_deinit(whd_driver_t whd_driver)
 {
-    if ( (uint32_t)IOCTL_OFFSET + data_length > USHRT_MAX )
+    whd_cdc_bdc_info_t *cdc_bdc_info = whd_driver->proto->pd;
+    whd_error_info_t *error_info = &whd_driver->error_info;
+
+    /* Delete the sleep mutex */
+    (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_sleep);
+
+    /* Delete the queue mutex.  */
+    (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_mutex);
+
+    /* Delete the event list management mutex */
+    (void)cy_rtos_deinit_semaphore(&cdc_bdc_info->event_list_mutex);
+
+    whd_driver->proto->pd = NULL;
+    whd_mem_free(cdc_bdc_info);
+
+    /* Delete the error list management mutex */
+    (void)cy_rtos_deinit_semaphore(&error_info->event_list_mutex);
+}
+
+whd_result_t whd_cdc_bdc_info_init(whd_driver_t whd_driver)
+{
+    whd_cdc_bdc_info_t *cdc_bdc_info;
+    whd_error_info_t *error_info = &whd_driver->error_info;
+
+    cdc_bdc_info = (whd_cdc_bdc_info_t *)whd_mem_malloc(sizeof(whd_cdc_bdc_info_t) );
+    if (!cdc_bdc_info)
     {
-        WPRINT_WHD_ERROR( ("The reserved ioctl buffer length is over %u\n", USHRT_MAX) );
-        return NULL;
+        return WHD_MALLOC_FAILURE;
     }
-    if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX, (uint16_t)(IOCTL_OFFSET + data_length),
-                            (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
+
+    /* Create the mutex protecting the packet send queue */
+    if (cy_rtos_init_semaphore(&cdc_bdc_info->ioctl_mutex, 1, 0) != WHD_SUCCESS)
     {
-        return (whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) + IOCTL_OFFSET);
+        return WHD_SEMAPHORE_ERROR;
     }
-    else
+    if (cy_rtos_set_semaphore(&cdc_bdc_info->ioctl_mutex, WHD_FALSE) != WHD_SUCCESS)
     {
-        WPRINT_WHD_ERROR( ("Error - failed to allocate a packet buffer for IOCTL\n") );
-        return NULL;
+        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
     }
+
+    /* Create the event flag which signals the whd thread needs to wake up */
+    if (cy_rtos_init_semaphore(&cdc_bdc_info->ioctl_sleep, 1, 0) != WHD_SUCCESS)
+    {
+        cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_mutex);
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    /* Create semaphore to protect event list management */
+    if (cy_rtos_init_semaphore(&cdc_bdc_info->event_list_mutex, 1, 0) != WHD_SUCCESS)
+    {
+        cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_sleep);
+        cy_rtos_deinit_semaphore(&cdc_bdc_info->ioctl_mutex);
+        return WHD_SEMAPHORE_ERROR;
+    }
+    if (cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    /* Initialise the list of event handler functions */
+    memset(cdc_bdc_info->whd_event_list, 0, sizeof(cdc_bdc_info->whd_event_list) );
+
+    /* Create semaphore to protect event list management */
+    if (cy_rtos_init_semaphore(&error_info->event_list_mutex, 1, 0) != WHD_SUCCESS)
+    {
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    if (cy_rtos_set_semaphore(&error_info->event_list_mutex, WHD_FALSE) != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    /* Initialise the list of error handler functions */
+    memset(error_info->whd_event_list, 0, sizeof(error_info->whd_event_list) );
+
+    whd_driver->proto->get_ioctl_buffer = whd_cdc_get_ioctl_buffer;
+    whd_driver->proto->get_iovar_buffer = whd_cdc_get_iovar_buffer;
+    whd_driver->proto->set_ioctl = whd_cdc_set_ioctl;
+    whd_driver->proto->get_ioctl = whd_cdc_get_ioctl;
+    whd_driver->proto->set_iovar = whd_cdc_set_iovar;
+    whd_driver->proto->get_iovar = whd_cdc_get_iovar;
+    whd_driver->proto->tx_queue_data = whd_cdc_tx_queue_data;
+    whd_driver->proto->pd = cdc_bdc_info;
+
+    return WHD_SUCCESS;
 }
 
 /** Processes CDC header information received in the RX packet and sets IOCTL response buffer
@@ -510,7 +560,7 @@ void whd_process_cdc(whd_driver_t whd_driver, whd_buffer_t buffer)
 {
     uint32_t flags;
     uint16_t id;
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
+    whd_cdc_bdc_info_t *cdc_bdc_info = whd_driver->proto->pd;
     whd_result_t result;
     cdc_header_t *cdc_header = (cdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     whd_result_t ioctl_mutex_res;
@@ -619,7 +669,7 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
     uint16_t ether_type;
     whd_event_header_t *whd_event;
     whd_event_t *event, *aligned_event = (whd_event_t *)whd_driver->aligned_addr;
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
+    whd_cdc_bdc_info_t *cdc_bdc_info = whd_driver->proto->pd;
     whd_result_t result;
     bdc_header_t *bdc_header = (bdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     uint16_t i;
@@ -758,3 +808,4 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
 
 }
 
+#endif /* PROTO_MSGBUF */

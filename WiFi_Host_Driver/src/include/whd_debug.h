@@ -16,7 +16,6 @@
  */
 
 #include <stdio.h>
-#include <stdio.h>
 #include <string.h>
 #include "whd.h"
 
@@ -147,4 +146,3 @@ typedef struct
 } /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_WHD_DEBUG_H */
-

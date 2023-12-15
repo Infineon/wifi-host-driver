@@ -18,6 +18,7 @@
 #ifndef INCLUDED_WHD_CDC_BDC_H
 #define INCLUDED_WHD_CDC_BDC_H
 
+#ifndef PROTO_MSGBUF
 #include "whd.h"
 #include "cyabs_rtos.h"
 #include "whd_events_int.h"
@@ -88,26 +89,11 @@ typedef struct
 
 #pragma pack()
 
-/** Event list element structure
- *
- * events : A pointer to a whd_event_num_t array that is terminated with a WLC_E_NONE event
- * handler: A pointer to the whd_event_handler_t function that will receive the event
- * handler_user_data : User provided data that will be passed to the handler when a matching event occurs
- */
-typedef struct
-{
-    whd_bool_t event_set;
-    whd_event_num_t events[WHD_MAX_EVENT_SUBSCRIPTION];
-    whd_event_handler_t handler;
-    void *handler_user_data;
-    uint8_t ifidx;
-} event_list_elem_t;
-
 /** @endcond */
 
 typedef struct whd_cdc_info
 {
-    /* Event list variables */
+    /* Event list variables (Must be at the begining) */
     event_list_elem_t whd_event_list[WHD_EVENT_HANDLER_LIST_SIZE];
     cy_semaphore_t event_list_mutex;
 
@@ -118,6 +104,8 @@ typedef struct whd_cdc_info
     cy_semaphore_t ioctl_sleep;
 
 } whd_cdc_bdc_info_t;
+
+#ifndef PROTO_MSGBUF
 /** Error list element structure
  *
  * events : set event of error type
@@ -140,6 +128,7 @@ typedef struct whd_error_info
     error_list_elem_t whd_event_list[WHD_EVENT_HANDLER_LIST_SIZE];
     cy_semaphore_t event_list_mutex;
 } whd_error_info_t;
+#endif
 
 /******************************************************
 *               Function Declarations
@@ -160,7 +149,6 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
                                whd_buffer_t *buffer,
                                uint16_t data_length,
                                const char *name);
-whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer);
 
 void *whd_cdc_get_ioctl_buffer(whd_driver_t whd_driver,
                                whd_buffer_t *buffer,
@@ -176,5 +164,6 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
 } /* extern "C" */
 #endif
 
-#endif /* ifndef INCLUDED_WHD_CDC_BDC_H */
+#endif /* PROTO_MSGBUF */
 
+#endif /* ifndef INCLUDED_WHD_CDC_BDC_H */

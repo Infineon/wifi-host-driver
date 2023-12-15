@@ -22,6 +22,7 @@ var searchData=
   ['whd_5fmac_5ft',['whd_mac_t',['../structwhd__mac__t.html',1,'']]],
   ['whd_5fmaclist_5ft',['whd_maclist_t',['../structwhd__maclist__t.html',1,'']]],
   ['whd_5fnetif_5ffuncs',['whd_netif_funcs',['../structwhd__netif__funcs.html',1,'']]],
+  ['whd_5foci_5fconfig',['whd_oci_config',['../structwhd__oci__config.html',1,'']]],
   ['whd_5foob_5fconfig',['whd_oob_config',['../structwhd__oob__config.html',1,'']]],
   ['whd_5fpacket_5ffilter_5ft',['whd_packet_filter_t',['../structwhd__packet__filter__t.html',1,'']]],
   ['whd_5fresource_5fsource',['whd_resource_source',['../structwhd__resource__source.html',1,'']]],

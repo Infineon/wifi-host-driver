@@ -23,8 +23,12 @@
 #define INCLUDED_WHD_INT_H
 
 #include "whd_thread.h"
+#ifndef PROTO_MSGBUF
 #include "whd_sdpcm.h"
 #include "whd_cdc_bdc.h"
+#else
+#include "whd_msgbuf.h"
+#endif /* PROTO_MSGBUF */
 #include "whd_chip.h"
 #include "whd_ap.h"
 #include "whd_debug.h"
@@ -33,6 +37,11 @@
 extern "C"
 {
 #endif
+
+/* Forward declarations */
+struct whd_proto;   /* device communication protocol info */
+struct whd_ram_shared_info;   /* device ram shared info */
+struct whd_msgbuf;   /* device msg buffer info */
 
 typedef struct
 {
@@ -55,6 +64,12 @@ typedef enum
     WHD_P2P_ROLE               = 3,         /**< P2P Interface  */
 } whd_interface_role_t;
 
+/* The level of bus communication with the dongle */
+typedef enum
+{
+    WHD_PROTO_BCDC,
+    WHD_PROTO_MSGBUF,
+} whd_bus_protocol_type_t;
 
 struct whd_interface
 {
@@ -93,6 +108,7 @@ struct whd_driver
     struct whd_bus_info *bus_if;
     struct whd_bus_priv *bus_priv;
     struct whd_bus_common_info *bus_common_info;
+    struct whd_proto *proto;
     whd_bt_dev_t bt_dev;
 
     whd_buffer_funcs_t *buffer_if;
@@ -102,10 +118,12 @@ struct whd_driver
 
     whd_bool_t bus_gspi_32bit;
 
+    whd_bus_protocol_type_t proto_type;
     whd_thread_info_t thread_info;
-    whd_cdc_bdc_info_t cdc_bdc_info;
     whd_error_info_t error_info;
+#ifndef PROTO_MSGBUF
     whd_sdpcm_info_t sdpcm_info;
+#endif /* PROTO_MSGBUF */
     whd_internal_info_t internal_info;
     whd_ap_int_info_t ap_info;
     whd_chip_info_t chip_info;
@@ -116,6 +134,19 @@ struct whd_driver
     whd_ioctl_log_t whd_ioctl_log[WHD_IOCTL_LOG_SIZE];
     int whd_ioctl_log_index;
     cy_semaphore_t whd_log_mutex;
+
+    struct whd_ram_shared_info *ram_shared;
+    struct whd_msgbuf *msgbuf;
+    uint16_t (*read_ptr)(struct whd_driver *whd_driver, uint32_t mem_offset);
+    void (*write_ptr)(struct whd_driver *whd_driver, uint32_t mem_offset, uint16_t value);
+    cy_semaphore_t host_suspend_mutex;
+    cy_event_t host_suspend_event_wait;
+    uint8_t host_trigger_suspend_flag;
+    uint8_t ack_d2h_suspend; /* 1: D3_ack_suspend(suspend from host), 0: Non D3_ack_suspend(suspend from WHD) */
+    uint8_t dma_index_sz;
+#ifdef ULP_SUPPORT
+    uint32_t ds_exit_in_progress;
+#endif
 };
 
 whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8_t ifidx,
@@ -125,9 +156,9 @@ whd_result_t whd_add_primary_interface(whd_driver_t whd_driver, whd_interface_t 
 
 whd_interface_t whd_get_primary_interface(whd_driver_t whd_driver);
 
+whd_interface_t whd_get_interface(whd_driver_t whd_driver, uint8_t ifidx);
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
 #endif /* INCLUDED_WHD_INT_H */
-

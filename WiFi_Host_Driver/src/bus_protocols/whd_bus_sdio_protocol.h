@@ -189,6 +189,8 @@ extern whd_result_t whd_bus_sdio_ack_interrupt(whd_driver_t whd_driver, uint32_t
 
 extern whd_result_t whd_bus_sdio_set_backplane_window(whd_driver_t whd_driver, uint32_t addr, uint32_t *curbase);
 
+extern whd_result_t whd_wlan_reset_sdio(whd_driver_t whd_driver);
+
 extern void whd_delayed_bus_release_schedule_update(whd_driver_t whd_driver, whd_bool_t is_scheduled);
 #define DELAYED_BUS_RELEASE_SCHEDULE(whd_driver, schedule) \
     do {  whd_delayed_bus_release_schedule_update(whd_driver, schedule); } while (0)

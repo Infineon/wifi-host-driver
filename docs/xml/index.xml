@@ -40,7 +40,7 @@
   <compound refid="structwhd__band__list__t" kind="struct"><name>whd_band_list_t</name>
     <member refid="structwhd__band__list__t_1aa96a08185b53b8f402dfbc637c6f162d" kind="variable"><name>number_of_bands</name></member>
     <member refid="structwhd__band__list__t_1aed8b81544ada7366584d9cdea48639f9" kind="variable"><name>current_band</name></member>
-    <member refid="structwhd__band__list__t_1ad8ab251449a85be9bcc30eb9113862e6" kind="variable"><name>other_band</name></member>
+    <member refid="structwhd__band__list__t_1af168db5d1800391c83bf924c0456ccbe" kind="variable"><name>other_band</name></member>
   </compound>
   <compound refid="structwhd__btc__lescan__params" kind="struct"><name>whd_btc_lescan_params</name>
     <member refid="structwhd__btc__lescan__params_1a0815784d41b3c13d42ce22367abfba1d" kind="variable"><name>priority</name></member>
@@ -160,13 +160,16 @@
   <compound refid="structwhd__netif__funcs" kind="struct"><name>whd_netif_funcs</name>
     <member refid="structwhd__netif__funcs_1aeb98a45468d1d8f37450617a3388387c" kind="variable"><name>whd_network_process_ethernet_data</name></member>
   </compound>
+  <compound refid="structwhd__oci__config" kind="struct"><name>whd_oci_config</name>
+    <member refid="structwhd__oci__config_1afde40b36899b604612feb3b6c39b00ed" kind="variable"><name>is_normal_mode</name></member>
+  </compound>
   <compound refid="structwhd__oob__config" kind="struct"><name>whd_oob_config</name>
     <member refid="structwhd__oob__config_1a6c705dc46f1c4249cef91f1fc8a877dc" kind="variable"><name>host_oob_pin</name></member>
+    <member refid="structwhd__oob__config_1af5188a951c3c040753b3b9cf141fc771" kind="variable"><name>drive_mode</name></member>
+    <member refid="structwhd__oob__config_1ac84963ec3ea0999b1468ae20aae9ebbf" kind="variable"><name>init_drive_state</name></member>
     <member refid="structwhd__oob__config_1a2d83d43c26f20c82203b65cef7cf9d2f" kind="variable"><name>dev_gpio_sel</name></member>
     <member refid="structwhd__oob__config_1afac6867bb224b40190d70a7bed57b556" kind="variable"><name>is_falling_edge</name></member>
     <member refid="structwhd__oob__config_1a948130b9ee9aaba4463a9a678c830b2f" kind="variable"><name>intr_priority</name></member>
-    <member refid="structwhd__oob__config_1af5188a951c3c040753b3b9cf141fc771" kind="variable"><name>drive_mode</name></member>
-    <member refid="structwhd__oob__config_1ac84963ec3ea0999b1468ae20aae9ebbf" kind="variable"><name>init_drive_state</name></member>
   </compound>
   <compound refid="structwhd__packet__filter__t" kind="struct"><name>whd_packet_filter_t</name>
     <member refid="structwhd__packet__filter__t_1abaabdc509cdaba7df9f56c6c76f3ae19" kind="variable"><name>id</name></member>
@@ -393,14 +396,22 @@
     <member refid="whd__types_8h_1a32f56429462855603066fea3723c5217" kind="define"><name>PM1_POWERSAVE_MODE</name></member>
     <member refid="whd__types_8h_1af29e5543837b68c29417a7d15e3228b7" kind="define"><name>PM2_POWERSAVE_MODE</name></member>
     <member refid="whd__types_8h_1a287bbd4f521f0d1cf44165bc617cebf5" kind="define"><name>NO_POWERSAVE_MODE</name></member>
+    <member refid="whd__types_8h_1acd0149fc13ddc1b605e64c7c2cebef58" kind="define"><name>ULP_BUSWIDTH_INTR_MODE</name></member>
+    <member refid="whd__types_8h_1a8b261b3c1cad9af898406794802c1be1" kind="define"><name>ULP_OOB_INTR_MODE</name></member>
+    <member refid="whd__types_8h_1a5580d1c1e63d922c2e3dbbac91babd2c" kind="define"><name>ULP_ASYNC_INTR_MODE</name></member>
     <member refid="whd__types_8h_1af2ce8126dc46ee1d9d3beda3e1003193" kind="define"><name>PMKID_LEN</name></member>
+    <member refid="whd__types_8h_1a446dbf4b15aa0f7e6618cf9b9e015d65" kind="define"><name>ULP_NO_SUPPORT</name></member>
+    <member refid="whd__types_8h_1af0f3d61a6ccd77a3ad66cfde3d8f818b" kind="define"><name>ULP_DS1_SUPPORT</name></member>
+    <member refid="whd__types_8h_1a3b1eb85333b0169339ffa8f513ea5cbb" kind="define"><name>ULP_DS2_SUPPORT</name></member>
     <member refid="whd__types_8h_1a113e5523834b14dff04ab2f9de618aec" kind="define"><name>WHD_OOB_CONFIG_VERSION</name></member>
+    <member refid="whd__types_8h_1a17050055c7789bd6fd6960ec0f25d4f5" kind="define"><name>WHD_SAP_USE_CHANSPEC</name></member>
     <member refid="whd__types_8h_1a3c95a90e7806e4b0d21edfae15b73465" kind="define"><name>UNUSED_PARAMETER</name></member>
     <member refid="whd__types_8h_1a4048bf3892868ded8a28f8cbdd339c09" kind="define"><name>UNUSED_VARIABLE</name></member>
     <member refid="whd__types_8h_1a1491cb4c4adc44f22a91f18609dfb2f7" kind="define"><name>REFERENCE_DEBUG_ONLY_VARIABLE</name></member>
     <member refid="whd__types_8h_1ae6328bba53e322f1332e7b7b2d7cc128" kind="define"><name>WIFI_IE_OUI_LENGTH</name></member>
     <member refid="whd__types_8h_1a7ccccfd0b93f11b672f4627277f9153f" kind="define"><name>VNDR_IE_MAX_LEN</name></member>
     <member refid="whd__types_8h_1a50f830e25a5ac6d7d0e3eb8d23e90943" kind="define"><name>BDC_HEADER_WITH_PAD</name></member>
+    <member refid="whd__types_8h_1a9a43f624a90cb7b54e6b953f2ed25f4f" kind="define"><name>MSGBUF_OVERHEAD_WITH_PAD</name></member>
     <member refid="whd__types_8h_1a559655385d80ca97754fafa29ac87717" kind="define"><name>BDC_HEADER_OFFSET_TO_DATA</name></member>
     <member refid="whd__types_8h_1aaf73ac170e07969ed067a6cd5088044f" kind="define"><name>SDPCM_HEADER</name></member>
     <member refid="whd__types_8h_1aab3fad8b23f2db6d6c985134359bec0d" kind="define"><name>MAX_BUS_HEADER_SIZE</name></member>
@@ -487,6 +498,10 @@
     <member refid="whd__types_8h_1a68e4cdc07dccd14d0cc6c6216ff37fb2" kind="define"><name>WHD_HAL_ERROR</name></member>
     <member refid="whd__types_8h_1a6499f6328208f184b4f716a910d7cdf6" kind="define"><name>WHD_RTOS_STATIC_MEM_LIMIT</name></member>
     <member refid="whd__types_8h_1ab05f43e01bbb9228b3ccf13f30861d07" kind="define"><name>WHD_NO_REGISTER_FUNCTION_POINTER</name></member>
+    <member refid="whd__types_8h_1a5cb063b5fe90bb8a2027fc73bdf3b238" kind="define"><name>WHD_BLHS_VALIDATE_FAILED</name></member>
+    <member refid="whd__types_8h_1a6ec6f8cb59c6a69f32f52a0d59fe92f3" kind="define"><name>WHD_BUS_UP_FAIL</name></member>
+    <member refid="whd__types_8h_1aaee45e8e698ca400c9463c9d04701f23" kind="define"><name>WHD_BUS_MEM_RESERVE_FAIL</name></member>
+    <member refid="whd__types_8h_1a185e66e33a12853e16c209e62594ed65" kind="define"><name>WHD_NO_PKT_ID_AVAILABLE</name></member>
     <member refid="whd__types_8h_1a01539df5d3e26227c354161d9eda58f8" kind="define"><name>WLAN_ENUM_OFFSET</name></member>
     <member refid="whd__types_8h_1ac23d24b8da4c424644151d0893c83a6d" kind="define"><name>WHD_WLAN_ERROR</name></member>
     <member refid="whd__types_8h_1a8014f6266d91d9393e04bbc9a9b9080b" kind="define"><name>WHD_WLAN_BADARG</name></member>
@@ -588,6 +603,7 @@
     <member refid="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85" kind="enum"><name>whd_802_11_band_t</name></member>
     <member refid="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85a0af1540533ecaf4c2511d1953c766119" kind="enumvalue"><name>WHD_802_11_BAND_5GHZ</name></member>
     <member refid="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85ad83834fecf6a59269c7bdbc02bf0ce2f" kind="enumvalue"><name>WHD_802_11_BAND_2_4GHZ</name></member>
+    <member refid="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85acb8fd2eab5112fdbc276f1eca797c417" kind="enumvalue"><name>WHD_802_11_BAND_6GHZ</name></member>
     <member refid="whd__types_8h_1a8be1026494a86f0ceeebb2dcbf092cbd" kind="enum"><name>whd_custom_ie_action_t</name></member>
     <member refid="whd__types_8h_1a8be1026494a86f0ceeebb2dcbf092cbda79a530656dc2116ab992378d57256869" kind="enumvalue"><name>WHD_ADD_CUSTOM_IE</name></member>
     <member refid="whd__types_8h_1a8be1026494a86f0ceeebb2dcbf092cbdadc803bf5bf9286741e59da1b850561ce" kind="enumvalue"><name>WHD_REMOVE_CUSTOM_IE</name></member>
@@ -657,6 +673,8 @@
     <member refid="whd__types_8h_1a71ad9330854aaa61a7433a165fd57683" kind="enum"><name>whd_fwcap_id_t</name></member>
     <member refid="whd__types_8h_1a71ad9330854aaa61a7433a165fd57683aa1b32f572128596bbfcd0b9ee037cde5" kind="enumvalue"><name>WHD_FWCAP_SAE</name></member>
     <member refid="whd__types_8h_1a71ad9330854aaa61a7433a165fd57683a0bc5289c89080c2d3cabde3b2b965c86" kind="enumvalue"><name>WHD_FWCAP_SAE_EXT</name></member>
+    <member refid="whd__types_8h_1a71ad9330854aaa61a7433a165fd57683a3348dbf406acd32aa91082cc34b9247b" kind="enumvalue"><name>WHD_FWCAP_OFFLOADS</name></member>
+    <member refid="whd__types_8h_1a71ad9330854aaa61a7433a165fd57683ab8c090a0d7252c242dd51d5a3b3a9ab9" kind="enumvalue"><name>WHD_FWCAP_GCMP</name></member>
     <member refid="whd__types_8h_1a5adb0953a8527552bc47001673830602" kind="enum"><name>whd_country_code_t</name></member>
     <member refid="whd__types_8h_1a5adb0953a8527552bc47001673830602ae770f53071110d4c62c45f3185212a2c" kind="enumvalue"><name>WHD_COUNTRY_AFGHANISTAN</name></member>
     <member refid="whd__types_8h_1a5adb0953a8527552bc47001673830602ad6f4894e386515835c1754f164e9bcc6" kind="enumvalue"><name>WHD_COUNTRY_ALBANIA</name></member>
@@ -923,6 +941,7 @@
     <member refid="whd__types_8h_1a2b3fb82834e1fbcbbf1f51e83c675edd" kind="typedef"><name>whd_sdio_config_t</name></member>
     <member refid="whd__types_8h_1a2f5c5d3c7f74ce9a86595fe220c860d3" kind="typedef"><name>whd_spi_config_t</name></member>
     <member refid="whd__types_8h_1ab5fa3b42c3b6290fc944c79deb812c8c" kind="typedef"><name>whd_m2m_config_t</name></member>
+    <member refid="whd__types_8h_1a6731d1e828d8be24f5af1972b48a7a48" kind="typedef"><name>whd_oci_config_t</name></member>
     <member refid="whd__types_8h_1a98dae084aa15394bf6f8e907e09233a4" kind="typedef"><name>whd_btc_lescan_params_t</name></member>
     <member refid="whd__types_8h_1a1cb4da9972e0e9317a6e26e2fd460902" kind="typedef"><name>whd_coex_config_t</name></member>
   </compound>
@@ -945,11 +964,18 @@
     <member refid="group__wifijoin_1gab5bc462251b6849ebd8e708a2560066d" kind="function"><name>whd_wifi_stop_external_auth_request</name></member>
     <member refid="group__wifijoin_1gac767814ae445f735b51686db20c780be" kind="function"><name>whd_wifi_join</name></member>
     <member refid="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" kind="function"><name>whd_wifi_join_specific</name></member>
+    <member refid="group__wifijoin_1ga99f5e49ef124d6522fb5290c913cd838" kind="function"><name>whd_wifi_set_chanspec</name></member>
     <member refid="group__wifiutilities_1ga168fb83b839bab61d2c9d3b1f42a6782" kind="function"><name>whd_wifi_set_channel</name></member>
     <member refid="group__wifiutilities_1gab81522c25d723fbe18b90871a278ba9d" kind="function"><name>whd_wifi_get_channel</name></member>
     <member refid="group__wifiutilities_1ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6" kind="function"><name>whd_wifi_get_channels</name></member>
     <member refid="group__wifiutilities_1ga893ccaef6ed5d0afe95a96bbe89e8a80" kind="function"><name>whd_wifi_set_passphrase</name></member>
     <member refid="group__wifiutilities_1ga977fe2ff7c3f6966ffc40fda0e9694a8" kind="function"><name>whd_wifi_sae_password</name></member>
+    <member refid="group__wifiutilities_1gae2a0ccc383656e145fc16689c8dfcffd" kind="function"><name>whd_wifi_offload_config</name></member>
+    <member refid="group__wifiutilities_1gaf71e71af4b557ebb46190c32847632d0" kind="function"><name>whd_wifi_offload_ipv4_update</name></member>
+    <member refid="group__wifiutilities_1ga70646388c3bc4519a04716d890b86caa" kind="function"><name>whd_wifi_offload_ipv6_update</name></member>
+    <member refid="group__wifiutilities_1gaaacc373db21154b5b9e919a490b71bf6" kind="function"><name>whd_wifi_offload_enable</name></member>
+    <member refid="group__wifiutilities_1gac12db78aeb2fda7e6e73ce26926477d5" kind="function"><name>whd_configure_wowl</name></member>
+    <member refid="group__wifiutilities_1gabe3b791cbd725db296d63cb9959b0e36" kind="function"><name>whd_configure_tko_offload</name></member>
     <member refid="group__wifiutilities_1gae118219bea1b82ae76a5c1ee5f7f302c" kind="function"><name>whd_wifi_enable_sup_set_passphrase</name></member>
     <member refid="group__wifiutilities_1gae9d18a43c3e8e09f38ecb5adbda450b9" kind="function"><name>whd_wifi_set_pmk</name></member>
     <member refid="group__wifiutilities_1ga96d5646b67b4ae5ec78f1a23789caca1" kind="function"><name>whd_wifi_set_roam_time_threshold</name></member>
@@ -962,7 +988,7 @@
     <member refid="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" kind="function"><name>whd_wifi_leave</name></member>
     <member refid="group__wifiutilities_1ga8a634822973adc75a61a05eb2b664ef5" kind="function"><name>whd_wifi_get_mac_address</name></member>
     <member refid="group__wifiutilities_1ga52d3190589758d9fd36a7b27a9d08f28" kind="function"><name>whd_wifi_get_bssid</name></member>
-    <member refid="group__wifisoftap_1ga647aebc1d86708017fd11029e2e1a51c" kind="function"><name>whd_wifi_init_ap</name></member>
+    <member refid="group__wifisoftap_1gab21ff21fba955160ccf66ceb4a4aafb0" kind="function"><name>whd_wifi_init_ap</name></member>
     <member refid="group__wifisoftap_1ga3c9aa99add3f6a6d13e9092bd6e1246b" kind="function"><name>whd_wifi_start_ap</name></member>
     <member refid="group__wifisoftap_1ga2c6c28512678dc57dabb641c41e30d41" kind="function"><name>whd_wifi_stop_ap</name></member>
     <member refid="group__wifisoftap_1ga32982684d093a173a6e578856b581d29" kind="function"><name>whd_wifi_ap_get_max_assoc</name></member>
@@ -975,6 +1001,7 @@
     <member refid="group__wifipowersave_1ga6152d966f454fe8e8836472b802401c3" kind="function"><name>whd_wifi_enable_powersave_with_throughput</name></member>
     <member refid="group__wifipowersave_1ga3eed267d42020440a077d7649cde0567" kind="function"><name>whd_wifi_get_powersave_mode</name></member>
     <member refid="group__wifipowersave_1gab9af7ef8dac544f2bb8871259f85c437" kind="function"><name>whd_wifi_disable_powersave</name></member>
+    <member refid="group__wifipowersave_1gad299c0905cb70379e2f483a5aad1327f" kind="function"><name>whd_wifi_config_ulp_mode</name></member>
     <member refid="group__wifiutilities_1gab36ff07aa1d825c0366c82ce003dd9f6" kind="function"><name>whd_wifi_register_multicast_address</name></member>
     <member refid="group__wifiutilities_1gad092a543b73e91c7090875ccb940e01f" kind="function"><name>whd_wifi_unregister_multicast_address</name></member>
     <member refid="group__wifiutilities_1gac93f69169a725f277e955eec0bf528db" kind="function"><name>whd_wifi_set_listen_interval</name></member>
@@ -1078,6 +1105,7 @@
     <member refid="group__wifijoin_1gab5bc462251b6849ebd8e708a2560066d" kind="function"><name>whd_wifi_stop_external_auth_request</name></member>
     <member refid="group__wifijoin_1gac767814ae445f735b51686db20c780be" kind="function"><name>whd_wifi_join</name></member>
     <member refid="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" kind="function"><name>whd_wifi_join_specific</name></member>
+    <member refid="group__wifijoin_1ga99f5e49ef124d6522fb5290c913cd838" kind="function"><name>whd_wifi_set_chanspec</name></member>
     <member refid="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" kind="function"><name>whd_wifi_leave</name></member>
   </compound>
   <compound refid="group__wifiutilities" kind="group"><name>wifiutilities</name>
@@ -1086,6 +1114,12 @@
     <member refid="group__wifiutilities_1ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6" kind="function"><name>whd_wifi_get_channels</name></member>
     <member refid="group__wifiutilities_1ga893ccaef6ed5d0afe95a96bbe89e8a80" kind="function"><name>whd_wifi_set_passphrase</name></member>
     <member refid="group__wifiutilities_1ga977fe2ff7c3f6966ffc40fda0e9694a8" kind="function"><name>whd_wifi_sae_password</name></member>
+    <member refid="group__wifiutilities_1gae2a0ccc383656e145fc16689c8dfcffd" kind="function"><name>whd_wifi_offload_config</name></member>
+    <member refid="group__wifiutilities_1gaf71e71af4b557ebb46190c32847632d0" kind="function"><name>whd_wifi_offload_ipv4_update</name></member>
+    <member refid="group__wifiutilities_1ga70646388c3bc4519a04716d890b86caa" kind="function"><name>whd_wifi_offload_ipv6_update</name></member>
+    <member refid="group__wifiutilities_1gaaacc373db21154b5b9e919a490b71bf6" kind="function"><name>whd_wifi_offload_enable</name></member>
+    <member refid="group__wifiutilities_1gac12db78aeb2fda7e6e73ce26926477d5" kind="function"><name>whd_configure_wowl</name></member>
+    <member refid="group__wifiutilities_1gabe3b791cbd725db296d63cb9959b0e36" kind="function"><name>whd_configure_tko_offload</name></member>
     <member refid="group__wifiutilities_1gae118219bea1b82ae76a5c1ee5f7f302c" kind="function"><name>whd_wifi_enable_sup_set_passphrase</name></member>
     <member refid="group__wifiutilities_1gae9d18a43c3e8e09f38ecb5adbda450b9" kind="function"><name>whd_wifi_set_pmk</name></member>
     <member refid="group__wifiutilities_1ga96d5646b67b4ae5ec78f1a23789caca1" kind="function"><name>whd_wifi_set_roam_time_threshold</name></member>
@@ -1149,7 +1183,7 @@
     <member refid="group__wifiutilities_1ga189ed043d5ce9cf8d1a0845484a96d6b" kind="function"><name>whd_tko_toggle</name></member>
   </compound>
   <compound refid="group__wifisoftap" kind="group"><name>wifisoftap</name>
-    <member refid="group__wifisoftap_1ga647aebc1d86708017fd11029e2e1a51c" kind="function"><name>whd_wifi_init_ap</name></member>
+    <member refid="group__wifisoftap_1gab21ff21fba955160ccf66ceb4a4aafb0" kind="function"><name>whd_wifi_init_ap</name></member>
     <member refid="group__wifisoftap_1ga3c9aa99add3f6a6d13e9092bd6e1246b" kind="function"><name>whd_wifi_start_ap</name></member>
     <member refid="group__wifisoftap_1ga2c6c28512678dc57dabb641c41e30d41" kind="function"><name>whd_wifi_stop_ap</name></member>
     <member refid="group__wifisoftap_1ga32982684d093a173a6e578856b581d29" kind="function"><name>whd_wifi_ap_get_max_assoc</name></member>
@@ -1164,6 +1198,7 @@
     <member refid="group__wifipowersave_1ga6152d966f454fe8e8836472b802401c3" kind="function"><name>whd_wifi_enable_powersave_with_throughput</name></member>
     <member refid="group__wifipowersave_1ga3eed267d42020440a077d7649cde0567" kind="function"><name>whd_wifi_get_powersave_mode</name></member>
     <member refid="group__wifipowersave_1gab9af7ef8dac544f2bb8871259f85c437" kind="function"><name>whd_wifi_disable_powersave</name></member>
+    <member refid="group__wifipowersave_1gad299c0905cb70379e2f483a5aad1327f" kind="function"><name>whd_wifi_config_ulp_mode</name></member>
   </compound>
   <compound refid="group__wifiioctl" kind="group"><name>wifiioctl</name>
     <member refid="group__wifiioctl_1gad54ac84589a14cc97429bf138fa32639" kind="function"><name>whd_wifi_set_ioctl_value</name></member>

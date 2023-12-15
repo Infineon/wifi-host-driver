@@ -27,11 +27,14 @@
 #include "whd_chip_constants.h"
 #include "whd_debug.h"
 #include "whd_events_int.h"
+#ifndef PROTO_MSGBUF
 #include "whd_cdc_bdc.h"
+#endif /* PROTO_MSGBUF */
 #include "whd_thread_internal.h"
 #include "whd_utils.h"
 #include "whd_wifi_api.h"
 #include "whd_wlioctl.h"
+#include "whd_proto.h"
 
 /******************************************************
 * @cond       Constants
@@ -83,10 +86,10 @@ uint32_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
             ap_mac_address.octet[0] |= MAC_ADDRESS_LOCALLY_ADMINISTERED_BIT;
         }
 
-        data = (uint32_t *)whd_cdc_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_mac_t), IOVAR_STR_CUR_ETHERADDR);
+        data = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_mac_t), IOVAR_STR_CUR_ETHERADDR);
         CHECK_IOCTL_BUFFER(data);
         memcpy(data, &ap_mac_address, sizeof(whd_mac_t) );
-        CHECK_RETURN(whd_cdc_send_iovar(ifp, CDC_SET, buffer, NULL) );
+        CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
 
         if (memcmp(&mac, &ap_mac_address, sizeof(whd_mac_t) ) != 0)
         {
@@ -100,12 +103,11 @@ uint32_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
     }
     else
     {
-        data = (uint32_t *)whd_cdc_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_mac_t), IOVAR_STR_CUR_ETHERADDR);
+        data = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_mac_t), IOVAR_STR_CUR_ETHERADDR);
         CHECK_IOCTL_BUFFER(data);
         memcpy(data, &mac, sizeof(whd_mac_t) );
-        CHECK_RETURN(whd_cdc_send_iovar(ifp, CDC_SET, buffer, NULL) );
+        CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
     }
 
     return WHD_SUCCESS;
 }
-

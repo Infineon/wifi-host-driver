@@ -253,6 +253,84 @@ extern cy_rslt_t cy_rtos_set_semaphore(cy_semaphore_t *semaphore, bool in_isr);
  */
 extern cy_rslt_t cy_rtos_deinit_semaphore(cy_semaphore_t *semaphore);
 
+/*********************************************** Events **********************************************/
+
+/** Create an event.
+ *
+ * This is an event which can be used to signal a set of threads
+ * with a 32 bit data element.
+ *
+ * @param[in,out] event Pointer to the event handle to be initialized
+ *
+ * @return The status of the event initialization request.
+ *         [CY_RSLT_SUCCESS, CY_RTOS_NO_MEMORY, CY_RTOS_GENERAL_ERROR]
+ */
+extern cy_rslt_t cy_rtos_init_event(cy_event_t *event) ;
+
+/** Set the event flag bits.
+ *
+ * This is an event which can be used to signal a set of threads
+ * with a 32 bit data element. Any threads waiting on this event are released
+ *
+ * @param[in] event  Pointer to the event handle
+ * @param[in] bits   The value of the 32 bit flags
+ * @param[in] in_isr If true, this is called from an ISR, otherwise from a thread
+ *
+ * @return The status of the set request. [CY_RSLT_SUCCESS, CY_RTOS_NO_MEMORY, CY_RTOS_GENERAL_ERROR]
+ */
+extern cy_rslt_t cy_rtos_setbits_event(cy_event_t *event, uint32_t bits, bool in_isr)  ;
+
+/**
+ * Clear the event flag bits
+ *
+ * This function clears bits in the event.
+ *
+ * @param[in] event   Pointer to the event handle
+ * @param[in] bits    Any bits set in this value, will be cleared in the event.
+ * @param[in] in_isr  if true, this is called from an ISR, otherwise from a thread
+ *
+ * @return The status of the clear flags request. [CY_RSLT_SUCCESS, CY_RTOS_NO_MEMORY, CY_RTOS_GENERAL_ERROR]
+ */
+extern cy_rslt_t cy_rtos_clearbits_event(cy_event_t *event, uint32_t bits, bool in_isr)  ;
+
+/** Get the event bits.
+ *
+ * Returns the current bits for the event.
+ *
+ * @param[in]  event Pointer to the event handle
+ * @param[out] bits  pointer to receive the value of the event flags
+ *
+ * @return The status of the get request. [CY_RSLT_SUCCESS, CY_RTOS_NO_MEMORY, CY_RTOS_GENERAL_ERROR]
+ */
+extern cy_rslt_t cy_rtos_getbits_event(cy_event_t *event, uint32_t *bits) ;
+
+/** Wait for the event and return bits.
+ *
+ * Waits for the event to be set and then returns the bits assocaited
+ * with the event, or waits for the given timeout period.
+ * @note This function returns if any bit in the set is set.
+ *
+ * @param[in] event     Pointer to the event handle
+ * @param[in,out] bits  pointer to receive the value of the event flags
+ * @param[in] clear     if true, clear any bits set that cause the wait to return
+ *                      if false, do not clear bits
+ * @param[in] all       if true, all bits in the initial bits value must be set to return
+ *                      if false, any one bit in the initial bits value must be set to return
+ * @param[in] timeout   The amount of time to wait in milliseconds
+ *
+ * @return The status of the wait for event request. [CY_RSLT_SUCCESS, CY_RTOS_NO_MEMORY, CY_RTOS_GENERAL_ERROR]
+ */
+extern cy_rslt_t cy_rtos_waitbits_event(cy_event_t *event, uint32_t *bits, bool clear, bool all, cy_time_t timeout) ;
+
+/** Deinitialize a event.
+ *
+ * This function frees the resources associated with an event.
+ *
+ * @param[in] event Pointer to the event handle
+ *
+ * @return The status of the deletion request. [CY_RSLT_SUCCESS, CY_RTOS_GENERAL_ERROR]
+ */
+extern cy_rslt_t cy_rtos_deinit_event(cy_event_t *event) ;
 
 /*********************************************** Time **********************************************/
 

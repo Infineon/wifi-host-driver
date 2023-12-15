@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-#include <stdlib.h>
 #include "bus_protocols/whd_chip_reg.h"
 #include "bus_protocols/whd_sdio.h"
 #include "bus_protocols/whd_bus_common.h"
 #include "bus_protocols/whd_bus_protocol_interface.h"
 #include "whd_chip_constants.h"
+#ifndef PROTO_MSGBUF
 #include "whd_cdc_bdc.h"
+#endif /* PROTO_MSGBUF */
 #include "whd_thread_internal.h"
 #include "whd_buffer_api.h"
 #include "whd_debug.h"
@@ -30,7 +31,10 @@
 #include "whd_chip.h"
 #include "whd.h"
 #include "whd_wlioctl.h"
-
+#include "whd_proto.h"
+#ifdef PROTO_MSGBUF
+#include "whd_ring.h"
+#endif
 /******************************************************
 *                      Macros
 ******************************************************/
@@ -64,8 +68,14 @@
 #define WRAPPER_REGISTER_OFFSET     (0x100000)
 
 #define WLAN_SHARED_VERSION_MASK    (0x00ff)
-#define WLAN_SHARED_VERSION         (0x0001)
+#define WLAN_SHARED_VERSION         (0x0003)
 #define WPRINT_WHD_DEBUG_DS(args) WPRINT_WHD_DEBUG(args)
+
+#ifdef ULP_SUPPORT
+#define WAKE_FROM_UCODE_TIMEOUT_MS     (5000) //5000 ms
+#define WAKE_FROM_UCODE_TIMEOUT_LOOPS  (100)
+#define WAKE_FROM_UCODE_CHECK_PER_LOOP (WAKE_FROM_UCODE_TIMEOUT_MS/WAKE_FROM_UCODE_TIMEOUT_LOOPS) //50 ms
+#endif
 
 /******************************************************
 *             Structures
@@ -78,8 +88,9 @@ static const whd_fwcap_t whd_fwcap_map[] =
 {
     {WHD_FWCAP_SAE, "sae "},
     {WHD_FWCAP_SAE_EXT, "sae_ext "},
+    {WHD_FWCAP_OFFLOADS, "offloads "},
+    {WHD_FWCAP_GCMP, "gcmp" },
 };
-
 /******************************************************
 *             Static Function Declarations
 ******************************************************/
@@ -455,47 +466,74 @@ whd_result_t whd_wifi_read_wlan_log_unsafe(whd_driver_t whd_driver, uint32_t wla
 
     c = &internal_info->console;
 
-    if (internal_info->console_addr == 0)
+    uint32_t shared_addr = 0;
+
+    address = wlan_shared_address;
+
+    /* Once the FW starts executing it will update the Shared region space(4Bytes) - wlan_shared_address with the shared structure address,
+    this shared structure address should be the address FW RAM address so we need the boundary check for this */
+    while ( (shared_addr == 0) || (shared_addr <= GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) ) ||
+            (shared_addr >= (GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) ) ) )
     {
-        uint shared_addr;
-
-        address = wlan_shared_address;
         result = whd_bus_read_backplane_value(whd_driver, address, 4, (uint8_t *)&shared_addr);
-        if (result != WHD_SUCCESS)
-        {
-            WPRINT_WHD_ERROR( ("%s:%d whd_bus_read_backplane_value failed\n", __FUNCTION__, __LINE__) );
-            goto done;
-        }
-
-        result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_READ, shared_addr, sizeof(wlan_shared_t),
-                                                  (uint8_t *)&internal_info->sh);
-        if (result != WHD_SUCCESS)
-        {
-            WPRINT_WHD_ERROR( ("%s:%d whd_bus_transfer_backplane_bytes failed\n", __FUNCTION__, __LINE__) );
-            goto done;
-        }
-
-        internal_info->sh.flags = dtoh32(internal_info->sh.flags);
-        internal_info->sh.trap_addr = dtoh32(internal_info->sh.trap_addr);
-        internal_info->sh.assert_exp_addr = dtoh32(internal_info->sh.assert_exp_addr);
-        internal_info->sh.assert_file_addr = dtoh32(internal_info->sh.assert_file_addr);
-        internal_info->sh.assert_line = dtoh32(internal_info->sh.assert_line);
-        internal_info->sh.console_addr = dtoh32(internal_info->sh.console_addr);
-        internal_info->sh.msgtrace_addr = dtoh32(internal_info->sh.msgtrace_addr);
-
-        if ( (internal_info->sh.flags & WLAN_SHARED_VERSION_MASK) != WLAN_SHARED_VERSION )
-        {
-            WPRINT_WHD_ERROR( ("Readconsole: WLAN shared version is not valid sh.flags %x\n\r",
-                               internal_info->sh.flags) );
-            result = WHD_WLAN_INVALID;
-            goto done;
-        }
-        internal_info->console_addr = internal_info->sh.console_addr;
     }
+
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("%s:%d whd_bus_read_backplane_value failed\n", __FUNCTION__, __LINE__) );
+        goto done;
+    }
+
+#ifndef PROTO_MSGBUF
+    result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_READ, shared_addr, sizeof(wlan_shared_t),
+                                              (uint8_t *)&internal_info->sh);
+#else
+    result = whd_bus_mem_bytes(whd_driver, BUS_READ, TRANS_ADDR(
+                                   shared_addr), sizeof(internal_info->sh), (uint8_t *)&internal_info->sh);
+#endif
+
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("%s:%d whd_bus_transfer_backplane_bytes failed\n", __FUNCTION__, __LINE__) );
+        goto done;
+    }
+
+    internal_info->sh.flags = dtoh32(internal_info->sh.flags);
+    internal_info->sh.trap_addr = dtoh32(internal_info->sh.trap_addr);
+    internal_info->sh.assert_exp_addr = dtoh32(internal_info->sh.assert_exp_addr);
+    internal_info->sh.assert_file_addr = dtoh32(internal_info->sh.assert_file_addr);
+    internal_info->sh.assert_line = dtoh32(internal_info->sh.assert_line);
+    internal_info->sh.console_addr = dtoh32(internal_info->sh.console_addr);
+    internal_info->sh.msgtrace_addr = dtoh32(internal_info->sh.msgtrace_addr);
+
+#ifndef PROTO_MSGBUF
+    if ( (internal_info->sh.flags & WLAN_SHARED_VERSION_MASK) > WLAN_SHARED_VERSION )
+    {
+        WPRINT_WHD_ERROR( ("Readconsole: WLAN shared version is not valid sh.flags %x\n\r",
+                           internal_info->sh.flags) );
+        result = WHD_WLAN_INVALID;
+        goto done;
+    }
+#else
+    if ( (internal_info->sh.flags & WLAN_M2M_SHARED_VERSION_MASK) > WLAN_M2M_SHARED_VERSION )
+    {
+        WPRINT_WHD_ERROR( ("ReadShared: WLAN shared version is not valid sh.flags %x\n\r", internal_info->sh.flags) );
+        result = WHD_WLAN_INVALID;
+        goto done;
+    }
+#endif
+
+    internal_info->console_addr = internal_info->sh.console_addr;
 
     /* Read console log struct */
     address = internal_info->console_addr + offsetof(hnd_cons_t, log);
+
+#ifndef PROTO_MSGBUF
     result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_READ, address, sizeof(c->log), (uint8_t *)&c->log);
+#else
+    result = whd_bus_mem_bytes(whd_driver, BUS_READ, TRANS_ADDR(address), sizeof(c->log), (uint8_t *)&c->log);
+#endif
+
     if (result != WHD_SUCCESS)
     {
         WPRINT_WHD_ERROR( ("%s:%d whd_bus_transfer_backplane_bytes failed\n", __FUNCTION__, __LINE__) );
@@ -506,7 +544,7 @@ whd_result_t whd_wifi_read_wlan_log_unsafe(whd_driver_t whd_driver, uint32_t wla
     if (c->buf == NULL)
     {
         c->bufsize = dtoh32(c->log.buf_size);
-        c->buf = malloc(c->bufsize);
+        c->buf = whd_mem_malloc(c->bufsize);
         if (c->buf == NULL)
         {
             WPRINT_WHD_ERROR( ("%s:%d c->buf IS null \n", __FUNCTION__, __LINE__) );
@@ -540,7 +578,13 @@ whd_result_t whd_wifi_read_wlan_log_unsafe(whd_driver_t whd_driver, uint32_t wla
      * it would also have to handle wrap-around.
      */
     address = dtoh32(c->log.buf);
+
+#ifndef PROTO_MSGBUF
     result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_READ, address, c->bufsize, (uint8_t *)c->buf);
+#else
+    result = whd_bus_mem_bytes(whd_driver, BUS_READ, TRANS_ADDR(address), c->bufsize, (uint8_t *)c->buf);
+#endif
+
     if (result != WHD_SUCCESS)
     {
         WPRINT_WHD_ERROR( ("%s:%d whd_bus_transfer_backplane_bytes failed\n", __FUNCTION__, __LINE__) );
@@ -740,15 +784,15 @@ whd_result_t whd_wifi_set_custom_country_code(whd_interface_t ifp, const whd_cou
         whd_buffer_t buffer;
         whd_result_t result;
         whd_country_info_t *data;
-        data = (whd_country_info_t *)whd_cdc_get_ioctl_buffer(whd_driver, &buffer,
-                                                              (uint16_t)sizeof(whd_country_info_t) + 10);
+        data = (whd_country_info_t *)whd_proto_get_ioctl_buffer(whd_driver, &buffer,
+                                                                (uint16_t)sizeof(whd_country_info_t) + 10);
         if (data == NULL)
         {
             whd_assert("Could not get buffer for IOCTL", 0 != 0);
             return WHD_BUFFER_ALLOC_FAIL;
         }
         memcpy(data, country_code, sizeof(whd_country_info_t) );
-        result = whd_cdc_send_ioctl(ifp, CDC_SET, WLC_SET_CUSTOM_COUNTRY, buffer, NULL);
+        result = whd_proto_set_ioctl(ifp, WLC_SET_CUSTOM_COUNTRY, buffer, NULL);
         return result;
     }
     else
@@ -874,9 +918,16 @@ whd_result_t whd_wifi_read_wlan_log(whd_driver_t whd_driver, char *buffer, uint3
     {
         /* Backplane access needs HT clock. So, disabling bus sleep */
         WHD_WLAN_KEEP_AWAKE(whd_driver);
+#ifndef DM_43022C1
         /* FW populates the last word of RAM with wlan_shared_t struct address */
         wlan_shared_address = PLATFORM_WLAN_RAM_BASE + GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) +
                               GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4;
+#else
+        /* FW populates the last word of RAM with wlan_shared_t struct address */
+        wlan_shared_address = (PLATFORM_WLAN_RAM_BASE + GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) +
+                              GET_C_VAR(whd_driver, NVRAM_DNLD_ADDR) - 4);
+#endif
+
         if (!GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) && (whd_is_fw_sr_capable(whd_driver) == WHD_TRUE) )
         {
             wlan_shared_address -= GET_C_VAR(whd_driver, SOCRAM_SRMEM_SIZE);
@@ -897,7 +948,7 @@ uint32_t whd_wifi_print_whd_log(whd_driver_t whd_driver)
 
     WHD_IOCTL_PRINT(whd_driver);
 
-    if ( (buffer = malloc(WLAN_LOG_BUF_LEN) ) == NULL )
+    if ( (buffer = whd_mem_malloc(WLAN_LOG_BUF_LEN) ) == NULL )
     {
         WPRINT_WHD_ERROR( ("Memory allocation failed for log buffer in %s \n", __FUNCTION__) );
         return WHD_MALLOC_FAILURE;
@@ -908,7 +959,7 @@ uint32_t whd_wifi_print_whd_log(whd_driver_t whd_driver)
     {
         whd_print_logbuffer();  // This is not supported yet.
     }
-    free(buffer);
+    whd_mem_free(buffer);
     CHECK_RETURN(result);
     return result;
 }
@@ -966,7 +1017,7 @@ whd_result_t whd_ensure_wlan_bus_is_up(whd_driver_t whd_driver)
         if (attempts == 0)
         {
             WPRINT_WHD_ERROR( ("SDIO bus failed to come up , %s failed at %d \n", __func__, __LINE__) );
-            return WHD_SDIO_BUS_UP_FAIL;
+            return WHD_BUS_UP_FAIL;
         }
         else
         {
@@ -981,6 +1032,25 @@ whd_result_t whd_ensure_wlan_bus_is_up(whd_driver_t whd_driver)
         //M2M_POWERSAVE_COMM_TX_BEGIN
         return WHD_SUCCESS;
     }
+#ifdef PROTO_MSGBUF
+    else if ((wlan_chip_id == 55500) || (wlan_chip_id == 55900))
+    {
+#if 0	/* To be verified after TO */
+        if (whd_bus_resume(whd_driver) == WHD_SUCCESS)
+        {
+            whd_bus_set_state(whd_driver, WHD_TRUE);
+            return WHD_SUCCESS;
+        }
+        else
+        {
+            WPRINT_WHD_ERROR( ("Bus failed to come up , %s failed at %d \n", __func__, __LINE__) );
+            return WHD_SDIO_BUS_UP_FAIL;
+        }
+#else
+        return WHD_SUCCESS;
+#endif
+    }
+#endif
     else
     {
         if (whd_driver->chip_info.save_restore_enable == WHD_FALSE)
@@ -1075,6 +1145,13 @@ static whd_bool_t whd_is_fw_sr_capable(whd_driver_t whd_driver)
         }
         return save_restore_capable;
     }
+    else if (wlan_chip_id == 55560 || wlan_chip_id == 43022 || wlan_chip_id == 55500)
+    {
+        /*In hatchet Chips(DM) and 43022DM, the SR(SaveRestore) is always enabled. In DM mode(secure), host not
+           able to access PMU register(SR). So making save_restore_capable as default for Hatchet and 43022DM Chips */
+        save_restore_capable = WHD_TRUE;
+        return save_restore_capable;
+    }
     else
     {
         /* check if fw initialized sr engine */
@@ -1102,16 +1179,24 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
 
     if (whd_is_fw_sr_capable(whd_driver) == WHD_TRUE)
     {
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
         {
             /* Configure WakeupCtrl register to set AlpAvail request bit in chipClockCSR register
              * after the sdiod core is powered on.
              */
             CHECK_RETURN(whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_WAKEUP_CTRL,
                                                      (uint8_t)sizeof(data), &data) );
-            data |= SBSDIO_WCTRL_WAKE_TILL_ALP_AVAIL;
+
+#ifdef CP_OVER_SDIO
+            data |= SBSDIO_WCTRL_BT_WAKE_TILL_ALP_AVAIL;
             CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_WAKEUP_CTRL,
                                                       (uint8_t)sizeof(data), data) );
+#else
+            data |= SBSDIO_WCTRL_WL_WAKE_TILL_ALP_AVAIL;
+            CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_WAKEUP_CTRL,
+                                                      (uint8_t)sizeof(data), data) );
+#endif
+
         }
         else
         {
@@ -1120,7 +1205,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
              */
             CHECK_RETURN(whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_WAKEUP_CTRL,
                                                      (uint8_t)1, &data) );
-            data |= SBSDIO_WCTRL_WAKE_TILL_HT_AVAIL;
+            data |= SBSDIO_WCTRL_WL_WAKE_TILL_HT_AVAIL;
             CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_WAKEUP_CTRL,
                                                       (uint8_t)1, data) );
         }
@@ -1131,7 +1216,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
          */
         CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, (uint32_t)SDIOD_CCCR_BRCM_CARDCAP,
                                                   (uint8_t)1, SDIOD_CCCR_BRCM_CARDCAP_CMD_NODEC) );
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
         {
             CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_CHIP_CLOCK_CSR,
                                                       (uint8_t)1, SBSDIO_HT_AVAIL_REQ) );
@@ -1143,7 +1228,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
         }
 
         /* Enable KeepSdioOn (KSO) bit for normal operation */
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
         {
             CHECK_RETURN(whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                      (uint8_t)sizeof(data), &data) );
@@ -1153,10 +1238,10 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
             CHECK_RETURN(whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                      (uint8_t)1, &data) );
         }
-        if ( (data & SBSDIO_SLPCSR_KEEP_SDIO_ON) == 0 )
+        if ( (data & SBSDIO_SLPCSR_KEEP_WL_KSO) == 0 )
         {
-            data |= SBSDIO_SLPCSR_KEEP_SDIO_ON;
-            if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) )
+            data |= SBSDIO_SLPCSR_KEEP_WL_KSO;
+            if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
             {
                 CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                           (uint8_t)sizeof(data), data) );
@@ -1199,7 +1284,14 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
     uint16_t wlan_chip_id = whd_chip_get_chip_id(whd_driver);
     if (enable == WHD_TRUE)
     {
-        write_value |= SBSDIO_SLPCSR_KEEP_SDIO_ON;
+#ifdef CP_OVER_SDIO
+        if (wlan_chip_id == 55500)
+        {
+            write_value |= SBSDIO_SLPCSR_KEEP_BT_KSO;
+        }
+#else
+        write_value |= SBSDIO_SLPCSR_KEEP_WL_KSO;
+#endif
     }
 
     /* 1st KSO write goes to AOS wake up core if device is asleep  */
@@ -1219,7 +1311,7 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
              * write bit 0 & read back until
              * both bits 0(kso bit) & 1 (dev on status) are set
              */
-            compare_value = SBSDIO_SLPCSR_KEEP_SDIO_ON | SBSDIO_SLPCSR_DEVICE_ON;
+            compare_value = SBSDIO_SLPCSR_KEEP_WL_KSO | SBSDIO_SLPCSR_WL_DEVON;
             bmask = compare_value;
         }
         else
@@ -1227,7 +1319,7 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
             /* Put device to sleep, turn off  KSO  */
             compare_value = 0;
             /* Check for bit0 only, bit1(devon status) may not get cleared right away */
-            bmask = SBSDIO_SLPCSR_KEEP_SDIO_ON;
+            bmask = SBSDIO_SLPCSR_KEEP_WL_KSO;
         }
     }
     else
@@ -1235,7 +1327,7 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
         CHECK_RETURN_IGNORE(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                          (uint8_t)1, write_value) );
 
-        /* In case of 43012 chip, the chip could go down immediately after KSO bit is cleared.
+        /* In case of 43012/555x0 chip, the chip could go down immediately after KSO bit is cleared.
          * So the further reads of KSO register could fail. Thereby just bailing out immediately
          * after clearing KSO bit, to avoid polling of KSO bit.
          */
@@ -1250,9 +1342,17 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
 
         /* device WAKEUP through KSO:
          * write bit 0 & read back until
-         * both bits 0(kso bit) & 1 (dev on status) are set
+         * both bits 0(kso bit) & 1 (dev on status) are set,
+         * For CP , enable BT KSO bits
          */
-        compare_value = SBSDIO_SLPCSR_KEEP_SDIO_ON | SBSDIO_SLPCSR_DEVICE_ON;
+#ifdef CP_OVER_SDIO
+        if (wlan_chip_id == 55500)
+        {
+            compare_value = SBSDIO_SLPCSR_KEEP_BT_KSO | SBSDIO_SLPCSR_BT_DEVON;
+        }
+#else
+        compare_value = SBSDIO_SLPCSR_KEEP_WL_KSO | SBSDIO_SLPCSR_WL_DEVON;
+#endif
         bmask = compare_value;
     }
 
@@ -1315,7 +1415,7 @@ void whd_wlan_wake_from_host(whd_driver_t whd_driver)
     }
     WPRINT_WHD_DEBUG( ("%s: %d:after: maccontrol: 0x%08x\n", __FUNCTION__, __LINE__, (unsigned int)val32) );
 }
-
+#ifndef ULP_SUPPORT
 whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t wake_from_firmware,
                                            uint32_t wake_event_indication_addr, uint32_t wake_indication_addr,
                                            uint32_t sdio_control_addr)
@@ -1534,4 +1634,188 @@ whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t w
         return WHD_SUCCESS;
     }
 }
+#else
+whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t wake_from_ucode )
+{
+#ifndef DM_43022C1
+    uint32_t val;
+    uint32_t val1;
+    uint32_t count = 0;
+    uint32_t wake_event_ind = 0;
+    uint32_t ulp_wake_ind  = 0;
+#endif
+    uint8_t enb_rd = 0;
+    /* Get chip number */
 
+    uint16_t wlan_chip_id = whd_chip_get_chip_id(whd_driver);
+
+    if ((wlan_chip_id == 43012) || (wlan_chip_id == 43022))
+    {
+        WPRINT_WHD_DEBUG_DS( ("%s: enter: wake_fr_fw=%d\n", __func__, (int )wake_from_ucode) );
+
+        whd_driver->ds_exit_in_progress = WHD_TRUE;
+        /* Release the transceive_semaphore, if acquired for some tx/rx operations */
+        (void)cy_rtos_set_semaphore(&whd_driver->thread_info.transceive_semaphore, WHD_TRUE);
+
+        whd_driver->internal_info.whd_wlan_status.state = WLAN_OFF;
+
+        CHECK_RETURN(whd_bus_read_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_IOEN, (uint8_t)1, &enb_rd))
+
+        if(enb_rd == SDIO_FUNC_ENABLE_1)
+        {
+            WPRINT_WHD_DEBUG(("GOT UCODE INTERRUPT \n"));
+
+#ifndef DM_43022C1
+            CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11SHM_ADDR(M_WAKEEVENT_IND), 4,
+                                                      (uint8_t *)&wake_event_ind) );
+            WPRINT_WHD_DEBUG(("M_WAKEEVENT_IND is 0x%x \n", wake_event_ind));
+            CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11SHM_ADDR(M_ULP_WAKE_IND), 4, (uint8_t *)&ulp_wake_ind) );
+            WPRINT_WHD_DEBUG(("M_ULP_WAKE_IND is 0x%x \n", ulp_wake_ind));
+
+            if((M_WAKEEVENT_IND % 4))
+            {
+                 wake_event_ind = (wake_event_ind >> 16);
+                 WPRINT_WHD_DEBUG(("M_WAKEEVENT_IND[MOD] is 0x%x \n", wake_event_ind));
+            }
+            else
+            {
+                wake_event_ind = (wake_event_ind & 0x0000FFFF);
+                WPRINT_WHD_DEBUG(("M_WAKEEVENT_IND[MOD-1] is 0x%x \n", wake_event_ind));
+            }
+
+            if((M_ULP_WAKE_IND % 4))
+            {
+                 ulp_wake_ind = (ulp_wake_ind >> 16);
+                 WPRINT_WHD_DEBUG(("M_ULP_WAKE_IND[MOD] is 0x%x \n", ulp_wake_ind));
+            }
+            else
+            {
+                ulp_wake_ind = (ulp_wake_ind & 0x0000FFFF);
+                WPRINT_WHD_DEBUG(("M_ULP_WAKE_IND[MOD-1] is 0x%x \n", ulp_wake_ind));
+            }
+            CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, PMU_MINRESMASK, 4,
+                                                                           DEFAULT_43012_MIN_RES_MASK) );
+#else
+            /* For 43022DM, host should not access any core other than SDIO,
+               it it access, it will end up in FW crash(intentional crash) */
+            WPRINT_WHD_INFO( ("Successfully completed DS wake sequence\n") );
+            return WHD_SUCCESS;
+#endif /* DM_43022C1 */
+
+#ifndef DM_43022C1
+            if (wake_from_ucode == WHD_TRUE)
+            {
+                WPRINT_WHD_DEBUG_DS( ("%s: CCCR written\n", __func__) );
+
+                /* Read DS1 CTRL STATUS SHM to Check whether HOST MAIL BOX interrupt is triggered due to TX/RX
+                 * For RX Cases , Value will be DS1_SLEEP
+                 * For TX Cases, Value will be MAC ON or RADIO_PHY_ON
+                 */
+                CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11SHM_ADDR(M_DS1_CTRL_STATUS), (uint8_t)2,
+                                                          (uint8_t *)&val) );
+
+                WPRINT_WHD_DEBUG((" DS1 CTRL STATUS is 0x%x\n", val));
+
+                if ( (wake_event_ind > 0) || (ulp_wake_ind > 0) )
+                {
+                    /* HUDI communication to inform D11 to Process and Exit DS1 not required for D11 Wake cases
+                    * Simply update PMU Resource Mask and Re-download firmware for this case
+                    */
+                    WPRINT_WHD_DEBUG_DS( ("%s: D11 wake detected\n", __func__) );
+
+                    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, PMU_MINRESMASK, 4,
+                                                               DEFAULT_43012_MIN_RES_MASK) );
+
+                }
+                else
+                {
+
+                    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, D11SHM_ADDR(M_DS1_CTRL_SDIO), 2,
+                                                               C_DS1_CTRL_SDIO_DS1_EXIT | C_DS1_CTRL_REQ_VALID) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: SDIO ctl written\n", __func__) );
+
+                    CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11SHM_ADDR(M_DS1_CTRL_SDIO), (uint8_t)2,
+                                                              (uint8_t *)&val) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: M_DS1_CTRL_SDIO = [%x]\n", __func__, (int )val) );
+
+                    CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11_MACCONTROL_REG, (uint8_t)4, (uint8_t *)&val1) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: before setting wake = [%x]\n", __func__, (int )val1) );
+
+                    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, D11_MACCONTROL_REG, 4,
+                                                               val1 | D11_MACCONTROL_REG_WAKE) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: After setting wake= [%x]\n", __func__, (int )val1) );
+
+                    while (!(val & C_DS1_CTRL_PROC_DONE) )
+                    {
+                        CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11SHM_ADDR(M_DS1_CTRL_SDIO), (uint8_t)2,
+                                                                 (uint8_t *)&val) );
+                        count++;
+                        WPRINT_WHD_DEBUG(("PROC READ - 0x%x \t", val));
+                        if (count == 1000)
+                        {
+                            WPRINT_WHD_ERROR( ("%s: sdio timed out! Aborting\n", __func__) );
+                            return WHD_TIMEOUT;
+                        }
+                    }
+
+                    CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11SHM_ADDR(M_DS1_CTRL_SDIO), (uint8_t)2,
+                                                              (uint8_t *)&val) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: M_DS1_CTRL_SDIO after poll = [%x]\n", __func__, (int )val) );
+
+                    CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, D11_MACCONTROL_REG, (uint8_t)2, (uint8_t *)&val1) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: D11_MACCONTROL_REG before Clear = [%x]\n", __func__, (int )val1) );
+
+                    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, D11_MACCONTROL_REG, 2,
+                                                               val1 & D11_MACCONTROL_CLEAR_WAKE) );
+                    WPRINT_WHD_DEBUG_DS( ("%s: D11_MACCONTROL_REG after Clear = [%x]\n", __func__, (int )val1) );
+
+                    CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, PMU_MINRESMASK, 4, DEFAULT_43012_MIN_RES_MASK) );
+                    CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, PMU_MINRESMASK, (uint8_t)4, (uint8_t *)&val1) );
+
+                    WPRINT_WHD_DEBUG_DS( ("%s: PMU_MINRESMASK = [%x]\n", __func__, (int )val1) );
+
+                }
+                WPRINT_WHD_INFO( ("successfully completed DS wake sequence\n") );
+                return WHD_SUCCESS;
+            }
+#endif /* DM_43022C1 */
+        }
+        else
+        {
+            WPRINT_WHD_ERROR( ("SDIO I/O Enable Failed\n") );
+            return WHD_BADARG;
+        }
+    }
+
+    WPRINT_WHD_ERROR( ("Chip Doesn't support ULP Wake \n") );
+    return WHD_BADARG;
+}
+
+whd_result_t whd_ensure_wlan_bus_not_in_deep_sleep(whd_driver_t whd_driver)
+{
+    uint16_t wlan_chip_id = whd_chip_get_chip_id(whd_driver);
+    uint8_t byte_data = 0;
+    int loop_count = 0;
+
+    if ((wlan_chip_id == 43012) || (wlan_chip_id == 43022))
+    {
+        /* Wait for F2 to be ready */
+        while ( ( (whd_bus_read_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_IORDY, (uint8_t)1, &byte_data) ) != WHD_SUCCESS ) ||
+                ( ( (byte_data & SDIO_FUNC_READY_2) == 0 ) && (loop_count < WAKE_FROM_UCODE_TIMEOUT_LOOPS) ) )
+        {
+              (void)cy_rtos_delay_milliseconds( (uint32_t)WAKE_FROM_UCODE_CHECK_PER_LOOP );   /* Ignore return - nothing can be done if it fails */
+              loop_count++;
+        }
+
+        if (loop_count >= (uint32_t)WAKE_FROM_UCODE_TIMEOUT_LOOPS)
+        {
+            WPRINT_WHD_DEBUG( ("F2 ready timed out \n") );
+            /* Reachable after hitting assert */
+            return WHD_FALSE;
+        }
+
+    }
+    return WHD_TRUE;
+}
+
+#endif /* ULP_SUPPORT */

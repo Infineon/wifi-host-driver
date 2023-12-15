@@ -13,6 +13,6 @@ var searchData=
   ['int_5fgrant',['int_grant',['../structwhd__btc__lescan__params.html#a8dcea8fcf19e2facaf59891ab47375d9',1,'whd_btc_lescan_params']]],
   ['intr_5fpriority',['intr_priority',['../structwhd__oob__config.html#a948130b9ee9aaba4463a9a678c830b2f',1,'whd_oob_config']]],
   ['is_5ffalling_5fedge',['is_falling_edge',['../structwhd__oob__config.html#afac6867bb224b40190d70a7bed57b556',1,'whd_oob_config']]],
-  ['is_5fnormal_5fmode',['is_normal_mode',['../structwhd__m2m__config.html#afde40b36899b604612feb3b6c39b00ed',1,'whd_m2m_config']]],
+  ['is_5fnormal_5fmode',['is_normal_mode',['../structwhd__m2m__config.html#afde40b36899b604612feb3b6c39b00ed',1,'whd_m2m_config::is_normal_mode()'],['../structwhd__oci__config.html#afde40b36899b604612feb3b6c39b00ed',1,'whd_oci_config::is_normal_mode()']]],
   ['is_5fspi_5fnormal_5fmode',['is_spi_normal_mode',['../structwhd__spi__config.html#a65649e24a48dbfcf74a6e3b0ea729181',1,'whd_spi_config']]]
 ];

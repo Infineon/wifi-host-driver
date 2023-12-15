@@ -99,4 +99,3 @@ extern whd_result_t whd_wifi_set_ampdu_parameters(whd_interface_t ifp);
 #endif
 
 #endif /* ifndef INCLUDED_WHD_AP_H */
-

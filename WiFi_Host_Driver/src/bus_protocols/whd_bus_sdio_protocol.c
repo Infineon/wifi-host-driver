@@ -23,9 +23,10 @@
  *  sending/receiving raw packets etc
  */
 
-#include <stdlib.h>
 #include "cybsp.h"
-#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
+#include "whd_utils.h"
+
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) && !defined(COMPONENT_WIFI_INTERFACE_OCI)
 
 #include "cyabs_rtos.h"
 #include "cyhal_sdio.h"
@@ -45,7 +46,11 @@
 #include "whd_resource_if.h"
 #include "whd_types_int.h"
 #include "whd_types.h"
+#include "whd_proto.h"
 
+#ifdef DM_43022C1
+#include "resources.h"
+#endif
 
 /******************************************************
 *             Constants
@@ -82,7 +87,6 @@ struct whd_bus_priv
     whd_sdio_config_t sdio_config;
     whd_bus_stats_t whd_bus_stats;
     cyhal_sdio_t *sdio_obj;
-
 };
 
 /* For BSP backward compatible, should be removed the macro once 1.0 is not supported */
@@ -128,6 +132,9 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_unregister_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_enable_oob_intr(whd_driver_t whd_driver, whd_bool_t enable);
+#ifdef BLHS_SUPPORT
+static whd_result_t whd_bus_sdio_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
+#endif
 static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
                                                    whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
 static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver);
@@ -146,7 +153,7 @@ uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdi
         return WHD_WLAN_BADARG;
     }
 
-    whd_bus_info = (whd_bus_info_t *)malloc(sizeof(whd_bus_info_t) );
+    whd_bus_info = (whd_bus_info_t *)whd_mem_malloc(sizeof(whd_bus_info_t) );
 
     if (whd_bus_info == NULL)
     {
@@ -157,7 +164,7 @@ uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdi
 
     whd_driver->bus_if = whd_bus_info;
 
-    whd_driver->bus_priv = (struct whd_bus_priv *)malloc(sizeof(struct whd_bus_priv) );
+    whd_driver->bus_priv = (struct whd_bus_priv *)whd_mem_malloc(sizeof(struct whd_bus_priv) );
 
     if (whd_driver->bus_priv == NULL)
     {
@@ -168,6 +175,8 @@ uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdi
 
     whd_driver->bus_priv->sdio_obj = sdio_obj;
     whd_driver->bus_priv->sdio_config = *whd_sdio_config;
+
+    whd_driver->proto_type = WHD_PROTO_BCDC;
 
     whd_bus_info->whd_bus_init_fptr = whd_bus_sdio_init;
     whd_bus_info->whd_bus_deinit_fptr = whd_bus_sdio_deinit;
@@ -202,8 +211,12 @@ uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdi
     whd_bus_info->whd_bus_reinit_stats_fptr = whd_bus_sdio_reinit_stats;
     whd_bus_info->whd_bus_irq_register_fptr = whd_bus_sdio_irq_register;
     whd_bus_info->whd_bus_irq_enable_fptr = whd_bus_sdio_irq_enable;
+#ifdef BLHS_SUPPORT
+    whd_bus_info->whd_bus_blhs_fptr = whd_bus_sdio_blhs;
+#endif
     whd_bus_info->whd_bus_download_resource_fptr = whd_bus_sdio_download_resource;
     whd_bus_info->whd_bus_set_backplane_window_fptr = whd_bus_sdio_set_backplane_window;
+
     return WHD_SUCCESS;
 }
 
@@ -211,12 +224,12 @@ void whd_bus_sdio_detach(whd_driver_t whd_driver)
 {
     if (whd_driver->bus_if != NULL)
     {
-        free(whd_driver->bus_if);
+        whd_mem_free(whd_driver->bus_if);
         whd_driver->bus_if = NULL;
     }
     if (whd_driver->bus_priv != NULL)
     {
-        free(whd_driver->bus_priv);
+        whd_mem_free(whd_driver->bus_priv);
         whd_driver->bus_priv = NULL;
     }
 }
@@ -294,12 +307,16 @@ whd_result_t whd_bus_sdio_send_buffer(whd_driver_t whd_driver, whd_buffer_t buff
 whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 {
     uint8_t byte_data;
+#ifdef DM_43022C1
+    uint8_t secure_chk = -1;
+#endif
     whd_result_t result;
     uint32_t loop_count;
     whd_time_t elapsed_time, current_time;
     uint32_t wifi_firmware_image_size = 0;
     uint16_t chip_id;
     uint8_t *aligned_addr = NULL;
+    memset(&whd_driver->chip_info, 0, sizeof(whd_driver->chip_info) );
 
     whd_bus_set_flow_control(whd_driver, WHD_FALSE);
 
@@ -452,9 +469,67 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 
     CHECK_RETURN(whd_bus_read_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_IORDY, (uint8_t)1, &byte_data) );
 
+#ifndef DM_43022C1
+    /* Check if chip supports CHIPID Read from SDIO core and bootloader handshake */
+    CHECK_RETURN(whd_bus_read_register_value (whd_driver, BUS_FUNCTION, SDIOD_CCCR_BRCM_CARDCAP, (uint8_t)1,
+                                              &byte_data) );
+
+    if ( (byte_data & SDIOD_CCCR_BRCM_CARDCAP_SECURE_MODE) != 0 )
+    {
+        WPRINT_WHD_INFO( ("Chip supports bootloader handshake \n") );
+    }
+
+    if ( (byte_data & SDIOD_CCCR_BRCM_CARDCAP_CHIPID_PRESENT) != 0 )
+    {
+        uint8_t addrlow, addrmid, addrhigh;
+        uint32_t reg_addr;
+        uint8_t devctl;
+        whd_driver->chip_info.chipid_in_sdiocore = 1;
+        CHECK_RETURN(whd_bus_sdio_read_register_value(whd_driver, BACKPLANE_FUNCTION, SBSDIO_DEVICE_CTL, 1, &devctl) );
+        CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SBSDIO_DEVICE_CTL,
+                                                  (uint8_t)1, (devctl | SBSDIO_DEVCTL_ADDR_RST) ) );
+
+        CHECK_RETURN(whd_bus_sdio_read_register_value(whd_driver, BACKPLANE_FUNCTION, SBSDIO_FUNC1_SBADDRLOW, 1,
+                                                      &addrlow) );
+        CHECK_RETURN(whd_bus_sdio_read_register_value(whd_driver, BACKPLANE_FUNCTION, SBSDIO_FUNC1_SBADDRMID, 1,
+                                                      &addrmid) );
+        CHECK_RETURN(whd_bus_sdio_read_register_value(whd_driver, BACKPLANE_FUNCTION, SBSDIO_FUNC1_SBADDRHIGH, 1,
+                                                      &addrhigh) );
+
+        reg_addr = ( (addrlow << 8) | (addrmid << 16) | (addrhigh << 24) ) + SDIO_CORE_CHIPID_REG;
+
+        CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, SBSDIO_DEVICE_CTL,
+                                                  (uint8_t)1, devctl) );
+        CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, reg_addr, 2, (uint8_t *)&chip_id) );
+        whd_chip_set_chip_id(whd_driver, chip_id);
+        WPRINT_WHD_INFO( ("chip ID: %d, Support ChipId Read from SDIO Core \n", chip_id) );
+    }
+    else
+    {
+        /* Read the chip id */
+        CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, CHIPCOMMON_BASE_ADDRESS, 2, (uint8_t *)&chip_id) );
+        whd_chip_set_chip_id(whd_driver, chip_id);
+        WPRINT_WHD_INFO( ("chip ID: %d \n", chip_id) );
+    }
+#else
+
+    CHECK_RETURN(whd_bus_read_register_value (whd_driver, BACKPLANE_FUNCTION, SBSDIO_FUNC1_SECURE_MODE, (uint8_t)1,
+                                              &secure_chk) );
+    if ( secure_chk == 0 )	/* Secure mode register -  will be updated later */
+    {
+        WPRINT_WHD_INFO( ("43022DM : Chip supports bootloader handshake \n") );
+    }
+    else
+    {
+        WPRINT_WHD_ERROR( ("43022DM : Error in the Secure Bootloader Check \n") );
+    }
+
     /* Read the chip id */
     CHECK_RETURN(whd_bus_read_backplane_value(whd_driver, CHIPCOMMON_BASE_ADDRESS, 2, (uint8_t *)&chip_id) );
     whd_chip_set_chip_id(whd_driver, chip_id);
+    WPRINT_WHD_INFO( ("chip ID: %d \n", chip_id) );
+
+#endif
 
     cy_rtos_get_time(&elapsed_time);
     result = whd_bus_sdio_download_firmware(whd_driver);
@@ -494,7 +569,7 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
     }
     if (whd_driver->aligned_addr == NULL)
     {
-        if ( (aligned_addr = malloc(WHD_LINK_MTU) ) == NULL )
+        if ( (aligned_addr = whd_mem_malloc(WHD_LINK_MTU) ) == NULL )
         {
             WPRINT_WHD_ERROR( ("Memory allocation failed for aligned_addr in %s \n", __FUNCTION__) );
             return WHD_MALLOC_FAILURE;
@@ -504,14 +579,14 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
     result = whd_chip_specific_init(whd_driver);
     if (result != WHD_SUCCESS)
     {
-        free(whd_driver->aligned_addr);
+        whd_mem_free(whd_driver->aligned_addr);
         whd_driver->aligned_addr = NULL;
     }
     CHECK_RETURN(result);
     result = whd_ensure_wlan_bus_is_up(whd_driver);
     if (result != WHD_SUCCESS)
     {
-        free(whd_driver->aligned_addr);
+        whd_mem_free(whd_driver->aligned_addr);
         whd_driver->aligned_addr = NULL;
     }
     CHECK_RETURN(result);
@@ -522,6 +597,7 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
     cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, WHD_TRUE);
 #endif
     UNUSED_PARAMETER(elapsed_time);
+
     return result;
 }
 
@@ -529,7 +605,7 @@ whd_result_t whd_bus_sdio_deinit(whd_driver_t whd_driver)
 {
     if (whd_driver->aligned_addr)
     {
-        free(whd_driver->aligned_addr);
+        whd_mem_free(whd_driver->aligned_addr);
         whd_driver->aligned_addr = NULL;
     }
 
@@ -592,6 +668,10 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
     uint32_t hmb_data = 0;
     uint8_t error_type = 0;
     whd_bt_dev_t btdev = whd_driver->bt_dev;
+#ifdef ULP_SUPPORT
+    uint16_t wlan_chip_id;
+    wlan_chip_id = whd_chip_get_chip_id(whd_driver);
+#endif
 
     /* Ensure the wlan backplane bus is up */
     CHECK_RETURN(whd_ensure_wlan_bus_is_up(whd_driver) );
@@ -608,8 +688,8 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
     if ( (I_HMB_HOST_INT & int_status) != 0 )
     {
         /* Read mailbox data and ack that we did so */
-        if (whd_bus_read_backplane_value(whd_driver,  SDIO_TO_HOST_MAILBOX_DATA(whd_driver), 4,
-                                         (uint8_t *)&hmb_data) == WHD_SUCCESS)
+        if ((whd_bus_read_backplane_value(whd_driver,  SDIO_TO_HOST_MAILBOX_DATA(whd_driver), 4,
+                                         (uint8_t *)&hmb_data) == WHD_SUCCESS) && (hmb_data > 0))
             if (whd_bus_write_backplane_value(whd_driver, SDIO_TO_SB_MAILBOX(whd_driver), (uint8_t)4,
                                               SMB_INT_ACK) != WHD_SUCCESS)
                 WPRINT_WHD_ERROR( ("%s: Failed writing SMB_INT_ACK\n", __FUNCTION__) );
@@ -622,7 +702,55 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
             error_type = WLC_ERR_FW;
             whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
+#ifdef ULP_SUPPORT
+        else if(hmb_data == 0 && ( wlan_chip_id == 43012 || wlan_chip_id == 43022 ))
+        {
+            WPRINT_WHD_DEBUG( ("%s: mailbox indication about DS1/DS2 Exit\n", __FUNCTION__) );
+            if(whd_driver->ds_exit_in_progress == WHD_FALSE)
+            {
+                if(whd_wlan_bus_complete_ds_wake(whd_driver, true) == WHD_SUCCESS)
+                {
+                    WPRINT_WHD_DEBUG(("DS EXIT Triggered: Start Re-Downloading Firmware \n"));
+                    /* If we are running LPA, then LPA will disable MCU SDIO clock.So, re-dowanload fails.
+                     in ordet to avoid this, releasing the clock before FW re-download */
+                    cyhal_syspm_lock_deepsleep();
+                    whd_sdpcm_quit(whd_driver);
+                    /* Re-Download Firmware no need to check return, as it affects sync of whd thread, error will be thrown */
+                    whd_bus_reinit_stats(whd_driver, true);
+                    cyhal_syspm_unlock_deepsleep();
+                }
+            }
+            else
+            {
+                 WPRINT_WHD_ERROR(("DS1/DS2 Exit(FW Re-download) is already in progress \n"));
+            }
+        }
+
+        if (whd_bus_write_backplane_value(whd_driver, (uint32_t)SDIO_INT_STATUS(whd_driver), (uint8_t)4,
+                            (int_status & I_HMB_HOST_INT)) != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("%s: Error clearing interrupts\n", __FUNCTION__) );
+            int_status = 0;
+            goto exit;
+        }
+        int_status &= ~I_HMB_HOST_INT;
+
+        if ((int_status & I_HMB_FC_STATE) != 0 )
+        {
+            WPRINT_WHD_DEBUG(("Dongle reports I_HMB_FC_STATE\n"));
+            if (whd_bus_write_backplane_value(whd_driver, (uint32_t)SDIO_INT_STATUS(whd_driver), (uint8_t)4,
+                          (int_status & I_HMB_FC_STATE)) != WHD_SUCCESS)
+            {
+                WPRINT_WHD_ERROR( ("%s: Error clearing interrupts\n", __FUNCTION__) );
+                int_status = 0;
+                goto exit;
+            }
+            int_status &= ~I_HMB_FC_STATE;
+       }
+#endif	/* ULP_SUPPORT */
+
     }
+
     if (btdev && btdev->bt_int_cb)
     {
         if ( (I_HMB_FC_CHANGE & int_status) != 0 )
@@ -877,7 +1005,7 @@ static whd_result_t whd_bus_sdio_cmd52(whd_driver_t whd_driver, whd_bus_transfer
                                        whd_bus_function_t function, uint32_t address, uint8_t value,
                                        sdio_response_needed_t response_expected, uint8_t *response)
 {
-    uint32_t sdio_response;
+    uint32_t sdio_response = 0;
     whd_result_t result;
     sdio_cmd_argument_t arg;
     arg.value = 0;
@@ -956,7 +1084,7 @@ static whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer
 
         if (result != CY_RSLT_SUCCESS)
         {
-            WPRINT_WHD_ERROR( ("%s:%d cyhal_sdio_bulk_transfer failed\n", __func__, __LINE__) );
+            WPRINT_WHD_ERROR( ("%s:%d cyhal_sdio_bulk_transfer SDIO_BLOCK_MODE failed\n", __func__, __LINE__) );
             goto done;
         }
     }
@@ -982,9 +1110,12 @@ static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver)
     uint8_t csr_val = 0;
     whd_result_t result;
     uint32_t loop_count;
+
+#ifndef BLHS_SUPPORT
     uint32_t ram_start_address;
 
     ram_start_address = GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
+
     if (ram_start_address != 0)
     {
         CHECK_RETURN(whd_reset_core(whd_driver, WLAN_ARM_CORE, SICF_CPUHALT, SICF_CPUHALT) );
@@ -994,19 +1125,15 @@ static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver)
         CHECK_RETURN(whd_disable_device_core(whd_driver, WLAN_ARM_CORE, WLAN_CORE_FLAG_NONE) );
         CHECK_RETURN(whd_disable_device_core(whd_driver, SOCRAM_CORE, WLAN_CORE_FLAG_NONE) );
         CHECK_RETURN(whd_reset_device_core(whd_driver, SOCRAM_CORE, WLAN_CORE_FLAG_NONE) );
-
         CHECK_RETURN(whd_chip_specific_socsram_init(whd_driver) );
     }
-
-#if 0
-    /* 43362 specific: Remap JTAG pins to UART output */
-    uint32_t data = 0;
-    CHECK_RETURN(whd_bus_write_backplane_value(0x18000650, 1, 1) );
-    CHECK_RETURN(whd_bus_read_backplane_value(0x18000654, 4, (uint8_t *)&data) );
-    data |= (1 << 24);
-    CHECK_RETURN(whd_bus_write_backplane_value(0x18000654, 4, data) );
 #endif
 
+#ifdef BLHS_SUPPORT
+    CHECK_RETURN(whd_bus_common_blhs(whd_driver, CHK_BL_INIT) );
+#endif
+
+#ifndef DM_43022C1
     result = whd_bus_write_wifi_firmware_image(whd_driver);
 
     if (result == WHD_UNFINISHED)
@@ -1022,8 +1149,27 @@ static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver)
     }
 
     CHECK_RETURN(whd_bus_sdio_write_wifi_nvram_image(whd_driver) );
+#else
+    /* For the Chip - 43022(DM) : Download NVRAM before Firmware */
+    CHECK_RETURN(whd_bus_sdio_write_wifi_nvram_image(whd_driver) );
+
+    result = whd_bus_write_wifi_firmware_image(whd_driver);
+
+    if (result == WHD_UNFINISHED)
+    {
+        WPRINT_WHD_INFO( ("User aborted fw download\n") );
+        /* user aborted */
+        return result;
+    }
+    else if (result != WHD_SUCCESS)
+    {
+        whd_assert("Failed to load wifi firmware\n", result == WHD_SUCCESS);
+        return result;
+    }
+#endif
 
     /* Take the ARM core out of reset */
+#ifndef BLHS_SUPPORT
     if (ram_start_address != 0)
     {
         CHECK_RETURN(whd_reset_core(whd_driver, WLAN_ARM_CORE, 0, 0) );
@@ -1040,7 +1186,7 @@ static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver)
             return result;
         }
     }
-
+#endif
     /* Wait until the High Throughput clock is available */
     loop_count = 0;
     while ( ( (result = whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_CHIP_CLOCK_CSR, (uint8_t)1,
@@ -1351,14 +1497,20 @@ whd_result_t whd_bus_sdio_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_
                                               INTR_CTL_MASTER_EN | INTR_CTL_FUNC2_EN) );
 
     CHECK_RETURN(whd_bus_read_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_IORDY, (uint8_t)1, &byte_data) );
+    WPRINT_WHD_DEBUG(("FW RE-DOWNL STARTS \n"));
 
     result = whd_bus_sdio_download_firmware(whd_driver);
 
     if (result != WHD_SUCCESS)
     {
         /*  either an error or user abort */
-        WPRINT_WHD_DEBUG( ("FW download failed\n") );
+        WPRINT_WHD_ERROR( ("FW re-download failed\n") );
         return result;
+    }
+    else
+    {
+        WPRINT_WHD_ERROR( (" # DS0-FW DOWNLOAD DONE # \n") );
+        whd_driver->internal_info.whd_wlan_status.state = WLAN_DOWN;
     }
 
     /* Wait for F2 to be ready */
@@ -1391,6 +1543,8 @@ whd_result_t whd_bus_sdio_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_
 
     }
 
+    /* Update wlan state */
+    whd_driver->internal_info.whd_wlan_status.state = WLAN_UP;
     /* Do chip specific init */
     CHECK_RETURN(whd_chip_specific_init(whd_driver) );
 
@@ -1399,6 +1553,12 @@ whd_result_t whd_bus_sdio_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_
 
     /* Allow bus to go to  sleep */
     CHECK_RETURN(whd_allow_wlan_bus_to_sleep(whd_driver) );
+
+    CHECK_RETURN(whd_sdpcm_init(whd_driver));
+
+#ifdef ULP_SUPPORT
+    whd_driver->ds_exit_in_progress = WHD_FALSE;
+#endif
 
     WPRINT_WHD_INFO( ("whd_bus_reinit Completed \n") );
     return WHD_SUCCESS;
@@ -1493,12 +1653,8 @@ static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event
 static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
-	whd_result_t result;
 
-    result = cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, config->drive_mode, config->init_drive_state);
-    if (result != CY_RSLT_SUCCESS)
-		WPRINT_WHD_ERROR( ("%s: Failed at cyhal_gpio_init for host_oob_pin, result code = %u \n", __func__, (unsigned int)result) );
-
+    cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, config->drive_mode, config->init_drive_state);
 #if (CYHAL_API_VERSION >= 2)
     static cyhal_gpio_callback_data_t cbdata;
     cbdata.callback = whd_bus_sdio_oob_irq_handler;
@@ -1587,6 +1743,178 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver)
     return WHD_SUCCESS;
 }
 
+#ifdef BLHS_SUPPORT
+static whd_result_t whd_bus_sdio_blhs_read_h2d(whd_driver_t whd_driver, uint32_t *val)
+{
+    return whd_bus_sdio_read_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_REG_DAR_H2D_MSG_0, 1, (uint8_t *)val);
+}
+
+static whd_result_t whd_bus_sdio_blhs_write_h2d(whd_driver_t whd_driver, uint32_t val)
+{
+    return whd_bus_sdio_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_REG_DAR_H2D_MSG_0,
+                                             (uint8_t)1, val);
+}
+
+static whd_result_t whd_bus_sdio_blhs_wait_d2h(whd_driver_t whd_driver, uint16_t state)
+{
+    uint16_t byte_data = 0;
+    uint32_t loop_count = 0;
+    whd_result_t result;
+#ifdef DM_43022C1
+    uint8_t no_of_bytes = 2;
+#else
+    uint8_t no_of_bytes = 1;
+#endif
+
+    while ( ( (result =
+                   whd_bus_sdio_read_register_value(whd_driver, BACKPLANE_FUNCTION, SDIO_REG_DAR_D2H_MSG_0, (uint8_t)no_of_bytes,
+                                                    (uint8_t*)&byte_data) ) == WHD_SUCCESS ) &&
+            ( (byte_data & state) == 0 ) &&
+            (loop_count < SDIO_BLHS_D2H_TIMEOUT_MS) )
+    {
+        (void)cy_rtos_delay_milliseconds( (uint32_t)10 );
+        loop_count += 10;
+    }
+
+    if (loop_count >= SDIO_BLHS_D2H_TIMEOUT_MS)
+    {
+        if (result != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("Read D2H message failed\n") );
+        }
+        else
+        {
+            WPRINT_WHD_ERROR( ("Timeout while waiting for D2H_MSG(0x%x) expected 0x%x\n", byte_data, state) );
+        }
+        return WHD_TIMEOUT;
+    }
+
+    return WHD_SUCCESS;
+}
+
+static whd_result_t whd_bus_sdio_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage)
+{
+    uint32_t val = 0;
+#ifdef DM_43022C1
+    uint32_t loop = 0;
+    uint32_t value = 0;
+#endif
+
+    /* Skip bootloader handshake if it is not need */
+
+    switch (stage)
+    {
+       case CHK_BL_INIT:
+            WPRINT_WHD_DEBUG(("CHK_BL_INIT \n"));
+#ifdef DM_43022C1
+            CHECK_RETURN(whd_bus_sdio_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_REG_DAR_H2D_MSG_0,
+                                               (uint8_t)4, SDIO_BLHS_H2D_BL_INIT));
+#else
+            CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, SDIO_BLHS_H2D_BL_INIT) );
+#endif
+            CHECK_RETURN(whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_READY) );
+            break;
+        case PREP_FW_DOWNLOAD:
+            WPRINT_WHD_DEBUG(("PREP_FW_DOWNLOAD!! \n"));
+            CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, SDIO_BLHS_H2D_DL_FW_START) );
+            break;
+        case POST_FW_DOWNLOAD:
+            CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, SDIO_BLHS_H2D_DL_FW_DONE) );
+            WPRINT_WHD_DEBUG(("POST_FW_DOWNLOAD \n"));
+
+#ifdef DM_43022C1
+
+            if (whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_BP_CLK_DIS_REQ) != WHD_SUCCESS)
+            {
+                whd_wifi_print_whd_log(whd_driver);
+                whd_bus_sdio_blhs_read_h2d(whd_driver, &val);
+                whd_bus_sdio_blhs_write_h2d(whd_driver, (val | SDIO_BLHS_H2D_BL_RESET_ON_ERROR) );
+                return WHD_BLHS_VALIDATE_FAILED;
+            }
+            else
+            {
+                WPRINT_WHD_DEBUG(("Received SDIO_BLHS_D2H_BP_CLK_DIS_REQ from Dongle!! \n"));
+                whd_bus_sdio_blhs_write_h2d(whd_driver, SDIO_BLHS_H2D_BP_CLK_DIS_ACK);
+                WPRINT_WHD_DEBUG(("SDIO_BLHS_H2D_BP_CLK_DIS_ACK \n"));
+            }
+
+            /* Check for any interrupt pending. Here Interrupt pending will be treated as HS bit
+             * to know that the backplane is enabled. Interrupt pending register is choosen here
+             * because the backplane will be disabled and this is the only tested register which
+             * is accessible while backplane is disabled
+             */
+             for (loop = 0; loop < 80000; loop++) {
+                CHECK_RETURN(whd_bus_read_register_value (whd_driver, BUS_FUNCTION, SDIOD_CCCR_INTPEND, (uint8_t)4, (uint8_t*)&value) );
+                if (value & SDIOD_CCCR_INTPEND_INT1) {
+                    WPRINT_WHD_DEBUG(("%s: Backplane enabled.\n",  __func__));
+                    break;
+                }
+            }
+
+            /* Bootloader hung after backplane disable */
+            if (loop == 80000) {
+                WPRINT_WHD_ERROR(("%s: Device hung, return failure.\n", __func__));
+                return WHD_BLHS_VALIDATE_FAILED;
+            }
+#else
+            if (whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_TRXHDR_PARSE_DONE) != WHD_SUCCESS)
+            {
+                whd_wifi_print_whd_log(whd_driver);
+                whd_bus_sdio_blhs_read_h2d(whd_driver, &val);
+                whd_bus_sdio_blhs_write_h2d(whd_driver, (val | SDIO_BLHS_H2D_BL_RESET_ON_ERROR) );
+                return WHD_BLHS_VALIDATE_FAILED;
+            }
+            else
+            {
+                WPRINT_WHD_DEBUG(("Received TRX parsing Succeed MSG from Dongle \n"));
+            }
+#endif /* DM_43022C1 */
+            break;
+        case CHK_FW_VALIDATION:
+            WPRINT_WHD_DEBUG(("CHK_FW_VALIDATION \n"));
+            if ( (whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_VALDN_DONE) != WHD_SUCCESS) ||
+                 (whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_VALDN_RESULT) != WHD_SUCCESS) )
+            {
+                whd_wifi_print_whd_log(whd_driver);
+                whd_bus_sdio_blhs_read_h2d(whd_driver, &val);
+                whd_bus_sdio_blhs_write_h2d(whd_driver, (val | SDIO_BLHS_H2D_BL_RESET_ON_ERROR) );
+                return WHD_BLHS_VALIDATE_FAILED;
+            }
+            break;
+#ifdef DM_43022C1
+        case PREP_NVRAM_DOWNLOAD:
+            WPRINT_WHD_DEBUG(("PREP_NVRAM_DOWNLOAD \n"));
+            CHECK_RETURN(whd_bus_sdio_blhs_read_h2d(whd_driver, &val) );
+            CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, (val | SDIO_BLHS_H2D_DL_NVRAM_START) ) );
+            break;
+#endif
+        case POST_NVRAM_DOWNLOAD:
+            WPRINT_WHD_DEBUG(("POST_NVRAM_DOWNLOAD \n"));
+            CHECK_RETURN(whd_bus_sdio_blhs_read_h2d(whd_driver, &val) );
+            CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, (val | SDIO_BLHS_H2D_DL_NVRAM_DONE) ) );
+#ifdef DM_43022C1
+            /* For chip 43022(DM), NVRAM is downloaded at 512KB region and BL moves the NVRAM at the RAM end portion and gives ACK(SDIO_BLHS_D2H_NVRAM_DONE) */
+            if (whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_NVRAM_MV_DONE) != WHD_SUCCESS)
+            {
+                whd_wifi_print_whd_log(whd_driver);
+                whd_bus_sdio_blhs_read_h2d(whd_driver, &val);
+                whd_bus_sdio_blhs_write_h2d(whd_driver, (val | SDIO_BLHS_H2D_BL_RESET_ON_ERROR) );
+                return WHD_BLHS_VALIDATE_FAILED;
+            }
+#endif
+            break;
+        case POST_WATCHDOG_RESET:
+            CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, SDIO_BLHS_H2D_BL_INIT) );
+            CHECK_RETURN(whd_bus_sdio_blhs_wait_d2h(whd_driver, SDIO_BLHS_D2H_READY) );
+        default:
+            return WHD_BADARG;
+    }
+
+    return WHD_SUCCESS;
+}
+
+#endif
+
 #ifdef WPRINT_ENABLE_WHD_DEBUG
 #define WHD_BLOCK_SIZE       (1024)
 static whd_result_t whd_bus_sdio_verify_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
@@ -1606,7 +1934,7 @@ static whd_result_t whd_bus_sdio_verify_resource(whd_driver_t whd_driver, whd_re
                            __LINE__) );
         goto exit;
     }
-    cmd_img = malloc(WHD_BLOCK_SIZE);
+    cmd_img = whd_mem_malloc(WHD_BLOCK_SIZE);
     if (cmd_img != NULL)
     {
         for (i = 0; i < blocks_count; i++)
@@ -1628,14 +1956,20 @@ static whd_result_t whd_bus_sdio_verify_resource(whd_driver_t whd_driver, whd_re
     }
 exit:
     if (cmd_img)
-        free(cmd_img);
+        whd_mem_free(cmd_img);
     return WHD_SUCCESS;
 }
 
 #endif
+
 static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
                                                    whd_bool_t direct_resource, uint32_t address, uint32_t image_size)
 {
+
+#ifdef DM_43022C1
+#define TRX_HDR_START_ADDR 0x7fd4c /* TRX header start address */
+#endif
+
     whd_result_t result = WHD_SUCCESS;
     uint8_t *image;
     uint32_t blocks_count = 0;
@@ -1654,13 +1988,62 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
         goto exit;
     }
 
-    for (i = 0; i < blocks_count; i++)
+    for (i = 0; i < blocks_count && image_size > 0; i++)
     {
         CHECK_RETURN(whd_get_resource_block(whd_driver, resource, i, (const uint8_t **)&image, &size_out) );
-        if ( (resource == WHD_RESOURCE_WLAN_FIRMWARE) && (reset_instr == 0) )
+        if (resource == WHD_RESOURCE_WLAN_FIRMWARE)
         {
-            /* Copy the starting address of the firmware into a global variable */
-            reset_instr = *( (uint32_t *)(&image[0]) );
+#ifdef BLHS_SUPPORT
+            trx_header_t *trx;
+            if (i == 0)
+            {
+#ifndef DM_43022C1
+                trx = (trx_header_t *)&image[0];
+#else
+#ifndef WLAN_MFG_FIRMWARE
+                trx = (trx_header_t *)&wifi_firmware_image_data;
+#else
+                trx = (trx_header_t *)&wifi_mfg_firmware_image_data;
+#endif /* WLAN_MFG_FIRMWARE */
+#endif /* DM_43022C1 */
+
+                if (trx->magic == TRX_MAGIC)
+                {
+
+#ifdef DM_43022C1
+                    /* For 43022DM, Reading the trx header and writing at 512KB area */
+                    whd_bus_transfer_backplane_bytes(whd_driver, BUS_WRITE, TRX_HDR_START_ADDR, sizeof(*trx), (uint8_t*)trx);
+#else
+                    image_size = trx->len;
+                    address -= sizeof(*trx);
+#endif /* DM_43022C1 */
+
+#ifdef WPRINT_ENABLE_WHD_DEBUG
+                    pre_addr = address;
+#endif
+                }
+                else
+                {
+                    result = WHD_BADARG;
+                    WPRINT_WHD_ERROR( ("%s: TRX header mismatch\n", __FUNCTION__) );
+                    goto exit;
+                }
+            }
+#endif
+            if (size_out > image_size)
+            {
+                size_out = image_size;
+                image_size = 0;
+            }
+            else
+            {
+                image_size -= size_out;
+            }
+            if (reset_instr == 0)
+            {
+                /* Copy the starting address of the firmware into a global variable */
+                reset_instr = *( (uint32_t *)(&image[0]) );
+            }
         }
         result = whd_bus_transfer_backplane_bytes(whd_driver, BUS_WRITE, address, size_out, &image[0]);
         if (result != WHD_SUCCESS)
@@ -1678,6 +2061,7 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
      * load the first 32 bytes with the offset of the firmware load address
      * which is been copied before during the firmware download
      */
+#ifndef BLHS_SUPPORT
     if ( (address != 0) && (reset_instr != 0) )
     {
         /* write address 0 with reset instruction */
@@ -1698,6 +2082,7 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
             }
         }
     }
+#endif
 exit: return result;
 }
 
@@ -1707,6 +2092,10 @@ static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
     uint32_t img_end;
     uint32_t image_size;
 
+#if defined(BLHS_SUPPORT) && defined(DM_43022C1)
+    CHECK_RETURN(whd_bus_common_blhs(whd_driver, PREP_NVRAM_DOWNLOAD) );
+#endif /* defined(BLHS_SUPPORT) && defined(DM_43022C1) */
+
     /* Get the size of the variable image */
     CHECK_RETURN(whd_resource_size(whd_driver, WHD_RESOURCE_WLAN_NVRAM, &image_size) );
 
@@ -1714,7 +2103,15 @@ static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
     image_size = ROUND_UP(image_size, NVM_IMAGE_SIZE_ALIGNMENT);
 
     /* Write image */
+
+#ifndef DM_43022C1
     img_end = GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4;
+#else
+    /* 43022DM - NVRAM is downloaded at 512KB region,
+    later will be moved to RAM END region by Bootloader */
+    img_end = GET_C_VAR(whd_driver, NVRAM_DNLD_ADDR) - 4;
+#endif
+
     img_base = (img_end - image_size);
     img_base += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
 
@@ -1726,6 +2123,11 @@ static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
     img_end += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
 
     CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, (uint32_t)img_end, 4, image_size) );
+
+#ifdef BLHS_SUPPORT
+    CHECK_RETURN(whd_bus_common_blhs(whd_driver, POST_NVRAM_DOWNLOAD) );
+#endif /* BLHS_SUPPORT */
+
     return WHD_SUCCESS;
 }
 
@@ -1796,6 +2198,60 @@ whd_result_t whd_bus_sdio_set_backplane_window(whd_driver_t whd_driver, uint32_t
     }
 
     return WHD_SUCCESS;
+}
+
+whd_result_t whd_wlan_reset_sdio(whd_driver_t whd_driver)
+{
+
+    CHECK_DRIVER_NULL(whd_driver);
+
+#ifdef BLHS_SUPPORT
+    uint8_t byte_data = 0;
+    uint8_t result = -1;
+    /* Host to Dongle Registers are initialized to zero */
+    CHECK_RETURN(whd_bus_sdio_blhs_write_h2d(whd_driver, SDIO_BLHS_H2D_BL_INIT) );
+
+    if (whd_driver->chip_info.chipid_in_sdiocore == 1)
+    {
+        /* Option1 - Configure registers to trigger WLAN reset on "SDIO Soft Reset (Func0 RES bit)",
+           and set RES bit to trigger SDIO as well as WLAN reset (instead of using PMU/CC Watchdog register) */
+        CHECK_RETURN(whd_bus_read_register_value (whd_driver, BUS_FUNCTION, SDIOD_CCCR_BRCM_CARDCTL, (uint8_t)1,
+                                                  &byte_data) );
+
+        byte_data |= SDIOD_CCCR_BRCM_WLANRST_ONF0ABORT;
+
+        CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_BRCM_CARDCTL, (uint8_t)1,
+                                                  byte_data) );
+        /* Option2 - To trigger only WLAN Reset the corresponding new bit in rev 31 */
+        //CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_IOABORT, (uint8_t)1,
+        //                                            IO_ABORT_RESET_ALL ));
+        return WHD_SUCCESS;
+    }
+    else
+    {
+        /* using PMU Watchdog register reset */
+        uint32_t watchdog_reset = 0xFFFF;
+
+        result =
+            whd_bus_write_backplane_value(whd_driver, (uint32_t)PMU_WATCHDOG(
+                                              whd_driver), (uint8_t)sizeof(watchdog_reset),
+                                          (uint8_t)watchdog_reset);
+        if (result != WHD_SUCCESS)
+        {
+            WPRINT_WHD_ERROR( ("Error: pmuwatchdog reset failed, result=%d \n", result) );
+            return WHD_FALSE;
+        }
+        else
+        {
+            WPRINT_WHD_INFO( ("pmuwatchdog reset done\n") );
+            return WHD_SUCCESS;
+        }
+    }
+#else
+    WPRINT_WHD_INFO( ("Wifi Driver Deinit not implemented , %s failed at %d \n", __func__,
+                      __LINE__) );
+    return WHD_FALSE;
+#endif
 }
 
 #endif /* (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */

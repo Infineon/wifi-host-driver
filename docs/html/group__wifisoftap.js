@@ -1,6 +1,6 @@
 var group__wifisoftap =
 [
-    [ "whd_wifi_init_ap", "group__wifisoftap.html#ga647aebc1d86708017fd11029e2e1a51c", null ],
+    [ "whd_wifi_init_ap", "group__wifisoftap.html#gab21ff21fba955160ccf66ceb4a4aafb0", null ],
     [ "whd_wifi_start_ap", "group__wifisoftap.html#ga3c9aa99add3f6a6d13e9092bd6e1246b", null ],
     [ "whd_wifi_stop_ap", "group__wifisoftap.html#ga2c6c28512678dc57dabb641c41e30d41", null ],
     [ "whd_wifi_ap_get_max_assoc", "group__wifisoftap.html#ga32982684d093a173a6e578856b581d29", null ],

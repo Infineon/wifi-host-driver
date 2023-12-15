@@ -21,6 +21,7 @@
 #include "whd_network_types.h"
 #include "whd_types_int.h"
 #include "whd_resource_api.h"
+#include "whd_bus_common.h"
 
 #ifndef INCLUDED_WHD_BUS_PROTOCOL_INTERFACE_H_
 #define INCLUDED_WHD_BUS_PROTOCOL_INTERFACE_H_
@@ -133,7 +134,10 @@ extern whd_result_t whd_bus_reinit_stats(whd_driver_t whd_driver, whd_bool_t wak
 extern whd_result_t whd_bus_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
 extern whd_result_t whd_bus_irq_register(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
-											  whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
+                                              whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
+#ifdef BLHS_SUPPORT
+extern whd_result_t whd_bus_common_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
+#endif
 /******************************************************
 *             Global variables
 ******************************************************/

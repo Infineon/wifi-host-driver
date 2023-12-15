@@ -176,6 +176,9 @@ See <a class="el" href="group__wifiutilities.html#ga5a62f0854ad148dde280b4f75596
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__m2m__config.html">whd_m2m_config</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for M2M config parameters which can be set by application during whd power up.  <a href="structwhd__m2m__config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__oci__config.html">whd_oci_config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for OCI config parameters which can be set by application during whd power up.  <a href="structwhd__oci__config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwhd__btc__lescan__params.html">whd_btc_lescan_params</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for LE Scan parameters.  <a href="structwhd__btc__lescan__params.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,14 +259,39 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a287bbd4f521f0d1cf44165bc617cebf5">NO_POWERSAVE_MODE</a>&#160;&#160;&#160;(0)</td></tr>
 <tr class="memdesc:a287bbd4f521f0d1cf44165bc617cebf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">No Powersave mode. <br /></td></tr>
 <tr class="separator:a287bbd4f521f0d1cf44165bc617cebf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0149fc13ddc1b605e64c7c2cebef58"><td class="memItemLeft" align="right" valign="top"><a id="acd0149fc13ddc1b605e64c7c2cebef58"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#acd0149fc13ddc1b605e64c7c2cebef58">ULP_BUSWIDTH_INTR_MODE</a>&#160;&#160;&#160;(0)</td></tr>
+<tr class="memdesc:acd0149fc13ddc1b605e64c7c2cebef58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use BUS Width Interrupt method, when device is in DS2 state Exit. <br /></td></tr>
+<tr class="separator:acd0149fc13ddc1b605e64c7c2cebef58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b261b3c1cad9af898406794802c1be1"><td class="memItemLeft" align="right" valign="top"><a id="a8b261b3c1cad9af898406794802c1be1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a8b261b3c1cad9af898406794802c1be1">ULP_OOB_INTR_MODE</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="memdesc:a8b261b3c1cad9af898406794802c1be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use OOB interrupt method, when device is in DS2 state Exit. <br /></td></tr>
+<tr class="separator:a8b261b3c1cad9af898406794802c1be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5580d1c1e63d922c2e3dbbac91babd2c"><td class="memItemLeft" align="right" valign="top"><a id="a5580d1c1e63d922c2e3dbbac91babd2c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a5580d1c1e63d922c2e3dbbac91babd2c">ULP_ASYNC_INTR_MODE</a>&#160;&#160;&#160;(2)</td></tr>
+<tr class="memdesc:a5580d1c1e63d922c2e3dbbac91babd2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Asynchronous method, when device is in DS2 state Exit. <br /></td></tr>
+<tr class="separator:a5580d1c1e63d922c2e3dbbac91babd2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2ce8126dc46ee1d9d3beda3e1003193"><td class="memItemLeft" align="right" valign="top"><a id="af2ce8126dc46ee1d9d3beda3e1003193"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#af2ce8126dc46ee1d9d3beda3e1003193">PMKID_LEN</a>&#160;&#160;&#160;(16)</td></tr>
 <tr class="memdesc:af2ce8126dc46ee1d9d3beda3e1003193"><td class="mdescLeft">&#160;</td><td class="mdescRight">PMKID LENGTH. <br /></td></tr>
 <tr class="separator:af2ce8126dc46ee1d9d3beda3e1003193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a446dbf4b15aa0f7e6618cf9b9e015d65"><td class="memItemLeft" align="right" valign="top"><a id="a446dbf4b15aa0f7e6618cf9b9e015d65"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ULP_NO_SUPPORT</b>&#160;&#160;&#160;(0) /* Flag to disable ULP in 43022 */</td></tr>
+<tr class="separator:a446dbf4b15aa0f7e6618cf9b9e015d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f3d61a6ccd77a3ad66cfde3d8f818b"><td class="memItemLeft" align="right" valign="top"><a id="af0f3d61a6ccd77a3ad66cfde3d8f818b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ULP_DS1_SUPPORT</b>&#160;&#160;&#160;(1) /* Flag to enable DS1 mode in 43022 */</td></tr>
+<tr class="separator:af0f3d61a6ccd77a3ad66cfde3d8f818b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1eb85333b0169339ffa8f513ea5cbb"><td class="memItemLeft" align="right" valign="top"><a id="a3b1eb85333b0169339ffa8f513ea5cbb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ULP_DS2_SUPPORT</b>&#160;&#160;&#160;(2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */</td></tr>
+<tr class="separator:a3b1eb85333b0169339ffa8f513ea5cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a113e5523834b14dff04ab2f9de618aec"><td class="memItemLeft" align="right" valign="top"><a id="a113e5523834b14dff04ab2f9de618aec"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a113e5523834b14dff04ab2f9de618aec">WHD_OOB_CONFIG_VERSION</a>&#160;&#160;&#160;(2)</td></tr>
 <tr class="memdesc:a113e5523834b14dff04ab2f9de618aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the version for <a class="el" href="structwhd__oob__config.html" title="Structure for Out-of-band interrupt config parameters which can be set by application during whd powe...">whd_oob_config</a> structure. <br /></td></tr>
 <tr class="separator:a113e5523834b14dff04ab2f9de618aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17050055c7789bd6fd6960ec0f25d4f5"><td class="memItemLeft" align="right" valign="top"><a id="a17050055c7789bd6fd6960ec0f25d4f5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a17050055c7789bd6fd6960ec0f25d4f5">WHD_SAP_USE_CHANSPEC</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="memdesc:a17050055c7789bd6fd6960ec0f25d4f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this macro as any value indicate whd_wifi_init_ap api uses chanspec instead of channel. <br /></td></tr>
+<tr class="separator:a17050055c7789bd6fd6960ec0f25d4f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c95a90e7806e4b0d21edfae15b73465"><td class="memItemLeft" align="right" valign="top"><a id="a3c95a90e7806e4b0d21edfae15b73465"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a3c95a90e7806e4b0d21edfae15b73465">UNUSED_PARAMETER</a>(x)&#160;&#160;&#160;( (void)(x) )</td></tr>
 <tr class="memdesc:a3c95a90e7806e4b0d21edfae15b73465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suppress unused parameter warning. <br /></td></tr>
@@ -288,6 +316,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a>&#160;&#160;&#160;6</td></tr>
 <tr class="memdesc:a50f830e25a5ac6d7d0e3eb8d23e90943"><td class="mdescLeft">&#160;</td><td class="mdescRight">BDC Header with padding 4 + 2. <br /></td></tr>
 <tr class="separator:a50f830e25a5ac6d7d0e3eb8d23e90943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a43f624a90cb7b54e6b953f2ed25f4f"><td class="memItemLeft" align="right" valign="top"><a id="a9a43f624a90cb7b54e6b953f2ed25f4f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a9a43f624a90cb7b54e6b953f2ed25f4f">MSGBUF_OVERHEAD_WITH_PAD</a>&#160;&#160;&#160;6</td></tr>
+<tr class="memdesc:a9a43f624a90cb7b54e6b953f2ed25f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overhaed Space with padding 4 + 2. <br /></td></tr>
+<tr class="separator:a9a43f624a90cb7b54e6b953f2ed25f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a559655385d80ca97754fafa29ac87717"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a>&#160;&#160;&#160;4</td></tr>
 <tr class="memdesc:a559655385d80ca97754fafa29ac87717"><td class="mdescLeft">&#160;</td><td class="mdescRight">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).  <a href="#a559655385d80ca97754fafa29ac87717">More...</a><br /></td></tr>
 <tr class="separator:a559655385d80ca97754fafa29ac87717"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -625,6 +657,22 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#ab05f43e01bbb9228b3ccf13f30861d07">WHD_NO_REGISTER_FUNCTION_POINTER</a>&#160;&#160;&#160;<a class="el" href="whd__types_8h.html#adf4a5004401ae1772bf5b33a5e19e108">WHD_RESULT_CREATE</a>(1071)</td></tr>
 <tr class="memdesc:ab05f43e01bbb9228b3ccf13f30861d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">No register function pointer. <br /></td></tr>
 <tr class="separator:ab05f43e01bbb9228b3ccf13f30861d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cb063b5fe90bb8a2027fc73bdf3b238"><td class="memItemLeft" align="right" valign="top"><a id="a5cb063b5fe90bb8a2027fc73bdf3b238"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a5cb063b5fe90bb8a2027fc73bdf3b238">WHD_BLHS_VALIDATE_FAILED</a>&#160;&#160;&#160;<a class="el" href="whd__types_8h.html#adf4a5004401ae1772bf5b33a5e19e108">WHD_RESULT_CREATE</a>(1072)</td></tr>
+<tr class="memdesc:a5cb063b5fe90bb8a2027fc73bdf3b238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bootloader handshake validation failed. <br /></td></tr>
+<tr class="separator:a5cb063b5fe90bb8a2027fc73bdf3b238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec6f8cb59c6a69f32f52a0d59fe92f3"><td class="memItemLeft" align="right" valign="top"><a id="a6ec6f8cb59c6a69f32f52a0d59fe92f3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a6ec6f8cb59c6a69f32f52a0d59fe92f3">WHD_BUS_UP_FAIL</a>&#160;&#160;&#160;<a class="el" href="whd__types_8h.html#adf4a5004401ae1772bf5b33a5e19e108">WHD_RESULT_CREATE</a>(1073)</td></tr>
+<tr class="memdesc:a6ec6f8cb59c6a69f32f52a0d59fe92f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">bus failed to come up <br /></td></tr>
+<tr class="separator:a6ec6f8cb59c6a69f32f52a0d59fe92f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee45e8e698ca400c9463c9d04701f23"><td class="memItemLeft" align="right" valign="top"><a id="aaee45e8e698ca400c9463c9d04701f23"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#aaee45e8e698ca400c9463c9d04701f23">WHD_BUS_MEM_RESERVE_FAIL</a>&#160;&#160;&#160;<a class="el" href="whd__types_8h.html#adf4a5004401ae1772bf5b33a5e19e108">WHD_RESULT_CREATE</a>(1074)</td></tr>
+<tr class="memdesc:aaee45e8e698ca400c9463c9d04701f23"><td class="mdescLeft">&#160;</td><td class="mdescRight">commonring reserve for write failed <br /></td></tr>
+<tr class="separator:aaee45e8e698ca400c9463c9d04701f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a185e66e33a12853e16c209e62594ed65"><td class="memItemLeft" align="right" valign="top"><a id="a185e66e33a12853e16c209e62594ed65"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a185e66e33a12853e16c209e62594ed65">WHD_NO_PKT_ID_AVAILABLE</a>&#160;&#160;&#160;<a class="el" href="whd__types_8h.html#adf4a5004401ae1772bf5b33a5e19e108">WHD_RESULT_CREATE</a>(1075)</td></tr>
+<tr class="memdesc:a185e66e33a12853e16c209e62594ed65"><td class="mdescLeft">&#160;</td><td class="mdescRight">commonring reserve for write failed <br /></td></tr>
+<tr class="separator:a185e66e33a12853e16c209e62594ed65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01539df5d3e26227c354161d9eda58f8"><td class="memItemLeft" align="right" valign="top"><a id="a01539df5d3e26227c354161d9eda58f8"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a01539df5d3e26227c354161d9eda58f8">WLAN_ENUM_OFFSET</a>&#160;&#160;&#160;2000</td></tr>
 <tr class="memdesc:a01539df5d3e26227c354161d9eda58f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">WLAN enum offset for WHD_WLAN error processing. <br /></td></tr>
@@ -890,6 +938,10 @@ typedef struct <a class="el" href="structwhd__spi__config.html">whd_spi_config</
 typedef struct <a class="el" href="structwhd__m2m__config.html">whd_m2m_config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#ab5fa3b42c3b6290fc944c79deb812c8c">whd_m2m_config_t</a></td></tr>
 <tr class="memdesc:ab5fa3b42c3b6290fc944c79deb812c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for M2M config parameters which can be set by application during whd power up. <br /></td></tr>
 <tr class="separator:ab5fa3b42c3b6290fc944c79deb812c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6731d1e828d8be24f5af1972b48a7a48"><td class="memItemLeft" align="right" valign="top"><a id="a6731d1e828d8be24f5af1972b48a7a48"></a>
+typedef struct <a class="el" href="structwhd__oci__config.html">whd_oci_config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a6731d1e828d8be24f5af1972b48a7a48">whd_oci_config_t</a></td></tr>
+<tr class="memdesc:a6731d1e828d8be24f5af1972b48a7a48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for OCI config parameters which can be set by application during whd power up. <br /></td></tr>
+<tr class="separator:a6731d1e828d8be24f5af1972b48a7a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98dae084aa15394bf6f8e907e09233a4"><td class="memItemLeft" align="right" valign="top"><a id="a98dae084aa15394bf6f8e907e09233a4"></a>
 typedef struct <a class="el" href="structwhd__btc__lescan__params.html">whd_btc_lescan_params</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a98dae084aa15394bf6f8e907e09233a4">whd_btc_lescan_params_t</a></td></tr>
 <tr class="memdesc:a98dae084aa15394bf6f8e907e09233a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for LE Scan parameters. <br /></td></tr>
@@ -976,7 +1028,8 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:a3070614a06a8989b9eb207e9f1286c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of network types.  <a href="whd__types_8h.html#a3070614a06a8989b9eb207e9f1286c5f">More...</a><br /></td></tr>
 <tr class="separator:a3070614a06a8989b9eb207e9f1286c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa57cbd1826f7022123be8ec0ac352d85"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85">whd_802_11_band_t</a> { <a class="el" href="whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85a0af1540533ecaf4c2511d1953c766119">WHD_802_11_BAND_5GHZ</a> = 0, 
-<a class="el" href="whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85ad83834fecf6a59269c7bdbc02bf0ce2f">WHD_802_11_BAND_2_4GHZ</a> = 1
+<a class="el" href="whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85ad83834fecf6a59269c7bdbc02bf0ce2f">WHD_802_11_BAND_2_4GHZ</a> = 1,
+<a class="el" href="whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85acb8fd2eab5112fdbc276f1eca797c417">WHD_802_11_BAND_6GHZ</a> = 2
  }</td></tr>
 <tr class="memdesc:aa57cbd1826f7022123be8ec0ac352d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of 802.11 radio bands.  <a href="whd__types_8h.html#aa57cbd1826f7022123be8ec0ac352d85">More...</a><br /></td></tr>
 <tr class="separator:aa57cbd1826f7022123be8ec0ac352d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1083,7 +1136,9 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:a6158197f83b368e63fa825eb34602dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of bus type. <br /></td></tr>
 <tr class="separator:a6158197f83b368e63fa825eb34602dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71ad9330854aaa61a7433a165fd57683"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683">whd_fwcap_id_t</a> { <a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683aa1b32f572128596bbfcd0b9ee037cde5">WHD_FWCAP_SAE</a> = 0, 
-<a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683a0bc5289c89080c2d3cabde3b2b965c86">WHD_FWCAP_SAE_EXT</a> = 1
+<a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683a0bc5289c89080c2d3cabde3b2b965c86">WHD_FWCAP_SAE_EXT</a> = 1,
+<a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683a3348dbf406acd32aa91082cc34b9247b">WHD_FWCAP_OFFLOADS</a> = 2,
+<a class="el" href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683ab8c090a0d7252c242dd51d5a3b3a9ab9">WHD_FWCAP_GCMP</a> = 3
  }</td></tr>
 <tr class="memdesc:a71ad9330854aaa61a7433a165fd57683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand fw capabilities list to enumeration.  <a href="whd__types_8h.html#a71ad9330854aaa61a7433a165fd57683">More...</a><br /></td></tr>
 <tr class="separator:a71ad9330854aaa61a7433a165fd57683"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1437,10 +1492,10 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a> + <a class="code" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a> + \</div><div class="line">                         SDPCM_HEADER + <a class="code" href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a> + <a class="code" href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a>)</div><div class="ttc" id="whd__types_8h_html_aab3fad8b23f2db6d6c985134359bec0d"><div class="ttname"><a href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a></div><div class="ttdeci">#define MAX_BUS_HEADER_SIZE</div><div class="ttdoc">Max bus header size for all bus types (sdio)</div><div class="ttdef"><b>Definition:</b> whd_types.h:106</div></div>
-<div class="ttc" id="whd__types_8h_html_a50f830e25a5ac6d7d0e3eb8d23e90943"><div class="ttname"><a href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a></div><div class="ttdeci">#define BDC_HEADER_WITH_PAD</div><div class="ttdoc">BDC Header with padding 4 + 2.</div><div class="ttdef"><b>Definition:</b> whd_types.h:96</div></div>
-<div class="ttc" id="whd__types_8h_html_a9b159bb86ca28f2200f30661441f232e"><div class="ttname"><a href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a></div><div class="ttdeci">#define BUFFER_OVERHEAD</div><div class="ttdoc">Buffer overhead, sizeof(void *)</div><div class="ttdef"><b>Definition:</b> whd_types.h:115</div></div>
-<div class="ttc" id="whd__types_8h_html_a559655385d80ca97754fafa29ac87717"><div class="ttname"><a href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a></div><div class="ttdeci">#define BDC_HEADER_OFFSET_TO_DATA</div><div class="ttdoc">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).</div><div class="ttdef"><b>Definition:</b> whd_types.h:101</div></div>
+<b>Value:</b><div class="fragment"><div class="line">(<a class="code" href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a> + <a class="code" href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a> + \</div><div class="line">                         SDPCM_HEADER + <a class="code" href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a> + <a class="code" href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a>)</div><div class="ttc" id="whd__types_8h_html_aab3fad8b23f2db6d6c985134359bec0d"><div class="ttname"><a href="whd__types_8h.html#aab3fad8b23f2db6d6c985134359bec0d">MAX_BUS_HEADER_SIZE</a></div><div class="ttdeci">#define MAX_BUS_HEADER_SIZE</div><div class="ttdoc">Max bus header size for all bus types (sdio)</div><div class="ttdef"><b>Definition:</b> whd_types.h:116</div></div>
+<div class="ttc" id="whd__types_8h_html_a50f830e25a5ac6d7d0e3eb8d23e90943"><div class="ttname"><a href="whd__types_8h.html#a50f830e25a5ac6d7d0e3eb8d23e90943">BDC_HEADER_WITH_PAD</a></div><div class="ttdeci">#define BDC_HEADER_WITH_PAD</div><div class="ttdoc">BDC Header with padding 4 + 2.</div><div class="ttdef"><b>Definition:</b> whd_types.h:104</div></div>
+<div class="ttc" id="whd__types_8h_html_a9b159bb86ca28f2200f30661441f232e"><div class="ttname"><a href="whd__types_8h.html#a9b159bb86ca28f2200f30661441f232e">BUFFER_OVERHEAD</a></div><div class="ttdeci">#define BUFFER_OVERHEAD</div><div class="ttdoc">Buffer overhead, sizeof(void *)</div><div class="ttdef"><b>Definition:</b> whd_types.h:127</div></div>
+<div class="ttc" id="whd__types_8h_html_a559655385d80ca97754fafa29ac87717"><div class="ttname"><a href="whd__types_8h.html#a559655385d80ca97754fafa29ac87717">BDC_HEADER_OFFSET_TO_DATA</a></div><div class="ttdeci">#define BDC_HEADER_OFFSET_TO_DATA</div><div class="ttdoc">From bdc header, Ethernet data starts after an offset of (bdc_header-&gt;data_offset&lt;&lt;2).</div><div class="ttdef"><b>Definition:</b> whd_types.h:111</div></div>
 </div><!-- fragment -->
 <p>The maximum space in bytes required for headers in front of the Ethernet header. </p>
 <p>6 + (8 + 4) + 4 + 4 + 4 = 30 bytes </p>
@@ -1780,6 +1835,8 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="aa57cbd1826f7022123be8ec0ac352d85ad83834fecf6a59269c7bdbc02bf0ce2f"></a>WHD_802_11_BAND_2_4GHZ&#160;</td><td class="fielddoc"><p>Denotes 2.4GHz radio band. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="aa57cbd1826f7022123be8ec0ac352d85acb8fd2eab5112fdbc276f1eca797c417"></a>WHD_802_11_BAND_6GHZ&#160;</td><td class="fielddoc"><p>Denotes 6GHz radio band. </p>
+</td></tr>
 </table>
 
 </div>
@@ -1961,6 +2018,10 @@ Enumerations</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a71ad9330854aaa61a7433a165fd57683aa1b32f572128596bbfcd0b9ee037cde5"></a>WHD_FWCAP_SAE&#160;</td><td class="fielddoc"><p>Internal SAE. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a71ad9330854aaa61a7433a165fd57683a0bc5289c89080c2d3cabde3b2b965c86"></a>WHD_FWCAP_SAE_EXT&#160;</td><td class="fielddoc"><p>External SAE. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a71ad9330854aaa61a7433a165fd57683a3348dbf406acd32aa91082cc34b9247b"></a>WHD_FWCAP_OFFLOADS&#160;</td><td class="fielddoc"><p>Offload config. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a71ad9330854aaa61a7433a165fd57683ab8c090a0d7252c242dd51d5a3b3a9ab9"></a>WHD_FWCAP_GCMP&#160;</td><td class="fielddoc"><p>GCMP. </p>
 </td></tr>
 </table>
 

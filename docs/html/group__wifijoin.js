@@ -9,5 +9,6 @@ var group__wifijoin =
     [ "whd_wifi_stop_external_auth_request", "group__wifijoin.html#gab5bc462251b6849ebd8e708a2560066d", null ],
     [ "whd_wifi_join", "group__wifijoin.html#gac767814ae445f735b51686db20c780be", null ],
     [ "whd_wifi_join_specific", "group__wifijoin.html#gae41c4ab0b2f3ecc433a6c4e89238b066", null ],
+    [ "whd_wifi_set_chanspec", "group__wifijoin.html#ga99f5e49ef124d6522fb5290c913cd838", null ],
     [ "whd_wifi_leave", "group__wifijoin.html#ga971ed7d8e459c715aa9bf3c52b563d8b", null ]
 ];

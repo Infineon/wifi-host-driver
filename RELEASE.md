@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v2.7.0
+# Wi-Fi Host Driver (WHD)  v3.0.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,8 +11,9 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v2.6.1
+## Changes since v2.7.0
 ### New Features
+* 43022 support
 
 ### Defect Fixes
 
@@ -42,6 +43,9 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * --- 7.15.168.163 ---
 * CVE fixs
 * --- 7.15.168.159 ---
+
+#### CYW43022
+* --- 13.54.1 ---
 
 Note: [r] is regulatory-related
 

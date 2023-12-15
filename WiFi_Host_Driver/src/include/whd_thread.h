@@ -90,4 +90,3 @@ extern void whd_thread_notify_irq(whd_driver_t whd_driver);
 #endif
 
 #endif /* ifndef INCLUDED_WHD_THREAD_H_ */
-

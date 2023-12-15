@@ -59,4 +59,3 @@ uint32_t whd_print_stats(whd_driver_t whd_driver, whd_bool_t reset_after_print)
     CHECK_RETURN(whd_bus_print_stats(whd_driver, reset_after_print) );
     return WHD_SUCCESS;
 }
-

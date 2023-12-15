@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1205" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1205" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1240" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1240" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__btc__lescan__params_1ad0362052c89424bf11eb63b726b05182" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1206" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1206" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1241" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1241" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__btc__lescan__params_1a531bd65b280391995c4497112ca4e9c3" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1207" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1207" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1242" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1242" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__btc__lescan__params_1a8dcea8fcf19e2facaf59891ab47375d9" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1208" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1208" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1243" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1243" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__btc__lescan__params_1ab9fbbe93d8ab19fa81bebf4ade2deddd" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1209" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1209" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1244" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1244" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__btc__lescan__params_1a02d72a917cfb65e36cd0527ed472bf8f" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1210" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1210" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1245" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1245" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -94,7 +94,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" line="1204" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_types.h" bodystart="1203" bodyend="1211"/>
+    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1239" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1238" bodyend="1246"/>
     <listofallmembers>
       <member refid="structwhd__btc__lescan__params_1ad0362052c89424bf11eb63b726b05182" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>duty_cycle</name></member>
       <member refid="structwhd__btc__lescan__params_1a8dcea8fcf19e2facaf59891ab47375d9" prot="public" virt="non-virtual"><scope>whd_btc_lescan_params</scope><name>int_grant</name></member>

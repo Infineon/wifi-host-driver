@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="208" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" bodystart="208" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="224" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group__wifijoin_1ga2604c8dec9eff39e79b3281496da2611" prot="public" static="no">
         <type>void(*</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="286" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" bodystart="286" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="302" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="302" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="223" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="239" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="258" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="274" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gacf8632bb68cef4d831083a66bee7b8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="275" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="291" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga58ef7de14079c4b2b879e786a5e15c24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -404,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="307" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="323" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gab5bc462251b6849ebd8e708a2560066d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="317" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="333" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gac767814ae445f735b51686db20c780be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -515,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="335" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="351" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -582,7 +582,51 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="353" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="369" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__wifijoin_1ga99f5e49ef124d6522fb5290c913cd838" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_set_chanspec</definition>
+        <argsstring>(whd_interface_t ifp, wl_chanspec_t chanspec)</argsstring>
+        <name>whd_wifi_set_chanspec</name>
+        <param>
+          <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
+          <declname>ifp</declname>
+        </param>
+        <param>
+          <type><ref refid="whd__types_8h_1ac2f5aa33ad4da263645133854e489c76" kindref="member">wl_chanspec_t</ref></type>
+          <declname>chanspec</declname>
+        </param>
+        <briefdescription>
+<para>Set the current chanspec on the WLAN radio. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>On most WLAN devices this will set the chanspec for both AP <emphasis>AND</emphasis> STA (since there is only one radio - it cannot be on two chanspec simulaneously)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ifp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to handle instance of whd interface </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chanspec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired chanspec</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>WHD_SUCCESS if the chanspec was successfully set Error code if the chanspec was not successfully set </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="383" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -613,7 +657,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_wifi_api.h" line="532" column="1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="627" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -46,4 +46,3 @@ extern whd_bool_t whd_wifi_p2p_is_go_up(whd_driver_t whd_driver);
 #endif
 
 #endif /* ifndef INCLUDED_WHD_WIFI_P2P_H */
-

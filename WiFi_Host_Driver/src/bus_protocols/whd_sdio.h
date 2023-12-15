@@ -64,6 +64,7 @@ extern "C" {
 #define SDIOD_CCCR_DRIVE           ( (uint32_t)0x15 )     /* Drive Strength */
 #define SDIOD_CCCR_INTEXT          ( (uint32_t)0x16 )     /* Interrupt Extension */
 #define SDIOD_CCCR_BRCM_CARDCAP    ( (uint32_t)0xF0 )     /* Brcm Card Capability */
+#define SDIOD_CCCR_BRCM_CARDCTL    ( (uint32_t)0xF1 )     /* Brcm Card Control */
 #define SDIOD_SEP_INT_CTL          ( (uint32_t)0xF2 )     /* Separate Interrupt Control*/
 #define SDIOD_CCCR_F1INFO          ( (uint32_t)0x100 )    /* Function 1 (Backplane) Info */
 #define SDIOD_CCCR_F1HP            ( (uint32_t)0x102 )    /* Function 1 (Backplane) High Power */
@@ -110,10 +111,15 @@ extern "C" {
 #define SDIO_WAKEUP_CTRL              ( (uint32_t)0x1001E )
 #define SDIO_SLEEP_CSR                ( (uint32_t)0x1001F )
 #define I_HMB_SW_MASK                 ( (uint32_t)0x000000F0 )
+
+#define I_HMB_FC_STATE                (1 << 4)
+#define I_HMB_FC_CHANGE               (1 << 5)
 #define I_HMB_FRAME_IND               (1 << 6)
 #define I_HMB_HOST_INT                (1 << 7)
-#define I_HMB_FC_CHANGE               (1 << 5)
+
 #define FRAME_AVAILABLE_MASK          I_HMB_SW_MASK
+
+#define SDIOD_CCCR_INTPEND_INT1       0x02
 
 /******************************************************
 *             Bit Masks
@@ -182,9 +188,13 @@ extern "C" {
 #define SDIO_SPEED_EHS             ( (uint32_t)0x02 )     /* enable high-speed [clocking] mode (RW) */
 
 /* SDIOD_CCCR_BRCM_CARDCAP Bits */
-#define SDIOD_CCCR_BRCM_CARDCAP_CMD14_SUPPORT ( (uint32_t)0x02 )   /* Supports CMD14 */
-#define SDIOD_CCCR_BRCM_CARDCAP_CMD14_EXT     ( (uint32_t)0x04 )   /* CMD14 is allowed in FSM command state */
-#define SDIOD_CCCR_BRCM_CARDCAP_CMD_NODEC     ( (uint32_t)0x08 )   /* sdiod_aos does not decode any command */
+#define SDIOD_CCCR_BRCM_CARDCAP_CMD14_SUPPORT    ( (uint32_t)0x02 )   /* Supports CMD14 */
+#define SDIOD_CCCR_BRCM_CARDCAP_CMD14_EXT        ( (uint32_t)0x04 )   /* CMD14 is allowed in FSM command state */
+#define SDIOD_CCCR_BRCM_CARDCAP_CMD_NODEC        ( (uint32_t)0x08 )   /* sdiod_aos does not decode any command */
+#define SDIOD_CCCR_BRCM_CARDCAP_SECURE_MODE      ( (uint32_t)0x80 )   /* Supports bootloader security */
+#define SDIOD_CCCR_BRCM_CARDCAP_CHIPID_PRESENT   ( (uint32_t)0x40 )   /* Supports Chip ID Read from SDIO Core */
+
+#define SDIOD_CCCR_BRCM_WLANRST_ONF0ABORT     ( (uint32_t)0x02 )
 
 /* SDIO_FUNCTION_INT_MASK Bits*/
 #define SDIO_FUNC_MASK_F1          ( (uint32_t)0x01 )     /* interrupt mask enable for function 1 */
@@ -192,6 +202,9 @@ extern "C" {
 
 /* SDIO_DEVICE_CONTROL Bits */
 #define SDIO_DATA_PAD_ISO          ( (uint32_t)0x08 )     /* isolate internal SDIO data bus signals */
+
+/* SDIO CORE CHIPID REGISTER */
+#define SDIO_CORE_CHIPID_REG        ( (uint32_t)0x330 )
 
 /* SDIO_CHIP_CLOCK_CSR Bits */
 #define SBSDIO_FORCE_ALP           ( (uint32_t)0x01 )     /* Force ALP request to backplane */
@@ -204,6 +217,12 @@ extern "C" {
 #define SBSDIO_HT_AVAIL            ( (uint32_t)0x80 )     /* Status: HT is ready */
 #define SBSDIO_Rev8_HT_AVAIL       ( (uint32_t)0x40 )
 #define SBSDIO_Rev8_ALP_AVAIL      ( (uint32_t)0x80 )
+
+#define SBSDIO_FUNC1_SBADDRLOW     ( (uint32_t)0x1000A )  /* SB Address Window Low (b15) */
+#define SBSDIO_FUNC1_SBADDRMID     ( (uint32_t)0x1000B )  /* SB Address Window Mid (b23:b16) */
+#define SBSDIO_FUNC1_SBADDRHIGH    ( (uint32_t)0x1000C )  /* SB Address Window High (b31:b24) */
+#define SBSDIO_DEVICE_CTL          ( (uint32_t)0x10009 )  /* control busy signal generation */
+#define SBSDIO_DEVCTL_ADDR_RST     ( (uint32_t)0x40 )     /* Reset SB Address to default value */
 
 /* SDIO_FRAME_CONTROL Bits */
 #define SFC_RF_TERM                ( (uint32_t)(1 << 0) ) /* Read Frame Terminate */
@@ -218,12 +237,23 @@ extern "C" {
 #define SMB_DEV_INT                ( (uint32_t)(1 << 3) ) /* To SB Mailbox Miscellaneous Interrupt */
 
 /* SDIO_WAKEUP_CTRL bits */
-#define SBSDIO_WCTRL_WAKE_TILL_ALP_AVAIL     ( (uint32_t)(1 << 0) ) /* WakeTillAlpAvail bit */
-#define SBSDIO_WCTRL_WAKE_TILL_HT_AVAIL      ( (uint32_t)(1 << 1) ) /* WakeTillHTAvail bit */
+#define SBSDIO_WCTRL_WL_WAKE_TILL_ALP_AVAIL      ( (uint32_t)(1 << 0) )   /* WL_WakeTillAlpAvail bit */
+#define SBSDIO_WCTRL_WL_WAKE_TILL_HT_AVAIL       ( (uint32_t)(1 << 1) )   /* WL_WakeTillHTAvail bit */
+/* Additional Bits in case of sdiorev31 */
+#define SBSDIO_WCTRL_BT_WAKE_TILL_ALP_AVAIL      ( (uint32_t)(1 << 2) )   /* BT_WakeTillAlpAvail bit */
+#define SBSDIO_WCTRL_BT_WAKE_TILL_HT_AVAIL       ( (uint32_t)(1 << 3) )   /* BT_WakeTillHTAvail bit */
+#define SBSDIO_WCTRL_WL_DISABLE_AUTOSET_KSO      ( (uint32_t)(1 << 4) )    /* WL_DisableKSOAutoSet bit */
+#define SBSDIO_WCTRL_BT_DISABLE_AUTOSET_KSO      ( (uint32_t)(1 << 5) )    /* BT_DisableKSOAutoSet bit */
 
 /* SDIO_SLEEP_CSR bits */
-#define SBSDIO_SLPCSR_KEEP_SDIO_ON           ( (uint32_t)(1 << 0) ) /* KeepSdioOn bit */
-#define SBSDIO_SLPCSR_DEVICE_ON              ( (uint32_t)(1 << 1) ) /* DeviceOn bit */
+#define SBSDIO_SLPCSR_KEEP_WL_KSO       ( (uint32_t)(1 << 0) )
+#define SBSDIO_SLPCSR_WL_DEVON             ( (uint32_t)(1 << 1) )
+/* Additional Bits in case of sdiorev31 */
+#define SBSDIO_SLPCSR_KEEP_BT_KSO       ( (uint32_t)(1 << 2) )
+#define SBSDIO_SLPCSR_BT_DEVON             ( (uint32_t)(1 << 3) )
+
+/* Sdio rev 27 only */
+#define SBSDIO_FUNC1_SECURE_MODE    0x10001    /* To read secure-mode bit */
 
 /* To hostmail box data */
 #define I_HMB_DATA_NAKHANDLED       0x0001  /* retransmit NAK'd frame */
@@ -231,6 +261,41 @@ extern "C" {
 #define I_HMB_DATA_FC               0x0004  /* per prio flowcontrol update flag */
 #define I_HMB_DATA_FWREADY          0x0008  /* fw ready for protocol activity */
 #define I_HMB_DATA_FWHALT           0x0010  /* firmware halted */
+
+/* SDIO Security Handshake Register */
+#ifndef DM_43022C1
+#define SDIO_REG_DAR_H2D_MSG_0    0x10030
+#define SDIO_REG_DAR_D2H_MSG_0    0x10038
+#else
+#define SDIO_REG_DAR_H2D_MSG_0    ( 0x18002000 + 0x48 )
+#define SDIO_REG_DAR_D2H_MSG_0    ( 0x18002000 + 0x4C )
+#endif
+
+#define SDIO_BLHS_D2H_TIMEOUT_MS               500
+
+/* Bootloader handshake flags - dongle to host */
+#define SDIO_BLHS_D2H_START                    (1 << 0)
+#define SDIO_BLHS_D2H_READY                    (1 << 1)
+#define SDIO_BLHS_D2H_STEADY                   (1 << 2)
+#define SDIO_BLHS_D2H_TRXHDR_PARSE_DONE        (1 << 3)
+#define SDIO_BLHS_D2H_VALDN_START              (1 << 4)
+#define SDIO_BLHS_D2H_VALDN_RESULT             (1 << 5)
+#define SDIO_BLHS_D2H_VALDN_DONE               (1 << 6)
+#define SDIO_BLHS_D2H_NVRAM_MV_DONE            (1 << 7)
+#ifdef DM_43022C1
+#define SDIO_BLHS_D2H_BP_CLK_DIS_REQ           (1 << 8)
+#endif
+
+/* Bootloader handshake flags - host to dongle */
+#define SDIO_BLHS_H2D_BL_INIT                   0
+#define SDIO_BLHS_H2D_DL_FW_START              (1 << 0)
+#define SDIO_BLHS_H2D_DL_FW_DONE               (1 << 1)
+#define SDIO_BLHS_H2D_DL_NVRAM_DONE            (1 << 2)
+#define SDIO_BLHS_H2D_BL_RESET_ON_ERROR        (1 << 3)
+#ifdef DM_43022C1
+#define SDIO_BLHS_H2D_DL_NVRAM_START           (1 << 4)
+#define SDIO_BLHS_H2D_BP_CLK_DIS_ACK           (1 << 5)
+#endif
 
 #ifdef __cplusplus
 } /* extern "C" */

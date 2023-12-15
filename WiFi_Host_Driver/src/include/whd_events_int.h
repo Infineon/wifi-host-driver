@@ -492,6 +492,21 @@ typedef struct whd_event
 
 #pragma pack()
 
+/** Event list element structure
+ *
+ * events : A pointer to a whd_event_num_t array that is terminated with a WLC_E_NONE event
+ * handler: A pointer to the whd_event_handler_t function that will receive the event
+ * handler_user_data : User provided data that will be passed to the handler when a matching event occurs
+ */
+typedef struct
+{
+    whd_bool_t event_set;
+    whd_event_num_t events[WHD_MAX_EVENT_SUBSCRIPTION];
+    whd_event_handler_t handler;
+    void *handler_user_data;
+    uint8_t ifidx;
+} event_list_elem_t;
+
 /** @endcond */
 
 /** @} */
@@ -500,4 +515,3 @@ typedef struct whd_event
 } /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_WHD_EVENTS_H */
-

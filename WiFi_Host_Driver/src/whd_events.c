@@ -16,7 +16,6 @@
  */
 
 #include "whd_int.h"
-#include "whd_cdc_bdc.h"
 #include "whd_events_int.h"
 #include "cyabs_rtos.h"
 #include "whd_network_types.h"
@@ -24,6 +23,8 @@
 #include "whd_wlioctl.h"
 #include "whd_thread_internal.h"
 #include "whd_buffer_api.h"
+#include "whd_proto.h"
+#include "whd_utils.h"
 
 /******************************************************
 *        Constants
@@ -31,16 +32,16 @@
 /******************************************************
 *             Macros
 ******************************************************/
-/* bit map related macros */
-#define  NBBY  8  /* 8 bits per byte */
-#define  setbit(a, i)   ( ( (uint8_t *)a )[(int)(i) / (int)(NBBY)] |= (uint8_t)(1 << ( (i) % NBBY ) ) )
-#define  clrbit(a, i)   ( ( (uint8_t *)a )[(int)(i) / (int)(NBBY)] &= (uint8_t) ~(1 << ( (i) % NBBY ) ) )
-#define  isset(a, i)    ( ( (const uint8_t *)a )[(int)(i) / (int)(NBBY)]& (1 << ( (i) % NBBY ) ) )
-#define  isclr(a, i)    ( ( ( (const uint8_t *)a )[(int)(i) / (int)(NBBY)]& (1 << ( (i) % NBBY ) ) ) == 0 )
 
 /******************************************************
 *             Local Structures
 ******************************************************/
+typedef struct whd_event_info
+{
+    /* Event list variables */
+    event_list_elem_t whd_event_list[WHD_EVENT_HANDLER_LIST_SIZE];
+    cy_semaphore_t event_list_mutex;
+} whd_event_info_t;
 
 /******************************************************
 *             Static Variables
@@ -103,9 +104,9 @@ whd_result_t whd_management_set_event_handler_locally(whd_interface_t ifp, const
     uint16_t entry = (uint16_t)0xFF;
     uint16_t i;
     whd_driver_t whd_driver = ifp->whd_driver;
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
     uint8_t num_of_events;
     num_of_events = whd_find_number_of_events(event_nums);
+    whd_event_info_t *event_info = (whd_event_info_t *)whd_driver->proto->pd;
 
     if (num_of_events <= 1)
     {
@@ -117,20 +118,20 @@ whd_result_t whd_management_set_event_handler_locally(whd_interface_t ifp, const
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
         /* Find a matching event list OR the first empty event entry */
-        if (!(memcmp(cdc_bdc_info->whd_event_list[i].events, event_nums,
+        if (!(memcmp(event_info->whd_event_list[i].events, event_nums,
                      num_of_events * (sizeof(whd_event_num_t) ) ) ) )
         {
             /* Check if all the data already matches */
-            if ( (cdc_bdc_info->whd_event_list[i].handler           == handler_func) &&
-                 (cdc_bdc_info->whd_event_list[i].handler_user_data == handler_user_data) &&
-                 (cdc_bdc_info->whd_event_list[i].ifidx == ifp->ifidx) )
+            if ( (event_info->whd_event_list[i].handler           == handler_func) &&
+                 (event_info->whd_event_list[i].handler_user_data == handler_user_data) &&
+                 (event_info->whd_event_list[i].ifidx == ifp->ifidx) )
             {
                 /* send back the entry where the handler is added */
                 *event_index = i;
                 return WHD_SUCCESS;
             }
         }
-        else if ( (entry == (uint16_t)0xFF) && (cdc_bdc_info->whd_event_list[i].event_set == WHD_FALSE) )
+        else if ( (entry == (uint16_t)0xFF) && (event_info->whd_event_list[i].event_set == WHD_FALSE) )
         {
             entry = i;
         }
@@ -147,11 +148,11 @@ whd_result_t whd_management_set_event_handler_locally(whd_interface_t ifp, const
         }
 
         /* Add the new handler in at the free space */
-        memcpy (cdc_bdc_info->whd_event_list[entry].events, event_nums, num_of_events * (sizeof(whd_event_num_t) ) );
-        cdc_bdc_info->whd_event_list[entry].handler           = handler_func;
-        cdc_bdc_info->whd_event_list[entry].handler_user_data = handler_user_data;
-        cdc_bdc_info->whd_event_list[entry].ifidx             = ifp->ifidx;
-        cdc_bdc_info->whd_event_list[entry].event_set         = WHD_TRUE;
+        memcpy (event_info->whd_event_list[entry].events, event_nums, num_of_events * (sizeof(whd_event_num_t) ) );
+        event_info->whd_event_list[entry].handler           = handler_func;
+        event_info->whd_event_list[entry].handler_user_data = handler_user_data;
+        event_info->whd_event_list[entry].ifidx             = ifp->ifidx;
+        event_info->whd_event_list[entry].event_set         = WHD_TRUE;
 
         /* send back the entry where the handler is added */
         *event_index = entry;
@@ -260,16 +261,16 @@ static uint8_t *whd_management_alloc_event_msgs_buffer(whd_interface_t ifp, whd_
     eventmsgs_ext_t *eventmsgs_ext_data = NULL;
     uint32_t *data                      = NULL;
     whd_driver_t whd_driver = ifp->whd_driver;
-    whd_cdc_bdc_info_t *cdc_bdc_info = &whd_driver->cdc_bdc_info;
+    whd_event_info_t *event_info = (whd_event_info_t *)whd_driver->proto->pd;
 
     /* Check to see if event that's set requires more than 128 bit */
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
-        if (cdc_bdc_info->whd_event_list[i].event_set)
+        if (event_info->whd_event_list[i].event_set)
         {
-            for (j = 0; cdc_bdc_info->whd_event_list[i].events[j] != WLC_E_NONE; j++)
+            for (j = 0; event_info->whd_event_list[i].events[j] != WLC_E_NONE; j++)
             {
-                uint32_t event_value = cdc_bdc_info->whd_event_list[i].events[j];
+                uint32_t event_value = event_info->whd_event_list[i].events[j];
                 if (event_value > 127)
                 {
                     use_extended_evt = WHD_TRUE;
@@ -286,8 +287,8 @@ static uint8_t *whd_management_alloc_event_msgs_buffer(whd_interface_t ifp, whd_
     if (WHD_FALSE == use_extended_evt)
     {
         /* use old iovar for backwards compat */
-        data = (uint32_t *)whd_cdc_get_iovar_buffer(whd_driver, buffer, (uint16_t)WL_EVENTING_MASK_LEN + 4,
-                                                    "bsscfg:" IOVAR_STR_EVENT_MSGS);
+        data = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, buffer, (uint16_t)WL_EVENTING_MASK_LEN + 4,
+                                                      "bsscfg:" IOVAR_STR_EVENT_MSGS);
 
         if (NULL == data)
         {
@@ -302,9 +303,9 @@ static uint8_t *whd_management_alloc_event_msgs_buffer(whd_interface_t ifp, whd_
     {
         uint8_t mask_len   = (uint8_t)( (max_event + 8) / 8 );
         data =
-            (uint32_t *)whd_cdc_get_iovar_buffer(whd_driver, buffer,
-                                                 (uint16_t)(sizeof(eventmsgs_ext_t) + mask_len + 4),
-                                                 "bsscfg:" IOVAR_STR_EVENT_MSGS_EXT);
+            (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, buffer,
+                                                   (uint16_t)(sizeof(eventmsgs_ext_t) + mask_len + 4),
+                                                   "bsscfg:" IOVAR_STR_EVENT_MSGS_EXT);
 
         if (NULL == data)
         {
@@ -354,7 +355,6 @@ whd_result_t whd_management_set_event_handler(whd_interface_t ifp, const whd_eve
     uint16_t j;
     whd_result_t res;
     whd_driver_t whd_driver;
-    whd_cdc_bdc_info_t *cdc_bdc_info;
     whd_interface_t prim_ifp;
 
     if (ifp == NULL)
@@ -369,8 +369,8 @@ whd_result_t whd_management_set_event_handler(whd_interface_t ifp, const whd_eve
     }
 
     whd_driver = ifp->whd_driver;
-    cdc_bdc_info = &whd_driver->cdc_bdc_info;
     prim_ifp = whd_get_primary_interface(whd_driver);
+    whd_event_info_t *event_info = (whd_event_info_t *)whd_driver->proto->pd;
 
     if (prim_ifp == NULL)
     {
@@ -378,7 +378,7 @@ whd_result_t whd_management_set_event_handler(whd_interface_t ifp, const whd_eve
     }
 
     /* Acquire mutex preventing multiple threads accessing the handler at the same time */
-    res = cy_rtos_get_semaphore(&cdc_bdc_info->event_list_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE);
+    res = cy_rtos_get_semaphore(&event_info->event_list_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE);
     if (res != WHD_SUCCESS)
     {
         return res;
@@ -409,33 +409,34 @@ whd_result_t whd_management_set_event_handler(whd_interface_t ifp, const whd_eve
     memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
-        if (cdc_bdc_info->whd_event_list[i].event_set)
+        if (event_info->whd_event_list[i].event_set)
         {
-            for (j = 0; cdc_bdc_info->whd_event_list[i].events[j] != WLC_E_NONE; j++)
+            for (j = 0; event_info->whd_event_list[i].events[j] != WLC_E_NONE; j++)
             {
-                setbit(event_mask, cdc_bdc_info->whd_event_list[i].events[j]);
+                setbit(event_mask, event_info->whd_event_list[i].events[j]);
             }
         }
     }
 
-    res = whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0);
+    res = whd_proto_set_iovar(prim_ifp, buffer, 0);
     if (res != WHD_SUCCESS)
     {
         WPRINT_WHD_ERROR( ("%s: send event_msgs(iovar) failed\n", __func__) );
+        goto set_event_handler_exit;
     }
 
     /* set the event_list_mutex here after sending iovar.
      * we get event_list_mutex -> ioctl_mutex, make sure we didn't have any thread, having ioctl_mutex -> event_list_mutex path.
      * Otherwise it may cause deadlock
      */
-    CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) );
+    CHECK_RETURN(cy_rtos_set_semaphore(&event_info->event_list_mutex, WHD_FALSE) );
 
     /* The wlan chip can sleep from now on */
     WHD_WLAN_LET_SLEEP(whd_driver);
     return WHD_SUCCESS;
 
 set_event_handler_exit:
-    CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) );
+    CHECK_RETURN(cy_rtos_set_semaphore(&event_info->event_list_mutex, WHD_FALSE) );
     return res;
 }
 
@@ -449,7 +450,6 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
     uint16_t j;
     whd_result_t res;
     whd_driver_t whd_driver;
-    whd_cdc_bdc_info_t *cdc_bdc_info;
     whd_interface_t prim_ifp;
 
     if (ifp == NULL)
@@ -464,8 +464,8 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
     }
 
     whd_driver = ifp->whd_driver;
-    cdc_bdc_info = &whd_driver->cdc_bdc_info;
     prim_ifp = whd_get_primary_interface(whd_driver);
+    whd_event_info_t *event_info = (whd_event_info_t *)whd_driver->proto->pd;
 
     if (prim_ifp == NULL)
     {
@@ -473,7 +473,7 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
     }
 
     /* Acquire mutex preventing multiple threads accessing the handler at the same time */
-    res = cy_rtos_get_semaphore(&cdc_bdc_info->event_list_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE);
+    res = cy_rtos_get_semaphore(&event_info->event_list_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE);
     if (res != WHD_SUCCESS)
     {
         return res;
@@ -505,16 +505,16 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
     memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
-        if (cdc_bdc_info->whd_event_list[i].event_set)
+        if (event_info->whd_event_list[i].event_set)
         {
-            for (j = 0; cdc_bdc_info->whd_event_list[i].events[j] != WLC_E_NONE; j++)
+            for (j = 0; event_info->whd_event_list[i].events[j] != WLC_E_NONE; j++)
             {
-                setbit(event_mask, cdc_bdc_info->whd_event_list[i].events[j]);
+                setbit(event_mask, event_info->whd_event_list[i].events[j]);
             }
         }
     }
 
-    res = whd_cdc_send_iovar(prim_ifp, CDC_SET, buffer, 0);
+    res = whd_proto_set_iovar(prim_ifp, buffer, 0);
     if (res != WHD_SUCCESS)
     {
         WPRINT_WHD_ERROR( ("%s: send event_msgs(iovar) failed\n", __func__) );
@@ -524,14 +524,14 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
      * we get event_list_mutex -> ioctl_mutex, make sure we didn't have any thread, having ioctl_mutex -> event_list_mutex path.
      * Otherwise it may cause deadlock
      */
-    CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) );
+    CHECK_RETURN(cy_rtos_set_semaphore(&event_info->event_list_mutex, WHD_FALSE) );
 
     /* The wlan chip can sleep from now on */
     WHD_WLAN_LET_SLEEP(whd_driver);
     return WHD_SUCCESS;
 
 set_event_handler_exit:
-    CHECK_RETURN(cy_rtos_set_semaphore(&cdc_bdc_info->event_list_mutex, WHD_FALSE) );
+    CHECK_RETURN(cy_rtos_set_semaphore(&event_info->event_list_mutex, WHD_FALSE) );
     return res;
 }
 
@@ -597,7 +597,6 @@ whd_result_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *erro
 uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index)
 {
     whd_driver_t whd_driver;
-    whd_cdc_bdc_info_t *cdc_bdc_info;
 
     if (ifp == NULL)
     {
@@ -605,15 +604,16 @@ uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_i
     }
 
     whd_driver = ifp->whd_driver;
-    cdc_bdc_info = &whd_driver->cdc_bdc_info;
+
+    whd_event_info_t *event_info = (whd_event_info_t *)whd_driver->proto->pd;
 
     if (event_index < WHD_EVENT_HANDLER_LIST_SIZE)
     {
-        memset(cdc_bdc_info->whd_event_list[event_index].events, 0xFF,
-               (sizeof(cdc_bdc_info->whd_event_list[event_index].events) ) );
-        cdc_bdc_info->whd_event_list[event_index].handler = NULL;
-        cdc_bdc_info->whd_event_list[event_index].handler_user_data = NULL;
-        cdc_bdc_info->whd_event_list[event_index].event_set = WHD_FALSE;
+        memset(event_info->whd_event_list[event_index].events, 0xFF,
+               (sizeof(event_info->whd_event_list[event_index].events) ) );
+        event_info->whd_event_list[event_index].handler = NULL;
+        event_info->whd_event_list[event_index].handler_user_data = NULL;
+        event_info->whd_event_list[event_index].event_set = WHD_FALSE;
         return WHD_SUCCESS;
     }
     if (event_index == 0xFF)
@@ -654,4 +654,3 @@ uint32_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_i
     WPRINT_WHD_DEBUG( ("Invalid error index received to deregister the event handler \n") );
     return WHD_BADARG;
 }
-

@@ -55,4 +55,3 @@ uint32_t whd_resource_read(whd_driver_t whd_driver, whd_resource_type_t type, ui
 #endif
 
 #endif /* ifndef _WHD_INTERNAL_RESOURCE_API_H_ */
-

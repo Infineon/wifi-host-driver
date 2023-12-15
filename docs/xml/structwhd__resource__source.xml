@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" line="75" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="75" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" line="75" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__resource__source_1a621cec3fecb5491d46d3534a59b6862b" prot="public" static="no" mutable="no">
         <type>uint32_t(*</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" line="88" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="88" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" line="88" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__resource__source_1a2645315e933c6e65046bec5dad04b8e4" prot="public" static="no" mutable="no">
         <type>uint32_t(*</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" line="100" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="100" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" line="100" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__resource__source_1af7ac61e99cc2504e39dfb220a34b8d39" prot="public" static="no" mutable="no">
         <type>uint32_t(*</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" line="111" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="111" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" line="111" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__resource__source_1a0c9a11dcc9c8fd71189a97c3747c3e62" prot="public" static="no" mutable="no">
         <type>uint32_t(*</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" line="125" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="125" bodyend="-1"/>
+        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" line="125" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -262,7 +262,7 @@
 <para>This data structure defines a source for data generally intended to be downloaded to the radio device.</para>
 <para>The data is assumed to be available as a set of blocks that are all the same size with the exception of the last block. The whd_get_resource_block_size function returns this block size. The whd_get_resource_block call returns a pointer to a block of data. The actual storage for the data block is owned by the data source, so only a pointer to the block is returned. There are two predominate use cases. If the data is stored in the internal flash memory, then whd_get_resource_no_of_blocks will return 1 and a call to whd_get_resource_block will return a pointer to the data image with the size being the size of the data image. If the data is stored in an external flash of some type, each block of data can be read from the external flash one at a time. whd_get_resource_no_of_blocks will return the physical number of blocks in the data and each call to whd_get_resource_block will read data from the external memory and make it available via an internal buffer. </para>
     </detaileddescription>
-    <location file="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" line="64" column="1" bodyfile="C:/Users/hsiehyuanpin/01_Src/WHD/mclass/whd/inc/whd_resource_api.h" bodystart="63" bodyend="127"/>
+    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" line="64" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_resource_api.h" bodystart="63" bodyend="127"/>
     <listofallmembers>
       <member refid="structwhd__resource__source_1a621cec3fecb5491d46d3534a59b6862b" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_block</name></member>
       <member refid="structwhd__resource__source_1af7ac61e99cc2504e39dfb220a34b8d39" prot="public" virt="non-virtual"><scope>whd_resource_source</scope><name>whd_get_resource_block_size</name></member>

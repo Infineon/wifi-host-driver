@@ -22,6 +22,7 @@
  *  It is required when communicating with Broadcom 802.11 devices.
  *
  */
+#ifndef PROTO_MSGBUF
 #include "whd_sdpcm.h"
 #include "bus_protocols/whd_bus_protocol_interface.h"
 #include "whd_endian.h"
@@ -585,6 +586,14 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     whd_result_t result;
     int ac;
 
+#ifdef ULP_SUPPORT
+    if(!(whd_ensure_wlan_bus_not_in_deep_sleep(whd_driver)))
+    {
+        WPRINT_WHD_DEBUG(("Could not send pkt - F2 is not ready\n"));
+        return WHD_BUS_FAIL;
+    }
+#endif
+
     CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
     size = whd_buffer_get_current_piece_size(whd_driver, buffer);
 
@@ -687,3 +696,4 @@ static void whd_sdpcm_set_next_buffer_in_queue(whd_driver_t whd_driver, whd_buff
     packet->queue_next = buffer;
 }
 
+#endif /* PROTO_MSGBUF */

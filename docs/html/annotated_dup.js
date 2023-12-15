@@ -24,6 +24,7 @@ var annotated_dup =
     [ "whd_mac_t", "structwhd__mac__t.html", "structwhd__mac__t" ],
     [ "whd_maclist_t", "structwhd__maclist__t.html", "structwhd__maclist__t" ],
     [ "whd_netif_funcs", "structwhd__netif__funcs.html", "structwhd__netif__funcs" ],
+    [ "whd_oci_config", "structwhd__oci__config.html", "structwhd__oci__config" ],
     [ "whd_oob_config", "structwhd__oob__config.html", "structwhd__oob__config" ],
     [ "whd_packet_filter_t", "structwhd__packet__filter__t.html", "structwhd__packet__filter__t" ],
     [ "whd_resource_source", "structwhd__resource__source.html", "structwhd__resource__source" ],

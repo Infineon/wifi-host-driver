@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 #include "whd.h"
+#include "whd_trxhdr.h"
 #include <stdint.h>
 
 #ifndef INCLUDED_WHD_BUS_COMMON_H
@@ -27,6 +28,18 @@ extern "C" {
 #define WHD_BACKPLAIN_BUF_TIMEOUT   (0xFFFFFFFF)
 #define WHD_RX_BUF_TIMEOUT          (10)
 
+typedef enum
+{
+    CHK_BL_INIT = 0,
+    PREP_FW_DOWNLOAD,
+    POST_FW_DOWNLOAD,
+    CHK_FW_VALIDATION,
+#ifdef DM_43022C1
+    PREP_NVRAM_DOWNLOAD,
+#endif
+    POST_NVRAM_DOWNLOAD,
+    POST_WATCHDOG_RESET
+} whd_bus_blhs_stage_t;
 
 struct whd_bus_common_info;
 
