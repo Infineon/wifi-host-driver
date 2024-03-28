@@ -51,7 +51,7 @@
 *             Function definitions
 ******************************************************/
 
-uint32_t whd_proto_attach(whd_driver_t whd_driver)
+whd_result_t whd_proto_attach(whd_driver_t whd_driver)
 {
     struct whd_proto *proto;
 
@@ -84,7 +84,7 @@ fail:
     return WHD_WLAN_NOMEM;
 }
 
-uint32_t whd_proto_detach(whd_driver_t whd_driver)
+whd_result_t whd_proto_detach(whd_driver_t whd_driver)
 {
     if (whd_driver->proto)
     {

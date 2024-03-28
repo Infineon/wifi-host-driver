@@ -85,6 +85,8 @@ $(document).ready(function(){initNavTree('group__dbg.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">WHD Wi-Fi Debug API<div class="ingroups"><a class="el" href="group__wifi.html">WHD Wi-Fi API</a></div></div>  </div>
@@ -93,42 +95,65 @@ $(document).ready(function(){initNavTree('group__dbg.html','');});
 <a name="details" id="details"></a><h2 class="groupheader">General Description</h2>
 <p>WHD APIs which allows debugging like, printing whd log information, getting whd stats, etc. </p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdeepsleep__cb__info.html">deepsleep_cb_info</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gaa23e41f2a17585bcfbefb603eda678dd"><td class="memItemLeft" align="right" valign="top"><a id="gaa23e41f2a17585bcfbefb603eda678dd"></a>
+typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><b>whd_ds_callback_t</b>) (void *, char *, uint32_t)</td></tr>
+<tr class="separator:gaa23e41f2a17585bcfbefb603eda678dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga368ff04c3bc3c82139e0a5028e29f358"><td class="memItemLeft" align="right" valign="top"><a id="ga368ff04c3bc3c82139e0a5028e29f358"></a>
+typedef struct <a class="el" href="structdeepsleep__cb__info.html">deepsleep_cb_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>deepsleep_cb_info_t</b></td></tr>
+<tr class="separator:ga368ff04c3bc3c82139e0a5028e29f358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga334e8f04bdbc06da6eadf29cea997b99"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga334e8f04bdbc06da6eadf29cea997b99">whd_wifi_get_wifi_version</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, char *version, uint8_t length)</td></tr>
-<tr class="memdesc:ga334e8f04bdbc06da6eadf29cea997b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the WLAN firmware version.  <a href="#ga334e8f04bdbc06da6eadf29cea997b99">More...</a><br /></td></tr>
-<tr class="separator:ga334e8f04bdbc06da6eadf29cea997b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1e8a85564910052e82332a89db4d9ff5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga1e8a85564910052e82332a89db4d9ff5">whd_wifi_get_clm_version</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, char *version, uint8_t length)</td></tr>
-<tr class="memdesc:ga1e8a85564910052e82332a89db4d9ff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the WLAN CLM version.  <a href="#ga1e8a85564910052e82332a89db4d9ff5">More...</a><br /></td></tr>
-<tr class="separator:ga1e8a85564910052e82332a89db4d9ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7f089a4c933c9c05a61e2cfc00fcb4f8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga7f089a4c933c9c05a61e2cfc00fcb4f8">whd_wifi_read_wlan_log</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, char *buffer, uint32_t buffer_size)</td></tr>
-<tr class="memdesc:ga7f089a4c933c9c05a61e2cfc00fcb4f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">To print whd log information.  <a href="#ga7f089a4c933c9c05a61e2cfc00fcb4f8">More...</a><br /></td></tr>
-<tr class="separator:ga7f089a4c933c9c05a61e2cfc00fcb4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6435c76ac1eae5af952053d76d9c67ab"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga6435c76ac1eae5af952053d76d9c67ab">whd_wifi_print_whd_log</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv)</td></tr>
-<tr class="memdesc:ga6435c76ac1eae5af952053d76d9c67ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">To print whd log information.  <a href="#ga6435c76ac1eae5af952053d76d9c67ab">More...</a><br /></td></tr>
-<tr class="separator:ga6435c76ac1eae5af952053d76d9c67ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga01abfdd80ff65c7cac64e0d7c2f93c60"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga01abfdd80ff65c7cac64e0d7c2f93c60">whd_network_get_ifidx_from_ifp</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t *ifidx)</td></tr>
-<tr class="memdesc:ga01abfdd80ff65c7cac64e0d7c2f93c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the ifidx from interface pointer.  <a href="#ga01abfdd80ff65c7cac64e0d7c2f93c60">More...</a><br /></td></tr>
-<tr class="separator:ga01abfdd80ff65c7cac64e0d7c2f93c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga84376c0830fbdb04c67812243539d4c6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga84376c0830fbdb04c67812243539d4c6">whd_network_get_bsscfgidx_from_ifp</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t *bsscfgidx)</td></tr>
-<tr class="memdesc:ga84376c0830fbdb04c67812243539d4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the bsscfgidx from interface pointer.  <a href="#ga84376c0830fbdb04c67812243539d4c6">More...</a><br /></td></tr>
-<tr class="separator:ga84376c0830fbdb04c67812243539d4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab4a8c97085b18321d8d682b1578edf7d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#gab4a8c97085b18321d8d682b1578edf7d">whd_wifi_get_bss_info</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#a92c6377f96c792ee4d94bb36b7777ea6">wl_bss_info_t</a> *bi)</td></tr>
-<tr class="memdesc:gab4a8c97085b18321d8d682b1578edf7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrives the bss info.  <a href="#gab4a8c97085b18321d8d682b1578edf7d">More...</a><br /></td></tr>
-<tr class="separator:gab4a8c97085b18321d8d682b1578edf7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6dca3a6d7a90a1f9d8fb18660048c18"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#gab6dca3a6d7a90a1f9d8fb18660048c18">whd_print_stats</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, <a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a> reset_after_print)</td></tr>
-<tr class="memdesc:gab6dca3a6d7a90a1f9d8fb18660048c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints WHD stats.  <a href="#gab6dca3a6d7a90a1f9d8fb18660048c18">More...</a><br /></td></tr>
-<tr class="separator:gab6dca3a6d7a90a1f9d8fb18660048c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga11041df00c4388b377fa896c7d123463"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga11041df00c4388b377fa896c7d123463">whd_wifi_get_wifi_version</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, char *version, uint8_t length)</td></tr>
+<tr class="memdesc:ga11041df00c4388b377fa896c7d123463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the WLAN firmware version.  <a href="#ga11041df00c4388b377fa896c7d123463">More...</a><br /></td></tr>
+<tr class="separator:ga11041df00c4388b377fa896c7d123463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga49dbde3a0df183dc760ff738bdaef24a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga49dbde3a0df183dc760ff738bdaef24a">whd_wifi_get_clm_version</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, char *version, uint8_t length)</td></tr>
+<tr class="memdesc:ga49dbde3a0df183dc760ff738bdaef24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the WLAN CLM version.  <a href="#ga49dbde3a0df183dc760ff738bdaef24a">More...</a><br /></td></tr>
+<tr class="separator:ga49dbde3a0df183dc760ff738bdaef24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga78c9ec3412e5473820e9730bfcf3bd98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga78c9ec3412e5473820e9730bfcf3bd98">whd_wifi_read_wlan_log</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, char *buffer, uint32_t buffer_size)</td></tr>
+<tr class="memdesc:ga78c9ec3412e5473820e9730bfcf3bd98"><td class="mdescLeft">&#160;</td><td class="mdescRight">To print whd log information.  <a href="#ga78c9ec3412e5473820e9730bfcf3bd98">More...</a><br /></td></tr>
+<tr class="separator:ga78c9ec3412e5473820e9730bfcf3bd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9cbe00c5f8ce33344ff24ee9ffa45b81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga9cbe00c5f8ce33344ff24ee9ffa45b81">whd_wifi_print_whd_log</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv)</td></tr>
+<tr class="memdesc:ga9cbe00c5f8ce33344ff24ee9ffa45b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">To print whd log information.  <a href="#ga9cbe00c5f8ce33344ff24ee9ffa45b81">More...</a><br /></td></tr>
+<tr class="separator:ga9cbe00c5f8ce33344ff24ee9ffa45b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac60179254bafbbe4a4685e41bb1f5141"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#gac60179254bafbbe4a4685e41bb1f5141">whd_network_get_ifidx_from_ifp</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t *ifidx)</td></tr>
+<tr class="memdesc:gac60179254bafbbe4a4685e41bb1f5141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the ifidx from interface pointer.  <a href="#gac60179254bafbbe4a4685e41bb1f5141">More...</a><br /></td></tr>
+<tr class="separator:gac60179254bafbbe4a4685e41bb1f5141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4df626e2c65cf42ed1c0a6c9eeb2779e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga4df626e2c65cf42ed1c0a6c9eeb2779e">whd_network_get_bsscfgidx_from_ifp</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, uint8_t *bsscfgidx)</td></tr>
+<tr class="memdesc:ga4df626e2c65cf42ed1c0a6c9eeb2779e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the bsscfgidx from interface pointer.  <a href="#ga4df626e2c65cf42ed1c0a6c9eeb2779e">More...</a><br /></td></tr>
+<tr class="separator:ga4df626e2c65cf42ed1c0a6c9eeb2779e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga956afe6388d2d06a1df75146ca6b2e54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga956afe6388d2d06a1df75146ca6b2e54">whd_wifi_get_bss_info</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, <a class="el" href="whd__types_8h.html#a92c6377f96c792ee4d94bb36b7777ea6">wl_bss_info_t</a> *bi)</td></tr>
+<tr class="memdesc:ga956afe6388d2d06a1df75146ca6b2e54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrives the bss info.  <a href="#ga956afe6388d2d06a1df75146ca6b2e54">More...</a><br /></td></tr>
+<tr class="separator:ga956afe6388d2d06a1df75146ca6b2e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2dd26b0bfe26599da638e002d2002324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga2dd26b0bfe26599da638e002d2002324">whd_print_stats</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_drv, <a class="el" href="whd__types_8h.html#a7cd94a03f2e7e6aab7217ed559c7a0ac">whd_bool_t</a> reset_after_print)</td></tr>
+<tr class="memdesc:ga2dd26b0bfe26599da638e002d2002324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints WHD stats.  <a href="#ga2dd26b0bfe26599da638e002d2002324">More...</a><br /></td></tr>
+<tr class="separator:ga2dd26b0bfe26599da638e002d2002324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2b2d67fef2fa24fba58a00793a8ea2c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga2b2d67fef2fa24fba58a00793a8ea2c7">whd_wifi_get_deepsleep_stats</a> (<a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a> whd_driver, char *buf, uint32_t buflen)</td></tr>
+<tr class="memdesc:ga2b2d67fef2fa24fba58a00793a8ea2c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches ulp statistics and fills the buffer with that data and executes deepsleep indication callback if application registers for it.  <a href="#ga2b2d67fef2fa24fba58a00793a8ea2c7">More...</a><br /></td></tr>
+<tr class="separator:ga2b2d67fef2fa24fba58a00793a8ea2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1bb177b65938fdcfe3ee543addd5e306"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga1bb177b65938fdcfe3ee543addd5e306">whd_wifi_register_ds_callback</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, whd_ds_callback_t callback, void *ctx, char *buf, uint32_t buflen)</td></tr>
+<tr class="memdesc:ga1bb177b65938fdcfe3ee543addd5e306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to register callbacks to be executed.  <a href="#ga1bb177b65938fdcfe3ee543addd5e306">More...</a><br /></td></tr>
+<tr class="separator:ga1bb177b65938fdcfe3ee543addd5e306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9d7550b21cacd2ab114227af0da1f65f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dbg.html#ga9d7550b21cacd2ab114227af0da1f65f">whd_wifi_deregister_ds_callback</a> (<a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a> ifp, whd_ds_callback_t callback)</td></tr>
+<tr class="memdesc:ga9d7550b21cacd2ab114227af0da1f65f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to unregister callbacks that are note needed to be executed anymore.  <a href="#ga9d7550b21cacd2ab114227af0da1f65f">More...</a><br /></td></tr>
+<tr class="separator:ga9d7550b21cacd2ab114227af0da1f65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga334e8f04bdbc06da6eadf29cea997b99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga334e8f04bdbc06da6eadf29cea997b99">&#9670;&nbsp;</a></span>whd_wifi_get_wifi_version()</h2>
+<a id="ga11041df00c4388b377fa896c7d123463"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga11041df00c4388b377fa896c7d123463">&#9670;&nbsp;</a></span>whd_wifi_get_wifi_version()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_wifi_get_wifi_version </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_get_wifi_version </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
           <td class="paramname"><em>ifp</em>, </td>
@@ -166,14 +191,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1e8a85564910052e82332a89db4d9ff5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1e8a85564910052e82332a89db4d9ff5">&#9670;&nbsp;</a></span>whd_wifi_get_clm_version()</h2>
+<a id="ga49dbde3a0df183dc760ff738bdaef24a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga49dbde3a0df183dc760ff738bdaef24a">&#9670;&nbsp;</a></span>whd_wifi_get_clm_version()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_wifi_get_clm_version </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_get_clm_version </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
           <td class="paramname"><em>ifp</em>, </td>
@@ -211,14 +236,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga7f089a4c933c9c05a61e2cfc00fcb4f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7f089a4c933c9c05a61e2cfc00fcb4f8">&#9670;&nbsp;</a></span>whd_wifi_read_wlan_log()</h2>
+<a id="ga78c9ec3412e5473820e9730bfcf3bd98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78c9ec3412e5473820e9730bfcf3bd98">&#9670;&nbsp;</a></span>whd_wifi_read_wlan_log()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_wifi_read_wlan_log </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_read_wlan_log </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a>&#160;</td>
           <td class="paramname"><em>whd_drv</em>, </td>
@@ -256,14 +281,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga6435c76ac1eae5af952053d76d9c67ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6435c76ac1eae5af952053d76d9c67ab">&#9670;&nbsp;</a></span>whd_wifi_print_whd_log()</h2>
+<a id="ga9cbe00c5f8ce33344ff24ee9ffa45b81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9cbe00c5f8ce33344ff24ee9ffa45b81">&#9670;&nbsp;</a></span>whd_wifi_print_whd_log()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_wifi_print_whd_log </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_print_whd_log </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a>&#160;</td>
           <td class="paramname"><em>whd_drv</em></td><td>)</td>
@@ -283,14 +308,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga01abfdd80ff65c7cac64e0d7c2f93c60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga01abfdd80ff65c7cac64e0d7c2f93c60">&#9670;&nbsp;</a></span>whd_network_get_ifidx_from_ifp()</h2>
+<a id="gac60179254bafbbe4a4685e41bb1f5141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac60179254bafbbe4a4685e41bb1f5141">&#9670;&nbsp;</a></span>whd_network_get_ifidx_from_ifp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_network_get_ifidx_from_ifp </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_network_get_ifidx_from_ifp </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
           <td class="paramname"><em>ifp</em>, </td>
@@ -322,14 +347,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga84376c0830fbdb04c67812243539d4c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga84376c0830fbdb04c67812243539d4c6">&#9670;&nbsp;</a></span>whd_network_get_bsscfgidx_from_ifp()</h2>
+<a id="ga4df626e2c65cf42ed1c0a6c9eeb2779e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4df626e2c65cf42ed1c0a6c9eeb2779e">&#9670;&nbsp;</a></span>whd_network_get_bsscfgidx_from_ifp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_network_get_bsscfgidx_from_ifp </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_network_get_bsscfgidx_from_ifp </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
           <td class="paramname"><em>ifp</em>, </td>
@@ -361,14 +386,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gab4a8c97085b18321d8d682b1578edf7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab4a8c97085b18321d8d682b1578edf7d">&#9670;&nbsp;</a></span>whd_wifi_get_bss_info()</h2>
+<a id="ga956afe6388d2d06a1df75146ca6b2e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga956afe6388d2d06a1df75146ca6b2e54">&#9670;&nbsp;</a></span>whd_wifi_get_bss_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_wifi_get_bss_info </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_get_bss_info </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
           <td class="paramname"><em>ifp</em>, </td>
@@ -399,14 +424,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gab6dca3a6d7a90a1f9d8fb18660048c18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab6dca3a6d7a90a1f9d8fb18660048c18">&#9670;&nbsp;</a></span>whd_print_stats()</h2>
+<a id="ga2dd26b0bfe26599da638e002d2002324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2dd26b0bfe26599da638e002d2002324">&#9670;&nbsp;</a></span>whd_print_stats()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t whd_print_stats </td>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_print_stats </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a>&#160;</td>
           <td class="paramname"><em>whd_drv</em>, </td>
@@ -434,6 +459,148 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga2b2d67fef2fa24fba58a00793a8ea2c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2b2d67fef2fa24fba58a00793a8ea2c7">&#9670;&nbsp;</a></span>whd_wifi_get_deepsleep_stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_get_deepsleep_stats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#ac45015d82e65db891b463066873eca4f">whd_driver_t</a>&#160;</td>
+          <td class="paramname"><em>whd_driver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>buflen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fetches ulp statistics and fills the buffer with that data and executes deepsleep indication callback if application registers for it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">whd_driver</td><td>Instance of whd driver </td></tr>
+    <tr><td class="paramname">buf</td><td>Pointer to buffer to be filled with ulpstats data </td></tr>
+    <tr><td class="paramname">buflen</td><td>Buffer length of the above buffer should be between 2048 and 4096</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or Error code </dd></dl>
+
+</div>
+</div>
+<a id="ga1bb177b65938fdcfe3ee543addd5e306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1bb177b65938fdcfe3ee543addd5e306">&#9670;&nbsp;</a></span>whd_wifi_register_ds_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_register_ds_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_ds_callback_t&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>buflen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to register callbacks to be executed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">callback</td><td>Callback api to be registered </td></tr>
+    <tr><td class="paramname">ctx</td><td>Pointer to context </td></tr>
+    <tr><td class="paramname">buf</td><td>Buffer to be filled with data </td></tr>
+    <tr><td class="paramname">buflen</td><td>Buffer length of the above buffer</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or WHD_UNKNOWN_INTERFACE </dd></dl>
+
+</div>
+</div>
+<a id="ga9d7550b21cacd2ab114227af0da1f65f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d7550b21cacd2ab114227af0da1f65f">&#9670;&nbsp;</a></span>whd_wifi_deregister_ds_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="whd__types_8h.html#add62f4b5040a2451e23869d2f9e1ae05">whd_result_t</a> whd_wifi_deregister_ds_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="whd_8h.html#a2e544c482ddbb690bbb95ce7174e79a0">whd_interface_t</a>&#160;</td>
+          <td class="paramname"><em>ifp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">whd_ds_callback_t&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to unregister callbacks that are note needed to be executed anymore. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ifp</td><td>Pointer to handle instance of whd interface </td></tr>
+    <tr><td class="paramname">callback</td><td>Callback api to be registered</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>WHD_SUCCESS or WHD_UNKNOWN_INTERFACE </dd></dl>
 
 </div>
 </div>

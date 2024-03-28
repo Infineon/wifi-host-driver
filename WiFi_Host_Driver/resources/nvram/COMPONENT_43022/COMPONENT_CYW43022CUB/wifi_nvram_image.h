@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2019, Cypress Semiconductor Corporation, All Rights Reserved
- * SPDX-License-Identifier: LicenseRef-PBL
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * SPDX-License-Identifier: Apache-2.0
  *
- * This file and the related binary are licensed under the
- * Permissive Binary License, Version 1.0 (the "License");
- * you may not use these files except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * You may obtain a copy of the License here:
- * LICENSE-permissive-binary-license-1.0.txt and at
- * https://www.mbed.com/licenses/PBL-1.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -27,7 +28,7 @@ extern "C" {
 
 /**
  * Character array of NVRAM image
- * Generated from cyw943022sdm2wlipa_rev1.1.txt
+ * Generated from cyw943022sdm2wlipa_rev1.2.txt
  */
 
 static const char wifi_nvram_image[] =
@@ -38,7 +39,7 @@ static const char wifi_nvram_image[] =
         "bphyscale=0x20"                                                     "\x00"
         "boardflags3=0x4000C101"                                             "\x00"
         "vendid=0x12be"                                                      "\x00"
-        "devid=0xa80e"                                                       "\x00"
+        "devid=0xbd3f"                                                       "\x00"
         "manfid=0x2d0"                                                       "\x00"
         "prodid=0x052e"                                                      "\x00"
         NVRAM_GENERATED_MAC_ADDRESS                                          "\x00"
@@ -74,20 +75,20 @@ static const char wifi_nvram_image[] =
         "femctrl=17"                                                         "\x00"
         "subband5gver=4"                                                     "\x00"
         "pa2ga0=-162,6070,-755"                                              "\x00"
-        "pa5ga0=-147,5146,-648,-124,5411,-668,-134,5289,-651,-148,5291,-679" "\x00"
+        "pa5ga0=-147,5658,-685,-124,5923,-699,-134,5801,-684,-148,5803,-716" "\x00"
         "cckpwroffset0=2"                                                    "\x00"
         "pdoffset40ma0=0"                                                    "\x00"
         "pdoffset80ma0=0"                                                    "\x00"
         "lowpowerrange2g=0"                                                  "\x00"
         "lowpowerrange5g=0"                                                  "\x00"
-        "rssicorrnorm_c0=2,0"                                                "\x00"
-        "rssicorrnorm5g_c0=-10,0,0,-15,0,0,-15,0,0,-15,0,0"                  "\x00"
+        "rssicorrnorm_c0=-6,0"                                               "\x00"
+        "rssicorrnorm5g_c0=-2,0,0,-15,0,0,-15,0,0,-15,0,0"                   "\x00"
         "ed_thresh2g=-63"                                                    "\x00"
         "ed_thresh5g=-63"                                                    "\x00"
-        "swctrlmap_2g=0x20002000,0x60406040, 0x20002000,0x000040,0x3e7"      "\x00"
+        "swctrlmap_2g=0x20002000,0x60406040, 0x20002000,0x000040,0x1e7"      "\x00"
         "swctrlmapext_2g=0x02020202,0x00000000, 0x02020202,0x000000,0x003"   "\x00"
-        "swctrlmap_5g=0x20002000,0x20002000,0x20002000,0x000000,0x3a7"       "\x00"
-        "swctrlmapext_5g=0x00000000,0x00010001, 0x00010001,0x000000,0x003"   "\x00"
+        "swctrlmap_5g=0x20002000,0x20002000,0x20002000,0x000000,0x1a7"       "\x00"
+        "swctrlmapext_5g=0x00000000,0x00010101, 0x00010001,0x000000,0x003"   "\x00"
         "ulpnap=0"                                                           "\x00"
         "ulpadc=1"                                                           "\x00"
         "ssagc_en=0"                                                         "\x00"
@@ -139,6 +140,25 @@ static const char wifi_nvram_image[] =
         "txidxcap5g=5"                                                       "\x00"
         "initbaseidx2govrval=30"                                             "\x00"
         "initbaseidx5govrval=20"                                             "\x00"
+        "swdiv_en=0 "                                                        "\x00"
+        "swdiv_gpio=0"                                                       "\x00"
+        "swdiv_swctrl_en=2"                                                  "\x00"
+        "swdiv_swctrl_ant0=0"                                                "\x00"
+        "swdiv_swctrl_ant1=1"                                                "\x00"
+        "swdiv_antmap2g_main=1"                                              "\x00"
+        "swdiv_antmap5g_main=1"                                              "\x00"
+        "swdiv_snrlim=290 "                                                  "\x00"
+        "swdiv_thresh=2000 "                                                 "\x00"
+        "swdiv_snrthresh=24 "                                                "\x00"
+        "swdiv_timeon=10"                                                    "\x00"
+        "swdiv_timeoff=1"                                                    "\x00"
+        "swdiv_snr2g20=232"                                                  "\x00"
+        "swdiv_snr2g40=257"                                                  "\x00"
+        "swdiv_snr5g20=296"                                                  "\x00"
+        "swdiv_snr5g40=312"                                                  "\x00"
+        "swdiv_snr5g80=296"                                                  "\x00"
+        "swdiv_ap_dead_check=0 "                                             "\x00"
+        "swdiv_ap_div=0 "                                                    "\x00"
         "\x00\x00";
 #ifdef __cplusplus
 } /*extern "C" */

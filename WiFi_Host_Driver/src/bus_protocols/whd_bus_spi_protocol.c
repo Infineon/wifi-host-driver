@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -156,7 +156,7 @@ static whd_result_t whd_bus_spi_set_backplane_window(whd_driver_t whd_driver, ui
 ******************************************************/
 uint32_t whd_bus_spi_bt_packet_available_to_read(whd_driver_t whd_driver);
 
-uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_config, cyhal_spi_t *spi_obj)
+whd_result_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_config, cyhal_spi_t *spi_obj)
 {
     struct whd_bus_info *whd_bus_info;
 

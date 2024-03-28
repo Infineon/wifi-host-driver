@@ -10,15 +10,6 @@
     <includedby refid="whd_8h" local="yes">whd.h</includedby>
     <includedby refid="whd__wifi__api_8h" local="yes">whd_wifi_api.h</includedby>
     <incdepgraph>
-      <node id="42">
-        <label>stdint.h</label>
-      </node>
-      <node id="44">
-        <label>cy_result.h</label>
-      </node>
-      <node id="45">
-        <label>cyhal_hw_types.h</label>
-      </node>
       <node id="41">
         <label>whd_types.h</label>
         <link refid="whd__types_8h"/>
@@ -33,6 +24,15 @@
         <childnode refid="46" relation="include">
         </childnode>
       </node>
+      <node id="42">
+        <label>stdint.h</label>
+      </node>
+      <node id="44">
+        <label>cy_result.h</label>
+      </node>
+      <node id="45">
+        <label>cyhal_hw_types.h</label>
+      </node>
       <node id="46">
         <label>cyhal_gpio.h</label>
       </node>
@@ -44,14 +44,6 @@
       <node id="52">
         <label>whd_wifi_api.h</label>
         <link refid="whd__wifi__api_8h"/>
-      </node>
-      <node id="49">
-        <label>whd_events.h</label>
-        <link refid="whd__events_8h"/>
-      </node>
-      <node id="51">
-        <label>whd_resource_api.h</label>
-        <link refid="whd__resource__api_8h"/>
       </node>
       <node id="47">
         <label>whd_types.h</label>
@@ -65,6 +57,10 @@
         <label>whd_network_types.h</label>
         <link refid="whd__network__types_8h"/>
       </node>
+      <node id="51">
+        <label>whd_resource_api.h</label>
+        <link refid="whd__resource__api_8h"/>
+      </node>
       <node id="48">
         <label>whd.h</label>
         <link refid="whd_8h"/>
@@ -76,6 +72,10 @@
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
+      </node>
+      <node id="49">
+        <label>whd_events.h</label>
+        <link refid="whd__events_8h"/>
       </node>
     </invincdepgraph>
     <innerclass refid="structwhd__band__list__t" prot="public">whd_band_list_t</innerclass>
@@ -108,6 +108,9 @@
     <innerclass refid="structwhd__btc__lescan__params" prot="public">whd_btc_lescan_params</innerclass>
     <innerclass refid="structwhd__coex__config" prot="public">whd_coex_config</innerclass>
     <innerclass refid="structwhd__packet__filter__t" prot="public">whd_packet_filter_t</innerclass>
+    <innerclass refid="structwhd__keep__alive" prot="public">whd_keep_alive</innerclass>
+    <innerclass refid="struct_protocol_version" prot="public">ProtocolVersion</innerclass>
+    <innerclass refid="structtls__param__info" prot="public">tls_param_info</innerclass>
       <sectiondef kind="define">
       <memberdef kind="define" id="whd__types_8h_1a9ee2fe056ad3787e30bb8da7248592c7" prot="public" static="no">
         <name>SSID_NAME_SIZE</name>
@@ -119,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="28" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="28" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="28" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4199a1b37dba92f482ff0b9eb406c323" prot="public" static="no">
         <name>WEP_ENABLED</name>
@@ -131,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="30" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="30" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="30" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a20f0d7118c2d35a688bcdc5b8b0920d9" prot="public" static="no">
         <name>TKIP_ENABLED</name>
@@ -143,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="31" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="31" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="31" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a577a9dbc615ba145496a41a2035bd615" prot="public" static="no">
         <name>AES_ENABLED</name>
@@ -155,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="32" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="32" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="32" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4d4a4586c264fe8e4acb0bf7169b7b0f" prot="public" static="no">
         <name>SHARED_ENABLED</name>
@@ -167,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="33" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="33" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="33" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aa7ccd472bacbd8ee01f31f0f0e2ce3dc" prot="public" static="no">
         <name>WPA_SECURITY</name>
@@ -179,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="34" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="34" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="34" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8875737a0403d2136a69bbc96401cccf" prot="public" static="no">
         <name>WPA2_SECURITY</name>
@@ -191,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="35" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="35" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="35" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aebc69eacd8308e6a6549c40d069a92ef" prot="public" static="no">
         <name>WPA2_SHA256_SECURITY</name>
@@ -203,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="36" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="36" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="36" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ad175824d1581f69f5a725e4c9171aa79" prot="public" static="no">
         <name>WPA3_SECURITY</name>
@@ -215,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="37" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="37" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="37" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a537103c16413b65ffb4d9ee0156248f5" prot="public" static="no">
         <name>SECURITY_MASK</name>
@@ -227,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="38" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="38" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="38" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ada6d6331053c0f88c63d77ba8d2019c8" prot="public" static="no">
         <name>ENTERPRISE_ENABLED</name>
@@ -239,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="40" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="40" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="40" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aaae7e8a0eb357cae8f130f9099d8e7b8" prot="public" static="no">
         <name>WPS_ENABLED</name>
@@ -251,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="41" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="41" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="41" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9640c064932a3a633a3312b737658f83" prot="public" static="no">
         <name>IBSS_ENABLED</name>
@@ -263,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="42" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="42" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="42" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aafdddf85f4d0df08ee3aead815ad7c76" prot="public" static="no">
         <name>FBT_ENABLED</name>
@@ -275,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="43" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="43" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="43" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a32f56429462855603066fea3723c5217" prot="public" static="no">
         <name>PM1_POWERSAVE_MODE</name>
@@ -287,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="45" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="45" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="45" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af29e5543837b68c29417a7d15e3228b7" prot="public" static="no">
         <name>PM2_POWERSAVE_MODE</name>
@@ -299,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="46" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="46" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="46" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a287bbd4f521f0d1cf44165bc617cebf5" prot="public" static="no">
         <name>NO_POWERSAVE_MODE</name>
@@ -311,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="47" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="47" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="47" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1acd0149fc13ddc1b605e64c7c2cebef58" prot="public" static="no">
         <name>ULP_BUSWIDTH_INTR_MODE</name>
@@ -323,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="49" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="49" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="49" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8b261b3c1cad9af898406794802c1be1" prot="public" static="no">
         <name>ULP_OOB_INTR_MODE</name>
@@ -335,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="50" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="50" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="50" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a5580d1c1e63d922c2e3dbbac91babd2c" prot="public" static="no">
         <name>ULP_ASYNC_INTR_MODE</name>
@@ -347,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="51" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="51" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="51" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af2ce8126dc46ee1d9d3beda3e1003193" prot="public" static="no">
         <name>PMKID_LEN</name>
@@ -359,40 +362,43 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="53" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="53" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="53" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a446dbf4b15aa0f7e6618cf9b9e015d65" prot="public" static="no">
         <name>ULP_NO_SUPPORT</name>
-        <initializer>(0) /* Flag to disable ULP in 43022 */</initializer>
+        <initializer>(0)</initializer>
         <briefdescription>
+<para>Flag to disable ULP in 43022. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="55" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="55" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="55" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af0f3d61a6ccd77a3ad66cfde3d8f818b" prot="public" static="no">
         <name>ULP_DS1_SUPPORT</name>
-        <initializer>(1) /* Flag to enable DS1 mode in 43022 */</initializer>
+        <initializer>(1)</initializer>
         <briefdescription>
+<para>Flag to enable DS1 mode in 43022. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="56" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="56" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="56" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a3b1eb85333b0169339ffa8f513ea5cbb" prot="public" static="no">
         <name>ULP_DS2_SUPPORT</name>
-        <initializer>(2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */</initializer>
+        <initializer>(2)</initializer>
         <briefdescription>
+<para>Flag to enable DS2 mode in 43022(Only supported in DM) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="57" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="57" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="57" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a113e5523834b14dff04ab2f9de618aec" prot="public" static="no">
         <name>WHD_OOB_CONFIG_VERSION</name>
@@ -404,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="58" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="58" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="58" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a17050055c7789bd6fd6960ec0f25d4f5" prot="public" static="no">
         <name>WHD_SAP_USE_CHANSPEC</name>
@@ -416,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="59" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="59" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="59" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a3c95a90e7806e4b0d21edfae15b73465" prot="public" static="no">
         <name>UNUSED_PARAMETER</name>
@@ -429,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="65" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="65" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="65" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4048bf3892868ded8a28f8cbdd339c09" prot="public" static="no">
         <name>UNUSED_VARIABLE</name>
@@ -442,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="72" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="72" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="72" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a1491cb4c4adc44f22a91f18609dfb2f7" prot="public" static="no">
         <name>REFERENCE_DEBUG_ONLY_VARIABLE</name>
@@ -455,7 +461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="79" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="79" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="79" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ae6328bba53e322f1332e7b7b2d7cc128" prot="public" static="no">
         <name>WIFI_IE_OUI_LENGTH</name>
@@ -467,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="99" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="99" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="103" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7ccccfd0b93f11b672f4627277f9153f" prot="public" static="no">
         <name>VNDR_IE_MAX_LEN</name>
@@ -479,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="100" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="100" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="104" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a50f830e25a5ac6d7d0e3eb8d23e90943" prot="public" static="no">
         <name>BDC_HEADER_WITH_PAD</name>
@@ -491,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="104" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="104" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="108" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9a43f624a90cb7b54e6b953f2ed25f4f" prot="public" static="no">
         <name>MSGBUF_OVERHEAD_WITH_PAD</name>
@@ -503,7 +509,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="106" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="106" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="110" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a559655385d80ca97754fafa29ac87717" prot="public" static="no">
         <name>BDC_HEADER_OFFSET_TO_DATA</name>
@@ -516,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="111" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="111" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="115" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aaf73ac170e07969ed067a6cd5088044f" prot="public" static="no">
         <name>SDPCM_HEADER</name>
@@ -528,7 +534,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="113" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="113" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="117" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aab3fad8b23f2db6d6c985134359bec0d" prot="public" static="no">
         <name>MAX_BUS_HEADER_SIZE</name>
@@ -540,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="116" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="116" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="120" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9b159bb86ca28f2200f30661441f232e" prot="public" static="no">
         <name>BUFFER_OVERHEAD</name>
@@ -552,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="127" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="127" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="131" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a19b63b93a33a8d9f330925e1f0e87a5d" prot="public" static="no">
         <name>WHD_LINK_HEADER</name>
@@ -566,7 +572,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="134" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="134" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="138" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac7923e15c2e0a935cb7c8cad13b9dc6e" prot="public" static="no">
         <name>WHD_ETHERNET_SIZE</name>
@@ -578,7 +584,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="147" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="147" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="151" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a65859cd60e3f43138360dfa07e2d0b30" prot="public" static="no">
         <name>WHD_PHYSICAL_HEADER</name>
@@ -591,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="152" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="152" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="156" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a90b4f488c8f53596cffcb88fe6111fcc" prot="public" static="no">
         <name>WHD_PAYLOAD_MTU</name>
@@ -603,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="158" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="158" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="162" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="162" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6c25e15fb4270bbd5e77169d9ce1da59" prot="public" static="no">
         <name>WHD_LINK_MTU</name>
@@ -616,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="168" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="168" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="172" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="172" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4ab8a2182e68bb029551aa754bff1861" prot="public" static="no">
         <name>MK_CNTRY</name>
@@ -632,7 +638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="499" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="498" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="503" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="502" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aa44a8901a98f9868efefee50db967736" prot="public" static="no">
         <name>MCSSET_LEN</name>
@@ -644,7 +650,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="794" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="794" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="798" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="798" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a24950ac00b520d360c9d6092be69ee68" prot="public" static="no">
         <name>WHD_RESULT_TYPE</name>
@@ -656,7 +662,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="859" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="859" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="863" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="863" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1adf4a5004401ae1772bf5b33a5e19e108" prot="public" static="no">
         <name>WHD_RESULT_CREATE</name>
@@ -669,7 +675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="860" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="860" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="864" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="864" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8aaeff5d2f1bfaeeb2931c401ac40a3f" prot="public" static="no">
         <name>WHD_SUCCESS</name>
@@ -681,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="862" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="862" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="866" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="866" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8c29570e0fc44f87bdea3b6a438efe1c" prot="public" static="no">
         <name>WHD_PENDING</name>
@@ -693,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="863" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="863" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="867" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="867" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7eee7c29f665510d218cea3c620b3150" prot="public" static="no">
         <name>WHD_TIMEOUT</name>
@@ -705,7 +711,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="864" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="864" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="868" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="868" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a572bf9261bd3f234bd804d55b284f55d" prot="public" static="no">
         <name>WHD_BADARG</name>
@@ -717,7 +723,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="865" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="865" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="869" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="869" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9a3c109ff2d06746031090b108e9540e" prot="public" static="no">
         <name>WHD_UNFINISHED</name>
@@ -729,7 +735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="866" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="866" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="870" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="870" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a1b8d28e95bef4c55d0cdbc2ffc6c9ef7" prot="public" static="no">
         <name>WHD_PARTIAL_RESULTS</name>
@@ -741,7 +747,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="868" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="868" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="872" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="872" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a63b3cf80bafef7f1f255c0c826bceb10" prot="public" static="no">
         <name>WHD_INVALID_KEY</name>
@@ -753,7 +759,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="869" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="869" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="873" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="873" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1abb82350191c4b2751119d4206044c676" prot="public" static="no">
         <name>WHD_DOES_NOT_EXIST</name>
@@ -765,7 +771,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="870" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="870" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="874" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="874" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac2e279a3f388f66c076d4dd73310a27b" prot="public" static="no">
         <name>WHD_NOT_AUTHENTICATED</name>
@@ -777,7 +783,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="871" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="871" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="875" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="875" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4377fd0c321dbebed159e8c84858a1e4" prot="public" static="no">
         <name>WHD_NOT_KEYED</name>
@@ -789,7 +795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="872" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="872" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="876" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="876" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac9f58fcc05846835a544720f7a80e9f7" prot="public" static="no">
         <name>WHD_IOCTL_FAIL</name>
@@ -801,7 +807,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="873" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="873" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="877" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="877" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a94f122e793a4a91c8ac044366d1611a9" prot="public" static="no">
         <name>WHD_BUFFER_UNAVAILABLE_TEMPORARY</name>
@@ -813,7 +819,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="874" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="874" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="878" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="878" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a730333b8281a84dcda0985b757b97823" prot="public" static="no">
         <name>WHD_BUFFER_UNAVAILABLE_PERMANENT</name>
@@ -825,7 +831,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="875" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="875" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="879" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="879" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a11801e020e110714a7a21527b18bc5c0" prot="public" static="no">
         <name>WHD_CONNECTION_LOST</name>
@@ -837,7 +843,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="876" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="876" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="880" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="880" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a24f120d05f15b5c5564c8fc7098516f3" prot="public" static="no">
         <name>WHD_OUT_OF_EVENT_HANDLER_SPACE</name>
@@ -849,7 +855,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="877" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="877" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="881" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="881" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a465f9477fbe7df4860470bf262a20e81" prot="public" static="no">
         <name>WHD_SEMAPHORE_ERROR</name>
@@ -861,7 +867,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="878" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="878" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="882" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="882" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a23f5c05cf88f6ed945cf15c111c778cb" prot="public" static="no">
         <name>WHD_FLOW_CONTROLLED</name>
@@ -873,7 +879,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="879" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="879" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="883" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="883" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6270efc8ded415e7d0e1059b3d5eff1f" prot="public" static="no">
         <name>WHD_NO_CREDITS</name>
@@ -885,7 +891,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="880" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="880" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="884" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="884" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a1e3927ec83cfaac801196210b8a9af45" prot="public" static="no">
         <name>WHD_NO_PACKET_TO_SEND</name>
@@ -897,7 +903,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="881" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="881" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="885" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="885" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af182b141bdde3c09af9849ca2f6f4598" prot="public" static="no">
         <name>WHD_CORE_CLOCK_NOT_ENABLED</name>
@@ -909,7 +915,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="882" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="882" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="886" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="886" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1adcd663e17b745c4fde47a59bd4ae3886" prot="public" static="no">
         <name>WHD_CORE_IN_RESET</name>
@@ -921,7 +927,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="883" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="883" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="887" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="887" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac555243f1fc71fb3a5037d57d5f70768" prot="public" static="no">
         <name>WHD_UNSUPPORTED</name>
@@ -933,7 +939,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="884" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="884" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="888" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="888" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a659306d5da66cf4bb2d2a5a8c7f530a2" prot="public" static="no">
         <name>WHD_BUS_WRITE_REGISTER_ERROR</name>
@@ -945,7 +951,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="885" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="885" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="889" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="889" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac73dc3debf5093500f5fcd0b1750e8e7" prot="public" static="no">
         <name>WHD_SDIO_BUS_UP_FAIL</name>
@@ -957,7 +963,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="886" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="886" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="890" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="890" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a39d85692e57da297005929f28430cf8e" prot="public" static="no">
         <name>WHD_JOIN_IN_PROGRESS</name>
@@ -969,7 +975,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="887" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="887" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="891" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="891" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a27ea061512955c1fa154666b11346771" prot="public" static="no">
         <name>WHD_NETWORK_NOT_FOUND</name>
@@ -981,7 +987,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="888" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="888" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="892" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="892" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ab0c582f87b55cbcbbfdcdd1551f6be1b" prot="public" static="no">
         <name>WHD_INVALID_JOIN_STATUS</name>
@@ -993,7 +999,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="889" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="889" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="893" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="893" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ad6972e6627af27af729d9441ac57dbac" prot="public" static="no">
         <name>WHD_UNKNOWN_INTERFACE</name>
@@ -1005,7 +1011,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="890" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="890" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="894" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="894" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a276b9d9307ec24da1cd6ed1da2f0feaf" prot="public" static="no">
         <name>WHD_SDIO_RX_FAIL</name>
@@ -1017,7 +1023,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="891" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="891" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="895" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="895" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1abdd206e05538f81fcb9dca59d4f4404e" prot="public" static="no">
         <name>WHD_HWTAG_MISMATCH</name>
@@ -1029,7 +1035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="892" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="892" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="896" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="896" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7609ba95d8336c6d5a3a790b0b61b590" prot="public" static="no">
         <name>WHD_RX_BUFFER_ALLOC_FAIL</name>
@@ -1041,7 +1047,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="893" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="893" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="897" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="897" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a998914de59ed4ad6f510c063fee877f1" prot="public" static="no">
         <name>WHD_BUS_READ_REGISTER_ERROR</name>
@@ -1053,7 +1059,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="894" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="894" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="898" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="898" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ab7fb839bb825a42085305032735fcfff" prot="public" static="no">
         <name>WHD_THREAD_CREATE_FAILED</name>
@@ -1065,7 +1071,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="895" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="895" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="899" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="899" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a0c06e71abd08027b33cc93a684c04cd5" prot="public" static="no">
         <name>WHD_QUEUE_ERROR</name>
@@ -1077,7 +1083,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="896" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="896" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="900" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="900" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4453a7518a649b88128f21a5af2a8755" prot="public" static="no">
         <name>WHD_BUFFER_POINTER_MOVE_ERROR</name>
@@ -1089,7 +1095,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="897" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="897" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="901" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="901" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af7974469bcf8a4bad24d339d623297e7" prot="public" static="no">
         <name>WHD_BUFFER_SIZE_SET_ERROR</name>
@@ -1101,7 +1107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="898" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="898" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="902" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="902" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9c694e98139f96882d3098802ec9a947" prot="public" static="no">
         <name>WHD_THREAD_STACK_NULL</name>
@@ -1113,7 +1119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="899" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="899" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="903" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="903" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4deb31cfc8310b82d3b6359b526f7e9b" prot="public" static="no">
         <name>WHD_THREAD_DELETE_FAIL</name>
@@ -1125,7 +1131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="900" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="900" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="904" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="904" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ad506512b8a302ce61df402f59bc7504c" prot="public" static="no">
         <name>WHD_SLEEP_ERROR</name>
@@ -1137,7 +1143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="901" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="901" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="905" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="905" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a18719c46ce4cff61ff3c4d50309261e2" prot="public" static="no">
         <name>WHD_BUFFER_ALLOC_FAIL</name>
@@ -1149,7 +1155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="902" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="902" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="906" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="906" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a5a5122cc33024c33eaa9dcca1d6b2917" prot="public" static="no">
         <name>WHD_NO_PACKET_TO_RECEIVE</name>
@@ -1161,7 +1167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="903" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="903" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="907" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="907" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a32f993fc79964aeb95864885ab604a20" prot="public" static="no">
         <name>WHD_INTERFACE_NOT_UP</name>
@@ -1173,7 +1179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="904" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="904" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="908" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="908" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7c128bcb61d6db9a8d58a2f5b9ed55a2" prot="public" static="no">
         <name>WHD_DELAY_TOO_LONG</name>
@@ -1185,7 +1191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="905" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="905" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="909" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="909" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8ef95acfbfd3ccbb9912af09bc4d0784" prot="public" static="no">
         <name>WHD_INVALID_DUTY_CYCLE</name>
@@ -1197,7 +1203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="906" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="906" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="910" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="910" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9691a3d9b9499bc36d73483bdf824ab7" prot="public" static="no">
         <name>WHD_PMK_WRONG_LENGTH</name>
@@ -1209,7 +1215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="907" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="907" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="911" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="911" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7904772fe0ca7e2de9843ee118def04c" prot="public" static="no">
         <name>WHD_UNKNOWN_SECURITY_TYPE</name>
@@ -1221,7 +1227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="908" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="908" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="912" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="912" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af35d1a67b9c58a0dd84bc13a4fa63e67" prot="public" static="no">
         <name>WHD_WEP_NOT_ALLOWED</name>
@@ -1233,7 +1239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="909" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="909" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="913" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="913" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a379efc2cb11128835c418e615adfcefc" prot="public" static="no">
         <name>WHD_WPA_KEYLEN_BAD</name>
@@ -1245,7 +1251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="910" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="910" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="914" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="914" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a91089285a820e59587c544de682420e3" prot="public" static="no">
         <name>WHD_FILTER_NOT_FOUND</name>
@@ -1257,7 +1263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="911" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="911" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="915" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="915" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a0ed6696f986b3d35b4306c06a708db19" prot="public" static="no">
         <name>WHD_SPI_ID_READ_FAIL</name>
@@ -1269,7 +1275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="912" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="912" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="916" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="916" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6e7d6fcd9f48e9df5bd8ed66f88d05f3" prot="public" static="no">
         <name>WHD_SPI_SIZE_MISMATCH</name>
@@ -1281,7 +1287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="913" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="913" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="917" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="917" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7aecc5610dbe6e1584b349bfb202a2a7" prot="public" static="no">
         <name>WHD_ADDRESS_ALREADY_REGISTERED</name>
@@ -1293,7 +1299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="914" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="914" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="918" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="918" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac5725175be9d81f698084386eb44688e" prot="public" static="no">
         <name>WHD_SDIO_RETRIES_EXCEEDED</name>
@@ -1305,7 +1311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="915" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="915" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="919" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="919" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ab7612a8165b6e28255c4a2ef78627454" prot="public" static="no">
         <name>WHD_NULL_PTR_ARG</name>
@@ -1317,7 +1323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="916" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="916" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="920" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="920" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a3be54cee48ade84eff99df8a29979958" prot="public" static="no">
         <name>WHD_THREAD_FINISH_FAIL</name>
@@ -1329,7 +1335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="917" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="917" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="921" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="921" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aa716e92104149dfba1cd732a92ddd04f" prot="public" static="no">
         <name>WHD_WAIT_ABORTED</name>
@@ -1341,7 +1347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="918" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="918" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="922" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="922" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8aedd7c7219349b28905c47b547e3419" prot="public" static="no">
         <name>WHD_SET_BLOCK_ACK_WINDOW_FAIL</name>
@@ -1353,7 +1359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="919" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="919" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="923" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="923" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a34cc0bb8645a8046708428c134c76f14" prot="public" static="no">
         <name>WHD_DELAY_TOO_SHORT</name>
@@ -1365,7 +1371,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="920" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="920" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="924" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="924" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a17a759d5ba4e5b5cfc51a5ea89e16ad0" prot="public" static="no">
         <name>WHD_INVALID_INTERFACE</name>
@@ -1377,7 +1383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="921" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="921" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="925" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="925" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ae33bbaaf58019659592cd22800fc20e0" prot="public" static="no">
         <name>WHD_WEP_KEYLEN_BAD</name>
@@ -1389,7 +1395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="922" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="922" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="926" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="926" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a18206b25da666ffc407fcf2b207a1739" prot="public" static="no">
         <name>WHD_HANDLER_ALREADY_REGISTERED</name>
@@ -1401,7 +1407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="923" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="923" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="927" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="927" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a3ed786d3514cdb56daecc1713feb8199" prot="public" static="no">
         <name>WHD_AP_ALREADY_UP</name>
@@ -1413,7 +1419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="924" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="924" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="928" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="928" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a433165f9b0097e6c60d21ae88f2f16f6" prot="public" static="no">
         <name>WHD_EAPOL_KEY_PACKET_M1_TIMEOUT</name>
@@ -1425,7 +1431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="925" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="925" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="929" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="929" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6ebde3f52c86c797f2a6f2e1366febac" prot="public" static="no">
         <name>WHD_EAPOL_KEY_PACKET_M3_TIMEOUT</name>
@@ -1437,7 +1443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="926" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="926" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="930" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="930" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a2b501e596df5290737987b146f4f8ea7" prot="public" static="no">
         <name>WHD_EAPOL_KEY_PACKET_G1_TIMEOUT</name>
@@ -1449,7 +1455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="927" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="927" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="931" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="931" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a11f0c32e1137f71695fca3ffcfba3225" prot="public" static="no">
         <name>WHD_EAPOL_KEY_FAILURE</name>
@@ -1461,7 +1467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="928" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="928" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="932" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="932" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6450f155199992d564d036f64963cd54" prot="public" static="no">
         <name>WHD_MALLOC_FAILURE</name>
@@ -1473,7 +1479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="929" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="929" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="933" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="933" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a38cbe87adc541246f2eae5534501231a" prot="public" static="no">
         <name>WHD_ACCESS_POINT_NOT_FOUND</name>
@@ -1485,7 +1491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="930" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="930" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="934" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="934" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a2ef366a6a9ac07e3087461c1946499dd" prot="public" static="no">
         <name>WHD_RTOS_ERROR</name>
@@ -1497,7 +1503,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="931" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="931" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="935" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="935" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6dd36bd14965f3601fee55c6e799dfa1" prot="public" static="no">
         <name>WHD_CLM_BLOB_DLOAD_ERROR</name>
@@ -1509,7 +1515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="932" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="932" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="936" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="936" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a68e4cdc07dccd14d0cc6c6216ff37fb2" prot="public" static="no">
         <name>WHD_HAL_ERROR</name>
@@ -1521,7 +1527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="933" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="933" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="937" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="937" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6499f6328208f184b4f716a910d7cdf6" prot="public" static="no">
         <name>WHD_RTOS_STATIC_MEM_LIMIT</name>
@@ -1533,7 +1539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="934" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="934" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="938" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="938" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ab05f43e01bbb9228b3ccf13f30861d07" prot="public" static="no">
         <name>WHD_NO_REGISTER_FUNCTION_POINTER</name>
@@ -1545,7 +1551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="935" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="935" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="939" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="939" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a5cb063b5fe90bb8a2027fc73bdf3b238" prot="public" static="no">
         <name>WHD_BLHS_VALIDATE_FAILED</name>
@@ -1557,7 +1563,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="936" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="936" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="940" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="940" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a6ec6f8cb59c6a69f32f52a0d59fe92f3" prot="public" static="no">
         <name>WHD_BUS_UP_FAIL</name>
@@ -1569,7 +1575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="937" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="937" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="941" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="941" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aaee45e8e698ca400c9463c9d04701f23" prot="public" static="no">
         <name>WHD_BUS_MEM_RESERVE_FAIL</name>
@@ -1581,7 +1587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="938" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="938" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="942" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="942" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a185e66e33a12853e16c209e62594ed65" prot="public" static="no">
         <name>WHD_NO_PKT_ID_AVAILABLE</name>
@@ -1593,7 +1599,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="939" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="939" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="943" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="943" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a01539df5d3e26227c354161d9eda58f8" prot="public" static="no">
         <name>WLAN_ENUM_OFFSET</name>
@@ -1605,7 +1611,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="941" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="941" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="945" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="945" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac23d24b8da4c424644151d0893c83a6d" prot="public" static="no">
         <name>WHD_WLAN_ERROR</name>
@@ -1617,7 +1623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="943" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="943" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="947" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="947" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8014f6266d91d9393e04bbc9a9b9080b" prot="public" static="no">
         <name>WHD_WLAN_BADARG</name>
@@ -1629,7 +1635,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="944" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="944" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="948" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="948" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ae8f8c4c8662920789e013f15ee23f242" prot="public" static="no">
         <name>WHD_WLAN_BADOPTION</name>
@@ -1641,7 +1647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="945" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="945" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="949" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="949" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aca39c37d54a0b1e2fc06ccb347ff9a6d" prot="public" static="no">
         <name>WHD_WLAN_NOTUP</name>
@@ -1653,7 +1659,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="946" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="946" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="950" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="950" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a73c623ff49884d56e536136962111df4" prot="public" static="no">
         <name>WHD_WLAN_NOTDOWN</name>
@@ -1665,7 +1671,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="947" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="947" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="951" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="951" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a5e8feb3e343b95b26599bf953f8511c3" prot="public" static="no">
         <name>WHD_WLAN_NOTAP</name>
@@ -1677,7 +1683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="948" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="948" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="952" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="952" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a13bd8edb5c29960413f87f584a508810" prot="public" static="no">
         <name>WHD_WLAN_NOTSTA</name>
@@ -1689,7 +1695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="949" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="949" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="953" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="953" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aa0ab7a6987319fd5e0fd5e3cd1176be2" prot="public" static="no">
         <name>WHD_WLAN_BADKEYIDX</name>
@@ -1701,7 +1707,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="950" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="950" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="954" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="954" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1afb565415b3fc8dc00b2681e202ed16fa" prot="public" static="no">
         <name>WHD_WLAN_RADIOOFF</name>
@@ -1713,7 +1719,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="951" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="951" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="955" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="955" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ada99a8b76a743e8f4d919b111583303d" prot="public" static="no">
         <name>WHD_WLAN_NOTBANDLOCKED</name>
@@ -1725,7 +1731,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="952" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="952" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="956" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="956" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8a32264cc4534666f4538abf1b3279b3" prot="public" static="no">
         <name>WHD_WLAN_NOCLK</name>
@@ -1737,7 +1743,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="953" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="953" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="957" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="957" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a904ea4607ee1a485d849ef38118986e0" prot="public" static="no">
         <name>WHD_WLAN_BADRATESET</name>
@@ -1749,7 +1755,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="954" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="954" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="958" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="958" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a3da74a46eebc41e14e7c25815c1381b1" prot="public" static="no">
         <name>WHD_WLAN_BADBAND</name>
@@ -1761,7 +1767,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="955" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="955" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="959" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="959" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a8a8bbb7fc3c39acc127eb738ad8e41e1" prot="public" static="no">
         <name>WHD_WLAN_BUFTOOSHORT</name>
@@ -1773,7 +1779,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="956" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="956" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="960" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="960" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a0be1d9ad73a6e99f93858cc5b62b37cc" prot="public" static="no">
         <name>WHD_WLAN_BUFTOOLONG</name>
@@ -1785,7 +1791,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="957" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="957" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="961" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="961" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac1e0aee10477b784b711951247bcf799" prot="public" static="no">
         <name>WHD_WLAN_BUSY</name>
@@ -1797,7 +1803,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="958" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="958" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="962" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="962" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9b985926cd74ad21525001e31e37dc60" prot="public" static="no">
         <name>WHD_WLAN_NOTASSOCIATED</name>
@@ -1809,7 +1815,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="959" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="959" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="963" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="963" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ac3d931142254845104478204c9d1f87f" prot="public" static="no">
         <name>WHD_WLAN_BADSSIDLEN</name>
@@ -1821,7 +1827,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="960" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="960" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="964" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="964" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1af790269c01083f486ba9e4e6df6bfccb" prot="public" static="no">
         <name>WHD_WLAN_OUTOFRANGECHAN</name>
@@ -1833,7 +1839,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="961" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="961" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="965" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="965" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a18200ecab39e4cdedafa57f74be50009" prot="public" static="no">
         <name>WHD_WLAN_BADCHAN</name>
@@ -1845,7 +1851,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="962" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="962" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="966" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="966" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a1412d0482b0178a4c05c76edb14148af" prot="public" static="no">
         <name>WHD_WLAN_BADADDR</name>
@@ -1857,7 +1863,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="963" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="963" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="967" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="967" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7df68783c789fc1ba43a37b4b06e65f5" prot="public" static="no">
         <name>WHD_WLAN_NORESOURCE</name>
@@ -1869,7 +1875,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="964" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="964" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="968" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="968" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ad74bbd2e81cb23c0ecc35fefda6f4478" prot="public" static="no">
         <name>WHD_WLAN_UNSUPPORTED</name>
@@ -1881,7 +1887,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="965" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="965" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="969" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="969" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1afd54025f38ebd9a069a768c74da6d80a" prot="public" static="no">
         <name>WHD_WLAN_BADLEN</name>
@@ -1893,7 +1899,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="966" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="966" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="970" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="970" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7811e88b62f2f8b51d6818c05325fda9" prot="public" static="no">
         <name>WHD_WLAN_NOTREADY</name>
@@ -1905,7 +1911,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="967" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="967" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="971" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="971" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1abb313ccaa4a5cb84f6d14affad96a300" prot="public" static="no">
         <name>WHD_WLAN_EPERM</name>
@@ -1917,7 +1923,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="968" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="968" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="972" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="972" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a9ed1ef0145feb5c599c0ffe521cf7016" prot="public" static="no">
         <name>WHD_WLAN_NOMEM</name>
@@ -1929,7 +1935,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="969" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="969" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="973" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="973" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1afa0df2e6c420b3d8bef2baf60d2addea" prot="public" static="no">
         <name>WHD_WLAN_ASSOCIATED</name>
@@ -1941,7 +1947,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="970" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="970" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="974" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="974" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a10597a7175433ccd2c519babf24d50ce" prot="public" static="no">
         <name>WHD_WLAN_RANGE</name>
@@ -1953,7 +1959,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="971" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="971" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="975" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="975" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ae98f0303ab1877e4e4cda0dd803d6383" prot="public" static="no">
         <name>WHD_WLAN_NOTFOUND</name>
@@ -1965,7 +1971,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="972" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="972" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="976" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="976" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a34acd1ff790f822872ed736945f683ab" prot="public" static="no">
         <name>WHD_WLAN_WME_NOT_ENABLED</name>
@@ -1977,7 +1983,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="973" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="973" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="977" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="977" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a28b3339dce5b5c2044c5875d6902e964" prot="public" static="no">
         <name>WHD_WLAN_TSPEC_NOTFOUND</name>
@@ -1989,7 +1995,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="974" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="974" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="978" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="978" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a0ed279e8ccaefdcb4347649c08591280" prot="public" static="no">
         <name>WHD_WLAN_ACM_NOTSUPPORTED</name>
@@ -2001,7 +2007,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="975" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="975" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="979" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="979" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7a72b67344e174d59d9da91884500c1a" prot="public" static="no">
         <name>WHD_WLAN_NOT_WME_ASSOCIATION</name>
@@ -2013,7 +2019,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="976" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="976" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="980" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="980" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a634bebec2a4dba9371c7c0168cf9c081" prot="public" static="no">
         <name>WHD_WLAN_SDIO_ERROR</name>
@@ -2025,7 +2031,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="977" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="977" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="981" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="981" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a2ab103bac375d60d8ae2d942b324376e" prot="public" static="no">
         <name>WHD_WLAN_WLAN_DOWN</name>
@@ -2037,7 +2043,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="978" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="978" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="982" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="982" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ad06624a14de68f3ceb4464bc2c38ab97" prot="public" static="no">
         <name>WHD_WLAN_BAD_VERSION</name>
@@ -2049,7 +2055,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="979" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="979" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="983" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="983" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1afd4b4619382d94a5e5fa9675bd92f802" prot="public" static="no">
         <name>WHD_WLAN_TXFAIL</name>
@@ -2061,7 +2067,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="980" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="980" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="984" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="984" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aaa963717ba6115b3a909f7162436c919" prot="public" static="no">
         <name>WHD_WLAN_RXFAIL</name>
@@ -2073,7 +2079,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="981" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="981" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="985" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="985" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a0d1ab8d1ea6eb43f00a2a7a55a67016f" prot="public" static="no">
         <name>WHD_WLAN_NODEVICE</name>
@@ -2085,7 +2091,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="982" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="982" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="986" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="986" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4fa6337820d22f0cfa922f27bbf50250" prot="public" static="no">
         <name>WHD_WLAN_UNFINISHED</name>
@@ -2097,7 +2103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="983" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="983" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="987" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="987" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1aecc3e43dc3a59b8d6f452d6a2972c3f8" prot="public" static="no">
         <name>WHD_WLAN_NONRESIDENT</name>
@@ -2109,7 +2115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="984" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="984" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="988" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="988" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ae42dbb304386a4e16435d6fbbf1e5c55" prot="public" static="no">
         <name>WHD_WLAN_DISABLED</name>
@@ -2121,7 +2127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="985" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="985" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="989" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="989" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a4e2fb5743b973f4d26dfa641ce7a7d16" prot="public" static="no">
         <name>WHD_WLAN_NOFUNCTION</name>
@@ -2133,7 +2139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="986" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="986" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="990" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="990" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a03251fa1c42118f23bfb5e8377e2ed3d" prot="public" static="no">
         <name>WHD_WLAN_INVALID</name>
@@ -2145,7 +2151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="987" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="987" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="991" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="991" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1ae528496ed94368d53b938f40aa8f089b" prot="public" static="no">
         <name>WHD_WLAN_NOBAND</name>
@@ -2157,7 +2163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="988" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="988" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="992" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="992" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a7d8ed7e88b85772d09799ca87a27370d" prot="public" static="no">
         <name>PORT_FILTER_LEN</name>
@@ -2169,7 +2175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1256" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1256" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1260" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1260" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a1905b69d7646a2d2e21da7042bd14374" prot="public" static="no">
         <name>PACKET_FILTER_LIST_BUFFER_MAX_LEN</name>
@@ -2181,7 +2187,84 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1257" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1257" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1261" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1ac77184f45ce08103f9e9a90536d91f8e" prot="public" static="no">
+        <name>TLS_MAX_KEY_LENGTH</name>
+        <initializer>48</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1292" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1292" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1ae3b229c8e14e30716b23f9fea8c2bebe" prot="public" static="no">
+        <name>TLS_MAX_MAC_KEY_LENGTH</name>
+        <initializer>32</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1293" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1adf30d64da245c7bbab46db8654532fd6" prot="public" static="no">
+        <name>TLS_MAX_IV_LENGTH</name>
+        <initializer>32</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1294" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1a357a4e54c0527d53aafc0ad4e9b4bcd3" prot="public" static="no">
+        <name>TLS_MAX_SEQUENCE_LENGTH</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1295" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1295" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1a8d2c7a910b261553c7ad3e5e9467450d" prot="public" static="no">
+        <name>TLS_MAX_PAYLOAD_LEN</name>
+        <initializer>1024</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1296" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1abf4fcaacb1ad2010711b7c880ec2ed20" prot="public" static="no">
+        <name>ETHER_ADDR_LEN</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1349" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1349" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="whd__types_8h_1a9b265aeade41d30d1aa2a7ff81185450" prot="public" static="no">
+        <name>IPV4_ADDR_LEN</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1350" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1350" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="whd__types_8h_1a3e98ad24780d89cefbec71da9fac2da6" prot="public" static="no">
         <name>TKO_DATA_OFFSET</name>
@@ -2193,7 +2276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1281" column="9" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1281" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1389" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1389" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">
@@ -2225,7 +2308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="184" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="183" bodyend="187"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="188" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="187" bodyend="191"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" prot="public" static="no" strong="no">
         <type></type>
@@ -2255,7 +2338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="193" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="192" bodyend="196"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="197" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="196" bodyend="200"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1afc8e8073d434bf124933526a8184313a" prot="public" static="no" strong="no">
         <type></type>
@@ -2283,7 +2366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="203" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="202" bodyend="207"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="207" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="206" bodyend="211"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" prot="public" static="no" strong="no">
         <type></type>
@@ -2530,7 +2613,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="213" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="212" bodyend="245"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="217" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="216" bodyend="249"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1af7ac1b0be4ce67f3e82b876c2f27fd3a" prot="public" static="no" strong="no">
         <type></type>
@@ -2587,7 +2670,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="251" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="250" bodyend="257"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="255" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="254" bodyend="261"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a3070614a06a8989b9eb207e9f1286c5f" prot="public" static="no" strong="no">
         <type></type>
@@ -2645,7 +2728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="263" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="262" bodyend="270"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="267" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="266" bodyend="274"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85" prot="public" static="no" strong="no">
         <type></type>
@@ -2684,7 +2767,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="276" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="275" bodyend="280"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="280" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="279" bodyend="284"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a8be1026494a86f0ceeebb2dcbf092cbd" prot="public" static="no" strong="no">
         <type></type>
@@ -2712,7 +2795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="286" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="285" bodyend="289"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="290" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="289" bodyend="293"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a98ac1a2590358bafac6a2da287034638" prot="public" static="no" strong="no">
         <type></type>
@@ -2740,7 +2823,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="296" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="295" bodyend="299"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="300" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="299" bodyend="303"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a34d5a5749a0bcc00b7249108a8670ada" prot="public" static="no" strong="no">
         <type></type>
@@ -2776,7 +2859,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="305" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="304" bodyend="309"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="309" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="308" bodyend="313"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a853c6ba0cbd32dd7ec37dac9f8ccbfa7" prot="public" static="no" strong="no">
         <type></type>
@@ -2804,7 +2887,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="315" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="314" bodyend="318"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="319" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="318" bodyend="322"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a4bb9a3034dfb9a44507ef6201842edb7" prot="public" static="no" strong="no">
         <type></type>
@@ -2843,7 +2926,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="334" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="333" bodyend="338"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="338" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="337" bodyend="342"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a06fc87d81c62e9abb8790b6e5713c55b" prot="public" static="no" strong="no">
         <type></type>
@@ -2880,7 +2963,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="344" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="343" bodyend="348"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="348" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="347" bodyend="352"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1aaf3febc3b0392a63822949dc85ed1b0c" prot="public" static="no" strong="no">
         <type></type>
@@ -2980,7 +3063,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="355" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="354" bodyend="368"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="359" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="358" bodyend="372"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a316541b19d3e8071b691a4baccbb17c8" prot="public" static="no" strong="no">
         <type></type>
@@ -3088,7 +3171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="374" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="373" bodyend="388"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="378" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="377" bodyend="392"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a9911a5f34d75551d1c25fa68396eafc4" prot="public" static="no" strong="no">
         <type></type>
@@ -3150,7 +3233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="394" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="393" bodyend="402"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="398" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="397" bodyend="406"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1adc3a23bad78e0110546c9edc00456daf" prot="public" static="no" strong="no">
         <type></type>
@@ -3207,7 +3290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="408" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="407" bodyend="415"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="412" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="411" bodyend="419"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a6158197f83b368e63fa825eb34602dcd" prot="public" static="no" strong="no">
         <type></type>
@@ -3249,7 +3332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="421" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="420" bodyend="426"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="425" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="424" bodyend="430"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a71ad9330854aaa61a7433a165fd57683" prot="public" static="no" strong="no">
         <type></type>
@@ -3297,7 +3380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="432" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="431" bodyend="437"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="436" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="435" bodyend="441"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a5adb0953a8527552bc47001673830602" prot="public" static="no" strong="no">
         <type></type>
@@ -5442,7 +5525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="508" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="507" bodyend="746"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="512" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="511" bodyend="750"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a07b4f24f4e2abacc45a9ad29f008488f" prot="public" static="no" strong="no">
         <type></type>
@@ -5527,7 +5610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1222" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1221" bodyend="1233"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1226" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1225" bodyend="1237"/>
       </memberdef>
       <memberdef kind="enum" id="whd__types_8h_1a36b806b9b0e986bf290ae005d1bae038" prot="public" static="no" strong="no">
         <type></type>
@@ -5557,7 +5640,243 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1262" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1261" bodyend="1265"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1266" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1265" bodyend="1269"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1a9ad384ba9e695b2b61e368a070c5f011" prot="public" static="no" strong="no">
+        <type></type>
+        <name>wl_wowl_tls_mode</name>
+        <enumvalue id="whd__types_8h_1a9ad384ba9e695b2b61e368a070c5f011af6056815bbb2859a1b1eff647a63546c" prot="public">
+          <name>TLS_MODE_SSWOWL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1a9ad384ba9e695b2b61e368a070c5f011a8e56b9be2f504a8072882dd93596e75b" prot="public">
+          <name>TLS_MODE_MIWOWL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1299" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1299" bodyend="1302"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1a3040f524f7553a65d16cf6be8437ddc7" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Cipher_Suite_e</name>
+        <enumvalue id="whd__types_8h_1a3040f524f7553a65d16cf6be8437ddc7a66dbf1044b4f0573224f873645406ea5" prot="public">
+          <name>TLS_RSA_WITH_AES_128_CBC_SHA</name>
+          <initializer>=     0x002F</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1a3040f524f7553a65d16cf6be8437ddc7aea3afe3c79d6c2ada7b303f03e77f642" prot="public">
+          <name>TLS_RSA_WITH_AES_256_CBC_SHA</name>
+          <initializer>=     0x0035</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1305" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1305" bodyend="1308"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1ae875757e75f87beb4dc6cd1e6e7c1906" prot="public" static="no" strong="no">
+        <type></type>
+        <name>ContentType_e</name>
+        <enumvalue id="whd__types_8h_1ae875757e75f87beb4dc6cd1e6e7c1906a4cd7b5c49f067abab8b6cd91413f1949" prot="public">
+          <name>CONTENTTYPE_CHANGE_CIPHER_SPEC</name>
+          <initializer>= 20</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ae875757e75f87beb4dc6cd1e6e7c1906aa5cb11d64703692eed9dec35eb1fe70c" prot="public">
+          <name>CONTENTTYPE_ALERT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ae875757e75f87beb4dc6cd1e6e7c1906ad9b4426cabd8f511d8c4b1fb3862533a" prot="public">
+          <name>CONTENTTYPE_HANDSHAKE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ae875757e75f87beb4dc6cd1e6e7c1906a36c396102b8cc99f90b04e74c092697d" prot="public">
+          <name>CONTENTTYPE_APPLICATION_DATA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1310" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1310" bodyend="1315"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1a5e8b49805f566933f981f078e601fcee" prot="public" static="no" strong="no">
+        <type></type>
+        <name>CompressionMethod_e</name>
+        <enumvalue id="whd__types_8h_1a5e8b49805f566933f981f078e601fceeacfc4df5339914a17dc5d76b526f0854d" prot="public">
+          <name>COMPRESSIONMETHOD_NULL</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1317" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1317" bodyend="1319"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1a9066e1495564559b4ca3c134970142e6" prot="public" static="no" strong="no">
+        <type></type>
+        <name>BulkCipherAlgorithm_e</name>
+        <enumvalue id="whd__types_8h_1a9066e1495564559b4ca3c134970142e6a56c826f95d3d30328a27953cd06518b0" prot="public">
+          <name>BULKCIPHERALGORITHM_NULL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1a9066e1495564559b4ca3c134970142e6a3e966d505f1035d00b3b5eb1e2f73e1a" prot="public">
+          <name>BULKCIPHERALGORITHM_RC4</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1a9066e1495564559b4ca3c134970142e6ab0f4654db8ed8e936df3f844c3ac1024" prot="public">
+          <name>BULKCIPHERALGORITHM_3DES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1a9066e1495564559b4ca3c134970142e6afd8db7dcc2d3a62e54e3826948328cbe" prot="public">
+          <name>BULKCIPHERALGORITHM_AES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1321" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1321" bodyend="1326"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1ac52be85a7ad91ecb928dcfb732b6d14c" prot="public" static="no" strong="no">
+        <type></type>
+        <name>CipherType_e</name>
+        <enumvalue id="whd__types_8h_1ac52be85a7ad91ecb928dcfb732b6d14ca5e09caa75c6a5c4dbe482dfb91bcbd07" prot="public">
+          <name>CIPHERTYPE_STREAM</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac52be85a7ad91ecb928dcfb732b6d14ca08ab86c387d080d3cb1580e96a5b1347" prot="public">
+          <name>CIPHERTYPE_BLOCK</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac52be85a7ad91ecb928dcfb732b6d14cad84ad513081aac6e64adc4ae0f7362cd" prot="public">
+          <name>CIPHERTYPE_AEAD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1328" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1328" bodyend="1332"/>
+      </memberdef>
+      <memberdef kind="enum" id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600" prot="public" static="no" strong="no">
+        <type></type>
+        <name>MACAlgorithm_e</name>
+        <enumvalue id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600a6a8191398cb0c2eaff4d504574cdf0f9" prot="public">
+          <name>MACALGORITHM_NULL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600ae5ebf495142c88e47d4e929e981d0c15" prot="public">
+          <name>MACALGORITHM_HMAC_MD5</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600a0172afda5f837ec4ce868cf3b58c0dde" prot="public">
+          <name>MACALGORITHM_HMAC_SHA1</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600a49b099e93514708ea20697b22d784a81" prot="public">
+          <name>MACALGORITHM_HMAC_SHA256</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600a1abd468efda0645365eeaf638d01453c" prot="public">
+          <name>MACALGORITHM_HMAC_SHA384</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="whd__types_8h_1ac08866e9f3cd6a146a46d3368a449600abe7a48b5cb3b031c4edc59be08dc84ab" prot="public">
+          <name>MACALGORITHM_HMAC_SHA512</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1334" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1334" bodyend="1341"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
@@ -5573,7 +5892,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="778" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="782" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1ab30a697b3ebbf2007dc09194b54b1a1b" prot="public" static="no">
         <type>struct <ref refid="structwhd__simple__scan__result" kindref="compound">whd_simple_scan_result</ref></type>
@@ -5587,7 +5906,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="791" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="795" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1ac2f5aa33ad4da263645133854e489c76" prot="public" static="no">
         <type>uint16_t</type>
@@ -5601,7 +5920,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="793" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="793" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="797" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="797" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a92c6377f96c792ee4d94bb36b7777ea6" prot="public" static="no">
         <type>struct <ref refid="structwl__bss__info__struct" kindref="compound">wl_bss_info_struct</ref></type>
@@ -5616,7 +5935,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="839" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="843" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" prot="public" static="no">
         <type>uint32_t</type>
@@ -5630,7 +5949,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="854" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="854" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="858" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="858" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a0767ab3fb805f164a11b58473c308053" prot="public" static="no">
         <type>whd_buffer_t</type>
@@ -5644,7 +5963,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="993" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="993" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="997" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="997" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1ab850fbf60dfa93cd732f4e36a1e134cf" prot="public" static="no">
         <type>struct <ref refid="structwhd__ap__info" kindref="compound">whd_ap_info</ref></type>
@@ -5658,7 +5977,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1011" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1015" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a41a5921cae8749f8c7b96f216ff318a3" prot="public" static="no">
         <type>struct <ref refid="struct__pmkid" kindref="compound">_pmkid</ref></type>
@@ -5672,7 +5991,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1031" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1035" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a7fd1ad2146ecc43341e64fda630f2d9d" prot="public" static="no">
         <type>struct <ref refid="struct__pmkid__list" kindref="compound">_pmkid_list</ref></type>
@@ -5685,7 +6004,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1037" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1041" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a30e2e99a6c6f124f4f7a200e31f7a8cc" prot="public" static="no">
         <type>struct <ref refid="structwhd__auth__req__status" kindref="compound">whd_auth_req_status</ref></type>
@@ -5699,7 +6018,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1050" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1054" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1aaf5901182e9ac5462ba6d4ada56e54d0" prot="public" static="no">
         <type>uint32_t</type>
@@ -5713,7 +6032,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1055" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" bodystart="1055" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1059" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1059" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a8f2ad68c18064e7129ad1828429f4b08" prot="public" static="no">
         <type>struct <ref refid="structwhd__auth__params" kindref="compound">whd_auth_params</ref></type>
@@ -5727,7 +6046,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1081" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1085" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1ac07b13dcb5ec0e66a707dcf8a539c97e" prot="public" static="no">
         <type>struct <ref refid="structwhd__oob__config" kindref="compound">whd_oob_config</ref></type>
@@ -5741,7 +6060,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1177" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1181" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a2b3fb82834e1fbcbbf1f51e83c675edd" prot="public" static="no">
         <type>struct <ref refid="structwhd__sdio__config" kindref="compound">whd_sdio_config</ref></type>
@@ -5755,7 +6074,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1188" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1192" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a2f5c5d3c7f74ce9a86595fe220c860d3" prot="public" static="no">
         <type>struct <ref refid="structwhd__spi__config" kindref="compound">whd_spi_config</ref></type>
@@ -5769,7 +6088,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1198" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1202" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1ab5fa3b42c3b6290fc944c79deb812c8c" prot="public" static="no">
         <type>struct <ref refid="structwhd__m2m__config" kindref="compound">whd_m2m_config</ref></type>
@@ -5783,7 +6102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1207" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1211" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a6731d1e828d8be24f5af1972b48a7a48" prot="public" static="no">
         <type>struct <ref refid="structwhd__oci__config" kindref="compound">whd_oci_config</ref></type>
@@ -5797,7 +6116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1216" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1220" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a98dae084aa15394bf6f8e907e09233a4" prot="public" static="no">
         <type>struct <ref refid="structwhd__btc__lescan__params" kindref="compound">whd_btc_lescan_params</ref></type>
@@ -5811,7 +6130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1246" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1250" column="1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd__types_8h_1a1cb4da9972e0e9317a6e26e2fd460902" prot="public" static="no">
         <type>struct <ref refid="structwhd__coex__config" kindref="compound">whd_coex_config</ref></type>
@@ -5825,7 +6144,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h" line="1254" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1258" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd__types_8h_1a733f6dc9b3c9802913f09b358ef21371" prot="public" static="no">
+        <type>struct <ref refid="structwhd__keep__alive" kindref="compound">whd_keep_alive</ref></type>
+        <definition>typedef struct whd_keep_alive  whd_keep_alive_t</definition>
+        <argsstring></argsstring>
+        <name>whd_keep_alive_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1290" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="whd__types_8h_1a7bfec7a13f301130457694318eb25bd9" prot="public" static="no">
+        <type>enum wl_wowl_tls_mode</type>
+        <definition>typedef enum wl_wowl_tls_mode  wl_wowl_tls_mode_t</definition>
+        <argsstring></argsstring>
+        <name>wl_wowl_tls_mode_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1302" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -5833,6 +6178,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_types.h"/>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h"/>
   </compounddef>
 </doxygen>

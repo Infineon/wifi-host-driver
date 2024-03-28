@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -183,7 +183,7 @@ static void *whd_handle_apsta_event(whd_interface_t ifp, const whd_event_header_
 }
 
 /* All chips */
-uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type,
+whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type,
                           const uint8_t *security_key, uint8_t key_length, uint16_t chanspec)
 {
     whd_driver_t whd_driver;
@@ -479,44 +479,48 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
     }
     else
     {
+        wsec_pmk_t *psk;
+
+        /* Set the wpa auth */
+        data =
+            (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, (uint16_t)8, "bsscfg:" IOVAR_STR_WPA_AUTH);
+        CHECK_IOCTL_BUFFER_WITH_SEMAPHORE(data, &ap->whd_wifi_sleep_flag);
+        if ( (wlan_chip_id == 43340) || (wlan_chip_id == 43342) )
+        {
+            data[0] = htod32( (uint32_t)CHIP_AP_INTERFACE );
+        }
+        else
+        {
+            data[0] = htod32(bss_index);
+        }
+	if (auth_type == WHD_SECURITY_OPEN)
+        {
+            data[1] = WHD_SECURITY_OPEN;
+        }
+        else if ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) )
+        {
+            data[1] =
+                htod32( (uint32_t)( (auth_type ==
+                                     WHD_SECURITY_WPA3_SAE) ? (WPA3_AUTH_SAE_PSK) : (WPA3_AUTH_SAE_PSK |
+                                                                                     WPA2_AUTH_PSK) ) );
+        }
+        else
+        {
+            data[1] =
+                htod32( (uint32_t)(auth_type ==
+                                   WHD_SECURITY_WPA_TKIP_PSK) ? (WPA_AUTH_PSK) : (WPA2_AUTH_PSK | WPA_AUTH_PSK) );
+        }
+        if ( (wlan_chip_id == 43340) || (wlan_chip_id == 43342) )
+        {
+            CHECK_RETURN_WITH_SEMAPHORE(whd_proto_set_iovar(ifp, buffer, 0), &ap->whd_wifi_sleep_flag);
+        }
+        else
+        {
+            CHECK_RETURN_WITH_SEMAPHORE(whd_proto_set_iovar(prim_ifp, buffer, 0),
+                                        &ap->whd_wifi_sleep_flag);
+        }
         if (auth_type != WHD_SECURITY_OPEN)
         {
-            wsec_pmk_t *psk;
-
-            /* Set the wpa auth */
-            data =
-                (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, (uint16_t)8, "bsscfg:" IOVAR_STR_WPA_AUTH);
-            CHECK_IOCTL_BUFFER_WITH_SEMAPHORE(data, &ap->whd_wifi_sleep_flag);
-            if ( (wlan_chip_id == 43340) || (wlan_chip_id == 43342) )
-            {
-                data[0] = htod32( (uint32_t)CHIP_AP_INTERFACE );
-            }
-            else
-            {
-                data[0] = htod32(bss_index);
-            }
-            if ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) )
-            {
-                data[1] =
-                    htod32( (uint32_t)( (auth_type ==
-                                         WHD_SECURITY_WPA3_SAE) ? (WPA3_AUTH_SAE_PSK) : (WPA3_AUTH_SAE_PSK |
-                                                                                         WPA2_AUTH_PSK) ) );
-            }
-            else
-            {
-                data[1] =
-                    htod32( (uint32_t)(auth_type ==
-                                       WHD_SECURITY_WPA_TKIP_PSK) ? (WPA_AUTH_PSK) : (WPA2_AUTH_PSK | WPA_AUTH_PSK) );
-            }
-            if ( (wlan_chip_id == 43340) || (wlan_chip_id == 43342) )
-            {
-                CHECK_RETURN_WITH_SEMAPHORE(whd_proto_set_iovar(ifp, buffer, 0), &ap->whd_wifi_sleep_flag);
-            }
-            else
-            {
-                CHECK_RETURN_WITH_SEMAPHORE(whd_proto_set_iovar(prim_ifp, buffer, 0),
-                                            &ap->whd_wifi_sleep_flag);
-            }
             if ( (auth_type == WHD_SECURITY_WPA3_SAE) && (whd_driver->chip_info.fwcap_flags & (1 << WHD_FWCAP_SAE) ) )
             {
                 whd_wifi_sae_password(ifp, security_key, key_length);
@@ -574,7 +578,7 @@ uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t 
     return WHD_SUCCESS;
 }
 
-uint32_t whd_wifi_start_ap(whd_interface_t ifp)
+whd_result_t whd_wifi_start_ap(whd_interface_t ifp)
 {
     whd_buffer_t buffer;
     uint32_t *data;
@@ -612,7 +616,7 @@ uint32_t whd_wifi_start_ap(whd_interface_t ifp)
     return WHD_SUCCESS;
 }
 
-uint32_t whd_wifi_stop_ap(whd_interface_t ifp)
+whd_result_t whd_wifi_stop_ap(whd_interface_t ifp)
 {
     uint32_t *data;
     whd_buffer_t buffer;

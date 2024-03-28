@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,7 +71,7 @@
 #define WLAN_SHARED_VERSION         (0x0003)
 #define WPRINT_WHD_DEBUG_DS(args) WPRINT_WHD_DEBUG(args)
 
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
 #define WAKE_FROM_UCODE_TIMEOUT_MS     (5000) //5000 ms
 #define WAKE_FROM_UCODE_TIMEOUT_LOOPS  (100)
 #define WAKE_FROM_UCODE_CHECK_PER_LOOP (WAKE_FROM_UCODE_TIMEOUT_MS/WAKE_FROM_UCODE_TIMEOUT_LOOPS) //50 ms
@@ -939,7 +939,7 @@ whd_result_t whd_wifi_read_wlan_log(whd_driver_t whd_driver, char *buffer, uint3
 
 }
 
-uint32_t whd_wifi_print_whd_log(whd_driver_t whd_driver)
+whd_result_t whd_wifi_print_whd_log(whd_driver_t whd_driver)
 {
     whd_result_t result;
     char *buffer = NULL;
@@ -1415,7 +1415,7 @@ void whd_wlan_wake_from_host(whd_driver_t whd_driver)
     }
     WPRINT_WHD_DEBUG( ("%s: %d:after: maccontrol: 0x%08x\n", __FUNCTION__, __LINE__, (unsigned int)val32) );
 }
-#ifndef ULP_SUPPORT
+#ifndef CYCFG_ULP_SUPPORT_ENABLED
 whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t wake_from_firmware,
                                            uint32_t wake_event_indication_addr, uint32_t wake_indication_addr,
                                            uint32_t sdio_control_addr)
@@ -1818,4 +1818,4 @@ whd_result_t whd_ensure_wlan_bus_not_in_deep_sleep(whd_driver_t whd_driver)
     return WHD_TRUE;
 }
 
-#endif /* ULP_SUPPORT */
+#endif /* CYCFG_ULP_SUPPORT_ENABLED */

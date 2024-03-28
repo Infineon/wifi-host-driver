@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="224" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="224" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="227" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="227" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group__wifijoin_1ga2604c8dec9eff39e79b3281496da2611" prot="public" static="no">
         <type>void(*</type>
@@ -55,7 +55,7 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>result_prt</parametername>
+<parametername>result_ptr</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>A pointer to the pointer that indicates where to put the auth result </para>
@@ -98,13 +98,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="302" column="1" bodyfile="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="302" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="305" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="305" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__wifijoin_1ga2752d761f639411027fffa67038d8a61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_scan_synch</definition>
+      <memberdef kind="function" id="group__wifijoin_1gad89b3244a31c2ed9122d266b7f99def0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_scan_synch</definition>
         <argsstring>(whd_interface_t ifp, whd_sync_scan_result_t *scan_result, uint32_t *count)</argsstring>
         <name>whd_wifi_scan_synch</name>
         <param>
@@ -123,7 +123,7 @@
 <para>Initiates a scan to search for 802.11 networks. </para>
         </briefdescription>
         <detaileddescription>
-<para>This functions returns the scan results with limited sets of parameter in a buffer provided by the caller. It is also a blocking call. It is an simplified version of the <ref refid="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" kindref="member">whd_wifi_scan()</ref>.</para>
+<para>This functions returns the scan results with limited sets of parameter in a buffer provided by the caller. It is also a blocking call. It is an simplified version of the <ref refid="group__wifijoin_1ga253707d44ba49bb46256b38c1c1a204e" kindref="member">whd_wifi_scan()</ref>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>ifp</parametername>
@@ -157,11 +157,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="239" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="242" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1ga82d8c980d15acf0e6e18b56423f4e52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_scan</definition>
+      <memberdef kind="function" id="group__wifijoin_1ga253707d44ba49bb46256b38c1c1a204e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_scan</definition>
         <argsstring>(whd_interface_t ifp, whd_scan_type_t scan_type, whd_bss_type_t bss_type, const whd_ssid_t *optional_ssid, const whd_mac_t *optional_mac, const uint16_t *optional_channel_list, const whd_scan_extended_params_t *optional_extended_params, whd_scan_result_callback_t callback, whd_scan_result_t *result_ptr, void *user_data)</argsstring>
         <name>whd_wifi_scan</name>
         <param>
@@ -302,11 +302,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="274" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="277" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1gacf8632bb68cef4d831083a66bee7b8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_stop_scan</definition>
+      <memberdef kind="function" id="group__wifijoin_1ga1b67138e3689fb66ce526810ed188f4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_stop_scan</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_stop_scan</name>
         <param>
@@ -332,11 +332,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="291" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="294" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1ga58ef7de14079c4b2b879e786a5e15c24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_external_auth_request</definition>
+      <memberdef kind="function" id="group__wifijoin_1ga7a393cc47dd501a2bf00d4a0d305dd6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_external_auth_request</definition>
         <argsstring>(whd_interface_t ifp, whd_auth_result_callback_t callback, void *result_ptr, void *user_data)</argsstring>
         <name>whd_wifi_external_auth_request</name>
         <param>
@@ -378,7 +378,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>data</parametername>
+<parametername>result_ptr</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Pointer to a pointer to a result storage structure. </para>
@@ -404,11 +404,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="323" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="326" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1gab5bc462251b6849ebd8e708a2560066d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_stop_external_auth_request</definition>
+      <memberdef kind="function" id="group__wifijoin_1gaf24ce3dea8e8e0d61f5ee82e2429b1b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_stop_external_auth_request</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_stop_external_auth_request</name>
         <param>
@@ -434,11 +434,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="333" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="336" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1gac767814ae445f735b51686db20c780be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_join</definition>
+      <memberdef kind="function" id="group__wifijoin_1gafde10c6bc61306ec3292a0aede919baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_join</definition>
         <argsstring>(whd_interface_t ifp, const whd_ssid_t *ssid, whd_security_t auth_type, const uint8_t *security_key, uint8_t key_length)</argsstring>
         <name>whd_wifi_join</name>
         <param>
@@ -515,11 +515,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="351" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="354" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1gae41c4ab0b2f3ecc433a6c4e89238b066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_join_specific</definition>
+      <memberdef kind="function" id="group__wifijoin_1ga149e2de0e902c6f7de181c65f93dff3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_join_specific</definition>
         <argsstring>(whd_interface_t ifp, const whd_scan_result_t *ap, const uint8_t *security_key, uint8_t key_length)</argsstring>
         <name>whd_wifi_join_specific</name>
         <param>
@@ -582,11 +582,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="369" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="372" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1ga99f5e49ef124d6522fb5290c913cd838" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_set_chanspec</definition>
+      <memberdef kind="function" id="group__wifijoin_1gab76c5c1b2c85ba90657b0fe249fc8ebd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_set_chanspec</definition>
         <argsstring>(whd_interface_t ifp, wl_chanspec_t chanspec)</argsstring>
         <name>whd_wifi_set_chanspec</name>
         <param>
@@ -626,11 +626,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="383" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="386" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifijoin_1ga971ed7d8e459c715aa9bf3c52b563d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_leave</definition>
+      <memberdef kind="function" id="group__wifijoin_1gaf5c47285f84de334d0991e092c903153" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_leave</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_leave</name>
         <param>
@@ -657,7 +657,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="627" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="653" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

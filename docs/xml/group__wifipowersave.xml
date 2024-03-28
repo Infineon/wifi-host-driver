@@ -4,9 +4,9 @@
     <compoundname>wifipowersave</compoundname>
     <title>WHD Wi-Fi Power Save API</title>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__wifipowersave_1ga05cfafe07ad2c208acfdee29f7c6e626" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_enable_powersave</definition>
+      <memberdef kind="function" id="group__wifipowersave_1ga3ae04a5a5f1def6b9a5f058906ad2332" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_enable_powersave</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_enable_powersave</name>
         <param>
@@ -33,11 +33,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="781" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="807" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifipowersave_1ga6152d966f454fe8e8836472b802401c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_enable_powersave_with_throughput</definition>
+      <memberdef kind="function" id="group__wifipowersave_1gaa1c30fb7db2b0e8a974102c5f025ff78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_enable_powersave_with_throughput</definition>
         <argsstring>(whd_interface_t ifp, uint16_t return_to_sleep_delay)</argsstring>
         <name>whd_wifi_enable_powersave_with_throughput</name>
         <param>
@@ -77,11 +77,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="801" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="827" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifipowersave_1ga3eed267d42020440a077d7649cde0567" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_get_powersave_mode</definition>
+      <memberdef kind="function" id="group__wifipowersave_1ga25f625bcd458f724fb11549d79f2e9d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_get_powersave_mode</definition>
         <argsstring>(whd_interface_t ifp, uint32_t *value)</argsstring>
         <name>whd_wifi_get_powersave_mode</name>
         <param>
@@ -119,11 +119,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="811" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="837" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifipowersave_1gab9af7ef8dac544f2bb8871259f85c437" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_disable_powersave</definition>
+      <memberdef kind="function" id="group__wifipowersave_1gab2c005a9374d05aae2b51f800b4c9644" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_disable_powersave</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_disable_powersave</name>
         <param>
@@ -149,11 +149,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="821" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="847" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifipowersave_1gad299c0905cb70379e2f483a5aad1327f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_config_ulp_mode</definition>
+      <memberdef kind="function" id="group__wifipowersave_1ga389db8a1c10c4662d55bb889036965b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_config_ulp_mode</definition>
         <argsstring>(whd_interface_t ifp, uint32_t *mode, uint32_t *wait_time)</argsstring>
         <name>whd_wifi_config_ulp_mode</name>
         <param>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="835" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="861" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

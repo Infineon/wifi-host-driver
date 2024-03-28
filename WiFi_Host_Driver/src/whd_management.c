@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -138,12 +138,12 @@ whd_result_t whd_add_primary_interface(whd_driver_t whd_driver, whd_interface_t 
     return whd_add_interface(whd_driver, 0, 0, "wlan0", NULL, ifpp);
 }
 
-uint32_t whd_add_secondary_interface(whd_driver_t whd_driver, whd_mac_t *mac_addr, whd_interface_t *ifpp)
+whd_result_t whd_add_secondary_interface(whd_driver_t whd_driver, whd_mac_t *mac_addr, whd_interface_t *ifpp)
 {
     return whd_add_interface(whd_driver, 1, 1, "wlan1", mac_addr, ifpp);
 }
 
-uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_config,
+whd_result_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_config,
                   whd_resource_source_t *resource_ops, whd_buffer_funcs_t *buffer_ops,
                   whd_netif_funcs_t *network_ops)
 {
@@ -195,7 +195,7 @@ uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_conf
     return WHD_SUCCESS;
 }
 
-uint32_t whd_deinit(whd_interface_t ifp)
+whd_result_t whd_deinit(whd_interface_t ifp)
 {
     uint8_t i;
     whd_driver_t whd_driver;
@@ -301,7 +301,7 @@ whd_result_t whd_management_wifi_platform_init(whd_driver_t whd_driver, whd_coun
  *
  * @return WHD_SUCCESS if initialization is successful, error code otherwise
  */
-uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
+whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
 {
     wl_country_t *country_struct;
     uint32_t *ptr;
@@ -516,7 +516,7 @@ uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
         whd_wifi_enable_powersave_with_throughput(ifp, DEFAULT_PM2_SLEEP_RET_TIME);
     }
 
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
     /* Configuring OOB mode in fw */
     if(wlan_chip_id == 43022)
     {
@@ -556,7 +556,7 @@ uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
  *
  * @return WHD_SUCCESS if deinitialization is successful, error code otherwise
  */
-uint32_t whd_wifi_off(whd_interface_t ifp)
+whd_result_t whd_wifi_off(whd_interface_t ifp)
 {
     whd_result_t retval;
     whd_driver_t whd_driver;

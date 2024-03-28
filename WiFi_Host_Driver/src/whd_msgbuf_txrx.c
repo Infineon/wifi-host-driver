@@ -1085,7 +1085,7 @@ void whd_msgbuf_delete_flowring(struct whd_driver *drvr, uint16_t flowid)
     }
 }
 
-static uint32_t whd_msgbuf_txflow_reinsert(struct whd_flowring *flow, uint16_t flowid,
+static whd_result_t whd_msgbuf_txflow_reinsert(struct whd_flowring *flow, uint16_t flowid,
                                            whd_buffer_t skb)
 {
     struct whd_flowring_ring *ring = flow->rings[flowid];
@@ -1533,7 +1533,7 @@ whd_result_t whd_msgbuf_tx_queue_data(whd_interface_t ifp, whd_buffer_t buffer)
     return WHD_SUCCESS;
 }
 
-static uint32_t whd_msgbuf_rxbuf_data_post(struct whd_msgbuf *msgbuf, uint32_t count)
+static whd_result_t whd_msgbuf_rxbuf_data_post(struct whd_msgbuf *msgbuf, uint32_t count)
 {
     struct whd_driver *drvr = msgbuf->drvr;
     struct whd_commonring *commonring;
@@ -1801,7 +1801,7 @@ static void whd_msgbuf_detach(struct whd_driver *whd_driver)
     }
 }
 
-static uint32_t whd_msgbuf_attach(struct whd_driver *whd_driver)
+static whd_result_t whd_msgbuf_attach(struct whd_driver *whd_driver)
 {
     struct whd_msgbuf *msgbuf;
     struct whd_commonring **flowrings = NULL;

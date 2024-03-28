@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +50,10 @@
 
 #ifdef DM_43022C1
 #include "resources.h"
+#endif
+
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
+#include "cy_network_mw_core.h"
 #endif
 
 /******************************************************
@@ -142,7 +146,7 @@ static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
 *             Global Function definitions
 ******************************************************/
 
-uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdio_config, cyhal_sdio_t *sdio_obj)
+whd_result_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdio_config, cyhal_sdio_t *sdio_obj)
 {
     struct whd_bus_info *whd_bus_info;
 
@@ -668,7 +672,7 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
     uint32_t hmb_data = 0;
     uint8_t error_type = 0;
     whd_bt_dev_t btdev = whd_driver->bt_dev;
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
     uint16_t wlan_chip_id;
     wlan_chip_id = whd_chip_get_chip_id(whd_driver);
 #endif
@@ -702,7 +706,7 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
             error_type = WLC_ERR_FW;
             whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
         else if(hmb_data == 0 && ( wlan_chip_id == 43012 || wlan_chip_id == 43022 ))
         {
             WPRINT_WHD_DEBUG( ("%s: mailbox indication about DS1/DS2 Exit\n", __FUNCTION__) );
@@ -718,6 +722,9 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
                     /* Re-Download Firmware no need to check return, as it affects sync of whd thread, error will be thrown */
                     whd_bus_reinit_stats(whd_driver, true);
                     cyhal_syspm_unlock_deepsleep();
+                    /* Notify the network activity callback to not to miss network packets, if any
+                       (TBD) This place is temporary, this will be fixed later */
+                    cy_network_activity_notify(CY_NETWORK_ACTIVITY_RX);
                 }
             }
             else
@@ -747,7 +754,7 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
             }
             int_status &= ~I_HMB_FC_STATE;
        }
-#endif	/* ULP_SUPPORT */
+#endif	/* CYCFG_ULP_SUPPORT_ENABLED */
 
     }
 
@@ -1341,6 +1348,17 @@ whd_result_t whd_bus_sdio_print_stats(whd_driver_t whd_driver, whd_bool_t reset_
         memset(&whd_driver->bus_priv->whd_bus_stats, 0, sizeof(whd_bus_stats_t) );
     }
 
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
+    if (whd_driver->ds_cb_info.callback != NULL)
+    {
+        CHECK_RETURN(whd_wifi_get_deepsleep_stats(whd_driver, whd_driver->ds_cb_info.buf, whd_driver->ds_cb_info.buflen) );
+    }
+    else
+    {
+        WPRINT_WHD_ERROR( ("No callback registered") );
+    }
+#endif
+
     return WHD_SUCCESS;
 }
 
@@ -1488,10 +1506,6 @@ whd_result_t whd_bus_sdio_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_
     /* Enable F1 and F2 */
     CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_IOEN, (uint8_t)1,
                                               SDIO_FUNC_ENABLE_1 | SDIO_FUNC_ENABLE_2) );
-
-    /* Setup host-wake signals */
-    CHECK_RETURN(whd_bus_sdio_init_oob_intr(whd_driver) );
-
     /* Enable F2 interrupt only */
     CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, SDIOD_CCCR_INTEN, (uint8_t)1,
                                               INTR_CTL_MASTER_EN | INTR_CTL_FUNC2_EN) );
@@ -1556,7 +1570,7 @@ whd_result_t whd_bus_sdio_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_
 
     CHECK_RETURN(whd_sdpcm_init(whd_driver));
 
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
     whd_driver->ds_exit_in_progress = WHD_FALSE;
 #endif
 
@@ -1654,7 +1668,8 @@ static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
 
-    cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, config->drive_mode, config->init_drive_state);
+    CHECK_RETURN(cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, config->drive_mode, config->init_drive_state));
+
 #if (CYHAL_API_VERSION >= 2)
     static cyhal_gpio_callback_data_t cbdata;
     cbdata.callback = whd_bus_sdio_oob_irq_handler;
@@ -1670,6 +1685,8 @@ static whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver)
 static whd_result_t whd_bus_sdio_unregister_oob_intr(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
+
+    cyhal_gpio_free(config->host_oob_pin);
 #if (CYHAL_API_VERSION >= 2)
     cyhal_gpio_register_callback(config->host_oob_pin, NULL);
 #else

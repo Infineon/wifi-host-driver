@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,6 +36,9 @@ extern "C"
 {
 #endif
 
+#define REMAINING_LEN(ptr, type, member) \
+	(sizeof(*(ptr)) - offsetof(type, member) - sizeof((ptr)->member))
+
 /******************************************************
 *             Function declarations
 ******************************************************/
@@ -61,7 +64,7 @@ extern "C"
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_config,
+extern whd_result_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_config,
                          whd_resource_source_t *resource_ops, whd_buffer_funcs_t *buffer_ops,
                          whd_netif_funcs_t *network_ops);
 /* @} */
@@ -81,7 +84,7 @@ extern uint32_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_in
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj);
+extern whd_result_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj);
 
 /** Detach the WLAN Device to a specific SDIO bus
  *
@@ -98,7 +101,7 @@ extern void whd_bus_sdio_detach(whd_driver_t whd_driver);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t *spi_obj);
+extern whd_result_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t *spi_obj);
 
 /** Detach the WLAN Device to a specific SPI bus
  *
@@ -115,7 +118,7 @@ extern void whd_bus_spi_detach(whd_driver_t whd_driver);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_config, cyhal_m2m_t *m2m_obj);
+extern whd_result_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_config, cyhal_m2m_t *m2m_obj);
 
 /** Detach the WLAN Device to a specific M2M bus
  *
@@ -132,7 +135,7 @@ extern void whd_bus_m2m_detach(whd_driver_t whd_driver);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_bus_oci_attach(whd_driver_t whd_driver, whd_oci_config_t *whd_config);
+extern whd_result_t whd_bus_oci_attach(whd_driver_t whd_driver, whd_oci_config_t *whd_config);
 
 /** Detach the WLAN Device to a specific AXI(OCI) bus
  *
@@ -167,7 +170,7 @@ error "CYBSP_WIFI_INTERFACE_TYPE or COMPONENT_WIFI_INTERFACE_OCI is not defined"
  *
  *  @return WHD_SUCCESS if initialization is successful, error code otherwise
  */
-extern uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp);
+extern whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp);
 
 /**
  * Turn off the Wi-Fi device
@@ -182,7 +185,7 @@ extern uint32_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp);
  *
  *  @return WHD_SUCCESS if deinitialization is successful, Error code otherwise
  */
-extern uint32_t whd_wifi_off(whd_interface_t ifp);
+extern whd_result_t whd_wifi_off(whd_interface_t ifp);
 
 /** Shutdown this instance of the wifi driver, freeing all used resources
  *
@@ -190,7 +193,7 @@ extern uint32_t whd_wifi_off(whd_interface_t ifp);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_deinit(whd_interface_t ifp);
+extern whd_result_t whd_deinit(whd_interface_t ifp);
 
 /** Brings up the Wi-Fi core
  *
@@ -198,7 +201,7 @@ extern uint32_t whd_deinit(whd_interface_t ifp);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_up(whd_interface_t ifp);
+extern whd_result_t whd_wifi_set_up(whd_interface_t ifp);
 
 /** Bring down the Wi-Fi core
  *
@@ -209,7 +212,7 @@ extern uint32_t whd_wifi_set_up(whd_interface_t ifp);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_down(whd_interface_t ifp);
+extern whd_result_t whd_wifi_set_down(whd_interface_t ifp);
 
 /** Creates a secondary interface
  *
@@ -219,7 +222,7 @@ extern uint32_t whd_wifi_set_down(whd_interface_t ifp);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_add_secondary_interface(whd_driver_t whd_drv, whd_mac_t *mac_addr, whd_interface_t *ifpp);
+extern whd_result_t whd_add_secondary_interface(whd_driver_t whd_drv, whd_mac_t *mac_addr, whd_interface_t *ifpp);
 /*  @} */
 
 /** @addtogroup wifijoin   WHD Wi-Fi Join, Scan and Halt API
@@ -249,7 +252,7 @@ typedef void (*whd_scan_result_callback_t)(whd_scan_result_t **result_ptr, void 
  *
  *  @return  WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_scan_synch(whd_interface_t ifp,
+extern whd_result_t whd_wifi_scan_synch(whd_interface_t ifp,
                                     whd_sync_scan_result_t *scan_result,
                                     uint32_t *count
                                     );
@@ -284,7 +287,7 @@ extern uint32_t whd_wifi_scan_synch(whd_interface_t ifp,
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_scan(whd_interface_t ifp,
+extern whd_result_t whd_wifi_scan(whd_interface_t ifp,
                               whd_scan_type_t scan_type,
                               whd_bss_type_t bss_type,
                               const whd_ssid_t *optional_ssid,
@@ -301,11 +304,11 @@ extern uint32_t whd_wifi_scan(whd_interface_t ifp,
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_stop_scan(whd_interface_t ifp);
+extern whd_result_t whd_wifi_stop_scan(whd_interface_t ifp);
 
 /** Auth result callback function pointer type
  *
- * @param result_prt   A pointer to the pointer that indicates where to put the auth result
+ * @param result_ptr   A pointer to the pointer that indicates where to put the auth result
  * @param len          the size of result
  * @param status       Status of auth process
  * @param flag         flag of h2e will be indicated in auth request event, otherwise is NULL.
@@ -323,7 +326,7 @@ typedef void (*whd_auth_result_callback_t)(void *result_ptr, uint32_t len, whd_a
  *
  *  @param   ifp                       Pointer to handle instance of whd interface
  *  @param   callback                  The callback function which will receive and process the result data.
- *  @param   data                      Pointer to a pointer to a result storage structure.
+ *  @param   result_ptr                Pointer to a pointer to a result storage structure.
  *  @param   user_data                 user specific data that will be passed directly to the callback function
  *
  *  @note - Callback must not use blocking functions, nor use WHD functions, since it is called from the context of the
@@ -333,7 +336,7 @@ typedef void (*whd_auth_result_callback_t)(void *result_ptr, uint32_t len, whd_a
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_external_auth_request(whd_interface_t ifp,
+extern whd_result_t whd_wifi_external_auth_request(whd_interface_t ifp,
                                                whd_auth_result_callback_t callback,
                                                void *result_ptr,
                                                void *user_data);
@@ -343,7 +346,7 @@ extern uint32_t whd_wifi_external_auth_request(whd_interface_t ifp,
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_stop_external_auth_request(whd_interface_t ifp);
+extern whd_result_t whd_wifi_stop_external_auth_request(whd_interface_t ifp);
 
 /** Joins a Wi-Fi network
  *
@@ -361,7 +364,7 @@ extern uint32_t whd_wifi_stop_external_auth_request(whd_interface_t ifp);
  *  @return  WHD_SUCCESS   when the system is joined and ready to send data packets
  *           Error code    if an error occurred
  */
-extern uint32_t whd_wifi_join(whd_interface_t ifp, const whd_ssid_t *ssid, whd_security_t auth_type,
+extern whd_result_t whd_wifi_join(whd_interface_t ifp, const whd_ssid_t *ssid, whd_security_t auth_type,
                               const uint8_t *security_key, uint8_t key_length);
 
 /** Joins a specific Wi-Fi network
@@ -379,7 +382,7 @@ extern uint32_t whd_wifi_join(whd_interface_t ifp, const whd_ssid_t *ssid, whd_s
  *  @return  WHD_SUCCESS   when the system is joined and ready to send data packets
  *           Error code    if an error occurred
  */
-extern uint32_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_result_t *ap, const uint8_t *security_key,
+extern whd_result_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_result_t *ap, const uint8_t *security_key,
                                        uint8_t key_length);
 
 /** Set the current chanspec on the WLAN radio
@@ -393,7 +396,7 @@ extern uint32_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_resul
  *  @return  WHD_SUCCESS   if the chanspec was successfully set
  *           Error code    if the chanspec was not successfully set
  */
-extern uint32_t whd_wifi_set_chanspec(whd_interface_t ifp, wl_chanspec_t chanspec);
+extern whd_result_t whd_wifi_set_chanspec(whd_interface_t ifp, wl_chanspec_t chanspec);
 
 /*  @} */
 
@@ -414,7 +417,7 @@ extern uint32_t whd_wifi_set_chanspec(whd_interface_t ifp, wl_chanspec_t chanspe
  *  @return  WHD_SUCCESS   if the channel was successfully set
  *           Error code    if the channel was not successfully set
  */
-extern uint32_t whd_wifi_set_channel(whd_interface_t ifp, uint32_t channel);
+extern whd_result_t whd_wifi_set_channel(whd_interface_t ifp, uint32_t channel);
 
 /** Get the current channel on the WLAN radio
  *
@@ -427,7 +430,7 @@ extern uint32_t whd_wifi_set_channel(whd_interface_t ifp, uint32_t channel);
  *  @return  WHD_SUCCESS    if the channel was successfully retrieved
  *           Error code     if the channel was not successfully retrieved
  */
-extern uint32_t whd_wifi_get_channel(whd_interface_t ifp, uint32_t *channel);
+extern whd_result_t whd_wifi_get_channel(whd_interface_t ifp, uint32_t *channel);
 
 /** Gets the supported channels
  *
@@ -438,7 +441,7 @@ extern uint32_t whd_wifi_get_channel(whd_interface_t ifp, uint32_t *channel);
  *  @return  WHD_SUCCESS         if the active connections was successfully read
  *           WHD_ERROR           if the active connections was not successfully read
  */
-extern uint32_t whd_wifi_get_channels(whd_interface_t ifp, whd_list_t *channel_list);
+extern whd_result_t whd_wifi_get_channels(whd_interface_t ifp, whd_list_t *channel_list);
 
 
 /** Set the passphrase
@@ -450,7 +453,7 @@ extern uint32_t whd_wifi_get_channels(whd_interface_t ifp, whd_list_t *channel_l
  *  @return  WHD_SUCCESS    when the key is set
  *           Error code     if an error occurred
  */
-extern uint32_t whd_wifi_set_passphrase(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length);
+extern whd_result_t whd_wifi_set_passphrase(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length);
 
 /** Set the SAE password
  *
@@ -461,7 +464,7 @@ extern uint32_t whd_wifi_set_passphrase(whd_interface_t ifp, const uint8_t *secu
  *  @return  WHD_SUCCESS    when the key is set
  *           Error code     if an error occurred
  */
-extern uint32_t whd_wifi_sae_password(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length);
+extern whd_result_t whd_wifi_sae_password(whd_interface_t ifp, const uint8_t *security_key, uint8_t key_length);
 
 /** Set the offload configuration
  *
@@ -472,29 +475,32 @@ extern uint32_t whd_wifi_sae_password(whd_interface_t ifp, const uint8_t *securi
  * @return  WHD_SUCCESS    when the offload config is set/reset
  *          Error code     if an error occurred
  */
-extern uint32_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_feat, uint32_t reset);
+extern whd_result_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_feat, uint32_t reset);
 
 /** Update IPV4 address
  *
  * @param  ifp            Pointer to handle instance of whd interface
  * @param  ol_feat        Offload Skip bitmap
+ * @param  ipv4_addr      set ipv4 address
  * @param  is_add         To add or delete IPV4 address
  *
  * @return WHD_SUCCESS    when the ipv4 address updated or not
  *         Error code     if an error occurred
  */
-extern uint32_t whd_wifi_offload_ipv4_update(whd_interface_t ifp, uint32_t ol_feat, uint32_t ipv4_addr, whd_bool_t is_add);
+extern whd_result_t whd_wifi_offload_ipv4_update(whd_interface_t ifp, uint32_t ol_feat, uint32_t ipv4_addr, whd_bool_t is_add);
 
 /** Update IPV6 address
  *
  * @param  ifp            Pointer to handle instance of whd interface
  * @param  ol_feat        Offload Skip bitmap
+ * @param  ipv6_addr      set ipv6 address
+ * @param  type           set 0:unicast 1:anycast
  * @param  is_add         To add or delete IPV6 address
  *
  * @return WHD_SUCCESS    when the ipv6 address updated or not
  *         Error code     if an error occurred
  */
-extern uint32_t whd_wifi_offload_ipv6_update(whd_interface_t ifp, uint32_t ol_feat, uint32_t *ipv6_addr, uint8_t type, whd_bool_t is_add);
+extern whd_result_t whd_wifi_offload_ipv6_update(whd_interface_t ifp, uint32_t ol_feat, uint32_t *ipv6_addr, uint8_t type, whd_bool_t is_add);
 
 /** Enable the offload module
  *
@@ -505,7 +511,7 @@ extern uint32_t whd_wifi_offload_ipv6_update(whd_interface_t ifp, uint32_t ol_fe
  * @return  WHD_SUCCESS    when offload module enabled or not
  * 	    Error code     if an error occurred
  */
-extern uint32_t whd_wifi_offload_enable(whd_interface_t ifp, uint32_t ol_feat, uint32_t enable);
+extern whd_result_t whd_wifi_offload_enable(whd_interface_t ifp, uint32_t ol_feat, uint32_t enable);
 
 /** Configure the offload module
  *
@@ -517,17 +523,37 @@ extern uint32_t whd_wifi_offload_enable(whd_interface_t ifp, uint32_t ol_feat, u
  */
 extern whd_result_t whd_configure_wowl(whd_interface_t ifp, uint32_t set_wowl);
 
-/** Configure the TKO offload module
+/** Configure the Keep Alive offload module
  *
  * @param   ifp            Pointer to handle instance of whd interface
- * @param   interval       How often to send (in seconds)
- * @param   retry_inerval  Max times to retry if original fails
- * @param   retry_count    Wait time between retries (in seconds)
+ * @param   packet         whd period,len_bytes & Data parameter structure
+ * @param   flag           Flag to set NULL(0)/NAT(1) keepalive
  *
  * @return  WHD_SUCCESS    when offload module enabled or not
  *          Error code     if an error occurred
  */
-extern whd_result_t whd_configure_tko_offload(whd_interface_t ifp, uint16_t interval, uint16_t retry_interval, uint16_t retry_count);
+extern whd_result_t whd_wifi_keepalive_config(whd_interface_t ifp, whd_keep_alive_t * packet, uint8_t flag);
+
+/** Configure the TKO offload module
+ *
+ * @param   ifp            Pointer to handle instance of whd interface
+ * @param   enable         Enable/Disable TCP Keepalive offload
+ *
+ * @return  WHD_SUCCESS    when offload module enabled or not
+ *          Error code     if an error occurred
+ */
+extern whd_result_t whd_configure_tko_offload(whd_interface_t ifp, whd_bool_t enable);
+
+/** Configure the TKO filter module
+ *
+ * @param   ifp            Pointer to handle instance of whd interface
+ * @param   whd_filter     wl_filter structure buffer from Firmware
+ * @param   filter_flag    To set filter
+ *
+ * @return  WHD_SUCCESS    when offload module enabled or not
+ *          Error code     if an error occurred
+ */
+extern whd_result_t whd_configure_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * whd_filter, uint8_t filter_flag);
 
 /** Enable WHD internal supplicant and set WPA2 passphrase in case of WPA3/WPA2 transition mode
  *
@@ -539,7 +565,7 @@ extern whd_result_t whd_configure_tko_offload(whd_interface_t ifp, uint16_t inte
  *  @return  WHD_SUCCESS        when the supplicant variable and wpa2 passphrase is set
  *           Error code         if an error occurred
  */
-extern uint32_t whd_wifi_enable_sup_set_passphrase(whd_interface_t ifp, const uint8_t *security_key_psk,
+extern whd_result_t whd_wifi_enable_sup_set_passphrase(whd_interface_t ifp, const uint8_t *security_key_psk,
                                                    uint8_t psk_length, whd_security_t auth_type);
 
 /** Set the PMK Key
@@ -571,7 +597,7 @@ extern whd_result_t whd_wifi_set_roam_time_threshold(whd_interface_t ifp, uint32
  *  @return  WHD_SUCCESS    when the supplicant variable is set
  *           Error code     if an error occurred
  */
-extern uint32_t whd_wifi_enable_supplicant(whd_interface_t ifp, whd_security_t auth_type);
+extern whd_result_t whd_wifi_enable_supplicant(whd_interface_t ifp, whd_security_t auth_type);
 
 /** Set PMKID in Device (WLAN)
  *
@@ -598,7 +624,7 @@ extern whd_result_t whd_wifi_pmkid_clear(whd_interface_t ifp);
  *  @return  WHD_SUCCESS   if the RSSI was successfully retrieved
  *           Error code    if the RSSI was not retrieved
  */
-extern uint32_t whd_wifi_get_rssi(whd_interface_t ifp, int32_t *rssi);
+extern whd_result_t whd_wifi_get_rssi(whd_interface_t ifp, int32_t *rssi);
 
 /** Retrieve the latest Roam time threshold value
  *
@@ -608,7 +634,7 @@ extern uint32_t whd_wifi_get_rssi(whd_interface_t ifp, int32_t *rssi);
  *  @return  WHD_SUCCESS   if the roam time threshold was successfully retrieved
  *           Error code    if the roam time threshold was not retrieved
  */
-extern uint32_t whd_wifi_get_roam_time_threshold(whd_interface_t ifp, uint32_t *roam_time_threshold);
+extern whd_result_t whd_wifi_get_roam_time_threshold(whd_interface_t ifp, uint32_t *roam_time_threshold);
 
 /** Retrieve the associated STA's RSSI value
  *
@@ -619,7 +645,7 @@ extern uint32_t whd_wifi_get_roam_time_threshold(whd_interface_t ifp, uint32_t *
  *  @return  WHD_SUCCESS  : if the RSSI was successfully retrieved
  *           Error code   : if the RSSI was not retrieved
  */
-extern uint32_t whd_wifi_get_ap_client_rssi(whd_interface_t ifp, int32_t *rssi, const whd_mac_t *client_mac);
+extern whd_result_t whd_wifi_get_ap_client_rssi(whd_interface_t ifp, int32_t *rssi, const whd_mac_t *client_mac);
 
 
 /* @} */
@@ -637,7 +663,7 @@ extern uint32_t whd_wifi_get_ap_client_rssi(whd_interface_t ifp, int32_t *rssi, 
  *  @return  WHD_SUCCESS   On successful disassociation from the AP
  *           Error code    If an error occurred
  */
-extern uint32_t whd_wifi_leave(whd_interface_t ifp);
+extern whd_result_t whd_wifi_leave(whd_interface_t ifp);
 /* @} */
 
 /** @addtogroup wifiutilities   WHD Wi-Fi Utility API
@@ -654,7 +680,7 @@ extern uint32_t whd_wifi_leave(whd_interface_t ifp);
  *
  *  @return  WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_mac_address(whd_interface_t ifp, whd_mac_t *mac);
+extern whd_result_t whd_wifi_get_mac_address(whd_interface_t ifp, whd_mac_t *mac);
 
 /** Get the BSSID of the interface
  *
@@ -663,7 +689,7 @@ extern uint32_t whd_wifi_get_mac_address(whd_interface_t ifp, whd_mac_t *mac);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_bssid(whd_interface_t ifp, whd_mac_t *bssid);
+extern whd_result_t whd_wifi_get_bssid(whd_interface_t ifp, whd_mac_t *bssid);
 /* @} */
 
 /** @addtogroup wifisoftap     WHD Wi-Fi SoftAP API
@@ -684,7 +710,7 @@ extern uint32_t whd_wifi_get_bssid(whd_interface_t ifp, whd_mac_t *bssid);
  *  @return  WHD_SUCCESS   if successfully initialises an AP
  *           Error code    if an error occurred
  */
-extern uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type,
+extern whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type,
                                  const uint8_t *security_key, uint8_t key_length, uint16_t chanspec);
 
 /** Start the infrastructure WiFi network (SoftAP)
@@ -693,7 +719,7 @@ extern uint32_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_secu
  *  @return  WHD_SUCCESS   if successfully creates an AP
  *           Error code    if an error occurred
  */
-extern uint32_t whd_wifi_start_ap(whd_interface_t ifp);
+extern whd_result_t whd_wifi_start_ap(whd_interface_t ifp);
 
 /** Stops an existing infrastructure WiFi network
  *
@@ -702,7 +728,7 @@ extern uint32_t whd_wifi_start_ap(whd_interface_t ifp);
  *  @return  WHD_SUCCESS   if the AP is successfully stopped or if the AP has not yet been brought up
  *           Error code    if an error occurred
  */
-extern uint32_t whd_wifi_stop_ap(whd_interface_t ifp);
+extern whd_result_t whd_wifi_stop_ap(whd_interface_t ifp);
 
 
 /** Get the maximum number of associations supported by AP interfaces
@@ -713,7 +739,7 @@ extern uint32_t whd_wifi_stop_ap(whd_interface_t ifp);
  *  @return  WHD_SUCCESS   if the maximum number of associated clients was successfully read
  *           WHD_ERROR     if the maximum number of associated clients was not successfully read
  */
-extern uint32_t whd_wifi_ap_get_max_assoc(whd_interface_t ifp, uint32_t *max_assoc);
+extern whd_result_t whd_wifi_ap_get_max_assoc(whd_interface_t ifp, uint32_t *max_assoc);
 
 /** Gets the current number of active connections
  *
@@ -724,7 +750,7 @@ extern uint32_t whd_wifi_ap_get_max_assoc(whd_interface_t ifp, uint32_t *max_ass
  *  @return  WHD_SUCCESS         if the active connections was successfully read
  *           WHD_ERROR           if the active connections was not successfully read
  */
-extern uint32_t whd_wifi_get_associated_client_list(whd_interface_t ifp, void *client_list_buffer,
+extern whd_result_t whd_wifi_get_associated_client_list(whd_interface_t ifp, void *client_list_buffer,
                                                     uint16_t buffer_length);
 
 /** Deauthenticates a STA which may or may not be associated to SoftAP
@@ -738,7 +764,7 @@ extern uint32_t whd_wifi_get_associated_client_list(whd_interface_t ifp, void *c
  * @return  WHD_SUCCESS     On successful deauthentication of the other STA
  *          WHD_ERROR       If an error occurred
  */
-extern uint32_t whd_wifi_deauth_sta(whd_interface_t ifp, whd_mac_t *mac, whd_dot11_reason_code_t reason);
+extern whd_result_t whd_wifi_deauth_sta(whd_interface_t ifp, whd_mac_t *mac, whd_dot11_reason_code_t reason);
 
 /** Retrieves AP information
  *
@@ -749,7 +775,7 @@ extern uint32_t whd_wifi_deauth_sta(whd_interface_t ifp, whd_mac_t *mac, whd_dot
  *  @return WHD_SUCCESS    if the AP info was successfully retrieved
  *          Error code     if the AP info was not successfully retrieved
  */
-extern uint32_t whd_wifi_get_ap_info(whd_interface_t ifp, whd_bss_info_t *ap_info, whd_security_t *security);
+extern whd_result_t whd_wifi_get_ap_info(whd_interface_t ifp, whd_bss_info_t *ap_info, whd_security_t *security);
 
 /** Set the beacon interval.
  *
@@ -760,7 +786,7 @@ extern uint32_t whd_wifi_get_ap_info(whd_interface_t ifp, whd_bss_info_t *ap_inf
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_ap_set_beacon_interval(whd_interface_t ifp, uint16_t interval);
+extern whd_result_t whd_wifi_ap_set_beacon_interval(whd_interface_t ifp, uint16_t interval);
 
 /** Set the DTIM interval.
  *
@@ -771,7 +797,7 @@ extern uint32_t whd_wifi_ap_set_beacon_interval(whd_interface_t ifp, uint16_t in
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_ap_set_dtim_interval(whd_interface_t ifp, uint16_t interval);
+extern whd_result_t whd_wifi_ap_set_dtim_interval(whd_interface_t ifp, uint16_t interval);
 /*  @} */
 
 
@@ -791,7 +817,7 @@ extern uint32_t whd_wifi_ap_set_dtim_interval(whd_interface_t ifp, uint16_t inte
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_enable_powersave(whd_interface_t ifp);
+extern whd_result_t whd_wifi_enable_powersave(whd_interface_t ifp);
 
 /** Enables powersave mode on specified interface while attempting to maximise throughput
  *
@@ -811,7 +837,7 @@ extern uint32_t whd_wifi_enable_powersave(whd_interface_t ifp);
  *           Error code             if power save mode was not successfully enabled
  *
  */
-extern uint32_t whd_wifi_enable_powersave_with_throughput(whd_interface_t ifp, uint16_t return_to_sleep_delay);
+extern whd_result_t whd_wifi_enable_powersave_with_throughput(whd_interface_t ifp, uint16_t return_to_sleep_delay);
 
 /** Get powersave mode on specified interface
  *
@@ -821,7 +847,7 @@ extern uint32_t whd_wifi_enable_powersave_with_throughput(whd_interface_t ifp, u
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_powersave_mode(whd_interface_t ifp, uint32_t *value);
+extern whd_result_t whd_wifi_get_powersave_mode(whd_interface_t ifp, uint32_t *value);
 
 /** Disables 802.11 power save mode on specified interface
  *
@@ -831,7 +857,7 @@ extern uint32_t whd_wifi_get_powersave_mode(whd_interface_t ifp, uint32_t *value
  *           Error code        if power save mode was not successfully disabled
  *
  */
-extern uint32_t whd_wifi_disable_powersave(whd_interface_t ifp);
+extern whd_result_t whd_wifi_disable_powersave(whd_interface_t ifp);
 
 /** Configure ULP mode on specified interface
  *
@@ -845,7 +871,7 @@ extern uint32_t whd_wifi_disable_powersave(whd_interface_t ifp);
  *           Error code        if ulp mode was not configured successfully
  *
  */
-extern uint32_t whd_wifi_config_ulp_mode(whd_interface_t ifp, uint32_t *mode, uint32_t *wait_time);
+extern whd_result_t whd_wifi_config_ulp_mode(whd_interface_t ifp, uint32_t *mode, uint32_t *wait_time);
 
 /* @} */
 
@@ -866,7 +892,7 @@ extern uint32_t whd_wifi_config_ulp_mode(whd_interface_t ifp, uint32_t *mode, ui
  *  @return WHD_SUCCESS      if the address was registered successfully
  *          Error code       if the address was not registered
  */
-extern uint32_t whd_wifi_register_multicast_address(whd_interface_t ifp, const whd_mac_t *mac);
+extern whd_result_t whd_wifi_register_multicast_address(whd_interface_t ifp, const whd_mac_t *mac);
 
 /** Unregisters interest in a multicast address
  *
@@ -879,7 +905,7 @@ extern uint32_t whd_wifi_register_multicast_address(whd_interface_t ifp, const w
  *  @return WHD_SUCCESS      if the address was unregistered successfully
  *          Error code       if the address was not unregistered
  */
-extern uint32_t whd_wifi_unregister_multicast_address(whd_interface_t ifp, const whd_mac_t *mac);
+extern whd_result_t whd_wifi_unregister_multicast_address(whd_interface_t ifp, const whd_mac_t *mac);
 
 /** Sets the 802.11 powersave listen interval for a Wi-Fi client, and communicates
  *  the listen interval to the Access Point. The listen interval will be set to
@@ -898,7 +924,7 @@ extern uint32_t whd_wifi_unregister_multicast_address(whd_interface_t ifp, const
  *  @return WHD_SUCCESS      If the listen interval was successfully set.
  *          Error code       If the listen interval was not successfully set.
  */
-extern uint32_t whd_wifi_set_listen_interval(whd_interface_t ifp, uint8_t listen_interval,
+extern whd_result_t whd_wifi_set_listen_interval(whd_interface_t ifp, uint8_t listen_interval,
                                              whd_listen_interval_time_unit_t time_unit);
 
 /** Gets the current value of all beacon listen interval variables
@@ -912,7 +938,7 @@ extern uint32_t whd_wifi_set_listen_interval(whd_interface_t ifp, uint8_t listen
  *  @return WHD_SUCCESS             If all listen interval values are read successfully
  *          Error code              If at least one of the listen interval values are NOT read successfully
  */
-extern uint32_t whd_wifi_get_listen_interval(whd_interface_t ifp, whd_listen_interval_t *li);
+extern whd_result_t whd_wifi_get_listen_interval(whd_interface_t ifp, whd_listen_interval_t *li);
 
 /** Determines if a particular interface is ready to transceive ethernet packets
  *
@@ -926,7 +952,7 @@ extern uint32_t whd_wifi_get_listen_interval(whd_interface_t ifp, whd_listen_int
  *                                    This can occur if the passphrase is incorrect.
  *             Error code             if the interface is not ready to transceive ethernet packets
  */
-extern uint32_t whd_wifi_is_ready_to_transceive(whd_interface_t ifp);
+extern whd_result_t whd_wifi_is_ready_to_transceive(whd_interface_t ifp);
 
 /* Certification APIs */
 
@@ -941,7 +967,7 @@ extern uint32_t whd_wifi_is_ready_to_transceive(whd_interface_t ifp);
  *  @return  WHD_SUCCESS   if the AC Parameters were successfully retrieved
  *           Error code    if the AC Parameters were not retrieved
  */
-extern uint32_t whd_wifi_get_acparams(whd_interface_t ifp, whd_edcf_ac_param_t *acp);
+extern whd_result_t whd_wifi_get_acparams(whd_interface_t ifp, whd_edcf_ac_param_t *acp);
 
 /* Action Frames */
 
@@ -958,7 +984,7 @@ extern uint32_t whd_wifi_get_acparams(whd_interface_t ifp, whd_edcf_ac_param_t *
  *  @return WHD_SUCCESS    if the custom IE action was successful
  *          Error code     if the custom IE action failed
  */
-extern uint32_t whd_wifi_manage_custom_ie(whd_interface_t ifp, whd_custom_ie_action_t action,
+extern whd_result_t whd_wifi_manage_custom_ie(whd_interface_t ifp, whd_custom_ie_action_t action,
                                           const uint8_t *oui, uint8_t subtype, const void *data,
                                           uint16_t length, uint16_t which_packets);
 
@@ -969,7 +995,7 @@ extern uint32_t whd_wifi_manage_custom_ie(whd_interface_t ifp, whd_custom_ie_act
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_send_action_frame(whd_interface_t ifp, whd_af_params_t *af_params);
+extern whd_result_t whd_wifi_send_action_frame(whd_interface_t ifp, whd_af_params_t *af_params);
 
 /** Send a pre-prepared authentication frame
  *
@@ -987,7 +1013,7 @@ extern whd_result_t whd_wifi_send_auth_frame(whd_interface_t ifp, whd_auth_param
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_he_omi(whd_interface_t ifp, whd_he_omi_params_t *he_omi_params);
+extern whd_result_t whd_wifi_he_omi(whd_interface_t ifp, whd_he_omi_params_t *he_omi_params);
 
 /** Configure BSS Max Idle Time
  *
@@ -996,7 +1022,7 @@ extern uint32_t whd_wifi_he_omi(whd_interface_t ifp, whd_he_omi_params_t *he_omi
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_bss_max_idle(whd_interface_t ifp, uint16_t period);
+extern whd_result_t whd_wifi_bss_max_idle(whd_interface_t ifp, uint16_t period);
 
 /** Trigger individual TWT session(used by STA)
  *
@@ -1005,7 +1031,7 @@ extern uint32_t whd_wifi_bss_max_idle(whd_interface_t ifp, uint16_t period);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_itwt_setup(whd_interface_t ifp, whd_itwt_setup_params_t *twt_params);
+extern whd_result_t whd_wifi_itwt_setup(whd_interface_t ifp, whd_itwt_setup_params_t *twt_params);
 
 /** Trigger Join broadcast TWT session(used by STA)
  *
@@ -1014,7 +1040,7 @@ extern uint32_t whd_wifi_itwt_setup(whd_interface_t ifp, whd_itwt_setup_params_t
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_btwt_join(whd_interface_t ifp, whd_btwt_join_params_t *twt_params);
+extern whd_result_t whd_wifi_btwt_join(whd_interface_t ifp, whd_btwt_join_params_t *twt_params);
 
 /** Trigger teardown all individual or broadcast TWT sessions
  *
@@ -1023,7 +1049,7 @@ extern uint32_t whd_wifi_btwt_join(whd_interface_t ifp, whd_btwt_join_params_t *
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_twt_teardown(whd_interface_t ifp, whd_twt_teardown_params_t *twt_params);
+extern whd_result_t whd_wifi_twt_teardown(whd_interface_t ifp, whd_twt_teardown_params_t *twt_params);
 
 /** Trigger TWT information frame(used by STA)
  *
@@ -1033,7 +1059,7 @@ extern uint32_t whd_wifi_twt_teardown(whd_interface_t ifp, whd_twt_teardown_para
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_twt_information_frame(whd_interface_t ifp, whd_twt_information_params_t *twt_params);
+extern whd_result_t whd_wifi_twt_information_frame(whd_interface_t ifp, whd_twt_information_params_t *twt_params);
 
 /** Configure TWT IE in beacon(used by AP)
  *
@@ -1042,7 +1068,7 @@ extern uint32_t whd_wifi_twt_information_frame(whd_interface_t ifp, whd_twt_info
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_btwt_config(whd_interface_t ifp, whd_btwt_config_params_t *twt_params);
+extern whd_result_t whd_wifi_btwt_config(whd_interface_t ifp, whd_btwt_config_params_t *twt_params);
 
 /** Set coex configuration
  *
@@ -1051,16 +1077,16 @@ extern uint32_t whd_wifi_btwt_config(whd_interface_t ifp, whd_btwt_config_params
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_coex_config(whd_interface_t ifp, whd_coex_config_t *coex_config);
+extern whd_result_t whd_wifi_set_coex_config(whd_interface_t ifp, whd_coex_config_t *coex_config);
 
 /** Set auth status used for External AUTH(SAE)
  *
  *  @param   ifp                    Pointer to handle instance of whd interface
- *  @param   whd_auth_req_status    Pointer to Auth_Status structure
+ *  @param   status                 Pointer to Auth_Status structure
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_wifi_set_auth_status(whd_interface_t ifp, whd_auth_req_status_t *params);
+extern whd_result_t whd_wifi_set_auth_status(whd_interface_t ifp, whd_auth_req_status_t *status);
 
 /** Get FW(chip) Capability
  *
@@ -1344,6 +1370,13 @@ whd_result_t whd_tko_get_FW_connect(whd_interface_t ifp, uint8_t index, whd_tko_
  */
 whd_result_t whd_tko_toggle(whd_interface_t ifp, whd_bool_t enable);
 
+/** Return the stats associated with a filter
+ * @param[in]     ifp        : Pointer to handle instance of whd interface
+ * @param[in]     whd_filter : wl_filter structure buffer from Firmware
+ * @param[in]     filter_flag: To set filter
+ * @return whd_result_t
+ */
+extern whd_result_t whd_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * whd_filter, uint8_t filter_flag);
 
 /* @} */
 
@@ -1360,7 +1393,7 @@ whd_result_t whd_tko_toggle(whd_interface_t ifp, whd_bool_t enable);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_ioctl_value(whd_interface_t ifp, uint32_t ioctl, uint32_t value);
+extern whd_result_t whd_wifi_set_ioctl_value(whd_interface_t ifp, uint32_t ioctl, uint32_t value);
 
 /** Sends an IOCTL command - CDC_GET IOCTL value
  *
@@ -1370,7 +1403,7 @@ extern uint32_t whd_wifi_set_ioctl_value(whd_interface_t ifp, uint32_t ioctl, ui
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_ioctl_value(whd_interface_t ifp, uint32_t ioctl, uint32_t *value);
+extern whd_result_t whd_wifi_get_ioctl_value(whd_interface_t ifp, uint32_t ioctl, uint32_t *value);
 
 /** Sends an IOCTL command - CDC_SET IOCTL buffer
  *
@@ -1381,7 +1414,7 @@ extern uint32_t whd_wifi_get_ioctl_value(whd_interface_t ifp, uint32_t ioctl, ui
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_ioctl_buffer(whd_interface_t ifp, uint32_t ioctl, void *buffer, uint16_t buffer_length);
+extern whd_result_t whd_wifi_set_ioctl_buffer(whd_interface_t ifp, uint32_t ioctl, void *buffer, uint16_t buffer_length);
 
 /** Sends an IOCTL command - CDC_GET IOCTL buffer
  *
@@ -1392,7 +1425,7 @@ extern uint32_t whd_wifi_set_ioctl_buffer(whd_interface_t ifp, uint32_t ioctl, v
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_ioctl_buffer(whd_interface_t ifp, uint32_t ioctl, uint8_t *out_buffer,
+extern whd_result_t whd_wifi_get_ioctl_buffer(whd_interface_t ifp, uint32_t ioctl, uint8_t *out_buffer,
                                           uint16_t out_length);
 
 /** Sends an IOVAR command
@@ -1406,7 +1439,7 @@ extern uint32_t whd_wifi_get_ioctl_buffer(whd_interface_t ifp, uint32_t ioctl, u
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_iovar_buffer_with_param(whd_interface_t ifp, const char *iovar_name, void *param,
+extern whd_result_t whd_wifi_get_iovar_buffer_with_param(whd_interface_t ifp, const char *iovar_name, void *param,
                                                      uint32_t paramlen, uint8_t *out_buffer, uint32_t out_length);
 
 /* @} */
@@ -1424,7 +1457,7 @@ extern uint32_t whd_wifi_get_iovar_buffer_with_param(whd_interface_t ifp, const 
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_wifi_version(whd_interface_t ifp, char *version, uint8_t length);
+extern whd_result_t whd_wifi_get_wifi_version(whd_interface_t ifp, char *version, uint8_t length);
 
 /** Retrieves the WLAN CLM version
  *
@@ -1434,7 +1467,7 @@ extern uint32_t whd_wifi_get_wifi_version(whd_interface_t ifp, char *version, ui
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_clm_version(whd_interface_t ifp, char *version, uint8_t length);
+extern whd_result_t whd_wifi_get_clm_version(whd_interface_t ifp, char *version, uint8_t length);
 
 /** To print whd log information
  *
@@ -1444,7 +1477,7 @@ extern uint32_t whd_wifi_get_clm_version(whd_interface_t ifp, char *version, uin
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_read_wlan_log(whd_driver_t whd_drv, char *buffer, uint32_t buffer_size);
+extern whd_result_t whd_wifi_read_wlan_log(whd_driver_t whd_drv, char *buffer, uint32_t buffer_size);
 
 /** To print whd log information
  *
@@ -1452,7 +1485,7 @@ extern uint32_t whd_wifi_read_wlan_log(whd_driver_t whd_drv, char *buffer, uint3
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_print_whd_log(whd_driver_t whd_drv);
+extern whd_result_t whd_wifi_print_whd_log(whd_driver_t whd_drv);
 
 /** Retrieves the ifidx from interface pointer.
  *  ifidx is a unique value and be used to identify a instance of tcp/ip stack
@@ -1462,7 +1495,7 @@ extern uint32_t whd_wifi_print_whd_log(whd_driver_t whd_drv);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_network_get_ifidx_from_ifp(whd_interface_t ifp, uint8_t *ifidx);
+extern whd_result_t whd_network_get_ifidx_from_ifp(whd_interface_t ifp, uint8_t *ifidx);
 
 /** Retrieves the bsscfgidx from interface pointer.
  *
@@ -1473,7 +1506,7 @@ extern uint32_t whd_network_get_ifidx_from_ifp(whd_interface_t ifp, uint8_t *ifi
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_network_get_bsscfgidx_from_ifp(whd_interface_t ifp, uint8_t *bsscfgidx);
+extern whd_result_t whd_network_get_bsscfgidx_from_ifp(whd_interface_t ifp, uint8_t *bsscfgidx);
 
 
 /** Retrives the bss info
@@ -1483,7 +1516,7 @@ extern uint32_t whd_network_get_bsscfgidx_from_ifp(whd_interface_t ifp, uint8_t 
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_bss_info(whd_interface_t ifp, wl_bss_info_t *bi);
+extern whd_result_t whd_wifi_get_bss_info(whd_interface_t ifp, wl_bss_info_t *bi);
 
 /** Prints WHD stats
  *
@@ -1492,9 +1525,53 @@ extern uint32_t whd_wifi_get_bss_info(whd_interface_t ifp, wl_bss_info_t *bi);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_print_stats(whd_driver_t whd_drv, whd_bool_t reset_after_print);
+extern whd_result_t whd_print_stats(whd_driver_t whd_drv, whd_bool_t reset_after_print);
 
-/* @} */
+/** Fetches ulp statistics and fills the buffer with that data and executes deepsleep
+ *  indication callback if application registers for it
+ *
+ *  @param whd_driver              Instance of whd driver
+ *  @param buf                     Pointer to buffer to be filled with ulpstats data
+ *  @param buflen                  Buffer length of the above buffer
+ *                                 should be between 2048 and 4096
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_get_deepsleep_stats(whd_driver_t whd_driver, char *buf, uint32_t buflen);
+
+/* Function pointer to be used callback registration */
+typedef void* (*whd_ds_callback_t)(void*, char*, uint32_t);
+
+/* Structure to store callback registration and parameters */
+typedef struct deepsleep_cb_info {
+    whd_ds_callback_t callback;
+    void* ctx;
+    char* buf;
+    uint32_t buflen;
+} deepsleep_cb_info_t ;
+
+/** Function to register callbacks to be executed
+ *
+ *  @param ifp                   Pointer to handle instance of whd interface
+ *  @param callback              Callback api to be registered
+ *  @param ctx                   Pointer to context
+ *  @param buf                   Buffer to be filled with data
+ *  @param buflen                Buffer length of the above buffer
+ *
+ *  @return WHD_SUCCESS or WHD_UNKNOWN_INTERFACE
+ */
+extern whd_result_t whd_wifi_register_ds_callback(whd_interface_t ifp, whd_ds_callback_t callback, void *ctx, char* buf, uint32_t buflen);
+
+/** Function to unregister callbacks that are note needed to be executed anymore
+ *
+ *  @param ifp                   Pointer to handle instance of whd interface
+ *  @param callback              Callback api to be registered
+ *
+ *  @return WHD_SUCCESS or WHD_UNKNOWN_INTERFACE
+ */
+extern whd_result_t whd_wifi_deregister_ds_callback(whd_interface_t ifp, whd_ds_callback_t callback);
+
+
 /* @} */
 
 #ifdef __cplusplus

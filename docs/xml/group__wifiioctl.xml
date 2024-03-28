@@ -4,9 +4,9 @@
     <compoundname>wifiioctl</compoundname>
     <title>WHD Wi-Fi IOCTL Set/Get API</title>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__wifiioctl_1gad54ac84589a14cc97429bf138fa32639" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_set_ioctl_value</definition>
+      <memberdef kind="function" id="group__wifiioctl_1gaf3e0da6e70350e204b9085808f98b173" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_set_ioctl_value</definition>
         <argsstring>(whd_interface_t ifp, uint32_t ioctl, uint32_t value)</argsstring>
         <name>whd_wifi_set_ioctl_value</name>
         <param>
@@ -56,11 +56,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="1350" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1383" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifiioctl_1ga817655c1372b8c87608b204105f06937" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_get_ioctl_value</definition>
+      <memberdef kind="function" id="group__wifiioctl_1gaa9fd47570676f2a47d67d922a960f175" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_get_ioctl_value</definition>
         <argsstring>(whd_interface_t ifp, uint32_t ioctl, uint32_t *value)</argsstring>
         <name>whd_wifi_get_ioctl_value</name>
         <param>
@@ -110,11 +110,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="1360" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1393" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifiioctl_1ga5d7aec7622caacf4a0642cf1da1fa647" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_set_ioctl_buffer</definition>
+      <memberdef kind="function" id="group__wifiioctl_1ga0cda2f7b96d2b6beb99c397342cda324" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_set_ioctl_buffer</definition>
         <argsstring>(whd_interface_t ifp, uint32_t ioctl, void *buffer, uint16_t buffer_length)</argsstring>
         <name>whd_wifi_set_ioctl_buffer</name>
         <param>
@@ -176,11 +176,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="1371" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1404" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifiioctl_1gab1a4c2ae9163408ae92b3f292ee2807f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_get_ioctl_buffer</definition>
+      <memberdef kind="function" id="group__wifiioctl_1gacafc79968242b824baaf63a419807d8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_get_ioctl_buffer</definition>
         <argsstring>(whd_interface_t ifp, uint32_t ioctl, uint8_t *out_buffer, uint16_t out_length)</argsstring>
         <name>whd_wifi_get_ioctl_buffer</name>
         <param>
@@ -242,11 +242,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="1382" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1415" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifiioctl_1ga2b1cdfc36df80ca4700076fd2747b34e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_wifi_get_iovar_buffer_with_param</definition>
+      <memberdef kind="function" id="group__wifiioctl_1ga851cf123cb495a37053dccc89ecdd522" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_wifi_get_iovar_buffer_with_param</definition>
         <argsstring>(whd_interface_t ifp, const char *iovar_name, void *param, uint32_t paramlen, uint8_t *out_buffer, uint32_t out_length)</argsstring>
         <name>whd_wifi_get_iovar_buffer_with_param</name>
         <param>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/Jia-Shyr.Chuang@infineon.com/Documents/01.SRC/whd_mclass/whd/inc/whd_wifi_api.h" line="1396" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1429" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

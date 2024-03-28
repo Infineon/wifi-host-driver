@@ -2,6 +2,9 @@ var annotated_dup =
 [
     [ "_pmkid", "struct__pmkid.html", "struct__pmkid" ],
     [ "_pmkid_list", "struct__pmkid__list.html", "struct__pmkid__list" ],
+    [ "deepsleep_cb_info", "structdeepsleep__cb__info.html", "structdeepsleep__cb__info" ],
+    [ "ProtocolVersion", "struct_protocol_version.html", "struct_protocol_version" ],
+    [ "tls_param_info", "structtls__param__info.html", "structtls__param__info" ],
     [ "whd_ap_info", "structwhd__ap__info.html", "structwhd__ap__info" ],
     [ "whd_auth_params", "structwhd__auth__params.html", "structwhd__auth__params" ],
     [ "whd_auth_req_status", "structwhd__auth__req__status.html", "structwhd__auth__req__status" ],
@@ -18,6 +21,7 @@ var annotated_dup =
     [ "whd_he_omi_params_t", "structwhd__he__omi__params__t.html", "structwhd__he__omi__params__t" ],
     [ "whd_init_config", "structwhd__init__config.html", "structwhd__init__config" ],
     [ "whd_itwt_setup_params_t", "structwhd__itwt__setup__params__t.html", "structwhd__itwt__setup__params__t" ],
+    [ "whd_keep_alive", "structwhd__keep__alive.html", "structwhd__keep__alive" ],
     [ "whd_list_t", "structwhd__list__t.html", "structwhd__list__t" ],
     [ "whd_listen_interval_t", "structwhd__listen__interval__t.html", "structwhd__listen__interval__t" ],
     [ "whd_m2m_config", "structwhd__m2m__config.html", "structwhd__m2m__config" ],

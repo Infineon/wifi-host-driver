@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -225,7 +225,7 @@ typedef void *(*whd_error_handler_t)(whd_driver_t whd_driver, const uint8_t *err
  *
  *  @return WHD_SUCCESS or Error code
  */
-uint32_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *event_type, whd_event_handler_t handler_func,
+whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *event_type, whd_event_handler_t handler_func,
                                     void *handler_user_data, uint16_t *event_index);
 /** Registers a handler to receive error callbacks.
  *
@@ -246,7 +246,7 @@ uint32_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *event_t
  *
  *  @return WHD_SUCCESS or Error code
  */
-uint32_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_nums, whd_error_handler_t handler_func,
+whd_result_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_nums, whd_error_handler_t handler_func,
                                     void *handler_user_data, uint16_t *error_index);
 
 /** Delete/Deregister the event entry where callback is registered
@@ -257,7 +257,7 @@ uint32_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *error_nu
  *  @return WHD_SUCCESS or Error code
  */
 
-uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index);
+whd_result_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index);
 /** Delete/Deregister the error entry where callback is registered
  *
  *  @param  ifp                Pointer to handle instance of whd interface
@@ -266,7 +266,7 @@ uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_i
  *  @return WHD_SUCCESS or Error code
  */
 
-uint32_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index);
+whd_result_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index);
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -44,68 +44,70 @@
     </topic>
     <topic label="WHD Wi-Fi API" href="group__wifi.html">
       <topic label="WHD Wi-Fi Management API" href="group__wifimanagement.html">
-        <topic label="whd_init" href="group__wifimanagement.html#ga286dde2ee65ac3ea5ae67a6e6ef25f0a"/>
-        <topic label="whd_wifi_on" href="group__wifimanagement.html#ga1c8bf41b593cb947266f8690d495f381"/>
-        <topic label="whd_wifi_off" href="group__wifimanagement.html#ga422587a9b104a871233a42aceb2141d2"/>
-        <topic label="whd_deinit" href="group__wifimanagement.html#gab7d6e59874922e5646e08e52082e32f5"/>
-        <topic label="whd_wifi_set_up" href="group__wifimanagement.html#ga925da3b1ed914d7bb661d3cb2af50680"/>
-        <topic label="whd_wifi_set_down" href="group__wifimanagement.html#ga412c2d4653a7c36329c6cf78be344336"/>
-        <topic label="whd_add_secondary_interface" href="group__wifimanagement.html#ga553c009e9f6f856dfe243d745e21bbf9"/>
+        <topic label="whd_init" href="group__wifimanagement.html#ga17a49bcd418b5e58f22980d35f43f371"/>
+        <topic label="whd_wifi_on" href="group__wifimanagement.html#ga3c6051b713ad060d3c952e701c0a8c3b"/>
+        <topic label="whd_wifi_off" href="group__wifimanagement.html#ga57d010b6c6f11339841c4b65f7814e93"/>
+        <topic label="whd_deinit" href="group__wifimanagement.html#gae21463d0daa71580109215639b306751"/>
+        <topic label="whd_wifi_set_up" href="group__wifimanagement.html#ga79bae132535b03baca5e000783e5818f"/>
+        <topic label="whd_wifi_set_down" href="group__wifimanagement.html#gaddabdd109bae0292e8e6e2e708b92062"/>
+        <topic label="whd_add_secondary_interface" href="group__wifimanagement.html#ga35c3829c26a03a3862a584a2ef9f93e1"/>
       </topic>
       <topic label="WHD Wi-Fi Join, Scan and Halt API" href="group__wifijoin.html">
         <topic label="whd_scan_result_callback_t" href="group__wifijoin.html#ga9f8c6096922212981dd2101a17aec471"/>
         <topic label="whd_auth_result_callback_t" href="group__wifijoin.html#ga2604c8dec9eff39e79b3281496da2611"/>
-        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#ga2752d761f639411027fffa67038d8a61"/>
-        <topic label="whd_wifi_scan" href="group__wifijoin.html#ga82d8c980d15acf0e6e18b56423f4e52b"/>
-        <topic label="whd_wifi_stop_scan" href="group__wifijoin.html#gacf8632bb68cef4d831083a66bee7b8fa"/>
-        <topic label="whd_wifi_external_auth_request" href="group__wifijoin.html#ga58ef7de14079c4b2b879e786a5e15c24"/>
-        <topic label="whd_wifi_stop_external_auth_request" href="group__wifijoin.html#gab5bc462251b6849ebd8e708a2560066d"/>
-        <topic label="whd_wifi_join" href="group__wifijoin.html#gac767814ae445f735b51686db20c780be"/>
-        <topic label="whd_wifi_join_specific" href="group__wifijoin.html#gae41c4ab0b2f3ecc433a6c4e89238b066"/>
-        <topic label="whd_wifi_set_chanspec" href="group__wifijoin.html#ga99f5e49ef124d6522fb5290c913cd838"/>
-        <topic label="whd_wifi_leave" href="group__wifijoin.html#ga971ed7d8e459c715aa9bf3c52b563d8b"/>
+        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#gad89b3244a31c2ed9122d266b7f99def0"/>
+        <topic label="whd_wifi_scan" href="group__wifijoin.html#ga253707d44ba49bb46256b38c1c1a204e"/>
+        <topic label="whd_wifi_stop_scan" href="group__wifijoin.html#ga1b67138e3689fb66ce526810ed188f4d"/>
+        <topic label="whd_wifi_external_auth_request" href="group__wifijoin.html#ga7a393cc47dd501a2bf00d4a0d305dd6e"/>
+        <topic label="whd_wifi_stop_external_auth_request" href="group__wifijoin.html#gaf24ce3dea8e8e0d61f5ee82e2429b1b4"/>
+        <topic label="whd_wifi_join" href="group__wifijoin.html#gafde10c6bc61306ec3292a0aede919baf"/>
+        <topic label="whd_wifi_join_specific" href="group__wifijoin.html#ga149e2de0e902c6f7de181c65f93dff3c"/>
+        <topic label="whd_wifi_set_chanspec" href="group__wifijoin.html#gab76c5c1b2c85ba90657b0fe249fc8ebd"/>
+        <topic label="whd_wifi_leave" href="group__wifijoin.html#gaf5c47285f84de334d0991e092c903153"/>
       </topic>
       <topic label="WHD Wi-Fi Utility API" href="group__wifiutilities.html">
-        <topic label="whd_wifi_set_channel" href="group__wifiutilities.html#ga168fb83b839bab61d2c9d3b1f42a6782"/>
-        <topic label="whd_wifi_get_channel" href="group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d"/>
-        <topic label="whd_wifi_get_channels" href="group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"/>
-        <topic label="whd_wifi_set_passphrase" href="group__wifiutilities.html#ga893ccaef6ed5d0afe95a96bbe89e8a80"/>
-        <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8"/>
-        <topic label="whd_wifi_offload_config" href="group__wifiutilities.html#gae2a0ccc383656e145fc16689c8dfcffd"/>
-        <topic label="whd_wifi_offload_ipv4_update" href="group__wifiutilities.html#gaf71e71af4b557ebb46190c32847632d0"/>
-        <topic label="whd_wifi_offload_ipv6_update" href="group__wifiutilities.html#ga70646388c3bc4519a04716d890b86caa"/>
-        <topic label="whd_wifi_offload_enable" href="group__wifiutilities.html#gaaacc373db21154b5b9e919a490b71bf6"/>
+        <topic label="whd_wifi_set_channel" href="group__wifiutilities.html#gad00fb03d006c24cbcef95f3f854b7684"/>
+        <topic label="whd_wifi_get_channel" href="group__wifiutilities.html#ga5bd4f005033f0b0866813fa02044a1da"/>
+        <topic label="whd_wifi_get_channels" href="group__wifiutilities.html#gaa46dc0ebd537da9b2c2cfba451be7a38"/>
+        <topic label="whd_wifi_set_passphrase" href="group__wifiutilities.html#gab13513230a025dbfc29df76b0ed10222"/>
+        <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga3b0acddff0ff8c467f111abcb3d2b43a"/>
+        <topic label="whd_wifi_offload_config" href="group__wifiutilities.html#ga15806d2cb87d117b4dcaf51bc1c1b99e"/>
+        <topic label="whd_wifi_offload_ipv4_update" href="group__wifiutilities.html#gafebf9c76eea2b56e4c2916cc15f34fc9"/>
+        <topic label="whd_wifi_offload_ipv6_update" href="group__wifiutilities.html#gaf0e49257ee875d148d37cc67099ee0cd"/>
+        <topic label="whd_wifi_offload_enable" href="group__wifiutilities.html#ga185890900617bcbb760ed090975ea977"/>
         <topic label="whd_configure_wowl" href="group__wifiutilities.html#gac12db78aeb2fda7e6e73ce26926477d5"/>
-        <topic label="whd_configure_tko_offload" href="group__wifiutilities.html#gabe3b791cbd725db296d63cb9959b0e36"/>
-        <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c"/>
+        <topic label="whd_wifi_keepalive_config" href="group__wifiutilities.html#ga6a213e11cb2201d251d5bf111f87e239"/>
+        <topic label="whd_configure_tko_offload" href="group__wifiutilities.html#ga92b6063464e66c62c633fc19ca73d68c"/>
+        <topic label="whd_configure_tko_filter" href="group__wifiutilities.html#gadace029a782307a9c1c0973095cbda69"/>
+        <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#ga6b3c6e45e7311893f1019124d2fe85b1"/>
         <topic label="whd_wifi_set_pmk" href="group__wifiutilities.html#gae9d18a43c3e8e09f38ecb5adbda450b9"/>
         <topic label="whd_wifi_set_roam_time_threshold" href="group__wifiutilities.html#ga96d5646b67b4ae5ec78f1a23789caca1"/>
-        <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gad2daa1aba4dccd3f0506950ccee42113"/>
+        <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gadcd78be7647dc8a5a1040d40950aff9c"/>
         <topic label="whd_wifi_set_pmksa" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8"/>
         <topic label="whd_wifi_pmkid_clear" href="group__wifiutilities.html#ga112a1fa7274b896e41ee98f88f943c62"/>
-        <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125"/>
-        <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga6ac8ec63a66fc046979bae1e809b0d25"/>
-        <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gab571b303f19131fd032fba4b744dbf20"/>
-        <topic label="whd_wifi_get_mac_address" href="group__wifiutilities.html#ga8a634822973adc75a61a05eb2b664ef5"/>
-        <topic label="whd_wifi_get_bssid" href="group__wifiutilities.html#ga52d3190589758d9fd36a7b27a9d08f28"/>
-        <topic label="whd_wifi_register_multicast_address" href="group__wifiutilities.html#gab36ff07aa1d825c0366c82ce003dd9f6"/>
-        <topic label="whd_wifi_unregister_multicast_address" href="group__wifiutilities.html#gad092a543b73e91c7090875ccb940e01f"/>
-        <topic label="whd_wifi_set_listen_interval" href="group__wifiutilities.html#gac93f69169a725f277e955eec0bf528db"/>
-        <topic label="whd_wifi_get_listen_interval" href="group__wifiutilities.html#ga5a62f0854ad148dde280b4f75596a309"/>
-        <topic label="whd_wifi_is_ready_to_transceive" href="group__wifiutilities.html#ga07144bbc68755481708752962538ee6f"/>
-        <topic label="whd_wifi_get_acparams" href="group__wifiutilities.html#gafe61d474712d3ce7e15ef371d87f54e5"/>
-        <topic label="whd_wifi_manage_custom_ie" href="group__wifiutilities.html#gaaf7be7d8099507426f52ecff8f716543"/>
-        <topic label="whd_wifi_send_action_frame" href="group__wifiutilities.html#ga2cf8ecd7c319660833bd30a060990dca"/>
+        <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gabd75a10a7f258a42cb4620db255d239a"/>
+        <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga16aa6ed1a8531775420a42b677401359"/>
+        <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gac929fa29049cd8b316cdab43099d5ff2"/>
+        <topic label="whd_wifi_get_mac_address" href="group__wifiutilities.html#ga56304c5255a0ac38892b7d071e5b141c"/>
+        <topic label="whd_wifi_get_bssid" href="group__wifiutilities.html#gaa7cbd36c92253606be155e88631167c5"/>
+        <topic label="whd_wifi_register_multicast_address" href="group__wifiutilities.html#ga7b501123c8b93e54e9696c96eba2f459"/>
+        <topic label="whd_wifi_unregister_multicast_address" href="group__wifiutilities.html#ga76cb42ea0d5a3f4e3884fcfa8a35fe41"/>
+        <topic label="whd_wifi_set_listen_interval" href="group__wifiutilities.html#ga49d6f2b4f41173e0c691ace247aa654d"/>
+        <topic label="whd_wifi_get_listen_interval" href="group__wifiutilities.html#ga6784a1eb2c42fda8ec7d037da056cb1b"/>
+        <topic label="whd_wifi_is_ready_to_transceive" href="group__wifiutilities.html#gaf8089b2625e77498fb3fbe117c5b6886"/>
+        <topic label="whd_wifi_get_acparams" href="group__wifiutilities.html#gad19147b67def79fa14cd54f587004555"/>
+        <topic label="whd_wifi_manage_custom_ie" href="group__wifiutilities.html#ga8cb13597c33e7e8c0549e88c561129e1"/>
+        <topic label="whd_wifi_send_action_frame" href="group__wifiutilities.html#gad2a7949bde2a0e578be1288a727cc82c"/>
         <topic label="whd_wifi_send_auth_frame" href="group__wifiutilities.html#ga48cd0946d2277a26ff6ddb4e601d7601"/>
-        <topic label="whd_wifi_he_omi" href="group__wifiutilities.html#gaae1e930cb505d3cd13d46cd8b77c841b"/>
-        <topic label="whd_wifi_bss_max_idle" href="group__wifiutilities.html#ga7190d986953fe92012bb973495c87f48"/>
-        <topic label="whd_wifi_itwt_setup" href="group__wifiutilities.html#ga54322c21ea7d6ee27db7cc921084ecbe"/>
-        <topic label="whd_wifi_btwt_join" href="group__wifiutilities.html#ga2dacd5151ab077f23ff2197ad033ae63"/>
-        <topic label="whd_wifi_twt_teardown" href="group__wifiutilities.html#ga81c6e1f320c6403816e9c56f91bbe4d4"/>
-        <topic label="whd_wifi_twt_information_frame" href="group__wifiutilities.html#ga74a103b9c2302f6c61515127e1401829"/>
-        <topic label="whd_wifi_btwt_config" href="group__wifiutilities.html#ga963f841413cd793138ef2451d0e68a49"/>
-        <topic label="whd_wifi_set_coex_config" href="group__wifiutilities.html#ga95237c0e6182bfb176519421ac9287b4"/>
-        <topic label="whd_wifi_set_auth_status" href="group__wifiutilities.html#gafad0f635db3968da01437542c13c91db"/>
+        <topic label="whd_wifi_he_omi" href="group__wifiutilities.html#gac2fb4db61762739fa1153b30e024e816"/>
+        <topic label="whd_wifi_bss_max_idle" href="group__wifiutilities.html#ga70f6401cd89d881beede2c93e43e3c70"/>
+        <topic label="whd_wifi_itwt_setup" href="group__wifiutilities.html#ga6512665ab2b6915c8070bf1b26ba75d1"/>
+        <topic label="whd_wifi_btwt_join" href="group__wifiutilities.html#ga82a85511a31e95f52b84d6cd12798c26"/>
+        <topic label="whd_wifi_twt_teardown" href="group__wifiutilities.html#ga41227b9976b2fc20e8b28c32408bfbe3"/>
+        <topic label="whd_wifi_twt_information_frame" href="group__wifiutilities.html#gad09c074ff80494d9df7ec9013736a856"/>
+        <topic label="whd_wifi_btwt_config" href="group__wifiutilities.html#ga3042bc2348ca131559f6e68723678702"/>
+        <topic label="whd_wifi_set_coex_config" href="group__wifiutilities.html#ga66489d815bb8d09075335a520f679b2c"/>
+        <topic label="whd_wifi_set_auth_status" href="group__wifiutilities.html#gaa3e2a5884bd9471a27d0fbe071b10ef7"/>
         <topic label="whd_wifi_get_fwcap" href="group__wifiutilities.html#ga1441ae647ff194b94413cbe2016be113"/>
         <topic label="whd_arp_version" href="group__wifiutilities.html#gae6bf707d845518cba9a8256fb5681f4a"/>
         <topic label="whd_arp_peerage_get" href="group__wifiutilities.html#ga2cd55bdc13221177c61310ecaa6f4bd7"/>
@@ -138,45 +140,55 @@
         <topic label="whd_tko_max_assoc" href="group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343"/>
         <topic label="whd_tko_get_FW_connect" href="group__wifiutilities.html#gacc2882e3a308f7b2b938bc5741ab43c3"/>
         <topic label="whd_tko_toggle" href="group__wifiutilities.html#ga189ed043d5ce9cf8d1a0845484a96d6b"/>
+        <topic label="whd_tko_filter" href="group__wifiutilities.html#ga253f6986d31c192750003ff912fa7f44"/>
       </topic>
       <topic label="WHD Wi-Fi SoftAP API" href="group__wifisoftap.html">
-        <topic label="whd_wifi_init_ap" href="group__wifisoftap.html#gab21ff21fba955160ccf66ceb4a4aafb0"/>
-        <topic label="whd_wifi_start_ap" href="group__wifisoftap.html#ga3c9aa99add3f6a6d13e9092bd6e1246b"/>
-        <topic label="whd_wifi_stop_ap" href="group__wifisoftap.html#ga2c6c28512678dc57dabb641c41e30d41"/>
-        <topic label="whd_wifi_ap_get_max_assoc" href="group__wifisoftap.html#ga32982684d093a173a6e578856b581d29"/>
-        <topic label="whd_wifi_get_associated_client_list" href="group__wifisoftap.html#ga9e974ab0fcc24698d01a5abc3e2c1dbb"/>
-        <topic label="whd_wifi_deauth_sta" href="group__wifisoftap.html#gad9ad2649c18db8773351a5938e7930e4"/>
-        <topic label="whd_wifi_get_ap_info" href="group__wifisoftap.html#ga95c40af4be45d119b737c0113d9a038e"/>
-        <topic label="whd_wifi_ap_set_beacon_interval" href="group__wifisoftap.html#gaf2758fcc1028704d801b16d77b96a345"/>
-        <topic label="whd_wifi_ap_set_dtim_interval" href="group__wifisoftap.html#ga57c57ad4d5acf499e90ff8db020fa2d9"/>
+        <topic label="whd_wifi_init_ap" href="group__wifisoftap.html#gaadae58f1d4df7841e8be7fafeae72450"/>
+        <topic label="whd_wifi_start_ap" href="group__wifisoftap.html#gaa8dae2c15fc1b0ce7d7d25c1a0c94319"/>
+        <topic label="whd_wifi_stop_ap" href="group__wifisoftap.html#ga7d01b60b83e6130cbce31f21db00cef5"/>
+        <topic label="whd_wifi_ap_get_max_assoc" href="group__wifisoftap.html#ga85719f47f4eb9eed7cc1a8e76f573432"/>
+        <topic label="whd_wifi_get_associated_client_list" href="group__wifisoftap.html#ga28218244e640e2821e7832d23b75d33f"/>
+        <topic label="whd_wifi_deauth_sta" href="group__wifisoftap.html#gaea93b14e2dee42b32029d0ec3990ff86"/>
+        <topic label="whd_wifi_get_ap_info" href="group__wifisoftap.html#ga4b7b3b58a4bcc68a642091c817bd32af"/>
+        <topic label="whd_wifi_ap_set_beacon_interval" href="group__wifisoftap.html#ga2b2b514109551abf57e79d0233818497"/>
+        <topic label="whd_wifi_ap_set_dtim_interval" href="group__wifisoftap.html#ga48ea6684564b9b79cfbbdf60916ce5c9"/>
       </topic>
       <topic label="WHD Wi-Fi Power Save API" href="group__wifipowersave.html">
-        <topic label="whd_wifi_enable_powersave" href="group__wifipowersave.html#ga05cfafe07ad2c208acfdee29f7c6e626"/>
-        <topic label="whd_wifi_enable_powersave_with_throughput" href="group__wifipowersave.html#ga6152d966f454fe8e8836472b802401c3"/>
-        <topic label="whd_wifi_get_powersave_mode" href="group__wifipowersave.html#ga3eed267d42020440a077d7649cde0567"/>
-        <topic label="whd_wifi_disable_powersave" href="group__wifipowersave.html#gab9af7ef8dac544f2bb8871259f85c437"/>
-        <topic label="whd_wifi_config_ulp_mode" href="group__wifipowersave.html#gad299c0905cb70379e2f483a5aad1327f"/>
+        <topic label="whd_wifi_enable_powersave" href="group__wifipowersave.html#ga3ae04a5a5f1def6b9a5f058906ad2332"/>
+        <topic label="whd_wifi_enable_powersave_with_throughput" href="group__wifipowersave.html#gaa1c30fb7db2b0e8a974102c5f025ff78"/>
+        <topic label="whd_wifi_get_powersave_mode" href="group__wifipowersave.html#ga25f625bcd458f724fb11549d79f2e9d2"/>
+        <topic label="whd_wifi_disable_powersave" href="group__wifipowersave.html#gab2c005a9374d05aae2b51f800b4c9644"/>
+        <topic label="whd_wifi_config_ulp_mode" href="group__wifipowersave.html#ga389db8a1c10c4662d55bb889036965b4"/>
       </topic>
       <topic label="WHD Wi-Fi IOCTL Set/Get API" href="group__wifiioctl.html">
-        <topic label="whd_wifi_set_ioctl_value" href="group__wifiioctl.html#gad54ac84589a14cc97429bf138fa32639"/>
-        <topic label="whd_wifi_get_ioctl_value" href="group__wifiioctl.html#ga817655c1372b8c87608b204105f06937"/>
-        <topic label="whd_wifi_set_ioctl_buffer" href="group__wifiioctl.html#ga5d7aec7622caacf4a0642cf1da1fa647"/>
-        <topic label="whd_wifi_get_ioctl_buffer" href="group__wifiioctl.html#gab1a4c2ae9163408ae92b3f292ee2807f"/>
-        <topic label="whd_wifi_get_iovar_buffer_with_param" href="group__wifiioctl.html#ga2b1cdfc36df80ca4700076fd2747b34e"/>
+        <topic label="whd_wifi_set_ioctl_value" href="group__wifiioctl.html#gaf3e0da6e70350e204b9085808f98b173"/>
+        <topic label="whd_wifi_get_ioctl_value" href="group__wifiioctl.html#gaa9fd47570676f2a47d67d922a960f175"/>
+        <topic label="whd_wifi_set_ioctl_buffer" href="group__wifiioctl.html#ga0cda2f7b96d2b6beb99c397342cda324"/>
+        <topic label="whd_wifi_get_ioctl_buffer" href="group__wifiioctl.html#gacafc79968242b824baaf63a419807d8d"/>
+        <topic label="whd_wifi_get_iovar_buffer_with_param" href="group__wifiioctl.html#ga851cf123cb495a37053dccc89ecdd522"/>
       </topic>
       <topic label="WHD Wi-Fi Debug API" href="group__dbg.html">
-        <topic label="whd_wifi_get_wifi_version" href="group__dbg.html#ga334e8f04bdbc06da6eadf29cea997b99"/>
-        <topic label="whd_wifi_get_clm_version" href="group__dbg.html#ga1e8a85564910052e82332a89db4d9ff5"/>
-        <topic label="whd_wifi_read_wlan_log" href="group__dbg.html#ga7f089a4c933c9c05a61e2cfc00fcb4f8"/>
-        <topic label="whd_wifi_print_whd_log" href="group__dbg.html#ga6435c76ac1eae5af952053d76d9c67ab"/>
-        <topic label="whd_network_get_ifidx_from_ifp" href="group__dbg.html#ga01abfdd80ff65c7cac64e0d7c2f93c60"/>
-        <topic label="whd_network_get_bsscfgidx_from_ifp" href="group__dbg.html#ga84376c0830fbdb04c67812243539d4c6"/>
-        <topic label="whd_wifi_get_bss_info" href="group__dbg.html#gab4a8c97085b18321d8d682b1578edf7d"/>
-        <topic label="whd_print_stats" href="group__dbg.html#gab6dca3a6d7a90a1f9d8fb18660048c18"/>
+        <topic label="deepsleep_cb_info" href="structdeepsleep__cb__info.html">
+          <topic label="callback" href="group__wifi.html#ga6b69ab13769b9f0dfbf3ca6d4266b340"/>
+          <topic label="ctx" href="group__wifi.html#ga1f6d09b30c54854dfca659b7463ac207"/>
+          <topic label="buf" href="group__wifi.html#ga1fe855c208bc17a51a4d34fefdb2d5b1"/>
+          <topic label="buflen" href="group__wifi.html#ga3a92b3e6d105dee4dd0b5ac8eefeb219"/>
+        </topic>
+        <topic label="whd_wifi_get_wifi_version" href="group__dbg.html#ga11041df00c4388b377fa896c7d123463"/>
+        <topic label="whd_wifi_get_clm_version" href="group__dbg.html#ga49dbde3a0df183dc760ff738bdaef24a"/>
+        <topic label="whd_wifi_read_wlan_log" href="group__dbg.html#ga78c9ec3412e5473820e9730bfcf3bd98"/>
+        <topic label="whd_wifi_print_whd_log" href="group__dbg.html#ga9cbe00c5f8ce33344ff24ee9ffa45b81"/>
+        <topic label="whd_network_get_ifidx_from_ifp" href="group__dbg.html#gac60179254bafbbe4a4685e41bb1f5141"/>
+        <topic label="whd_network_get_bsscfgidx_from_ifp" href="group__dbg.html#ga4df626e2c65cf42ed1c0a6c9eeb2779e"/>
+        <topic label="whd_wifi_get_bss_info" href="group__dbg.html#ga956afe6388d2d06a1df75146ca6b2e54"/>
+        <topic label="whd_print_stats" href="group__dbg.html#ga2dd26b0bfe26599da638e002d2002324"/>
+        <topic label="whd_wifi_get_deepsleep_stats" href="group__dbg.html#ga2b2d67fef2fa24fba58a00793a8ea2c7"/>
+        <topic label="whd_wifi_register_ds_callback" href="group__dbg.html#ga1bb177b65938fdcfe3ee543addd5e306"/>
+        <topic label="whd_wifi_deregister_ds_callback" href="group__dbg.html#ga9d7550b21cacd2ab114227af0da1f65f"/>
       </topic>
     </topic>
     <topic label="WHD Bus API" href="group__busapi.html">
-      <topic label="whd_bus_sdio_attach" href="group__busapi.html#ga9f08c5241843cbe2ef06ffa8bfb5118d"/>
+      <topic label="whd_bus_sdio_attach" href="group__busapi.html#ga360c394e2ee52c4a59ec5a092b6e54fa"/>
       <topic label="whd_bus_sdio_detach" href="group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da"/>
     </topic>
   </topic>
@@ -189,6 +201,53 @@
       <topic label="_pmkid_list" href="struct__pmkid__list.html">
         <topic label="npmkid" href="struct__pmkid__list.html#a32ad6657f812be13479ac99afd21d9da"/>
         <topic label="pmkid" href="struct__pmkid__list.html#a4b8f03d735b97a1aecb8867be75bec60"/>
+      </topic>
+      <topic label="deepsleep_cb_info" href="structdeepsleep__cb__info.html">
+        <topic label="callback" href="group__wifi.html#ga6b69ab13769b9f0dfbf3ca6d4266b340"/>
+        <topic label="ctx" href="group__wifi.html#ga1f6d09b30c54854dfca659b7463ac207"/>
+        <topic label="buf" href="group__wifi.html#ga1fe855c208bc17a51a4d34fefdb2d5b1"/>
+        <topic label="buflen" href="group__wifi.html#ga3a92b3e6d105dee4dd0b5ac8eefeb219"/>
+      </topic>
+      <topic label="ProtocolVersion" href="struct_protocol_version.html">
+        <topic label="major" href="struct_protocol_version.html#a5bd4e4c943762926c8f653b6224cced2"/>
+        <topic label="minor" href="struct_protocol_version.html#ae2f416b0a34b7beb4ed3873d791ac393"/>
+        <topic label="padding" href="struct_protocol_version.html#adc9958438bc5e8eb9b9b9ade76e37e79"/>
+      </topic>
+      <topic label="tls_param_info" href="structtls__param__info.html">
+        <topic label="version" href="structtls__param__info.html#abe1b247743d4691ae90a9b12b08cc176"/>
+        <topic label="compression_algorithm" href="structtls__param__info.html#a89392c23f4bc2c984200e7b20c8d2cc3"/>
+        <topic label="cipher_algorithm" href="structtls__param__info.html#a75ecac58277ac4806960879ca2fbb5c2"/>
+        <topic label="cipher_type" href="structtls__param__info.html#a851ffcf706b8439103ea26e95818de53"/>
+        <topic label="mac_algorithm" href="structtls__param__info.html#a2d3f0e71b1ae45f9dc1e3f59b78b05da"/>
+        <topic label="keepalive_interval" href="structtls__param__info.html#ac1d23332c723b90aea250e4b0b493038"/>
+        <topic label="read_master_key" href="structtls__param__info.html#a3aa9d344652892262b351ae1d4d9fd96"/>
+        <topic label="read_master_key_len" href="structtls__param__info.html#abe421e7afa2c1fb07c528ad836a2ba82"/>
+        <topic label="read_iv" href="structtls__param__info.html#aa1832eb9bea939091d05515d47e8ba3b"/>
+        <topic label="read_iv_len" href="structtls__param__info.html#af19a823586df0cf8be913ad32d62490b"/>
+        <topic label="read_mac_key" href="structtls__param__info.html#a7092ce510c6f1d616a3bcc6643aeccde"/>
+        <topic label="read_mac_key_len" href="structtls__param__info.html#a8eb9a5e86d566642f95dfebab3141718"/>
+        <topic label="read_sequence" href="structtls__param__info.html#a3c932dd0deeda6bc621c1bbe55dffd31"/>
+        <topic label="read_sequence_len" href="structtls__param__info.html#aebc00dbdae49e2c5ef6c85a79817946b"/>
+        <topic label="write_master_key" href="structtls__param__info.html#abb7164ed815c5714bea9f7bca035d74e"/>
+        <topic label="write_master_key_len" href="structtls__param__info.html#a3a642a5071cc2248e79f95f26473d9d6"/>
+        <topic label="write_iv" href="structtls__param__info.html#ac91776b522dbd8bb22395d0b7f50feb4"/>
+        <topic label="write_iv_len" href="structtls__param__info.html#aa0e5b8fff456b147088d5bf40fc504fc"/>
+        <topic label="write_mac_key" href="structtls__param__info.html#a12c12839d3aec43d59ed54df35a47714"/>
+        <topic label="write_mac_key_len" href="structtls__param__info.html#a18ac484dae57eae4e8b27dc2723dccc3"/>
+        <topic label="write_sequence" href="structtls__param__info.html#aea8283f7318bb7fa2675a41a7d27cfcb"/>
+        <topic label="write_sequence_len" href="structtls__param__info.html#aadf58f2ff0a0aeadae2ce213af69d6b0"/>
+        <topic label="tcp_ack_num" href="structtls__param__info.html#a976f6f1c45ab42d115aba558fd4d5627"/>
+        <topic label="tcp_seq_num" href="structtls__param__info.html#ac0cb03e0706dbf8f9c78a202a87b0099"/>
+        <topic label="local_ip" href="structtls__param__info.html#a0c6f5eae0588e77ddabc969a374289fe"/>
+        <topic label="remote_ip" href="structtls__param__info.html#a4d16f8c33b34aed2c85b7f1604063f50"/>
+        <topic label="local_port" href="structtls__param__info.html#a7c8171cd15cb1f99e0a352fef95750e3"/>
+        <topic label="remote_port" href="structtls__param__info.html#a78f55417df3c5a6ab11ece9f724e595e"/>
+        <topic label="local_mac_addr" href="structtls__param__info.html#a07698199b8c72d07f01f769dc7b60f62"/>
+        <topic label="remote_mac_addr" href="structtls__param__info.html#ac4a4d7db9d46529d6b23b81517fd9415"/>
+        <topic label="app_syncid" href="structtls__param__info.html#a9fae50ce7f3a6f22f83d0fc77e7a2c55"/>
+        <topic label="payload" href="structtls__param__info.html#a74eea8302318864de75f7412d2711c64"/>
+        <topic label="payload_len" href="structtls__param__info.html#a275f869dbba91f4716540a49b6c22532"/>
+        <topic label="encrypt_then_mac" href="structtls__param__info.html#a199203bc16e47500c9cf24f8ebafcc59"/>
       </topic>
       <topic label="whd_ap_info" href="structwhd__ap__info.html">
         <topic label="SSID" href="structwhd__ap__info.html#ae3940d431c3c3ed25294eb70a02c330b"/>
@@ -319,6 +378,11 @@
         <topic label="mantissa" href="structwhd__itwt__setup__params__t.html#af3e8ae277c955710b8b3163452e1b3fc"/>
         <topic label="wake_time_h" href="structwhd__itwt__setup__params__t.html#aa19d40094f177173b777582d3e0a0c65"/>
         <topic label="wake_time_l" href="structwhd__itwt__setup__params__t.html#a4b99597d91ed77eed387c7cc602effd2"/>
+      </topic>
+      <topic label="whd_keep_alive" href="structwhd__keep__alive.html">
+        <topic label="period_msec" href="structwhd__keep__alive.html#a67798d7358bbe819f22dc4c08019a78b"/>
+        <topic label="len_bytes" href="structwhd__keep__alive.html#a55990999e160ec20ac0d2b0c8ce8a4ce"/>
+        <topic label="data" href="structwhd__keep__alive.html#abe222f6d3581e7920dcad5306cc906a8"/>
       </topic>
       <topic label="whd_list_t" href="structwhd__list__t.html">
         <topic label="count" href="structwhd__list__t.html#a86988a65e0d3ece7990c032c159786d6"/>
@@ -584,10 +648,10 @@
           <topic label="WLC_SUP_KEYXCHANGE_WAIT_G1" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a"/>
           <topic label="WLC_SUP_KEYXCHANGE_PREP_G2" href="whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303"/>
         </topic>
-        <topic label="whd_wifi_set_event_handler" href="whd__events_8h.html#a4175c3ef9bb16601fabc605fadeaf8d8"/>
-        <topic label="whd_wifi_set_error_handler" href="whd__events_8h.html#a2072e91b840217584cfd60ad540b3146"/>
-        <topic label="whd_wifi_deregister_event_handler" href="whd__events_8h.html#ae415f1f3fcbbfe506aa0e656bf8debb3"/>
-        <topic label="whd_wifi_deregister_error_handler" href="whd__events_8h.html#aa7f28d32a8c06c7df471636de6f4dec6"/>
+        <topic label="whd_wifi_set_event_handler" href="whd__events_8h.html#ac2fa88545a7e177d4c6848324373654a"/>
+        <topic label="whd_wifi_set_error_handler" href="whd__events_8h.html#ae0b3dcb39d9c000c85baa001af6f495e"/>
+        <topic label="whd_wifi_deregister_event_handler" href="whd__events_8h.html#a0f47a09cb430f375bb51ff3959b191d1"/>
+        <topic label="whd_wifi_deregister_error_handler" href="whd__events_8h.html#a029a04e071abf7628ffdb4c8334f519d"/>
       </topic>
       <topic label="whd_network_types.h" href="whd__network__types_8h.html">
         <topic label="whd_buffer_dir_t" href="group__buffif.html#ga44a64c51498b204ceef5555209e29452">
@@ -829,6 +893,52 @@
           <topic label="pattern" href="structwhd__packet__filter__t.html#af42a55e4e3cdd2ea57e52a29a0d77ce3"/>
           <topic label="enabled_status" href="structwhd__packet__filter__t.html#ad9dfd7c243623af351789a69a792beb8"/>
         </topic>
+        <topic label="whd_keep_alive" href="structwhd__keep__alive.html">
+          <topic label="period_msec" href="structwhd__keep__alive.html#a67798d7358bbe819f22dc4c08019a78b"/>
+          <topic label="len_bytes" href="structwhd__keep__alive.html#a55990999e160ec20ac0d2b0c8ce8a4ce"/>
+          <topic label="data" href="structwhd__keep__alive.html#abe222f6d3581e7920dcad5306cc906a8"/>
+        </topic>
+        <topic label="ProtocolVersion" href="struct_protocol_version.html">
+          <topic label="major" href="struct_protocol_version.html#a5bd4e4c943762926c8f653b6224cced2"/>
+          <topic label="minor" href="struct_protocol_version.html#ae2f416b0a34b7beb4ed3873d791ac393"/>
+          <topic label="padding" href="struct_protocol_version.html#adc9958438bc5e8eb9b9b9ade76e37e79"/>
+        </topic>
+        <topic label="tls_param_info" href="structtls__param__info.html">
+          <topic label="version" href="structtls__param__info.html#abe1b247743d4691ae90a9b12b08cc176"/>
+          <topic label="compression_algorithm" href="structtls__param__info.html#a89392c23f4bc2c984200e7b20c8d2cc3"/>
+          <topic label="cipher_algorithm" href="structtls__param__info.html#a75ecac58277ac4806960879ca2fbb5c2"/>
+          <topic label="cipher_type" href="structtls__param__info.html#a851ffcf706b8439103ea26e95818de53"/>
+          <topic label="mac_algorithm" href="structtls__param__info.html#a2d3f0e71b1ae45f9dc1e3f59b78b05da"/>
+          <topic label="keepalive_interval" href="structtls__param__info.html#ac1d23332c723b90aea250e4b0b493038"/>
+          <topic label="read_master_key" href="structtls__param__info.html#a3aa9d344652892262b351ae1d4d9fd96"/>
+          <topic label="read_master_key_len" href="structtls__param__info.html#abe421e7afa2c1fb07c528ad836a2ba82"/>
+          <topic label="read_iv" href="structtls__param__info.html#aa1832eb9bea939091d05515d47e8ba3b"/>
+          <topic label="read_iv_len" href="structtls__param__info.html#af19a823586df0cf8be913ad32d62490b"/>
+          <topic label="read_mac_key" href="structtls__param__info.html#a7092ce510c6f1d616a3bcc6643aeccde"/>
+          <topic label="read_mac_key_len" href="structtls__param__info.html#a8eb9a5e86d566642f95dfebab3141718"/>
+          <topic label="read_sequence" href="structtls__param__info.html#a3c932dd0deeda6bc621c1bbe55dffd31"/>
+          <topic label="read_sequence_len" href="structtls__param__info.html#aebc00dbdae49e2c5ef6c85a79817946b"/>
+          <topic label="write_master_key" href="structtls__param__info.html#abb7164ed815c5714bea9f7bca035d74e"/>
+          <topic label="write_master_key_len" href="structtls__param__info.html#a3a642a5071cc2248e79f95f26473d9d6"/>
+          <topic label="write_iv" href="structtls__param__info.html#ac91776b522dbd8bb22395d0b7f50feb4"/>
+          <topic label="write_iv_len" href="structtls__param__info.html#aa0e5b8fff456b147088d5bf40fc504fc"/>
+          <topic label="write_mac_key" href="structtls__param__info.html#a12c12839d3aec43d59ed54df35a47714"/>
+          <topic label="write_mac_key_len" href="structtls__param__info.html#a18ac484dae57eae4e8b27dc2723dccc3"/>
+          <topic label="write_sequence" href="structtls__param__info.html#aea8283f7318bb7fa2675a41a7d27cfcb"/>
+          <topic label="write_sequence_len" href="structtls__param__info.html#aadf58f2ff0a0aeadae2ce213af69d6b0"/>
+          <topic label="tcp_ack_num" href="structtls__param__info.html#a976f6f1c45ab42d115aba558fd4d5627"/>
+          <topic label="tcp_seq_num" href="structtls__param__info.html#ac0cb03e0706dbf8f9c78a202a87b0099"/>
+          <topic label="local_ip" href="structtls__param__info.html#a0c6f5eae0588e77ddabc969a374289fe"/>
+          <topic label="remote_ip" href="structtls__param__info.html#a4d16f8c33b34aed2c85b7f1604063f50"/>
+          <topic label="local_port" href="structtls__param__info.html#a7c8171cd15cb1f99e0a352fef95750e3"/>
+          <topic label="remote_port" href="structtls__param__info.html#a78f55417df3c5a6ab11ece9f724e595e"/>
+          <topic label="local_mac_addr" href="structtls__param__info.html#a07698199b8c72d07f01f769dc7b60f62"/>
+          <topic label="remote_mac_addr" href="structtls__param__info.html#ac4a4d7db9d46529d6b23b81517fd9415"/>
+          <topic label="app_syncid" href="structtls__param__info.html#a9fae50ce7f3a6f22f83d0fc77e7a2c55"/>
+          <topic label="payload" href="structtls__param__info.html#a74eea8302318864de75f7412d2711c64"/>
+          <topic label="payload_len" href="structtls__param__info.html#a275f869dbba91f4716540a49b6c22532"/>
+          <topic label="encrypt_then_mac" href="structtls__param__info.html#a199203bc16e47500c9cf24f8ebafcc59"/>
+        </topic>
         <topic label="SSID_NAME_SIZE" href="whd__types_8h.html#a9ee2fe056ad3787e30bb8da7248592c7"/>
         <topic label="WEP_ENABLED" href="whd__types_8h.html#a4199a1b37dba92f482ff0b9eb406c323"/>
         <topic label="TKIP_ENABLED" href="whd__types_8h.html#a20f0d7118c2d35a688bcdc5b8b0920d9"/>
@@ -1001,6 +1111,13 @@
         <topic label="WHD_WLAN_NOBAND" href="whd__types_8h.html#ae528496ed94368d53b938f40aa8f089b"/>
         <topic label="PORT_FILTER_LEN" href="whd__types_8h.html#a7d8ed7e88b85772d09799ca87a27370d"/>
         <topic label="PACKET_FILTER_LIST_BUFFER_MAX_LEN" href="whd__types_8h.html#a1905b69d7646a2d2e21da7042bd14374"/>
+        <topic label="TLS_MAX_KEY_LENGTH" href="whd__types_8h.html#ac77184f45ce08103f9e9a90536d91f8e"/>
+        <topic label="TLS_MAX_MAC_KEY_LENGTH" href="whd__types_8h.html#ae3b229c8e14e30716b23f9fea8c2bebe"/>
+        <topic label="TLS_MAX_IV_LENGTH" href="whd__types_8h.html#adf30d64da245c7bbab46db8654532fd6"/>
+        <topic label="TLS_MAX_SEQUENCE_LENGTH" href="whd__types_8h.html#a357a4e54c0527d53aafc0ad4e9b4bcd3"/>
+        <topic label="TLS_MAX_PAYLOAD_LEN" href="whd__types_8h.html#a8d2c7a910b261553c7ad3e5e9467450d"/>
+        <topic label="ETHER_ADDR_LEN" href="whd__types_8h.html#abf4fcaacb1ad2010711b7c880ec2ed20"/>
+        <topic label="IPV4_ADDR_LEN" href="whd__types_8h.html#a9b265aeade41d30d1aa2a7ff81185450"/>
         <topic label="TKO_DATA_OFFSET" href="whd__types_8h.html#a3e98ad24780d89cefbec71da9fac2da6"/>
         <topic label="whd_scan_result_t" href="whd__types_8h.html#a58298b1b5c2f2425d5aed061de48aaa7"/>
         <topic label="whd_sync_scan_result_t" href="whd__types_8h.html#ab30a697b3ebbf2007dc09194b54b1a1b"/>
@@ -1021,6 +1138,8 @@
         <topic label="whd_oci_config_t" href="whd__types_8h.html#a6731d1e828d8be24f5af1972b48a7a48"/>
         <topic label="whd_btc_lescan_params_t" href="whd__types_8h.html#a98dae084aa15394bf6f8e907e09233a4"/>
         <topic label="whd_coex_config_t" href="whd__types_8h.html#a1cb4da9972e0e9317a6e26e2fd460902"/>
+        <topic label="whd_keep_alive_t" href="whd__types_8h.html#a733f6dc9b3c9802913f09b358ef21371"/>
+        <topic label="wl_wowl_tls_mode_t" href="whd__types_8h.html#a7bfec7a13f301130457694318eb25bd9"/>
         <topic label="whd_dot11_reason_code_t" href="whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55d">
           <topic label="WHD_DOT11_RC_RESERVED" href="whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55daf2b4dc47610f370bd154aa27c2434398"/>
           <topic label="WHD_DOT11_RC_UNSPECIFIED" href="whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55da03fab52dfc684e41485202d5a72588d1"/>
@@ -1414,82 +1533,123 @@
           <topic label="WHD_PACKET_FILTER_RULE_POSITIVE_MATCHING" href="whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038a75352695a5824e5b1759743869bca6d9"/>
           <topic label="WHD_PACKET_FILTER_RULE_NEGATIVE_MATCHING" href="whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038a1f6065677744b90d146bafbcb3832cac"/>
         </topic>
+        <topic label="wl_wowl_tls_mode" href="whd__types_8h.html#a9ad384ba9e695b2b61e368a070c5f011">
+          <topic label="TLS_MODE_SSWOWL" href="whd__types_8h.html#a9ad384ba9e695b2b61e368a070c5f011af6056815bbb2859a1b1eff647a63546c"/>
+          <topic label="TLS_MODE_MIWOWL" href="whd__types_8h.html#a9ad384ba9e695b2b61e368a070c5f011a8e56b9be2f504a8072882dd93596e75b"/>
+        </topic>
+        <topic label="Cipher_Suite_e" href="whd__types_8h.html#a3040f524f7553a65d16cf6be8437ddc7">
+          <topic label="TLS_RSA_WITH_AES_128_CBC_SHA" href="whd__types_8h.html#a3040f524f7553a65d16cf6be8437ddc7a66dbf1044b4f0573224f873645406ea5"/>
+          <topic label="TLS_RSA_WITH_AES_256_CBC_SHA" href="whd__types_8h.html#a3040f524f7553a65d16cf6be8437ddc7aea3afe3c79d6c2ada7b303f03e77f642"/>
+        </topic>
+        <topic label="ContentType_e" href="whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906">
+          <topic label="CONTENTTYPE_CHANGE_CIPHER_SPEC" href="whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906a4cd7b5c49f067abab8b6cd91413f1949"/>
+          <topic label="CONTENTTYPE_ALERT" href="whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906aa5cb11d64703692eed9dec35eb1fe70c"/>
+          <topic label="CONTENTTYPE_HANDSHAKE" href="whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906ad9b4426cabd8f511d8c4b1fb3862533a"/>
+          <topic label="CONTENTTYPE_APPLICATION_DATA" href="whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906a36c396102b8cc99f90b04e74c092697d"/>
+        </topic>
+        <topic label="CompressionMethod_e" href="whd__types_8h.html#a5e8b49805f566933f981f078e601fcee">
+          <topic label="COMPRESSIONMETHOD_NULL" href="whd__types_8h.html#a5e8b49805f566933f981f078e601fceeacfc4df5339914a17dc5d76b526f0854d"/>
+        </topic>
+        <topic label="BulkCipherAlgorithm_e" href="whd__types_8h.html#a9066e1495564559b4ca3c134970142e6">
+          <topic label="BULKCIPHERALGORITHM_NULL" href="whd__types_8h.html#a9066e1495564559b4ca3c134970142e6a56c826f95d3d30328a27953cd06518b0"/>
+          <topic label="BULKCIPHERALGORITHM_RC4" href="whd__types_8h.html#a9066e1495564559b4ca3c134970142e6a3e966d505f1035d00b3b5eb1e2f73e1a"/>
+          <topic label="BULKCIPHERALGORITHM_3DES" href="whd__types_8h.html#a9066e1495564559b4ca3c134970142e6ab0f4654db8ed8e936df3f844c3ac1024"/>
+          <topic label="BULKCIPHERALGORITHM_AES" href="whd__types_8h.html#a9066e1495564559b4ca3c134970142e6afd8db7dcc2d3a62e54e3826948328cbe"/>
+        </topic>
+        <topic label="CipherType_e" href="whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14c">
+          <topic label="CIPHERTYPE_STREAM" href="whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14ca5e09caa75c6a5c4dbe482dfb91bcbd07"/>
+          <topic label="CIPHERTYPE_BLOCK" href="whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14ca08ab86c387d080d3cb1580e96a5b1347"/>
+          <topic label="CIPHERTYPE_AEAD" href="whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14cad84ad513081aac6e64adc4ae0f7362cd"/>
+        </topic>
+        <topic label="MACAlgorithm_e" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600">
+          <topic label="MACALGORITHM_NULL" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a6a8191398cb0c2eaff4d504574cdf0f9"/>
+          <topic label="MACALGORITHM_HMAC_MD5" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600ae5ebf495142c88e47d4e929e981d0c15"/>
+          <topic label="MACALGORITHM_HMAC_SHA1" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a0172afda5f837ec4ce868cf3b58c0dde"/>
+          <topic label="MACALGORITHM_HMAC_SHA256" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a49b099e93514708ea20697b22d784a81"/>
+          <topic label="MACALGORITHM_HMAC_SHA384" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a1abd468efda0645365eeaf638d01453c"/>
+          <topic label="MACALGORITHM_HMAC_SHA512" href="whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600abe7a48b5cb3b031c4edc59be08dc84ab"/>
+        </topic>
       </topic>
       <topic label="whd_wifi_api.h" href="whd__wifi__api_8h.html">
+        <topic label="REMAINING_LEN" href="whd__wifi__api_8h.html#ad2660ec70ac3ba0350629daa44fe18ae"/>
         <topic label="whd_scan_result_callback_t" href="group__wifijoin.html#ga9f8c6096922212981dd2101a17aec471"/>
         <topic label="whd_auth_result_callback_t" href="group__wifijoin.html#ga2604c8dec9eff39e79b3281496da2611"/>
-        <topic label="whd_init" href="group__wifimanagement.html#ga286dde2ee65ac3ea5ae67a6e6ef25f0a"/>
-        <topic label="whd_bus_sdio_attach" href="group__busapi.html#ga9f08c5241843cbe2ef06ffa8bfb5118d"/>
+        <topic label="whd_ds_callback_t" href="group__dbg.html#gaa23e41f2a17585bcfbefb603eda678dd"/>
+        <topic label="deepsleep_cb_info_t" href="group__dbg.html#ga368ff04c3bc3c82139e0a5028e29f358"/>
+        <topic label="whd_init" href="group__wifimanagement.html#ga17a49bcd418b5e58f22980d35f43f371"/>
+        <topic label="whd_bus_sdio_attach" href="group__busapi.html#ga360c394e2ee52c4a59ec5a092b6e54fa"/>
         <topic label="whd_bus_sdio_detach" href="group__busapi.html#gadeed66e792eed64cbb6a0deef1dbe2da"/>
-        <topic label="whd_wifi_on" href="group__wifimanagement.html#ga1c8bf41b593cb947266f8690d495f381"/>
-        <topic label="whd_wifi_off" href="group__wifimanagement.html#ga422587a9b104a871233a42aceb2141d2"/>
-        <topic label="whd_deinit" href="group__wifimanagement.html#gab7d6e59874922e5646e08e52082e32f5"/>
-        <topic label="whd_wifi_set_up" href="group__wifimanagement.html#ga925da3b1ed914d7bb661d3cb2af50680"/>
-        <topic label="whd_wifi_set_down" href="group__wifimanagement.html#ga412c2d4653a7c36329c6cf78be344336"/>
-        <topic label="whd_add_secondary_interface" href="group__wifimanagement.html#ga553c009e9f6f856dfe243d745e21bbf9"/>
-        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#ga2752d761f639411027fffa67038d8a61"/>
-        <topic label="whd_wifi_scan" href="group__wifijoin.html#ga82d8c980d15acf0e6e18b56423f4e52b"/>
-        <topic label="whd_wifi_stop_scan" href="group__wifijoin.html#gacf8632bb68cef4d831083a66bee7b8fa"/>
-        <topic label="whd_wifi_external_auth_request" href="group__wifijoin.html#ga58ef7de14079c4b2b879e786a5e15c24"/>
-        <topic label="whd_wifi_stop_external_auth_request" href="group__wifijoin.html#gab5bc462251b6849ebd8e708a2560066d"/>
-        <topic label="whd_wifi_join" href="group__wifijoin.html#gac767814ae445f735b51686db20c780be"/>
-        <topic label="whd_wifi_join_specific" href="group__wifijoin.html#gae41c4ab0b2f3ecc433a6c4e89238b066"/>
-        <topic label="whd_wifi_set_chanspec" href="group__wifijoin.html#ga99f5e49ef124d6522fb5290c913cd838"/>
-        <topic label="whd_wifi_set_channel" href="group__wifiutilities.html#ga168fb83b839bab61d2c9d3b1f42a6782"/>
-        <topic label="whd_wifi_get_channel" href="group__wifiutilities.html#gab81522c25d723fbe18b90871a278ba9d"/>
-        <topic label="whd_wifi_get_channels" href="group__wifiutilities.html#ga7cfb1e5b84aea5dc7b3ebf6bbf0421a6"/>
-        <topic label="whd_wifi_set_passphrase" href="group__wifiutilities.html#ga893ccaef6ed5d0afe95a96bbe89e8a80"/>
-        <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga977fe2ff7c3f6966ffc40fda0e9694a8"/>
-        <topic label="whd_wifi_offload_config" href="group__wifiutilities.html#gae2a0ccc383656e145fc16689c8dfcffd"/>
-        <topic label="whd_wifi_offload_ipv4_update" href="group__wifiutilities.html#gaf71e71af4b557ebb46190c32847632d0"/>
-        <topic label="whd_wifi_offload_ipv6_update" href="group__wifiutilities.html#ga70646388c3bc4519a04716d890b86caa"/>
-        <topic label="whd_wifi_offload_enable" href="group__wifiutilities.html#gaaacc373db21154b5b9e919a490b71bf6"/>
+        <topic label="whd_wifi_on" href="group__wifimanagement.html#ga3c6051b713ad060d3c952e701c0a8c3b"/>
+        <topic label="whd_wifi_off" href="group__wifimanagement.html#ga57d010b6c6f11339841c4b65f7814e93"/>
+        <topic label="whd_deinit" href="group__wifimanagement.html#gae21463d0daa71580109215639b306751"/>
+        <topic label="whd_wifi_set_up" href="group__wifimanagement.html#ga79bae132535b03baca5e000783e5818f"/>
+        <topic label="whd_wifi_set_down" href="group__wifimanagement.html#gaddabdd109bae0292e8e6e2e708b92062"/>
+        <topic label="whd_add_secondary_interface" href="group__wifimanagement.html#ga35c3829c26a03a3862a584a2ef9f93e1"/>
+        <topic label="whd_wifi_scan_synch" href="group__wifijoin.html#gad89b3244a31c2ed9122d266b7f99def0"/>
+        <topic label="whd_wifi_scan" href="group__wifijoin.html#ga253707d44ba49bb46256b38c1c1a204e"/>
+        <topic label="whd_wifi_stop_scan" href="group__wifijoin.html#ga1b67138e3689fb66ce526810ed188f4d"/>
+        <topic label="whd_wifi_external_auth_request" href="group__wifijoin.html#ga7a393cc47dd501a2bf00d4a0d305dd6e"/>
+        <topic label="whd_wifi_stop_external_auth_request" href="group__wifijoin.html#gaf24ce3dea8e8e0d61f5ee82e2429b1b4"/>
+        <topic label="whd_wifi_join" href="group__wifijoin.html#gafde10c6bc61306ec3292a0aede919baf"/>
+        <topic label="whd_wifi_join_specific" href="group__wifijoin.html#ga149e2de0e902c6f7de181c65f93dff3c"/>
+        <topic label="whd_wifi_set_chanspec" href="group__wifijoin.html#gab76c5c1b2c85ba90657b0fe249fc8ebd"/>
+        <topic label="whd_wifi_set_channel" href="group__wifiutilities.html#gad00fb03d006c24cbcef95f3f854b7684"/>
+        <topic label="whd_wifi_get_channel" href="group__wifiutilities.html#ga5bd4f005033f0b0866813fa02044a1da"/>
+        <topic label="whd_wifi_get_channels" href="group__wifiutilities.html#gaa46dc0ebd537da9b2c2cfba451be7a38"/>
+        <topic label="whd_wifi_set_passphrase" href="group__wifiutilities.html#gab13513230a025dbfc29df76b0ed10222"/>
+        <topic label="whd_wifi_sae_password" href="group__wifiutilities.html#ga3b0acddff0ff8c467f111abcb3d2b43a"/>
+        <topic label="whd_wifi_offload_config" href="group__wifiutilities.html#ga15806d2cb87d117b4dcaf51bc1c1b99e"/>
+        <topic label="whd_wifi_offload_ipv4_update" href="group__wifiutilities.html#gafebf9c76eea2b56e4c2916cc15f34fc9"/>
+        <topic label="whd_wifi_offload_ipv6_update" href="group__wifiutilities.html#gaf0e49257ee875d148d37cc67099ee0cd"/>
+        <topic label="whd_wifi_offload_enable" href="group__wifiutilities.html#ga185890900617bcbb760ed090975ea977"/>
         <topic label="whd_configure_wowl" href="group__wifiutilities.html#gac12db78aeb2fda7e6e73ce26926477d5"/>
-        <topic label="whd_configure_tko_offload" href="group__wifiutilities.html#gabe3b791cbd725db296d63cb9959b0e36"/>
-        <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#gae118219bea1b82ae76a5c1ee5f7f302c"/>
+        <topic label="whd_wifi_keepalive_config" href="group__wifiutilities.html#ga6a213e11cb2201d251d5bf111f87e239"/>
+        <topic label="whd_configure_tko_offload" href="group__wifiutilities.html#ga92b6063464e66c62c633fc19ca73d68c"/>
+        <topic label="whd_configure_tko_filter" href="group__wifiutilities.html#gadace029a782307a9c1c0973095cbda69"/>
+        <topic label="whd_wifi_enable_sup_set_passphrase" href="group__wifiutilities.html#ga6b3c6e45e7311893f1019124d2fe85b1"/>
         <topic label="whd_wifi_set_pmk" href="group__wifiutilities.html#gae9d18a43c3e8e09f38ecb5adbda450b9"/>
         <topic label="whd_wifi_set_roam_time_threshold" href="group__wifiutilities.html#ga96d5646b67b4ae5ec78f1a23789caca1"/>
-        <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gad2daa1aba4dccd3f0506950ccee42113"/>
+        <topic label="whd_wifi_enable_supplicant" href="group__wifiutilities.html#gadcd78be7647dc8a5a1040d40950aff9c"/>
         <topic label="whd_wifi_set_pmksa" href="group__wifiutilities.html#gaff1c3d13edc4ceee2bebaeb93ec7a9c8"/>
         <topic label="whd_wifi_pmkid_clear" href="group__wifiutilities.html#ga112a1fa7274b896e41ee98f88f943c62"/>
-        <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gaf82eda2ff9979b1bc053a6d7f1f4b125"/>
-        <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga6ac8ec63a66fc046979bae1e809b0d25"/>
-        <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gab571b303f19131fd032fba4b744dbf20"/>
-        <topic label="whd_wifi_leave" href="group__wifijoin.html#ga971ed7d8e459c715aa9bf3c52b563d8b"/>
-        <topic label="whd_wifi_get_mac_address" href="group__wifiutilities.html#ga8a634822973adc75a61a05eb2b664ef5"/>
-        <topic label="whd_wifi_get_bssid" href="group__wifiutilities.html#ga52d3190589758d9fd36a7b27a9d08f28"/>
-        <topic label="whd_wifi_init_ap" href="group__wifisoftap.html#gab21ff21fba955160ccf66ceb4a4aafb0"/>
-        <topic label="whd_wifi_start_ap" href="group__wifisoftap.html#ga3c9aa99add3f6a6d13e9092bd6e1246b"/>
-        <topic label="whd_wifi_stop_ap" href="group__wifisoftap.html#ga2c6c28512678dc57dabb641c41e30d41"/>
-        <topic label="whd_wifi_ap_get_max_assoc" href="group__wifisoftap.html#ga32982684d093a173a6e578856b581d29"/>
-        <topic label="whd_wifi_get_associated_client_list" href="group__wifisoftap.html#ga9e974ab0fcc24698d01a5abc3e2c1dbb"/>
-        <topic label="whd_wifi_deauth_sta" href="group__wifisoftap.html#gad9ad2649c18db8773351a5938e7930e4"/>
-        <topic label="whd_wifi_get_ap_info" href="group__wifisoftap.html#ga95c40af4be45d119b737c0113d9a038e"/>
-        <topic label="whd_wifi_ap_set_beacon_interval" href="group__wifisoftap.html#gaf2758fcc1028704d801b16d77b96a345"/>
-        <topic label="whd_wifi_ap_set_dtim_interval" href="group__wifisoftap.html#ga57c57ad4d5acf499e90ff8db020fa2d9"/>
-        <topic label="whd_wifi_enable_powersave" href="group__wifipowersave.html#ga05cfafe07ad2c208acfdee29f7c6e626"/>
-        <topic label="whd_wifi_enable_powersave_with_throughput" href="group__wifipowersave.html#ga6152d966f454fe8e8836472b802401c3"/>
-        <topic label="whd_wifi_get_powersave_mode" href="group__wifipowersave.html#ga3eed267d42020440a077d7649cde0567"/>
-        <topic label="whd_wifi_disable_powersave" href="group__wifipowersave.html#gab9af7ef8dac544f2bb8871259f85c437"/>
-        <topic label="whd_wifi_config_ulp_mode" href="group__wifipowersave.html#gad299c0905cb70379e2f483a5aad1327f"/>
-        <topic label="whd_wifi_register_multicast_address" href="group__wifiutilities.html#gab36ff07aa1d825c0366c82ce003dd9f6"/>
-        <topic label="whd_wifi_unregister_multicast_address" href="group__wifiutilities.html#gad092a543b73e91c7090875ccb940e01f"/>
-        <topic label="whd_wifi_set_listen_interval" href="group__wifiutilities.html#gac93f69169a725f277e955eec0bf528db"/>
-        <topic label="whd_wifi_get_listen_interval" href="group__wifiutilities.html#ga5a62f0854ad148dde280b4f75596a309"/>
-        <topic label="whd_wifi_is_ready_to_transceive" href="group__wifiutilities.html#ga07144bbc68755481708752962538ee6f"/>
-        <topic label="whd_wifi_get_acparams" href="group__wifiutilities.html#gafe61d474712d3ce7e15ef371d87f54e5"/>
-        <topic label="whd_wifi_manage_custom_ie" href="group__wifiutilities.html#gaaf7be7d8099507426f52ecff8f716543"/>
-        <topic label="whd_wifi_send_action_frame" href="group__wifiutilities.html#ga2cf8ecd7c319660833bd30a060990dca"/>
+        <topic label="whd_wifi_get_rssi" href="group__wifiutilities.html#gabd75a10a7f258a42cb4620db255d239a"/>
+        <topic label="whd_wifi_get_roam_time_threshold" href="group__wifiutilities.html#ga16aa6ed1a8531775420a42b677401359"/>
+        <topic label="whd_wifi_get_ap_client_rssi" href="group__wifiutilities.html#gac929fa29049cd8b316cdab43099d5ff2"/>
+        <topic label="whd_wifi_leave" href="group__wifijoin.html#gaf5c47285f84de334d0991e092c903153"/>
+        <topic label="whd_wifi_get_mac_address" href="group__wifiutilities.html#ga56304c5255a0ac38892b7d071e5b141c"/>
+        <topic label="whd_wifi_get_bssid" href="group__wifiutilities.html#gaa7cbd36c92253606be155e88631167c5"/>
+        <topic label="whd_wifi_init_ap" href="group__wifisoftap.html#gaadae58f1d4df7841e8be7fafeae72450"/>
+        <topic label="whd_wifi_start_ap" href="group__wifisoftap.html#gaa8dae2c15fc1b0ce7d7d25c1a0c94319"/>
+        <topic label="whd_wifi_stop_ap" href="group__wifisoftap.html#ga7d01b60b83e6130cbce31f21db00cef5"/>
+        <topic label="whd_wifi_ap_get_max_assoc" href="group__wifisoftap.html#ga85719f47f4eb9eed7cc1a8e76f573432"/>
+        <topic label="whd_wifi_get_associated_client_list" href="group__wifisoftap.html#ga28218244e640e2821e7832d23b75d33f"/>
+        <topic label="whd_wifi_deauth_sta" href="group__wifisoftap.html#gaea93b14e2dee42b32029d0ec3990ff86"/>
+        <topic label="whd_wifi_get_ap_info" href="group__wifisoftap.html#ga4b7b3b58a4bcc68a642091c817bd32af"/>
+        <topic label="whd_wifi_ap_set_beacon_interval" href="group__wifisoftap.html#ga2b2b514109551abf57e79d0233818497"/>
+        <topic label="whd_wifi_ap_set_dtim_interval" href="group__wifisoftap.html#ga48ea6684564b9b79cfbbdf60916ce5c9"/>
+        <topic label="whd_wifi_enable_powersave" href="group__wifipowersave.html#ga3ae04a5a5f1def6b9a5f058906ad2332"/>
+        <topic label="whd_wifi_enable_powersave_with_throughput" href="group__wifipowersave.html#gaa1c30fb7db2b0e8a974102c5f025ff78"/>
+        <topic label="whd_wifi_get_powersave_mode" href="group__wifipowersave.html#ga25f625bcd458f724fb11549d79f2e9d2"/>
+        <topic label="whd_wifi_disable_powersave" href="group__wifipowersave.html#gab2c005a9374d05aae2b51f800b4c9644"/>
+        <topic label="whd_wifi_config_ulp_mode" href="group__wifipowersave.html#ga389db8a1c10c4662d55bb889036965b4"/>
+        <topic label="whd_wifi_register_multicast_address" href="group__wifiutilities.html#ga7b501123c8b93e54e9696c96eba2f459"/>
+        <topic label="whd_wifi_unregister_multicast_address" href="group__wifiutilities.html#ga76cb42ea0d5a3f4e3884fcfa8a35fe41"/>
+        <topic label="whd_wifi_set_listen_interval" href="group__wifiutilities.html#ga49d6f2b4f41173e0c691ace247aa654d"/>
+        <topic label="whd_wifi_get_listen_interval" href="group__wifiutilities.html#ga6784a1eb2c42fda8ec7d037da056cb1b"/>
+        <topic label="whd_wifi_is_ready_to_transceive" href="group__wifiutilities.html#gaf8089b2625e77498fb3fbe117c5b6886"/>
+        <topic label="whd_wifi_get_acparams" href="group__wifiutilities.html#gad19147b67def79fa14cd54f587004555"/>
+        <topic label="whd_wifi_manage_custom_ie" href="group__wifiutilities.html#ga8cb13597c33e7e8c0549e88c561129e1"/>
+        <topic label="whd_wifi_send_action_frame" href="group__wifiutilities.html#gad2a7949bde2a0e578be1288a727cc82c"/>
         <topic label="whd_wifi_send_auth_frame" href="group__wifiutilities.html#ga48cd0946d2277a26ff6ddb4e601d7601"/>
-        <topic label="whd_wifi_he_omi" href="group__wifiutilities.html#gaae1e930cb505d3cd13d46cd8b77c841b"/>
-        <topic label="whd_wifi_bss_max_idle" href="group__wifiutilities.html#ga7190d986953fe92012bb973495c87f48"/>
-        <topic label="whd_wifi_itwt_setup" href="group__wifiutilities.html#ga54322c21ea7d6ee27db7cc921084ecbe"/>
-        <topic label="whd_wifi_btwt_join" href="group__wifiutilities.html#ga2dacd5151ab077f23ff2197ad033ae63"/>
-        <topic label="whd_wifi_twt_teardown" href="group__wifiutilities.html#ga81c6e1f320c6403816e9c56f91bbe4d4"/>
-        <topic label="whd_wifi_twt_information_frame" href="group__wifiutilities.html#ga74a103b9c2302f6c61515127e1401829"/>
-        <topic label="whd_wifi_btwt_config" href="group__wifiutilities.html#ga963f841413cd793138ef2451d0e68a49"/>
-        <topic label="whd_wifi_set_coex_config" href="group__wifiutilities.html#ga95237c0e6182bfb176519421ac9287b4"/>
-        <topic label="whd_wifi_set_auth_status" href="group__wifiutilities.html#gafad0f635db3968da01437542c13c91db"/>
+        <topic label="whd_wifi_he_omi" href="group__wifiutilities.html#gac2fb4db61762739fa1153b30e024e816"/>
+        <topic label="whd_wifi_bss_max_idle" href="group__wifiutilities.html#ga70f6401cd89d881beede2c93e43e3c70"/>
+        <topic label="whd_wifi_itwt_setup" href="group__wifiutilities.html#ga6512665ab2b6915c8070bf1b26ba75d1"/>
+        <topic label="whd_wifi_btwt_join" href="group__wifiutilities.html#ga82a85511a31e95f52b84d6cd12798c26"/>
+        <topic label="whd_wifi_twt_teardown" href="group__wifiutilities.html#ga41227b9976b2fc20e8b28c32408bfbe3"/>
+        <topic label="whd_wifi_twt_information_frame" href="group__wifiutilities.html#gad09c074ff80494d9df7ec9013736a856"/>
+        <topic label="whd_wifi_btwt_config" href="group__wifiutilities.html#ga3042bc2348ca131559f6e68723678702"/>
+        <topic label="whd_wifi_set_coex_config" href="group__wifiutilities.html#ga66489d815bb8d09075335a520f679b2c"/>
+        <topic label="whd_wifi_set_auth_status" href="group__wifiutilities.html#gaa3e2a5884bd9471a27d0fbe071b10ef7"/>
         <topic label="whd_wifi_get_fwcap" href="group__wifiutilities.html#ga1441ae647ff194b94413cbe2016be113"/>
         <topic label="whd_arp_version" href="group__wifiutilities.html#gae6bf707d845518cba9a8256fb5681f4a"/>
         <topic label="whd_arp_peerage_get" href="group__wifiutilities.html#ga2cd55bdc13221177c61310ecaa6f4bd7"/>
@@ -1522,19 +1682,23 @@
         <topic label="whd_tko_max_assoc" href="group__wifiutilities.html#ga70cacca6b62ca658882d9070c49b6343"/>
         <topic label="whd_tko_get_FW_connect" href="group__wifiutilities.html#gacc2882e3a308f7b2b938bc5741ab43c3"/>
         <topic label="whd_tko_toggle" href="group__wifiutilities.html#ga189ed043d5ce9cf8d1a0845484a96d6b"/>
-        <topic label="whd_wifi_set_ioctl_value" href="group__wifiioctl.html#gad54ac84589a14cc97429bf138fa32639"/>
-        <topic label="whd_wifi_get_ioctl_value" href="group__wifiioctl.html#ga817655c1372b8c87608b204105f06937"/>
-        <topic label="whd_wifi_set_ioctl_buffer" href="group__wifiioctl.html#ga5d7aec7622caacf4a0642cf1da1fa647"/>
-        <topic label="whd_wifi_get_ioctl_buffer" href="group__wifiioctl.html#gab1a4c2ae9163408ae92b3f292ee2807f"/>
-        <topic label="whd_wifi_get_iovar_buffer_with_param" href="group__wifiioctl.html#ga2b1cdfc36df80ca4700076fd2747b34e"/>
-        <topic label="whd_wifi_get_wifi_version" href="group__dbg.html#ga334e8f04bdbc06da6eadf29cea997b99"/>
-        <topic label="whd_wifi_get_clm_version" href="group__dbg.html#ga1e8a85564910052e82332a89db4d9ff5"/>
-        <topic label="whd_wifi_read_wlan_log" href="group__dbg.html#ga7f089a4c933c9c05a61e2cfc00fcb4f8"/>
-        <topic label="whd_wifi_print_whd_log" href="group__dbg.html#ga6435c76ac1eae5af952053d76d9c67ab"/>
-        <topic label="whd_network_get_ifidx_from_ifp" href="group__dbg.html#ga01abfdd80ff65c7cac64e0d7c2f93c60"/>
-        <topic label="whd_network_get_bsscfgidx_from_ifp" href="group__dbg.html#ga84376c0830fbdb04c67812243539d4c6"/>
-        <topic label="whd_wifi_get_bss_info" href="group__dbg.html#gab4a8c97085b18321d8d682b1578edf7d"/>
-        <topic label="whd_print_stats" href="group__dbg.html#gab6dca3a6d7a90a1f9d8fb18660048c18"/>
+        <topic label="whd_tko_filter" href="group__wifiutilities.html#ga253f6986d31c192750003ff912fa7f44"/>
+        <topic label="whd_wifi_set_ioctl_value" href="group__wifiioctl.html#gaf3e0da6e70350e204b9085808f98b173"/>
+        <topic label="whd_wifi_get_ioctl_value" href="group__wifiioctl.html#gaa9fd47570676f2a47d67d922a960f175"/>
+        <topic label="whd_wifi_set_ioctl_buffer" href="group__wifiioctl.html#ga0cda2f7b96d2b6beb99c397342cda324"/>
+        <topic label="whd_wifi_get_ioctl_buffer" href="group__wifiioctl.html#gacafc79968242b824baaf63a419807d8d"/>
+        <topic label="whd_wifi_get_iovar_buffer_with_param" href="group__wifiioctl.html#ga851cf123cb495a37053dccc89ecdd522"/>
+        <topic label="whd_wifi_get_wifi_version" href="group__dbg.html#ga11041df00c4388b377fa896c7d123463"/>
+        <topic label="whd_wifi_get_clm_version" href="group__dbg.html#ga49dbde3a0df183dc760ff738bdaef24a"/>
+        <topic label="whd_wifi_read_wlan_log" href="group__dbg.html#ga78c9ec3412e5473820e9730bfcf3bd98"/>
+        <topic label="whd_wifi_print_whd_log" href="group__dbg.html#ga9cbe00c5f8ce33344ff24ee9ffa45b81"/>
+        <topic label="whd_network_get_ifidx_from_ifp" href="group__dbg.html#gac60179254bafbbe4a4685e41bb1f5141"/>
+        <topic label="whd_network_get_bsscfgidx_from_ifp" href="group__dbg.html#ga4df626e2c65cf42ed1c0a6c9eeb2779e"/>
+        <topic label="whd_wifi_get_bss_info" href="group__dbg.html#ga956afe6388d2d06a1df75146ca6b2e54"/>
+        <topic label="whd_print_stats" href="group__dbg.html#ga2dd26b0bfe26599da638e002d2002324"/>
+        <topic label="whd_wifi_get_deepsleep_stats" href="group__dbg.html#ga2b2d67fef2fa24fba58a00793a8ea2c7"/>
+        <topic label="whd_wifi_register_ds_callback" href="group__dbg.html#ga1bb177b65938fdcfe3ee543addd5e306"/>
+        <topic label="whd_wifi_deregister_ds_callback" href="group__dbg.html#ga9d7550b21cacd2ab114227af0da1f65f"/>
       </topic>
     </topic>
     <topic label="Globals" href="globals.html">

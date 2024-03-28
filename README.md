@@ -25,4 +25,3 @@ The [release notes](./RELEASE.md) detail the current release. You can also find 
 * [Infineon Technologies](http://www.infineon.com)
 
 ---
-© Infineon Technologies, 2019.

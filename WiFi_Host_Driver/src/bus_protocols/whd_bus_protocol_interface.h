@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -86,7 +86,7 @@ extern whd_result_t whd_bus_share_bt_init(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_bt_attach(whd_driver_t whd_driver, void *btdata,
                                       void (*bt_int_fun)(void *data) );
 extern void whd_bus_bt_detach(whd_driver_t whd_driver);
-extern uint32_t whd_get_bt_info(whd_driver_t whd_drv, whd_bt_info_t bt_info);
+extern whd_result_t whd_get_bt_info(whd_driver_t whd_drv, whd_bt_info_t bt_info);
 /* Initialisation functions */
 extern whd_result_t whd_bus_init(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_deinit(whd_driver_t whd_driver);

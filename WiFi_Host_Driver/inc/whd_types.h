@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -65,9 +65,9 @@ extern "C"
 
 #define PMKID_LEN                   (16) /**< PMKID LENGTH */
 
-#define ULP_NO_SUPPORT              (0) /* Flag to disable ULP in 43022 */
-#define ULP_DS1_SUPPORT             (1) /* Flag to enable DS1 mode in 43022 */
-#define ULP_DS2_SUPPORT             (2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */
+#define ULP_NO_SUPPORT              (0) /**< Flag to disable ULP in 43022 */
+#define ULP_DS1_SUPPORT             (1) /**< Flag to enable DS1 mode in 43022 */
+#define ULP_DS2_SUPPORT             (2) /**< Flag to enable DS2 mode in 43022(Only supported in DM) */
 #define WHD_OOB_CONFIG_VERSION      (2) /**< Indicate the version for whd_oob_config structure */
 #define WHD_SAP_USE_CHANSPEC        (1) /**< Define this macro as any value indicate whd_wifi_init_ap api uses chanspec instead of channel */
 
@@ -104,6 +104,10 @@ typedef struct wl_pkt_filter_stats whd_pkt_filter_stats_t;
 typedef struct whd_tko_retry whd_tko_retry_t;
 typedef struct whd_tko_connect whd_tko_connect_t;
 typedef struct whd_tko_status whd_tko_status_t;
+typedef struct whd_tko_auto_filter whd_tko_auto_filter_t;
+typedef struct whd_tko_autoconnect whd_tko_autoconnect_t;
+typedef struct tls_param_info  tls_param_info_t;
+typedef struct secure_sess_info secure_sess_info_t;
 /** @endcond */
 /******************************************************
 *                    Constants
@@ -1290,6 +1294,110 @@ typedef struct
     uint8_t *pattern;                             /**< Pattern bytes used to filter eg. "\x0800"  (must be in network byte order) */
     whd_bool_t enabled_status;                     /**< When returned from wwd_wifi_get_packet_filters, indicates if the filter is enabled */
 } whd_packet_filter_t;
+
+typedef struct whd_keep_alive
+{
+    uint32_t period_msec;
+    uint16_t len_bytes;
+    uint8_t *data;
+} whd_keep_alive_t;
+
+#define TLS_MAX_KEY_LENGTH           48
+#define TLS_MAX_MAC_KEY_LENGTH       32
+#define TLS_MAX_IV_LENGTH            32
+#define TLS_MAX_SEQUENCE_LENGTH      8
+#define TLS_MAX_PAYLOAD_LEN          1024
+
+/* Secured WOWL packet was encrypted, need decrypted before check filter match */
+typedef enum wl_wowl_tls_mode{
+    TLS_MODE_SSWOWL,
+    TLS_MODE_MIWOWL
+} wl_wowl_tls_mode_t;
+
+/* add supported cipher suite according rfc5246#appendix-A.5 */
+typedef enum {
+    TLS_RSA_WITH_AES_128_CBC_SHA     =     0x002F,
+    TLS_RSA_WITH_AES_256_CBC_SHA     =     0x0035
+} Cipher_Suite_e;
+
+typedef enum {
+    CONTENTTYPE_CHANGE_CIPHER_SPEC = 20,
+    CONTENTTYPE_ALERT,
+    CONTENTTYPE_HANDSHAKE,
+    CONTENTTYPE_APPLICATION_DATA
+} ContentType_e;
+
+typedef enum {
+    COMPRESSIONMETHOD_NULL = 0
+} CompressionMethod_e;
+
+typedef enum {
+    BULKCIPHERALGORITHM_NULL,
+    BULKCIPHERALGORITHM_RC4,
+    BULKCIPHERALGORITHM_3DES,
+    BULKCIPHERALGORITHM_AES
+} BulkCipherAlgorithm_e;
+
+typedef enum {
+    CIPHERTYPE_STREAM = 1,
+    CIPHERTYPE_BLOCK,
+    CIPHERTYPE_AEAD
+} CipherType_e;
+
+typedef enum {
+    MACALGORITHM_NULL,
+    MACALGORITHM_HMAC_MD5,
+    MACALGORITHM_HMAC_SHA1,
+    MACALGORITHM_HMAC_SHA256,
+    MACALGORITHM_HMAC_SHA384,
+    MACALGORITHM_HMAC_SHA512
+} MACAlgorithm_e;
+
+typedef struct {
+    uint8_t major;
+    uint8_t minor;
+    uint8_t padding[2];
+} ProtocolVersion;
+
+#define ETHER_ADDR_LEN      6
+#define IPV4_ADDR_LEN       4
+
+struct tls_param_info{
+    ProtocolVersion version;
+    uint32_t compression_algorithm;
+    uint32_t cipher_algorithm;
+    uint32_t cipher_type;
+    uint32_t mac_algorithm;
+    uint32_t keepalive_interval; /* keepalive interval, in seconds */
+    uint8_t read_master_key[TLS_MAX_KEY_LENGTH];
+    uint32_t read_master_key_len;
+    uint8_t read_iv[TLS_MAX_IV_LENGTH];
+    uint32_t read_iv_len;
+    uint8_t read_mac_key[TLS_MAX_MAC_KEY_LENGTH];
+    uint32_t read_mac_key_len;
+    uint8_t read_sequence[TLS_MAX_SEQUENCE_LENGTH];
+    uint32_t read_sequence_len;
+    uint8_t write_master_key[TLS_MAX_KEY_LENGTH];
+    uint32_t write_master_key_len;
+    uint8_t write_iv[TLS_MAX_IV_LENGTH];
+    uint32_t write_iv_len;
+    uint8_t write_mac_key[TLS_MAX_MAC_KEY_LENGTH];
+    uint32_t write_mac_key_len;
+    uint8_t write_sequence[TLS_MAX_SEQUENCE_LENGTH];
+    uint32_t write_sequence_len;
+    uint32_t tcp_ack_num;
+    uint32_t tcp_seq_num;
+    uint8_t local_ip[IPV4_ADDR_LEN];
+    uint8_t remote_ip[IPV4_ADDR_LEN];
+    uint16_t local_port;
+    uint16_t remote_port;
+    uint8_t local_mac_addr[ETHER_ADDR_LEN];
+    uint8_t remote_mac_addr[ETHER_ADDR_LEN];
+    uint32_t app_syncid;
+    uint8_t payload[TLS_MAX_PAYLOAD_LEN];
+    uint16_t payload_len;
+    bool encrypt_then_mac;
+};
 
 #define TKO_DATA_OFFSET offsetof(wl_tko_t, data)  /**< TKO data offset */
 

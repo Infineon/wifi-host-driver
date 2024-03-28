@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -119,7 +119,9 @@ static whd_result_t whd_bus_m2m_print_stats(whd_driver_t whd_driver, whd_bool_t 
 static whd_result_t whd_bus_m2m_reinit_stats(whd_driver_t whd_driver, whd_bool_t wake_from_firmware);
 static whd_result_t whd_bus_m2m_irq_register(whd_driver_t whd_driver);
 static whd_result_t whd_bus_m2m_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
+#ifdef BLHS_SUPPORT
 static whd_result_t whd_bus_m2m_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
+#endif /* BLHS_SUPPORT */
 static whd_result_t whd_bus_m2m_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
                                                   whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
 static whd_result_t whd_bus_m2m_write_wifi_nvram_image(whd_driver_t whd_driver);
@@ -136,7 +138,7 @@ void whd_bus_m2m_irq_handler(void *callback_arg, cyhal_m2m_event_t events);
 ******************************************************/
 
 // Functions for whd_driver->bus_if function list
-uint32_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_m2m_config, cyhal_m2m_t *m2m_obj)
+whd_result_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_m2m_config, cyhal_m2m_t *m2m_obj)
 {
     WPRINT_WHD_INFO( ("m2m_attach\n") );
 

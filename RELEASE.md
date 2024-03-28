@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v3.0.0
+# Wi-Fi Host Driver (WHD)  v3.1.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -11,12 +11,16 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 * Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
 * Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v2.7.0
+## Changes since v3.0.0
 ### New Features
-* 43022 support
+* Added MQTT offload support
+* Added NAT/NULL Keepalive offload support
+* Added auto TKO offload support
 
 ### Defect Fixes
-
+* 43022CUB M2 Board NVRAM update to rev1.2
+* Remove ARM compilation warning
+* Fix mfg firmware assoication issue with open security
 
 ### Known Issues
 
@@ -26,26 +30,20 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 
 #### CYW43012
 * --- 13.10.271.305 ---
-* Fixed CVE issue
-* --- 13.10.271.293 ---
 
 #### CYW4373
 * --- 13.10.246.321 ---
-* Fixed CVE issue
-* --- 13.10.246.286 ---
 
 #### CYW43439
 * --- 7.95.64 ---
-* CVE Fixs
-* --- 7.95.62 ---
 
 #### CYW43909
 * --- 7.15.168.163 ---
-* CVE fixs
-* --- 7.15.168.159 ---
 
 #### CYW43022
-* --- 13.54.1 ---
+* --- 13.60.4 ---
+* Offload support
+* --- 13.54.1      ---
 
 Note: [r] is regulatory-related
 
@@ -55,7 +53,7 @@ This version of the WHD was validated for compatibility with the following softw
 | Software and Tools                                      | Version      |
 | :---                                                    | :----        |
 | GCC Compiler                                            | 11.3         |
-| IAR Compiler                                            | 9.3          |
+| IAR Compiler                                            | 9.40         |
 | Arm Compiler 6                                          | 6.16         |
 | Mbed OS                                                 | 6.2.0        |
 | ThreadX/NetX-Duo                                        | 5.8          |
@@ -68,4 +66,3 @@ This version of the WHD was validated for compatibility with the following softw
 * [Infineon Technologies](http://www.infineon.com) 
 
 ---
-© Infineon Technologies, 2019.

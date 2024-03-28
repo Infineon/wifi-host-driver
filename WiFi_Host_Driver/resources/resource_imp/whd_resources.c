@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,14 +59,14 @@
 /******************************************************
 *               Static Function Declarations
 ******************************************************/
-uint32_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type_t resource, uint32_t *size_out);
-uint32_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t type,
+whd_result_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type_t resource, uint32_t *size_out);
+whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t type,
                                  uint32_t blockno, const uint8_t **data, uint32_t *size_out);
-uint32_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *block_count);
-uint32_t host_get_resource_block_size(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out);
+whd_result_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *block_count);
+whd_result_t host_get_resource_block_size(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out);
 resource_result_t resource_read(const resource_hnd_t *resource, uint32_t offset, uint32_t maxsize, uint32_t *size,
                                 void *buffer);
-uint32_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
+whd_result_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
                             uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer);
 /******************************************************
 *               Variable Definitions
@@ -165,7 +165,7 @@ resource_result_t resource_read(const resource_hnd_t *resource, uint32_t offset,
     return RESOURCE_SUCCESS;
 }
 
-uint32_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type_t resource, uint32_t *size_out)
+whd_result_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type_t resource, uint32_t *size_out)
 {
     if (resource == WHD_RESOURCE_WLAN_FIRMWARE)
     {
@@ -211,7 +211,7 @@ uint32_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type_t r
     return WHD_SUCCESS;
 }
 
-uint32_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t type,
+whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t type,
                                  uint32_t blockno, const uint8_t **data, uint32_t *size_out)
 {
     uint32_t resource_size;
@@ -303,13 +303,13 @@ uint32_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t type,
     return WHD_SUCCESS;
 }
 
-uint32_t host_get_resource_block_size(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out)
+whd_result_t host_get_resource_block_size(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *size_out)
 {
     *size_out = BLOCK_BUFFER_SIZE;
     return WHD_SUCCESS;
 }
 
-uint32_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *block_count)
+whd_result_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_t type, uint32_t *block_count)
 {
     uint32_t resource_size;
     uint32_t block_size;
@@ -323,7 +323,7 @@ uint32_t host_get_resource_no_of_blocks(whd_driver_t whd_drv, whd_resource_type_
     return WHD_SUCCESS;
 }
 
-uint32_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
+whd_result_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
                             uint32_t offset, uint32_t size, uint32_t *size_out, void *buffer)
 {
     uint32_t result;

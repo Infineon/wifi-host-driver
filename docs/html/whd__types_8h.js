@@ -30,6 +30,9 @@ var whd__types_8h =
     [ "whd_btc_lescan_params", "structwhd__btc__lescan__params.html", "structwhd__btc__lescan__params" ],
     [ "whd_coex_config", "structwhd__coex__config.html", "structwhd__coex__config" ],
     [ "whd_packet_filter_t", "structwhd__packet__filter__t.html", "structwhd__packet__filter__t" ],
+    [ "whd_keep_alive", "structwhd__keep__alive.html", "structwhd__keep__alive" ],
+    [ "ProtocolVersion", "struct_protocol_version.html", "struct_protocol_version" ],
+    [ "tls_param_info", "structtls__param__info.html", "structtls__param__info" ],
     [ "SSID_NAME_SIZE", "whd__types_8h.html#a9ee2fe056ad3787e30bb8da7248592c7", null ],
     [ "WEP_ENABLED", "whd__types_8h.html#a4199a1b37dba92f482ff0b9eb406c323", null ],
     [ "TKIP_ENABLED", "whd__types_8h.html#a20f0d7118c2d35a688bcdc5b8b0920d9", null ],
@@ -202,6 +205,13 @@ var whd__types_8h =
     [ "WHD_WLAN_NOBAND", "whd__types_8h.html#ae528496ed94368d53b938f40aa8f089b", null ],
     [ "PORT_FILTER_LEN", "whd__types_8h.html#a7d8ed7e88b85772d09799ca87a27370d", null ],
     [ "PACKET_FILTER_LIST_BUFFER_MAX_LEN", "whd__types_8h.html#a1905b69d7646a2d2e21da7042bd14374", null ],
+    [ "TLS_MAX_KEY_LENGTH", "whd__types_8h.html#ac77184f45ce08103f9e9a90536d91f8e", null ],
+    [ "TLS_MAX_MAC_KEY_LENGTH", "whd__types_8h.html#ae3b229c8e14e30716b23f9fea8c2bebe", null ],
+    [ "TLS_MAX_IV_LENGTH", "whd__types_8h.html#adf30d64da245c7bbab46db8654532fd6", null ],
+    [ "TLS_MAX_SEQUENCE_LENGTH", "whd__types_8h.html#a357a4e54c0527d53aafc0ad4e9b4bcd3", null ],
+    [ "TLS_MAX_PAYLOAD_LEN", "whd__types_8h.html#a8d2c7a910b261553c7ad3e5e9467450d", null ],
+    [ "ETHER_ADDR_LEN", "whd__types_8h.html#abf4fcaacb1ad2010711b7c880ec2ed20", null ],
+    [ "IPV4_ADDR_LEN", "whd__types_8h.html#a9b265aeade41d30d1aa2a7ff81185450", null ],
     [ "TKO_DATA_OFFSET", "whd__types_8h.html#a3e98ad24780d89cefbec71da9fac2da6", null ],
     [ "whd_scan_result_t", "whd__types_8h.html#a58298b1b5c2f2425d5aed061de48aaa7", null ],
     [ "whd_sync_scan_result_t", "whd__types_8h.html#ab30a697b3ebbf2007dc09194b54b1a1b", null ],
@@ -222,6 +232,8 @@ var whd__types_8h =
     [ "whd_oci_config_t", "whd__types_8h.html#a6731d1e828d8be24f5af1972b48a7a48", null ],
     [ "whd_btc_lescan_params_t", "whd__types_8h.html#a98dae084aa15394bf6f8e907e09233a4", null ],
     [ "whd_coex_config_t", "whd__types_8h.html#a1cb4da9972e0e9317a6e26e2fd460902", null ],
+    [ "whd_keep_alive_t", "whd__types_8h.html#a733f6dc9b3c9802913f09b358ef21371", null ],
+    [ "wl_wowl_tls_mode_t", "whd__types_8h.html#a7bfec7a13f301130457694318eb25bd9", null ],
     [ "whd_dot11_reason_code_t", "whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55d", [
       [ "WHD_DOT11_RC_RESERVED", "whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55daf2b4dc47610f370bd154aa27c2434398", null ],
       [ "WHD_DOT11_RC_UNSPECIFIED", "whd__types_8h.html#ac81b31559ee1db82f01e8acfb8eea55da03fab52dfc684e41485202d5a72588d1", null ]
@@ -614,5 +626,41 @@ var whd__types_8h =
     [ "whd_packet_filter_rule_t", "whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038", [
       [ "WHD_PACKET_FILTER_RULE_POSITIVE_MATCHING", "whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038a75352695a5824e5b1759743869bca6d9", null ],
       [ "WHD_PACKET_FILTER_RULE_NEGATIVE_MATCHING", "whd__types_8h.html#a36b806b9b0e986bf290ae005d1bae038a1f6065677744b90d146bafbcb3832cac", null ]
+    ] ],
+    [ "wl_wowl_tls_mode", "whd__types_8h.html#a9ad384ba9e695b2b61e368a070c5f011", [
+      [ "TLS_MODE_SSWOWL", "whd__types_8h.html#a9ad384ba9e695b2b61e368a070c5f011af6056815bbb2859a1b1eff647a63546c", null ],
+      [ "TLS_MODE_MIWOWL", "whd__types_8h.html#a9ad384ba9e695b2b61e368a070c5f011a8e56b9be2f504a8072882dd93596e75b", null ]
+    ] ],
+    [ "Cipher_Suite_e", "whd__types_8h.html#a3040f524f7553a65d16cf6be8437ddc7", [
+      [ "TLS_RSA_WITH_AES_128_CBC_SHA", "whd__types_8h.html#a3040f524f7553a65d16cf6be8437ddc7a66dbf1044b4f0573224f873645406ea5", null ],
+      [ "TLS_RSA_WITH_AES_256_CBC_SHA", "whd__types_8h.html#a3040f524f7553a65d16cf6be8437ddc7aea3afe3c79d6c2ada7b303f03e77f642", null ]
+    ] ],
+    [ "ContentType_e", "whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906", [
+      [ "CONTENTTYPE_CHANGE_CIPHER_SPEC", "whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906a4cd7b5c49f067abab8b6cd91413f1949", null ],
+      [ "CONTENTTYPE_ALERT", "whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906aa5cb11d64703692eed9dec35eb1fe70c", null ],
+      [ "CONTENTTYPE_HANDSHAKE", "whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906ad9b4426cabd8f511d8c4b1fb3862533a", null ],
+      [ "CONTENTTYPE_APPLICATION_DATA", "whd__types_8h.html#ae875757e75f87beb4dc6cd1e6e7c1906a36c396102b8cc99f90b04e74c092697d", null ]
+    ] ],
+    [ "CompressionMethod_e", "whd__types_8h.html#a5e8b49805f566933f981f078e601fcee", [
+      [ "COMPRESSIONMETHOD_NULL", "whd__types_8h.html#a5e8b49805f566933f981f078e601fceeacfc4df5339914a17dc5d76b526f0854d", null ]
+    ] ],
+    [ "BulkCipherAlgorithm_e", "whd__types_8h.html#a9066e1495564559b4ca3c134970142e6", [
+      [ "BULKCIPHERALGORITHM_NULL", "whd__types_8h.html#a9066e1495564559b4ca3c134970142e6a56c826f95d3d30328a27953cd06518b0", null ],
+      [ "BULKCIPHERALGORITHM_RC4", "whd__types_8h.html#a9066e1495564559b4ca3c134970142e6a3e966d505f1035d00b3b5eb1e2f73e1a", null ],
+      [ "BULKCIPHERALGORITHM_3DES", "whd__types_8h.html#a9066e1495564559b4ca3c134970142e6ab0f4654db8ed8e936df3f844c3ac1024", null ],
+      [ "BULKCIPHERALGORITHM_AES", "whd__types_8h.html#a9066e1495564559b4ca3c134970142e6afd8db7dcc2d3a62e54e3826948328cbe", null ]
+    ] ],
+    [ "CipherType_e", "whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14c", [
+      [ "CIPHERTYPE_STREAM", "whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14ca5e09caa75c6a5c4dbe482dfb91bcbd07", null ],
+      [ "CIPHERTYPE_BLOCK", "whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14ca08ab86c387d080d3cb1580e96a5b1347", null ],
+      [ "CIPHERTYPE_AEAD", "whd__types_8h.html#ac52be85a7ad91ecb928dcfb732b6d14cad84ad513081aac6e64adc4ae0f7362cd", null ]
+    ] ],
+    [ "MACAlgorithm_e", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600", [
+      [ "MACALGORITHM_NULL", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a6a8191398cb0c2eaff4d504574cdf0f9", null ],
+      [ "MACALGORITHM_HMAC_MD5", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600ae5ebf495142c88e47d4e929e981d0c15", null ],
+      [ "MACALGORITHM_HMAC_SHA1", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a0172afda5f837ec4ce868cf3b58c0dde", null ],
+      [ "MACALGORITHM_HMAC_SHA256", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a49b099e93514708ea20697b22d784a81", null ],
+      [ "MACALGORITHM_HMAC_SHA384", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600a1abd468efda0645365eeaf638d01453c", null ],
+      [ "MACALGORITHM_HMAC_SHA512", "whd__types_8h.html#ac08866e9f3cd6a146a46d3368a449600abe7a48b5cb3b031c4edc59be08dc84ab", null ]
     ] ]
 ];

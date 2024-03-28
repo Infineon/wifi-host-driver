@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -132,7 +132,7 @@ whd_result_t whd_oci_bus_write_wifi_firmware_image(whd_driver_t whd_driver);
 ******************************************************/
 
 // Functions for whd_driver->bus_if function list
-uint32_t whd_bus_oci_attach(whd_driver_t whd_driver, whd_oci_config_t *whd_oci_config )
+whd_result_t whd_bus_oci_attach(whd_driver_t whd_driver, whd_oci_config_t *whd_oci_config )
 {
     WPRINT_WHD_INFO( ("oci_attach\n") );
 
@@ -507,7 +507,7 @@ uint8_t whd_bus_oci_blhs_read_h2d(whd_driver_t whd_driver, uint32_t *val )
 #endif
 }
 
-uint8_t whd_bus_oci_blhs_write_h2d(whd_driver_t whd_driver, uint32_t val )
+whd_result_t whd_bus_oci_blhs_write_h2d(whd_driver_t whd_driver, uint32_t val )
 {
 #ifndef GCI_SECURE_ACCESS
     return whd_bus_oci_write_backplane_value(whd_driver, (uint32_t)OCI_REG_DAR_H2D_MSG_0, 1, val);

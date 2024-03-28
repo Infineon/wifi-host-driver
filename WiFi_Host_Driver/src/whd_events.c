@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -594,7 +594,7 @@ whd_result_t whd_wifi_set_error_handler(whd_interface_t ifp, const uint8_t *erro
 
 }
 
-uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index)
+whd_result_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_index)
 {
     whd_driver_t whd_driver;
 
@@ -625,7 +625,7 @@ uint32_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t event_i
     return WHD_BADARG;
 }
 
-uint32_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index)
+whd_result_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t error_index)
 {
     whd_driver_t whd_driver;
     whd_error_info_t *error_info;

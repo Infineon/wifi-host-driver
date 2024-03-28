@@ -47,9 +47,9 @@ struct whd_proto
     void *pd;
 };
 
-uint32_t whd_proto_attach(whd_driver_t whd_driver);
+whd_result_t whd_proto_attach(whd_driver_t whd_driver);
 
-uint32_t whd_proto_detach(whd_driver_t whd_driver);
+whd_result_t whd_proto_detach(whd_driver_t whd_driver);
 
 static inline void *whd_proto_get_ioctl_buffer(whd_driver_t whd_driver, whd_buffer_t *buffer, uint16_t data_length)
 {

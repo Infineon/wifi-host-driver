@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -367,10 +367,10 @@ typedef enum
     /* 17-255 Reserved */
 } dot11_sc_t;
 
-uint32_t whd_wifi_get_iovar_value(whd_interface_t ifp, const char *iovar, uint32_t *value);
-uint32_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,
+whd_result_t whd_wifi_get_iovar_value(whd_interface_t ifp, const char *iovar, uint32_t *value);
+whd_result_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,
                                     const uint16_t *lengths, const uint8_t num_buffers);
-uint32_t whd_wifi_set_iovar_value(whd_interface_t ifp, const char *iovar, uint32_t value);
+whd_result_t whd_wifi_set_iovar_value(whd_interface_t ifp, const char *iovar, uint32_t value);
 
 /** Sends an IOVAR command
  *
@@ -379,7 +379,7 @@ uint32_t whd_wifi_set_iovar_value(whd_interface_t ifp, const char *iovar, uint32
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_iovar_void(whd_interface_t ifp, const char *iovar);
+extern whd_result_t whd_wifi_set_iovar_void(whd_interface_t ifp, const char *iovar);
 
 /** Sends an IOVAR command
  *
@@ -390,7 +390,7 @@ extern uint32_t whd_wifi_set_iovar_void(whd_interface_t ifp, const char *iovar);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_iovar_buffer(whd_interface_t ifp, const char *iovar, void *buffer, uint16_t buffer_length);
+extern whd_result_t whd_wifi_set_iovar_buffer(whd_interface_t ifp, const char *iovar, void *buffer, uint16_t buffer_length);
 
 /** Sends an IOVAR command
  *
@@ -402,7 +402,7 @@ extern uint32_t whd_wifi_set_iovar_buffer(whd_interface_t ifp, const char *iovar
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,
+extern whd_result_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,
                                            const uint16_t *in_buffer_lengths, const uint8_t num_buffers);
 
 /** Sends an IOVAR command
@@ -414,7 +414,7 @@ extern uint32_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iova
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_get_iovar_buffer(whd_interface_t ifp, const char *iovar_name, uint8_t *out_buffer,
+extern whd_result_t whd_wifi_get_iovar_buffer(whd_interface_t ifp, const char *iovar_name, uint8_t *out_buffer,
                                           uint16_t out_length);
 
 /** Sends an IOVAR command
@@ -426,7 +426,7 @@ extern uint32_t whd_wifi_get_iovar_buffer(whd_interface_t ifp, const char *iovar
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_iovar_buffer(whd_interface_t ifp, const char *iovar, void *buffer, uint16_t buffer_length);
+extern whd_result_t whd_wifi_set_iovar_buffer(whd_interface_t ifp, const char *iovar, void *buffer, uint16_t buffer_length);
 
 /** Sends an IOVAR command
  *
@@ -438,10 +438,10 @@ extern uint32_t whd_wifi_set_iovar_buffer(whd_interface_t ifp, const char *iovar
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern uint32_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,
+extern whd_result_t whd_wifi_set_iovar_buffers(whd_interface_t ifp, const char *iovar, const void **in_buffers,
                                            const uint16_t *in_buffer_lengths, const uint8_t num_buffers);
 
-extern uint32_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac);
+extern whd_result_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac);
 
 #ifdef __cplusplus
 }     /* extern "C" */

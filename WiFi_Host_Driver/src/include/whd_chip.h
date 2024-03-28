@@ -1,5 +1,5 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -381,7 +381,7 @@ whd_result_t whd_internal_info_deinit(whd_driver_t whd_driver);
 ******************************************************/
 
 extern void whd_wifi_chip_info_init(whd_driver_t whd_driver);
-#ifndef ULP_SUPPORT
+#ifndef CYCFG_ULP_SUPPORT_ENABLED
 extern whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t wake_from_firmware,
                                                   uint32_t wake_event_indication_addr, uint32_t wake_indication_addr,
                                                   uint32_t sdio_control_addr);
