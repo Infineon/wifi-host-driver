@@ -18,6 +18,7 @@
 /** @file
  * Defines WHD resource functions for BCM943340WCD1 platform
  */
+#include <stdalign.h>
 #include "resources.h"
 #if !defined(NO_CLM_BLOB_FILE)
 #include "clm_resources.h"
@@ -80,7 +81,7 @@ extern const resource_hnd_t wifi_firmware_image;
 extern const resource_hnd_t wifi_firmware_clm_blob;
 #endif /* WLAN_MFG_FIRMWARE */
 
-unsigned char r_buffer[BLOCK_BUFFER_SIZE];
+alignas(4) unsigned char r_buffer[BLOCK_BUFFER_SIZE];
 
 #if defined(WHD_DYNAMIC_NVRAM)
 uint32_t dynamic_nvram_size = sizeof(wifi_nvram_image);
