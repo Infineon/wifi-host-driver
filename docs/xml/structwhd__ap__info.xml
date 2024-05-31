@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1006" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1006" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="970" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="970" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1acff14471b28062500a2992114ae54765" prot="public" static="no" mutable="no">
         <type><ref refid="structwhd__mac__t" kindref="compound">whd_mac_t</ref></type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1007" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1007" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="971" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="971" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1ac303b69da3c469c92299a6ff260e2859" prot="public" static="no" mutable="no">
         <type>int16_t</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1008" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1008" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="972" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="972" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1a2deb22a1108e6c9371d92d496c07da01" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1009" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1009" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="973" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="973" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1ad1f59c68ce8ec9dad45866f67ee0ef44" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1a3070614a06a8989b9eb207e9f1286c5f" kindref="member">whd_bss_type_t</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1010" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1010" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="974" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="974" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1ae8d5baabacdabe6d3590465572849754" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1aaeeea5666743710aa4f01ff264b27059" kindref="member">whd_security_t</ref></type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1011" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1011" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="975" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="975" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1a715f5cb061d11eb75981741eda4dafcd" prot="public" static="no" mutable="no">
         <type>uint8_t</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1012" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1012" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="976" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="976" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1aee4db592d40d1e5a4305eb6ba177c1d7" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1aa57cbd1826f7022123be8ec0ac352d85" kindref="member">whd_802_11_band_t</ref></type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1013" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1013" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="977" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="977" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__ap__info_1a79b534cf566945b2c8b016126425102b" prot="public" static="no" mutable="no">
         <type>struct <ref refid="structwhd__ap__info" kindref="compound">whd_ap_info</ref> *</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1014" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1014" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="978" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="978" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -140,29 +140,29 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="16">
+      <node id="9">
         <label>whd_ssid_t</label>
         <link refid="structwhd__ssid__t"/>
       </node>
-      <node id="17">
+      <node id="10">
         <label>whd_mac_t</label>
         <link refid="structwhd__mac__t"/>
       </node>
-      <node id="15">
+      <node id="8">
         <label>whd_ap_info</label>
         <link refid="structwhd__ap__info"/>
-        <childnode refid="16" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>SSID</edgelabel>
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="10" relation="usage">
           <edgelabel>BSSID</edgelabel>
         </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>next</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1005" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1004" bodyend="1015"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="969" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="968" bodyend="979"/>
     <listofallmembers>
       <member refid="structwhd__ap__info_1aee4db592d40d1e5a4305eb6ba177c1d7" prot="public" virt="non-virtual"><scope>whd_ap_info</scope><name>band</name></member>
       <member refid="structwhd__ap__info_1ad1f59c68ce8ec9dad45866f67ee0ef44" prot="public" virt="non-virtual"><scope>whd_ap_info</scope><name>bss_type</name></member>

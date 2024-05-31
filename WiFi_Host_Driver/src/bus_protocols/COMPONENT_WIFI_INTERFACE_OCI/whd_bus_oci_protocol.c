@@ -1,13 +1,13 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,6 +37,11 @@
 #include "whd_proto.h"
 #include "whd_ring.h"
 
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+#include "cyhal_syspm.h"
+#include "cy_wcm.h"
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
 #ifdef GCI_SECURE_ACCESS
 #include "whd_hw.h"
 #endif
@@ -47,8 +52,6 @@
 
 #define WHD_BUS_OCI_BACKPLANE_READ_PADD_SIZE    	(0)
 #define WHD_BUS_OCI_MAX_BACKPLANE_TRANSFER_SIZE 	(WHD_PAYLOAD_MTU)
-#define BOOT_WLAN_WAIT_TIME                     	(5)     /* 5ms wait time */
-#define OCI_DMA_RX_BUFFER_SIZE                  	(WHD_PHYSICAL_HEADER + WLC_IOCTL_MEDLEN)
 
 #define ARMCR4_SW_INT0                      (0x1 << 0)
 
@@ -109,6 +112,9 @@ static whd_result_t whd_bus_oci_poke_wlan(whd_driver_t whd_driver);
 static whd_result_t whd_bus_oci_wakeup(whd_driver_t whd_driver);
 static whd_result_t whd_bus_oci_sleep(whd_driver_t whd_driver);
 static uint8_t whd_bus_oci_backplane_read_padd_size(whd_driver_t whd_driver);
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+static whd_result_t whd_bus_oci_sleep_allow_decider(whd_driver_t whd_driver, cy_semaphore_t *transceive_semaphore, uint32_t timeout_ms);
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 static whd_result_t whd_bus_oci_wait_for_wlan_event(whd_driver_t whd_driver, cy_semaphore_t *transceive_semaphore);
 static whd_bool_t whd_bus_oci_use_status_report_scheme(whd_driver_t whd_driver);
 static uint32_t whd_bus_oci_get_max_transfer_size(whd_driver_t whd_driver);
@@ -139,8 +145,8 @@ whd_result_t whd_bus_oci_attach(whd_driver_t whd_driver, whd_oci_config_t *whd_o
     whd_driver->bus_if   = &whd_bus_oci_info;
     whd_driver->bus_priv = &whd_bus_priv;
 
-    memset(whd_driver->bus_if, 0, sizeof(whd_bus_info_t) );
-    memset(whd_driver->bus_priv, 0, sizeof(struct whd_bus_priv) );
+    whd_mem_memset(whd_driver->bus_if, 0, sizeof(whd_bus_info_t) );
+    whd_mem_memset(whd_driver->bus_priv, 0, sizeof(struct whd_bus_priv) );
 
     whd_driver->bus_priv->oci_config = *whd_oci_config;
 
@@ -227,14 +233,12 @@ static whd_result_t whd_bus_oci_init(whd_driver_t whd_driver)
 #ifdef GCI_SECURE_ACCESS
     uint16_t Chip_ID;
 
+    /* WLAN Out of Reset sequence for H1-CP */
+    whd_hw_initApi();
     whd_hw_wlanAssertResetApi();
     whd_hw_wlanResetControlOverrideApi(1);
     cyhal_system_delay_ms(500);
-    whd_hw_wlanAssertResetApi();
-    cyhal_system_delay_ms(500);
     whd_hw_wlanDeassertResetApi();
-
-    whd_hw_initApi();
     cyhal_system_delay_ms(500);
 
     Chip_ID = whd_hw_readGciChipIdRegisterApi();
@@ -398,11 +402,11 @@ static whd_result_t whd_bus_oci_transfer_bytes(whd_driver_t whd_driver, whd_bus_
 
     if (direction == BUS_WRITE)
     {
-        memcpy((void *)address, (const void *)data, size);
+        whd_mem_memcpy((void *)address, (const void *)data, size);
     }
     else
     {
-        memcpy((void *)data, (const void *)address, size);
+        whd_mem_memcpy((void *)data, (const void *)address, size);
     }
 
     return WHD_SUCCESS;
@@ -431,15 +435,77 @@ static uint8_t whd_bus_oci_backplane_read_padd_size(whd_driver_t whd_driver)
     return WHD_BUS_OCI_BACKPLANE_READ_PADD_SIZE;
 }
 
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+static whd_result_t whd_bus_oci_sleep_allow_decider(whd_driver_t whd_driver, cy_semaphore_t *transceive_semaphore, uint32_t timeout_ms)
+{
+    whd_result_t result = 0;
+
+    if (whd_driver->ack_d2h_suspend == WHD_TRUE)
+    {
+        CHECK_RETURN(whd_bus_suspend(whd_driver));
+        whd_driver->pds_sleep_allow = WHD_TRUE;
+        WPRINT_WHD_DEBUG(("***SLEEP ALLOW*** \n"));
+        whd_pds_unlock_sleep(whd_driver);
+        /* If it here comes means, timeout aleady happened and WLAN is in D3 state,
+           so return CY_RTOS_TIMEOUT to wait on NEVER timeout for any activity */
+        return CY_RTOS_TIMEOUT;
+    }
+    else
+    {
+        whd_driver->pds_sleep_allow = WHD_FALSE;
+        whd_pds_lock_sleep(whd_driver);
+    }
+
+    result = cy_rtos_get_semaphore(transceive_semaphore, timeout_ms, WHD_FALSE);
+
+    if (result == CY_RTOS_TIMEOUT)
+    {
+        if (cy_wcm_is_connected_to_ap() == WHD_TRUE)
+        {
+            CHECK_RETURN(whd_msgbuf_send_mbdata(whd_driver, WHD_H2D_HOST_D3_INFORM));
+        }
+        else
+        {
+            CHECK_RETURN(whd_bus_suspend(whd_driver));
+            whd_driver->pds_sleep_allow = WHD_TRUE;
+            whd_pds_unlock_sleep(whd_driver);
+        }
+    }
+
+    return result;
+}
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
 static whd_result_t whd_bus_oci_wait_for_wlan_event(whd_driver_t whd_driver, cy_semaphore_t *transceive_semaphore)
 {
     whd_result_t result = WHD_SUCCESS;
-    uint32_t timeout_ms;
+    uint32_t timeout_ms = 0;
 
-    timeout_ms = CY_RTOS_NEVER_TIMEOUT;
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+    timeout_ms = WHD_MSGBUF_SLP_DETECT_TIME;
 
-    whd_bus_oci_irq_enable(whd_driver, WHD_TRUE);
-    result = cy_rtos_get_semaphore(transceive_semaphore, timeout_ms, WHD_FALSE);
+    result = whd_bus_oci_sleep_allow_decider(whd_driver, transceive_semaphore, timeout_ms);
+    if (result == CY_RTOS_TIMEOUT)
+    {
+        /* Here the timeout indiactes, no activity detected for this time(WHD_MSGBUF_SLP_DETECT_TIME),
+           so D3 suspend is done and now wait on infinite timeout for any interrupt reception/activity */
+        result = cy_rtos_get_semaphore(transceive_semaphore, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE);
+    }
+#else
+    uint32_t delayed_release_timeout_ms = 0;
+    delayed_release_timeout_ms = whd_bus_handle_delayed_release(whd_driver);
+    if (delayed_release_timeout_ms != 0)
+    {
+        timeout_ms = delayed_release_timeout_ms;
+    }
+    else
+    {
+        timeout_ms = CY_RTOS_NEVER_TIMEOUT;
+    }
+
+    result = cy_rtos_get_semaphore(transceive_semaphore, (uint32_t)MIN_OF(timeout_ms,
+                                                                          WHD_THREAD_POLL_TIMEOUT), WHD_FALSE);
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
     return result;
 }
@@ -487,12 +553,6 @@ static whd_result_t whd_bus_oci_irq_enable(whd_driver_t whd_driver, whd_bool_t e
 
 whd_result_t whd_oci_bus_write_wifi_firmware_image(whd_driver_t whd_driver)
 {
-#ifndef PROTO_MSGBUF
-    /* Halt ARM and remove from reset */
-    WPRINT_WHD_INFO( ("Reset wlan core..\n") );
-    VERIFY_RESULT(whd_reset_device_core(whd_driver, WLAN_ARM_CORE, WLAN_CORE_FLAG_CPU_HALT) );
-#endif /* PROTO_MSGBUF */
-
     return whd_bus_write_wifi_firmware_image(whd_driver);
 }
 
@@ -507,7 +567,7 @@ uint8_t whd_bus_oci_blhs_read_h2d(whd_driver_t whd_driver, uint32_t *val )
 #endif
 }
 
-whd_result_t whd_bus_oci_blhs_write_h2d(whd_driver_t whd_driver, uint32_t val )
+uint8_t whd_bus_oci_blhs_write_h2d(whd_driver_t whd_driver, uint32_t val )
 {
 #ifndef GCI_SECURE_ACCESS
     return whd_bus_oci_write_backplane_value(whd_driver, (uint32_t)OCI_REG_DAR_H2D_MSG_0, 1, val);
@@ -650,7 +710,7 @@ static whd_result_t whd_bus_oci_download_resource(whd_driver_t whd_driver, whd_r
             }
         }
 
-        memcpy( (void *)TRANS_ADDR(address), (void*)image, size_out );
+        whd_mem_memcpy( (void *)TRANS_ADDR(address), (void*)image, size_out );
 
         address += size_out;
     }
@@ -718,4 +778,29 @@ whd_bool_t whd_ensure_wlan_is_up(whd_driver_t whd_driver)
     else
         return WHD_FALSE;
 }
+
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+void whd_pds_lock_sleep(whd_driver_t whd_driver)
+{
+    cy_rtos_get_mutex(&whd_driver->sleep_mutex, CY_RTOS_NEVER_TIMEOUT);
+    if(whd_driver->lock_sleep == 0)
+    {
+         whd_driver->lock_sleep++;
+         cyhal_syspm_lock_deepsleep();
+    }
+    cy_rtos_set_mutex(&whd_driver->sleep_mutex);
+}
+
+void whd_pds_unlock_sleep(whd_driver_t whd_driver)
+{
+    cy_rtos_get_mutex(&whd_driver->sleep_mutex, CY_RTOS_NEVER_TIMEOUT);
+    if(whd_driver->lock_sleep == 1)
+    {
+         whd_driver->lock_sleep--;
+         cyhal_syspm_unlock_deepsleep();
+    }
+    cy_rtos_set_mutex(&whd_driver->sleep_mutex);
+}
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
 #endif /* COMPONENT_WIFI_INTERFACE_OCI */

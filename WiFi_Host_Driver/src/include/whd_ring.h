@@ -1,13 +1,13 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -65,8 +65,19 @@ extern "C" {
 #define WHD_SHARED_HOST_CAP_OFFSET          84
 
 #define WHD_H2D_ENABLE_HOSTRDY              0x400
+#define WHD_SHARED_HOST_CAP_NO_OOB          0x1000
 
-#define WHD_DEF_MAX_RXBUFPOST               8
+#define WHD_H2D_INFORM_HOSTRDY              (1 << 9)
+
+/* This is adjusted to handle TCP throughput and memory availability for pools. 
+ * DEFAULT_TCP_WINDOW_SIZE has to be mapped based on this max rxbufpost value, 
+ * Currently it is defined as 14 - 1 = 13 --> (13*1460 = 18980(18k)) */
+#ifdef RX_PACKET_POOL_SIZE
+#define WHD_DEF_MAX_RXBUFPOST               (RX_PACKET_POOL_SIZE - WHD_MSGBUF_MAX_EVENTBUF_POST)
+#else
+/* Default RX_PACKET_POOL_SIZE(16) - WHD_MSGBUF_MAX_EVENTBUF_POST(2) */
+#define WHD_DEF_MAX_RXBUFPOST               14
+#endif /* RX_PACKET_POOL_SIZE */
 
 #define WLAN_M2M_SHARED_VERSION_MASK    (0x00ff)
 #define WLAN_M2M_SHARED_VERSION         (0x0007)
@@ -83,12 +94,12 @@ extern "C" {
 
 #define WHD_MBDATA_TIMEOUT                (2000)
 
-#define WHD_H2D_MSGRING_CONTROL_SUBMIT_MAX_ITEM     32
-#define WHD_H2D_MSGRING_RXPOST_SUBMIT_MAX_ITEM      128
-#define WHD_D2H_MSGRING_CONTROL_COMPLETE_MAX_ITEM   32
-#define WHD_D2H_MSGRING_TX_COMPLETE_MAX_ITEM        128
-#define WHD_D2H_MSGRING_RX_COMPLETE_MAX_ITEM        128
-#define WHD_H2D_TXFLOWRING_MAX_ITEM                 128
+#define WHD_H2D_MSGRING_CONTROL_SUBMIT_MAX_ITEM     16
+#define WHD_H2D_MSGRING_RXPOST_SUBMIT_MAX_ITEM      32
+#define WHD_D2H_MSGRING_CONTROL_COMPLETE_MAX_ITEM   16
+#define WHD_D2H_MSGRING_TX_COMPLETE_MAX_ITEM        32
+#define WHD_D2H_MSGRING_RX_COMPLETE_MAX_ITEM        32
+#define WHD_H2D_TXFLOWRING_MAX_ITEM                 32
 
 /* Submit Itemsize for rings should match with FW item sizes */
 #define WHD_H2D_MSGRING_CONTROL_SUBMIT_ITEMSIZE     40
@@ -192,3 +203,4 @@ extern whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver);
 #endif
 
 #endif /* INCLUDED_WHD_RING_H */
+

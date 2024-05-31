@@ -26,6 +26,7 @@
 #include "whd_resource_api.h"
 #include "whd_debug.h"
 #include "whd.h"
+#include "whd_utils.h"
 
 /******************************************************
 *                      Macros
@@ -78,6 +79,9 @@ extern const resource_hnd_t wifi_mfg_firmware_clm_blob;
 #else
 extern const resource_hnd_t wifi_firmware_image;
 extern const resource_hnd_t wifi_firmware_clm_blob;
+#ifdef DOWNLOAD_RAM_BOOTLOADER
+extern const resource_hnd_t wifi_bootloader_image;
+#endif /* DOWNLOAD_RAM_BOOTLOADER */
 #endif /* WLAN_MFG_FIRMWARE */
 
 unsigned char r_buffer[BLOCK_BUFFER_SIZE];
@@ -103,7 +107,7 @@ resource_result_t resource_read(const resource_hnd_t *resource, uint32_t offset,
 
     if (resource->location == RESOURCE_IN_MEMORY)
     {
-        memcpy(buffer, &resource->val.mem.data[offset], *size);
+        whd_mem_memcpy(buffer, &resource->val.mem.data[offset], *size);
     }
 #ifdef USES_RESOURCES_IN_EXTERNAL_STORAGE
     else if (resource->location == RESOURCE_IN_EXTERNAL_STORAGE)
@@ -192,6 +196,12 @@ whd_result_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type
 #endif /* NO_WIFI_FIRMWARE */
 
     }
+#ifdef DOWNLOAD_RAM_BOOTLOADER
+    else if (resource == WHD_RESOURCE_BL_IMAGE)
+    {
+        *size_out = (uint32_t)resource_get_size(&wifi_bootloader_image);
+    }
+#endif
     else if (resource == WHD_RESOURCE_WLAN_NVRAM)
     {
         *size_out = NVRAM_SIZE;
@@ -223,7 +233,7 @@ whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t t
     host_platform_resource_size(whd_drv, type, &resource_size);
     host_get_resource_block_size(whd_drv, type, &block_size);
     host_get_resource_no_of_blocks(whd_drv, type, &block_count);
-    memset(r_buffer, 0, block_size);
+    whd_mem_memset(r_buffer, 0, block_size);
     read_pos = blockno * block_size;
 
     if (blockno >= block_count)
@@ -255,6 +265,21 @@ whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t t
          *  *size_out = (uint32_t)resource_get_size(&wifi_firmware_image);
          */
     }
+#ifdef DOWNLOAD_RAM_BOOTLOADER
+    else if (type == WHD_RESOURCE_BL_IMAGE)
+    {
+
+        result = resource_read( (const resource_hnd_t *)&wifi_bootloader_image, read_pos, block_size, size_out,
+                                     r_buffer );
+
+        if (result != WHD_SUCCESS)
+        {
+            return result;
+        }
+        *data = (uint8_t *)&r_buffer;
+
+    }
+#endif /* DOWNLOAD_RAM_BOOTLOADER */
     else if (type == WHD_RESOURCE_WLAN_NVRAM)
     {
         if (NVRAM_SIZE - read_pos > block_size)
@@ -342,13 +367,25 @@ whd_result_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
             return result;
 
     }
+#ifdef DOWNLOAD_RAM_BOOTLOADER
+    else if (type == WHD_RESOURCE_BL_IMAGE)
+    {
+
+        result = resource_read( (const resource_hnd_t *)&wifi_bootloader_image, offset, size,
+                                size_out, buffer );
+
+        if (result != WHD_SUCCESS)
+            return result;
+
+    }
+#endif /* DOWNLOAD_RAM_BOOTLOADER */
     else if (type == WHD_RESOURCE_WLAN_NVRAM)
     {
         if (size != sizeof(wifi_nvram_image) )
         {
             return WHD_BUFFER_SIZE_SET_ERROR;
         }
-        memcpy( (uint8_t *)buffer, wifi_nvram_image, sizeof(wifi_nvram_image) );
+        whd_mem_memcpy( (uint8_t *)buffer, wifi_nvram_image, sizeof(wifi_nvram_image) );
         *size_out = sizeof(wifi_nvram_image);
     }
     return WHD_SUCCESS;
@@ -362,3 +399,4 @@ whd_resource_source_t resource_ops =
     .whd_get_resource_block = host_get_resource_block,
     .whd_resource_read = host_resource_read
 };
+

@@ -1,13 +1,13 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,18 +26,6 @@
 
 #define WHD_FLOWRING_HASH_AP(da, fifo, ifidx) (da[5] * 2 + fifo + ifidx * 16)
 #define WHD_FLOWRING_HASH_STA(fifo, ifidx)    (fifo + ifidx * 16)
-
-static const uint8_t whd_flowring_prio2fifo[] =
-{
-    0,
-    1,
-    1,
-    0,
-    2,
-    2,
-    3,
-    3
-};
 
 static const uint8_t ALLFFMAC[ETHER_ADDR_LEN] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
 
@@ -165,7 +153,7 @@ uint32_t whd_flowring_create(struct whd_flowring *flow, uint8_t da[ETHER_ADDR_LE
         if (!ring)
             return -1;
 
-        memcpy(hash[hash_idx].mac, mac, ETHER_ADDR_LEN);
+        whd_mem_memcpy(hash[hash_idx].mac, mac, ETHER_ADDR_LEN);
         hash[hash_idx].fifo = fifo;
         hash[hash_idx].ifidx = ifidx;
         hash[hash_idx].flowid = i;
@@ -195,7 +183,7 @@ void whd_flowring_delete(struct whd_flowring *flow, uint16_t flowid)
 
     hash_idx = ring->hash_id;
     flow->hash[hash_idx].ifidx = WHD_FLOWRING_INVALID_IFIDX;
-    memset(flow->hash[hash_idx].mac, 0, WHD_ETHER_ADDR_LEN);
+    whd_mem_memset(flow->hash[hash_idx].mac, 0, WHD_ETHER_ADDR_LEN);
 
     (void)whd_msgbuf_txflow_dequeue(whd_driver, &skb, flowid);
     while (skb)
@@ -265,7 +253,12 @@ void whd_flowring_detach(struct whd_flowring *flow)
         search = search->next;
         whd_mem_free(remove);
     }
-    whd_mem_free(flow->rings);
+
+    if(!flow->rings)
+    {
+        whd_mem_free(flow->rings);
+    }
+
     whd_mem_free(flow);
 }
 
@@ -278,7 +271,7 @@ struct whd_flowring *whd_flowring_attach(struct whd_driver *dev, uint16_t nrofri
 
     if (flow)
     {
-        memset(flow, 0, sizeof(*flow));
+        whd_mem_memset(flow, 0, sizeof(*flow));
         flow->dev = dev;
         flow->nrofrings = nrofrings;
 

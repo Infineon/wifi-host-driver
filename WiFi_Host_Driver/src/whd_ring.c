@@ -1,13 +1,13 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -132,13 +132,12 @@ static void whd_write_tcm32(whd_driver_t whd_driver, uint32_t mem_offset, uint32
 
 void whd_bus_handle_mb_data(whd_driver_t whd_driver, uint32_t d2h_mb_data)
 {
+
     WPRINT_WHD_DEBUG( ("D2H_MB_DATA: 0x%04x\n", (unsigned int)d2h_mb_data) );
 
     if (d2h_mb_data & WHD_D2H_DEV_DS_ENTER_REQ)
     {
         WPRINT_WHD_DEBUG( ("D2H_MB_DATA: DEEP SLEEP REQ\n") );
-        //whd_pcie_send_mb_data(devinfo, WHD_H2D_HOST_DS_ACK);
-        //WPRINT_WHD_DEBUG( ("D2H_MB_DATA: sent DEEP SLEEP ACK\n") );
     }
 
     if (d2h_mb_data & WHD_D2H_DEV_DS_EXIT_NOTE)
@@ -147,13 +146,7 @@ void whd_bus_handle_mb_data(whd_driver_t whd_driver, uint32_t d2h_mb_data)
     if (d2h_mb_data & WHD_D2H_DEV_D3_ACK)
     {
         WPRINT_WHD_DEBUG( ("D2H_MB_DATA: D3 ACK\n") );
-
         whd_driver->ack_d2h_suspend = 1;
-
-        /* Disable WLAN force HT clock */
-        CHECK_RETURN_IGNORE(whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_CLOCK_CSR, 4, 0) );
-
-        cy_rtos_setbits_event(&whd_driver->host_suspend_event_wait, (uint32_t)HOST_TRIGGER_SUSPEND_COMPLETE, false);
     }
 
     if (d2h_mb_data & WHD_D2H_DEV_FWHALT)
@@ -161,71 +154,24 @@ void whd_bus_handle_mb_data(whd_driver_t whd_driver, uint32_t d2h_mb_data)
         WPRINT_WHD_DEBUG( ("D2H_MB_DATA: FW HALT\n") );
         //whd_fw_crashed(&devinfo->pdev->dev);
     }
-}
 
-whd_result_t whd_host_trigger_suspend(whd_driver_t whd_driver)
-{
-    uint32_t flags;
-    int retval;
-
-    CHECK_RETURN(cy_rtos_get_semaphore(&whd_driver->host_suspend_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) );
-
-    /* Set flag to let WHD Thread, suspend is triggered by Host */
-    whd_driver->host_trigger_suspend_flag = 1;
-
-    cy_rtos_clearbits_event(&whd_driver->host_suspend_event_wait, (uint32_t)HOST_TRIGGER_SUSPEND_COMPLETE, false);
-
-    /* Wake up whd thread to suspend */
-    whd_thread_notify(whd_driver);
-
-    /* Wait WHD thread return suspend is OK or not(need check system view logic) */
-    flags = (uint32_t)HOST_TRIGGER_SUSPEND_COMPLETE;
-    retval =
-        cy_rtos_waitbits_event(&whd_driver->host_suspend_event_wait, &flags, true, false,
-                               WHD_HOST_TRIGGER_SUSPEND_TIMEOUT);
-
-    whd_driver->host_trigger_suspend_flag = 0;
-
-    CHECK_RETURN(cy_rtos_set_semaphore(&whd_driver->host_suspend_mutex, WHD_FALSE) );
-
-    if (CY_RTOS_TIMEOUT == retval)
-    {
-        WPRINT_WHD_ERROR( ("Timeout on response for host suspend(no D3_Ack on time)\n") );
-        return CY_RTOS_TIMEOUT;
-    }
-
-    return WHD_SUCCESS;
-}
-
-whd_result_t whd_host_trigger_resume(whd_driver_t whd_driver)
-{
-    /* Do nothing, because other place will wake up whd thread if any tx/rx */
-
-    return WHD_SUCCESS;
 }
 
 whd_result_t whd_bus_suspend(whd_driver_t whd_driver)
 {
+
     if (whd_bus_is_up(whd_driver) == WHD_FALSE)
     {
-        WPRINT_WHD_ERROR( ("Bus is already in SUSPEND state.\n") );
+        WPRINT_WHD_DEBUG( ("Bus is already in SUSPEND state.\n") );
         return WHD_SUCCESS;
     }
 
     whd_bus_set_state(whd_driver, WHD_FALSE);
 
-    /* Host trigger suspend or not  */
-    if (whd_driver->host_trigger_suspend_flag == 1)
-    {
-        whd_driver->host_trigger_suspend_flag = 0;
-
-        whd_msgbuf_send_mbdata(whd_driver, WHD_H2D_HOST_D3_INFORM);
-    }
-    else
-    {
-        /* Disable WLAN force HT clock */
-        CHECK_RETURN_IGNORE(whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_CLOCK_CSR, 4, 0) );
-    }
+#ifndef GCI_SECURE_ACCESS
+    /* Disable WLAN force HT clock, if running */
+    CHECK_RETURN_IGNORE(whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_CLOCK_CSR, 4, 0) );
+#endif
 
     return WHD_SUCCESS;
 }
@@ -233,12 +179,14 @@ whd_result_t whd_bus_suspend(whd_driver_t whd_driver)
 whd_result_t whd_bus_resume(whd_driver_t whd_driver)
 {
     whd_result_t result = WHD_SUCCESS;
-    uint32_t csr = 0;
-    uint32_t attempts = 0;
 
     /* Check register “BT2WL Clock Request and Status Register (Offset 0x6A4)”
      * if ALP or HT not available on WLAN backplane then set ALPAvailRequest (AQ) before accessing the TCM.
      * Make sure ALPClockAvailable (AA) is available before accessing the TCM. */
+#ifndef GCI_SECURE_ACCESS
+    uint32_t csr = 0;
+    uint32_t attempts = 0;
+
     while ( ( (result = whd_bus_read_backplane_value(whd_driver, GCI_BT2WL_CLOCK_CSR,
                                                      (uint8_t)sizeof(csr), (uint8_t *)&csr) ) == WHD_SUCCESS ) &&
             ( (csr & (GCI_ALP_AVAIL | GCI_HT_AVAIL) ) == 0 ) &&
@@ -249,20 +197,19 @@ whd_result_t whd_bus_resume(whd_driver_t whd_driver)
         (void)cy_rtos_delay_milliseconds( (uint32_t)HT_AVAIL_WAIT_MS );   /* Ignore return - nothing can be done if it fails */
         attempts++;
     }
-
-    if (attempts >= (uint32_t)WLAN_BUS_UP_ATTEMPTS)
-    {
-        WPRINT_WHD_ERROR( ("WLAN bus HT Clock failed to come up , %s failed at %d \n", __func__, __LINE__) );
-        return WHD_BUS_UP_FAIL;
-    }
+#endif
 
     /* Host trigger suspend or not  */
-    if (whd_driver->ack_d2h_suspend == 1)
+    if (whd_driver->ack_d2h_suspend == WHD_TRUE)
     {
-        whd_driver->ack_d2h_suspend = 0;
+        whd_driver->ack_d2h_suspend = WHD_FALSE;
         /* If Resume from Host, send H1D DB1 to "WLAN FW" */
-        WPRINT_WHD_DEBUG( ("Notify Firmware about HOST READY!!! \n") );
-        result = whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_DB1_REG, 4, (1 << 9) );
+        WPRINT_WHD_INFO( ("Notify Firmware about HOST READY!!! \n") );
+#ifndef GCI_SECURE_ACCESS
+        result = whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_DB1_REG, 4, WHD_H2D_INFORM_HOSTRDY);
+#else
+        result = whd_hw_generateBt2WlDbInterruptApi(1, WHD_H2D_INFORM_HOSTRDY);
+#endif
         if (result != WHD_SUCCESS)
         {
             WPRINT_WHD_ERROR( ("whd_bus_write_backplane_value failed in %s at %d \n", __func__, __LINE__) );
@@ -321,7 +268,7 @@ static struct whd_ringbuf *whd_allocate_ring_and_handle(whd_driver_t whd_driver,
     {
         return NULL;
     }
-    memset(ring, 0, sizeof(*ring) );
+    whd_mem_memset(ring, 0, sizeof(*ring) );
     whd_commonring_config(&ring->commonring, whd_ring_max_item[ring_id],
                           ring_itemsize_array[ring_id], (void*)ring_handle);
 
@@ -463,7 +410,12 @@ uint32_t whd_bus_m2m_ring_init(whd_driver_t whd_driver)
         ring_mem_ptr += WHD_RING_MEM_SZ;
     }
 
+#if 0    /* Currently WLAN FW is returning the max flowring req count as 40, which needs to be fixed */
     whd_driver->ram_shared->max_flowrings = max_flowrings;
+#else
+    whd_driver->ram_shared->max_flowrings = 5;    /* This will be increased for concurrent mode later */
+#endif
+
     whd_driver->ram_shared->max_submissionrings = max_submissionrings;
     whd_driver->ram_shared->max_completionrings = max_completionrings;
     rings = whd_mem_malloc(max_flowrings * sizeof(*ring) );
@@ -497,9 +449,9 @@ uint32_t whd_bus_m2m_ring_init(whd_driver_t whd_driver)
 
     WPRINT_WHD_DEBUG( ("Notify Firmware about HOST READY!!! \n") );
 #ifndef GCI_SECURE_ACCESS
-    result = whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_DB1_REG, 4, (1 << 9) );
+    result = whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_DB1_REG, 4, WHD_H2D_INFORM_HOSTRDY);
 #else
-    result = whd_hw_generateBt2WlDbInterruptApi(1, (1 << 9));
+    result = whd_hw_generateBt2WlDbInterruptApi(1, WHD_H2D_INFORM_HOSTRDY);
 #endif
     if (result != WHD_SUCCESS)
     {
@@ -532,7 +484,7 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     {
         return WHD_MALLOC_FAILURE;
     }
-    memset(ram_shared_info, 0, sizeof(struct whd_ram_shared_info));
+    whd_mem_memset(ram_shared_info, 0, sizeof(struct whd_ram_shared_info));
 
     whd_driver->ram_shared = ram_shared_info;
 
@@ -545,7 +497,6 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     while ( (shared_addr == 0) || (shared_addr <= GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) ) ||
             (shared_addr >= (GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) ) ) )
     {
-        WPRINT_WHD_DEBUG( ("Value at Shared Space is 0x%lx \n", REG32(wlan_shared_address) ) );
         result = whd_bus_read_backplane_value(whd_driver, wlan_shared_address, 4, (uint8_t *)&shared_addr);
     }
 
@@ -584,6 +535,9 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     }
 
     WPRINT_WHD_DEBUG( ("FW Supported Flag Value is 0x%x \n", internal_info.sh.flags) );
+
+    /* Disable oob interrupt base for Hatchet-1 CP */
+    host_capability = host_capability | WHD_SHARED_HOST_CAP_NO_OOB;
 
     if ( (internal_info.sh.flags & WHD_PCIE_SHARED_HOSTRDY_DB1) )
     {
@@ -632,6 +586,7 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
         WPRINT_WHD_ERROR( ("whd_bus_read_backplane_value failed in %s at %d \n", __func__, __LINE__) );
         goto fail;
     }
+
 #if 0	/* To be verified after TO for alignment issue */
     addr = shared_addr + WHD_SHARED_HTOD_MB_DATA_ADDR_OFFSET;
     result = whd_bus_read_backplane_value(whd_driver, TRANS_ADDR(addr), 4,
@@ -651,6 +606,7 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
         goto fail;
     }
 #endif
+
     addr = shared_addr + WHD_SHARED_RING_INFO_ADDR_OFFSET;
     result = whd_bus_read_backplane_value(whd_driver, addr, 4,
                                           (uint8_t *)&whd_driver->ram_shared->ring_info_addr);
@@ -661,7 +617,7 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     }
 
     addr = shared_addr + WHD_SHARED_HOST_CAP_OFFSET;
-    result = whd_bus_write_backplane_value(whd_driver, addr, host_capability, 4);
+    result = whd_bus_write_backplane_value(whd_driver, addr, 4, host_capability);
     if (result != WHD_SUCCESS)
     {
         WPRINT_WHD_ERROR( ("whd_bus_write_backplane_value failed in %s at %d \n", __func__, __LINE__) );
@@ -687,14 +643,6 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     {
         WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
         return WHD_SEMAPHORE_ERROR;
-    }
-
-    result = cy_rtos_init_event(&whd_driver->host_suspend_event_wait);
-    if (result != WHD_SUCCESS)
-    {
-        cy_rtos_deinit_semaphore(&whd_driver->host_suspend_mutex);
-        WPRINT_WHD_ERROR( ("Failed to initialize for host_suspend_event_wait event.\n") );
-        goto fail;
     }
 
     return result;

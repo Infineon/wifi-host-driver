@@ -35,6 +35,10 @@
 #include "whd_resource_api.h"
 #include "whd_types_int.h"
 
+#ifdef DOWNLOAD_RAM_BOOTLOADER
+#include "resources.h"
+#endif
+
 /******************************************************
 *                      Macros
 ******************************************************/
@@ -236,6 +240,32 @@ whd_result_t whd_bus_write_wifi_firmware_image(whd_driver_t whd_driver)
     uint32_t ram_start_address;
     uint32_t image_size;
 
+#ifdef DOWNLOAD_RAM_BOOTLOADER
+    uint32_t bl_start_address = ( (0x8F620000) + (0x460000  - 0x003A0000) );
+    volatile uint32_t *rom_address = (volatile uint32_t *)0x8F7C0000;
+    volatile uint32_t *cr4_rst_address = (volatile uint32_t*)0x8F782800;
+    uint32_t romword;
+
+    WPRINT_WHD_DEBUG(("Entering Bootloader Download \n"));
+
+    cyhal_system_delay_ms(1000);
+    WPRINT_WHD_DEBUG(("Bootloader Download Starts \n"));
+    whd_mem_memcpy( (void *)bl_start_address, (void*)wifi_bootloader_image_data, sizeof(wifi_bootloader_image_data));
+    WPRINT_WHD_DEBUG(("Bootloader Download Done \n"));
+
+    romword = wifi_bootloader_image_data[0] | (wifi_bootloader_image_data[1] << 8) | (wifi_bootloader_image_data[2] << 16) | (wifi_bootloader_image_data[3] << 24);
+
+    *rom_address = romword;
+
+    *cr4_rst_address = 1;
+
+    cyhal_system_delay_ms(500);
+
+    *cr4_rst_address = 0;
+
+    cyhal_system_delay_ms(500);
+#endif /* DOWNLOAD_RAM_BOOTLOADER */
+
 #ifdef BLHS_SUPPORT
     CHECK_RETURN(whd_bus_common_blhs(whd_driver, PREP_FW_DOWNLOAD) );
 #endif
@@ -355,7 +385,7 @@ whd_result_t whd_bus_transfer_backplane_bytes(whd_driver_t whd_driver, whd_bus_t
         if (direction == BUS_WRITE)
         {
             DISABLE_COMPILER_WARNING(diag_suppress = Pa039)
-            memcpy( ( (whd_transfer_bytes_packet_t *)packet )->data, data + size - remaining_buf_size, transfer_size );
+            whd_mem_memcpy( ( (whd_transfer_bytes_packet_t *)packet )->data, data + size - remaining_buf_size, transfer_size );
             ENABLE_COMPILER_WARNING(diag_suppress = Pa039)
             result = whd_bus_transfer_bytes(whd_driver, direction, BACKPLANE_FUNCTION,
                                             trans_addr, (uint16_t)transfer_size,
@@ -377,7 +407,7 @@ whd_result_t whd_bus_transfer_backplane_bytes(whd_driver_t whd_driver, whd_bus_t
                 goto done;
             }
             DISABLE_COMPILER_WARNING(diag_suppress = Pa039)
-            memcpy(data + size - remaining_buf_size, (uint8_t *)( (whd_transfer_bytes_packet_t *)packet )->data +
+            whd_mem_memcpy(data + size - remaining_buf_size, (uint8_t *)( (whd_transfer_bytes_packet_t *)packet )->data +
                    whd_bus_backplane_read_padd_size(whd_driver), transfer_size);
             ENABLE_COMPILER_WARNING(diag_suppress = Pa039)
         }

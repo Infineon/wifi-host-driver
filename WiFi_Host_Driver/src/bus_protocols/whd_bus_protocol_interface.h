@@ -138,6 +138,12 @@ extern whd_result_t whd_bus_download_resource(whd_driver_t whd_driver, whd_resou
 #ifdef BLHS_SUPPORT
 extern whd_result_t whd_bus_common_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
 #endif
+
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+extern void whd_pds_lock_sleep(whd_driver_t whd_driver);
+extern void whd_pds_unlock_sleep(whd_driver_t whd_driver);
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
 /******************************************************
 *             Global variables
 ******************************************************/

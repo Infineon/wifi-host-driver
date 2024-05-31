@@ -83,8 +83,8 @@ typedef enum
     WHD_AKM_SAE_SHA256 = 8,
     WHD_AKM_FT_SAE_SHA256 = 9,
     WHD_AKM_AP_PEER_KEY_SHA256 = 10,
-    WHD_AKM_SUITEB_8021X_HMAC_SHA256 = 11,
-    WHD_AKM_SUITEB_8021X_HMAC_SHA384 = 12,
+    WHD_AKM_8021X_SUITE_B = 11,
+    WHD_AKM_8021X_SUITE_B_192 = 12,
     WHD_AKM_SUITEB_FT_8021X_HMAC_SHA384 = 13,
 } whd_akm_suite_t;
 
@@ -381,7 +381,7 @@ whd_result_t whd_internal_info_deinit(whd_driver_t whd_driver);
 ******************************************************/
 
 extern void whd_wifi_chip_info_init(whd_driver_t whd_driver);
-#ifndef CYCFG_ULP_SUPPORT_ENABLED
+#ifndef ULP_SUPPORT
 extern whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t wake_from_firmware,
                                                   uint32_t wake_event_indication_addr, uint32_t wake_indication_addr,
                                                   uint32_t sdio_control_addr);
@@ -412,9 +412,14 @@ extern whd_result_t whd_wifi_read_fw_capabilities(whd_interface_t ifp);
 extern void whd_wifi_peek(whd_driver_t whd_driver, uint32_t address, uint8_t register_length, uint8_t *value);
 extern void whd_wifi_poke(whd_driver_t whd_driver, uint32_t address, uint8_t register_length, uint32_t value);
 extern uint32_t whd_wifi_get_btc_params(whd_driver_t whd_driver, uint32_t address, whd_interface_t interface);
+extern uint32_t whd_wifi_read_tcm_byte(whd_driver_t whd_driver, uint32_t offset);
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+bool whd_syspm_registered_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void *arg);
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
 
 #endif /* ifndef INCLUDED_WHD_CHIP_H */
+

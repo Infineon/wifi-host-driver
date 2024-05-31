@@ -71,8 +71,8 @@ var whd__events_8h =
       [ "WLC_SUP_KEYXCHANGE_WAIT_G1", "whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4ca8f648a422bf489e97c275b0e81b4e69a", null ],
       [ "WLC_SUP_KEYXCHANGE_PREP_G2", "whd__events_8h.html#aba9543ff6a1542d81c7adc66bb339c4caa1a479ce249334165efc2abb7a417303", null ]
     ] ],
-    [ "whd_wifi_set_event_handler", "whd__events_8h.html#ac2fa88545a7e177d4c6848324373654a", null ],
-    [ "whd_wifi_set_error_handler", "whd__events_8h.html#ae0b3dcb39d9c000c85baa001af6f495e", null ],
-    [ "whd_wifi_deregister_event_handler", "whd__events_8h.html#a0f47a09cb430f375bb51ff3959b191d1", null ],
-    [ "whd_wifi_deregister_error_handler", "whd__events_8h.html#a029a04e071abf7628ffdb4c8334f519d", null ]
+    [ "whd_wifi_set_event_handler", "whd__events_8h.html#a4175c3ef9bb16601fabc605fadeaf8d8", null ],
+    [ "whd_wifi_set_error_handler", "whd__events_8h.html#a2072e91b840217584cfd60ad540b3146", null ],
+    [ "whd_wifi_deregister_event_handler", "whd__events_8h.html#ae415f1f3fcbbfe506aa0e656bf8debb3", null ],
+    [ "whd_wifi_deregister_error_handler", "whd__events_8h.html#aa7f28d32a8c06c7df471636de6f4dec6", null ]
 ];

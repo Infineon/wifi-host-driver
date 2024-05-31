@@ -69,15 +69,15 @@ extern "C"
 #define WHD_ETHER_ADDR_LEN              (6)
 
 #define CHECK_IOCTL_BUFFER(buff)  if (buff == \
-                                      NULL){ WPRINT_WHD_ERROR( ("Buffer alloc failed in function %s at line %d \n", \
+                                      NULL){ WPRINT_WHD_ERROR_RETURN( ("Buffer alloc failed in function %s at line %d \n", \
                                                                 __func__, __LINE__) ); \
                                              return WHD_BUFFER_ALLOC_FAIL; }
 #define CHECK_PACKET_NULL(buff, err)  if (buff == \
-                                          NULL){ WPRINT_WHD_ERROR( ("No register function pointer in %s at line %d \n", \
+                                          NULL){ WPRINT_WHD_ERROR_RETURN( ("No register function pointer in %s at line %d \n", \
                                                                     __func__, __LINE__) ); \
                                                  return err;}
 #define CHECK_PACKET_WITH_NULL_RETURN(buff)  if (buff == \
-                                                 NULL){ WPRINT_WHD_ERROR( ( \
+                                                 NULL){ WPRINT_WHD_ERROR_RETURN( ( \
                                                                               "No register function pointer in %s at line %d \n", \
                                                                               __func__, __LINE__) ); \
                                                         return;}
@@ -86,7 +86,7 @@ extern "C"
         whd_result_t check_res = (expr); \
         if (check_res != WHD_SUCCESS) \
         { \
-            WPRINT_WHD_ERROR( ("Function %s failed at line %d checkres = %u \n", \
+            WPRINT_WHD_ERROR_RETURN( ("Function %s failed at line %d checkres = %u \n", \
                                __func__, __LINE__, \
                                (unsigned int)check_res) ); \
             return check_res; \
@@ -116,13 +116,13 @@ extern "C"
 }
 
 #define CHECK_IFP_NULL(ifp)  if (ifp == \
-                                 NULL){ WPRINT_WHD_ERROR( ( \
+                                 NULL){ WPRINT_WHD_ERROR_RETURN( ( \
                                                               "Interface is not up/NULL and failed in function %s at line %d \n", \
                                                               __func__, __LINE__) ); \
                                         return WHD_UNKNOWN_INTERFACE; }
 
 #define CHECK_DRIVER_NULL(driver)  if (driver == \
-                                       NULL){ WPRINT_WHD_ERROR( ( \
+                                       NULL){ WPRINT_WHD_ERROR_RETURN( ( \
                                                                     "WHD driver is not up/NULL and failed in function %s at line %d \n", \
                                                                     __func__, __LINE__) ); \
                                               return WHD_DOES_NOT_EXIST; }
@@ -447,3 +447,4 @@ extern whd_result_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
 }     /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_WHD_TYPES_INT_H_ */
+

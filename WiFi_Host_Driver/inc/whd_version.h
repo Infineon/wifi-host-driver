@@ -1,3 +1,3 @@
-#define WHD_VERSION "3.1.0.23284"
-#define WHD_BRANCH "v3.1.0"
-#define WHD_DATE "2024-03-21 22:57:11 +0800"
+#define WHD_VERSION "4.0.0.23750"
+#define WHD_BRANCH "EAP v4.0.0"
+#define WHD_DATE "2024-05-23 06:02:37 +0000"

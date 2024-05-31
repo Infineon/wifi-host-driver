@@ -71,7 +71,7 @@
 #define WLAN_SHARED_VERSION         (0x0003)
 #define WPRINT_WHD_DEBUG_DS(args) WPRINT_WHD_DEBUG(args)
 
-#ifdef CYCFG_ULP_SUPPORT_ENABLED
+#ifdef ULP_SUPPORT
 #define WAKE_FROM_UCODE_TIMEOUT_MS     (5000) //5000 ms
 #define WAKE_FROM_UCODE_TIMEOUT_LOOPS  (100)
 #define WAKE_FROM_UCODE_CHECK_PER_LOOP (WAKE_FROM_UCODE_TIMEOUT_MS/WAKE_FROM_UCODE_TIMEOUT_LOOPS) //50 ms
@@ -627,7 +627,13 @@ whd_result_t whd_wifi_read_wlan_log_unsafe(whd_driver_t whd_driver, uint32_t wla
             if (buffer[n - 1] == '\r')
                 n--;
             buffer[n] = 0;
+#ifndef PROTO_MSGBUF
             WPRINT_MACRO( ("CONSOLE: %s\n", buffer) );
+#else
+	    /* printf is used here because WPRINT_MACRO cannot be enabled in H1-CP because of memory constraint
+               This change has to be relooked again*/
+            printf("CONSOLE: %s\n", buffer);
+#endif
         }
     }
     /* Save last read position */
@@ -683,9 +689,9 @@ whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].is_this_event = 0;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data_size = MIN_OF(
         WHD_MAX_DATA_SIZE, data_size);
-    memset(whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data, 0,
+    whd_mem_memset(whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data, 0,
            WHD_MAX_DATA_SIZE);
-    memcpy(whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data, data,
+    whd_mem_memcpy(whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data, data,
            whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data_size);
 
     whd_driver->whd_ioctl_log_index++;
@@ -762,7 +768,7 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
         }
     }
 
-    memset(whd_driver->whd_ioctl_log, 0, sizeof(whd_driver->whd_ioctl_log) );
+    whd_mem_memset(whd_driver->whd_ioctl_log, 0, sizeof(whd_driver->whd_ioctl_log) );
     whd_driver->whd_ioctl_log_index = 0;
     CHECK_RETURN(cy_rtos_set_semaphore(&whd_driver->whd_log_mutex, WHD_FALSE) );
     return WHD_SUCCESS;
@@ -791,7 +797,7 @@ whd_result_t whd_wifi_set_custom_country_code(whd_interface_t ifp, const whd_cou
             whd_assert("Could not get buffer for IOCTL", 0 != 0);
             return WHD_BUFFER_ALLOC_FAIL;
         }
-        memcpy(data, country_code, sizeof(whd_country_info_t) );
+        whd_mem_memcpy(data, country_code, sizeof(whd_country_info_t) );
         result = whd_proto_set_ioctl(ifp, WLC_SET_CUSTOM_COUNTRY, buffer, NULL);
         return result;
     }
@@ -964,6 +970,22 @@ whd_result_t whd_wifi_print_whd_log(whd_driver_t whd_driver)
     return result;
 }
 
+uint32_t whd_wifi_read_tcm_byte(whd_driver_t whd_driver, uint32_t offset)
+{
+    uint32_t result;
+    uint32_t atcm_base_address = GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
+    uint8_t wifi_tcm_byte;
+
+    result = whd_bus_read_backplane_value(whd_driver, (atcm_base_address + offset), 1, (uint8_t *)&wifi_tcm_byte);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Failed to read address @ %lx\n", (unsigned long)(atcm_base_address + offset)) );
+        return result;
+    }
+
+    return wifi_tcm_byte;
+}
+
 whd_result_t whd_wifi_read_fw_capabilities(whd_interface_t ifp)
 {
     whd_result_t result;
@@ -1033,9 +1055,8 @@ whd_result_t whd_ensure_wlan_bus_is_up(whd_driver_t whd_driver)
         return WHD_SUCCESS;
     }
 #ifdef PROTO_MSGBUF
-    else if ((wlan_chip_id == 55500) || (wlan_chip_id == 55900))
+    else if (wlan_chip_id == 55900)
     {
-#if 0	/* To be verified after TO */
         if (whd_bus_resume(whd_driver) == WHD_SUCCESS)
         {
             whd_bus_set_state(whd_driver, WHD_TRUE);
@@ -1046,9 +1067,6 @@ whd_result_t whd_ensure_wlan_bus_is_up(whd_driver_t whd_driver)
             WPRINT_WHD_ERROR( ("Bus failed to come up , %s failed at %d \n", __func__, __LINE__) );
             return WHD_SDIO_BUS_UP_FAIL;
         }
-#else
-        return WHD_SUCCESS;
-#endif
     }
 #endif
     else
@@ -1415,7 +1433,7 @@ void whd_wlan_wake_from_host(whd_driver_t whd_driver)
     }
     WPRINT_WHD_DEBUG( ("%s: %d:after: maccontrol: 0x%08x\n", __FUNCTION__, __LINE__, (unsigned int)val32) );
 }
-#ifndef CYCFG_ULP_SUPPORT_ENABLED
+#ifndef ULP_SUPPORT
 whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t wake_from_firmware,
                                            uint32_t wake_event_indication_addr, uint32_t wake_indication_addr,
                                            uint32_t sdio_control_addr)
@@ -1696,7 +1714,7 @@ whd_result_t whd_wlan_bus_complete_ds_wake(whd_driver_t whd_driver, whd_bool_t w
             CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, PMU_MINRESMASK, 4,
                                                                            DEFAULT_43012_MIN_RES_MASK) );
 #else
-            /* For 43022DM, host should not access any core other than SDIO,
+            /* For 43022DM, host should not access any core other than SDIO, 
                it it access, it will end up in FW crash(intentional crash) */
             WPRINT_WHD_INFO( ("Successfully completed DS wake sequence\n") );
             return WHD_SUCCESS;
@@ -1818,4 +1836,39 @@ whd_result_t whd_ensure_wlan_bus_not_in_deep_sleep(whd_driver_t whd_driver)
     return WHD_TRUE;
 }
 
-#endif /* CYCFG_ULP_SUPPORT_ENABLED */
+#endif /* ULP_SUPPORT */
+
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+bool whd_syspm_registered_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void *arg)
+{
+    whd_driver_t whd_driver = (whd_driver_t)arg;
+
+    switch(mode)
+    {
+     case CYHAL_SYSPM_CHECK_READY:
+        /* Check whether wlan can go to sleep or not */
+        /* Returns true, if wlan allows system to go to sleep */
+        if(whd_driver->pds_sleep_allow == WHD_TRUE)
+        {
+           return WHD_TRUE;
+        }
+        else
+        {
+           return WHD_FALSE;
+        }
+
+     case CYHAL_SYSPM_BEFORE_TRANSITION:
+        /* WHD will allow only to sleep after detecting idle and done with the D3inform/D3 ack,
+            so need to do any job here */
+        return WHD_TRUE;
+
+    case CYHAL_SYSPM_AFTER_TRANSITION:
+       /* WHD thread will be resumed in this case, if needed */
+       return WHD_TRUE;
+
+    default:
+        return WHD_FALSE;
+    }
+}
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+

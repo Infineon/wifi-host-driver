@@ -58,11 +58,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__wifiutilities.html#ga92b6063464e66c62c633fc19ca73d68c",
-"structwhd__list__t.html#a86988a65e0d3ece7990c032c159786d6",
-"whd__types_8h.html#a27ea061512955c1fa154666b11346771",
-"whd__types_8h.html#a5adb0953a8527552bc47001673830602ac52c278360c46c8fb831604c3333adf6",
-"whd__types_8h.html#ac7923e15c2e0a935cb7c8cad13b9dc6e"
+"group__wifiutilities.html#gae6b46bcc1a3c7d708abc71ae6a123481",
+"whd__events_8h.html#a5608426af7320ce9e54a8a500fc044e9",
+"whd__types_8h.html#a5adb0953a8527552bc47001673830602a6132980ec6e1d1964aa5e9187961acc5",
+"whd__types_8h.html#aaeeea5666743710aa4f01ff264b27059a2b5521d2587803363849e1987775e78b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -76,7 +76,7 @@ whd_result_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
     {
         whd_mac_t ap_mac_address;
 
-        memcpy(&ap_mac_address, &mac, sizeof(whd_mac_t) );
+        whd_mem_memcpy(&ap_mac_address, &mac, sizeof(whd_mac_t) );
         if (ap_mac_address.octet[0] & MAC_ADDRESS_LOCALLY_ADMINISTERED_BIT)
         {
             ap_mac_address.octet[0] &= (uint8_t) ~(MAC_ADDRESS_LOCALLY_ADMINISTERED_BIT);
@@ -88,7 +88,7 @@ whd_result_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
 
         data = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_mac_t), IOVAR_STR_CUR_ETHERADDR);
         CHECK_IOCTL_BUFFER(data);
-        memcpy(data, &ap_mac_address, sizeof(whd_mac_t) );
+        whd_mem_memcpy(data, &ap_mac_address, sizeof(whd_mac_t) );
         CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
 
         if (memcmp(&mac, &ap_mac_address, sizeof(whd_mac_t) ) != 0)
@@ -105,9 +105,10 @@ whd_result_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
     {
         data = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_mac_t), IOVAR_STR_CUR_ETHERADDR);
         CHECK_IOCTL_BUFFER(data);
-        memcpy(data, &mac, sizeof(whd_mac_t) );
+        whd_mem_memcpy(data, &mac, sizeof(whd_mac_t) );
         CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
     }
 
     return WHD_SUCCESS;
 }
+

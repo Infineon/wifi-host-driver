@@ -84,7 +84,7 @@ extern whd_result_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *wh
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj);
+extern whd_result_t  whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, whd_sdio_t *sdio_obj);
 
 /** Detach the WLAN Device to a specific SDIO bus
  *
@@ -101,7 +101,7 @@ extern void whd_bus_sdio_detach(whd_driver_t whd_driver);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_config, cyhal_spi_t *spi_obj);
+extern whd_result_t  whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_config, whd_spi_t *spi_obj);
 
 /** Detach the WLAN Device to a specific SPI bus
  *
@@ -118,7 +118,7 @@ extern void whd_bus_spi_detach(whd_driver_t whd_driver);
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_config, cyhal_m2m_t *m2m_obj);
+extern whd_result_t  whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_config, whd_m2m_t *m2m_obj);
 
 /** Detach the WLAN Device to a specific M2M bus
  *
@@ -308,7 +308,7 @@ extern whd_result_t whd_wifi_stop_scan(whd_interface_t ifp);
 
 /** Auth result callback function pointer type
  *
- * @param result_ptr   A pointer to the pointer that indicates where to put the auth result
+ * @param result_prt   A pointer to the pointer that indicates where to put the auth result
  * @param len          the size of result
  * @param status       Status of auth process
  * @param flag         flag of h2e will be indicated in auth request event, otherwise is NULL.
@@ -326,7 +326,7 @@ typedef void (*whd_auth_result_callback_t)(void *result_ptr, uint32_t len, whd_a
  *
  *  @param   ifp                       Pointer to handle instance of whd interface
  *  @param   callback                  The callback function which will receive and process the result data.
- *  @param   result_ptr                Pointer to a pointer to a result storage structure.
+ *  @param   data                      Pointer to a pointer to a result storage structure.
  *  @param   user_data                 user specific data that will be passed directly to the callback function
  *
  *  @note - Callback must not use blocking functions, nor use WHD functions, since it is called from the context of the
@@ -471,7 +471,7 @@ extern whd_result_t whd_wifi_sae_password(whd_interface_t ifp, const uint8_t *se
  * @param   ifp            Pointer to handle instance of whd interface
  * @param   ol_feat        Offload Skip bitmap
  * @param   reset          reset or set configuration
- *
+ * 
  * @return  WHD_SUCCESS    when the offload config is set/reset
  *          Error code     if an error occurred
  */
@@ -481,7 +481,6 @@ extern whd_result_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_fea
  *
  * @param  ifp            Pointer to handle instance of whd interface
  * @param  ol_feat        Offload Skip bitmap
- * @param  ipv4_addr      set ipv4 address
  * @param  is_add         To add or delete IPV4 address
  *
  * @return WHD_SUCCESS    when the ipv4 address updated or not
@@ -493,8 +492,6 @@ extern whd_result_t whd_wifi_offload_ipv4_update(whd_interface_t ifp, uint32_t o
  *
  * @param  ifp            Pointer to handle instance of whd interface
  * @param  ol_feat        Offload Skip bitmap
- * @param  ipv6_addr      set ipv6 address
- * @param  type           set 0:unicast 1:anycast
  * @param  is_add         To add or delete IPV6 address
  *
  * @return WHD_SUCCESS    when the ipv6 address updated or not
@@ -528,7 +525,7 @@ extern whd_result_t whd_configure_wowl(whd_interface_t ifp, uint32_t set_wowl);
  * @param   ifp            Pointer to handle instance of whd interface
  * @param   packet         whd period,len_bytes & Data parameter structure
  * @param   flag           Flag to set NULL(0)/NAT(1) keepalive
- *
+ * 
  * @return  WHD_SUCCESS    when offload module enabled or not
  *          Error code     if an error occurred
  */
@@ -537,23 +534,14 @@ extern whd_result_t whd_wifi_keepalive_config(whd_interface_t ifp, whd_keep_aliv
 /** Configure the TKO offload module
  *
  * @param   ifp            Pointer to handle instance of whd interface
- * @param   enable         Enable/Disable TCP Keepalive offload
+ * @param   interval       How often to send (in seconds)
+ * @param   retry_inerval  Max times to retry if original fails
+ * @param   retry_count    Wait time between retries (in seconds)
  *
  * @return  WHD_SUCCESS    when offload module enabled or not
  *          Error code     if an error occurred
  */
 extern whd_result_t whd_configure_tko_offload(whd_interface_t ifp, whd_bool_t enable);
-
-/** Configure the TKO filter module
- *
- * @param   ifp            Pointer to handle instance of whd interface
- * @param   whd_filter     wl_filter structure buffer from Firmware
- * @param   filter_flag    To set filter
- *
- * @return  WHD_SUCCESS    when offload module enabled or not
- *          Error code     if an error occurred
- */
-extern whd_result_t whd_configure_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * whd_filter, uint8_t filter_flag);
 
 /** Enable WHD internal supplicant and set WPA2 passphrase in case of WPA3/WPA2 transition mode
  *
@@ -1070,6 +1058,33 @@ extern whd_result_t whd_wifi_twt_information_frame(whd_interface_t ifp, whd_twt_
  */
 extern whd_result_t whd_wifi_btwt_config(whd_interface_t ifp, whd_btwt_config_params_t *twt_params);
 
+/** Add MBO preffered/non-prefferd channel attributes
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  mbo_params     pointer to whd_mbo_add_chan_pref_params_t structure
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_mbo_add_chan_pref(whd_interface_t ifp, whd_mbo_add_chan_pref_params_t *mbo_params);
+
+/** Delete MBO preffered/non-prefferd channel attributes
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  mbo_params     pointer to whd_mbo_del_chan_pref_params_t structure
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_mbo_del_chan_pref(whd_interface_t ifp, whd_mbo_del_chan_pref_params_t *mbo_params);
+
+/** Send WNM Notification request sub-element type
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  sub_elem_type  sub-element type <2/3>
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_mbo_send_notif(whd_interface_t ifp, uint8_t sub_elem_type);
+
 /** Set coex configuration
  *
  *  @param  ifp                  Pointer to handle instance of whd interface
@@ -1082,11 +1097,11 @@ extern whd_result_t whd_wifi_set_coex_config(whd_interface_t ifp, whd_coex_confi
 /** Set auth status used for External AUTH(SAE)
  *
  *  @param   ifp                    Pointer to handle instance of whd interface
- *  @param   status                 Pointer to Auth_Status structure
+ *  @param   whd_auth_req_status    Pointer to Auth_Status structure
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_wifi_set_auth_status(whd_interface_t ifp, whd_auth_req_status_t *status);
+extern whd_result_t whd_wifi_set_auth_status(whd_interface_t ifp, whd_auth_req_status_t *params);
 
 /** Get FW(chip) Capability
  *
@@ -1370,13 +1385,6 @@ whd_result_t whd_tko_get_FW_connect(whd_interface_t ifp, uint8_t index, whd_tko_
  */
 whd_result_t whd_tko_toggle(whd_interface_t ifp, whd_bool_t enable);
 
-/** Return the stats associated with a filter
- * @param[in]     ifp        : Pointer to handle instance of whd interface
- * @param[in]     whd_filter : wl_filter structure buffer from Firmware
- * @param[in]     filter_flag: To set filter
- * @return whd_result_t
- */
-extern whd_result_t whd_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * whd_filter, uint8_t filter_flag);
 
 /* @} */
 
@@ -1393,6 +1401,15 @@ extern whd_result_t whd_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * 
  *
  *  @return WHD_SUCCESS or Error code
  */
+
+/** Return the stats associated with a filter
+ * @param        ifp          : Pointer to handle instance of whd interface
+ * @param        whd_filter   : wl_filter structure buffer from Firmware
+ * @param        set          : Set(1)/Get(0) Flag
+ * @return whd_result_t
+ */
+extern whd_result_t whd_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * whd_filter, uint8_t set); 
+
 extern whd_result_t whd_wifi_set_ioctl_value(whd_interface_t ifp, uint32_t ioctl, uint32_t value);
 
 /** Sends an IOCTL command - CDC_GET IOCTL value
@@ -1527,51 +1544,33 @@ extern whd_result_t whd_wifi_get_bss_info(whd_interface_t ifp, wl_bss_info_t *bi
  */
 extern whd_result_t whd_print_stats(whd_driver_t whd_drv, whd_bool_t reset_after_print);
 
-/** Fetches ulp statistics and fills the buffer with that data and executes deepsleep
- *  indication callback if application registers for it
+/** Print CR4 TCM bytes
  *
- *  @param whd_driver              Instance of whd driver
- *  @param buf                     Pointer to buffer to be filled with ulpstats data
- *  @param buflen                  Buffer length of the above buffer
- *                                 should be between 2048 and 4096
+ *  @param  ifp                  Pointer to handle instance of whd interface
+ *  @param  offset               offset of TCM from where the data to be read
+ *
+ *  @return Value read from TCM
+ */
+extern whd_result_t whd_wifi_get_cr4_tcm_byte(whd_interface_t ifp, uint32_t offset);
+
+/** Enable event logs
+ *
+ *  @param  ifp                  Pointer to handle instance of whd interface
+ *  @param  category             category to be enabled
  *
  *  @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_wifi_get_deepsleep_stats(whd_driver_t whd_driver, char *buf, uint32_t buflen);
+extern whd_result_t whd_wifi_enable_event_log(whd_interface_t ifp, uint8_t category);
 
-/* Function pointer to be used callback registration */
-typedef void* (*whd_ds_callback_t)(void*, char*, uint32_t);
-
-/* Structure to store callback registration and parameters */
-typedef struct deepsleep_cb_info {
-    whd_ds_callback_t callback;
-    void* ctx;
-    char* buf;
-    uint32_t buflen;
-} deepsleep_cb_info_t ;
-
-/** Function to register callbacks to be executed
- *
- *  @param ifp                   Pointer to handle instance of whd interface
- *  @param callback              Callback api to be registered
- *  @param ctx                   Pointer to context
- *  @param buf                   Buffer to be filled with data
- *  @param buflen                Buffer length of the above buffer
- *
- *  @return WHD_SUCCESS or WHD_UNKNOWN_INTERFACE
+/** Prints WHD wifi firmware logs
+ *  
+ * @param ifp                    Pointer to handle instance of whd interface
+ * 
+ * @return WHD_SUCCESS or Error code
  */
-extern whd_result_t whd_wifi_register_ds_callback(whd_interface_t ifp, whd_ds_callback_t callback, void *ctx, char* buf, uint32_t buflen);
+extern whd_result_t whd_wifi_get_fw_logs(whd_interface_t ifp);
 
-/** Function to unregister callbacks that are note needed to be executed anymore
- *
- *  @param ifp                   Pointer to handle instance of whd interface
- *  @param callback              Callback api to be registered
- *
- *  @return WHD_SUCCESS or WHD_UNKNOWN_INTERFACE
- */
-extern whd_result_t whd_wifi_deregister_ds_callback(whd_interface_t ifp, whd_ds_callback_t callback);
-
-
+/* @} */
 /* @} */
 
 #ifdef __cplusplus

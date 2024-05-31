@@ -4,10 +4,10 @@
     <compoundname>wifisoftap</compoundname>
     <title>WHD Wi-Fi SoftAP API</title>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__wifisoftap_1gaadae58f1d4df7841e8be7fafeae72450" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_init_ap</definition>
-        <argsstring>(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type, const uint8_t *security_key, uint8_t key_length, uint16_t chanspec)</argsstring>
+      <memberdef kind="function" id="group__wifisoftap_1ga647aebc1d86708017fd11029e2e1a51c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_init_ap</definition>
+        <argsstring>(whd_interface_t ifp, whd_ssid_t *ssid, whd_security_t auth_type, const uint8_t *security_key, uint8_t key_length, uint8_t channel)</argsstring>
         <name>whd_wifi_init_ap</name>
         <param>
           <type><ref refid="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" kindref="member">whd_interface_t</ref></type>
@@ -30,8 +30,8 @@
           <declname>key_length</declname>
         </param>
         <param>
-          <type>uint16_t</type>
-          <declname>chanspec</declname>
+          <type>uint8_t</type>
+          <declname>channel</declname>
         </param>
         <briefdescription>
 <para>Initialises an infrastructure WiFi network (SoftAP) </para>
@@ -79,10 +79,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>chanspec</parametername>
+<parametername>channel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The desired chanspec</para>
+<para>802.11 channel number</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -92,11 +92,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="700" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="571" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1gaa8dae2c15fc1b0ce7d7d25c1a0c94319" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_start_ap</definition>
+      <memberdef kind="function" id="group__wifisoftap_1ga3c9aa99add3f6a6d13e9092bd6e1246b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_start_ap</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_start_ap</name>
         <param>
@@ -104,7 +104,7 @@
           <declname>ifp</declname>
         </param>
         <briefdescription>
-<para>Start the infrastructure WiFi network (SoftAP) using the parameter set by <ref refid="group__wifisoftap_1gaadae58f1d4df7841e8be7fafeae72450" kindref="member">whd_wifi_init_ap()</ref> and optionaly by <ref refid="group__wifiutilities_1ga8cb13597c33e7e8c0549e88c561129e1" kindref="member">whd_wifi_manage_custom_ie()</ref> </para>
+<para>Start the infrastructure WiFi network (SoftAP) using the parameter set by <ref refid="group__wifisoftap_1ga647aebc1d86708017fd11029e2e1a51c" kindref="member">whd_wifi_init_ap()</ref> and optionaly by <ref refid="group__wifiutilities_1gaaf7be7d8099507426f52ecff8f716543" kindref="member">whd_wifi_manage_custom_ie()</ref> </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="return"><para>WHD_SUCCESS if successfully creates an AP Error code if an error occurred </para>
@@ -113,11 +113,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="709" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="580" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1ga7d01b60b83e6130cbce31f21db00cef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_stop_ap</definition>
+      <memberdef kind="function" id="group__wifisoftap_1ga2c6c28512678dc57dabb641c41e30d41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_stop_ap</definition>
         <argsstring>(whd_interface_t ifp)</argsstring>
         <name>whd_wifi_stop_ap</name>
         <param>
@@ -143,11 +143,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="718" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="589" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1ga85719f47f4eb9eed7cc1a8e76f573432" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_ap_get_max_assoc</definition>
+      <memberdef kind="function" id="group__wifisoftap_1ga32982684d093a173a6e578856b581d29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_ap_get_max_assoc</definition>
         <argsstring>(whd_interface_t ifp, uint32_t *max_assoc)</argsstring>
         <name>whd_wifi_ap_get_max_assoc</name>
         <param>
@@ -185,11 +185,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="729" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="600" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1ga28218244e640e2821e7832d23b75d33f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_get_associated_client_list</definition>
+      <memberdef kind="function" id="group__wifisoftap_1ga9e974ab0fcc24698d01a5abc3e2c1dbb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_associated_client_list</definition>
         <argsstring>(whd_interface_t ifp, void *client_list_buffer, uint16_t buffer_length)</argsstring>
         <name>whd_wifi_get_associated_client_list</name>
         <param>
@@ -239,11 +239,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="740" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="611" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1gaea93b14e2dee42b32029d0ec3990ff86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_deauth_sta</definition>
+      <memberdef kind="function" id="group__wifisoftap_1gad9ad2649c18db8773351a5938e7930e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_deauth_sta</definition>
         <argsstring>(whd_interface_t ifp, whd_mac_t *mac, whd_dot11_reason_code_t reason)</argsstring>
         <name>whd_wifi_deauth_sta</name>
         <param>
@@ -293,11 +293,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="754" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="625" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1ga4b7b3b58a4bcc68a642091c817bd32af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_get_ap_info</definition>
+      <memberdef kind="function" id="group__wifisoftap_1ga95c40af4be45d119b737c0113d9a038e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_get_ap_info</definition>
         <argsstring>(whd_interface_t ifp, whd_bss_info_t *ap_info, whd_security_t *security)</argsstring>
         <name>whd_wifi_get_ap_info</name>
         <param>
@@ -347,11 +347,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="765" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="636" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1ga2b2b514109551abf57e79d0233818497" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_ap_set_beacon_interval</definition>
+      <memberdef kind="function" id="group__wifisoftap_1gaf2758fcc1028704d801b16d77b96a345" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_ap_set_beacon_interval</definition>
         <argsstring>(whd_interface_t ifp, uint16_t interval)</argsstring>
         <name>whd_wifi_ap_set_beacon_interval</name>
         <param>
@@ -390,11 +390,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="776" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="647" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="group__wifisoftap_1ga48ea6684564b9b79cfbbdf60916ce5c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
-        <definition>whd_result_t whd_wifi_ap_set_dtim_interval</definition>
+      <memberdef kind="function" id="group__wifisoftap_1ga57c57ad4d5acf499e90ff8db020fa2d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t whd_wifi_ap_set_dtim_interval</definition>
         <argsstring>(whd_interface_t ifp, uint16_t interval)</argsstring>
         <name>whd_wifi_ap_set_dtim_interval</name>
         <param>
@@ -433,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="787" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="658" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

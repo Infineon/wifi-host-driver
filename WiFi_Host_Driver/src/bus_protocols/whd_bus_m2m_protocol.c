@@ -42,9 +42,7 @@
 #include "whd_wlioctl.h"
 #include "whd_m2m.h"
 #include "whd_proto.h"
-#ifdef PROTO_MSGBUF
-#include "whd_ring.h"
-#endif /* PROTO_MSGBUF */
+
 /******************************************************
 *             Constants
 ******************************************************/
@@ -121,7 +119,7 @@ static whd_result_t whd_bus_m2m_irq_register(whd_driver_t whd_driver);
 static whd_result_t whd_bus_m2m_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
 #ifdef BLHS_SUPPORT
 static whd_result_t whd_bus_m2m_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
-#endif /* BLHS_SUPPORT */
+#endif /*  BLHS_SUPPORT */
 static whd_result_t whd_bus_m2m_download_resource(whd_driver_t whd_driver, whd_resource_type_t resource,
                                                   whd_bool_t direct_resource, uint32_t address, uint32_t image_size);
 static whd_result_t whd_bus_m2m_write_wifi_nvram_image(whd_driver_t whd_driver);
@@ -145,8 +143,8 @@ whd_result_t whd_bus_m2m_attach(whd_driver_t whd_driver, whd_m2m_config_t *whd_m
     whd_driver->bus_if   = &whd_bus_m2m_info;
     whd_driver->bus_priv = &whd_bus_priv;
 
-    memset(whd_driver->bus_if, 0, sizeof(whd_bus_info_t) );
-    memset(whd_driver->bus_priv, 0, sizeof(struct whd_bus_priv) );
+    whd_mem_memset(whd_driver->bus_if, 0, sizeof(whd_bus_info_t) );
+    whd_mem_memset(whd_driver->bus_priv, 0, sizeof(struct whd_bus_priv) );
 
     whd_driver->bus_priv->m2m_obj = m2m_obj;
     whd_driver->bus_priv->m2m_config = *whd_m2m_config;
@@ -227,15 +225,11 @@ static whd_result_t whd_bus_m2m_init(whd_driver_t whd_driver)
 
     result = boot_wlan(whd_driver);
 
-#ifdef PROTO_MSGBUF
-    CHECK_RETURN(whd_bus_m2m_sharedmem_init(whd_driver) );
-#else
     if (result == WHD_SUCCESS)
     {
         cyhal_m2m_init(whd_driver->bus_priv->m2m_obj, M2M_DMA_RX_BUFFER_SIZE);
         cyhal_m2m_register_callback(whd_driver->bus_priv->m2m_obj, whd_bus_m2m_irq_handler, whd_driver);
     }
-#endif /* PROTO_MSGBUF */
 
     return result;
 }
@@ -331,9 +325,8 @@ static whd_result_t whd_bus_m2m_read_frame(whd_driver_t whd_driver, whd_buffer_t
          * back to the start of the pakcet
          */
         whd_buffer_add_remove_at_front(whd_driver, buffer, -(int)sizeof(whd_buffer_header_t) );
-#ifndef PROTO_MSGBUF
+
         whd_sdpcm_update_credit(whd_driver, (uint8_t *)hwtag);
-#endif /* PROTO_MSGBUF */
     }
 
     cyhal_m2m_rx_prepare(whd_driver->bus_priv->m2m_obj);
@@ -419,7 +412,7 @@ static whd_result_t whd_bus_m2m_transfer_bytes(whd_driver_t whd_driver, whd_bus_
     if (direction == BUS_WRITE)
     {
         DISABLE_COMPILER_WARNING(diag_suppress = Pa039)
-        memcpy( (uint8_t *)address, data->data, size );
+        whd_mem_memcpy( (uint8_t *)address, data->data, size );
         ENABLE_COMPILER_WARNING(diag_suppress = Pa039)
         if (address == 0)
         {
@@ -437,7 +430,7 @@ static whd_result_t whd_bus_m2m_transfer_bytes(whd_driver_t whd_driver, whd_bus_
     else
     {
         DISABLE_COMPILER_WARNING(diag_suppress = Pa039)
-        memcpy(data->data, (uint8_t *)address, size);
+        whd_mem_memcpy(data->data, (uint8_t *)address, size);
         ENABLE_COMPILER_WARNING(diag_suppress = Pa039)
     }
 
@@ -472,32 +465,10 @@ static whd_result_t whd_bus_m2m_wait_for_wlan_event(whd_driver_t whd_driver, cy_
     whd_result_t result = WHD_SUCCESS;
     uint32_t timeout_ms;
 
-#ifdef PROTO_MSGBUF
-    timeout_ms = 1;
-    uint32_t delayed_release_timeout_ms;
-
-    delayed_release_timeout_ms = whd_bus_handle_delayed_release(whd_driver);
-    if (delayed_release_timeout_ms != 0)
-    {
-        timeout_ms = delayed_release_timeout_ms;
-    }
-    else
-    {
-        result = whd_bus_suspend(whd_driver);
-
-        if (result == WHD_SUCCESS)
-        {
-            timeout_ms = CY_RTOS_NEVER_TIMEOUT;
-        }
-    }
-
-    result = cy_rtos_get_semaphore(transceive_semaphore, (uint32_t)MIN_OF(timeout_ms,
-                                                                          WHD_THREAD_POLL_TIMEOUT), WHD_FALSE);
-#else
     timeout_ms = CY_RTOS_NEVER_TIMEOUT;
     whd_bus_m2m_irq_enable(whd_driver, WHD_TRUE);
     result = cy_rtos_get_semaphore(transceive_semaphore, timeout_ms, WHD_FALSE);
-#endif
+
     return result;
 }
 
@@ -556,11 +527,9 @@ static whd_result_t whd_bus_m2m_irq_enable(whd_driver_t whd_driver, whd_bool_t e
 
 whd_result_t m2m_bus_write_wifi_firmware_image(whd_driver_t whd_driver)
 {
-#ifndef PROTO_MSGBUF
     /* Halt ARM and remove from reset */
     WPRINT_WHD_INFO( ("Reset wlan core..\n") );
     VERIFY_RESULT(whd_reset_device_core(whd_driver, WLAN_ARM_CORE, WLAN_CORE_FLAG_CPU_HALT) );
-#endif /* PROTO_MSGBUF */
 
     return whd_bus_write_wifi_firmware_image(whd_driver);
 }
@@ -579,7 +548,6 @@ static whd_result_t boot_wlan(whd_driver_t whd_driver)
 
     VERIFY_RESULT(whd_bus_m2m_write_wifi_nvram_image(whd_driver) );
 
-#ifndef PROTO_MSGBUF
     /* Release ARM core */
     WPRINT_WHD_INFO( ("Release WLAN core..\n") );
     VERIFY_RESULT(whd_wlan_armcore_run(whd_driver, WLAN_ARM_CORE, WLAN_CORE_FLAG_NONE) );
@@ -593,7 +561,6 @@ static whd_result_t boot_wlan(whd_driver_t whd_driver)
      */
     cy_rtos_delay_milliseconds(10);
 #endif  /* PLATFORM_BACKPLANE_ON_CPU_CLOCK_ENABLE == 0 */
-#endif /* PROTO_MSGBUF */
 
     return result;
 }
@@ -691,25 +658,6 @@ static whd_result_t whd_bus_m2m_download_resource(whd_driver_t whd_driver, whd_r
     whd_result_t result = WHD_SUCCESS;
     uint32_t size_out;
 
-#ifdef PROTO_MSGBUF
-    uint8_t *image;
-
-    CHECK_RETURN(whd_get_resource_block(whd_driver, resource, 0, (const uint8_t **)&image, &size_out) );
-
-    trx_header_t *trx = (trx_header_t *)&image[0];
-    if (trx->magic == TRX_MAGIC)
-    {
-        image_size = trx->len;
-        address -= sizeof(*trx);
-    }
-    else
-    {
-        result = WHD_BADARG;
-        WPRINT_WHD_ERROR( ("%s: TRX header mismatch\n", __FUNCTION__) );
-        return result;
-    }
-    memcpy( (void *)TRANS_ADDR(address), image, image_size );
-#else
     uint32_t reset_instr = 0;
 
     CHECK_RETURN(whd_resource_read(whd_driver, resource, 0,
@@ -725,7 +673,6 @@ static whd_result_t whd_bus_m2m_download_resource(whd_driver_t whd_driver, whd_r
     /* CR4_FF_ROM_SHADOW_DATA_REGISTER */
     CHECK_RETURN(whd_bus_write_backplane_value(whd_driver, GET_C_VAR(whd_driver, PMU_BASE_ADDRESS) + 0x084,
                                                (uint8_t)4, reset_instr) );
-#endif /* PROTO_MSGBUF */
 
     return result;
 }
@@ -748,27 +695,16 @@ static whd_result_t whd_bus_m2m_write_wifi_nvram_image(whd_driver_t whd_driver)
     nvram_destination_address = (GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4) - nvram_size;
     nvram_destination_address += GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS);
 
-#ifdef PROTO_MSGBUF
-    CHECK_RETURN(whd_resource_read(whd_driver, WHD_RESOURCE_WLAN_NVRAM, 0,
-                                   image_size, &size_out, (uint8_t *)TRANS_ADDR(nvram_destination_address) ) );
-#else
     /* Write NVRAM image into WLAN RAM */
     CHECK_RETURN(whd_resource_read(whd_driver, WHD_RESOURCE_WLAN_NVRAM, 0,
                                    image_size, &size_out, (uint8_t *)nvram_destination_address) );
-#endif /* PROTO_MSGBUF */
 
     /* Calculate the NVRAM image size in words (multiples of 4 bytes) and its bitwise inverse */
     nvram_size_in_words = nvram_size / 4;
     nvram_size_in_words = (~nvram_size_in_words << 16) | (nvram_size_in_words & 0x0000FFFF);
 
-#ifdef PROTO_MSGBUF
-    memcpy( (uint8_t *)TRANS_ADDR( (GET_C_VAR(whd_driver,
-                                              ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4) ),
+    whd_mem_memcpy( (uint8_t *)(GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4),
             (uint8_t *)&nvram_size_in_words, 4 );
-#else
-    memcpy( (uint8_t *)(GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) - 4),
-            (uint8_t *)&nvram_size_in_words, 4 );
-#endif /* PROTO_MSGBUF */
 
     return WHD_SUCCESS;
 }

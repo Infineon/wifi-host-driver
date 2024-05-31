@@ -41,7 +41,7 @@ int whd_buffer_printf(const char *format, ...)
         /* full print did not fit in buffer - wipe what was just written
            and reprint at start of buffer
          */
-        memset(&(logbuf.buffer[logbuf.buffer_write]), 0xf, (size_t)(LOGGING_BUFFER_SIZE - (logbuf.buffer_write) ) );
+        whd_mem_memset(&(logbuf.buffer[logbuf.buffer_write]), 0xf, (size_t)(LOGGING_BUFFER_SIZE - (logbuf.buffer_write) ) );
 
         logbuf.buffer_write = 0;
         potential_num_written = vsnprintf (&(logbuf.buffer[logbuf.buffer_write]),
@@ -109,3 +109,4 @@ void whd_print_logbuffer(void)
 }
 
 #endif /* ifdef WHD_LOGGING_BUFFER_ENABLE */
+

@@ -8,6 +8,5 @@ var searchData=
   ['pmkid_5flen',['PMKID_LEN',['../whd__types_8h.html#af2ce8126dc46ee1d9d3beda3e1003193',1,'whd_types.h']]],
   ['pmkid_5ft',['pmkid_t',['../whd__types_8h.html#a41a5921cae8749f8c7b96f216ff318a3',1,'whd_types.h']]],
   ['port_5ffilter_5flen',['PORT_FILTER_LEN',['../whd__types_8h.html#a7d8ed7e88b85772d09799ca87a27370d',1,'whd_types.h']]],
-  ['priority',['priority',['../structwhd__btc__lescan__params.html#a0815784d41b3c13d42ce22367abfba1d',1,'whd_btc_lescan_params']]],
-  ['protocolversion',['ProtocolVersion',['../struct_protocol_version.html',1,'']]]
+  ['priority',['priority',['../structwhd__btc__lescan__params.html#a0815784d41b3c13d42ce22367abfba1d',1,'whd_btc_lescan_params']]]
 ];

@@ -8,6 +8,21 @@
     <includedby refid="whd__resource__api_8h" local="yes">whd_resource_api.h</includedby>
     <includedby refid="whd__wifi__api_8h" local="yes">whd_wifi_api.h</includedby>
     <incdepgraph>
+      <node id="4">
+        <label>stdint.h</label>
+      </node>
+      <node id="6">
+        <label>cy_result.h</label>
+      </node>
+      <node id="2">
+        <label>whd.h</label>
+        <link refid="whd_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>cyhal_hw_types.h</label>
+      </node>
       <node id="3">
         <label>whd_types.h</label>
         <link refid="whd__types_8h"/>
@@ -19,59 +34,39 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>stdint.h</label>
-      </node>
-      <node id="6">
-        <label>cy_result.h</label>
-      </node>
-      <node id="7">
-        <label>cyhal_hw_types.h</label>
-      </node>
-      <node id="2">
-        <label>whd.h</label>
-        <link refid="whd_8h"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>cyhal_gpio.h</label>
       </node>
       <node id="5">
         <label>cybsp.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="13">
+      <node id="9">
+        <label>whd_events.h</label>
+        <link refid="whd__events_8h"/>
+      </node>
+      <node id="12">
         <label>whd_wifi_api.h</label>
         <link refid="whd__wifi__api_8h"/>
       </node>
-      <node id="11">
+      <node id="10">
         <label>whd_network_types.h</label>
         <link refid="whd__network__types_8h"/>
       </node>
-      <node id="12">
+      <node id="11">
         <label>whd_resource_api.h</label>
         <link refid="whd__resource__api_8h"/>
       </node>
-      <node id="9">
+      <node id="8">
         <label>whd.h</label>
         <link refid="whd_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>whd_events.h</label>
-        <link refid="whd__events_8h"/>
       </node>
     </invincdepgraph>
     <innerclass refid="structwhd__init__config" prot="public">whd_init_config</innerclass>
@@ -84,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="12" column="9" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="12" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="12" column="9" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="12" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
@@ -100,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="22" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="22" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="22" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1abb71e6e14de31e2b2da19bfb425a590e" prot="public" static="no">
         <type>struct whd_bt_info *</type>
@@ -114,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="26" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="26" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="26" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1ad739b6e984d3734516e40194e903f94e" prot="public" static="no">
         <type>struct whd_bt_dev *</type>
@@ -128,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="30" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="30" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="30" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1a2e544c482ddbb690bbb95ce7174e79a0" prot="public" static="no">
         <type>struct whd_interface *</type>
@@ -142,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="34" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1a44a6e9abc68a4322a3958bdc24ae9981" prot="public" static="no">
         <type>struct <ref refid="structwhd__buffer__funcs" kindref="compound">whd_buffer_funcs</ref></type>
@@ -156,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="39" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1ac35b975959ed585acf554535b502ce68" prot="public" static="no">
         <type>struct <ref refid="structwhd__netif__funcs" kindref="compound">whd_netif_funcs</ref></type>
@@ -170,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="44" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1a05847ad8fa418d69d5f51fe654835b8b" prot="public" static="no">
         <type>struct <ref refid="structwhd__resource__source" kindref="compound">whd_resource_source</ref></type>
@@ -184,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="49" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1af5e9a147a89968d2026fd7720a519bbd" prot="public" static="no">
         <type>struct whd_bus_funcs</type>
@@ -198,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="54" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1a7373cb0b0ef75e1b740fd53c77bda5e4" prot="public" static="no">
         <type>struct whd_bus_funcs</type>
@@ -212,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" bodystart="59" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="34" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="whd_8h_1a933f0025533b9b88ecb77b651db29250" prot="public" static="no">
         <type>struct <ref refid="structwhd__init__config" kindref="compound">whd_init_config</ref></type>
@@ -226,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h" line="70" column="1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h" line="70" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -234,6 +229,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd.h"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd.h"/>
   </compounddef>
 </doxygen>

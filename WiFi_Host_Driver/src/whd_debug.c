@@ -36,7 +36,7 @@
 ******************************************************/
 void whd_init_stats(whd_driver_t whd_driver)
 {
-    memset(&whd_driver->whd_stats, 0, sizeof(whd_driver->whd_stats) );
+    whd_mem_memset(&whd_driver->whd_stats, 0, sizeof(whd_driver->whd_stats) );
 }
 
 whd_result_t whd_print_stats(whd_driver_t whd_driver, whd_bool_t reset_after_print)
@@ -53,9 +53,10 @@ whd_result_t whd_print_stats(whd_driver_t whd_driver, whd_bool_t reset_after_pri
 
     if (reset_after_print == WHD_TRUE)
     {
-        memset(&whd_driver->whd_stats, 0, sizeof(whd_driver->whd_stats) );
+        whd_mem_memset(&whd_driver->whd_stats, 0, sizeof(whd_driver->whd_stats) );
     }
 
     CHECK_RETURN(whd_bus_print_stats(whd_driver, reset_after_print) );
     return WHD_SUCCESS;
 }
+

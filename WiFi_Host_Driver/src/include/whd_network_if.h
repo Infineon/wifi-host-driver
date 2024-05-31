@@ -73,3 +73,4 @@ whd_result_t whd_network_process_ethernet_data(whd_interface_t ifp, whd_buffer_t
 #endif
 
 #endif /* ifndef _WHD_INTERNAL_NETWORK_API_H_ */
+

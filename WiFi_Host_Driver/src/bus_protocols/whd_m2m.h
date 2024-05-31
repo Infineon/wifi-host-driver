@@ -1,13 +1,13 @@
 /*
- * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -65,7 +65,7 @@ extern "C" {
 #define GCI_WL2BT_DB6_REG          0x4fe4065c
 #define GCI_WL2BT_DB7_REG          0x4fe40660
 
-/* These register readable by both WLAN and BT. These registers reset with WLAN reset. */
+/* These register readable by both WLAN and BT. These registers reset with WLAN reset */
 #define GCI_WL2BT_CLOCK_CSR        0x4fe406A0
 
 /* These register readable by both WLAN and BT. These registers reset with BT reset. */
@@ -112,3 +112,4 @@ extern "C" {
 #endif
 
 #endif /* ifndef INCLUDED_WHD_M2M_H_ */
+
