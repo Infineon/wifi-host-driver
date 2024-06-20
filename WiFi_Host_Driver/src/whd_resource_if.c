@@ -115,4 +115,3 @@ uint32_t whd_resource_read(whd_driver_t whd_driver, whd_resource_type_t type, ui
 
     return WHD_WLAN_NOFUNCTION;
 }
-

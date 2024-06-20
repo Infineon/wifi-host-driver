@@ -26,7 +26,7 @@
 #ifndef PROTO_MSGBUF
 #include "whd_sdpcm.h"
 #else
-#include "whd_flowring.h"
+#include "whd_msgbuf.h"
 #endif /* PROTO_MSGBUF */
 #include "whd_thread_internal.h"
 #include "whd_events_int.h"
@@ -90,14 +90,6 @@ whd_bool_t whd_wifi_get_ap_is_up(whd_driver_t whd_driver)
 {
     return whd_driver->ap_info.ap_is_up;
 }
-
-#ifdef PROTO_MSGBUF
-void whd_wifi_update_addr_mode(whd_driver_t whd_driver, uint8_t idx)
-{
-    struct whd_msgbuf *msgbuf = whd_driver->msgbuf;
-    msgbuf->flow->addr_mode[idx] = ADDR_DIRECT;
-}
-#endif
 
 whd_result_t whd_wifi_set_block_ack_window_size_common(whd_interface_t ifp, uint16_t ap_win_size, uint16_t sta_win_size)
 {
@@ -228,6 +220,13 @@ whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_securit
            (wlan_chip_id == 43012) ) )
     {
         WPRINT_WHD_ERROR( ("WPA3 is not supported, %s failed at line %d \n", __func__, __LINE__) );
+        return WHD_UNSUPPORTED;
+    }
+
+    if ( (wlan_chip_id == 43022) &&
+         ( (auth_type & TKIP_ENABLED)  || (auth_type & WPA_SECURITY) ) )
+    {
+        WPRINT_WHD_ERROR( ("WPA and TKIP are not supported, %s failed at line %d \n", __func__, __LINE__) );
         return WHD_UNSUPPORTED;
     }
 
@@ -408,7 +407,7 @@ whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_securit
         data[0] = htod32(bss_index); /* Set the bsscfg index */
     }
     data[1] = htod32(ssid->length); /* Set the ssid length */
-    whd_mem_memcpy(&data[2], (uint8_t *)ssid->value, ssid->length);
+    memcpy(&data[2], (uint8_t *)ssid->value, ssid->length);
     if ( (wlan_chip_id == 43340) || (wlan_chip_id == 43342) )
     {
         CHECK_RETURN_WITH_SEMAPHORE(whd_proto_set_iovar(ifp, buffer, 0), &ap->whd_wifi_sleep_flag);
@@ -469,7 +468,7 @@ whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_securit
             /* Set the passphrase */
             psk = (wsec_pmk_t *)whd_proto_get_ioctl_buffer(whd_driver, &buffer, sizeof(wsec_pmk_t) );
             CHECK_IOCTL_BUFFER_WITH_SEMAPHORE(psk, &ap->whd_wifi_sleep_flag);
-            whd_mem_memcpy(psk->key, security_key, key_length);
+            memcpy(psk->key, security_key, key_length);
             psk->key_len = htod16(key_length);
             psk->flags = htod16( (uint16_t)WSEC_PASSPHRASE );
             CHECK_RETURN(cy_rtos_delay_milliseconds(1) );
@@ -536,7 +535,7 @@ whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_securit
                 /* Set the passphrase */
                 psk = (wsec_pmk_t *)whd_proto_get_ioctl_buffer(whd_driver, &buffer, sizeof(wsec_pmk_t) );
                 CHECK_IOCTL_BUFFER_WITH_SEMAPHORE(psk, &ap->whd_wifi_sleep_flag);
-                whd_mem_memcpy(psk->key, security_key, key_length);
+                memcpy(psk->key, security_key, key_length);
                 psk->key_len = htod16(key_length);
                 psk->flags = htod16( (uint16_t)WSEC_PASSPHRASE );
                 CHECK_RETURN(cy_rtos_delay_milliseconds(1) );
@@ -614,9 +613,6 @@ whd_result_t whd_wifi_start_ap(whd_interface_t ifp)
     ap->is_waiting_event = WHD_FALSE;
 
     whd_wifi_set_ap_is_up(whd_driver, WHD_TRUE);
-#ifdef PROTO_MSGBUF
-    whd_wifi_update_addr_mode(ifp->whd_driver, ifp->bsscfgidx);
-#endif
     return WHD_SUCCESS;
 }
 
@@ -732,4 +728,3 @@ sema_fail:
     ifp->role = WHD_INVALID_ROLE;
     return WHD_SUCCESS;
 }
-

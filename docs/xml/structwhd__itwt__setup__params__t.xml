@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__itwt__setup__params__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_itwt_setup_params_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1a1848c250921d04fa3d577e7ccef005a5" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t setup_cmd</definition>
+        <argsstring></argsstring>
+        <name>setup_cmd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1107" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1ad47e9b879c95a25ce124bd5611ff9497" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t trigger</definition>
+        <argsstring></argsstring>
+        <name>trigger</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1108" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1ab212cf1aed2334d31e9a0a7a28da0493" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t flow_type</definition>
+        <argsstring></argsstring>
+        <name>flow_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1109" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1acee83b30aaad37cab91b52874e5636a8" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t flow_id</definition>
+        <argsstring></argsstring>
+        <name>flow_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1110" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1a3ac172613c3145c8a25146425371318d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t wake_duration</definition>
+        <argsstring></argsstring>
+        <name>wake_duration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1111" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1af05d5abe7656953548edfb3eb5117659" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t exponent</definition>
+        <argsstring></argsstring>
+        <name>exponent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1112" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1af3e8ae277c955710b8b3163452e1b3fc" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t mantissa</definition>
+        <argsstring></argsstring>
+        <name>mantissa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1113" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1aa19d40094f177173b777582d3e0a0c65" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t wake_time_h</definition>
+        <argsstring></argsstring>
+        <name>wake_time_h</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1114" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__itwt__setup__params__t_1a4b99597d91ed77eed387c7cc602effd2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t wake_time_l</definition>
+        <argsstring></argsstring>
+        <name>wake_time_l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1115" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1115" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for itwt_setup params. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1106" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1105" bodyend="1116"/>
+    <listofallmembers>
+      <member refid="structwhd__itwt__setup__params__t_1af05d5abe7656953548edfb3eb5117659" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>exponent</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1acee83b30aaad37cab91b52874e5636a8" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>flow_id</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1ab212cf1aed2334d31e9a0a7a28da0493" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>flow_type</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1af3e8ae277c955710b8b3163452e1b3fc" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>mantissa</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1a1848c250921d04fa3d577e7ccef005a5" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>setup_cmd</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1ad47e9b879c95a25ce124bd5611ff9497" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>trigger</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1a3ac172613c3145c8a25146425371318d" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>wake_duration</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1aa19d40094f177173b777582d3e0a0c65" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>wake_time_h</name></member>
+      <member refid="structwhd__itwt__setup__params__t_1a4b99597d91ed77eed387c7cc602effd2" prot="public" virt="non-virtual"><scope>whd_itwt_setup_params_t</scope><name>wake_time_l</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

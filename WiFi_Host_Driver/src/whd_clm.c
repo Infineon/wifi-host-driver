@@ -58,13 +58,11 @@ whd_download_wifi_clm_image(whd_interface_t ifp, const char *iovar, uint16_t fla
     dload_ptr->crc = 0;
 
     whd_assert("dload buffer too large", len < 0xffffffff - 8);
-#ifndef PROTO_MSGBUF
     len = len + 8 - (len % 8);
-#endif
 
     iov_data = (uint8_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, (uint16_t)len, iovar);
     CHECK_IOCTL_BUFFER(iov_data);
-    whd_mem_memcpy(iov_data, (uint8_t *)dload_ptr, len);
+    memcpy(iov_data, (uint8_t *)dload_ptr, len);
     CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
     return WHD_SUCCESS;
 }
@@ -112,7 +110,7 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
 
     if ( (chunk_buf = (unsigned char *)whd_mem_malloc(size2alloc) ) != NULL )
     {
-        whd_mem_memset(chunk_buf, 0, size2alloc);
+        memset(chunk_buf, 0, size2alloc);
         transfer_progress = 0;
         for (i = 0; i < blocks_count; i++)
         {
@@ -128,7 +126,7 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
                     chunk_len = BLOCK_SIZE;
                 else
                     chunk_len = size_read;
-                whd_mem_memcpy(chunk_buf + data_offset, &image[transfer_progress], chunk_len);
+                memcpy(chunk_buf + data_offset, &image[transfer_progress], chunk_len);
 
                 if (datalen + chunk_len == clm_blob_size)
                 {
@@ -180,4 +178,3 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp)
 
     return ret;
 }
-

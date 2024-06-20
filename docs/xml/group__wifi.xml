@@ -10,6 +10,60 @@
     <innergroup refid="group__wifipowersave">WHD Wi-Fi Power Save API</innergroup>
     <innergroup refid="group__wifiioctl">WHD Wi-Fi IOCTL Set/Get API</innergroup>
     <innergroup refid="group__dbg">WHD Wi-Fi Debug API</innergroup>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="group__wifi_1ga6b69ab13769b9f0dfbf3ca6d4266b340" prot="public" static="no" mutable="no">
+        <type>whd_ds_callback_t</type>
+        <definition>whd_ds_callback_t callback</definition>
+        <argsstring></argsstring>
+        <name>callback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1534" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="1534" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__wifi_1ga1f6d09b30c54854dfca659b7463ac207" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* ctx</definition>
+        <argsstring></argsstring>
+        <name>ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1535" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="1535" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__wifi_1ga1fe855c208bc17a51a4d34fefdb2d5b1" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* buf</definition>
+        <argsstring></argsstring>
+        <name>buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1536" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="1536" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__wifi_1ga3a92b3e6d105dee4dd0b5ac8eefeb219" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t buflen</definition>
+        <argsstring></argsstring>
+        <name>buflen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="1537" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" bodystart="1537" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
     <briefdescription>
 <para>APIs for controlling the Wi-Fi system. </para>
     </briefdescription>

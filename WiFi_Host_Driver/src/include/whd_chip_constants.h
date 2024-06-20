@@ -140,4 +140,3 @@ whd_result_t whd_chip_get_chanspec_ctl_channel_num(whd_driver_t whd_driver, uint
 #endif
 
 #endif /* ifndef INCLUDED_CHIP_CONSTANTS_H_ */
-

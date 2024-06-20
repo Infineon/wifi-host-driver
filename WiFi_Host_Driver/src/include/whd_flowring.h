@@ -1,13 +1,13 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,25 +27,13 @@ extern "C"
 {
 #endif
 
-#define WHD_FLOWRING_HASHSIZE       16     /* has to be 2^x */
+#define WHD_FLOWRING_HASHSIZE       512     /* has to be 2^x */
 #define WHD_FLOWRING_INVALID_ID     0xFFFFFFFF
 
 enum proto_addr_mode
 {
     ADDR_INDIRECT   = 0,
     ADDR_DIRECT
-};
-
-static const uint8_t whd_flowring_prio2fifo[] =
-{
-    0,
-    1,
-    1,
-    0,
-    2,
-    2,
-    3,
-    3
 };
 
 static inline int is_multicast_ether_addr(const uint8_t *a)
@@ -81,7 +69,6 @@ struct whd_flowring_ring
     uint8_t blocked;
     enum ring_status status;
     whd_msgbuftx_info_t txflow_queue;
-    uint32_t ac_prio;
 };
 
 struct whd_flowring_tdls_entry
@@ -119,4 +106,3 @@ extern void whd_flowring_open(struct whd_flowring *flow, uint16_t flowid);
 #endif
 
 #endif
-

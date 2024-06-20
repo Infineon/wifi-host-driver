@@ -205,32 +205,6 @@ bool whd_str_to_ip(const char *ip4addr, size_t len, void *dest);
  */
 uint8_t whd_ip4_to_string(const void *ip4addr, char *p);
 
-/*!
- ******************************************************************************
- * The wrapper function for memory allocation.
- * It allocates the requested memory and returns a pointer to it.
- * In default implementation it uses The C library function malloc().
- *
- * Use macro WHD_USE_CUSTOM_MALLOC_IMPL (-D) for custom whd_mem_memcpy/
- * whd_mem_calloc/whd_mem_free inplemetation.
- *
- * @param[in] size     :  This is the size of the memory block, in byrtes 
- */
-void whd_mem_memcpy (void *dest, const void *src, size_t len);
-
-/*!
- ******************************************************************************
- * The wrapper function for memory allocation.
- * It allocates the requested memory and returns a pointer to it.
- * In default implementation it uses The C library function malloc().
- *
- * Use macro WHD_USE_CUSTOM_MALLOC_IMPL (-D) for custom whd_mem_memset/
- * whd_mem_calloc/whd_mem_free inplemetation.
- *
- * @param[in] lem     :  This is the size of the memory block, in bytes.
- *
- */
-void whd_mem_memset (void *buf, int val, size_t len);
 
 /*!
  ******************************************************************************
@@ -285,4 +259,3 @@ void whd_mem_free(void *ptr);
 } /* extern "C" */
 #endif
 #endif
-

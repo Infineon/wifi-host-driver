@@ -1,6 +1,7 @@
 var whd__resource__api_8h =
 [
     [ "BLOCK_SIZE", "whd__resource__api_8h.html#ad51ded0bbd705f02f73fc60c0b721ced", null ],
+    [ "NVM_IMAGE_SIZE_ALIGNMENT", "whd__resource__api_8h.html#adc19ff8217ab10b1bdf1dcbdd3fe8aaf", null ],
     [ "whd_resource_type_t", "whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0c", [
       [ "WHD_RESOURCE_WLAN_FIRMWARE", "whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0caf1635251dcc37bfa67af783a53f0acf3", null ],
       [ "WHD_RESOURCE_WLAN_NVRAM", "whd__resource__api_8h.html#a26c678527cf0cb5196be511d9ad62c0ca397297fd6225d6eae30e7fa0d40a94f7", null ],

@@ -124,4 +124,3 @@ extern whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer
 #endif /* PROTO_MSGBUF */
 
 #endif /* ifndef INCLUDED_WHD_SDPCM_H */
-

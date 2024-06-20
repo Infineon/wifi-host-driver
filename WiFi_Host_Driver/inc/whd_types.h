@@ -21,23 +21,14 @@
  */
 
 #include <stdint.h>
+
 #include "cybsp.h"
 #include "cy_result.h"
+#include "cyhal_hw_types.h"
+#include "cyhal_gpio.h"
 
 #ifndef INCLUDED_WHD_TYPES_H_
 #define INCLUDED_WHD_TYPES_H_
-
-#ifndef WHD_USE_CUSTOM_HAL_IMPL
-    #include "cyhal_hw_types.h"
-    #include "cyhal_gpio.h"
-#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
-    #include "cyhal_sdio.h"
-#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
-    #include "cyhal_spi.h"
-#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
-    #include "cyhal_m2m.h"
-#endif
-#endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
 
 #ifdef __cplusplus
 extern "C"
@@ -55,12 +46,11 @@ extern "C"
 #define SHARED_ENABLED     0x00008000  /**< Flag to enable Shared key Security */
 #define WPA_SECURITY       0x00200000  /**< Flag to enable WPA Security        */
 #define WPA2_SECURITY      0x00400000  /**< Flag to enable WPA2 Security       */
+#define WPA2_SHA256_SECURITY 0x00800000 /**< Flag to enable WPA2 SHA256 Security */
 #define WPA3_SECURITY      0x01000000  /**< Flag to enable WPA3 PSK Security   */
 #define SECURITY_MASK      (WEP_ENABLED | TKIP_ENABLED | AES_ENABLED) /**< Flag to Security mask */
 
 #define ENTERPRISE_ENABLED 0x02000000  /**< Flag to enable Enterprise Security */
-#define SHA256_1X          0x04000000  /**< Flag 1X with SHA256 key derivation */
-#define SUITE_B_SHA384     0x08000000  /**< Flag to enable Suite B-192 SHA384 Security */
 #define WPS_ENABLED        0x10000000  /**< Flag to enable WPS Security        */
 #define IBSS_ENABLED       0x20000000  /**< Flag to enable IBSS mode           */
 #define FBT_ENABLED        0x40000000  /**< Flag to enable FBT                 */
@@ -75,10 +65,11 @@ extern "C"
 
 #define PMKID_LEN                   (16) /**< PMKID LENGTH */
 
-#define ULP_NO_SUPPORT              (0) /* Flag to disable ULP in 43022 */
-#define ULP_DS1_SUPPORT             (1) /* Flag to enable DS1 mode in 43022 */
-#define ULP_DS2_SUPPORT             (2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */
+#define ULP_NO_SUPPORT              (0) /**< Flag to disable ULP in 43022 */
+#define ULP_DS1_SUPPORT             (1) /**< Flag to enable DS1 mode in 43022 */
+#define ULP_DS2_SUPPORT             (2) /**< Flag to enable DS2 mode in 43022(Only supported in DM) */
 #define WHD_OOB_CONFIG_VERSION      (2) /**< Indicate the version for whd_oob_config structure */
+#define WHD_SAP_USE_CHANSPEC        (1) /**< Define this macro as any value indicate whd_wifi_init_ap api uses chanspec instead of channel */
 
 /**
  * Suppress unused parameter warning
@@ -113,34 +104,10 @@ typedef struct wl_pkt_filter_stats whd_pkt_filter_stats_t;
 typedef struct whd_tko_retry whd_tko_retry_t;
 typedef struct whd_tko_connect whd_tko_connect_t;
 typedef struct whd_tko_status whd_tko_status_t;
-typedef struct whd_tko_auto_filter whd_tko_auto_filter_t; 
-typedef struct whd_tko_autoconnect whd_tko_autoconnect_t; 
-#ifdef MQTT_SUPPORT
+typedef struct whd_tko_auto_filter whd_tko_auto_filter_t;
+typedef struct whd_tko_autoconnect whd_tko_autoconnect_t;
 typedef struct tls_param_info  tls_param_info_t;
 typedef struct secure_sess_info secure_sess_info_t;
-#endif
-
-#ifndef WHD_USE_CUSTOM_HAL_IMPL
-#define WHD_NC_PIN_VALUE CYHAL_NC_PIN_VALUE
-typedef cyhal_gpio_t whd_gpio_t;
-typedef cyhal_gpio_drive_mode_t whd_gpio_drive_mode_t;
-#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
-typedef cyhal_sdio_t whd_sdio_t;
-#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
-typedef cyhal_spi_t whd_spi_t;
-#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
-typedef cyhal_m2m_t whd_m2m_t;
-#endif
-#else
-#define WHD_NC_PIN_VALUE	NULL
-typedef void* whd_gpio_t;
-typedef uint8_t whd_gpio_drive_mode_t;
-typedef void* whd_sdio_t;
-typedef void* whd_spi_t;
-typedef void* whd_m2m_t;
-#endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
-
-
 /** @endcond */
 /******************************************************
 *                    Constants
@@ -184,9 +151,9 @@ typedef void* whd_m2m_t;
 #define WHD_LINK_HEADER (BDC_HEADER_WITH_PAD + BDC_HEADER_OFFSET_TO_DATA + \
                          SDPCM_HEADER + MAX_BUS_HEADER_SIZE + BUFFER_OVERHEAD)
 #else
-/* 
- * In nx_user.h NX_PHYSICAL_HEADER is (14(Ethernet) + 4(Overhaed) + 2(pad)), 
- * so we are doing the similar here -> 4(hedaer) + 2(pad) in front of ethernet header 
+/*
+ * In nx_user.h NX_PHYSICAL_HEADER is (14(Ethernet) + 4(Overhaed) + 2(pad)),
+ * so we are doing the similar here -> 4(hedaer) + 2(pad) in front of ethernet header
  */
 #define WHD_LINK_HEADER (MSGBUF_OVERHEAD_WITH_PAD)
 #endif /* PROTO_MSGBUF */
@@ -268,7 +235,7 @@ typedef enum
     WHD_SECURITY_WPA_AES_PSK      = (WPA_SECURITY | AES_ENABLED),                                      /**< WPA PSK Security with AES                             */
     WHD_SECURITY_WPA_MIXED_PSK    = (WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),                       /**< WPA PSK Security with AES & TKIP                      */
     WHD_SECURITY_WPA2_AES_PSK     = (WPA2_SECURITY | AES_ENABLED),                                     /**< WPA2 PSK Security with AES                            */
-    WHD_SECURITY_WPA2_AES_PSK_SHA256 = (WPA2_SECURITY | SHA256_1X | AES_ENABLED),                      /**< WPA2 PSK SHA256 Security with AES                     */
+    WHD_SECURITY_WPA2_AES_PSK_SHA256 = (WPA2_SECURITY | WPA2_SHA256_SECURITY | AES_ENABLED),           /**< WPA2 PSK SHA256 Security with AES                     */
     WHD_SECURITY_WPA2_TKIP_PSK    = (WPA2_SECURITY | TKIP_ENABLED),                                    /**< WPA2 PSK Security with TKIP                           */
     WHD_SECURITY_WPA2_MIXED_PSK   = (WPA2_SECURITY | AES_ENABLED | TKIP_ENABLED),                      /**< WPA2 PSK Security with AES & TKIP                     */
     WHD_SECURITY_WPA2_FBT_PSK     = (WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),                       /**< WPA2 FBT PSK Security with AES & TKIP */
@@ -285,10 +252,6 @@ typedef enum
     WHD_SECURITY_WPA2_AES_ENT     = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED),                /**< WPA2 Enterprise Security with AES                     */
     WHD_SECURITY_WPA2_MIXED_ENT   = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED | TKIP_ENABLED), /**< WPA2 Enterprise Security with AES & TKIP              */
     WHD_SECURITY_WPA2_FBT_ENT     = (ENTERPRISE_ENABLED | WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),  /**< WPA2 Enterprise Security with AES & FBT               */
-
-    WHD_SECURITY_WPA3_192BIT_ENT  = (ENTERPRISE_ENABLED | WPA3_SECURITY | SUITE_B_SHA384 | AES_ENABLED),/**< WPA3 192-BIT Enterprise Security with AES            */
-    WHD_SECURITY_WPA3_ENT         = (ENTERPRISE_ENABLED | WPA3_SECURITY | SHA256_1X | AES_ENABLED),     /**< WPA3 Enterprise Security with AES                    */
-    WHD_SECURITY_WPA3_ENT_AES_CCMP= (ENTERPRISE_ENABLED | WPA3_SECURITY | WPA2_SECURITY | SHA256_1X | AES_ENABLED),/**< WPA3 Enterprise transition Security with AES    */
 
     WHD_SECURITY_IBSS_OPEN        = (IBSS_ENABLED),                                                    /**< Open security on IBSS ad-hoc network                  */
     WHD_SECURITY_WPS_SECURE       = AES_ENABLED,                                                       /**< WPS with AES security                                 */
@@ -1254,8 +1217,8 @@ typedef struct
  */
 typedef struct whd_oob_config
 {
-    whd_gpio_t host_oob_pin;          /**< Host-side GPIO pin selection */
-    whd_gpio_drive_mode_t drive_mode; /**< Host-side GPIO pin drive mode */
+    cyhal_gpio_t host_oob_pin;          /**< Host-side GPIO pin selection */
+    cyhal_gpio_drive_mode_t drive_mode; /**< Host-side GPIO pin drive mode */
     whd_bool_t init_drive_state;        /**< Host-side GPIO pin initial drive state */
     uint8_t dev_gpio_sel;               /**< WiFi device-side GPIO pin selection (must be zero) */
     whd_bool_t is_falling_edge;         /**< Interrupt trigger (polarity) */
@@ -1364,14 +1327,13 @@ typedef struct
     whd_bool_t enabled_status;                     /**< When returned from wwd_wifi_get_packet_filters, indicates if the filter is enabled */
 } whd_packet_filter_t;
 
-typedef struct whd_keep_alive 
+typedef struct whd_keep_alive
 {
-	uint32_t period_msec;
-	uint16_t len_bytes;
-	uint8_t *data;	
+    uint32_t period_msec;
+    uint16_t len_bytes;
+    uint8_t *data;
 } whd_keep_alive_t;
 
-#ifdef MQTT_SUPPORT
 #define TLS_MAX_KEY_LENGTH           48
 #define TLS_MAX_MAC_KEY_LENGTH       32
 #define TLS_MAX_IV_LENGTH            32
@@ -1468,7 +1430,6 @@ struct tls_param_info{
     uint16_t payload_len;
     bool encrypt_then_mac;
 };
-#endif
 
 #define TKO_DATA_OFFSET offsetof(wl_tko_t, data)  /**< TKO data offset */
 

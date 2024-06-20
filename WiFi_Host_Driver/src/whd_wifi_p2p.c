@@ -44,4 +44,3 @@ void whd_wifi_p2p_set_go_is_up(whd_driver_t whd_driver, whd_bool_t is_up)
         whd_driver->internal_info.whd_wifi_p2p_go_is_up = is_up;
     }
 }
-

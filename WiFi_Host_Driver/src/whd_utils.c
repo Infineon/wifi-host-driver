@@ -52,19 +52,14 @@ uint32_t whd_dmapool_init(uint32_t memory_size)
     WPRINT_WHD_DEBUG(("WHD allocating %lu bytes for DMA pool\n", memory_size));
     pool_mem = (dma_pool*)whd_hw_allocatePermanentApi(memory_size);
 
-    if (pool_mem == NULL)    
+    if (pool_mem == NULL)
       return -1;
 
     pool_mem->offset = 0;
     pool_mem->poolsize = memory_size - (sizeof(dma_pool));
 
-#ifndef AT_CMD_OVER_SDIO
     if (!whd_hw_openDeviceAccessApi(WHD_HW_DEVICE_WLAN, pool_mem->big_buffer, pool_mem->poolsize, 0 ))
        return -1;
-#else
-    if (!whd_hw_openDeviceAccessApi(WHD_HW_DEVICE_SDIO_AND_WLAN, pool_mem->big_buffer, pool_mem->poolsize, 0 ))
-       return -1;
-#endif /* AT_CMD_OVER_SDIO */
 
     return 0;
 }
@@ -164,11 +159,11 @@ whd_tlv8_header_t *whd_parse_dot11_tlvs(const whd_tlv8_header_t *tlv_buf, uint32
 #ifdef WPRINT_ENABLE_WHD_DEBUG
 char *whd_ssid_to_string(uint8_t *value, uint8_t length, char *ssid_buf, uint8_t ssid_buf_len)
 {
-    whd_mem_memset(ssid_buf, 0, ssid_buf_len);
+    memset(ssid_buf, 0, ssid_buf_len);
 
     if (ssid_buf_len > 0)
     {
-        whd_mem_memcpy(ssid_buf, value, ssid_buf_len < length ? ssid_buf_len : length);
+        memcpy(ssid_buf, value, ssid_buf_len < length ? ssid_buf_len : length);
     }
 
     return ssid_buf;
@@ -1216,32 +1211,6 @@ uint8_t whd_ip4_to_string(const void *ip4addr, char *p)
 }
 
 #ifndef WHD_USE_CUSTOM_MALLOC_IMPL
-
-inline void whd_mem_memcpy (void *dest, const void *src, size_t len)
-{
-#ifdef PROTO_MSGBUF
-    char *p1 = (char *)dest, *p2 = (char *)src;
-    while(len--)
-    {
-        *(p1++) = *(p2++);
-    }
-#else
-    memcpy(dest, src, len);
-#endif
-}
-
-inline void whd_mem_memset (void *buf, int val, size_t len)
-{
-#ifdef PROTO_MSGBUF
-    char* p = (char*)buf;
-    while(len--)
-    {
-        *(p++) = val;
-    }
-#else
-    memset(buf, val, len);
-#endif
-}
 
 inline void *whd_mem_malloc (size_t size)
 {

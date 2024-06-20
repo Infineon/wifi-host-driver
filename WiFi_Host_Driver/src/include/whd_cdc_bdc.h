@@ -167,4 +167,3 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
 #endif /* PROTO_MSGBUF */
 
 #endif /* ifndef INCLUDED_WHD_CDC_BDC_H */
-

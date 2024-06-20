@@ -61,7 +61,7 @@ static void whd_thread_func(cy_thread_arg_t thread_input);
 ******************************************************/
 void whd_thread_info_init(whd_driver_t whd_driver, whd_init_config_t *whd_init_config)
 {
-    whd_mem_memset(&whd_driver->thread_info, 0, sizeof(whd_driver->thread_info) );
+    memset(&whd_driver->thread_info, 0, sizeof(whd_driver->thread_info) );
     whd_driver->thread_info.thread_stack_start = whd_init_config->thread_stack_start;
     whd_driver->thread_info.thread_stack_size = whd_init_config->thread_stack_size;
     whd_driver->thread_info.thread_priority = (cy_thread_priority_t)whd_init_config->thread_priority;
@@ -159,7 +159,6 @@ int8_t whd_thread_send_one_packet(whd_driver_t whd_driver)
     return (int8_t)1;
 #else
     uint16_t local_id = 0;
-    uint16_t prio_ring = 0;
 
     /* Ensure the wlan backplane bus is up */
     result = whd_ensure_wlan_bus_is_up(whd_driver);
@@ -177,18 +176,22 @@ int8_t whd_thread_send_one_packet(whd_driver_t whd_driver)
         DELAYED_BUS_RELEASE_SCHEDULE(whd_driver, WHD_TRUE);
     }
 
-    for (local_id = 0; local_id < whd_driver->msgbuf->current_flowring_count; local_id++)
+    for (local_id = 0; local_id < whd_driver->ram_shared->max_flowrings; local_id++)
     {
-        result = whd_get_high_priority_flowring(whd_driver, whd_driver->msgbuf->current_flowring_count, &prio_ring);
-
-        if (result == WHD_SUCCESS)
+        if (isset(whd_driver->msgbuf->flow_map, local_id) )
         {
-            clrbit(whd_driver->msgbuf->flow_map, prio_ring);
-            CHECK_RETURN(whd_msgbuf_txflow(whd_driver, prio_ring));
+            WPRINT_WHD_DEBUG(("Wcd:> Sending Data pkt through Flowring\n"));
+            clrbit(whd_driver->msgbuf->flow_map, local_id);
+            whd_msgbuf_txflow(whd_driver, local_id);
             DELAYED_BUS_RELEASE_SCHEDULE(whd_driver, WHD_TRUE);
         }
     }
 
+    if (local_id == whd_driver->ram_shared->max_flowrings)
+    {
+        WPRINT_WHD_DEBUG(("Sending pkt failed - reached max flowring count\n"));
+        return 0;
+    }
     /* In MSGBUF protocol case, all the queued packets
        are sent through flowrings so, no need to check return 1 */
     return (int8_t)0;
@@ -404,13 +407,6 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
             whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
 
-#ifdef PROTO_MSGBUF
-    if (whd_driver->update_buffs == 1)
-    {
-            whd_msgbuf_rxbuf_fill_all(whd_driver->msgbuf);
-    }
-#endif
-
         /* Sleep till WLAN do something */
         whd_bus_wait_for_wlan_event(whd_driver, &thread_info->transceive_semaphore);
         WPRINT_WHD_DATA_LOG( ("whd Thread: Woke\n") );
@@ -431,4 +427,3 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
     /* Ignore return - not much can be done about failure */
     (void)cy_rtos_exit_thread();
 }
-

@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__he__omi__params__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_he_omi_params_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1a02d4b1bb9ebce7933dca166e6c59ad72" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t rx_nss</definition>
+        <argsstring></argsstring>
+        <name>rx_nss</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1092" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1092" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1a5df421a20f2821d0ce81478c8c11bb0b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t chnl_wdth</definition>
+        <argsstring></argsstring>
+        <name>chnl_wdth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1093" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1093" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1aee0037068654d53ce2ce55338a52ed90" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ul_mu_dis</definition>
+        <argsstring></argsstring>
+        <name>ul_mu_dis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1094" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1094" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1ad21d1c8c1dd9a31bae717843cd5dbd8f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t tx_nsts</definition>
+        <argsstring></argsstring>
+        <name>tx_nsts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1095" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1095" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1a81cf87b47a5fb58278da7003d7b4da7c" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t er_su_dis</definition>
+        <argsstring></argsstring>
+        <name>er_su_dis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1096" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1096" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1afa64b804ed606b1550c9a8a460ab4b9b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t dl_mu_resound</definition>
+        <argsstring></argsstring>
+        <name>dl_mu_resound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1097" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1097" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1a193657b2c50cdca71ed48e3459597836" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ul_mu_data_dis</definition>
+        <argsstring></argsstring>
+        <name>ul_mu_data_dis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1098" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1098" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__he__omi__params__t_1acb7bc06bed6f6408d719334fc41698c7" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t reserved</definition>
+        <argsstring></argsstring>
+        <name>reserved</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1099" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1099" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for he_omi params. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1091" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1090" bodyend="1100"/>
+    <listofallmembers>
+      <member refid="structwhd__he__omi__params__t_1a5df421a20f2821d0ce81478c8c11bb0b" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>chnl_wdth</name></member>
+      <member refid="structwhd__he__omi__params__t_1afa64b804ed606b1550c9a8a460ab4b9b" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>dl_mu_resound</name></member>
+      <member refid="structwhd__he__omi__params__t_1a81cf87b47a5fb58278da7003d7b4da7c" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>er_su_dis</name></member>
+      <member refid="structwhd__he__omi__params__t_1acb7bc06bed6f6408d719334fc41698c7" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>reserved</name></member>
+      <member refid="structwhd__he__omi__params__t_1a02d4b1bb9ebce7933dca166e6c59ad72" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>rx_nss</name></member>
+      <member refid="structwhd__he__omi__params__t_1ad21d1c8c1dd9a31bae717843cd5dbd8f" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>tx_nsts</name></member>
+      <member refid="structwhd__he__omi__params__t_1a193657b2c50cdca71ed48e3459597836" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>ul_mu_data_dis</name></member>
+      <member refid="structwhd__he__omi__params__t_1aee0037068654d53ce2ce55338a52ed90" prot="public" virt="non-virtual"><scope>whd_he_omi_params_t</scope><name>ul_mu_dis</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

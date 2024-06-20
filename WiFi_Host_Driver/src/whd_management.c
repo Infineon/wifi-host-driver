@@ -38,10 +38,6 @@
 #include "whd_chip_constants.h"
 #include "whd_proto.h"
 
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-#include "cyhal_syspm.h"
-#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
-
 /******************************************************
 *             Constants
 ******************************************************/
@@ -53,12 +49,8 @@
 #define DEFAULT_PM2_SLEEP_RET_TIME  200
 
 #ifdef PROTO_MSGBUF
-#ifndef AT_CMD_OVER_SDIO
-#define DMA_ALLOC_SIZE                 (15000)
-#else
-#define DMA_ALLOC_SIZE                 (15000 + SDIO_F2_DMA_BUFFER_SIZE)
-#endif /* AT_CMD_OVER_SDIO */
-#endif /* PROTO_MSGBUF */
+#define DMA_ALLOC_SIZE                 (40000)
+#endif
 /******************************************************
 *             Static Variables
 ******************************************************/
@@ -110,7 +102,7 @@ whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8
 
         if ( (ifp = (whd_interface_t)whd_mem_malloc(sizeof(struct whd_interface) ) ) != NULL )
         {
-            whd_mem_memset(ifp, 0, (sizeof(struct whd_interface) ) );
+            memset(ifp, 0, (sizeof(struct whd_interface) ) );
             *ifpp = ifp;
             ifp->whd_driver = whd_driver;
 
@@ -118,15 +110,15 @@ whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8
             /* strncpy doesn't terminate with null if the src string is long */
             ifp->if_name[WHD_MSG_IFNAME_MAX - 1] = '\0';
             strncpy(ifp->if_name, name, sizeof(ifp->if_name) - 1);
-            whd_mem_memset(ifp->event_reg_list, WHD_EVENT_NOT_REGISTERED, sizeof(ifp->event_reg_list) );
+            memset(ifp->event_reg_list, WHD_EVENT_NOT_REGISTERED, sizeof(ifp->event_reg_list) );
             /* Primary interface takes 0 as default */
             ifp->ifidx = ifidx;
             ifp->bsscfgidx = bsscfgidx;
 
             if (mac_addr != NULL)
-                whd_mem_memcpy(ifp->mac_addr.octet, mac_addr->octet, sizeof(whd_mac_t) );
+                memcpy(ifp->mac_addr.octet, mac_addr->octet, sizeof(whd_mac_t) );
             else
-                whd_mem_memset(ifp->mac_addr.octet, 0, sizeof(whd_mac_t) );
+                memset(ifp->mac_addr.octet, 0, sizeof(whd_mac_t) );
 
             whd_driver->iflist[bsscfgidx] = ifp;
             whd_driver->if2ifp[ifidx] = bsscfgidx;
@@ -171,7 +163,7 @@ whd_result_t whd_init(whd_driver_t *whd_driver_ptr, whd_init_config_t *whd_init_
 
     if ( (whd_drv = (whd_driver_t)whd_mem_malloc(sizeof(struct whd_driver) ) ) != NULL )
     {
-        whd_mem_memset(whd_drv, 0, sizeof(struct whd_driver) );
+        memset(whd_drv, 0, sizeof(struct whd_driver) );
         *whd_driver_ptr = whd_drv;
         whd_drv->buffer_if = buffer_ops;
         whd_drv->network_if = network_ops;
@@ -265,14 +257,6 @@ whd_result_t whd_management_wifi_platform_init(whd_driver_t whd_driver, whd_coun
 {
     whd_result_t retval;
 
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-    whd_driver->whd_syspm_cb_data.states = (cyhal_syspm_callback_state_t)CYHAL_SYSPM_CB_CPU_DEEPSLEEP;
-    whd_driver->whd_syspm_cb_data.callback = &whd_syspm_registered_callback;
-    whd_driver->whd_syspm_cb_data.ignore_modes = ( CYHAL_SYSPM_CHECK_FAIL );
-    whd_driver->whd_syspm_cb_data.args = whd_driver;
-    whd_driver->whd_syspm_cb_data.next = NULL;
-#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
-
     whd_driver->internal_info.whd_wlan_status.country_code = country;
 
     if (resume_after_deep_sleep == WHD_TRUE)
@@ -297,18 +281,13 @@ whd_result_t whd_management_wifi_platform_init(whd_driver_t whd_driver, whd_coun
     /* WLAN device is now powered up. Change state from OFF to DOWN */
     whd_driver->internal_info.whd_wlan_status.state = WLAN_DOWN;
 
+
     retval = whd_thread_init(whd_driver);
     if (retval != WHD_SUCCESS)
     {
         WPRINT_WHD_ERROR( ("Could not initialize WHD thread\n") );
         return retval;
     }
-
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-    /* Initialize a timer for the data/ctrl activity monitoring */
-    cyhal_syspm_register_callback(&whd_driver->whd_syspm_cb_data);
-    cy_rtos_init_mutex(&whd_driver->sleep_mutex);
-#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
     return WHD_SUCCESS;
 }
@@ -334,12 +313,6 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
     whd_interface_t ifp;
     uint16_t wlan_chip_id = 0;
 
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-    /* For H1CP, the BTSS sleep is enabled by default, so acquire the lock before doing the initialization process,
-     * release once all the WHD initialization process is done */
-    whd_pds_lock_sleep(whd_driver);
-#endif
-
     if (!whd_driver || !ifpp)
     {
         WPRINT_WHD_ERROR( ("Invalid param in func %s at line %d \n",
@@ -353,6 +326,7 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
     }
 
     whd_init_stats(whd_driver);
+
 
     retval = whd_management_wifi_platform_init(whd_driver, whd_driver->country, WHD_FALSE);
     if (retval != WHD_SUCCESS)
@@ -449,7 +423,7 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
         whd_assert("Could not get buffer for IOCTL", 0 != 0);
         return WHD_BUFFER_ALLOC_FAIL;
     }
-    whd_mem_memset(country_struct, 0, sizeof(wl_country_t) );
+    memset(country_struct, 0, sizeof(wl_country_t) );
 
     ptr = (uint32_t *)country_struct->ccode;
     *ptr = (uint32_t)whd_driver->internal_info.whd_wlan_status.country_code & 0x0000ffff;
@@ -486,7 +460,7 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
             whd_assert("Could not get buffer for IOVAR", 0 != 0);
             return WHD_BUFFER_ALLOC_FAIL;
         }
-        whd_mem_memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
+        memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
         retval = whd_proto_set_iovar(ifp, buffer, 0);
     }
     if (retval != WHD_SUCCESS)
@@ -526,16 +500,23 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
             return retval;
         }
     }
-    else
+#ifdef PROTO_MSGBUF	/* To be reviewed once power save is done for H1-CP */
+    else if((wlan_chip_id == 55500) || (wlan_chip_id == 55900))
     {
-        CHECK_RETURN(whd_wifi_enable_powersave_with_throughput(ifp, DEFAULT_PM2_SLEEP_RET_TIME));
-        if(wlan_chip_id == 55900)
+        retval = whd_wifi_disable_powersave(ifp);
+        if (retval != WHD_SUCCESS)
         {
-            CHECK_RETURN(whd_wifi_set_iovar_value(ifp, IOVAR_STR_MPC, 1));
+            WPRINT_WHD_ERROR( ("Failed to disable PM for CP\n") );
+            return retval;
         }
     }
+#endif
+    else
+    {
+        whd_wifi_enable_powersave_with_throughput(ifp, DEFAULT_PM2_SLEEP_RET_TIME);
+    }
 
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
     /* Configuring OOB mode in fw */
     if(wlan_chip_id == 43022)
     {
@@ -560,11 +541,6 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
         return retval;
     }
 #endif
-
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-    /* Unlocking the syspm sleep lock, as WHD initialization part is done */
-    whd_pds_unlock_sleep(whd_driver);
-#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
     return WHD_SUCCESS;
 }
@@ -610,11 +586,6 @@ whd_result_t whd_wifi_off(whd_interface_t ifp)
         return retval;
     }
 
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-    cy_rtos_deinit_mutex(&whd_driver->sleep_mutex);
-#endif
-
     whd_driver->internal_info.whd_wlan_status.state = WLAN_OFF;
     return WHD_SUCCESS;
 }
-

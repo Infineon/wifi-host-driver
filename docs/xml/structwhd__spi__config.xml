@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1079" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1079" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1200" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1200" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__spi__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1ac07b13dcb5ec0e66a707dcf8a539c97e" kindref="member">whd_oob_config_t</ref></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1080" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1080" bodyend="-1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1201" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1201" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -39,19 +39,19 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="74">
+      <node id="93">
         <label>whd_spi_config</label>
         <link refid="structwhd__spi__config"/>
-        <childnode refid="75" relation="usage">
+        <childnode refid="94" relation="usage">
           <edgelabel>oob_config</edgelabel>
         </childnode>
       </node>
-      <node id="75">
+      <node id="94">
         <label>whd_oob_config</label>
         <link refid="structwhd__oob__config"/>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1077" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1076" bodyend="1081"/>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1198" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1197" bodyend="1202"/>
     <listofallmembers>
       <member refid="structwhd__spi__config_1a65649e24a48dbfcf74a6e3b0ea729181" prot="public" virt="non-virtual"><scope>whd_spi_config</scope><name>is_spi_normal_mode</name></member>
       <member refid="structwhd__spi__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" virt="non-virtual"><scope>whd_spi_config</scope><name>oob_config</name></member>

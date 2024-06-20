@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__oci__config" kind="struct" language="C++" prot="public">
+    <compoundname>whd_oci_config</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__oci__config_1afde40b36899b604612feb3b6c39b00ed" prot="public" static="no" mutable="no">
+        <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
+        <definition>whd_bool_t is_normal_mode</definition>
+        <argsstring></argsstring>
+        <name>is_normal_mode</name>
+        <briefdescription>
+<para>Default is false. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1219" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1219" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for OCI config parameters which can be set by application during whd power up. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1217" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1216" bodyend="1220"/>
+    <listofallmembers>
+      <member refid="structwhd__oci__config_1afde40b36899b604612feb3b6c39b00ed" prot="public" virt="non-virtual"><scope>whd_oci_config</scope><name>is_normal_mode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

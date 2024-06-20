@@ -42,4 +42,3 @@ whd_result_t whd_process_clm_data(whd_interface_t ifp);
 #endif
 
 #endif /* ifndef _WHD_INTERNAL_CLM_H_ */
-

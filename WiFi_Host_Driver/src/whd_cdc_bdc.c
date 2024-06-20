@@ -332,8 +332,8 @@ void *whd_cdc_get_iovar_buffer(whd_driver_t whd_driver,
         uint8_t *data = whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
         CHECK_PACKET_NULL(data, NULL);
         data = data + IOCTL_OFFSET;
-        whd_mem_memset(data, 0, name_length_alignment_offset);
-        whd_mem_memcpy(data + name_length_alignment_offset, name, name_length);
+        memset(data, 0, name_length_alignment_offset);
+        memcpy(data + name_length_alignment_offset, name, name_length);
         return (data + name_length + name_length_alignment_offset);
     }
     else
@@ -521,7 +521,7 @@ whd_result_t whd_cdc_bdc_info_init(whd_driver_t whd_driver)
     }
 
     /* Initialise the list of event handler functions */
-    whd_mem_memset(cdc_bdc_info->whd_event_list, 0, sizeof(cdc_bdc_info->whd_event_list) );
+    memset(cdc_bdc_info->whd_event_list, 0, sizeof(cdc_bdc_info->whd_event_list) );
 
     /* Create semaphore to protect event list management */
     if (cy_rtos_init_semaphore(&error_info->event_list_mutex, 1, 0) != WHD_SUCCESS)
@@ -536,7 +536,7 @@ whd_result_t whd_cdc_bdc_info_init(whd_driver_t whd_driver)
     }
 
     /* Initialise the list of error handler functions */
-    whd_mem_memset(error_info->whd_event_list, 0, sizeof(error_info->whd_event_list) );
+    memset(error_info->whd_event_list, 0, sizeof(error_info->whd_event_list) );
 
     whd_driver->proto->get_ioctl_buffer = whd_cdc_get_ioctl_buffer;
     whd_driver->proto->get_iovar_buffer = whd_cdc_get_iovar_buffer;
@@ -763,11 +763,11 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
     }
 
     datalen = whd_event->datalen;
-    /* use whd_mem_memcpy to get aligned event message */
+    /* use memcpy to get aligned event message */
     addr = (uint32_t )DATA_AFTER_HEADER(event);
     if (aligned_event && (addr & ALIGNED_ADDRESS) )
     {
-        whd_mem_memcpy(aligned_event, (whd_event_t *)addr, datalen);
+        memcpy(aligned_event, (whd_event_t *)addr, datalen);
     }
     else
     {
@@ -809,4 +809,3 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
 }
 
 #endif /* PROTO_MSGBUF */
-

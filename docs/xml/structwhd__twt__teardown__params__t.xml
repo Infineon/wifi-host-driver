@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__twt__teardown__params__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_twt_teardown_params_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__twt__teardown__params__t_1a00b0b7668f09b778654a9151d1417e18" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t negotiation_type</definition>
+        <argsstring></argsstring>
+        <name>negotiation_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1139" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__twt__teardown__params__t_1acee83b30aaad37cab91b52874e5636a8" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t flow_id</definition>
+        <argsstring></argsstring>
+        <name>flow_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1140" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__twt__teardown__params__t_1a509004b6c52d585d85e5cbeb8f5a9756" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t bcast_twt_id</definition>
+        <argsstring></argsstring>
+        <name>bcast_twt_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1141" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__twt__teardown__params__t_1a8237f0d388772980fb70505101b49fde" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t teardown_all_twt</definition>
+        <argsstring></argsstring>
+        <name>teardown_all_twt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1142" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1142" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for twt_teardown params. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1138" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1137" bodyend="1143"/>
+    <listofallmembers>
+      <member refid="structwhd__twt__teardown__params__t_1a509004b6c52d585d85e5cbeb8f5a9756" prot="public" virt="non-virtual"><scope>whd_twt_teardown_params_t</scope><name>bcast_twt_id</name></member>
+      <member refid="structwhd__twt__teardown__params__t_1acee83b30aaad37cab91b52874e5636a8" prot="public" virt="non-virtual"><scope>whd_twt_teardown_params_t</scope><name>flow_id</name></member>
+      <member refid="structwhd__twt__teardown__params__t_1a00b0b7668f09b778654a9151d1417e18" prot="public" virt="non-virtual"><scope>whd_twt_teardown_params_t</scope><name>negotiation_type</name></member>
+      <member refid="structwhd__twt__teardown__params__t_1a8237f0d388772980fb70505101b49fde" prot="public" virt="non-virtual"><scope>whd_twt_teardown_params_t</scope><name>teardown_all_twt</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

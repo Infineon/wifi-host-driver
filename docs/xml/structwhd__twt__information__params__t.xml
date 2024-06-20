@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.15">
+  <compounddef id="structwhd__twt__information__params__t" kind="struct" language="C++" prot="public">
+    <compoundname>whd_twt_information_params_t</compoundname>
+    <includes local="no">whd_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structwhd__twt__information__params__t_1acee83b30aaad37cab91b52874e5636a8" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t flow_id</definition>
+        <argsstring></argsstring>
+        <name>flow_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1164" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__twt__information__params__t_1a27149b154c5955e8589c000caca205f7" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t suspend</definition>
+        <argsstring></argsstring>
+        <name>suspend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1165" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__twt__information__params__t_1a5c0a2ec64326ecfecb3f572a343c8d05" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t resume_time</definition>
+        <argsstring></argsstring>
+        <name>resume_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1166" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structwhd__twt__information__params__t_1acb7bc06bed6f6408d719334fc41698c7" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t reserved</definition>
+        <argsstring></argsstring>
+        <name>reserved</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1167" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1167" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for twt_information params. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1163" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1162" bodyend="1168"/>
+    <listofallmembers>
+      <member refid="structwhd__twt__information__params__t_1acee83b30aaad37cab91b52874e5636a8" prot="public" virt="non-virtual"><scope>whd_twt_information_params_t</scope><name>flow_id</name></member>
+      <member refid="structwhd__twt__information__params__t_1acb7bc06bed6f6408d719334fc41698c7" prot="public" virt="non-virtual"><scope>whd_twt_information_params_t</scope><name>reserved</name></member>
+      <member refid="structwhd__twt__information__params__t_1a5c0a2ec64326ecfecb3f572a343c8d05" prot="public" virt="non-virtual"><scope>whd_twt_information_params_t</scope><name>resume_time</name></member>
+      <member refid="structwhd__twt__information__params__t_1a27149b154c5955e8589c000caca205f7" prot="public" virt="non-virtual"><scope>whd_twt_information_params_t</scope><name>suspend</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

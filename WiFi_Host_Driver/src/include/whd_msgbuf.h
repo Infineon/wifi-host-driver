@@ -1,13 +1,13 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2023, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -67,33 +67,30 @@ extern "C"
 #define MSGBUF_TYPE_H2D_MAILBOX_DATA            0x23
 #define MSGBUF_TYPE_D2H_MAILBOX_DATA            0x24
 
-#define NR_TX_PKTIDS                            24
-#define NR_RX_PKTIDS                            24
+#define NR_TX_PKTIDS                            256
+#define NR_RX_PKTIDS                            128
 
 #define WHD_IOCTL_REQ_PKTID                     0xFFFE
 
 #define WHD_MSGBUF_IOCTL_MAX_TX_SIZE           (1500)    /* Should be less than 2KB(IOCTL inbut Buffer) */
-#define WHD_MSGBUF_IOCTL_MAX_RX_SIZE           (8192)
-#define WHD_MSGBUF_EVENT_MAX_RX_SIZE           (1500)
+#define WHD_MSGBUF_IOCTL_MAX_RX_SIZE           (1500)
 
 #define WHD_MSGBUF_DATA_MAX_RX_SIZE            (2048 - sizeof(whd_buffer_header_t))
 
-#define WHD_MSGBUF_RXBUFPOST_THRESHOLD          2
-#define WHD_MSGBUF_MAX_IOCTLRESPBUF_POST        2
-#define WHD_MSGBUF_MAX_EVENTBUF_POST            2
-
-#define WHD_MSGBUF_RXBUFPOST_TIMER_DELAY        60000    /* RX buffer Timer expiry timeout in milliseconds */
-#define WHD_MSGBUF_RXBUFPOST_RETRY_COUNT        10
-
-#define WHD_MSGBUF_SLP_DETECT_TIME              10000     /* Sleep Detect Timer expiry timeout in milliseconds */
+#define WHD_MSGBUF_RXBUFPOST_THRESHOLD        2
+#define WHD_MSGBUF_MAX_IOCTLRESPBUF_POST      5
+#define WHD_MSGBUF_MAX_EVENTBUF_POST          5
 
 #define WHD_MSGBUF_PKT_FLAGS_FRAME_802_3        0x01
 #define WHD_MSGBUF_PKT_FLAGS_FRAME_802_11       0x02
-#define WHD_MSGBUF_PKT_FLAGS_FRAME_MASK         0x07
-#define WHD_MSGBUF_PKT_FLAGS_PRIO_SHIFT         5
+#define WHD_MSGBUF_PKT_FLAGS_FRAME_MASK 0x07
+#define WHD_MSGBUF_PKT_FLAGS_PRIO_SHIFT 5
 
 #define WHD_MSGBUF_TX_FLUSH_CNT1                32
 #define WHD_MSGBUF_TX_FLUSH_CNT2                96
+
+#define WHD_MSGBUF_DELAY_TXWORKER_THRS  96
+#define WHD_MSGBUF_TRICKLE_TXWORKER_THRS        32
 #define WHD_MSGBUF_UPDATE_RX_PTR_THRS           48
 
 #define WHD_MAX_TXSTATUS_WAIT_RETRIES           10
@@ -398,31 +395,22 @@ struct whd_msgbuf
     struct whd_msgbuf_pktids *rx_pktids;
     struct whd_flowring *flow;
     uint8_t *flow_map;
+    unsigned long *txstatus_done_map;
     uint32_t priority;
-    uint32_t current_flowring_count;
 };
 
-extern whd_result_t whd_msgbuf_send_mbdata(struct whd_driver *drvr, uint32_t mbdata);
-extern whd_result_t whd_msgbuf_ioctl_dequeue(struct whd_driver *whd_driver);
+extern int whd_msgbuf_send_mbdata(struct whd_driver *drvr, uint32_t mbdata);
+extern int whd_msgbuf_ioctl_dequeue(struct whd_driver *whd_driver);
 extern uint32_t whd_msgbuf_process_rx_packet(struct whd_driver *dev);
 extern void whd_msgbuf_delete_flowring(struct whd_driver *drvr, uint16_t flowid);
 extern whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid);
-extern whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t num_flowring, uint16_t *prio_ring_id);
 extern whd_result_t whd_msgbuf_txflow_dequeue(whd_driver_t whd_driver, whd_buffer_t *buffer, uint16_t flowid);
 extern whd_result_t whd_msgbuf_txflow_init(whd_msgbuftx_info_t *msgtx_info);
 extern whd_result_t whd_msgbuf_info_init(whd_driver_t whd_driver);
 extern void whd_msgbuf_info_deinit(whd_driver_t whd_driver);
-
-extern void whd_msgbuf_indicate_to_fill_buffers(cy_timer_callback_arg_t arg);
-extern void whd_msgbuf_rxbuf_fill_all(struct whd_msgbuf *msgbuf);
-extern void whd_wifi_rxbuf_fill_timer_init(whd_driver_t whd_driver);
-extern void whd_wifi_rxbuf_fill_timer_start(whd_driver_t whd_driver);
-extern void whd_wifi_rxbuf_fill_timer_deinit(whd_driver_t whd_driver);
-extern void whd_wifi_rxbuf_fill_timer_stop(whd_driver_t whd_driver);
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
 
 #endif
-

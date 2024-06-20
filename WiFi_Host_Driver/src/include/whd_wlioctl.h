@@ -36,15 +36,7 @@ extern "C"
 #define MGMT_AUTH_FRAME_DWELL_TIME (100) /* Default Dwell Time(Let FW MSCH have enough left time to piggyback this "mgmt_frame" request within "join" request) */
 
 #define ACTION_FRAME_SIZE 1040
-#define WL_TKO_AUTO_VER 1
-#define TKO_FILTER_SRC_IP	0x1
-#define TKO_FILTER_DST_IP	0x2
-#define TKO_FILTER_SRC_PORT	0x4
-#define TKO_FILTER_DST_PORT	0x8
-#define TKO_FILTER_ALL (TKO_FILTER_SRC_IP|TKO_FILTER_DST_IP|TKO_FILTER_SRC_PORT|TKO_FILTER_DST_PORT)
-
-#define WL_KEEP_ALIVE_FIXED_LEN		offsetof(wl_keep_alive_pkt_t, data)
-
+#define WL_KEEP_ALIVE_FIXED_LEN    offsetof(wl_keep_alive_pkt_t, data)
 typedef uint16_t chanspec_t;
 #define    ETHER_ADDR_LEN        6
 
@@ -176,10 +168,10 @@ enum
 #define TWT_SETUP_CMD_DICTATE_TWT   6u  /* Dictate TWT */
 #define TWT_SETUP_CMD_REJECT_TWT    7u  /* Reject TWT */
 
-typedef enum keep_alive   
-{   
-	WHD_KEEPALIVE_NULL =0,
-	WHD_KEEPALIVE_NAT  =1,
+typedef enum keep_alive
+{
+    WHD_KEEPALIVE_NULL = 0,
+    WHD_KEEPALIVE_NAT  = 1,
 }keepaliveType_t;
 
 typedef enum twt_ctrl_nego_type
@@ -808,7 +800,6 @@ typedef enum
 #define WPA3_AUTH_SAE_FBT       0x80000 /* FT authentication over SAE */
 #define WPA3_AUTH_1X_SUITE_B_SHA384 0x400000 /* Suite B-192 SHA384 */
 #define WPA3_AUTH_OWE           0x100000  /* OWE */
-#define WPA3_AUTH_1X_SHA256     0x1000000 /* WPA3 1x with SHA256 key derivation */
 #define WPA_AUTH_PFN_ANY        0xffffffff  /* for PFN, match only ssid */
 
 #define    MAXPMKID                 16
@@ -1132,11 +1123,9 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_WOWL_OS                "wowl_os"
 #define IOVAR_STR_WOWL_ACTIVATE          "wowl_activate"
 
-#ifdef MQTT_SUPPORT
 #define IOVAR_STR_WOWL_CLEAR             "wowl_clear"
 #define IOVAR_STR_WOWL_ACTIVATE_SECURE   "wowl_activate_secure"
 #define IOVAR_STR_WOWL_SEC_SESS_INFO     "wowl_secure_sess_info"
-#endif
 
 #define IOVAR_STR_WOWL_KEEP_ALIVE        "wowl_keepalive"
 #define IOVAR_STR_WOWL_PATTERN           "wowl_pattern"
@@ -1146,6 +1135,7 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_ULP_WAIT               "ulp_wait"
 #define IOVAR_STR_ULP                    "ulp"
 #define IOVAR_STR_ULP_HOST_INTR_MODE     "ulp_host_intr_mode"
+#define IOVAR_STR_DUMP                   "dump"
 
 #define IOVAR_STR_PNO_ON                 "pfn"
 #define IOVAR_STR_PNO_ADD                "pfn_add"
@@ -1231,7 +1221,6 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_TWT                    "twt"
 #define IOVAR_STR_OFFLOAD_CONFIG         "offload_config"
 #define IOVAR_STR_WSEC_INFO              "wsec_info"
-#define IOVAR_STR_EVENT_LOG              "event_log_tag_control"
 #define IOVAR_STR_KEEPALIVE_CONFIG       "keep_alive"
 #define IOVAR_STR_MBO                    "mbo"
 
@@ -2154,6 +2143,8 @@ typedef struct
     uint32_t rxdropped;       /* rx dropped pkts (derived: sum of others) */
     /* XXX: Do not remove or rename inthe middle of this struct.
      * All counter variables have to be of uint32_t.
+     * Please follow the instruction in
+     * http://hwnbu-twiki.sj.broadcom.com/bin/view/Mwgroup/WlCounters#Counter_Edition
      */
 } wl_cnt_ver_30_t;
 typedef struct
@@ -3565,13 +3556,14 @@ typedef struct arp_ol_stats
     uint32_t peer_reply_drop;
     uint32_t peer_service;
 }arp_ol_stats_t;
+
 typedef struct wl_keep_alive_pkt
 {
     uint32_t period_msec;
     uint16_t len_bytes;
     uint8_t data[1];
 } wl_keep_alive_pkt_t;
-#define WL_KEEP_ALIVE_FIXED_LEN        offsetof(wl_keep_alive_pkt_t, data)
+
 typedef enum wl_pkt_filter_type
 {
     WL_PKT_FILTER_TYPE_PATTERN_MATCH
@@ -3697,23 +3689,19 @@ typedef struct wl_sslpnphy_percal_debug_data
 #define WL_WOWL_ARPOFFLOAD  (1 << 12)
 #define WL_WOWL_KEYROT      (1 << 14)
 #define WL_WOWL_BCAST       (1 << 15)
-#ifdef MQTT_SUPPORT
 #define WL_WOWL_SECURE      (1 << 25)   /* Wakeup if received matched secured pattern */
-#endif
 #define WL_WOWL_GTK         (0x441f)
 #define WL_WOWL_DEAUTH      (0x1F)
 #define WL_WOWL_ALL         (0x541E)
 
 #define MAGIC_PKT_MINLEN 102
 
-#ifdef MQTT_SUPPORT
 typedef enum {
-    wowl_pattern_type_bitmap = 0,
-    wowl_pattern_type_arp,
-    wowl_pattern_type_na,
-    wowl_pattern_type_secwowl
+    WOWL_PATTERN_TYPE_BITMAP = 0,
+    WOWL_PATTERN_TYPE_ARP,
+    WOWL_PATTERN_TYPE_NA,
+    WOWL_PATTERN_TYPE_SECWOWL
 } wowl_pattern_type_t;
-#endif
 
 typedef struct wl_wowl_pattern
 {
@@ -3721,13 +3709,11 @@ typedef struct wl_wowl_pattern
     uint32_t offset;          /**< Pattern byte offset in packet */
     uint32_t patternoffset;   /**< Offset of start of pattern in the structure */
     uint32_t patternsize;     /**< Size of the pattern itself in #of bytes */
-#ifdef MQTT_SUPPORT
     uint32_t id;              /**< id */
     uint32_t reasonsize;      /**< Size of the wakeup reason code */
     uint32_t type;            /**< Type of pattern */
     /* Mask follows the structure above */
     /* Pattern follows the mask is at 'patternoffset' from the start */
-#endif
 } wl_wowl_pattern_t;
 
 typedef struct wl_wowl_pattern_list
@@ -4245,10 +4231,14 @@ struct whd_arp_stats_s
  * TCP keepalive offload definitions
  */
 
-#ifdef MQTT_SUPPORT
 #define MAX_TLS_CONN                 1
-#endif
 #define MAX_TKO_CONN                 4
+#define WL_TKO_AUTO_VER 1
+#define TKO_FILTER_SRC_IP   0x1
+#define TKO_FILTER_DST_IP   0x2
+#define TKO_FILTER_SRC_PORT 0x4
+#define TKO_FILTER_DST_PORT 0x8
+#define TKO_FILTER_ALL (TKO_FILTER_SRC_IP|TKO_FILTER_DST_IP|TKO_FILTER_SRC_PORT|TKO_FILTER_DST_PORT)
 
 /* Default TCP Keepalive retry parameters.  */
 #define TCP_KEEPALIVE_OFFLOAD_INTERVAL_SEC       (20)
@@ -4269,9 +4259,9 @@ typedef struct wl_tko
 #define WL_TKO_SUBCMD_CONNECT           2       /* TCP connection info */
 #define WL_TKO_SUBCMD_ENABLE            3       /* enable/disable */
 #define WL_TKO_SUBCMD_STATUS            4       /* TCP connection status */
-#define WL_TKO_SUBCMD_AUTOENAB		6	/* TCP auto configurations */        
-#define WL_TKO_SUBCMD_AUTOCONNECT	7       /* get TCP auto connect info */          
-#define WL_TKO_SUBCMD_FILTER		8       /* auto TCP filter/wildcard configurations */
+#define WL_TKO_SUBCMD_AUTOENAB          6       /* TCP auto configurations */
+#define WL_TKO_SUBCMD_AUTOCONNECT       7       /* get TCP auto connect info */
+#define WL_TKO_SUBCMD_FILTER            8       /* auto TCP filter/wildcard configurations */
 
 /* WL_TKO_SUBCMD_MAX_CONNECT subcommand data */
 typedef struct wl_tko_max_tcp
@@ -4409,66 +4399,66 @@ struct ipv6_addr {
 };
 
 typedef struct wl_tko_autoenab {
-	uint16_t version;         /* auto tko command version */
-	uint16_t length;          /* The remaning len after */
-	uint8_t enable;           /* 0: disable, 1: enable */
-	uint8_t pad[3];           /* 4-byte struct alignment */
+    uint16_t version;         /* auto tko command version */
+    uint16_t length;          /* The remaning len after */
+    uint8_t enable;           /* 0: disable, 1: enable */
+    uint8_t pad[3];           /* 4-byte struct alignment */
 } wl_tko_autoenab_t;
 
 typedef struct wl_tko_autoconnect {
-	uint16_t	version;
-	uint16_t	length;
-	uint8_t	 	index;
-	bool		is_enabled;		/* Is auto tko enabled or not */
-	uint8_t		filter;			/* The tx packets field to be filtered */
-	uint8_t		ip_addr_type;		/* ipv4 or ipv6, only valid when allocated is TRUE */
-	bool		allocated;		/* This wildcard has been allocated */
-	bool		pkt_created;		/* the ready packet for tx/rx are really created */
-	uint8_t		pad[2];			/* pad */
-	uint8_t		src_ip[IPV6_ADDR_LEN];	/* src ip for offload, ipv6/ipv4 shared */
-	uint8_t		dst_ip[IPV6_ADDR_LEN];	/* dst ip for offload, ipv6/ipv4 shared */
-	uint16_t	local_port;		/* The local port for offload */
-	uint16_t	remote_port;		/* The remote port for offload */
-	uint32_t	local_seq;		/* The local seq got */
-	uint32_t	remote_seq;		/* The remote seq got */
+    uint16_t version;
+    uint16_t length;
+    uint8_t index;
+    bool is_enabled;                /* Is auto tko enabled or not */
+    uint8_t filter;                 /* The tx packets field to be filtered */
+    uint8_t ip_addr_type;           /* ipv4 or ipv6, only valid when allocated is TRUE */
+    bool allocated;                 /* This wildcard has been allocated */
+    bool pkt_created;               /* the ready packet for tx/rx are really created */
+    uint8_t pad[2];                 /* pad */
+    uint8_t src_ip[IPV6_ADDR_LEN];  /* src ip for offload, ipv6/ipv4 shared */
+    uint8_t dst_ip[IPV6_ADDR_LEN];  /* dst ip for offload, ipv6/ipv4 shared */
+    uint16_t local_port;            /* The local port for offload */
+    uint16_t remote_port;           /* The remote port for offload */
+    uint32_t local_seq;             /* The local seq got */
+    uint32_t remote_seq;            /* The remote seq got */
 } wl_tko_autoconnect_t;
 
 typedef struct wl_tko_filter {
-	uint16_t  version;                        /* auto tko command version */
-	uint16_t  length;                         /* The remaning len after */
-	uint16_t  sport;                          /* 0: wild card, others as filter local port */
-	uint16_t  dport;                          /* 0: wild card, others as filter remote port */
-	uint8_t   ip_src[IPV6_ADDR_LEN];          /* {0}: wild card, others as filter src ip */
-	uint8_t   ip_dst[IPV6_ADDR_LEN];          /* {0}: wild card, others as filter dst ip */
+    uint16_t version;                        /* auto tko command version */
+    uint16_t length;                         /* The remaning len after */
+    uint16_t sport;                          /* 0: wild card, others as filter local port */
+    uint16_t dport;                          /* 0: wild card, others as filter remote port */
+    uint8_t ip_src[IPV6_ADDR_LEN];           /* {0}: wild card, others as filter src ip */
+    uint8_t ip_dst[IPV6_ADDR_LEN];           /* {0}: wild card, others as filter dst ip */
 } wl_tko_filter_t;
 
-struct whd_tko_auto_filter               
+struct whd_tko_auto_filter
 {
-	uint16_t  version;                        /* auto tko command version */
-	uint16_t  length;                         /* The remaning len after */
-	uint16_t  sport;                          /* 0: wild card, others as filter local port */
-	uint16_t  dport;                          /* 0: wild card, others as filter remote port */
-	uint8_t   ip_src[IPV6_ADDR_LEN];          /* {0}: wild card, others as filter src ip */
-	uint8_t   ip_dst[IPV6_ADDR_LEN];          /* {0}: wild card, others as filter dst ip */
+    uint16_t version;                        /* auto tko command version */
+    uint16_t length;                         /* The remaning len after */
+    uint16_t sport;                          /* 0: wild card, others as filter local port */
+    uint16_t dport;                          /* 0: wild card, others as filter remote port */
+    uint8_t ip_src[IPV6_ADDR_LEN];           /* {0}: wild card, others as filter src ip */
+    uint8_t ip_dst[IPV6_ADDR_LEN];           /* {0}: wild card, others as filter dst ip */
 };
 
-struct whd_tko_autoconnect 
+struct whd_tko_autoconnect
 {
-	uint16_t	version;
-	uint16_t	length;
-	uint8_t	    index;
-	bool	    is_enabled;		/* Is auto tko enabled or not */
-	uint8_t	    filter;			/* The tx packets field to be filtered */
-	uint8_t	    ip_addr_type;		/* ipv4 or ipv6, only valid when allocated is TRUE */
-	bool	    allocated;		/* This wildcard has been allocated */
-	bool	    pkt_created;		/* the ready packet for tx/rx are really created */
-	uint8_t	    pad[2];			/* pad */
-	uint8_t 	src_ip[IPV6_ADDR_LEN];	/* src ip for offload, ipv6/ipv4 shared */
-	uint8_t	    dst_ip[IPV6_ADDR_LEN];	/* dst ip for offload, ipv6/ipv4 shared */
-	uint16_t	local_port;		/* The local port for offload */
-	uint16_t	remote_port;		/* The remote port for offload */
-	uint32_t	local_seq;		/* The local seq got */
-	uint32_t	remote_seq;		/* The remote seq got */
+    uint16_t version;
+    uint16_t length;
+    uint8_t index;
+    bool is_enabled;               /* Is auto tko enabled or not */
+    uint8_t filter;                /* The tx packets field to be filtered */
+    uint8_t ip_addr_type;          /* ipv4 or ipv6, only valid when allocated is TRUE */
+    bool allocated;                /* This wildcard has been allocated */
+    bool pkt_created;              /* the ready packet for tx/rx are really created */
+    uint8_t pad[2];                /* pad */
+    uint8_t src_ip[IPV6_ADDR_LEN]; /* src ip for offload, ipv6/ipv4 shared */
+    uint8_t dst_ip[IPV6_ADDR_LEN]; /* dst ip for offload, ipv6/ipv4 shared */
+    uint16_t local_port;           /* The local port for offload */
+    uint16_t remote_port;          /* The remote port for offload */
+    uint32_t local_seq;            /* The local seq got */
+    uint32_t remote_seq;           /* The remote seq got */
 };
 
 /* Versions of Offload config */
@@ -4523,14 +4513,12 @@ typedef struct wl_ol_cfg_v1 {
 	uint32_t offload_skip;		  /* Bitmap of offload to be skipped */
 } wl_ol_cfg_v1_t;
 
-#ifdef MQTT_SUPPORT
 struct secure_sess_info {
 	uint32_t tcp_seq;
 	uint32_t tcp_ack;
 	uint8_t  read_seq[TLS_MAX_SEQUENCE_LENGTH];
 	uint8_t  write_seq[TLS_MAX_SEQUENCE_LENGTH];
 };
-#endif
 
 /* Offload Skip Bitmap */
 #define WL_OL_ARP         (1 << 0)
@@ -4544,7 +4532,7 @@ struct secure_sess_info {
 #define WL_OL_GTKOE       (1 << 8)
 #define WL_OL_WOWLPF      (1 << 9)
 
-#define OFFLOAD_FEATURE   WL_OL_ARP | WL_OL_ND | WL_OL_BDO | WL_OL_ICMP | WL_OL_TKO | WL_OL_DLTRO | WL_OL_PNO | WL_OL_KEEPALIVE | WL_OL_GTKOE
+#define OFFLOAD_FEATURE   WL_OL_ARP | WL_OL_ND | WL_OL_BDO | WL_OL_ICMP | WL_OL_TKO | WL_OL_DLTRO | WL_OL_PNO | WL_OL_KEEPALIVE | WL_OL_GTKOE | WL_OL_WOWLPF
 
 
 #ifdef __cplusplus

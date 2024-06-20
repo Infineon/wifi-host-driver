@@ -4,9 +4,9 @@
     <compoundname>busapi</compoundname>
     <title>WHD Bus API</title>
       <sectiondef kind="func">
-      <memberdef kind="function" id="group__busapi_1ga9f08c5241843cbe2ef06ffa8bfb5118d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t whd_bus_sdio_attach</definition>
+      <memberdef kind="function" id="group__busapi_1ga360c394e2ee52c4a59ec5a092b6e54fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="whd__types_8h_1add62f4b5040a2451e23869d2f9e1ae05" kindref="member">whd_result_t</ref></type>
+        <definition>whd_result_t whd_bus_sdio_attach</definition>
         <argsstring>(whd_driver_t whd_driver, whd_sdio_config_t *whd_config, cyhal_sdio_t *sdio_obj)</argsstring>
         <name>whd_bus_sdio_attach</name>
         <param>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="71" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="74" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__busapi_1gadeed66e792eed64cbb6a0deef1dbe2da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_wifi_api.h" line="77" column="1"/>
+        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_wifi_api.h" line="80" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

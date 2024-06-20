@@ -148,7 +148,7 @@ whd_result_t whd_management_set_event_handler_locally(whd_interface_t ifp, const
         }
 
         /* Add the new handler in at the free space */
-        whd_mem_memcpy (event_info->whd_event_list[entry].events, event_nums, num_of_events * (sizeof(whd_event_num_t) ) );
+        memcpy (event_info->whd_event_list[entry].events, event_nums, num_of_events * (sizeof(whd_event_num_t) ) );
         event_info->whd_event_list[entry].handler           = handler_func;
         event_info->whd_event_list[entry].handler_user_data = handler_user_data;
         event_info->whd_event_list[entry].ifidx             = ifp->ifidx;
@@ -316,7 +316,7 @@ static uint8_t *whd_management_alloc_event_msgs_buffer(whd_interface_t ifp, whd_
 
         eventmsgs_ext_data = (eventmsgs_ext_t *)&data[1];
 
-        whd_mem_memset(eventmsgs_ext_data, 0, sizeof(*eventmsgs_ext_data) );
+        memset(eventmsgs_ext_data, 0, sizeof(*eventmsgs_ext_data) );
         eventmsgs_ext_data->ver     = EVENTMSGS_VER;
         eventmsgs_ext_data->command = EVENTMSGS_SET_MASK;
         eventmsgs_ext_data->len     = mask_len;
@@ -406,7 +406,7 @@ whd_result_t whd_management_set_event_handler(whd_interface_t ifp, const whd_eve
     WHD_WLAN_KEEP_AWAKE(whd_driver);
 
     /* Set the event bits for each event from every handler */
-    whd_mem_memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
+    memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
         if (event_info->whd_event_list[i].event_set)
@@ -502,7 +502,7 @@ whd_result_t whd_wifi_set_event_handler(whd_interface_t ifp, const uint32_t *eve
     WHD_WLAN_KEEP_AWAKE(whd_driver);
 
     /* Set the event bits for each event from every handler */
-    whd_mem_memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
+    memset(event_mask, 0, (size_t)WL_EVENTING_MASK_LEN);
     for (i = 0; i < (uint16_t)WHD_EVENT_HANDLER_LIST_SIZE; i++)
     {
         if (event_info->whd_event_list[i].event_set)
@@ -609,7 +609,7 @@ whd_result_t whd_wifi_deregister_event_handler(whd_interface_t ifp, uint16_t eve
 
     if (event_index < WHD_EVENT_HANDLER_LIST_SIZE)
     {
-        whd_mem_memset(event_info->whd_event_list[event_index].events, 0xFF,
+        memset(event_info->whd_event_list[event_index].events, 0xFF,
                (sizeof(event_info->whd_event_list[event_index].events) ) );
         event_info->whd_event_list[event_index].handler = NULL;
         event_info->whd_event_list[event_index].handler_user_data = NULL;
@@ -654,4 +654,3 @@ whd_result_t whd_wifi_deregister_error_handler(whd_interface_t ifp, uint16_t err
     WPRINT_WHD_DEBUG( ("Invalid error index received to deregister the event handler \n") );
     return WHD_BADARG;
 }
-

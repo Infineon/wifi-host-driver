@@ -237,4 +237,3 @@ whd_result_t whd_bus_common_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t s
 }
 
 #endif
-

@@ -140,25 +140,14 @@ struct whd_driver
     uint16_t (*read_ptr)(struct whd_driver *whd_driver, uint32_t mem_offset);
     void (*write_ptr)(struct whd_driver *whd_driver, uint32_t mem_offset, uint16_t value);
     cy_semaphore_t host_suspend_mutex;
-    uint8_t ack_d2h_suspend; /* Flag to check D3 wake from CM33(Host) */
+    cy_event_t host_suspend_event_wait;
+    uint8_t host_trigger_suspend_flag;
+    uint8_t ack_d2h_suspend; /* 1: D3_ack_suspend(suspend from host), 0: Non D3_ack_suspend(suspend from WHD) */
     uint8_t dma_index_sz;
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
     uint32_t ds_exit_in_progress;
+    deepsleep_cb_info_t ds_cb_info;
 #endif
-
-#ifdef PROTO_MSGBUF
-    cy_timer_t rxbuf_update_timer;
-    bool update_buffs;
-#endif
-
-#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
-    /* Callback to be registered to the syspm module for Low Power */
-    cyhal_syspm_callback_data_t whd_syspm_cb_data;
-    bool pds_sleep_allow;
-    uint32_t lock_sleep;
-    cy_mutex_t sleep_mutex;
-#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
-
 };
 
 whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8_t ifidx,
@@ -174,4 +163,3 @@ whd_interface_t whd_get_interface(whd_driver_t whd_driver, uint8_t ifidx);
 } /* extern "C" */
 #endif
 #endif /* INCLUDED_WHD_INT_H */
-

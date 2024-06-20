@@ -515,4 +515,3 @@ typedef struct
 } /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_WHD_EVENTS_H */
-

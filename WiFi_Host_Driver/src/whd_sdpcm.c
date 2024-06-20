@@ -194,7 +194,7 @@ static void add_sdpcm_log_entry(sdpcm_log_direction_t dir, sdpcm_log_type_t type
     sdpcm_log[next_sdpcm_log_pos].type = type;
     cy_rtos_get_time(&sdpcm_log[next_sdpcm_log_pos].time);
     sdpcm_log[next_sdpcm_log_pos].length = length;
-    whd_mem_memcpy(sdpcm_log[next_sdpcm_log_pos].header, eth_data, SDPCM_LOG_HEADER_SIZE);
+    memcpy(sdpcm_log[next_sdpcm_log_pos].header, eth_data, SDPCM_LOG_HEADER_SIZE);
     next_sdpcm_log_pos++;
     if (next_sdpcm_log_pos >= SDPCM_LOG_SIZE)
     {
@@ -341,7 +341,7 @@ void whd_sdpcm_process_rx_packet(whd_driver_t whd_driver, whd_buffer_t buffer)
 
     packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     CHECK_PACKET_WITH_NULL_RETURN(packet);
-    whd_mem_memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
+    memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
 
     sdpcm_header.frametag[0] = dtoh16(sdpcm_header.frametag[0]);
     sdpcm_header.frametag[1] = dtoh16(sdpcm_header.frametag[1]);
@@ -539,9 +539,9 @@ whd_result_t whd_sdpcm_get_packet_to_send(whd_driver_t whd_driver, whd_buffer_t 
     /* Set the sequence number */
     packet = (bus_common_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
     CHECK_PACKET_NULL(packet, WHD_NO_REGISTER_FUNCTION_POINTER);
-    whd_mem_memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
+    memcpy(&sdpcm_header, packet->bus_header, BUS_HEADER_LEN);
     sdpcm_header.sw_header.sequence = sdpcm_info->tx_seq;
-    whd_mem_memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
+    memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
     sdpcm_info->tx_seq++;
 
     return WHD_SUCCESS;
@@ -586,7 +586,7 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     whd_result_t result;
     int ac;
 
-#ifdef ULP_SUPPORT
+#ifdef CYCFG_ULP_SUPPORT_ENABLED
     if(!(whd_ensure_wlan_bus_not_in_deep_sleep(whd_driver)))
     {
         WPRINT_WHD_DEBUG(("Could not send pkt - F2 is not ready\n"));
@@ -600,7 +600,7 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     size = (uint16_t)(size - (uint16_t)sizeof(whd_buffer_header_t) );
 
     /* Prepare the SDPCM header */
-    whd_mem_memset( (uint8_t *)&sdpcm_header, 0, sizeof(sdpcm_header_t) );
+    memset( (uint8_t *)&sdpcm_header, 0, sizeof(sdpcm_header_t) );
     sdpcm_header.sw_header.channel_and_flags = (uint8_t)header_type;
     sdpcm_header.sw_header.header_length =
         (header_type == DATA_HEADER) ? sizeof(sdpcm_header_t) + 2 : sizeof(sdpcm_header_t);
@@ -608,7 +608,7 @@ whd_result_t whd_send_to_bus(whd_driver_t whd_driver, whd_buffer_t buffer,
     sdpcm_header.frametag[0] = size;
     sdpcm_header.frametag[1] = (uint16_t) ~size;
 
-    whd_mem_memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
+    memcpy(packet->bus_header, &sdpcm_header, BUS_HEADER_LEN);
     data = whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     CHECK_PACKET_NULL(data, WHD_NO_REGISTER_FUNCTION_POINTER);
     add_sdpcm_log_entry(LOG_TX, (header_type == DATA_HEADER) ? DATA : (header_type == CONTROL_HEADER) ? IOCTL : EVENT,
@@ -697,4 +697,3 @@ static void whd_sdpcm_set_next_buffer_in_queue(whd_driver_t whd_driver, whd_buff
 }
 
 #endif /* PROTO_MSGBUF */
-

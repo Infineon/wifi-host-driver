@@ -52,4 +52,3 @@ extern "C"
 #endif
 
 #endif /* ifndef INCLUDED_WHD_THREAD_INTERNAL_H */
-
