@@ -725,7 +725,7 @@ whd_result_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_feat, uint
 
     if (reset) {
         ol_cfg->u.ol_profile.reset = WHD_TRUE;
-        ol_cfg->u.ol_profile.type = -1;
+        ol_cfg->u.ol_profile.type = (uint32_t)-1;
     } else {
         ol_cfg->u.ol_profile.reset = WHD_FALSE;
         ol_cfg->u.ol_profile.type = WL_OL_PROF_TYPE_LOW_PWR;
