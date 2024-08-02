@@ -1,26 +1,43 @@
-# Wi-Fi Host Driver (WHD)  v3.2.0
+# Wi-Fi Host Driver (WHD) 4.1.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
-* Supports Out-of-Band (OOB) 
-* Provides API functions for ARP, packet filters
 * Supports Wi-Fi Station (STA) and AP mode of operation
-* Supports concurrent operation of STA and AP interface
 * Supports multiple security methods such as WPA2, WPA3, and open
-* Provides functions for Advanced Power Management
-* Supports low-power offloads, including ARP, packet filters, TCP Keepalive offload, DHCP lease time renewal offload, and Beacon trim
-* Includes WFA pre-certification support for 802.11n and WPA3
 
-## Changes since v3.1.0
 ### New Features
+Added H1-CP support for CM and SM
+Added offload config support
+
 
 ### Defect Fixes
-* Fix MQTT offload
-* Fix Packet filter offload
-* OpenSSL error fix during MQTT offload
+
+
+### WIFI6 Supported Chip
 
 ### Known Issues
+NA
 
+#### CYW55500
+* --- 28.10.301 ---
+
+
+#### CYW55900
+* --- 28.10.215 ---
+
+
+
+### WIFI5 Suppported Chip
+
+* Supports concurrent operation of STA and AP interface
+* Supports low-power offloads like ARP, packet filters, TCP Keepalive offload
+* Includes WFA pre-certification support for 802.11n, 802.11ac
+* Provides API functions for ARP, packet filters
+* Provides functions for Advanced Power Management
+
+
+### Known Issues
+NA
 
 #### CYW4343W
 * --- 7.45.98.120 ---
@@ -63,7 +80,7 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 #### CYW43022
 * --- 13.67.2 ---
 * Offload support
-* --- 13.54.1      ---
+* --- 13.54.1 ---
 
 Note: [r] is regulatory-related
 
@@ -72,8 +89,8 @@ This version of the WHD was validated for compatibility with the following softw
 
 | Software and Tools                                      | Version      |
 | :---                                                    | :----        |
-| GCC Compiler                                            | 11.3         |
-| IAR Compiler                                            | 9.40         |
+| GCC Compiler                                            | 10.3         |
+| IAR Compiler                                            | 9.3          |
 | Arm Compiler 6                                          | 6.16         |
 | Mbed OS                                                 | 6.2.0        |
 | ThreadX/NetX-Duo                                        | 5.8          |
@@ -83,6 +100,7 @@ This version of the WHD was validated for compatibility with the following softw
 ## More Information
 * [Wi-Fi Host Driver README File](./README.md)
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://infineon.github.io/wifi-host-driver/html/index.html)
-* [Infineon Technologies](http://www.infineon.com) 
+* [Infineon Technologies](http://www.infineon.com)
 
 ---
+© Infineon Technologies, 2019.

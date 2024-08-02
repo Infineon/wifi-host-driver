@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1257" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1257" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1128" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1128" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -25,19 +25,19 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="35">
+      <node id="24">
         <label>whd_coex_config</label>
         <link refid="structwhd__coex__config"/>
-        <childnode refid="36" relation="usage">
+        <childnode refid="25" relation="usage">
           <edgelabel>le_scan_params</edgelabel>
         </childnode>
       </node>
-      <node id="36">
+      <node id="25">
         <label>whd_btc_lescan_params</label>
         <link refid="structwhd__btc__lescan__params"/>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1256" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1255" bodyend="1258"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1127" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1126" bodyend="1129"/>
     <listofallmembers>
       <member refid="structwhd__coex__config_1afcc1e187cd7f285de8d56162fbbb52bb" prot="public" virt="non-virtual"><scope>whd_coex_config</scope><name>le_scan_params</name></member>
     </listofallmembers>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1189" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1189" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1068" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1068" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__sdio__config_1aa23e026ad94f9606f2a0e5fef47df13d" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1a7cd94a03f2e7e6aab7217ed559c7a0ac" kindref="member">whd_bool_t</ref></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1190" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1190" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1069" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1069" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structwhd__sdio__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" static="no" mutable="no">
         <type><ref refid="whd__types_8h_1ac07b13dcb5ec0e66a707dcf8a539c97e" kindref="member">whd_oob_config_t</ref></type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1191" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1191" bodyend="-1"/>
+        <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1070" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1070" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -53,19 +53,19 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="87">
+      <node id="68">
         <label>whd_oob_config</label>
         <link refid="structwhd__oob__config"/>
       </node>
-      <node id="86">
+      <node id="67">
         <label>whd_sdio_config</label>
         <link refid="structwhd__sdio__config"/>
-        <childnode refid="87" relation="usage">
+        <childnode refid="68" relation="usage">
           <edgelabel>oob_config</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" line="1187" column="1" bodyfile="C:/Users/ChuangJiaShy/Documents/01.SRC/repo/whd_mclass/whd/inc/whd_types.h" bodystart="1186" bodyend="1192"/>
+    <location file="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" line="1066" column="1" bodyfile="C:/Users/HsiehYuanPin/01_SRC/whd/inc/whd_types.h" bodystart="1065" bodyend="1071"/>
     <listofallmembers>
       <member refid="structwhd__sdio__config_1aa23e026ad94f9606f2a0e5fef47df13d" prot="public" virt="non-virtual"><scope>whd_sdio_config</scope><name>high_speed_sdio_clock</name></member>
       <member refid="structwhd__sdio__config_1a5fa87ee1769d21a2bf8a871ab7f4d1bb" prot="public" virt="non-virtual"><scope>whd_sdio_config</scope><name>oob_config</name></member>
