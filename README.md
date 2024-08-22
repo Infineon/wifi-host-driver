@@ -5,40 +5,21 @@ The WHD is an independent, embedded Wi-Fi Host Driver that provides a set of API
 
 The [release notes](./RELEASE.md) detail the current release. You can also find information about previous versions.
 
-### WIFI6
-
 ### Supported bus interface
----------------------------------
-|  Interface  |55500|55900|55572|
-|:-----------:|:---:|:---:|:---:|
-|  SDIO       |  O  |     |  O  |
-|  SPI        |     |     |     |
-|  M2M        |     |     |     |
-|  OCI        |     |  O  |     |
+---------------------------
+|  Interface  |55500|55900|
+|:-----------:|:---:|:---:|
+|  SDIO       |  O  |     |
+|  SPI        |     |     |
+|  M2M        |     |     |
+|  OCI        |     |  O  |
 
 ### AP mode support 
----------------------------------
-|  Security   |55500|55900|55572|
-|:-----------:|:---:|:---:|:---:|
-|  WPA3       |  O  |  O  |  O  |
-|  WPA2       |  O  |  O  |  O  |
-
-### WIFI5
-
-### Supported bus interface
----------------------------------------------------------
-|  Interface  |4343W|43438|4373 |43012|43439|43907|43022|
-|:-----------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  SDIO       |  O  |  O  |  O  |  O  |  O  |     |  O  |
-|  SPI        |  O  |  O  |     |     |  O  |     |     |
-|  M2M        |     |     |     |     |     |  O  |     |
-
-### WPA3 AP mode support
----------------------------------------------------------
-|  Security   |4343W|43438|4373 |43012|43439|43907|43022|
-|:-----------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  WPA3       |     |     |  O  |     |  O  |     |     |
-
+---------------------------
+|  Security   |55500|55900|
+|:-----------:|:---:|:---:|
+|  WPA3       |  O  |  O  |
+|  WPA2       |  O  |  O  |
 
 ### More information
 * [Wi-Fi Host Driver API Reference Manual and Porting Guide](https://infineon.github.io/wifi-host-driver/html/index.html)

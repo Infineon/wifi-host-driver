@@ -1,0 +1,3 @@
+#define WHD_VERSION "4.0.1.24511"
+#define WHD_BRANCH "EAP v4.0.1"
+#define WHD_DATE "2024-08-22 10:50:00 +0300"
