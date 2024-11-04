@@ -93,5 +93,13 @@ whd_result_t whd_network_process_ethernet_data(whd_interface_t ifp, whd_buffer_t
  */
 whd_result_t whd_network_send_ethernet_data(whd_interface_t ifp, whd_buffer_t buffer)
 {
+#ifdef COMPONENT_SDIO_HM
+    whd_result_t status;
+    cy_rtos_get_mutex(&ifp->whd_driver->whd_hm_tx_lock, CY_RTOS_NEVER_TIMEOUT);
+    status = whd_proto_tx_queue_data(ifp, buffer);
+    cy_rtos_set_mutex(&ifp->whd_driver->whd_hm_tx_lock);
+    return status;
+#else
     return whd_proto_tx_queue_data(ifp, buffer);
+#endif
 }

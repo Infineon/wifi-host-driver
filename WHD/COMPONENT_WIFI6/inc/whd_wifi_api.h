@@ -385,6 +385,15 @@ extern whd_result_t whd_wifi_join(whd_interface_t ifp, const whd_ssid_t *ssid, w
 extern whd_result_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_result_t *ap, const uint8_t *security_key,
                                        uint8_t key_length);
 
+/** Check whether the platform supports triband or not
+ *
+ *  @param   ifp      Pointer to handle instance of whd interface
+ *
+ *  @return  true     if the platform supports triband(6GHz support)
+ *           false    if the platform does not support triband
+ */
+extern whd_bool_t whd_wifi_platform_supports_triband(whd_interface_t ifp);
+
 /** Set the current chanspec on the WLAN radio
  *
  *  @note  On most WLAN devices this will set the chanspec for both AP *AND* STA
@@ -729,6 +738,16 @@ extern whd_result_t whd_wifi_stop_ap(whd_interface_t ifp);
  */
 extern whd_result_t whd_wifi_ap_get_max_assoc(whd_interface_t ifp, uint32_t *max_assoc);
 
+/** Get the maximum number of associations supported by AP interfaces
+ *
+ *  @param   ifp           Pointer to handle instance of whd interface
+ *  @param   max_assoc     The maximum number of clients supported by Soft AP interfaces.
+ *
+ *  @return  WHD_SUCCESS   if the maximum number of associated clients was successfully read
+ *           WHD_ERROR     if the maximum number of associated clients was not successfully read
+ */
+extern whd_result_t whd_wifi_ap_set_max_assoc(whd_interface_t ifp, uint32_t max_assoc);
+
 /** Gets the current number of active connections
  *
  *  @param   ifp                 Pointer to handle instance of whd interface
@@ -1057,6 +1076,33 @@ extern whd_result_t whd_wifi_twt_information_frame(whd_interface_t ifp, whd_twt_
  *  @return WHD_SUCCESS or Error code
  */
 extern whd_result_t whd_wifi_btwt_config(whd_interface_t ifp, whd_btwt_config_params_t *twt_params);
+
+/** Enable OCE Optimized Connectivity Experience
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  whd_bool_t     value to 'WHD_TRUE' or 'WHD_FALSE'
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_oce_enable(whd_interface_t ifp, whd_bool_t value);
+
+/** Get HE Bss Color
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  value          get value of color
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_get_he_color(whd_interface_t ifp, uint8_t *value);
+
+/** Set BSS Color
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  value          value from 0-255
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_set_he_color(whd_interface_t ifp, uint8_t *value);
 
 /** Add MBO preffered/non-prefferd channel attributes
  *
@@ -1613,6 +1659,18 @@ extern whd_result_t whd_wifi_get_fw_logs(whd_interface_t ifp);
  */
 extern whd_result_t whd_wifi_set_country_code(whd_interface_t ifp, whd_country_code_t country_code);
 
+#ifdef PROTO_MSGBUF
+/**
+ * whd_wifi_delete_peers -      Delete/remove the connected clients, during STA leave.
+ *
+ * @param ifp                    Pointer to handle instance of whd interface
+ * @param peer_addr              MAC Address of the Client STA connected to SoftAP
+ *
+ * @return void                  No error code returns
+ */
+extern void whd_wifi_delete_peer(whd_interface_t ifp, uint8_t *peer_addr);
+#endif /* PROTO_MSGBUF */
+
 #if defined(WHD_CSI_SUPPORT)
 /**
  * whd_wifi_csi_events_handler() - Handle the CSI Event notifications from Firmware.
@@ -1721,6 +1779,17 @@ whd_wifi_deregister_ds_callback(whd_interface_t ifp, whd_ds_callback_t callback)
  */
 extern whd_result_t
 whd_configure_scanmac_randomisation(whd_interface_t ifp, whd_bool_t config);
+
+/** Set the mac address via OTP bits
+ *
+ * @param ifp                    Pointer to handle instance of whd interface
+ * @param tlvbuf                 tlv buffer to be written to the OTP section
+ * @param len                    length of the buffer
+ *
+ * @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_set_mac_addr_via_otp(whd_interface_t ifp, char *tlvBuf, uint8_t len);
+
 
 /* @} */
 

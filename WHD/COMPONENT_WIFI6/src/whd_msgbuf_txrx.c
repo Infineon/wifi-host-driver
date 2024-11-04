@@ -26,6 +26,10 @@
 #include "bus_protocols/whd_bus_m2m_protocol.h"
 #include "cy_network_mw_core.h"
 
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+#include "cyhal_syspm.h"
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
 #define WHD_RX_BUF_TIMEOUT          (10)
 
 #define ETHER_TYPE_BRCM           (0x886C)      /** Broadcom Ethertype for identifying event packets - Copied from DHD include/proto/ethernet.h */
@@ -337,9 +341,42 @@ whd_result_t whd_msgbuf_ioctl_dequeue(struct whd_driver *whd_driver)
     return retval;
 }
 
+#if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
+static bool ioctl_lock_taken = WHD_FALSE;
+
+static void whd_msgbuf_ioctl_entry(void)
+{
+    if (ioctl_lock_taken == WHD_FALSE)
+    {
+        cyhal_syspm_lock_deepsleep();
+        ioctl_lock_taken = WHD_TRUE;
+    }
+}
+static void whd_msgbuf_ioctl_exit(void)
+{
+    if (ioctl_lock_taken == WHD_TRUE)
+    {
+        cyhal_syspm_unlock_deepsleep();
+        ioctl_lock_taken = WHD_FALSE;
+    }
+}
+#else
+static void whd_msgbuf_ioctl_entry(void)
+{
+    return;
+}
+static void whd_msgbuf_ioctl_exit(void)
+{
+    return;
+}
+#endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
 static int whd_msgbuf_send_ioctl(whd_interface_t ifp, uint32_t cmd, whd_buffer_t send_buffer_hnd,
                                  whd_buffer_t *response_buffer_hnd)
 {
+
+    whd_msgbuf_ioctl_entry();
+
     whd_driver_t whd_driver = ifp->whd_driver;
     struct whd_msgbuf *msgbuf = (struct whd_msgbuf *)whd_driver->msgbuf;
     whd_msgbuf_info_t *msgbuf_info = whd_driver->proto->pd;
@@ -352,6 +389,12 @@ static int whd_msgbuf_send_ioctl(whd_interface_t ifp, uint32_t cmd, whd_buffer_t
     msgbuf->ifidx = ifp->ifidx;
     msgbuf->ioctl_cmd = cmd;
 
+    /* Make sure FW has atleast one IOCTL RX buffer to post the response */
+    if (msgbuf->cur_ioctlrespbuf == 0)
+    {
+        whd_msgbuf_rxbuf_ioctlresp_post(msgbuf);
+    }
+
     do
     {
         whd_thread_notify(whd_driver);
@@ -362,6 +405,7 @@ static int whd_msgbuf_send_ioctl(whd_interface_t ifp, uint32_t cmd, whd_buffer_t
         {
             retry++;
             /* This is to force read the commonring for any index update, in case, interrupt got missed */
+            /* WHD is doing the retry beacuse of interrupt fix observation - CYW55900A0-1020 */
             (void)whd_hw_generateBt2WlDbInterruptApi(0, 0x01);
             whd_driver->force_rx_read = WHD_TRUE;
         }
@@ -372,11 +416,10 @@ static int whd_msgbuf_send_ioctl(whd_interface_t ifp, uint32_t cmd, whd_buffer_t
         }
     } while(retry < WHD_IOCTL_NO_OF_RETRIES);
 
-    if((retry == WHD_IOCTL_NO_OF_RETRIES) && (retval != WHD_SUCCESS))
+    if ((retry == WHD_IOCTL_NO_OF_RETRIES) && (retval != WHD_SUCCESS))
     {
         whd_driver->force_rx_read = WHD_FALSE;
-        /* Release the mutex since ioctl response will no longer be referenced. */
-        CHECK_RETURN(cy_rtos_set_semaphore(&msgbuf_info->ioctl_mutex, WHD_FALSE) );
+        whd_msgbuf_ioctl_exit();
         return retval;
     }
     msgbuf_info->ioctl_response =
@@ -386,6 +429,7 @@ static int whd_msgbuf_send_ioctl(whd_interface_t ifp, uint32_t cmd, whd_buffer_t
     {
         if (!msgbuf_info->ioctl_response)
         {
+            whd_msgbuf_ioctl_exit();
             return WHD_BADARG;
         }
     }
@@ -397,25 +441,24 @@ static int whd_msgbuf_send_ioctl(whd_interface_t ifp, uint32_t cmd, whd_buffer_t
     }
     else
     {
-        CHECK_RETURN(whd_buffer_release(whd_driver, msgbuf_info->ioctl_response, WHD_NETWORK_RX) );
+        (void)whd_buffer_release(whd_driver, msgbuf_info->ioctl_response, WHD_NETWORK_RX);
     }
 
     msgbuf_info->ioctl_response = NULL;
-
-    /* Release the mutex since ioctl response will no longer be referenced. */
-    CHECK_RETURN(cy_rtos_set_semaphore(&msgbuf_info->ioctl_mutex, WHD_FALSE) );
 
     /* Check whether the IOCTL response indicates it failed. */
     if (msgbuf_info->ioctl_response_status != WHD_SUCCESS)
     {
         if (response_buffer_hnd != NULL)
         {
-            CHECK_RETURN(whd_buffer_release(whd_driver, *response_buffer_hnd, WHD_NETWORK_RX) );
+            (void)whd_buffer_release(whd_driver, *response_buffer_hnd, WHD_NETWORK_RX);
             *response_buffer_hnd = NULL;
         }
+        whd_msgbuf_ioctl_exit();
         return WHD_RESULT_CREATE( (WLAN_ENUM_OFFSET - msgbuf_info->ioctl_response_status) );
     }
 
+    whd_msgbuf_ioctl_exit();
     return WHD_SUCCESS;
 }
 
@@ -521,8 +564,8 @@ whd_msgbuf_remove_flowring(struct whd_msgbuf *msgbuf, uint16_t flowid)
 {
 
     WPRINT_WHD_DEBUG( ("Removing flowring %d\n", flowid) );
-
-    CHECK_RETURN(whd_buffer_release(msgbuf->drvr, (whd_buffer_t)msgbuf->flowring_handle[flowid], WHD_NETWORK_TX));
+    /* TODO: Buffer release is not needed as it is from whd dmapool */
+    //CHECK_RETURN(whd_buffer_release(msgbuf->drvr, (whd_buffer_t)msgbuf->flowring_handle[flowid], WHD_NETWORK_TX));
 
     whd_flowring_delete(msgbuf->flow, flowid);
 
@@ -1304,7 +1347,7 @@ whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
 
 whd_result_t whd_msgbuf_txflow_init(whd_msgbuftx_info_t *msgtx_info)
 {
-    /* Create the sdpcm packet queue semaphore */
+    /* Create the msgbuf tx packet queue semaphore */
     if (cy_rtos_init_semaphore(&msgtx_info->send_queue_mutex, 1, 0) != WHD_SUCCESS)
     {
         return WHD_SEMAPHORE_ERROR;
@@ -1322,9 +1365,19 @@ whd_result_t whd_msgbuf_txflow_init(whd_msgbuftx_info_t *msgtx_info)
     return WHD_SUCCESS;
 }
 
-void whd_msgbuf_txflow_deinit(whd_msgbuftx_info_t *msgtx_info)
+whd_result_t whd_msgbuf_txflow_deinit(whd_msgbuftx_info_t *msgtx_info)
 {
+    msgtx_info->send_queue_head = (whd_buffer_t)NULL;
+    msgtx_info->send_queue_tail = (whd_buffer_t)NULL;
+    msgtx_info->npkt_in_q = 0;
 
+    /* Delete the msgbuf tx packet queue semaphore */
+    if (cy_rtos_deinit_semaphore(&msgtx_info->send_queue_mutex) != WHD_SUCCESS)
+    {
+        return WHD_SEMAPHORE_ERROR;
+    }
+
+    return WHD_SUCCESS;
 }
 
 static void whd_msgbuf_set_next_buffer_in_queue(whd_driver_t whd_driver, whd_buffer_t buffer, whd_buffer_t prev_buffer)
@@ -1475,7 +1528,12 @@ whd_msgbuf_flowring_create_worker(struct whd_msgbuf *msgbuf, struct whd_msgbuf_w
     flowid = work->flowid;
     flow_sz = WHD_H2D_TXFLOWRING_MAX_ITEM * WHD_H2D_TXFLOWRING_ITEMSIZE;
 
-    msgbuf->flowring_handle[flowid] = (uint32_t)whd_dmapool_alloc(flow_sz);
+    /* memory allocation for WLAN DMA is permanent, no need to do
+     * allocation for same flowid again and again */
+    if (msgbuf->flowring_handle[flowid] == (uint32_t)NULL)
+    {
+        msgbuf->flowring_handle[flowid] = (uint32_t)whd_dmapool_alloc(flow_sz);
+    }
 
     if (!(msgbuf->flowring_handle[flowid]) )
     {

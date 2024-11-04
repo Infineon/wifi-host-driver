@@ -125,6 +125,8 @@ typedef struct wl_wsec_info {
 enum
 {
     /* 0-12 Reserved */
+    WL_HE_CMD_BSSCOLOR = 5,
+    WL_HE_CMD_PARTIAL_BSSCOLOR = 6,
     WL_HE_CMD_OMI = 13,
     /* 14-27 Reserved */
     WL_HE_CMD_MUEDCA_OPT = 28,
@@ -332,6 +334,34 @@ typedef struct wl_twt_info
     /* deprecated - to be removed */
     wl_twt_idesc_t desc;
 } wl_twt_info_t;
+
+#define WL_OCE_IOV_MAJOR_VER 1
+#define WL_OCE_IOV_MINOR_VER 1
+#define WL_OCE_IOV_MAJOR_VER_SHIFT 8
+#define WL_OCE_IOV_VERSION \
+        ((WL_OCE_IOV_MAJOR_VER << WL_OCE_IOV_MAJOR_VER_SHIFT) | WL_OCE_IOV_MINOR_VER)
+
+enum wl_oce_cmd_ids {
+        WL_OCE_CMD_ENABLE = 1,
+        WL_OCE_CMD_PROBE_DEF_TIME = 2,
+        WL_OCE_CMD_FD_TX_PERIOD = 3,
+        WL_OCE_CMD_FD_TX_DURATION = 4,
+        WL_OCE_CMD_RSSI_TH = 5,
+        WL_OCE_CMD_RWAN_LINKS = 6,
+        WL_OCE_CMD_CU_TRIGGER = 7,
+        /* Add before this !! */
+        WL_OCE_CMD_LAST
+};
+
+enum wl_oce_xtlv_id {
+        WL_OCE_XTLV_ENABLE  = 0x1,
+        WL_OCE_XTLV_PROBE_DEF_TIME  = 0x2,
+        WL_OCE_XTLV_FD_TX_PERIOD    = 0x3,
+        WL_OCE_XTLV_FD_TX_DURATION  = 0x4,
+        WL_OCE_XTLV_RSSI_TH = 0x5,
+        WL_OCE_XTLV_RWAN_LINKS = 0x6,
+        WL_OCE_XTLV_CU_TRIGGER = 0x7
+};
 
 #define WL_MBO_IOV_MAJOR_VER 1
 #define WL_MBO_IOV_MINOR_VER 1
@@ -1235,10 +1265,13 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_EVENT_LOG              "event_log_tag_control"
 #define IOVAR_STR_KEEPALIVE_CONFIG       "keep_alive"
 #define IOVAR_STR_MBO                    "mbo"
+#define IOVAR_STR_OTPTLV                 "otptlv"
+#define IOVAR_STR_OCE                    "oce"
 #if defined(WHD_CSI_SUPPORT)
 #define IOVAR_STR_CSI                    "csi"
 #endif /* defined(WHD_CSI_SUPPORT) */
 #define IOVAR_STR_SCANMAC                "scanmac"
+#define IOVAR_STR_NDOE                   "ndoe"
 
 /* This value derived from the above strings, which appear maxed out in the 20s */
 #define IOVAR_NAME_STR_MAX_SIZE          32

@@ -41,9 +41,14 @@ extern "C"
 #define WHD_IOCTL_TIMEOUT_MS          (3000)     /** Need to give enough time for coming out of Deep sleep (was 5000) */
 #define WHD_IOCTL_NO_OF_RETRIES       (4)        /** If the IOCTL reponse not received, do these number of retry **/
 
-#define MSGBUF_IOCTL_RESP_TIMEOUT               msecs_to_jiffies(2000)
+#define WHD_EVENT_HANDLER_LIST_SIZE   (5)        /** Maximum number of simultaneously registered event handlers */
 
-#define WHD_EVENT_HANDLER_LIST_SIZE    (5)      /** Maximum number of simultaneously registered event handlers */
+/* The below two macro values, depends on WLAN FW configuration,
+ * update these macros, in case it is changed by WLAN FW,
+ * Firmware will need FW_WL_D11_BUF_POST buffers for D11 DMA and FW_M2MDMA_BUF_POST buffers
+ * for packets that takes the M2M DMA path to CM33 SRAM */
+#define FW_WL_D11_BUF_POST            (8)
+#define FW_M2MDMA_BUF_POST            (4)
 
 #define MSGBUF_TYPE_GEN_STATUS                  0x1
 #define MSGBUF_TYPE_RING_STATUS                 0x2
@@ -79,14 +84,13 @@ extern "C"
 
 #define WHD_MSGBUF_DATA_MAX_RX_SIZE            (2048 - sizeof(whd_buffer_header_t))
 
-#define WHD_MSGBUF_RXBUFPOST_THRESHOLD          2
 #define WHD_MSGBUF_MAX_IOCTLRESPBUF_POST        2
 #define WHD_MSGBUF_MAX_EVENTBUF_POST            2
 
 #define WHD_MSGBUF_RXBUFPOST_TIMER_DELAY        60000    /* RX buffer Timer expiry timeout in milliseconds */
 #define WHD_MSGBUF_RXBUFPOST_RETRY_COUNT        10
 
-#define WHD_MSGBUF_SLP_DETECT_TIME              10000     /* Sleep Detect Timer expiry timeout in milliseconds */
+#define WHD_MSGBUF_SLP_DETECT_TIME              2000     /* Sleep Detect Timer expiry timeout in milliseconds */
 
 #define WHD_MSGBUF_PKT_FLAGS_FRAME_802_3        0x01
 #define WHD_MSGBUF_PKT_FLAGS_FRAME_802_11       0x02
@@ -99,12 +103,23 @@ extern "C"
 
 #define WHD_MAX_TXSTATUS_WAIT_RETRIES           10
 
-#define WHD_EVENT_HANDLER_LIST_SIZE    (5)      /** Maximum number of simultaneously registered event handlers */
+#define WHD_EVENT_HANDLER_LIST_SIZE             (5)  /** Maximum number of simultaneously registered event handlers */
+#define MAX_CLIENT_SUPPORT                      (2)  /* No of Max STA connection supported in AP Mode */
 
 #define WHD_NROF_H2D_COMMON_MSGRINGS      2
 #define WHD_NROF_D2H_COMMON_MSGRINGS      3
 #define WHD_NROF_COMMON_MSGRINGS    (WHD_NROF_H2D_COMMON_MSGRINGS + \
                                      WHD_NROF_D2H_COMMON_MSGRINGS)
+
+#if defined(RX_PACKET_POOL_SIZE) && (RX_PACKET_POOL_SIZE >= 16)
+#define WHD_MSGBUF_RXBUFPOST_THRESHOLD          (RX_PACKET_POOL_SIZE - WHD_MSGBUF_MAX_EVENTBUF_POST - \
+                                                     FW_WL_D11_BUF_POST - FW_M2MDMA_BUF_POST)
+#elif defined(RX_PACKET_POOL_SIZE) && (RX_PACKET_POOL_SIZE < 16)
+#error "RX_PACKET_POOL_SIZE Should be greater or equal to 16, as per WLAN design"
+#else
+#define WHD_MSGBUF_RXBUFPOST_THRESHOLD          2
+#endif
+
 #ifdef PROTO_MSGBUF
 /** Error list element structure
  *
@@ -411,6 +426,7 @@ extern whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid);
 extern whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t num_flowring, uint16_t *prio_ring_id);
 extern whd_result_t whd_msgbuf_txflow_dequeue(whd_driver_t whd_driver, whd_buffer_t *buffer, uint16_t flowid);
 extern whd_result_t whd_msgbuf_txflow_init(whd_msgbuftx_info_t *msgtx_info);
+extern whd_result_t whd_msgbuf_txflow_deinit(whd_msgbuftx_info_t *msgtx_info);
 extern whd_result_t whd_msgbuf_info_init(whd_driver_t whd_driver);
 extern void whd_msgbuf_info_deinit(whd_driver_t whd_driver);
 

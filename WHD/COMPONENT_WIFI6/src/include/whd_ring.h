@@ -69,9 +69,10 @@ extern "C" {
 
 #define WHD_H2D_INFORM_HOSTRDY              (1 << 9)
 
-/* This is adjusted to handle TCP throughput and memory availability for pools.
+/* This is adjusted to handle TCP throughput based on memory/pool availability.
  * DEFAULT_TCP_WINDOW_SIZE has to be mapped based on this max rxbufpost value,
- * Currently it is defined as 14 - 1 = 13 --> (13*1460 = 18980(18k)) */
+ * To get better throughput, define RX_PACKET_POOL_SIZE as 20,
+ * then, 18-1 = 17 --> (17*1460 = 24820(24k), this becomes window size for TCP) */
 #ifdef RX_PACKET_POOL_SIZE
 #define WHD_DEF_MAX_RXBUFPOST               (RX_PACKET_POOL_SIZE - WHD_MSGBUF_MAX_EVENTBUF_POST)
 #else

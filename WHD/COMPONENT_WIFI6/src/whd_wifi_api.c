@@ -27,6 +27,8 @@
 #include "whd_chip_constants.h"
 #ifndef PROTO_MSGBUF
 #include "whd_cdc_bdc.h"
+#else
+#include "whd_flowring.h"
 #endif /* PROTO_MSGBUF */
 #include "whd_thread_internal.h"
 #include "whd_debug.h"
@@ -498,6 +500,53 @@ whd_result_t whd_get_bt_info(whd_driver_t whd_driver, whd_bt_info_t bt_info)
     return WHD_SUCCESS;
 }
 
+whd_bool_t whd_wifi_platform_supports_triband(whd_interface_t ifp)
+{
+    uint32_t band_list[4] = { 0 };
+    whd_band_list_t whd_bandlist = { 0 };
+    uint32_t res = 0,i = 0,j = 0;
+    char band_str[10] = { 0 };
+
+    res = whd_wifi_get_ioctl_buffer(ifp, WLC_GET_BANDLIST, (uint8_t*)&band_list, sizeof(band_list));
+    if(res != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("Function whd_wifi_get_ioctl_buffer failed at line %d \n ", __LINE__) );
+        return false;
+    }
+    /*
+     *All CY chips which supports 5Ghz will also support 2.4Ghz and
+     * for such platforms number of bands will be 2 or higher
+     */
+    whd_bandlist.number_of_bands= band_list[0];
+    WPRINT_WHD_DEBUG( ("Number of supported bands: %ld\n",whd_bandlist.number_of_bands ) );
+
+    for (i = 1; i <= whd_bandlist.number_of_bands && i < ARRAY_SIZE(band_list); i++,j++)
+    {
+        switch (band_list[i])
+        {
+            case WLC_BAND_6G:
+                strcpy(band_str,"6GHz");
+                break;
+            case WLC_BAND_5G:
+                strcpy(band_str,"5GHz");
+                break;
+            case WLC_BAND_2G:
+                strcpy(band_str,"2.4GHz");
+                break;
+            default:
+                strcpy(band_str,"Unknown");
+                break;
+        }
+        whd_bandlist.other_band[j] = band_list[i];
+        WPRINT_WHD_DEBUG( ("%s band supported\n", band_str) );
+        if (band_list[i] == WLC_BAND_6G)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 whd_result_t whd_wifi_set_chanspec(whd_interface_t ifp, wl_chanspec_t chanspec)
 {
     whd_buffer_t buffer;
@@ -750,6 +799,9 @@ whd_result_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_feat, uint
     whd_driver_t whd_driver;
     wl_ol_cfg_v1_t *ol_cfg;
     uint32_t ol_feat_skip = ~ol_feat;
+#ifdef PROTO_MSGBUF
+    wl_ol_cfg_v1_t ol_cfg_cpy;
+#endif
 
     whd_driver = ifp->whd_driver;
     CHECK_DRIVER_NULL(whd_driver);
@@ -760,10 +812,18 @@ whd_result_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_feat, uint
     CHECK_IOCTL_BUFFER(ol_cfg);
     whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
 
+#ifdef PROTO_MSGBUF
+    ol_cfg_cpy.ver = WL_OL_CFG_VER_1;
+    ol_cfg_cpy.len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg_cpy.id = WL_OL_CFG_ID_PROF;
+    ol_cfg_cpy.offload_skip = ol_feat_skip;
+    memcpy(ol_cfg , &ol_cfg_cpy, sizeof(wl_ol_cfg_v1_t) );
+#else
     ol_cfg->ver = WL_OL_CFG_VER_1;
     ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
     ol_cfg->id = WL_OL_CFG_ID_PROF;
     ol_cfg->offload_skip = ol_feat_skip;
+#endif
 
     if (reset) {
         ol_cfg->u.ol_profile.reset = WHD_TRUE;
@@ -788,113 +848,145 @@ whd_result_t whd_wifi_offload_config(whd_interface_t ifp, uint32_t ol_feat, uint
 
 whd_result_t whd_wifi_offload_ipv4_update(whd_interface_t ifp, uint32_t ol_feat, uint32_t ipv4_addr, whd_bool_t is_add)
 {
-	whd_buffer_t buffer;
-	whd_driver_t whd_driver;
-	wl_ol_cfg_v1_t *ol_cfg;
-	struct ipv4_addr addr;
-	uint8_t i;
-	uint8_t j=0;
-	uint32_t ol_feat_skip = ~ol_feat;
+    whd_buffer_t buffer;
+    whd_driver_t whd_driver;
+    wl_ol_cfg_v1_t *ol_cfg;
+    struct ipv4_addr addr;
+    uint8_t i;
+    uint8_t j=0;
+    uint32_t ol_feat_skip = ~ol_feat;
+#ifdef PROTO_MSGBUF
+    wl_ol_cfg_v1_t ol_cfg_cpy;
+#endif
 
-	whd_driver = ifp->whd_driver;
-	CHECK_DRIVER_NULL(whd_driver);
+    whd_driver = ifp->whd_driver;
+    CHECK_DRIVER_NULL(whd_driver);
 
-	for (i=0; i<IPV4_ADDR_LEN; i++)
-	{
-		addr.addr[i] = (ipv4_addr >> j) & 0xff;
-		j = j+8;
-	}
+    for (i=0; i<IPV4_ADDR_LEN; i++)
+    {
+        addr.addr[i] = (ipv4_addr >> j) & 0xff;
+        j = j+8;
+    }
 
-	ol_cfg = (wl_ol_cfg_v1_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,
+    ol_cfg = (wl_ol_cfg_v1_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,
                                                                    sizeof(wl_ol_cfg_v1_t),
                                                                    IOVAR_STR_OFFLOAD_CONFIG);
-	CHECK_IOCTL_BUFFER(ol_cfg);
-	whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
+    CHECK_IOCTL_BUFFER(ol_cfg);
+    whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
 
-	ol_cfg->ver = WL_OL_CFG_VER_1;
-	ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
-	ol_cfg->id = WL_OL_CFG_ID_INET_V4;
-	ol_cfg->offload_skip = ol_feat_skip;
+#ifdef PROTO_MSGBUF
+    ol_cfg_cpy.ver = WL_OL_CFG_VER_1;
+    ol_cfg_cpy.len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg_cpy.id = WL_OL_CFG_ID_INET_V4;
+    ol_cfg_cpy.offload_skip = ol_feat_skip;
+    memcpy(ol_cfg , &ol_cfg_cpy, sizeof(wl_ol_cfg_v1_t) );
+#else
+    ol_cfg->ver = WL_OL_CFG_VER_1;
+    ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg->id = WL_OL_CFG_ID_INET_V4;
+    ol_cfg->offload_skip = ol_feat_skip;
+#endif
 
-	ol_cfg->u.ol_inet_v4.del = (whd_bool_t) !is_add;
-	whd_mem_memcpy(&ol_cfg->u.ol_inet_v4.host_ipv4, &addr, sizeof(addr));
+    ol_cfg->u.ol_inet_v4.del = (whd_bool_t) !is_add;
+    whd_mem_memcpy(&ol_cfg->u.ol_inet_v4.host_ipv4, &addr, sizeof(addr));
 
-	CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0) );
-	return WHD_SUCCESS;
+    CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0) );
+    return WHD_SUCCESS;
 }
 
 whd_result_t whd_wifi_offload_ipv6_update(whd_interface_t ifp, uint32_t ol_feat, uint32_t *ipv6_addr, uint8_t type, whd_bool_t is_add)
 {
-	whd_buffer_t buffer;
-	whd_driver_t whd_driver;
-	wl_ol_cfg_v1_t *ol_cfg;
-	struct ipv6_addr addr;
-	uint8_t i, j=0;
-	uint8_t k=0;
-	uint32_t ol_feat_skip = ~ol_feat;
+    whd_buffer_t buffer;
+    whd_driver_t whd_driver;
+    wl_ol_cfg_v1_t *ol_cfg;
+    struct ipv6_addr addr;
+    uint8_t i, j=0;
+    uint8_t k=0;
+    uint32_t ol_feat_skip = ~ol_feat;
+#ifdef PROTO_MSGBUF
+    wl_ol_cfg_v1_t ol_cfg_cpy;
+#endif
 
-	whd_driver = ifp->whd_driver;
-	CHECK_DRIVER_NULL(whd_driver);
+    whd_driver = ifp->whd_driver;
+    CHECK_DRIVER_NULL(whd_driver);
 
-	for(i=0; i<IPV6_ADDR_LEN; i++)
-	{
-		addr.addr[i] = (ipv6_addr[j] >> k) & 0xff;
-		k = k+8;
-		if(k == 32)
-		{
-			j++;
-			k=0;
-		}
-	}
+    for(i=0; i<IPV6_ADDR_LEN; i++)
+    {
+        addr.addr[i] = (ipv6_addr[j] >> k) & 0xff;
+        k = k+8;
+        if(k == 32)
+        {
+            j++;
+            k=0;
+        }
+    }
 
-	ol_cfg = (wl_ol_cfg_v1_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,
+    ol_cfg = (wl_ol_cfg_v1_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,
                                                                    sizeof(wl_ol_cfg_v1_t),
                                                                    IOVAR_STR_OFFLOAD_CONFIG);
-	CHECK_IOCTL_BUFFER(ol_cfg);
-	whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
+    CHECK_IOCTL_BUFFER(ol_cfg);
+    whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
 
-	ol_cfg->ver = WL_OL_CFG_VER_1;
-	ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
-	ol_cfg->id = WL_OL_CFG_ID_INET_V6;
-	ol_cfg->offload_skip = ol_feat_skip;
+#ifdef PROTO_MSGBUF
+    ol_cfg_cpy.ver = WL_OL_CFG_VER_1;
+    ol_cfg_cpy.len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg_cpy.id = WL_OL_CFG_ID_INET_V6;
+    ol_cfg_cpy.offload_skip = ol_feat_skip;
+    memcpy(ol_cfg , &ol_cfg_cpy, sizeof(wl_ol_cfg_v1_t) );
+#else
+    ol_cfg->ver = WL_OL_CFG_VER_1;
+    ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg->id = WL_OL_CFG_ID_INET_V6;
+    ol_cfg->offload_skip = ol_feat_skip;
+#endif
 
-	ol_cfg->u.ol_inet_v6.del = (whd_bool_t) !is_add;
-	ol_cfg->u.ol_inet_v6.type = type;
-	whd_mem_memcpy(&ol_cfg->u.ol_inet_v6.host_ipv6, &addr, sizeof(addr));
+    ol_cfg->u.ol_inet_v6.del = (whd_bool_t) !is_add;
+    ol_cfg->u.ol_inet_v6.type = type;
+    whd_mem_memcpy(&ol_cfg->u.ol_inet_v6.host_ipv6, &addr, sizeof(addr));
 
-	CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0) );
-	return WHD_SUCCESS;
+    CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0) );
+    return WHD_SUCCESS;
 }
 
 whd_result_t whd_wifi_offload_enable(whd_interface_t ifp, uint32_t ol_feat, uint32_t enable)
 {
-	whd_buffer_t buffer;
-	whd_driver_t whd_driver;
-	wl_ol_cfg_v1_t *ol_cfg;
-	uint32_t ol_feat_skip = ~ol_feat;
+    whd_buffer_t buffer;
+    whd_driver_t whd_driver;
+    wl_ol_cfg_v1_t *ol_cfg;
+    uint32_t ol_feat_skip = ~ol_feat;
+#ifdef PROTO_MSGBUF
+    wl_ol_cfg_v1_t ol_cfg_cpy;
+#endif
 
-	whd_driver = ifp->whd_driver;
-	CHECK_DRIVER_NULL(whd_driver);
+    whd_driver = ifp->whd_driver;
+    CHECK_DRIVER_NULL(whd_driver);
 
-	ol_cfg = (wl_ol_cfg_v1_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,
+    ol_cfg = (wl_ol_cfg_v1_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,
                                                                    sizeof(wl_ol_cfg_v1_t),
                                                                    IOVAR_STR_OFFLOAD_CONFIG);
-	CHECK_IOCTL_BUFFER(ol_cfg);
-	whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
+    CHECK_IOCTL_BUFFER(ol_cfg);
+    whd_mem_memset(ol_cfg, 0, sizeof(wl_ol_cfg_v1_t) );
 
-	ol_cfg->ver = WL_OL_CFG_VER_1;
-	ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
-	ol_cfg->id = WL_OL_CFG_ID_ACTIVATE;
-	ol_cfg->offload_skip = ol_feat_skip;
+#ifdef PROTO_MSGBUF
+    ol_cfg_cpy.len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg_cpy.id = WL_OL_CFG_ID_ACTIVATE;
+    ol_cfg_cpy.offload_skip = ol_feat_skip;
+    memcpy(ol_cfg , &ol_cfg_cpy, sizeof(wl_ol_cfg_v1_t) );
+#else
+    ol_cfg->ver = WL_OL_CFG_VER_1;
+    ol_cfg->len = sizeof(wl_ol_cfg_v1_t);
+    ol_cfg->id = WL_OL_CFG_ID_ACTIVATE;
+    ol_cfg->offload_skip = ol_feat_skip;
+#endif
 
-	if (enable) {
-		ol_cfg->u.ol_activate.enable = WHD_TRUE;
-	} else {
-		ol_cfg->u.ol_activate.enable = WHD_FALSE;
-	}
+    if (enable) {
+        ol_cfg->u.ol_activate.enable = WHD_TRUE;
+    } else {
+        ol_cfg->u.ol_activate.enable = WHD_FALSE;
+    }
 
-	CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0) );
-	return WHD_SUCCESS;
+    CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0) );
+    return WHD_SUCCESS;
 }
 
 whd_result_t whd_configure_wowl(whd_interface_t ifp, uint32_t set_wowl)
@@ -1673,7 +1765,7 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
     data[0] = htod32(bss_index);
     data[1] =
         htod32( ( uint32_t )( ( ( (auth_type & WPA_SECURITY) != 0 ) || ( (auth_type & WPA2_SECURITY) != 0 ) ||
-                                (auth_type & WPA3_SECURITY) != 0 ) ? 1 : 0 ) );
+                              ( (auth_type & WPA3_SECURITY) != 0 ) || ( (auth_type & WPA3_OWE) != 0 ) ) ? 1 : 0 ) );
     (void)whd_proto_set_iovar(ifp, buffer, 0);
 
     /* Set the EAPOL version to whatever the AP is using (-1) */
@@ -1687,7 +1779,6 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
     switch (auth_type)
     {
         case WHD_SECURITY_OPEN:
-        case WHD_SECURITY_WPA3_OWE:
         case WHD_SECURITY_WPS_SECURE:
             break;
 
@@ -1726,6 +1817,12 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
                    If FW report WLC_E_EXT_AUTH_REQ during roaming, Host already called whd_wifi_stop_external_auth_request. */
                 CHECK_RETURN(whd_wifi_set_iovar_value(ifp, IOVAR_STR_ROAM_OFF, 1) );
             }
+            break;
+
+        case WHD_SECURITY_WPA3_OWE:
+            /* Set the EAPOL key packet timeout value, otherwise unsuccessful supplicant events aren't reported. OWE needs 4-way handshake */
+            CHECK_RETURN_UNSUPPORTED_CONTINUE(whd_wifi_set_supplicant_key_timeout(ifp,
+                                                                                 DEFAULT_EAPOL_KEY_PACKET_TIMEOUT) );
             break;
 
         case WHD_SECURITY_WPA_TKIP_ENT:
@@ -2257,6 +2354,10 @@ whd_result_t whd_wifi_leave(whd_interface_t ifp)
 
     CHECK_DRIVER_NULL(whd_driver);
 
+#ifdef PROTO_MSGBUF
+    struct whd_flowring *flow = whd_driver->msgbuf->flow;
+#endif
+
     /* Map the interface to a BSS index */
     bss_index = ifp->bsscfgidx;
 
@@ -2291,6 +2392,10 @@ whd_result_t whd_wifi_leave(whd_interface_t ifp)
         data[1] = htod32(0);
         (void)whd_proto_set_iovar(ifp, buffer, 0);
     }
+#ifdef PROTO_MSGBUF
+    /* Clear the flowring created as part of STA */
+    whd_flowring_delete_peers(flow, NULL, ifp->ifidx);
+#endif
 
     whd_driver->internal_info.whd_join_status[bss_index] = 0;
     ifp->role = WHD_INVALID_ROLE;
@@ -2337,6 +2442,9 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
     uint16_t ie_offset;
     uint32_t bss_info_length;
     country_info_ie_fixed_portion_t *country_info_ie;
+#ifdef COMPONENT_WIFI6
+    supported_operating_classes_ie_t *supported_operating_classes_ie;
+#endif
     rsn_ie_fixed_portion_t *rsnie;
     wpa_ie_fixed_portion_t *wpaie = NULL;
     rsnx_ie_t *rsnxie = NULL;
@@ -2594,6 +2702,10 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
                 record->security |= WPA2_SECURITY;
                 record->security |= FBT_ENABLED;
             }
+            if (akm_suite_list_item == (uint32_t)WHD_AKM_OWE)
+            {
+                record->security |= WPA3_OWE;
+            }
         }
 
         group_key_suite = ntoh32(rsnie->group_key_suite) & 0xFF;
@@ -2728,6 +2840,17 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
     }
     record->band = (CHSPEC_IS2G(chanspec) ? WHD_802_11_BAND_2_4GHZ :
                     (CHSPEC_IS5G(chanspec) ? WHD_802_11_BAND_5GHZ : WHD_802_11_BAND_6GHZ) );
+
+#ifdef COMPONENT_WIFI6
+    /* Find supported operating classes IE */
+    supported_operating_classes_ie = (supported_operating_classes_ie_t *)whd_parse_dot11_tlvs(cp, len, DOT11_IE_ID_SUPPORTED_OPERATING_CLASSES);
+    if ((supported_operating_classes_ie != NULL) && (supported_operating_classes_ie->tlv_header.length >= SUPPORTED_OPERATING_CLASSES_IE_MINIMUM_LENGTH))
+    {
+       record->num_supported_operating_classes = MIN_OF(supported_operating_classes_ie->tlv_header.length, sizeof(record->supported_operating_classes));
+       memcpy(record->supported_operating_classes, supported_operating_classes_ie->operating_classes, record->num_supported_operating_classes);
+       record->current_operating_class = supported_operating_classes_ie->current_operating_class;
+    }
+#endif
 
     whd_driver->internal_info.scan_result_callback(&whd_driver->internal_info.whd_scan_result_ptr, handler_user_data,
                                                    WHD_SCAN_INCOMPLETE);
@@ -3348,6 +3471,18 @@ whd_result_t whd_wifi_ap_get_max_assoc(whd_interface_t ifp, uint32_t *max_assoc)
     return whd_wifi_get_iovar_value(ifp, IOVAR_STR_MAX_ASSOC, max_assoc);
 }
 
+whd_result_t whd_wifi_ap_set_max_assoc(whd_interface_t ifp, uint32_t max_assoc)
+{
+    if (!ifp || !max_assoc)
+    {
+        WPRINT_WHD_ERROR( ("Invalid param in func %s at line %d \n",
+                           __func__, __LINE__) );
+        return WHD_WLAN_BADARG;
+    }
+
+    return whd_wifi_set_iovar_value(ifp, IOVAR_STR_MAX_ASSOC, max_assoc);
+}
+
 whd_result_t whd_wifi_get_associated_client_list(whd_interface_t ifp, void *client_list_buffer, uint16_t buffer_length)
 {
     whd_buffer_t buffer;
@@ -3446,6 +3581,14 @@ whd_result_t whd_wifi_get_ap_info(whd_interface_t ifp, wl_bss_info_t *ap_info, w
         else if (security_value == WPA_AUTH_PSK)
         {
             *security |= WPA_SECURITY;
+        }
+        else if (security_value == WPA3_AUTH_SAE_PSK)
+        {
+            *security |= WPA3_SECURITY;
+        }
+        else if (security_value == WPA3_AUTH_OWE)
+        {
+            *security |= WPA3_OWE;
         }
     }
     else if (*security != WHD_SECURITY_OPEN)
@@ -4301,7 +4444,89 @@ whd_result_t whd_wifi_btwt_config(whd_interface_t ifp, whd_btwt_config_params_t 
     whd_mem_memcpy(twt_iovar->data, (uint8_t *)&config_btwt, sizeof(wl_twt_setup_t) );
     RETURN_WITH_ASSERT(whd_proto_set_iovar(ifp, buffer, NULL) );
 }
+whd_result_t whd_wifi_get_he_color(whd_interface_t ifp, uint8_t *color)
+{
+    whd_buffer_t buffer;
+    whd_buffer_t response;
+    whd_driver_t whd_driver;
+    whd_xtlv_t *color_iovar = NULL;
+    uint8_t *pdata = NULL;
+    uint16_t len;
+    whd_result_t  ret;
 
+    if (!ifp )
+    {
+        WPRINT_WHD_ERROR( ("Invalid param in func %s at line %d \n",
+                           __func__, __LINE__) );
+        return WHD_WLAN_BADARG;
+    }
+    whd_driver = ifp->whd_driver;
+    CHECK_DRIVER_NULL(whd_driver);
+    len = sizeof(whd_xtlv_t)+sizeof(uint8_t)+1;
+    color_iovar = (whd_xtlv_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, len,
+                                                            IOVAR_STR_HE);
+    CHECK_IOCTL_BUFFER(color_iovar);
+    color_iovar->id = WL_HE_CMD_BSSCOLOR;
+    color_iovar->len = sizeof(uint8_t);
+    ret = whd_proto_get_iovar(ifp, buffer, &response);
+    if (ret != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR( ("%s: get iovar failed\n", __func__) );
+        return WHD_WLAN_ERROR;
+    }
+    pdata = whd_buffer_get_current_piece_data_pointer(whd_driver, response);
+    CHECK_PACKET_NULL(pdata, WHD_NO_REGISTER_FUNCTION_POINTER);
+    whd_mem_memcpy(color,pdata, sizeof(uint8_t));
+    CHECK_RETURN(whd_buffer_release(whd_driver, response, WHD_NETWORK_RX) );
+    return WHD_SUCCESS;
+}
+whd_result_t whd_wifi_set_he_color(whd_interface_t ifp, uint8_t *value)
+{
+    whd_buffer_t buffer;
+    whd_xtlv_t  *color_iovar = NULL;
+    whd_driver_t whd_driver;
+    uint16_t len;
+
+    CHECK_IFP_NULL(ifp);
+    whd_driver = ifp->whd_driver;
+    CHECK_DRIVER_NULL(whd_driver);
+    whd_mem_memset( (uint8_t *)&color_iovar, 0x00, sizeof(color_iovar) );
+    len = sizeof(whd_xtlv_t)+sizeof(uint8_t)+1;
+    color_iovar = (whd_xtlv_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, len,
+                                                            IOVAR_STR_HE);
+    CHECK_IOCTL_BUFFER (color_iovar);
+    color_iovar->id = WL_HE_CMD_BSSCOLOR;
+    color_iovar->len = sizeof(uint8_t);
+    whd_mem_memcpy(color_iovar->data, value , sizeof(uint8_t) );
+    CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL) );
+    return WHD_SUCCESS;
+}
+whd_result_t whd_wifi_oce_enable(whd_interface_t ifp, whd_bool_t value)
+{
+    whd_buffer_t buffer;
+    whd_iov_buf_t *oce_iovar;
+    whd_driver_t whd_driver;
+    mbo_xtlv_t param;
+
+    CHECK_IFP_NULL(ifp);
+    whd_driver = ifp->whd_driver;
+    CHECK_DRIVER_NULL(whd_driver);
+
+    whd_mem_memset( (uint8_t *)&param, 0x00, sizeof(param) );
+    param.id = WL_OCE_XTLV_ENABLE;
+    param.len = sizeof(value);
+    whd_mem_memcpy(param.data, (uint32_t *)&value, sizeof(value));
+
+    oce_iovar = (whd_iov_buf_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(whd_iov_buf_t) + sizeof(param),
+                                                         IOVAR_STR_OCE);
+    CHECK_IOCTL_BUFFER (oce_iovar);
+    oce_iovar->version = WL_OCE_IOV_VERSION;
+    oce_iovar->len = sizeof(param);
+    oce_iovar->id = WL_OCE_CMD_ENABLE;
+    whd_mem_memcpy(oce_iovar->data, (uint16_t *)&param, sizeof(mbo_xtlv_t) );
+    CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, NULL));
+    return WHD_SUCCESS;
+}
 whd_result_t whd_wifi_mbo_add_chan_pref(whd_interface_t ifp, whd_mbo_add_chan_pref_params_t *mbo_params)
 {
     whd_buffer_t buffer;
@@ -5945,6 +6170,21 @@ whd_result_t whd_wifi_enable_event_log(whd_interface_t ifp, uint8_t category)
     return WHD_SUCCESS;
 }
 
+whd_result_t whd_wifi_set_mac_addr_via_otp(whd_interface_t ifp, char *tlvBuf, uint8_t len)
+{
+    whd_buffer_t buffer;
+    whd_driver_t whd_driver = ifp->whd_driver;
+    char *data;
+    whd_result_t result = WHD_SUCCESS;
+
+    data = (char *)whd_proto_get_iovar_buffer(whd_driver, &buffer, (uint16_t)len, IOVAR_STR_OTPTLV);
+    CHECK_IOCTL_BUFFER(data);
+    memcpy(data, tlvBuf, len);
+    result = whd_proto_set_iovar(ifp, buffer, 0);
+
+    return result;
+}
+
 whd_result_t
 whd_get_wowl_cap(whd_interface_t ifp, uint32_t *value)
 {
@@ -5984,6 +6224,9 @@ whd_set_wowl_pattern(whd_interface_t ifp, char* opt, uint32_t offset, uint8_t ma
     whd_driver_t whd_driver = ifp->whd_driver;
     char* data;
     wl_wowl_pattern_t *wl_pattern;
+#ifdef PROTO_MSGBUF
+    wl_wowl_pattern_t wl_pattern_cpy;
+#endif
 
     if (strcmp(opt, "add") != 0 &&
         strcmp(opt, "del") != 0 &&
@@ -6009,6 +6252,16 @@ whd_set_wowl_pattern(whd_interface_t ifp, char* opt, uint32_t offset, uint8_t ma
 
     if (strcmp(opt, "clr") != 0)
     {
+#ifdef PROTO_MSGBUF
+        wl_pattern_cpy.offset = offset;
+        wl_pattern_cpy.masksize = mask_size;
+        wl_pattern_cpy.patternsize = pattern_size;
+        wl_pattern_cpy.patternoffset = sizeof(wl_wowl_pattern_t) + mask_size;
+        wl_pattern_cpy.id = 0;
+        wl_pattern_cpy.reasonsize = 0x00;
+        wl_pattern_cpy.type = type;
+        memcpy(wl_pattern, &wl_pattern_cpy, sizeof(wl_wowl_pattern_t));
+#else
         wl_pattern->offset = offset;
         wl_pattern->masksize = mask_size;
         wl_pattern->patternsize = pattern_size;
@@ -6016,6 +6269,7 @@ whd_set_wowl_pattern(whd_interface_t ifp, char* opt, uint32_t offset, uint8_t ma
         wl_pattern->id = 0;
         wl_pattern->reasonsize = 0x00;
         wl_pattern->type = type;
+#endif
 
 	data = (char*)(data + sizeof(wl_wowl_pattern_t));
         memcpy(data, (const char *)mask, mask_size);
@@ -6041,12 +6295,7 @@ whd_get_wowl_pattern(whd_interface_t ifp,uint32_t pattern_num,  wl_wowl_pattern_
     uint32_t tot;
 
     whd_proto_get_iovar_buffer(whd_driver, &buffer, WHD_PAYLOAD_MTU, IOVAR_STR_WOWL_PATTERN);
-    ret = whd_proto_get_iovar(ifp, buffer, &response);
-    if (ret != WHD_SUCCESS)
-    {
-        whd_buffer_release(whd_driver, response, WHD_NETWORK_RX);
-        return WHD_WLAN_ERROR;
-    }
+    CHECK_RETURN(whd_proto_get_iovar(ifp, buffer, &response) );
 
     list = (wl_wowl_pattern_list_t*) whd_buffer_get_current_piece_data_pointer(whd_driver, response);
     ptr = (uint8_t *)list->pattern;
@@ -6090,21 +6339,34 @@ whd_wowl_get_secure_session_status(whd_interface_t ifp, secure_sess_info_t *tls_
     whd_buffer_t buffer;
     whd_buffer_t response;
     whd_driver_t whd_driver = ifp->whd_driver;
+    uint8_t *data = NULL;
     struct secure_sess_info *sess_info;
-    ret = (whd_result_t)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(struct secure_sess_info),
+    data = (uint8_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(struct secure_sess_info),
 	  IOVAR_STR_WOWL_SEC_SESS_INFO);
+    CHECK_IOCTL_BUFFER(data);
 
-    ret = whd_proto_get_iovar(ifp, buffer, &response);
-    if (ret != WHD_SUCCESS)
-    {
-        whd_buffer_release(whd_driver, response, WHD_NETWORK_RX);
-        return WHD_WLAN_ERROR;
-    }
+    CHECK_RETURN(whd_proto_get_iovar(ifp, buffer, &response) );
     sess_info = (secure_sess_info_t*) whd_buffer_get_current_piece_data_pointer(whd_driver, response);
     whd_mem_memcpy(tls_sess_info, sess_info, sizeof(struct secure_sess_info));
     ret = whd_buffer_release(whd_driver, response, WHD_NETWORK_RX);
     return ret;
 }
+
+#ifdef PROTO_MSGBUF
+void whd_wifi_delete_peer(whd_interface_t ifp, uint8_t *peer_addr)
+{
+    whd_driver_t whd_driver = ifp->whd_driver;
+    struct whd_flowring *flow = whd_driver->msgbuf->flow;
+
+    if(!(NULL_MAC(peer_addr)))
+    {
+        WPRINT_WHD_DEBUG(("Clear flowring for STA: %.2X:%.2X:%.2X:%.2X:%.2X:%.2X\n", peer_addr[0],
+                            peer_addr[1], peer_addr[2], peer_addr[3], peer_addr[4], peer_addr[5]));
+        whd_flowring_delete_peers(flow, peer_addr, ifp->ifidx);
+    }
+    return;
+}
+#endif
 
 #ifdef CYCFG_ULP_SUPPORT_ENABLED
 whd_result_t

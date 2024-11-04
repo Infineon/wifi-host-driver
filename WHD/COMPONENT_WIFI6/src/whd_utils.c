@@ -49,22 +49,27 @@ dma_pool *pool_mem;
 
 uint32_t whd_dmapool_init(uint32_t memory_size)
 {
-    WPRINT_WHD_DEBUG(("WHD allocating %lu bytes for DMA pool\n", memory_size));
-    pool_mem = (dma_pool*)whd_hw_allocatePermanentApi(memory_size);
+    /* If pool is created already, no need to re-create it again */
+    if(pool_mem == NULL)
+        pool_mem = (dma_pool*)whd_hw_allocatePermanentApi(memory_size);
+    else
+        return 0;
 
     if (pool_mem == NULL)
       return -1;
 
+    WPRINT_WHD_DEBUG(("WHD allocated %lu bytes for DMA pool\n", memory_size));
+
     pool_mem->offset = 0;
     pool_mem->poolsize = memory_size - (sizeof(dma_pool));
 
-#ifndef AT_CMD_OVER_SDIO
+#ifndef COMPONENT_SDIO_HM
     if (!whd_hw_openDeviceAccessApi(WHD_HW_DEVICE_WLAN, pool_mem->big_buffer, pool_mem->poolsize, 0 ))
        return -1;
 #else
     if (!whd_hw_openDeviceAccessApi(WHD_HW_DEVICE_SDIO_AND_WLAN, pool_mem->big_buffer, pool_mem->poolsize, 0 ))
        return -1;
-#endif /* AT_CMD_OVER_SDIO */
+#endif /* COMPONENT_SDIO_HM */
 
     return 0;
 }
@@ -80,6 +85,13 @@ void* whd_dmapool_alloc( int size)
     pool_mem->offset += size;
 
     return allocbuf;
+}
+
+void whd_dmapool_reset( void )
+{
+    /* Reset the pool offset to point to start address of pool, as free is not available */
+    pool_mem->offset = 0;
+    return;
 }
 #endif
 

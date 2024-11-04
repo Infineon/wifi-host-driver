@@ -164,6 +164,10 @@ struct whd_driver
     cy_mutex_t sleep_mutex;
 #endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
+#ifdef COMPONENT_SDIO_HM
+    cy_mutex_t whd_hm_tx_lock;
+#endif
+
 };
 
 whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8_t ifidx,

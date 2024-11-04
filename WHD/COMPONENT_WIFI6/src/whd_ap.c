@@ -217,6 +217,13 @@ whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_securit
     /* Get the Chip Number */
     wlan_chip_id = whd_chip_get_chip_id(whd_driver);
 
+    if(((auth_type == WHD_SECURITY_WPA_TKIP_PSK) || (auth_type == WHD_SECURITY_WPA2_TKIP_PSK) || (auth_type == WHD_SECURITY_WPA_TKIP_ENT)) &&
+                 ((wlan_chip_id == 55500) || (wlan_chip_id == 55900) || (wlan_chip_id == 55530)))
+    {
+        WPRINT_WHD_ERROR(("WPA_TKIP security type is not supported for H1 Combo and H1CP , %s failed at line %d \n", __func__, __LINE__));
+        return WHD_UNSUPPORTED;
+    }
+
     if ( (auth_type & WEP_ENABLED) != 0 )
     {
         WPRINT_WHD_ERROR( ("WEP auth type is not allowed , %s failed at line %d \n", __func__, __LINE__) );
@@ -586,6 +593,8 @@ whd_result_t whd_wifi_start_ap(whd_interface_t ifp)
     whd_ap_int_info_t *ap;
     whd_interface_t prim_ifp;
     whd_driver_t whd_driver;
+    uint32_t arp = 0;
+    uint32_t nd = 0;
 
     CHECK_IFP_NULL(ifp);
 
@@ -598,6 +607,21 @@ whd_result_t whd_wifi_start_ap(whd_interface_t ifp)
     if (prim_ifp == NULL)
     {
         return WHD_UNKNOWN_INTERFACE;
+    }
+
+    /* Turn off arp and nd offloads to ensure AP functionality is not meddled with*/
+    whd_wifi_get_iovar_value(ifp, IOVAR_STR_ARPOE, &arp);
+    if(arp)
+    {
+        WPRINT_WHD_INFO ( ("Disabling ARPOE during AP bringup\n") );
+        whd_wifi_set_iovar_value(ifp, IOVAR_STR_ARPOE, WHD_FALSE);
+    }
+
+    whd_wifi_get_iovar_value(ifp, IOVAR_STR_NDOE, &nd);
+    if(nd)
+    {
+        WPRINT_WHD_INFO ( ("Disabling NDOE during AP bringup\n") );
+        whd_wifi_set_iovar_value(ifp, IOVAR_STR_NDOE, WHD_FALSE);
     }
 
     ap = &whd_driver->ap_info;
@@ -616,6 +640,7 @@ whd_result_t whd_wifi_start_ap(whd_interface_t ifp)
     whd_wifi_set_ap_is_up(whd_driver, WHD_TRUE);
 #ifdef PROTO_MSGBUF
     whd_wifi_update_addr_mode(ifp->whd_driver, ifp->bsscfgidx);
+    whd_wifi_ap_set_max_assoc(ifp, MAX_CLIENT_SUPPORT);
 #endif
     return WHD_SUCCESS;
 }
@@ -630,6 +655,12 @@ whd_result_t whd_wifi_stop_ap(whd_interface_t ifp)
     whd_interface_t prim_ifp;
     whd_driver_t whd_driver;
     whd_ap_int_info_t *ap;
+#ifdef PROTO_MSGBUF
+    whd_maclist_t *client_list;
+    uint32_t buf_len = 0;
+    whd_mac_t *current_mac;
+    struct whd_flowring *flow;
+#endif
 
     CHECK_IFP_NULL(ifp);
 
@@ -674,6 +705,38 @@ whd_result_t whd_wifi_stop_ap(whd_interface_t ifp)
     }
 
     CHECK_RETURN(whd_buffer_release(whd_driver, response, WHD_NETWORK_RX) );
+
+#ifdef PROTO_MSGBUF
+    /* Clear the flowring for STA clients, if created before doing BSS down */
+    buf_len = (sizeof(whd_mac_t) * MAX_CLIENT_SUPPORT) + sizeof(client_list->count);
+    client_list = (whd_maclist_t*)whd_mem_malloc(buf_len);
+
+    if (!client_list)
+    {
+        return WHD_MALLOC_FAILURE;
+    }
+
+    whd_mem_memset(client_list, 0, buf_len);
+    client_list->count = MAX_CLIENT_SUPPORT;
+
+    if((whd_wifi_get_associated_client_list(ifp, client_list, buf_len)) != CY_RSLT_SUCCESS)
+    {
+        WPRINT_WHD_ERROR(("Error while getting the associated STA list \n"));
+        whd_mem_free(client_list);
+    }
+
+    flow = whd_driver->msgbuf->flow;
+    current_mac = &client_list->mac_list[0];
+
+    while ( (client_list->count > 0) && (!(NULL_MAC(current_mac->octet))) )
+    {
+        whd_flowring_delete_peers(flow, current_mac->octet, ifp->ifidx);
+        --client_list->count;
+        ++current_mac;
+    }
+
+    whd_mem_free(client_list);
+#endif    /* PROTO_MSGBUF */
 
     ap->is_waiting_event = WHD_TRUE;
     /* set BSS down */
@@ -730,5 +793,13 @@ sema_fail:
     whd_wifi_set_ap_is_up(whd_driver, WHD_FALSE);
 
     ifp->role = WHD_INVALID_ROLE;
+
+    /* Turning on arp and nd offloads again as these were disabled during start_ap*/
+    if ( whd_driver->chip_info.fwcap_flags & (1 << WHD_FWCAP_OFFLOADS) )
+    {
+        whd_wifi_set_iovar_value(ifp, IOVAR_STR_ARPOE, WHD_TRUE);
+        whd_wifi_set_iovar_value(ifp, IOVAR_STR_NDOE, WHD_TRUE);
+    }
+
     return WHD_SUCCESS;
 }

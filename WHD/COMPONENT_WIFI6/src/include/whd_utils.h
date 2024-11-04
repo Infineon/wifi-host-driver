@@ -58,6 +58,7 @@ extern "C" {
 #ifdef PROTO_MSGBUF
 uint32_t whd_dmapool_init(uint32_t memory_size);
 void* whd_dmapool_alloc( int size);
+void whd_dmapool_reset( void );
 #endif
 
 /** Searches for a specific WiFi Information Element in a byte array

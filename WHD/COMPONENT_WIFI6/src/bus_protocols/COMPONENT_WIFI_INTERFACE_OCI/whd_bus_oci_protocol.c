@@ -446,8 +446,8 @@ static whd_result_t whd_bus_oci_sleep_allow_decider(whd_driver_t whd_driver, cy_
         whd_driver->pds_sleep_allow = WHD_TRUE;
         WPRINT_WHD_DEBUG(("***SLEEP ALLOW*** \n"));
         whd_pds_unlock_sleep(whd_driver);
-        /* If it here comes means, timeout aleady happened and WLAN is in D3 state,
-           so return CY_RTOS_TIMEOUT to wait on NEVER timeout for any activity */
+        /* If it comes here means, timeout aleady happened and WLAN is in D3 state,
+           so return CY_RTOS_TIMEOUT to wait forever for any activity */
         return CY_RTOS_TIMEOUT;
     }
     else
@@ -460,16 +460,7 @@ static whd_result_t whd_bus_oci_sleep_allow_decider(whd_driver_t whd_driver, cy_
 
     if (result == CY_RTOS_TIMEOUT)
     {
-        if (cy_wcm_is_connected_to_ap() == WHD_TRUE)
-        {
-            CHECK_RETURN(whd_msgbuf_send_mbdata(whd_driver, WHD_H2D_HOST_D3_INFORM));
-        }
-        else
-        {
-            CHECK_RETURN(whd_bus_suspend(whd_driver));
-            whd_driver->pds_sleep_allow = WHD_TRUE;
-            whd_pds_unlock_sleep(whd_driver);
-        }
+        CHECK_RETURN(whd_msgbuf_send_mbdata(whd_driver, WHD_H2D_HOST_D3_INFORM));
     }
 
     return result;

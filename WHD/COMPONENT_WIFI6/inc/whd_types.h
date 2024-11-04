@@ -291,7 +291,7 @@ typedef enum
 
     WHD_SECURITY_IBSS_OPEN        = (IBSS_ENABLED),                                                    /**< Open security on IBSS ad-hoc network                  */
     WHD_SECURITY_WPS_SECURE       = AES_ENABLED,                                                       /**< WPS with AES security                                 */
-    WHD_SECURITY_WPA3_OWE         = (WPA3_SECURITY | AES_ENABLED | WPA3_OWE),                          /**< WPA3 Enhanced Open with AES security                                 */
+    WHD_SECURITY_WPA3_OWE         = (WPA3_OWE | AES_ENABLED),                                          /**< WPA3 Enhanced Open with AES security                  */
 
     WHD_SECURITY_UNKNOWN          = -1,                                                                /**< May be returned by scan function if security is unknown. Do not pass this to the join function! */
 
@@ -376,9 +376,9 @@ typedef enum
  */
 typedef struct
 {
-    int32_t number_of_bands; /**< Number of bands supported, currently 1 or 2      */
-    int32_t current_band;    /**< Current band type: WLC_BAND_2G or WLC_BAND_5G or WLC_BAND_6G   */
-    int32_t other_band[2];   /**< If value of number_of_bands parameter is 2, then this member specifies the 2nd band */
+    uint32_t number_of_bands; /**< Number of bands supported, currently 1 or 2      */
+    uint32_t current_band;    /**< Current band type: WLC_BAND_2G or WLC_BAND_5G or WLC_BAND_6G   */
+    uint32_t other_band[2];   /**< If value of number_of_bands parameter is 2, then this member specifies the 2nd band */
 } whd_band_list_t;
 
 /**
@@ -829,6 +829,9 @@ typedef struct whd_scan_result
     struct whd_scan_result *next;               /**< Pointer to the next scan result                                           */
     uint8_t *ie_ptr;                            /**< Pointer to received Beacon/Probe Response IE(Information Element)         */
     uint32_t ie_len;                            /**< Length of IE(Information Element)                                         */
+    uint8_t current_operating_class;            /**< Current operating class (Information Element)                             */
+    uint8_t num_supported_operating_classes;    /**< Number of supported operating classes                                     */
+    uint8_t supported_operating_classes[255];   /**< Supported operating classes                                               */
 } whd_scan_result_t;
 #pragma pack()
 

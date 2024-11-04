@@ -171,11 +171,9 @@ uint32_t whd_flowring_create(struct whd_flowring *flow, uint8_t da[ETHER_ADDR_LE
 
 void whd_flowring_delete(struct whd_flowring *flow, uint16_t flowid)
 {
-    whd_result_t result;
     whd_driver_t whd_driver = flow->dev;
     struct whd_flowring_ring *ring;
     uint16_t hash_idx;
-    whd_buffer_t skb;
 
     ring = flow->rings[flowid];
     if (!ring)
@@ -185,14 +183,9 @@ void whd_flowring_delete(struct whd_flowring *flow, uint16_t flowid)
     flow->hash[hash_idx].ifidx = WHD_FLOWRING_INVALID_IFIDX;
     whd_mem_memset(flow->hash[hash_idx].mac, 0, WHD_ETHER_ADDR_LEN);
 
-    (void)whd_msgbuf_txflow_dequeue(whd_driver, &skb, flowid);
-    while (skb)
-    {
-        result = whd_buffer_release(whd_driver, skb, WHD_NETWORK_TX);
-        if (result != WHD_SUCCESS)
-            WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
-        (void)whd_msgbuf_txflow_dequeue(whd_driver, &skb, flowid);
-    }
+    /* Flush the TX data queue, if we have any packets pending */
+    (void)whd_msgbuf_txflow(whd_driver, flowid);
+    (void)whd_msgbuf_txflow_deinit(&ring->txflow_queue);
 
     whd_mem_free(ring);
     flow->rings[flowid] = NULL;
@@ -305,6 +298,29 @@ void whd_flowring_open(struct whd_flowring *flow, uint16_t flowid)
     }
 
     ring->status = RING_OPEN;
+}
+
+void whd_flowring_delete_peers(struct whd_flowring *flow, uint8_t peer_addr[ETHER_ADDR_LEN], uint8_t ifidx)
+{
+    whd_driver_t whd_driver = flow->dev;
+    struct whd_flowring_hash *hash;
+    uint32_t i = 0;
+    uint16_t flowid = 0;
+    bool sta;
+
+    sta = (flow->addr_mode[ifidx] == ADDR_INDIRECT);
+    hash = flow->hash;
+
+    for (i = 0; i < WHD_FLOWRING_HASHSIZE; i++)
+    {
+        if ((sta || (memcmp(hash[i].mac, peer_addr, ETHER_ADDR_LEN) == 0)) &&
+                        (hash[i].ifidx == ifidx))
+        {
+            flowid = flow->hash[i].flowid;
+            if (flow->rings[flowid]->status == RING_OPEN)
+                whd_msgbuf_delete_flowring(whd_driver, flowid);
+        }
+    }
 }
 
 #endif /* PROTO_MSGBUF */

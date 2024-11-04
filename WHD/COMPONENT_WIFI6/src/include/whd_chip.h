@@ -35,6 +35,8 @@ extern "C"
 #define WHD_WLAN_WAKE_TIMEOUT           (10000)
 #define WHD_SHARED_MEMORY_POLLING_DELAY (10)
 #define SICF_CPUHALT                    (0x0020)
+#define DOT11_MAX_SUPPORTED_OPERATING_CLASSES (255)
+#define SUPPORTED_OPERATING_CLASSES_IE_MINIMUM_LENGTH (2)
 
 /******************************************************
 *                 Enumerations
@@ -86,6 +88,7 @@ typedef enum
     WHD_AKM_8021X_SUITE_B = 11,
     WHD_AKM_8021X_SUITE_B_192 = 12,
     WHD_AKM_SUITEB_FT_8021X_HMAC_SHA384 = 13,
+    WHD_AKM_OWE  = 18,
 } whd_akm_suite_t;
 
 /**
@@ -171,6 +174,14 @@ typedef struct
     uint8_t env; /* dot11CountryString MIB octet 3, indicate indoor/outdoor environment */
     country_chan_info_t country_chan_info[1]; /* At least one country channel info triples                           */
 } country_info_ie_fixed_portion_t;
+
+/* Supported Operating Class Information */
+
+typedef struct {
+    whd_tlv8_header_t tlv_header; /* id, length */
+    uint8_t current_operating_class;
+    uint8_t operating_classes[DOT11_MAX_SUPPORTED_OPERATING_CLASSES];
+} supported_operating_classes_ie_t;
 
 /* Robust Secure Network */
 typedef struct

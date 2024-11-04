@@ -1163,7 +1163,7 @@ static whd_bool_t whd_is_fw_sr_capable(whd_driver_t whd_driver)
         }
         return save_restore_capable;
     }
-    else if (wlan_chip_id == 55560 || wlan_chip_id == 43022 || wlan_chip_id == 55500)
+    else if (wlan_chip_id == 55560 || wlan_chip_id == 43022 || wlan_chip_id == 55500 || wlan_chip_id == 55530)
     {
         /*In hatchet Chips(DM) and 43022DM, the SR(SaveRestore) is always enabled. In DM mode(secure), host not
            able to access PMU register(SR). So making save_restore_capable as default for Hatchet and 43022DM Chips */
@@ -1197,7 +1197,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
 
     if (whd_is_fw_sr_capable(whd_driver) == WHD_TRUE)
     {
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 55530) || (wlan_chip_id == 43022) )
         {
             /* Configure WakeupCtrl register to set AlpAvail request bit in chipClockCSR register
              * after the sdiod core is powered on.
@@ -1234,7 +1234,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
          */
         CHECK_RETURN(whd_bus_write_register_value(whd_driver, BUS_FUNCTION, (uint32_t)SDIOD_CCCR_BRCM_CARDCAP,
                                                   (uint8_t)1, SDIOD_CCCR_BRCM_CARDCAP_CMD_NODEC) );
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 55530) || (wlan_chip_id == 43022) )
         {
             CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_CHIP_CLOCK_CSR,
                                                       (uint8_t)1, SBSDIO_HT_AVAIL_REQ) );
@@ -1246,7 +1246,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
         }
 
         /* Enable KeepSdioOn (KSO) bit for normal operation */
-        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
+        if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 55530) || (wlan_chip_id == 43022) )
         {
             CHECK_RETURN(whd_bus_read_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                      (uint8_t)sizeof(data), &data) );
@@ -1259,7 +1259,7 @@ static whd_result_t whd_enable_save_restore(whd_driver_t whd_driver)
         if ( (data & SBSDIO_SLPCSR_KEEP_WL_KSO) == 0 )
         {
             data |= SBSDIO_SLPCSR_KEEP_WL_KSO;
-            if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 43022) )
+            if ( (wlan_chip_id == 43012) || (wlan_chip_id == 0x4373) || (wlan_chip_id == 55560) || (wlan_chip_id == 55500) || (wlan_chip_id == 55530) || (wlan_chip_id == 43022) )
             {
                 CHECK_RETURN(whd_bus_write_register_value(whd_driver, BACKPLANE_FUNCTION, (uint32_t)SDIO_SLEEP_CSR,
                                                           (uint8_t)sizeof(data), data) );
@@ -1303,7 +1303,7 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
     if (enable == WHD_TRUE)
     {
 #ifdef CP_OVER_SDIO
-        if (wlan_chip_id == 55500)
+        if (wlan_chip_id == 55500 || wlan_chip_id == 55530)
         {
             write_value |= SBSDIO_SLPCSR_KEEP_BT_KSO;
         }
@@ -1364,7 +1364,7 @@ static whd_result_t whd_kso_enable(whd_driver_t whd_driver, whd_bool_t enable)
          * For CP , enable BT KSO bits
          */
 #ifdef CP_OVER_SDIO
-        if (wlan_chip_id == 55500)
+        if (wlan_chip_id == 55500 || wlan_chip_id == 55530 )
         {
             compare_value = SBSDIO_SLPCSR_KEEP_BT_KSO | SBSDIO_SLPCSR_BT_DEVON;
         }

@@ -21,11 +21,11 @@
 
 #ifndef WLAN_MFG_FIRMWARE
 extern const resource_hnd_t wifi_firmware_image;
-extern const unsigned char wifi_firmware_image_data[592330];
+extern const unsigned char wifi_firmware_image_data[714694];
 #endif /* !WLAN_MFG_FIRMWARE */
 #ifdef WLAN_MFG_FIRMWARE
 extern const resource_hnd_t wifi_mfg_firmware_image;
-extern const unsigned char wifi_mfg_firmware_image_data[579098];
+extern const unsigned char wifi_mfg_firmware_image_data[668994];
 #endif /* WLAN_MFG_FIRMWARE */
 
 #endif /* ifndef INCLUDED_RESOURCES_H_ */

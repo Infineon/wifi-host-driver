@@ -53,11 +53,11 @@
 #define DEFAULT_PM2_SLEEP_RET_TIME  200
 
 #ifdef PROTO_MSGBUF
-#ifndef AT_CMD_OVER_SDIO
+#ifndef COMPONENT_SDIO_HM
 #define DMA_ALLOC_SIZE                 (15000)
 #else
 #define DMA_ALLOC_SIZE                 (15000 + SDIO_F2_DMA_BUFFER_SIZE)
-#endif /* AT_CMD_OVER_SDIO */
+#endif /* COMPONENT_SDIO_HM */
 #endif /* PROTO_MSGBUF */
 /******************************************************
 *             Static Variables
@@ -286,6 +286,10 @@ whd_result_t whd_deinit(whd_interface_t ifp)
         whd_mem_free(c->buf);
     }
 
+#ifdef PROTO_MSGBUF
+    whd_dmapool_reset();
+#endif
+
     whd_internal_info_deinit(whd_driver);
     whd_bus_common_info_deinit(whd_driver);
     whd_mem_free(whd_driver);
@@ -354,6 +358,10 @@ whd_result_t whd_management_wifi_platform_init(whd_driver_t whd_driver, whd_coun
     cyhal_syspm_register_callback(&whd_driver->whd_syspm_cb_data);
     cy_rtos_init_mutex(&whd_driver->sleep_mutex);
 #endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
+#ifdef COMPONENT_SDIO_HM
+    cy_rtos_init_mutex(&whd_driver->whd_hm_tx_lock);
+#endif
 
     return WHD_SUCCESS;
 }
@@ -638,6 +646,10 @@ whd_result_t whd_wifi_off(whd_interface_t ifp)
 
 #if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
     cy_rtos_deinit_mutex(&whd_driver->sleep_mutex);
+#endif
+
+#ifdef COMPONENT_SDIO_HM
+    cy_rtos_deinit_mutex(&whd_driver->whd_hm_tx_lock);
 #endif
 
     whd_driver->internal_info.whd_wlan_status.state = WLAN_OFF;

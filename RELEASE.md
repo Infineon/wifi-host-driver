@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD)  v4.1.1
+# Wi-Fi Host Driver (WHD) 4.2.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features
@@ -13,18 +13,18 @@ Please refer to the [README File](./README.md) and the [WHD API Reference Manual
 ### Defect Fixes
 
 
-### WIFI6 Supported Chip v4.1.0
+### WIFI6 Supported Chip v4.2.0
 
 ### Known Issues
 NA
 
 #### CYW55500
-* --- 28.10.301 ---
+* --- 28.10.371 ---
 
 
 
 #### CYW55900
-* --- 28.10.215 ---
+* --- 28.10.400 ---
 
 
 

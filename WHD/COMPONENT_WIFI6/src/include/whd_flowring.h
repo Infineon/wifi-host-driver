@@ -112,7 +112,7 @@ extern uint8_t whd_flowring_ifidx_get(struct whd_flowring *flow, uint16_t flowid
 extern void whd_flowring_detach(struct whd_flowring *flow);
 extern struct whd_flowring *whd_flowring_attach(struct whd_driver *dev, uint16_t nrofrings);
 extern void whd_flowring_open(struct whd_flowring *flow, uint16_t flowid);
-
+extern void whd_flowring_delete_peers(struct whd_flowring *flow, uint8_t peer_addr[ETHER_ADDR_LEN], uint8_t ifidx);
 
 #ifdef __cplusplus
 } /* extern "C" */

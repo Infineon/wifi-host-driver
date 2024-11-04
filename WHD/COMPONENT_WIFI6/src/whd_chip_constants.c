@@ -242,6 +242,7 @@ whd_result_t get_arm_core_base_address(uint16_t wlan_chip_id, uint32_t *addr)
         case 0x4373:
         case 55560:
         case 55500:
+        case 55530:
             *addr = 0x18002000 + WRAPPER_REGISTER_OFFSET;
             break;
         case 43012:
@@ -290,6 +291,7 @@ whd_result_t get_sdiod_core_base_address(uint16_t wlan_chip_id, uint32_t *addr)
             *addr = 0x18004000;
             break;
         case 55500:
+        case 55530:
             *addr = 0x18003000;
             break;
         case 0x4373:
@@ -320,6 +322,7 @@ whd_result_t get_pmu_base_address(uint16_t wlan_chip_id, uint32_t *addr)
         case 43022:
         case 55560:
         case 55500:
+        case 55530:
             *addr = 0x18012000;
             break;
         case 43909:
@@ -361,7 +364,7 @@ whd_result_t get_chip_ram_size(uint16_t wlan_chip_id, uint32_t *size)
     {
         *size = 0x150000 - 0x800 - 0x2b4;
     }
-    else if ((wlan_chip_id == 55500) || (wlan_chip_id == 55900)) /* Hatchet1-A1 and Hatchet1-CP supports TRXv5 */
+    else if ((wlan_chip_id == 55500) || (wlan_chip_id == 55900) || (wlan_chip_id == 55530)) /* Hatchet1-A1 and Hatchet1-CP supports TRXv5 */
     {
 #ifndef DOWNLOAD_RAM_BOOTLOADER
         *size = 0xE0000 - 0x20 - 0x1000;
@@ -391,7 +394,7 @@ whd_result_t get_atcm_ram_base_address(uint16_t wlan_chip_id, uint32_t *size)
     {
         *size = 0x370000 + 0x2b4 + 0x800;
     }
-    else if ((wlan_chip_id == 55500) || (wlan_chip_id == 55900)) /* Hatchet1-A1 and Hatchet1-CP supports TRXv5 */
+    else if ((wlan_chip_id == 55500) || (wlan_chip_id == 55900) || (wlan_chip_id == 55530)) /* Hatchet1-A1 and Hatchet1-CP supports TRXv5 */
     {
 #ifndef DOWNLOAD_RAM_BOOTLOADER
         *size = 0x3a0000 + 0x20 + 0x1000;
@@ -469,7 +472,7 @@ whd_result_t get_wl_chanspec_band_5G(uint16_t wlan_chip_id, uint32_t *band_5g)
 whd_result_t get_wl_chanspec_band_6G(uint16_t wlan_chip_id, uint32_t *band_6g)
 {
     *band_6g = 0;
-    if ( (wlan_chip_id == 55500) || (wlan_chip_id == 55560) || (wlan_chip_id == 55900) )
+    if ( (wlan_chip_id == 55500) || (wlan_chip_id == 55560) || (wlan_chip_id == 55900) || (wlan_chip_id == 55530) )
     {
         *band_6g = 0x8000;
     }
