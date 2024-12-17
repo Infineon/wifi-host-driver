@@ -1,13 +1,13 @@
 /*
  * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,9 +24,11 @@
  *
  */
 
-#include "cybsp.h"
 #include "whd.h"
 #include "whd_types.h"
+#ifdef ULP_CONFIG
+#include "cybsp.h"
+#endif
 
 #ifndef INCLUDED_WHD_WIFI_API_H
 #define INCLUDED_WHD_WIFI_API_H
@@ -1605,3 +1607,4 @@ extern whd_result_t whd_wifi_deregister_ds_callback(whd_interface_t ifp, whd_ds_
 } /* extern "C" */
 #endif
 #endif /* ifndef INCLUDED_WHD_WIFI_H */
+

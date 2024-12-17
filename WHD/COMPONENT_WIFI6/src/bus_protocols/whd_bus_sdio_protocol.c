@@ -23,7 +23,6 @@
  *  sending/receiving raw packets etc
  */
 
-#include "cybsp.h"
 #include "whd_utils.h"
 
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) && !defined(COMPONENT_WIFI_INTERFACE_OCI)
@@ -1051,7 +1050,7 @@ whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer_direct
                                        sdio_response_needed_t response_expected, uint32_t *response)
 {
     sdio_cmd_argument_t arg;
-    whd_result_t result;
+    whd_result_t result = WHD_SUCCESS;
 
     if (direction == BUS_WRITE)
     {

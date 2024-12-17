@@ -21,21 +21,18 @@
  */
 
 #include <stdint.h>
-#include "cybsp.h"
-#include "cy_result.h"
 
 #ifndef INCLUDED_WHD_TYPES_H_
 #define INCLUDED_WHD_TYPES_H_
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
-    #include "cyhal_hw_types.h"
-    #include "cyhal_gpio.h"
+#include "cyhal_gpio.h"
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
-    #include "cyhal_sdio.h"
+#include "cyhal_sdio.h"
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
-    #include "cyhal_spi.h"
+#include "cyhal_spi.h"
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
-    #include "cyhal_m2m.h"
+#include "cyhal_m2m.h"
 #endif
 #endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
 
@@ -272,9 +269,10 @@ typedef enum
     WHD_SECURITY_WPA2_MIXED_PSK   = (WPA2_SECURITY | AES_ENABLED | TKIP_ENABLED),                      /**< WPA2 PSK Security with AES & TKIP                     */
     WHD_SECURITY_WPA2_FBT_PSK     = (WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),                       /**< WPA2 FBT PSK Security with AES & TKIP */
     WHD_SECURITY_WPA3_SAE         = (WPA3_SECURITY | AES_ENABLED),                                     /**< WPA3 Security with AES */
+    WHD_SECURITY_WPA3_FBT          = (WPA3_SECURITY | AES_ENABLED | FBT_ENABLED),                      /**< WPA3 Security with FBT                                */
+    WHD_SECURITY_WPA3_WPA2_PSK_FBT  = (WPA3_SECURITY | WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),     /**< WPA3 WPA2 PSK security with AES FT enabled.           */
     WHD_SECURITY_WPA2_WPA_AES_PSK  = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED),                     /**< WPA2 WPA PSK Security with AES                        */
-    WHD_SECURITY_WPA2_WPA_MIXED_PSK = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),      /**< WPA2 WPA PSK Security with AES & TKIP                 */
-
+    WHD_SECURITY_WPA2_WPA_MIXED_PSK = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),      /**< WPA2 WPA PSK Security with AES & TKIP                  */
     WHD_SECURITY_WPA3_WPA2_PSK    = (WPA3_SECURITY | WPA2_SECURITY | AES_ENABLED),                     /**< WPA3 WPA2 PSK Security with AES */
 
     WHD_SECURITY_WPA_TKIP_ENT     = (ENTERPRISE_ENABLED | WPA_SECURITY | TKIP_ENABLED),                /**< WPA Enterprise Security with TKIP                     */

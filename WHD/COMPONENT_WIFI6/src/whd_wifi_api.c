@@ -1690,7 +1690,8 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
              (auth_type == WHD_SECURITY_WPA2_AES_PSK) || (auth_type == WHD_SECURITY_WPA2_AES_PSK_SHA256) ||
              (auth_type == WHD_SECURITY_WPA2_TKIP_PSK) || (auth_type == WHD_SECURITY_WPA2_MIXED_PSK) ) ) ||
          ( (key_length > (uint8_t)WSEC_MAX_SAE_PASSWORD_LEN) &&
-           ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) ) ) )
+           ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) ||
+           (auth_type == WHD_SECURITY_WPA3_FBT) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK_FBT)) ) )
     {
         return WHD_INVALID_KEY;
     }
@@ -1800,6 +1801,8 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
 
         case WHD_SECURITY_WPA3_SAE:
         case WHD_SECURITY_WPA3_WPA2_PSK:
+        case WHD_SECURITY_WPA3_FBT:
+        case WHD_SECURITY_WPA3_WPA2_PSK_FBT:
             if (auth_type == WHD_SECURITY_WPA3_WPA2_PSK)
             {
                 CHECK_RETURN(whd_wifi_enable_sup_set_passphrase(ifp, security_key, key_length, auth_type) );
@@ -1852,7 +1855,8 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
     /* Set infrastructure mode */
     CHECK_RETURN(whd_wifi_set_ioctl_value(ifp, WLC_SET_INFRA, ( (auth_type & IBSS_ENABLED) == 0 ) ? 1 : 0) );
 
-    if ( (auth_type == WHD_SECURITY_WPA3_SAE) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) )
+    if ( (auth_type == WHD_SECURITY_WPA3_SAE) || auth_type == WHD_SECURITY_WPA3_FBT
+     || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK_FBT))
     {
         auth = WL_AUTH_SAE;
     }
@@ -1867,12 +1871,14 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
      * When WPA2 security is enabled on the DUT, then by defaults the DUT shall:
      * Enable Robust Management Frame Protection Capable (MFPC) functionality
      */
-    if (auth_type == WHD_SECURITY_WPA3_SAE || auth_type == WHD_SECURITY_WPA3_ENT || auth_type == WHD_SECURITY_WPA3_192BIT_ENT
-                            || auth_type == WHD_SECURITY_WPA3_ENT_AES_CCMP || auth_type == WHD_SECURITY_WPA3_OWE)
+    if (auth_type == WHD_SECURITY_WPA3_SAE || auth_type == WHD_SECURITY_WPA3_FBT || auth_type == WHD_SECURITY_WPA3_ENT
+       || auth_type == WHD_SECURITY_WPA3_192BIT_ENT
+       || auth_type == WHD_SECURITY_WPA3_ENT_AES_CCMP || auth_type == WHD_SECURITY_WPA3_OWE)
     {
         auth_mfp = WL_MFP_REQUIRED;
     }
-    else if ( (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) || (auth_type & WPA2_SECURITY) )
+    else if ( (auth_type == WHD_SECURITY_WPA3_WPA2_PSK) || (auth_type == WHD_SECURITY_WPA3_WPA2_PSK_FBT)
+        || (auth_type & WPA2_SECURITY) )
     {
         auth_mfp = WL_MFP_CAPABLE;
     }
@@ -1936,6 +1942,12 @@ static whd_result_t whd_wifi_prepare_join(whd_interface_t ifp, whd_security_t au
         case WHD_SECURITY_WPA3_SAE:
         case WHD_SECURITY_WPA3_WPA2_PSK:
             *wpa_auth = (uint32_t)WPA3_AUTH_SAE_PSK;
+            break;
+        case WHD_SECURITY_WPA3_FBT:
+            *wpa_auth = (uint32_t)WPA3_AUTH_SAE_FBT;
+            break;
+        case WHD_SECURITY_WPA3_WPA2_PSK_FBT:
+            *wpa_auth = ( uint32_t )(WPA2_AUTH_PSK | WPA2_AUTH_FT | WPA3_AUTH_SAE_PSK | WPA3_AUTH_SAE_FBT);
             break;
 
         case WHD_SECURITY_WPA_TKIP_ENT:

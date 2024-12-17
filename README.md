@@ -11,7 +11,7 @@ The [release notes](./RELEASE.md) detail the current release. You can also find 
 ---------------------------------
 |  Interface  |55500|55900|55572|
 |:-----------:|:---:|:---:|:---:|
-|  SDIO       |  O  |     |  O  |
+|  SDIO       |  O  |     |  O  | 
 |  SPI        |     |     |     |
 |  M2M        |     |     |     |
 |  OCI        |     |  O  |     |
