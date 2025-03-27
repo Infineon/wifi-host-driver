@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -248,7 +248,7 @@ whd_result_t whd_bus_write_wifi_firmware_image(whd_driver_t whd_driver)
 
     WPRINT_WHD_DEBUG(("Entering Bootloader Download \n"));
 
-    cyhal_system_delay_ms(1000);
+    whd_hal_system_delay_ms(1000);
     WPRINT_WHD_DEBUG(("Bootloader Download Starts \n"));
     whd_mem_memcpy( (void *)bl_start_address, (void*)wifi_bootloader_image_data, sizeof(wifi_bootloader_image_data));
     WPRINT_WHD_DEBUG(("Bootloader Download Done \n"));
@@ -259,11 +259,11 @@ whd_result_t whd_bus_write_wifi_firmware_image(whd_driver_t whd_driver)
 
     *cr4_rst_address = 1;
 
-    cyhal_system_delay_ms(500);
+    whd_hal_system_delay_ms(500);
 
     *cr4_rst_address = 0;
 
-    cyhal_system_delay_ms(500);
+    whd_hal_system_delay_ms(500);
 #endif /* DOWNLOAD_RAM_BOOTLOADER */
 
 #ifdef BLHS_SUPPORT

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,9 +41,10 @@
 #define NVRAM_SIZE             dynamic_nvram_size
 #define NVRAM_IMAGE_VARIABLE   dynamic_nvram_image
 #else
-#define NVRAM_SIZE             sizeof(wifi_nvram_image)
+#define NVRAM_SIZE             NVRAM_IMAGE_SIZE
 #define NVRAM_IMAGE_VARIABLE   wifi_nvram_image
 #endif
+#define CLM_SIZE CLM_IMAGE_SIZE
 
 /******************************************************
 *                   Enumerations
@@ -73,16 +74,11 @@ whd_result_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
 *               Variable Definitions
 ******************************************************/
 
-#ifdef WLAN_MFG_FIRMWARE
-extern const resource_hnd_t wifi_mfg_firmware_image;
-extern const resource_hnd_t wifi_mfg_firmware_clm_blob;
-#else
 extern const resource_hnd_t wifi_firmware_image;
 extern const resource_hnd_t wifi_firmware_clm_blob;
 #ifdef DOWNLOAD_RAM_BOOTLOADER
 extern const resource_hnd_t wifi_bootloader_image;
 #endif /* DOWNLOAD_RAM_BOOTLOADER */
-#endif /* WLAN_MFG_FIRMWARE */
 
 unsigned char r_buffer[BLOCK_BUFFER_SIZE];
 
@@ -187,11 +183,7 @@ whd_result_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type
         }
         wiced_waf_app_get_size(&wifi_app, size_out);
 #else
-#ifdef WLAN_MFG_FIRMWARE
-        *size_out = (uint32_t)resource_get_size(&wifi_mfg_firmware_image);
-#else
         *size_out = (uint32_t)resource_get_size(&wifi_firmware_image);
-#endif /* WLAN_MFG_FIRMWARE */
 #endif /* WIFI_FIRMWARE_IN_MULTI_APP */
 #endif /* NO_WIFI_FIRMWARE */
 
@@ -211,11 +203,7 @@ whd_result_t host_platform_resource_size(whd_driver_t whd_drv, whd_resource_type
 #if defined(NO_CLM_BLOB_FILE)
         *size_out = 0;
 #else
-#ifdef WLAN_MFG_FIRMWARE
-        *size_out = (uint32_t)resource_get_size(&wifi_mfg_firmware_clm_blob);
-#else
-        *size_out = (uint32_t)resource_get_size(&wifi_firmware_clm_blob);
-#endif /* WLAN_MFG_FIRMWARE */
+        *size_out = CLM_SIZE;
 #endif /* NO_CLM_BLOB_FILE */
     }
     return WHD_SUCCESS;
@@ -243,13 +231,8 @@ whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t t
 
     if (type == WHD_RESOURCE_WLAN_FIRMWARE)
     {
-#ifdef WLAN_MFG_FIRMWARE
-        result = resource_read( (const resource_hnd_t *)&wifi_mfg_firmware_image, read_pos, block_size, size_out,
-                                r_buffer );
-#else
         result = resource_read( (const resource_hnd_t *)&wifi_firmware_image, read_pos, block_size, size_out,
                                 r_buffer );
-#endif /* WLAN_MFG_FIRMWARE */
         if (result != WHD_SUCCESS)
         {
             return result;
@@ -282,15 +265,23 @@ whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t t
 #endif /* DOWNLOAD_RAM_BOOTLOADER */
     else if (type == WHD_RESOURCE_WLAN_NVRAM)
     {
-        if (NVRAM_SIZE - read_pos > block_size)
+		uint32_t i;
+       result = resource_read( (const resource_hnd_t *)&wifi_nvram_image, read_pos, block_size, size_out,
+                                r_buffer );
+		 /* convert the newline to null-terminator */
+        for (i = 0; i < block_size; i++)
         {
-            *size_out = block_size;
+            if (r_buffer[i] == 0xa)
+            {
+		r_buffer[i] = 0x0;
+            }
         }
-        else
+       if (result != WHD_SUCCESS)
         {
-            *size_out = NVRAM_SIZE - read_pos;
+            return result;
         }
-        *data = ( (uint8_t *)NVRAM_IMAGE_VARIABLE ) + read_pos;
+        *data = (uint8_t *)&r_buffer;
+
     }
     else
     {
@@ -298,15 +289,9 @@ whd_result_t host_get_resource_block(whd_driver_t whd_drv, whd_resource_type_t t
         size_out = 0;
         return WHD_SUCCESS;
 #else
-#ifdef WLAN_MFG_FIRMWARE
-        result = resource_read( (const resource_hnd_t *)&wifi_mfg_firmware_clm_blob, read_pos, block_size,
-                                size_out,
-                                r_buffer );
-#else
         result = resource_read( (const resource_hnd_t *)&wifi_firmware_clm_blob, read_pos, block_size,
                                 size_out,
                                 r_buffer );
-#endif /* WLAN_MFG_FIRMWARE */
 #endif /* NO_CLM_BLOB_FILE */
         if (result != WHD_SUCCESS)
         {
@@ -355,14 +340,8 @@ whd_result_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
 
     if (type == WHD_RESOURCE_WLAN_FIRMWARE)
     {
-#ifdef WLAN_MFG_FIRMWARE
-        result = resource_read( (const resource_hnd_t *)&wifi_mfg_firmware_image, offset, size,
-                                size_out, buffer );
-#else
         result = resource_read( (const resource_hnd_t *)&wifi_firmware_image, offset, size,
                                 size_out, buffer );
-#endif /* WLAN_MFG_FIRMWARE */
-
         if (result != WHD_SUCCESS)
             return result;
 
@@ -381,13 +360,23 @@ whd_result_t host_resource_read(whd_driver_t whd_drv, whd_resource_type_t type,
 #endif /* DOWNLOAD_RAM_BOOTLOADER */
     else if (type == WHD_RESOURCE_WLAN_NVRAM)
     {
-        if (size != sizeof(wifi_nvram_image) )
+		uint32_t i,len;
+        uint8_t *nvrame_data = NULL;
+		result = resource_read( (const resource_hnd_t *)&wifi_nvram_image, offset, size,
+                                size_out, buffer );
+		nvrame_data = (uint8_t *) buffer;
+		len=*size_out;
+		 /* convert the newline to null-terminator */
+        for (i = 0; i < len; i++)
         {
-            return WHD_BUFFER_SIZE_SET_ERROR;
+            if (nvrame_data[i] == 0xa)
+            {
+                nvrame_data[i] = 0x0;
+            }
         }
-        whd_mem_memcpy( (uint8_t *)buffer, wifi_nvram_image, sizeof(wifi_nvram_image) );
-        *size_out = sizeof(wifi_nvram_image);
-    }
+		if (result != WHD_SUCCESS)
+            return result;
+     }
     return WHD_SUCCESS;
 }
 

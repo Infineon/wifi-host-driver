@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,6 +37,9 @@
 #include "whd_types_int.h"
 #include "whd_chip_constants.h"
 #include "whd_proto.h"
+#if defined(COMPONENT_WLANSENSE)
+#include "whd_wlansense_core.h"
+#endif /* defined(COMPONENT_WLANSENSE) */
 
 #if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
 #include "cyhal_syspm.h"
@@ -148,8 +151,13 @@ whd_result_t whd_add_primary_interface(whd_driver_t whd_driver, whd_interface_t 
 
 whd_result_t whd_add_secondary_interface(whd_driver_t whd_driver, whd_mac_t *mac_addr, whd_interface_t *ifpp)
 {
+#if !defined(COMPONENT_WLANSENSE)
     return whd_add_interface(whd_driver, 1, 1, "wlan1", mac_addr, ifpp);
+#else
+    return 0;
+#endif /* !defined(COMPONENT_WLANSENSE) */
 }
+
 whd_result_t
 whd_wifi_set_country_code(whd_interface_t ifp, whd_country_code_t country_code)
 {
@@ -356,7 +364,6 @@ whd_result_t whd_management_wifi_platform_init(whd_driver_t whd_driver, whd_coun
 #if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
     /* Initialize a timer for the data/ctrl activity monitoring */
     cyhal_syspm_register_callback(&whd_driver->whd_syspm_cb_data);
-    cy_rtos_init_mutex(&whd_driver->sleep_mutex);
 #endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
 #ifdef COMPONENT_SDIO_HM
@@ -388,6 +395,7 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
 #if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
     /* For H1CP, the BTSS sleep is enabled by default, so acquire the lock before doing the initialization process,
      * release once all the WHD initialization process is done */
+    cy_rtos_init_mutex(&whd_driver->sleep_mutex);
     whd_pds_lock_sleep(whd_driver);
 #endif
 
@@ -594,6 +602,10 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
             WPRINT_WHD_INFO( ("Disabled scanmac randomisation for 55500\n") );
         }
     }
+
+#if defined(COMPONENT_WLANSENSE)
+    CHECK_RETURN(whd_wlansense_create_interface(whd_driver));
+#endif /* defined(COMPONENT_WLANSENSE) */
 
 #if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
     /* Unlocking the syspm sleep lock, as WHD initialization part is done */

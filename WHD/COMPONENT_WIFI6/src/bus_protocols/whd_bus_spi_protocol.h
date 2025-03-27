@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,6 @@
 #include "whd.h"
 #include "whd_bus_protocol_interface.h"
 #include "cy_result.h"
-#include "cyhal_spi.h"
 
 #ifndef INCLUDED_SPI_WHD_BUS_PROTOCOL_H
 #define INCLUDED_SPI_WHD_BUS_PROTOCOL_H
@@ -87,11 +86,7 @@ extern whd_bool_t whd_bus_spi_use_status_report_scheme(whd_driver_t whd_driver);
 extern uint32_t whd_bus_spi_get_max_transfer_size(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_spi_irq_register(whd_driver_t whd_driver);
 extern whd_result_t whd_bus_spi_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
-#if (CYHAL_API_VERSION >= 2)
-extern void whd_bus_spi_irq_handler(void *handler_arg, cyhal_spi_event_t event);
-#else
-extern void whd_bus_spi_irq_handler(void *handler_arg, cyhal_spi_irq_event_t event);
-#endif
+
 /******************************************************
 *             Global variables
 ******************************************************/

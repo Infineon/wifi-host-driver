@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -1211,6 +1211,32 @@ uint8_t whd_ip4_to_string(const void *ip4addr, char *p)
 }
 
 #ifndef WHD_USE_CUSTOM_MALLOC_IMPL
+
+inline void whd_mem_memcpy (void *dest, const void *src, size_t len)
+{
+#ifdef PROTO_MSGBUF
+    char *p1 = (char *)dest, *p2 = (char *)src;
+    while(len--)
+    {
+        *(p1++) = *(p2++);
+    }
+#else
+    memcpy(dest, src, len);
+#endif
+}
+
+inline void whd_mem_memset (void *buf, int val, size_t len)
+{
+#ifdef PROTO_MSGBUF
+    char* p = (char*)buf;
+    while(len--)
+    {
+        *(p++) = val;
+    }
+#else
+    memset(buf, val, len);
+#endif
+}
 
 inline void *whd_mem_malloc (size_t size)
 {

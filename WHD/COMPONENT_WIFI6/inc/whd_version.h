@@ -1,3 +1,3 @@
-#define WHD_VERSION "4.2.1.25171"
-#define WHD_BRANCH "11ax v4.2.1"
-#define WHD_DATE "2024-12-05 09:29:03 -0600"
+#define WHD_VERSION "4.3.0.26332"
+#define WHD_BRANCH "11ax WIFI6-v4.3.0"
+#define WHD_DATE "2025-03-19 09:56:06 +0000"

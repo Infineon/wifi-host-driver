@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +44,17 @@ extern "C" {
 #define  CEIL(x, y)     ( ( (x) + ( (y) - 1 ) ) / (y) )
 #define  ROUNDUP(x, y)      ( ( ( (x) + ( (y) - 1 ) ) / (y) ) * (y) )
 #define  ROUNDDN(p, align)  ( (p)& ~( (align) - 1 ) )
+
+#ifdef BUS_ENC
+#define GCM_KEY_SIZE 128
+#define GCM_KEY_SIZE_BYTES 16
+#define GCM_IV_SIZE   12
+
+
+static const unsigned char aad[20] =  { 0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef,
+                                        0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef,
+                                        0xab, 0xad, 0xda, 0xd2 };
+#endif /* BUS_ENC */
 
 /**
  * Get the offset (in bytes) of a member within a structure
@@ -122,9 +133,22 @@ const char *whd_event_to_string(whd_event_num_t var);
 char *whd_ssid_to_string(uint8_t *value, uint8_t length, char *ssid_buf, uint8_t ssid_buf_len);
 const char *whd_status_to_string(whd_event_status_t status);
 const char *whd_reason_to_string(whd_event_reason_t reason);
-char *whd_ether_ntoa(const uint8_t *ea, char *buf, uint8_t buf_len);
 const char *whd_ioctl_to_string(uint32_t ioctl);
 #endif /* ifdef WPRINT_ENABLE_WHD_DEBUG */
+
+#if defined(WPRINT_ENABLE_WHD_DEBUG) || defined(COMPONENT_WLANSENSE)
+/**
+ * ****************************************************************************
+ * Converts whd_mac_t to string and assigns it to buf
+ * @param[in] ea :  MAC address in octet array
+ * @param[out] buf : character array to store the MAC address after conversion
+ * @param[out] buf_len : length of buf char array
+ *
+ * @return output character array which has resultant MAC address in string
+ *
+ */
+extern char *whd_ether_ntoa(const uint8_t *ea, char *buf, uint8_t buf_len);
+#endif /* defined(WPRINT_ENABLE_WHD_DEBUG) || defined(COMPONENT_WLANSENSE) */
 
 /**
  ******************************************************************************

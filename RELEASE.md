@@ -1,13 +1,13 @@
-# Wi-Fi Host Driver (WHD) 4.2.1
+# Wi-Fi Host Driver (WHD) 4.3.0
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
-### WIFI6 Supported Chip v4.2.1
+### WIFI6 Supported Chip v4.3.0
 * Supports Wi-Fi Station (STA) and AP mode of operation
 * Supports multiple security methods such as WPA2, WPA3, and open
 
 ### New Features
-* Support for SM on H1 family
-* Offload config support
+* CYW955913 Hosted mode shutdown/wake feature
+* CYW955913 CSI Support added
 
 ### Defect Fixes
 
@@ -17,14 +17,12 @@ NA
 #### CYW55500
 * --- 28.10.387.11 ---
 
-
-
 #### CYW55900
-* --- 28.10.400 ---
+* --- 28.10.400.1 ---
 
 
 
-### WIFI5 Suppported Chip v3.3.2
+### WIFI5 Suppported Chip v3.3.3
 
 * Supports concurrent operation of STA and AP interface
 * Supports low-power offloads like ARP, packet filters, TCP Keepalive offload
@@ -33,9 +31,10 @@ NA
 * Provides functions for Advanced Power Management
 
 ### New Features
+* TLS-1.3 Support for 43022
 
 ### Defect Fixes
-* Fix memory alignment issue on XMC
+* Fix Dcache issue on XMC
 
 ### Known Issues
 NA
@@ -56,7 +55,7 @@ NA
 * --- 7.15.168.163 ---
 
 #### CYW43022
-* --- 13.67.8 ---
+* --- 13.67.9 ---
 
 
 Note: [r] is regulatory-related

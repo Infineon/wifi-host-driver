@@ -21,12 +21,28 @@
 #if defined(COMPONENT_SDIO_HM)
 
 #include "cy_wcm.h"
+#include "sdio_api.h"
 
 #define SDIO_CMD_WAITFOREVER ( (uint32_t)0xffffffffUL )
 #define SDIO_CMD_QUEUE_LEN   (10)
 
 /**
- * Enumeration of Infineon command
+ * Command Definition
+ * BIT [31:24]  Type
+ * BIT [23: 0]  Command
+ */
+#define CMD_MASK        0x00FFFFFF
+#define CMD_TYPE_MASK   0xFF000000
+#define CMD_TYPE_SHIFT  24
+#define CMD_TYPE_ITOOL  0
+#define CMD_TYPE_WL     1
+#define CMD_TYPE_USER   2
+
+#define GET_CMD(c)      (c & CMD_MASK)
+#define GET_CMD_TYPE(c) ((c & CMD_TYPE_MASK) >> CMD_TYPE_SHIFT)
+
+/**
+ * Enumeration of Infineon iTool command
  */
 enum {
     INF_C_MAC            = 1,
@@ -167,6 +183,7 @@ struct sdio_command
 #if defined(SDIO_HM_AT_CMD)
     char at_cmd_buf[AT_CMD_BUF_SIZE];
 #endif
+	sdio_hm_user_cmd_cb user_cmd_cb;
 };
 
 typedef struct sdio_command *sdio_command_t;

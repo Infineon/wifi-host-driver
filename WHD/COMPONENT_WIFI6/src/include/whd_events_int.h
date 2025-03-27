@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -172,14 +172,14 @@ typedef enum
     WLC_E_EXT_AUTH_REQ = 187,        /* authentication request received */
     WLC_E_EXT_AUTH_FRAME_RX = 188,   /* authentication request received */
     WLC_E_MGMT_FRAME_TXSTATUS = 189, /* mgmt frame Tx complete */
-#if defined(WHD_CSI_SUPPORT)
+#if defined(COMPONENT_WLANSENSE)
     WLC_E_CSI_ENABLE = 198,          /* Setup a communication with the application layer to send CSI data */
     WLC_E_CSI_DATA = 199,            /* Send the CSI data to application layer */
     WLC_E_CSI_DISABLE = 200,         /* Diable the communication from application layer */
     WLC_E_LAST = 201,                /* highest val + 1 for range checking */
 #else
     WLC_E_LAST = 190,
-#endif /* defined(WHD_CSI_SUPPORT) */
+#endif /* defined(COMPONENT_WLANSENSE) */
 } whd_event_num_t;
 
 /**
@@ -453,9 +453,9 @@ typedef enum
     WHD_AP_EVENT_ENTRY,
     WHD_P2P_EVENT_ENTRY,
     WHD_AUTH_EVENT_ENTRY,
-#if defined(WHD_CSI_SUPPORT)
+#if defined(COMPONENT_WLANSENSE)
     WHD_CSI_EVENT_ENTRY,
-#endif /* defined(WHD_CSI_SUPPORT) */
+#endif /* defined(COMPONENT_WLANSENSE) */
     WHD_EVENT_ENTRY_MAX
 } whd_event_entry_t;
 

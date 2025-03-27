@@ -23,6 +23,7 @@
 #include "whd_int.h"
 
 #include "sdio_command.h"
+#include "sdio_api.h"
 
 /* Enabling Info and Error msgs by default */
 #define ENABLE_SDIO_HM_INFO
@@ -59,13 +60,13 @@
 
 #define PRINT_HM_HEX_DUMP(args, data, data_len) { \
         uint16_t i, j; \
-        PRINT_MACRO(args); \
+        PRINT_MACRO((args)); \
         for (i = 0; i < data_len; i += 16) { \
-            PRINT_MACRO("%08x:", i); \
+            PRINT_MACRO(("%08x:", i)); \
             for (j = i; (j < data_len && j < (i + 16)); j++) { \
-                PRINT_MACRO(" %02x", data[j]); \
+                PRINT_MACRO((" %02x", *((uint8_t *)data + j))); \
             } \
-            PRINT_MACRO("\n"); \
+            PRINT_MACRO(("\n")); \
         } \
 } \
 
@@ -103,11 +104,21 @@
 #define SDIO_HM_TX_EVENT(sdio_hm, buffer, length) sdio_hm_tx_buf_enq(sdio_hm, false, SDPCM_EVENT_CHANNEL, buffer, length)
 #define SDIO_HM_TX_CMD(sdio_hm, buffer, length) sdio_hm_tx_buf_enq(sdio_hm, false, SDPCM_CONTROL_CHANNEL, buffer, length)
 
+#ifdef COMPONENT_CAT5
+/* Currently H1-CP is only validated with LHL_GPIO as
+ * output pin connected to PMU EN pin of host */
+#define SHUT_WAKE_GPIO LHL_GPIO_6
+#else
+#error "SHUT_WAKE_GPIO configuration supported only for CYW955913"
+#endif /* COMPONENT_CAT5 */
+
 struct sdio_tx_info
 {
     cy_mutex_t q_mutex;
     cy_linked_list_t tx_idle_q;
     cy_linked_list_t tx_wait_q;
+
+    uint8_t tx_seq;
 
     /* statistic */
     uint16_t err_enq;
@@ -139,6 +150,7 @@ struct sdio_rx_info
     whd_buffer_t current_buffer;
     whd_buffer_t reserved_buffer;
 
+    uint32_t req_next_data;
     uint8_t next_seq;
 
     /* statistic */
@@ -176,6 +188,7 @@ struct sdio_handler
     sdio_command_t sdio_cmd;
     bool sdio_thread_active;
     bool sdio_rx_timer_active;
+    cyhal_gpio_t host_pwr_ctrl_gpio;
 };
 
 typedef struct sdio_handler *sdio_handler_t;
@@ -187,6 +200,8 @@ enum {
     INF_NW_EVENT   = 0,
     INF_SCAN_EVENT = 1,
     INF_AT_EVENT   = 2,
+    INF_SHUTDOWN_EVENT = 3,
+    INF_USER_EVENT = 4,
 };
 
 /**
@@ -261,6 +276,12 @@ typedef struct {
     scan_event_t scan;
 } __packed inf_scan_event_t;
 
+#define SHUTDOWN_EVENT_VER 1
+
+typedef struct {
+    inf_event_base_t base;
+} __packed inf_shutd_event_t;
+
 #if defined(SDIO_HM_AT_CMD)
 
 /* AT Command Event */
@@ -274,10 +295,23 @@ typedef struct {
 
 #endif /* SDIO_HM_AT_CMD */
 
+/* User defined Event */
+
+#define USER_EVENT_VER 1
+
+typedef struct {
+    inf_event_base_t base;
+    uint8_t event[MAX_USER_EVT_LEN];
+} __packed inf_user_event_t;
+
 /* Function prototypes */
 
 cy_rslt_t sdio_hm_tx_buf_enq(sdio_handler_t sdio_hm, bool is_whd, uint8_t channel, void *buffer, uint16_t length);
 cy_rslt_t sdio_hm_init(void);         //will be moved to only internal, now allowing application to call.
+cy_rslt_t sdio_hm_reinit(void);
+cy_rslt_t sdio_hm_deinit(sdio_handler_t sdio_hm);
+cy_rslt_t sdio_hm_shutd_evt_to_host(void);
 sdio_handler_t sdio_hm_get_sdio_handler();
+cy_rslt_t sdio_hm_set_host_power_control_gpio(cyhal_gpio_t gpio);
 
 #endif /* _SDIO_HOSTED_SUPPORT_H_ */

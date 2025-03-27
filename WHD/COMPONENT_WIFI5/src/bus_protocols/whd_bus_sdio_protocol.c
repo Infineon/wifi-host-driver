@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@
 #include "whd_proto.h"
 
 #ifdef DM_43022C1
-#include "resources.h"
+extern const unsigned char wifi_firmware_image_data[];
 #endif
 
 #ifdef CYCFG_ULP_SUPPORT_ENABLED
@@ -2056,11 +2056,7 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
 #ifndef DM_43022C1
                 trx = (trx_header_t *)&image[0];
 #else
-#ifndef WLAN_MFG_FIRMWARE
                 trx = (trx_header_t *)&wifi_firmware_image_data;
-#else
-                trx = (trx_header_t *)&wifi_mfg_firmware_image_data;
-#endif /* WLAN_MFG_FIRMWARE */
 #endif /* DM_43022C1 */
 
                 if (trx->magic == TRX_MAGIC)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -340,11 +340,11 @@ const char *whd_event_to_string(whd_event_num_t value)
         CASE_RETURN(WLC_E_TX_STAT_ERROR)
         CASE_RETURN(WLC_E_BCMC_CREDIT_SUPPORT)
         CASE_RETURN(WLC_E_PSTA_PRIMARY_INTF_IND)
-#if defined(WHD_CSI_SUPPORT)
+#if defined(COMPONENT_WLANSENSE)
         CASE_RETURN(WLC_E_CSI_ENABLE)
         CASE_RETURN(WLC_E_CSI_DATA)
         CASE_RETURN(WLC_E_CSI_DISABLE)
-#endif /* defined(WHD_CSI_SUPPORT) */
+#endif /* defined(COMPONENT_WLANSENSE) */
         case WLC_E_LAST:
         default:
             return "Unknown";
@@ -510,38 +510,6 @@ const char *whd_reason_to_string(whd_event_reason_t reason)
     }
 
     return "Unknown";
-}
-
-char *whd_ether_ntoa(const uint8_t *ea, char *buf, uint8_t buf_len)
-{
-    const char hex[] =
-    {
-        '0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-    };
-    char *output = buf;
-    const uint8_t *octet = ea;
-
-    if (buf_len < WHD_ETHER_ADDR_STR_LEN)
-    {
-        if (buf_len > 0)
-        {
-            /* buffer too short */
-            buf[0] = '\0';
-        }
-        return buf;
-    }
-
-    for (; octet != &ea[WHD_ETHER_ADDR_LEN]; octet++)
-    {
-        *output++ = hex[(*octet >> 4) & 0xf];
-        *output++ = hex[*octet & 0xf];
-        *output++ = ':';
-    }
-
-    *(output - 1) = '\0';
-
-    return buf;
 }
 
 const char *whd_ioctl_to_string(uint32_t ioctl)
@@ -833,8 +801,41 @@ const char *whd_ioctl_to_string(uint32_t ioctl)
             return "Unknown Command";
     }
 }
-
 #endif /* WPRINT_ENABLE_WHD_DEBUG */
+
+#if defined(WPRINT_ENABLE_WHD_DEBUG) || defined(COMPONENT_WLANSENSE)
+char *whd_ether_ntoa(const uint8_t *ea, char *buf, uint8_t buf_len)
+{
+    const char hex[] =
+    {
+        '0', '1', '2', '3', '4', '5', '6', '7',
+        '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    };
+    char *output = buf;
+    const uint8_t *octet = ea;
+
+    if (buf_len < WHD_ETHER_ADDR_STR_LEN)
+    {
+        if (buf_len > 0)
+        {
+            /* buffer too short */
+            buf[0] = '\0';
+        }
+        return buf;
+    }
+
+    for (; octet != &ea[WHD_ETHER_ADDR_LEN]; octet++)
+    {
+        *output++ = hex[(*octet >> 4) & 0xf];
+        *output++ = hex[*octet & 0xf];
+        *output++ = ':';
+    }
+
+    *(output - 1) = '\0';
+
+    return buf;
+}
+#endif /* defined(WPRINT_ENABLE_WHD_DEBUG) || defined(COMPONENT_WLANSENSE) */
 
 void whd_convert_security_type_to_string(whd_security_t security, char *out_str, uint16_t out_str_len)
 {

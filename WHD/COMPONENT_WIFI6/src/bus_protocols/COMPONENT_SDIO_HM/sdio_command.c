@@ -81,7 +81,7 @@ sdio_cmd_scan_handler(cy_wcm_scan_result_t *result_ptr, void *user_data, cy_wcm_
 }
 
 static void *
-sdio_cmd_get_rsp(uint8_t rsp_len, sdio_bcdc_header_t *cmd_bcdc)
+sdio_cmd_get_rsp(uint32_t rsp_len, sdio_bcdc_header_t *cmd_bcdc)
 {
     void *rsp = NULL;
     sdio_bcdc_header_t *bcdc = NULL;
@@ -103,7 +103,7 @@ sdio_cmd_get_rsp(uint8_t rsp_len, sdio_bcdc_header_t *cmd_bcdc)
 }
 
 static void
-sdio_cmd_send_rsp(sdio_command_t sdio_cmd, void *rsp, uint8_t rsp_len)
+sdio_cmd_send_rsp(sdio_command_t sdio_cmd, void *rsp, uint32_t rsp_len)
 {
     cy_rslt_t result;
 
@@ -112,6 +112,48 @@ sdio_cmd_send_rsp(sdio_command_t sdio_cmd, void *rsp, uint8_t rsp_len)
         PRINT_HM_ERROR(("Send event failed 0x%lx\n", result));
         free(rsp);
     }
+}
+
+static void
+sdio_cmd_user_cmd(sdio_command_t sdio_cmd, uint8_t *cmd_msg)
+{
+    sdio_bcdc_header_t *cmd_bcdc = (sdio_bcdc_header_t *)cmd_msg;
+    uint8_t *cmd_buf = cmd_msg + sizeof(*cmd_bcdc);
+    cy_rslt_t result = CY_RSLT_SUCCESS;
+    /* response */
+    uint8_t *rsp = NULL;
+    sdio_bcdc_header_t *rsp_bcdc = NULL;
+    uint32_t rsp_len = sizeof(*rsp_bcdc) + cmd_bcdc->len;
+
+    PRINT_HM_HEX_DUMP("CMD_BUFFER\n", cmd_buf, cmd_bcdc->len);
+
+    /* prepare response */
+    rsp = (uint8_t *)sdio_cmd_get_rsp(rsp_len, cmd_bcdc);
+    if (!rsp) {
+        return;
+    }
+
+    /* execute user defined command */
+    if (sdio_cmd->user_cmd_cb) {
+        result = sdio_cmd->user_cmd_cb(!!(cmd_bcdc->flags & BCDC_FLAG_SET),
+                                       cmd_buf, cmd_bcdc->len);
+        if (result) {
+            PRINT_HM_ERROR(("user cmd error: %ld\n", result));
+        }
+        PRINT_HM_HEX_DUMP("REPLY\n", cmd_buf, cmd_bcdc->len);
+    } else {
+        PRINT_HM_ERROR(("user cmd callback is NULL\n"));
+        result = CYHAL_SDIO_RSLT_ERR_UNSUPPORTED;
+    }
+
+    /* fill response */
+    rsp_bcdc = (sdio_bcdc_header_t *)rsp;
+    rsp_bcdc->status = result;
+
+    /* copy user defined command result to response */
+    whd_mem_memcpy(rsp + sizeof(*cmd_bcdc), cmd_buf, cmd_bcdc->len);
+
+    sdio_cmd_send_rsp(sdio_cmd, rsp, rsp_len);
 }
 
 static void
@@ -278,6 +320,132 @@ sdio_cmd_get_ip_info(sdio_command_t sdio_cmd, sdio_bcdc_header_t *cmd_bcdc)
 
     sdio_cmd_send_rsp(sdio_cmd, rsp, rsp_len);
 }
+
+#ifdef SDIO_HM_WL_CMD
+/*
+ * This function is used for sending wl_ioctl/iovar to WHD driver
+ *
+ * @ param2 int  cmd : cmd for IOCTL
+ * @ param3 void *buf: Buffer to fill for iovar set/get request/response
+ * @ param4 int  len : Length of Buffer
+ * @ param5 bool set : GET/SET GET is zero/SET is 1.
+ * @ param6 int  outlen: output data length
+ * @ return int: 0 SUCCESS
+ *               -1 ERROR
+ */
+static int
+sdio_cmd_wl_ioctl(sdio_command_t sdio_cmd, int cmd, void *buf, int len, bool set, int *outlen)
+{
+    sdio_handler_t sdio_hm = (sdio_handler_t)sdio_cmd->sdio_hm;
+    whd_interface_t ifp = sdio_hm->ifp;
+    uint32_t value = 0;
+    int result = 0;
+    char *token = NULL;
+    char *saveptr = (char *)buf;
+    int datalen = len;
+
+    if ( ( cmd != WLC_GET_VAR) && ( cmd != WLC_SET_VAR ))
+    {
+        if  ( ( len <= 4 ) && (set ))
+        {
+            if ( ( len > 0 ) && ( buf ) )
+            {
+                memcpy( &value, buf, len );
+            }
+            result = whd_wifi_set_ioctl_value(ifp, cmd, value);
+        }
+        else if ( ( len <= 4) )
+        {
+            result = whd_wifi_get_ioctl_value(ifp, cmd, &value);
+            memcpy(buf, &value, len );
+        }
+        else if ( ( len > 4) && ( set )  )
+        {
+            result = whd_wifi_set_ioctl_buffer(ifp, cmd, (uint8_t *) buf, len);
+        }
+        else if ( ( len > 4 ) && ( !set ))
+        {
+            result = whd_wifi_get_ioctl_buffer(ifp, cmd, (uint8_t *) buf, len);
+        }
+    }
+    else
+    {
+        token = strtok_r((char *)buf, "'\0'", &saveptr);
+        datalen = len - (strlen(token) + 1);
+
+        if ( ( datalen <= 4 ) && ( cmd == WLC_SET_VAR ) )
+        {
+            memcpy(&value, (char *)(((char *)buf) + strlen(token) + 1)  , sizeof(value));
+            result = whd_wifi_set_iovar_value(ifp, (const char *)buf, value);
+        }
+        else if  (( datalen <= 4 ) && ( cmd == WLC_GET_VAR ) )
+        {
+            result = whd_wifi_get_iovar_value(ifp, (const char *)buf, &value);
+            memcpy(buf, &value, len );
+        }
+        else if ( ( datalen > 4) && ( set )  )
+        {
+            result = whd_wifi_set_ioctl_buffer(ifp, cmd, (uint8_t *) buf, len);
+        }
+        else if ( ( datalen > 4 ) && ( !set ))
+        {
+            result = whd_wifi_get_ioctl_buffer(ifp, cmd, (uint8_t *) buf, len);
+        }
+    }
+
+    if ( set )
+    {
+        *outlen = 0;
+    }
+    else
+    {
+        *outlen = len;
+    }
+    return result;
+}
+
+static void
+sdio_cmd_wl_cmd(sdio_command_t sdio_cmd, uint8_t *cmd_msg)
+{
+    sdio_bcdc_header_t *cmd_bcdc = (sdio_bcdc_header_t *)cmd_msg;
+    uint8_t *cmd_buf = cmd_msg + sizeof(*cmd_bcdc);
+    uint32_t wl_cmd = cmd_bcdc->cmd & CMD_MASK;
+    int error = 0;
+    int outlen = 0;
+    /* response */
+    uint8_t *rsp = NULL;
+    sdio_bcdc_header_t *rsp_bcdc = NULL;
+    uint32_t rsp_len = sizeof(*rsp_bcdc) + cmd_bcdc->len;
+
+    PRINT_HM_INFO(("WL cmd %ld, len %ld, set %lx\n",
+        wl_cmd, cmd_bcdc->len, cmd_bcdc->flags & BCDC_FLAG_SET));
+
+    PRINT_HM_HEX_DUMP("CMD_BUFFER\n", cmd_buf, cmd_bcdc->len);
+
+    /* prepare response */
+    rsp = (uint8_t *)sdio_cmd_get_rsp(rsp_len, cmd_bcdc);
+    if (!rsp) {
+        return;
+    }
+
+    /* execute wl command */
+    error = sdio_cmd_wl_ioctl(sdio_cmd, wl_cmd, cmd_buf, cmd_bcdc->len,
+                              cmd_bcdc->flags & BCDC_FLAG_SET, &outlen);
+    if (error) {
+        PRINT_HM_ERROR(("wl error: %d\n", error));
+    }
+    PRINT_HM_HEX_DUMP("REPLY\n", cmd_buf, cmd_bcdc->len);
+
+    /* fill response */
+    rsp_bcdc = (sdio_bcdc_header_t *)rsp;
+    rsp_bcdc->status = error;
+
+    /* copy wl command result to response */
+    whd_mem_memcpy(rsp + sizeof(*cmd_bcdc), cmd_buf, cmd_bcdc->len);
+
+    sdio_cmd_send_rsp(sdio_cmd, rsp, rsp_len);
+}
+#endif /* SDIO_HM_WL_CMD */
 
 static void
 sdio_cmd_scan(sdio_command_t sdio_cmd, sdio_bcdc_header_t *cmd_bcdc)
@@ -498,6 +666,9 @@ uint32_t sdio_cmd_at_read_data(uint8_t *buffer, uint32_t size)
     whd_mem_memcpy(buffer, sdio_cmd->at_cmd_buf, len);
     whd_mem_memset(sdio_cmd->at_cmd_buf, 0, AT_CMD_BUF_SIZE);
 
+    /* if length is 0, AT command parser need '\r' at the end of command */
+    buffer[len++] = '\r';
+
     return len;
 }
 
@@ -630,19 +801,40 @@ static void sdio_cmd_set(sdio_command_t sdio_cmd, uint8_t *cmd_msg)
 static void sdio_cmd_handler(sdio_command_t sdio_cmd, uint8_t *cmd_msg)
 {
     sdio_bcdc_header_t *bcdc = (sdio_bcdc_header_t *)cmd_msg;
+    uint8_t cmd_type = GET_CMD_TYPE(bcdc->cmd);
 
-    PRINT_HM_INFO(("SDIO cmd %ld, len %ld, ver %ld, set %ld\n",
-        bcdc->cmd, bcdc->len, BCDC_FLAG_VER(bcdc->flags), bcdc->flags & BCDC_FLAG_SET));
+    PRINT_HM_INFO(("SDIO type %d, cmd %ld, len %ld, ver %ld, set %ld\n",
+        cmd_type, (bcdc->cmd & CMD_MASK), bcdc->len,
+        BCDC_FLAG_VER(bcdc->flags), bcdc->flags & BCDC_FLAG_SET));
 
     if (BCDC_FLAG_VER(bcdc->flags) != BCDC_PROTO_VER) {
         PRINT_HM_ERROR(("BCDC version mismatch %d\n", BCDC_PROTO_VER));
         return;
     }
 
-    if (bcdc->flags & BCDC_FLAG_SET)
-        sdio_cmd_set(sdio_cmd, cmd_msg);
-    else
-        sdio_cmd_get(sdio_cmd, cmd_msg);
+    switch (cmd_type)
+    {
+        case CMD_TYPE_ITOOL:
+            /* iTool command */
+            if (bcdc->flags & BCDC_FLAG_SET)
+                sdio_cmd_set(sdio_cmd, cmd_msg);
+            else
+                sdio_cmd_get(sdio_cmd, cmd_msg);
+            break;
+#ifdef SDIO_HM_WL_CMD
+        case CMD_TYPE_WL:
+            /* wl tool comand */
+            sdio_cmd_wl_cmd(sdio_cmd, cmd_msg);
+            break;
+#endif /* defined(SDIO_HM_AT_CMD) */
+        case CMD_TYPE_USER:
+            /* user defined comand */
+            sdio_cmd_user_cmd(sdio_cmd, cmd_msg);
+            break;
+        default:
+            PRINT_HM_ERROR(("unsupported command type %d \n", cmd_type));
+            break;
+    }
 }
 
 static void sdio_cmd_thread_func(cy_thread_arg_t arg)
@@ -680,6 +872,8 @@ cy_rslt_t sdio_cmd_init(void *sdio_handler)
 
     sdio_cmd->sdio_hm = sdio_hm;
     sdio_hm->sdio_cmd = sdio_cmd;
+
+    sdio_cmd->user_cmd_cb = NULL;
 
     CHK_RET(cy_rtos_queue_init(&sdio_cmd->msgq, SDIO_CMD_QUEUE_LEN, sizeof(sdio_cmd_msg_queue_t)));
 

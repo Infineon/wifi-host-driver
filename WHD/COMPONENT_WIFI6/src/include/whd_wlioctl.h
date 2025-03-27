@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -1267,11 +1267,17 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_MBO                    "mbo"
 #define IOVAR_STR_OTPTLV                 "otptlv"
 #define IOVAR_STR_OCE                    "oce"
-#if defined(WHD_CSI_SUPPORT)
+#if defined(COMPONENT_WLANSENSE)
 #define IOVAR_STR_CSI                    "csi"
-#endif /* defined(WHD_CSI_SUPPORT) */
+#define IOVAR_STR_CSI_IFADD              "csi_ifadd"
+#endif /* defined(COMPONENT_WLANSENSE) */
 #define IOVAR_STR_SCANMAC                "scanmac"
 #define IOVAR_STR_NDOE                   "ndoe"
+
+#ifdef BUS_ENC
+#define IOVAR_BUS_ENC_KEY                "bus_enc_key"
+#define IOVAR_BUS_ENC_IV                 "bus_iv"
+#endif /* BUS_ENC */
 
 /* This value derived from the above strings, which appear maxed out in the 20s */
 #define IOVAR_NAME_STR_MAX_SIZE          32
@@ -4299,9 +4305,9 @@ typedef struct wl_tko
 #define WL_TKO_SUBCMD_CONNECT           2       /* TCP connection info */
 #define WL_TKO_SUBCMD_ENABLE            3       /* enable/disable */
 #define WL_TKO_SUBCMD_STATUS            4       /* TCP connection status */
-#define WL_TKO_SUBCMD_AUTOENAB		6	/* TCP auto configurations */
-#define WL_TKO_SUBCMD_AUTOCONNECT	7       /* get TCP auto connect info */
-#define WL_TKO_SUBCMD_FILTER		8       /* auto TCP filter/wildcard configurations */
+#define WL_TKO_SUBCMD_AUTOENAB          6       /* TCP auto configurations */
+#define WL_TKO_SUBCMD_AUTOCONNECT       7       /* get TCP auto connect info */
+#define WL_TKO_SUBCMD_FILTER            8       /* auto TCP filter/wildcard configurations */
 
 /* WL_TKO_SUBCMD_MAX_CONNECT subcommand data */
 typedef struct wl_tko_max_tcp
@@ -4553,7 +4559,8 @@ typedef struct wl_ol_cfg_v1 {
 	uint32_t offload_skip;		  /* Bitmap of offload to be skipped */
 } wl_ol_cfg_v1_t;
 
-#if defined(WHD_CSI_SUPPORT)
+#if defined(COMPONENT_WLANSENSE)
+#define CSI_MAX_RX_MACADDR 4
 typedef struct wlc_csi_cfg {
 	uint8_t csi_enable;			/* 1: Enable CSI  0: Disable CSI */
 
@@ -4566,7 +4573,7 @@ typedef struct wlc_csi_cfg {
 	uint8_t ignore_fcs;			/* Also capture badfcs packets */
 
 	/* Unassociated Mode only */
-	struct ether_addr rx_macaddr; /* Only capture pkts from specified macaddr */
+	whd_mac_t rx_macaddr[CSI_MAX_RX_MACADDR]; /* Only capture pkts from specified macaddr */
 	chanspec_t chanspec;		/* Capture CSI only for specified chanspec */
 
 	/* Unsolicited Mode only */
@@ -4580,7 +4587,19 @@ typedef struct wlc_csi_cfg {
 
 	uint8_t frmtyp_subtyp[2];		/* FrameType & SubType */
 } wlc_csi_cfg_t;
-#endif /* defined(WHD_CSI_SUPPORT) */
+
+typedef struct wl_wlan_sense_if {
+    whd_mac_t csi_macaddr;
+} wl_wlan_sense_if_t;
+#endif /* defined(COMPONENT_WLANSENSE) */
+
+typedef struct wl_vif_event {
+    uint8_t ifidx;
+    uint8_t action;
+    uint8_t flags;
+    uint8_t bsscfgidx;
+    uint8_t role;
+} wl_vif_event_t;
 
 struct secure_sess_info {
 	uint32_t tcp_seq;

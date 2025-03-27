@@ -73,6 +73,10 @@ __attribute__((aligned(8)))    uint8_t sdio_stack[SDIO_STACK_SIZE] = {0};
 
 #define THREAD_TIME                10    /* 10ms to check buffer availability */
 
+#define DEINIT_TIME                10
+#define INIT_TIME                  100
+#define HOST_TURN_ON_DELAY         100
+
 /******************************************************************************
 * Global variables
 ******************************************************************************/
@@ -124,7 +128,6 @@ static cy_rslt_t sdio_hm_data_from_host(sdio_handler_t sdio_hm);
 
 #if defined(SDIO_HM_TEST)
 static void sdio_hm_tp_timer_cb(cy_timer_callback_arg_t arg);
-static void sdio_hm_process_at_cmd(at_cmd_msg_base_t *host_cmd, uint16_t length);
 static void sdio_hm_process_test_cmd(sdio_handler_t sdio_hm,
                                                               struct inf_test_msg_t *msg, uint16_t length);
 #endif /* defined(SDIO_HM_TEST) */
@@ -175,6 +178,47 @@ static cy_rslt_t sdio_hm_node_deq(sdio_tx_info_t txi, cy_linked_list_t *q, sdio_
     return result;
 }
 
+static void sdio_hm_q_buf_release(sdio_handler_t sdio_hm, sdio_tx_q_node_t q_node)
+{
+    sdio_tx_info_t txi = sdio_hm->tx_info;
+    whd_driver_t whd_driver = sdio_hm->ifp->whd_driver;
+    whd_result_t whd_result;
+
+    if (q_node->is_whd_buf) {
+        whd_result = whd_buffer_release(whd_driver, q_node->buf_ptr, WHD_NETWORK_RX);
+        if (whd_result != WHD_SUCCESS) {
+            txi->err_release++;
+            PRINT_HM_ERROR(("release whd buffer failed: %ld\n", whd_result));
+        }
+    } else {
+        free(q_node->buf_ptr);
+    }
+}
+
+static cy_rslt_t sdio_hm_q_reset(sdio_handler_t sdio_hm)
+{
+    sdio_tx_info_t txi = sdio_hm->tx_info;
+    sdio_tx_q_node_t q_node = NULL;
+    uint32_t idle_q_cnt;
+    uint32_t wait_q_cnt;
+
+    do {
+        sdio_hm_node_deq(txi, &txi->tx_wait_q, &q_node);
+        if (q_node == NULL)
+            break;
+
+        sdio_hm_q_buf_release(sdio_hm, q_node);
+        CHK_RET(sdio_hm_node_enq(txi, &txi->tx_idle_q, q_node));
+    } while (true);
+
+    cy_linked_list_get_count(&txi->tx_idle_q, &idle_q_cnt);
+    cy_linked_list_get_count(&txi->tx_wait_q, &wait_q_cnt);
+
+    PRINT_HM_DEBUG(("Tx list count: idle = %ld, wait = %ld\n", idle_q_cnt, wait_q_cnt));
+
+    return CY_RSLT_SUCCESS;
+}
+
 static cy_rslt_t sdio_hm_q_init(sdio_tx_info_t txi)
 {
     sdio_tx_q_node_t txq_node = NULL;
@@ -205,7 +249,6 @@ static cy_rslt_t sdio_hm_tx_from_q(sdio_handler_t sdio_hm)
     uint16_t data_len = 0;
     uint32_t wait_q_cnt;
     sdiod_status_t sdiod_status;
-    whd_result_t whd_result;
     cy_rslt_t result;
 
     /* check queue isn't empty */
@@ -221,7 +264,7 @@ static cy_rslt_t sdio_hm_tx_from_q(sdio_handler_t sdio_hm)
         return CYHAL_SDIO_DEV_RSLT_WRITE_ERROR;
     }
 
-    CHK_RET(sdio_hm_node_deq(sdio_hm->tx_info, &txi->tx_wait_q, &q_node));
+    CHK_RET(sdio_hm_node_deq(txi, &txi->tx_wait_q, &q_node));
 
     CY_ASSERT(NULL != q_node);
 
@@ -241,16 +284,7 @@ static cy_rslt_t sdio_hm_tx_from_q(sdio_handler_t sdio_hm)
         return result;
     }
 
-    if (q_node->is_whd_buf) {
-        whd_result = whd_buffer_release(whd_driver, q_node->buf_ptr, WHD_NETWORK_RX);
-        if (whd_result != WHD_SUCCESS) {
-            txi->err_release++;
-            PRINT_HM_ERROR(("release whd buffer failed: %ld\n", whd_result));
-            return CYHAL_SDIO_DEV_RSLT_WRITE_ERROR;
-        }
-    } else {
-        free(q_node->buf_ptr);
-    }
+    sdio_hm_q_buf_release(sdio_hm, q_node);
 
     CHK_RET(sdio_hm_node_enq(txi, &txi->tx_idle_q, q_node));
 
@@ -264,7 +298,7 @@ static void sdio_hm_process_ethernet_data(whd_interface_t ifp, whd_buffer_t buff
     uint16_t data_len = whd_buffer_get_current_piece_size(ifp->whd_driver, buffer);
     cy_rslt_t result = CY_RSLT_SUCCESS;
 
-    if (sdio_arb_eth_packet_recv_handle(data))
+    if (!sdio_hm->sdio_instance.is_ready || sdio_arb_eth_packet_recv_handle(data))
     {
         /* forward buffer to internal network stack */
         cy_network_process_ethernet_data(ifp, buffer);
@@ -358,19 +392,18 @@ static void sdio_hm_wcm_event_callback(cy_wcm_event_t event, cy_wcm_event_data_t
     }
 }
 
-static void sdio_hm_rx_notify_host()
+static void sdio_hm_rx_notify_host(sdio_rx_info_t rxi)
 {
-    static uint32_t to_host_mailbox_data = 0;
     sdiod_status_t dev_status = SDIOD_STATUS_SUCCESS;
 
-    dev_status = sdiod_set_ToHostMailboxData(to_host_mailbox_data);
+    dev_status = sdiod_set_ToHostMailboxData(rxi->req_next_data);
     if (dev_status != SDIOD_STATUS_SUCCESS) {
         PRINT_HM_ERROR(("failed to write mailbox data 0x%lx: %d\n",
-            to_host_mailbox_data, dev_status));
+            rxi->req_next_data, dev_status));
         return;
     }
 
-    to_host_mailbox_data++;
+    rxi->req_next_data++;
 }
 
 static cy_rslt_t sdio_hm_request_buffer(sdio_handler_t sdio_hm, whd_buffer_t *buffer)
@@ -397,13 +430,91 @@ static cy_rslt_t sdio_hm_request_buffer(sdio_handler_t sdio_hm, whd_buffer_t *bu
     return CY_RSLT_SUCCESS;
 }
 
+static cy_rslt_t sdio_hm_thread_timer_stop(sdio_handler_t sdio_hm)
+{
+    bool timer_state;
+    cy_rslt_t result;
+
+    sdio_hm->sdio_rx_timer_active = false;
+    result = cy_rtos_is_running_timer(&sdio_hm->thread_timer, &timer_state);
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("SDIO cannot get thread timer state: %ld\n", result));
+        return result;
+    }
+
+    if (!timer_state)
+        return CY_RSLT_SUCCESS;
+
+    result = cy_rtos_timer_stop(&sdio_hm->thread_timer);
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("SDIO stop thread timer failed: %ld\n", result));
+    }
+
+    return result;
+}
+
+static void sdio_hm_trisate_sdio_lines(void)
+{
+#ifdef COMPONENT_CAT5
+/* Currently H1-CP is only validated  */
+    PRINT_HM_INFO(("SDIO Deinit done, Tristating SDIO CLK, CMD, Data Lines \n"));
+    /* Set SDIO pins to TRISTAT */
+    wlss_pad_configure(PAD_SDIO_CLK, FUNC_SDIO_CLK_TRISTATE, 0);
+    wlss_pad_configure(PAD_SDIO_CMD, FUNC_SDIO_CMD_TRISTATE, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_0, FUNC_SDIO_DATA_0_TRISTATE, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_1, FUNC_SDIO_DATA_1_TRISTATE, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_2, FUNC_SDIO_DATA_2_TRISTATE, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_3, FUNC_SDIO_DATA_3_TRISTATE, 0);
+#else
+#error "Add equivalent code for your MCU family"
+#endif /* COMPONENT_CAT5 */
+}
+
+static void sdio_hm_restore_sdio_lines(void)
+{
+#ifdef COMPONENT_CAT5
+/* Currently H1-CP is only validated  */
+    wlss_pad_configure(PAD_SDIO_CLK, FUNC_SDIO_CLK, 0);
+    wlss_pad_configure(PAD_SDIO_CMD, FUNC_SDIO_CMD, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_0, FUNC_SDIO_DATA_0, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_1, FUNC_SDIO_DATA_1, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_2, FUNC_SDIO_DATA_2, 0);
+    wlss_pad_configure(PAD_SDIO_DATA_3, FUNC_SDIO_DATA_3, 0);
+#else
+#error "Add equivalent code for your MCU family"
+#endif /* COMPONENT_CAT5 */
+}
+
 void sdio_hm_int_evt_info(sdio_handler_t sdio_hm, sdiod_event_data_host_info_t       *host_info)
 {
-    if (host_info->io_enabled && !(sdio_hm->sdio_instance.is_ready)) {
-        PRINT_HM_DEBUG(("IO Enabled: %d\n", host_info->io_enabled));
+    PRINT_HM_DEBUG(("IO Enabled: %d\n", host_info->io_enabled));
+
+    if (host_info->io_enabled) {
         if(cyhal_sdio_dev_is_ready(&sdio_hm->sdio_instance)) {
             PRINT_HM_DEBUG(("F2 Ready done: %d\n", (sdio_hm->sdio_instance.is_ready)));
             cyhal_sdio_dev_read_async(&sdio_hm->sdio_instance, sdio_hm->sdio_instance.buffer.rx_header, SDIOD_RX_FRAME_HDR_LENGTH);
+        }
+    } else {
+        cy_rslt_t result;
+
+        sdio_hm->sdio_instance.is_ready = false;
+
+        while (sdiod_IsSleepAllowed() != CY_RSLT_SUCCESS) {
+            /* Wait for host to clear KSO, after F2 disable */
+            PRINT_HM_DEBUG(("Waiting for KSO clear[0x%x]\n", sdiod_IsSleepAllowed()));
+        }
+        PRINT_HM_INFO(("KSO cleared [0x%x]\n", sdiod_IsSleepAllowed()));
+
+        result = sdio_hm_deinit(sdio_hm);
+        if (result != CY_RSLT_SUCCESS) {
+            PRINT_HM_ERROR(("SDIO deinit failed: %ld\n", result));
+            return;
+        }
+        else {
+            sdio_hm_trisate_sdio_lines();
+            PRINT_HM_INFO(("SDIO Deinit done, SDIO Lines put to tristate, put SDIO host into Shutdown\n"));
+            cyhal_gpio_write(sdio_hm->host_pwr_ctrl_gpio, WHD_FALSE);
+            return;
         }
     }
 }
@@ -437,6 +548,134 @@ void sdio_hm_int_evt_cb(sdiod_event_code_t event_code, void *event_data)
         default:
             break;
     }
+}
+
+static cy_rslt_t sdio_hm_reset_tx(sdio_handler_t sdio_hm)
+{
+    CHK_RET(sdio_hm_q_reset(sdio_hm));
+
+    sdio_hm->tx_info->tx_seq = 0;
+
+    return CY_RSLT_SUCCESS;
+}
+
+static cy_rslt_t sdio_hm_reset_rx(sdio_rx_info_t rxi)
+{
+    rxi->req_next_data = 0;
+    rxi->next_seq = 0;
+
+    sdio_hm_rx_notify_host(rxi);
+
+    return CY_RSLT_SUCCESS;
+}
+
+cy_rslt_t sdio_hm_deinit(sdio_handler_t sdio_hm)
+{
+    cy_rslt_t result = CY_RSLT_SUCCESS;
+
+    if (!sdio_hm->sdio_instance.hw_inited) {
+        PRINT_HM_INFO(("SDIO is in already deinitialized state \n"));
+        return result;
+    }
+
+    /* wait until data thread idle */
+    while (sdio_hm->sdio_thread_active) {
+        cy_rtos_delay_milliseconds(DEINIT_TIME);
+    }
+
+    PRINT_HM_INFO(("sdio deinit start\n"));
+
+    /* stop interrupt */
+    result = (SDIOD_STATUS_SUCCESS == sdiod_DisableInterrupt()) ? CY_RSLT_SUCCESS : CYHAL_SDIO_RSLT_ERR_CONFIG;
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("sdiod_EnableInterrupt failed: %ld\n", result));
+        return result;
+    }
+
+    /* stop data thread timer */
+    result = sdio_hm_thread_timer_stop(sdio_hm);
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("stop thread timer failed: %ld\n", result));
+        return result;
+    }
+
+    /* abort Tx/Rx */
+    result = cyhal_sdio_abort_async(&sdio_hm->sdio_instance);
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("abort async failed: %ld\n", result));
+        return result;
+    }
+
+    sdiod_Deinit();
+
+    sdio_hm->sdio_instance.hw_inited = false;
+
+    PRINT_HM_INFO(("sdio deinit complete\n"));
+
+    return result;
+}
+
+cy_rslt_t sdio_hm_reinit(void)
+{
+    cy_rslt_t result = CY_RSLT_SUCCESS;
+
+    sdio_handler_t sdio_hm = (sdio_handler_t)sdio_hm_get_sdio_handler();
+
+    PRINT_HM_INFO(("SDIO reinit, putting back SDIO CLK, CMD, Data Lines on proper state\n"));
+
+    /* GPIO wake code here and have delay after triggering host wake */
+    cyhal_gpio_write(sdio_hm->host_pwr_ctrl_gpio, WHD_TRUE);
+    cy_rtos_delay_milliseconds(HOST_TURN_ON_DELAY);
+
+    if (sdio_hm->sdio_instance.hw_inited) {
+        PRINT_HM_INFO(("SDIO is in already Initialized state \n"));
+        return result;
+    }
+
+    PRINT_HM_INFO(("sdio re-init start\n"));
+
+    /* Set SDIO pins to proper state*/
+    sdio_hm_restore_sdio_lines();
+
+    result = (SDIOD_STATUS_SUCCESS == sdiod_Init(sdio_hm->_sdio_dma_desc)) ? CY_RSLT_SUCCESS : CYHAL_SDIO_RSLT_ERR_CONFIG;
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("sdiod_Init failed: %ld\n", result));
+        return result;
+    }
+
+    sdio_hm->sdio_instance.hw_inited = true;
+
+    /* register callback function to receive interrupt */
+    result = (SDIOD_STATUS_SUCCESS == sdiod_RegisterCallback(sdio_hm_int_evt_cb)) ? CY_RSLT_SUCCESS : CYHAL_SDIO_RSLT_ERR_CONFIG;
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("sdiod_RegisterCallback failed: %ld\n", result));
+        return result;
+    }
+
+    /* enable interrupt */
+    result = (SDIOD_STATUS_SUCCESS == sdiod_EnableInterrupt()) ? CY_RSLT_SUCCESS : CYHAL_SDIO_RSLT_ERR_CONFIG;
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("sdiod_EnableInterrupt failed: %ld\n", result));
+        return result;
+    }
+
+    /* reset tx */
+    result = sdio_hm_reset_tx(sdio_hm);
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("reset tx failed: %ld\n", result));
+        return result;
+    }
+
+    /* reset rx */
+    result = sdio_hm_reset_rx(sdio_hm->rx_info);
+    if (result != CY_RSLT_SUCCESS) {
+        PRINT_HM_ERROR(("reset rx failed: %ld\n", result));
+        return result;
+    }
+
+    PRINT_HM_INFO(("sdio init complete\n"));
+
+    return result;
 }
 
 static void sdio_hm_thread_timer_start(sdio_handler_t sdio_hm)
@@ -490,7 +729,7 @@ static void sdio_hm_thread_func(cy_thread_arg_t arg)
         if (!rxi->reserved_buffer) {
             result = sdio_hm_request_buffer(sdio_hm, &rxi->reserved_buffer);
             if (result == CY_RSLT_SUCCESS) {
-                sdio_hm_rx_notify_host();
+                sdio_hm_rx_notify_host(rxi);
             }
         }
 
@@ -659,6 +898,8 @@ static cy_rslt_t sdio_hm_init_tx(sdio_handler_t sdio_hm)
 
     CHK_RET(sdio_hm_q_init(txi));
 
+    txi->tx_seq = 0;
+
     /* init snet for arbitration */
     sdio_arb_network_init();
     sdio_arb_add_whitelist_port(5001);
@@ -682,6 +923,7 @@ static cy_rslt_t sdio_hm_init_rx(sdio_handler_t sdio_hm)
     sdio_hm->rx_info = rxi;
 
     rxi->reserved_buffer = NULL;
+    rxi->req_next_data = 0;
     rxi->next_seq = 0;
 
     CHK_RET(sdio_hm_request_buffer(sdio_hm, &rxi->current_buffer));
@@ -723,20 +965,23 @@ cy_rslt_t sdio_hm_init(void)
     /* register network event change callback */
     CHK_RET(cy_wcm_register_event_callback(sdio_hm_wcm_event_callback));
 
+    /* Initialize GPIO to do shutdown and wake the Linux Host, this GPIO shoud be connected to
+       PMU EN pin of Linux Host */
+    CHK_RET(sdio_hm_set_host_power_control_gpio(SHUT_WAKE_GPIO));
+
     PRINT_HM_INFO(("SDIO for HM configured successfully\n"));
 
     return CY_RSLT_SUCCESS;
 }
 
-static void sdio_hm_fill_sw_header(uint8_t *payload, uint8_t channel)
+static void sdio_hm_fill_sw_header(sdio_tx_info_t txi, uint8_t *payload, uint8_t channel)
 {
-    static uint8_t tx_seq = 0;
     sdio_sw_header_t *sw_hdr = (sdio_sw_header_t *)payload;
     cy_network_packet_pool_info_t txpool_info;
 
     cy_network_get_packet_pool_info(CY_NETWORK_PACKET_TX, &txpool_info);
 
-    sw_hdr->sequence = tx_seq++;
+    sw_hdr->sequence = txi->tx_seq++;
     sw_hdr->channel_and_flags = channel;
 
     sw_hdr->bus_data_credit = (txpool_info.free_packets);
@@ -765,7 +1010,7 @@ static cy_rslt_t sdio_hm_build_pkt_for_host(sdio_handler_t sdio_hm, uint8_t *dat
 {
     cy_rslt_t result;
 
-    sdio_hm_fill_sw_header(data, channel);
+    sdio_hm_fill_sw_header(sdio_hm->tx_info, data, channel);
 
     result = sdio_hm_data_to_host(sdio_hm, data, data_len);
     if (result != CY_RSLT_SUCCESS) {
@@ -834,7 +1079,7 @@ static void sdio_hm_rx_process(sdio_handler_t sdio_hm, uint8_t *payload, uint16_
     data_offset = (*sw_hdr & SDPCM_DATA_OFFSET_MASK) >> SDPCM_DATA_OFFSET_SHIFT;
 
     /* compare sequence number */
-    PRINT_HM_DEBUG(("Rx seq: 0x%lx, channel: %d\n", seq, channel));
+    PRINT_HM_DEBUG(("Rx seq: 0x%x, channel: %d\n", seq, channel));
 
     if (seq != rxi->next_seq) {
         PRINT_HM_ERROR(("received seq %d != expected seq %d\n", seq, rxi->next_seq));
@@ -852,7 +1097,7 @@ static void sdio_hm_rx_process(sdio_handler_t sdio_hm, uint8_t *payload, uint16_
 
     /* notify host to transmit next data before processing received data */
     if (result == CY_RSLT_SUCCESS) {
-        sdio_hm_rx_notify_host();
+        sdio_hm_rx_notify_host(rxi);
     }
 
     /* process received data */
@@ -986,74 +1231,6 @@ static void sdio_hm_tp_timer_cb(cy_timer_callback_arg_t arg)
     sdio_hm_tp_stop();
 }
 
-void sdio_hm_tx_at_cmd_msg(uint8_t *data, uint16_t data_len)
-{
-    sdio_hm_tx_prepare(sdio_hm, data, data_len, SDPCM_AT_CMD_CHANNEL);
-}
-
-static void sdio_hm_process_at_cmd(at_cmd_msg_base_t *host_cmd, uint16_t length)
-{
-    at_cmd_msg_base_t *msg = NULL;
-    at_cmd_ref_app_wcm_connect_specific_t *connect_config;
-    at_cmd_ref_app_wcm_get_ip_type_t *get_ip_config;
-    cy_rslt_t result;
-
-    PRINT_HM_DEBUG(("AT CMD ID: %ld\n", host_cmd->cmd_id));
-
-    /* copy from at_cmd_refapp_parse_wcm_cmd() */
-    switch (host_cmd->cmd_id)
-    {
-        case CMD_ID_AP_DISCONNECT:
-        case CMD_ID_SCAN_START:
-        case CMD_ID_SCAN_STOP:
-        case CMD_ID_AP_GET_INFO:
-        case CMD_ID_GET_IPv4_ADDRESS:
-        case CMD_ID_PING:
-            /*
-             * Commands with no arguments. We just need a basic config message structure.
-             */
-            msg = (at_cmd_msg_base_t *)malloc(sizeof(at_cmd_msg_base_t));
-            if (msg == NULL) {
-                PRINT_HM_ERROR(( "Error allocating WCM config message\n"));
-                return;
-            }
-            memset(msg, 0, sizeof(at_cmd_msg_base_t));
-            memcpy(msg, host_cmd, sizeof(at_cmd_msg_base_t));
-            break;
-
-        case CMD_ID_AP_CONNECT:
-            connect_config = malloc(sizeof(at_cmd_ref_app_wcm_connect_specific_t));
-            if (connect_config == NULL) {
-                PRINT_HM_ERROR(( "error allocating WCM connect specific message\n"));
-                return;
-            }
-            memset(connect_config, 0, sizeof(at_cmd_ref_app_wcm_connect_specific_t));
-            memcpy(connect_config, host_cmd, sizeof(at_cmd_ref_app_wcm_connect_specific_t));
-            msg = (at_cmd_msg_base_t *)connect_config;
-            break;
-
-        case CMD_ID_GET_IP_ADDRESS:
-            get_ip_config = malloc(sizeof(at_cmd_ref_app_wcm_get_ip_type_t));
-            if (get_ip_config == NULL) {
-                PRINT_HM_ERROR(( "error allocating WCM get ip config message\n"));
-                return;
-            }
-            memset(get_ip_config, 0, sizeof(at_cmd_ref_app_wcm_get_ip_type_t));
-            memcpy(get_ip_config, host_cmd, sizeof(at_cmd_ref_app_wcm_get_ip_type_t));
-            msg = (at_cmd_msg_base_t *)get_ip_config;
-            break;
-
-        default:
-            AT_CMD_REFAPP_LOG_MSG(( "Unimplemented cmd \n"));
-            return;
-    }
-
-    result = at_cmd_refapp_send_message(msg);
-    if (result != CY_RSLT_SUCCESS) {
-        PRINT_HM_ERROR(("at_cmd_refapp_send_message failed: %ld\n", result));
-    }
-}
-
 static cy_rslt_t sdio_hm_tp_test_start(void)
 {
     PRINT_HM_DEBUG(("Start SDIO HM TP test\n"));
@@ -1082,7 +1259,7 @@ static cy_rslt_t sdio_hm_rx_inc_test(sdio_handler_t sdio_hm)
 
     PRINT_HM_DEBUG(("Start RX INC Test\n"));
 
-    sdio_hm_fill_sw_header(payload, SDPCM_DATA_CHANNEL);
+    sdio_hm_fill_sw_header(sdio_hm->tx_info, payload, SDPCM_DATA_CHANNEL);
 
     for (i = 0; i < SDIO_FRAME_MAX_PAYLOAD; i++)
         payload[i+SDIO_SW_HEADER_LEN] = (uint8_t)i;
@@ -1105,7 +1282,7 @@ static cy_rslt_t sdio_hm_rx_dec_test(sdio_handler_t sdio_hm)
     uint16_t i;
     cy_rslt_t result;
 
-    sdio_hm_fill_sw_header(payload, SDPCM_DATA_CHANNEL);
+    sdio_hm_fill_sw_header(sdio_hm->tx_info, payload, SDPCM_DATA_CHANNEL);
 
     for (i = 0; i < SDIO_FRAME_MAX_PAYLOAD; i++)
         payload[i+SDIO_SW_HEADER_LEN] = (uint8_t)i;
@@ -1125,7 +1302,7 @@ static void sdio_hm_rx_tp_test(sdio_handler_t sdio_hm)
     uint16_t i;
     cy_rslt_t result;
 
-    sdio_hm_fill_sw_header(payload, SDPCM_DATA_CHANNEL);
+    sdio_hm_fill_sw_header(sdio_hm->tx_info, payload, SDPCM_DATA_CHANNEL);
 
     for (i = 0; i < SDIO_FRAME_MAX_PAYLOAD; i++)
         payload[i+SDIO_SW_HEADER_LEN] = (uint8_t)i;
@@ -1178,4 +1355,46 @@ static void sdio_hm_process_test_cmd(sdio_handler_t sdio_hm, struct inf_test_msg
 }
 #endif /* defined(SDIO_HM_TEST) */
 
+cy_rslt_t sdio_hm_shutd_evt_to_host(void)
+{
+    sdio_handler_t sdio_hm = sdio_hm_get_sdio_handler();
+    inf_shutd_event_t *inf_event = NULL;
+    inf_event_base_t *base = NULL;
+    cy_rslt_t result;
+
+    if ((!sdio_hm) || (!sdio_hm->sdio_instance.is_ready)) {
+        PRINT_HM_ERROR(("Host is not up, can't send shutdown event\n"));
+        return WHD_DOES_NOT_EXIST;
+    }
+
+    inf_event = whd_mem_malloc(sizeof(*inf_event));
+    if (!inf_event) {
+        PRINT_HM_ERROR(("inf_at_event_t malloc failed\n"));
+        return WHD_MALLOC_FAILURE;
+    }
+
+    whd_mem_memset(inf_event, 0, sizeof(*inf_event));
+
+    base = &inf_event->base;
+    base ->ver = SHUTDOWN_EVENT_VER;
+    base ->type = INF_SHUTDOWN_EVENT;
+    base ->len = 1;
+
+    result = SDIO_HM_TX_EVENT(sdio_hm, inf_event, sizeof(*inf_event));
+    if (result != SDIOD_STATUS_SUCCESS) {
+        sdio_hm->tx_info->err_event++;
+        PRINT_HM_ERROR(("tx event failed: 0x%lx\n", result));
+        free(inf_event);
+    }
+
+    return result;
+}
+
+cy_rslt_t sdio_hm_set_host_power_control_gpio(cyhal_gpio_t gpio)
+{
+    sdio_handler_t sdio_hm = sdio_hm_get_sdio_handler();
+    sdio_hm->host_pwr_ctrl_gpio = gpio;
+    CHK_RET(cyhal_gpio_init(sdio_hm->host_pwr_ctrl_gpio, CYHAL_GPIO_DIR_OUTPUT, CYHAL_GPIO_DRIVE_STRONG, WHD_TRUE));
+    return WHD_SUCCESS;
+}
 #endif /* COMPONENT_SDIO_HM */

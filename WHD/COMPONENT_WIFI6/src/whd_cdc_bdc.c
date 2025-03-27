@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +30,10 @@
 #include "whd_proto.h"
 #include "whd_utils.h"
 
+#ifdef BUS_ENC
+#include "mbedtls/gcm.h"
+#endif /* BUS_ENC */
+
 /******************************************************
 *        Constants
 ******************************************************/
@@ -37,6 +41,12 @@
 #define BDC_PROTO_VER                  (2)      /** Version number of BDC header */
 #define BDC_FLAG_VER_SHIFT             (4)      /** Number of bits to shift BDC version number in the flags field */
 #define BDC_FLAG2_IF_MASK           (0x0f)
+
+#ifdef BUS_ENC
+#define BDC_FLAG2_ENC_MASK          (0x20)
+#define BDC_FLAG2_ENC                   1
+#define BDC_FLAG2_ENC_SHIFT            (5)
+#endif /* BUS_ENC */
 
 #define ETHER_TYPE_BRCM           (0x886C)      /** Broadcom Ethertype for identifying event packets - Copied from DHD include/proto/ethernet.h */
 #define BRCM_OUI            "\x00\x10\x18"      /** Broadcom OUI (Organizationally Unique Identifier): Used in the proprietary(221) IE (Information Element) in all Broadcom devices */
@@ -161,6 +171,14 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     uint32_t bss_index = ifp->bsscfgidx;
     whd_driver_t whd_driver = ifp->whd_driver;
     whd_cdc_bdc_info_t *cdc_bdc_info = whd_driver->proto->pd;
+#ifdef BUS_ENC
+    unsigned char tag[16];
+    uint8_t *out;
+    uint8_t *data;
+    mbedtls_gcm_context ctx;
+    mbedtls_cipher_id_t cipher = MBEDTLS_CIPHER_ID_AES;
+    mbedtls_gcm_setkey( &ctx, cipher, whd_driver->key, GCM_KEY_SIZE );
+#endif /* BUS_ENC */
 
     /* Validate the command value */
     if (command > INT_MAX)
@@ -218,6 +236,9 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     send_packet->cdc_header.flags  = ( (requested_ioctl_id << CDCF_IOC_ID_SHIFT)
                                        & CDCF_IOC_ID_MASK ) | type | bss_index << CDCF_IOC_IF_SHIFT;
     send_packet->cdc_header.flags = htod32(send_packet->cdc_header.flags);
+#ifdef BUS_ENC
+    send_packet->cdc_header.flags  |= (CDCF_IOC_ENC << CDCF_IOC_ENC_SHIFT);
+#endif /* BUS_ENC */
 
     send_packet->cdc_header.status = 0;
 
@@ -227,6 +248,14 @@ whd_result_t whd_cdc_send_ioctl(whd_interface_t ifp, cdc_command_type_t type, ui
     {
         CHECK_RETURN(whd_buffer_set_size(whd_driver, send_buffer_hnd, WHD_IOCTL_MAX_TX_PKT_LEN) );
     }
+#ifdef BUS_ENC
+    data = (uint8_t *)DATA_AFTER_HEADER(send_packet);
+    out = whd_mem_malloc(data_length + 16);
+    mbedtls_gcm_crypt_and_tag( &ctx, MBEDTLS_GCM_ENCRYPT, data_length, whd_driver->iv,
+               GCM_IV_SIZE, aad, sizeof(aad),  data, out, sizeof(tag), tag);
+    whd_mem_memcpy(DATA_AFTER_HEADER(send_packet), out, data_length);
+    whd_mem_free(out);
+#endif /* BUS_ENC */
 
     /* Store the length of the data and the IO control header and pass "down" */
     CHECK_RETURN(whd_send_to_bus(whd_driver, send_buffer_hnd, CONTROL_HEADER, 8) );
@@ -394,6 +423,16 @@ whd_result_t whd_cdc_tx_queue_data(whd_interface_t ifp, whd_buffer_t buffer)
     ethernet_header_t *ethernet_header = (ethernet_header_t *)whd_buffer_get_current_piece_data_pointer(
         whd_driver, buffer);
     uint16_t ether_type;
+#ifdef BUS_ENC
+    unsigned char *out;
+    unsigned char *tmp;
+    unsigned char tag[16];
+    bdc_header_t *bdc_header;
+    mbedtls_gcm_context ctx;
+    mbedtls_cipher_id_t cipher = MBEDTLS_CIPHER_ID_AES;
+    mbedtls_gcm_init( &ctx );
+    mbedtls_gcm_setkey( &ctx, cipher, whd_driver->key, GCM_KEY_SIZE );
+#endif /* BUS_ENC */
     CHECK_PACKET_NULL(ethernet_header, WHD_NO_REGISTER_FUNCTION_POINTER);
     ether_type = ntoh16(ethernet_header->ethertype);
     if ( (ether_type == WHD_ETHERTYPE_IPv4) || (ether_type == WHD_ETHERTYPE_DOT1AS) )
@@ -450,8 +489,22 @@ whd_result_t whd_cdc_tx_queue_data(whd_interface_t ifp, whd_buffer_t buffer)
     }
 
     packet->bdc_header.flags2   = ifp->bsscfgidx;
+#ifdef BUS_ENC
+    packet->bdc_header.flags2   |= (BDC_FLAG2_ENC << BDC_FLAG2_ENC_SHIFT);
+#endif /*BUS_ENC */
     packet->bdc_header.data_offset = 0;
 
+#ifdef BUS_ENC
+   out = whd_mem_malloc(whd_buffer_get_current_piece_size(whd_driver, buffer));
+   tmp = (unsigned char *)&packet[1];
+   mbedtls_gcm_crypt_and_tag( &ctx, MBEDTLS_GCM_ENCRYPT,
+      whd_buffer_get_current_piece_size(whd_driver, buffer) - sizeof(data_header_t),
+      whd_driver->iv, GCM_IV_SIZE, aad, sizeof(aad), tmp, out, sizeof(tag), tag);
+   whd_mem_memcpy(tmp, out,
+     whd_buffer_get_current_piece_size(whd_driver, buffer) - sizeof(data_header_t));
+   whd_mem_free(out);
+   mbedtls_gcm_free( &ctx );
+#endif /* BUS_ENC */
     /* Add the length of the BDC header and pass "down" */
     return whd_send_to_bus(whd_driver, buffer, DATA_HEADER, packet->bdc_header.priority);
 
@@ -564,9 +617,20 @@ void whd_process_cdc(whd_driver_t whd_driver, whd_buffer_t buffer)
     whd_result_t result;
     cdc_header_t *cdc_header = (cdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     whd_result_t ioctl_mutex_res;
+#ifdef BUS_ENC
+    unsigned char tag[16];
+    uint8_t *tmp;
+    mbedtls_gcm_context ctx;
+    mbedtls_cipher_id_t cipher = MBEDTLS_CIPHER_ID_AES;
+    mbedtls_gcm_init( &ctx );
+    mbedtls_gcm_setkey( &ctx, cipher, whd_driver->key, GCM_KEY_SIZE );
+#endif /* BUS_ENC */
     CHECK_PACKET_WITH_NULL_RETURN(cdc_header);
     flags         = dtoh32(cdc_header->flags);
     id            = (uint16_t)( (flags & CDCF_IOC_ID_MASK) >> CDCF_IOC_ID_SHIFT );
+#ifdef BUS_ENC
+    tmp = (uint8 *)&cdc_header[1];
+#endif /* BUS_ENC */
 
     /* Validate request ioctl ID and check if whd_cdc_send_ioctl is still waiting for response*/
     if ( ( (ioctl_mutex_res = cy_rtos_get_semaphore(&cdc_bdc_info->ioctl_mutex, 0, WHD_FALSE) ) != WHD_SUCCESS ) &&
@@ -575,6 +639,22 @@ void whd_process_cdc(whd_driver_t whd_driver, whd_buffer_t buffer)
         /* Save the response packet in a variable */
         cdc_bdc_info->ioctl_response = buffer;
 
+#ifdef BUS_ENC
+    if (((flags & CDCF_IOC_ENC_MASK ) == CDCF_IOC_ENC_MASK) && (dtoh32(cdc_header->len) > 0))
+     {
+        int ret = 0;
+        unsigned char *out;
+        out = whd_mem_malloc(dtoh32(cdc_header->len));
+        mbedtls_gcm_auth_decrypt( &ctx, dtoh32(cdc_header->len), whd_driver->iv,
+                 GCM_IV_SIZE, aad, sizeof(aad),
+                (const unsigned char *)tag, sizeof(tag),
+                (const unsigned char *)tmp , (unsigned char *)out);
+        whd_mem_memcpy(tmp, out, dtoh32(cdc_header->len));
+        mbedtls_gcm_free( &ctx );
+        whd_mem_free(out);
+        cdc_bdc_info->ioctl_response = buffer;
+     }
+#endif /*BUS_ENC */
         WPRINT_WHD_DATA_LOG( ("Wcd:< Procd pkt 0x%08lX: IOCTL Response\n", (unsigned long)buffer) );
 
         /* Wake the thread which sent the IOCTL/IOVAR so that it will resume */
@@ -620,6 +700,14 @@ void whd_process_bdc(whd_driver_t whd_driver, whd_buffer_t buffer)
     uint32_t bssid_index;
     whd_interface_t ifp;
     whd_result_t result;
+#ifdef BUS_ENC
+    unsigned char tag[16];
+    unsigned char *tmp;
+    mbedtls_gcm_context ctx;
+    mbedtls_cipher_id_t cipher = MBEDTLS_CIPHER_ID_AES;
+    mbedtls_gcm_init( &ctx );
+    mbedtls_gcm_setkey( &ctx, cipher, whd_driver->key, GCM_KEY_SIZE );
+#endif /* BUS_ENC */
     bdc_header_t *bdc_header = (bdc_header_t *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     CHECK_PACKET_WITH_NULL_RETURN(bdc_header);
     /* Calculate where the payload is */
@@ -638,6 +726,23 @@ void whd_process_bdc(whd_driver_t whd_driver, whd_buffer_t buffer)
         return;
     }
 
+#ifdef BUS_ENC
+    if ((bdc_header->flags2 & BDC_FLAG2_ENC_MASK) == BDC_FLAG2_ENC_MASK)
+    {
+	int ret = 0;
+	uint8_t *out;
+	out = whd_mem_malloc(whd_buffer_get_current_piece_size(whd_driver, buffer));
+	ret = mbedtls_gcm_auth_decrypt( &ctx,
+		whd_buffer_get_current_piece_size(whd_driver, buffer), whd_driver->iv,
+                GCM_IV_SIZE, aad, sizeof(aad), (const unsigned char *)tag, sizeof(tag),
+                (const unsigned char *)whd_buffer_get_current_piece_data_pointer(whd_driver, buffer),
+		(unsigned char *)out);
+	whd_mem_memcpy(whd_buffer_get_current_piece_data_pointer(whd_driver, buffer),
+		out, whd_buffer_get_current_piece_size(whd_driver, buffer));
+	whd_mem_free(out);
+	mbedtls_gcm_free( &ctx );
+    }
+#endif /* BUS_ENC */
     /* It is preferable to have IP data at address aligned to 4 bytes. IP data startes after ethernet header */
     ip_data_start_add =
         (uint32_t )whd_buffer_get_current_piece_data_pointer(whd_driver, buffer) + WHD_ETHERNET_SIZE;
@@ -676,7 +781,32 @@ void whd_process_bdc_event(whd_driver_t whd_driver, whd_buffer_t buffer, uint16_
     uint16_t j;
     uint32_t datalen, addr;
 
+#ifdef BUS_ENC
+    unsigned char tag[16];
+    unsigned char *tmp;
+    mbedtls_gcm_context ctx;
+    mbedtls_cipher_id_t cipher = MBEDTLS_CIPHER_ID_AES;
+    mbedtls_gcm_init( &ctx );
+    mbedtls_gcm_setkey( &ctx, cipher, whd_driver->key, GCM_KEY_SIZE );
+#endif /* BUS_ENC */
     CHECK_PACKET_WITH_NULL_RETURN(bdc_header);
+#ifdef BUS_ENC
+    if ((bdc_header->flags2 & BDC_FLAG2_ENC_MASK) == BDC_FLAG2_ENC_MASK)
+    {
+        int ret = 0;
+        uint8_t *out;
+
+        out = whd_mem_malloc(whd_buffer_get_current_piece_size(whd_driver, buffer) - sizeof(bdc_header_t));
+        tmp = (unsigned char *)&bdc_header[bdc_header->data_offset + 1];
+        ret = mbedtls_gcm_auth_decrypt( &ctx,
+               whd_buffer_get_current_piece_size(whd_driver, buffer) - sizeof(bdc_header_t),
+	       whd_driver->iv, GCM_IV_SIZE, aad, sizeof(aad), (const unsigned char *)tag,
+               sizeof(tag), (const unsigned char *)tmp, (unsigned char *)out);
+        whd_mem_memcpy(tmp, out, whd_buffer_get_current_piece_size(whd_driver, buffer));
+        whd_mem_free(out);
+        mbedtls_gcm_free( &ctx );
+    }
+#endif /* BUS_ENC */
     event = (whd_event_t *)&bdc_header[bdc_header->data_offset + 1];
 
     ether_type = ntoh16(event->eth.ethertype);

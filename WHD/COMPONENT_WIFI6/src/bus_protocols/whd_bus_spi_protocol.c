@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +50,8 @@
 #include "whd_resource_if.h"
 #include "whd_proto.h"
 #include "whd_utils.h"
+#include "whd_hal_port.h"
+
 
 /******************************************************
 *             Constants
@@ -162,6 +164,7 @@ uint32_t whd_bus_spi_bt_packet_available_to_read(whd_driver_t whd_driver);
 whd_result_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_spi_config, whd_spi_t *spi_obj)
 {
     struct whd_bus_info *whd_bus_info;
+    const whd_oob_config_t *oob_config = &whd_spi_config->oob_config;
 
     if (!whd_driver || !whd_spi_config)
     {
@@ -170,7 +173,7 @@ whd_result_t whd_bus_spi_attach(whd_driver_t whd_driver, whd_spi_config_t *whd_s
         return WHD_WLAN_BADARG;
     }
 
-    if (whd_spi_config->oob_config.host_oob_pin == WHD_NC_PIN_VALUE)
+    if (whd_hal_is_oob_pin_avaliable(oob_config) != WHD_TRUE)
     {
         WPRINT_WHD_ERROR( ("OOB interrupt pin argument must be provided in %s\n", __FUNCTION__) );
         return WHD_BADARG;
@@ -260,7 +263,7 @@ void whd_bus_spi_detach(whd_driver_t whd_driver)
 whd_result_t whd_bus_spi_transfer(whd_driver_t whd_driver, const uint8_t *tx, size_t tx_length, uint8_t *rx, size_t rx_length,
                              uint8_t write_fill)
 {
-    return cyhal_spi_transfer(whd_driver->bus_priv->spi_obj, tx, tx_length, rx, rx_length, write_fill);
+    return whd_hal_spi_transfer(whd_driver->bus_priv->spi_obj, tx, tx_length, rx, rx_length, write_fill);
 }
 #endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
 
@@ -1157,25 +1160,15 @@ uint32_t whd_bus_spi_get_max_transfer_size(whd_driver_t whd_driver)
 }
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
-#if (CYHAL_API_VERSION >= 2)
-static void whd_bus_spi_oob_irq_handler(void *arg, cyhal_gpio_event_t event)
-#else
-static void whd_bus_spi_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event)
-#endif /* (CYHAL_API_VERSION >= 2) */
+static void whd_bus_spi_oob_irq_handler(void *arg, whd_hal_gpio_event_t event)
 {
     whd_driver_t whd_driver = (whd_driver_t)arg;
     const whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
-#if (CYHAL_API_VERSION >= 2)
-    const cyhal_gpio_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
-                                              ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-#else
-    const cyhal_gpio_irq_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
-                                                  ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-#endif /* (CYHAL_API_VERSION >= 2) */
+    const whd_hal_gpio_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
+                                              ? WHD_HAL_GPIO_IRQ_FALL : WHD_HAL_GPIO_IRQ_RISE;
     if (event != expected_event)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
-
         return;
     }
 
@@ -1183,40 +1176,18 @@ static void whd_bus_spi_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event)
     whd_thread_notify_irq(whd_driver);
 }
 
-/* XXX FIXME */
-#define WLAN_INTR_PRIORITY 1
 whd_result_t whd_bus_spi_irq_register(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
 
-    cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_ANALOG,
-                    (config->is_falling_edge == WHD_TRUE) ? 1 : 0);
-#if (CYHAL_API_VERSION >= 2)
-    static cyhal_gpio_callback_data_t cbdata;
-    cbdata.callback = whd_bus_spi_oob_irq_handler;
-    cbdata.callback_arg = whd_driver;
-    cyhal_gpio_register_callback(config->host_oob_pin, &cbdata);
-#else
-    cyhal_gpio_register_irq(config->host_oob_pin, WLAN_INTR_PRIORITY, whd_bus_spi_oob_irq_handler,
-                            whd_driver);
-#endif /* (CYHAL_API_VERSION >= 2) */
-    return WHD_TRUE;
+    return whd_hal_gpio_register_callback(config, WHD_TRUE, whd_bus_spi_oob_irq_handler, whd_driver);
 }
 
 whd_result_t whd_bus_spi_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
 {
-    const whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
-#if (CYHAL_API_VERSION >= 2)
-    const cyhal_gpio_event_t event =
-        (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
+    whd_oob_config_t *config = &whd_driver->bus_priv->spi_config.oob_config;
 
-    cyhal_gpio_enable_event(config->host_oob_pin, event, WLAN_INTR_PRIORITY, (enable == WHD_TRUE) ? true : false);
-#else
-    const cyhal_gpio_irq_event_t event =
-        (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-
-    cyhal_gpio_irq_enable(config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
-#endif /* (CYHAL_API_VERSION >= 2) */
+    whd_hal_gpio_enable_event(config, enable);
     return WHD_TRUE;
 }
 #endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */

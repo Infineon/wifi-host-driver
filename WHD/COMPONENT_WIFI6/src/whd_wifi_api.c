@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,10 +42,6 @@
 #ifdef CYCFG_ULP_SUPPORT_ENABLED
 #include "cy_wcm.h"
 #endif
-
-#if defined(WHD_CSI_SUPPORT)
-#include "whd_csi.h"
-#endif /* defined(WHD_CSI_SUPPORT) */
 
 #ifdef GCI_SECURE_ACCESS
 #include "whd_hw.h"
@@ -111,21 +107,6 @@
 #define EVTLOG_PRINT_ONLY_MODE          0x40
 #define EVTLOG_LOG_ONLY_MODE            0x80
 
-#if defined(WHD_CSI_SUPPORT)
-/* CSI parameters */
-#define CSI_CAPTURE_PERIOD_NON_PERIODIC	    -1
-#define CSI_DEFAULT_CAPTURE_WINDOW_DUR	    10
-#define CSI_AS_MODE_UNASSOC                 0
-#define CSI_AS_MODE_ASSOC                   1
-#define CSI_SOLICIT_MODE_UNSOL              1
-#define CSI_SOLICIT_MODE_SOLIC              0
-#define CSI_BSS_MODE_ANY_BSS                0
-#define CSI_BSS_MODE_MY_BSS                 1
-#define CSI_BSS_MODE_OTHER_BSS              2
-#define INVALID_FT                          0b11
-#define KEY_MAXLEN                          64
-#define CSI_BEACON_FRMTYPE                  32
-#endif /* defined(WHD_CSI_SUPPORT) */
 /** Buffer length check for ulp statistics
  *
  *  @param buflen              buffer length
@@ -174,10 +155,6 @@ const whd_event_num_t join_events[]  =
 static const whd_event_num_t scan_events[] = { WLC_E_ESCAN_RESULT, WLC_E_NONE };
 static const whd_event_num_t auth_events[] =
 { WLC_E_EXT_AUTH_REQ, WLC_E_EXT_AUTH_FRAME_RX, WLC_E_NONE };
-#if defined(WHD_CSI_SUPPORT)
-static const whd_event_num_t csi_events[] =
-{ WLC_E_CSI_ENABLE, WLC_E_CSI_DATA, WLC_E_CSI_DISABLE, WLC_E_NONE };
-#endif /* defined(WHD_CSI_SUPPORT) */
 
 /* Values are in 100's of Kbit/sec (1 = 100Kbit/s). Arranged as:
  * [Bit index]
@@ -1011,7 +988,7 @@ whd_result_t whd_wifi_keepalive_config(whd_interface_t ifp, whd_keep_alive_t *pa
 	whd_buffer_t buffer = NULL;
 	whd_driver_t whd_driver;
 	wl_keep_alive_pkt_t *keepalive_cfg;
-        uint32_t buffer_length;
+    uint32_t buffer_length;
 	whd_driver = ifp->whd_driver;
 	CHECK_DRIVER_NULL(whd_driver);
 
@@ -1032,15 +1009,41 @@ whd_result_t whd_wifi_keepalive_config(whd_interface_t ifp, whd_keep_alive_t *pa
         keepalive_cfg = (wl_keep_alive_pkt_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer,(uint16_t)buffer_length,IOVAR_STR_KEEPALIVE_CONFIG);
 
 		CHECK_IOCTL_BUFFER(keepalive_cfg);
-	keepalive_cfg->period_msec = packet->period_msec;
-	keepalive_cfg->len_bytes = packet->len_bytes;
-	whd_mem_memcpy(keepalive_cfg->data,packet->data,packet->len_bytes);
+        keepalive_cfg->period_msec = packet->period_msec;
+        keepalive_cfg->len_bytes = packet->len_bytes;
+        whd_mem_memcpy(keepalive_cfg->data,packet->data,packet->len_bytes);
 
-	}
+    }
 	CHECK_RETURN(whd_proto_set_iovar(ifp, buffer, 0));
     return WHD_SUCCESS;
 }
 
+whd_result_t whd_configure_tko_filter(whd_interface_t ifp,whd_tko_auto_filter_t * whd_filter, uint8_t filter_flag)
+{
+    uint32_t result = 0;
+
+    result =  whd_tko_toggle(ifp, WHD_FALSE);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR(("Set whd_tko_param returned failure\n"));
+    }
+    result =  whd_tko_autoenab(ifp, WHD_TRUE);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR(("Set whd_tko_autoenab returned failure\n"));
+    }
+    result = whd_tko_filter(ifp,whd_filter,filter_flag);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR(("Set whd_tko_filter returned failure\n"));
+    }
+    result =  whd_tko_toggle(ifp, WHD_TRUE);
+    if (result != WHD_SUCCESS)
+    {
+        WPRINT_WHD_ERROR(("Set whd_tko_param returned failure\n"));
+    }
+    return result;
+}
 
 whd_result_t whd_configure_tko_offload(whd_interface_t ifp, whd_bool_t enable)
 {
@@ -6457,297 +6460,7 @@ whd_wifi_deregister_ds_callback(whd_interface_t ifp, whd_ds_callback_t callback)
 
     return WHD_SUCCESS;
 }
-#endif
-#if defined(WHD_CSI_SUPPORT)
-/**
- * whd_wifi_csi_events_handler() - Handle the CSI Event notifications from Firmware.
- *
- * @ifp: interface instatnce.
- * @event_header: event message header.
- * @event_data: CSI information
- * @handler_user_data: Semaphore data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-void
-*whd_wifi_csi_events_handler(whd_interface_t ifp, const whd_event_header_t *event_header,
-                const uint8_t *event_data, void *handler_user_data)
-{
-    switch (event_header->event_type)
-    {
-        case WLC_E_CSI_ENABLE:
-            whd_wifi_csi_attach_and_handshake(ifp);
-            break;
-        case WLC_E_CSI_DATA:
-            whd_wifi_csi_process_csi_data(ifp, event_data, event_header->datalen);
-            break;
-        case WLC_E_CSI_DISABLE:
-            whd_wifi_csi_detach_and_release_uart(ifp);
-            break;
-        default:
-            WPRINT_WHD_ERROR("Event type is not registered !");
-    }
-    return 0;
-}
-
-/**
- * whd_csi_register_handler() - Handler attach function that would attach the handler function.
- *
- * @ifp: interface instatnce.
- * @user_data: Semaphore data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-whd_result_t
-whd_csi_register_handler(whd_interface_t ifp, void* user_data)
-{
-    uint16_t event_entry = 0xFF;
-    if (ifp->event_reg_list[WHD_CSI_EVENT_ENTRY] != WHD_EVENT_NOT_REGISTERED) {
-        whd_wifi_deregister_event_handler(ifp, ifp->event_reg_list[WHD_CSI_EVENT_ENTRY]);
-        ifp->event_reg_list[WHD_CSI_EVENT_ENTRY] = WHD_EVENT_NOT_REGISTERED;
-    }
-    CHECK_RETURN (whd_management_set_event_handler(ifp, csi_events,
-                whd_wifi_csi_events_handler,  user_data, &event_entry));
-    return WHD_SUCCESS;
-}
-void
-whd_init_csi_cfg_params(wlc_csi_cfg_t *params) {
-    /* Initializes the params which will be sent to FW */
-    params->csi_enable = TRUE;
-    params->capture_period_ms = CSI_CAPTURE_PERIOD_NON_PERIODIC;
-    params->capture_window_dur_ms = CSI_DEFAULT_CAPTURE_WINDOW_DUR;
-    params->solicit_mode = CSI_SOLICIT_MODE_UNSOL;
-    params->assoc_mode = CSI_AS_MODE_ASSOC;
-    params->bss_mode = CSI_BSS_MODE_ANY_BSS;
-    params->ignore_fcs = FALSE;
-    params->frmtyp_subtyp[0] = CSI_BEACON_FRMTYPE;
-    params->frmtyp_subtyp[1] = INVALID_FT;
-    params->multi_csi_per_mac = TRUE;
-    params->link_protection = FALSE;
-    params->subcarriers = 0;
-    params->chanspec = 0;
-
-    return;
-}
-
-/**
- * whd_wifi_csi_enable() - Called when user enters csi,enable cmd. Registers the event handler
- *
- * @ifp: interface instatnce.
- * @user_data: Semaphore data
- * @argv: passing the arguments that were provided by user in command console
- * @len: number of arguments that were provided by user in command console
- * @csi_data_cb_func: Callback function that should be used to sendup CSI data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-whd_result_t
-whd_wifi_csi_enable(whd_interface_t ifp,void* user_data, char* argv[],int len,whd_csi_data_sendup csi_data_cb_func)
-{
-    uint32_t *csi_iovar;
-    whd_buffer_t buffer;
-    wlc_csi_cfg_t params;
-    char *subcmd, *valstr, *endptr = NULL;
-    struct whd_csi_info *csi_info;
-    int val;
-    whd_driver_t whd_driver;
-    whd_result_t result = -1;
-    whd_driver = ifp->whd_driver;
-
-    /* Check if the handler isn't registered, then register it. */
-    if (ifp->event_reg_list[WHD_CSI_EVENT_ENTRY] == WHD_EVENT_NOT_REGISTERED) {
-        CHECK_RETURN (whd_csi_register_handler(ifp,user_data));
-    }
-    /* Allocating memory to whd_csi_info since we will be registering CSI data callaback here */
-    csi_info = whd_mem_malloc(sizeof(*csi_info));
-    /* Allocating memory for whd_csi_info structure pointer */
-    if (!csi_info) {
-        WPRINT_WHD_ERROR("CSI: Failed to allocate memory for csi_info \n");
-        return WHD_BUFFER_ALLOC_FAIL;
-    }
-    csi_info->csi_data_cb_func = csi_data_cb_func;
-    ifp->csi_info = csi_info;
-    /* Initializes the params which will be sent to FW */
-    whd_init_csi_cfg_params(&params);
-    if (len==1) {
-        WPRINT_WHD_ERROR(("Setting default parameters for CSI !"));
-    }
-    else if (len>1) {
-        subcmd = argv[1];
-        valstr = argv[2];
-        val = (int)strtol(valstr, &endptr, 0);
-        if (subcmd[0]=='f' || !strcmp(subcmd,"frmtyp_subtyp")) {
-            if (params.frmtyp_subtyp[0] == INVALID_FT) {
-                params.frmtyp_subtyp[0] = val;
-            }
-            else if (params.frmtyp_subtyp[1] == INVALID_FT) {
-                params.frmtyp_subtyp[1] = val;
-            }
-            else{
-                WPRINT_WHD_ERROR(("A maximum of only two frame filters can be configured. \n"));
-            }
-        }
-        if (subcmd[0]=='p' || !strcmp(subcmd,"capture_period_ms")) {
-            params.capture_period_ms = val;
-        }
-        if (subcmd[0]=='w' || !strcmp(subcmd,"capture_window_dur_ms")) {
-            params.capture_window_dur_ms = val;
-        }
-        if (subcmd[0]=='o' || !strcmp(subcmd,"solicit_mode")) {
-            params.solicit_mode = val;
-        }
-        if (subcmd[0]=='a' || !strcmp(subcmd,"assoc_mode")) {
-            params.assoc_mode = val;
-        }
-        if (subcmd[0]=='b' || !strcmp(subcmd,"bss_mode")) {
-            params.bss_mode = val;
-        }
-        if (subcmd[0]=='i' || !strcmp(subcmd,"ignore_fcs")) {
-            params.ignore_fcs = val;
-        }
-        if (subcmd[0]=='l' || !strcmp(subcmd,"link_protect")) {
-            params.link_protection = val;
-        }
-        if (subcmd[0]=='u' || !strcmp(subcmd,"multi_csi_per_mac")) {
-            params.multi_csi_per_mac = val;
-        }
-        if (subcmd[0]=='i' || !strcmp(subcmd,"ignore_fcs")) {
-            params.ignore_fcs = val;
-        }
-        if (subcmd[0]=='i' || !strcmp(subcmd,"ignore_fcs")) {
-            params.ignore_fcs = val;
-        }
-
-    }
-    csi_iovar = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(wlc_csi_cfg_t),
-                                                       IOVAR_STR_CSI);
-    CHECK_IOCTL_BUFFER (csi_iovar);
-    whd_mem_memcpy(csi_iovar, (uint32_t *)&params, sizeof(wlc_csi_cfg_t) );
-    result = whd_proto_set_iovar(ifp, buffer, 0);
-    return result;
-}
-
-/**
- * whd_wifi_csi_disable() - Called when user enters csi,disable cmd. Deregisters the event handler
- *
- * @ifp: interface instance.
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-whd_result_t
-whd_wifi_csi_disable(whd_interface_t ifp) {
-    whd_result_t result;
-    uint32_t *csi_iovar;
-    whd_buffer_t buffer;
-    wlc_csi_cfg_t params;
-    whd_driver_t whd_driver;
-    whd_driver = ifp->whd_driver;
-    if (ifp->event_reg_list[WHD_CSI_EVENT_ENTRY] != WHD_EVENT_NOT_REGISTERED)
-    {
-            result = whd_wifi_deregister_event_handler(ifp, ifp->event_reg_list[WHD_SCAN_EVENT_ENTRY]);
-            ifp->event_reg_list[WHD_CSI_EVENT_ENTRY] = WHD_EVENT_NOT_REGISTERED;
-    }
-    if (result != CY_RSLT_SUCCESS) {
-        WPRINT_WHD_ERROR(("Error while deregistering the handler %d \n",result));
-    }
-    whd_init_csi_cfg_params(&params);
-    params.csi_enable = FALSE;
-    csi_iovar = (uint32_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(wlc_csi_cfg_t),
-                                                       IOVAR_STR_CSI);
-    CHECK_IOCTL_BUFFER (csi_iovar);
-    whd_mem_memcpy(csi_iovar, (uint32_t *)&params, sizeof(wlc_csi_cfg_t) );
-    result = whd_proto_set_iovar(ifp, buffer, 0);
-    return result;
-}
-
-/**
- * whd_wifi_csi_info() - Dumps the wlc_csi_cfg_t struct from FW.
- *
- * @ifp: interface instance.
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-whd_result_t
-whd_wifi_csi_info(whd_interface_t ifp) {
-    cy_rslt_t   result = CY_RSLT_SUCCESS;
-    uint8_t buffer[WLC_IOCTL_MEDLEN];
-    wlc_csi_cfg_t *cfg_buf_params;
-
-    CHECK_RETURN(whd_wifi_get_iovar_buffer(ifp, IOVAR_STR_CSI, buffer, WLC_IOCTL_MEDLEN));
-    cfg_buf_params = (wlc_csi_cfg_t * )buffer;
-    /* Printing the contents to console */
-
-    WPRINT_WHD_INFO(("CSI Status: %s\n", cfg_buf_params->csi_enable == 1 ? "Enabled":"Disabled"));
-    if (cfg_buf_params->capture_period_ms < 0)
-    {
-        WPRINT_WHD_INFO(("\tCapture period: Non-periodic\n"));
-    } else
-    {
-        WPRINT_WHD_INFO(("\tcapture_period_ms: %ld\n", cfg_buf_params->capture_period_ms));
-        WPRINT_WHD_INFO(("\tcapture_window_dur_ms: %d\n", cfg_buf_params->capture_window_dur_ms));
-    }
-    WPRINT_WHD_INFO(("\tsolicit_mode: %d\n", cfg_buf_params->solicit_mode));
-    WPRINT_WHD_INFO(("\tassoc_mode: %d\n", cfg_buf_params->assoc_mode));
-    WPRINT_WHD_INFO(("\tbss_mode: %d\n", cfg_buf_params->bss_mode));
-    WPRINT_WHD_INFO(("\tignore_fcs: %d\n", cfg_buf_params->ignore_fcs));
-    if (cfg_buf_params->frmtyp_subtyp[0] == (uint8)INVALID_FT)
-    {
-        WPRINT_WHD_INFO(("\tfrmtyp_subtyp[0]: Not configured\n"));
-    } else
-    {
-        WPRINT_WHD_INFO(("\tfrmtyp_subtyp[0]: %d\n", cfg_buf_params->frmtyp_subtyp[0]));
-    }
-    if (cfg_buf_params->frmtyp_subtyp[1] == (uint8)INVALID_FT)
-    {
-        WPRINT_WHD_INFO(("\tfrmtyp_subtyp[1]: Not configured\n"));
-    } else
-    {
-        WPRINT_WHD_INFO(("\tfrmtyp_subtyp[1]: %d\n", cfg_buf_params->frmtyp_subtyp[1]));
-    }
-    WPRINT_WHD_INFO(("\tmulti_csi_per_mac: %d\n", cfg_buf_params->multi_csi_per_mac));
-    WPRINT_WHD_INFO(("\tlink_protection: %d\n", cfg_buf_params->link_protection));
-    WPRINT_WHD_INFO(("\tsubcarriers: %d\n", cfg_buf_params->subcarriers));
-
-    return result;
-}
-
-/**
- * whd_wifi_csi() - CSI command handler function that is called from command console.
- *
- * @ifp: interface instatnce.
- * @user_data: Semaphore data
- * @params: passing the arguments that were provided by user in command console
- * @argc: number of arguments that were provided by user in command console
- * @csi_data_cb_func: Callback function that should be used to sendup CSI data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-whd_result_t
-whd_wifi_csi(whd_interface_t ifp, void* user_data, char* params[], int argc,whd_csi_data_sendup csi_data_cb_func)
-{
-    char *cmd;
-    cmd = params[0];
-    if (!strcmp(cmd,"enable")) {
-        whd_wifi_csi_enable(ifp,user_data,params,argc,csi_data_cb_func);
-    }
-    else if (!strcmp(cmd,"disable")) {
-        whd_wifi_csi_disable(ifp);
-    }
-    else if (!strcmp(cmd,"info")) {
-        whd_wifi_csi_info(ifp);
-    }
-    else{
-        WPRINT_WHD_ERROR(("CSI command isn't registered"));
-    }
-    return 0;
-}
-#endif /* defined(WHD_CSI_SUPPORT) */
+#endif /* CYCFG_ULP_SUPPORT_ENABLED */
 
 whd_result_t
 whd_configure_scanmac_randomisation(whd_interface_t ifp, whd_bool_t config)

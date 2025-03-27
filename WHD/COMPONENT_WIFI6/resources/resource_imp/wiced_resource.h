@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -89,6 +89,19 @@ extern "C" {
     RESULT_ENUM(prefix, FILE_READ_FAIL,               4004),      /**< Failed to read resource file */
 
 #define resource_get_size(resource) ( (resource)->size )
+
+/* Add Binary file */
+#define RESOURCE_BIN_ADD(sect, file, sym, size) \
+__asm__(\
+    "    .pushsection " #sect "       \n" \
+    "    .balign 4                    \n" \
+    "    .global " #sym "             \n" \
+    #sym ":                           \n" \
+    "    .incbin \"" file "\"         \n" \
+    "    .global " #size "            \n" \
+    "    .set " #size ", . - " #sym " \n" \
+    "    .popsection                  \n" \
+    )
 
 /******************************************************
 *                    Constants

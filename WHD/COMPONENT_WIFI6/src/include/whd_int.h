@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +32,9 @@
 #include "whd_chip.h"
 #include "whd_ap.h"
 #include "whd_debug.h"
+#if defined(COMPONENT_WLANSENSE)
+#include "whd_wlansense_core.h"
+#endif /* defined(COMPONENT_WLANSENSE) */
 
 #ifdef __cplusplus
 extern "C"
@@ -82,10 +85,11 @@ struct whd_interface
     whd_mac_t mac_addr;
     uint8_t event_reg_list[WHD_EVENT_ENTRY_MAX];
     whd_bool_t state;
-#if defined(WHD_CSI_SUPPORT)
-    struct whd_csi_info *csi_info;
-#endif /* defined(WHD_CSI_SUPPORT) */
+#if defined(COMPONENT_WLANSENSE)
+    whd_csi_info_t csi_info;
+#endif /* defined(COMPONENT_WLANSENSE) */
 };
+
 struct whd_bt_dev
 {
     void     *bt_data;
@@ -167,6 +171,10 @@ struct whd_driver
 #ifdef COMPONENT_SDIO_HM
     cy_mutex_t whd_hm_tx_lock;
 #endif
+#ifdef BUS_ENC
+   unsigned char key[16];
+   unsigned char iv[12];
+#endif /* BUS_ENC */
 
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,7 @@
  *
  */
 
-#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
 #include "cybsp.h"
-#endif
 #include "whd.h"
 #include "whd_types.h"
 
@@ -553,6 +551,17 @@ extern whd_result_t whd_wifi_keepalive_config(whd_interface_t ifp, whd_keep_aliv
  *          Error code     if an error occurred
  */
 extern whd_result_t whd_configure_tko_offload(whd_interface_t ifp, whd_bool_t enable);
+
+/** Configure the TKO filter module
+ *
+ * @param   ifp            Pointer to handle instance of whd interface
+ * @param   whd_filter     wl_filter structure buffer from Firmware
+ * @param   filter_flag    To set filter
+ *
+ * @return  WHD_SUCCESS    when offload module enabled or not
+ *          Error code     if an error occurred
+ */
+extern whd_result_t whd_configure_tko_filter(whd_interface_t ifp, whd_tko_auto_filter_t * whd_filter, uint8_t filter_flag);
 
 /** Enable WHD internal supplicant and set WPA2 passphrase in case of WPA3/WPA2 transition mode
  *
@@ -1673,92 +1682,6 @@ extern whd_result_t whd_wifi_set_country_code(whd_interface_t ifp, whd_country_c
 extern void whd_wifi_delete_peer(whd_interface_t ifp, uint8_t *peer_addr);
 #endif /* PROTO_MSGBUF */
 
-#if defined(WHD_CSI_SUPPORT)
-/**
- * whd_wifi_csi_events_handler() - Handle the CSI Event notifications from Firmware.
- *
- * @ifp: interface instatnce.
- * @event_header: event message header.
- * @event_data: CSI information
- * @handler_user_data: Semaphore data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-extern void
-*whd_wifi_csi_events_handler(whd_interface_t ifp, const whd_event_header_t *event_header,const uint8_t *event_data, void *handler_user_data);
-
-/**
- * whd_csi_register_handler() - Handler attach function that would attach the handler function.
- *
- * @ifp: interface instatnce.
- * @user_data: Semaphore data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-extern whd_result_t whd_csi_register_handler(whd_interface_t ifp, void* user_data);
-
-/**
- * whd_csi_register_handler() - Handler attach function that would attach the handler function.
- *
- * @params: Initializes csi struct with default parameters.
- *
- * return: 0 on success, value < 0 on failure.
- */
-extern void whd_init_csi_cfg_params(wlc_csi_cfg_t *params);
-
-/**
- * whd_wifi_csi_enable() - Called when user enters csi,enable cmd. Registers the event handler
- *
- * @ifp: interface instatnce.
- * @user_data: Semaphore data
- * @argv: passing the arguments that were provided by user in command console
- * @len: number of arguments that were provided by user in command console
- * @csi_data_cb_func: Callback function that should be used to sendup CSI data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-extern whd_result_t whd_wifi_csi_enable(whd_interface_t ifp,void* user_data, char* argv[],int len,whd_csi_data_sendup csi_data_cb_func);
-
-/**
- * whd_wifi_csi_disable() - Called when user enters csi,disable cmd. Deregisters the event handler
- *
- * @ifp: interface instance.
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-extern whd_result_t whd_wifi_csi_disable(whd_interface_t ifp);
-
-/**
- * whd_wifi_csi_info() - Dumps the wlc_csi_cfg_t struct from FW.
- *
- * @ifp: interface instance.
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-extern whd_result_t whd_wifi_csi_info(whd_interface_t ifp);
-
-/**
- * whd_wifi_csi() - CSI command handler function that is called from command console.
- *
- * @ifp: interface instatnce.
- * @user_data: Semaphore data
- * @params: passing the arguments that were provided by user in command console
- * @argc: number of arguments that were provided by user in command console
- * @csi_data_cb_func: Callback function that should be used to sendup CSI data
- *
- * return: 0 on success, value < 0 on failure.
- */
-
-extern whd_result_t
-whd_wifi_csi(whd_interface_t ifp, void* user_data, char* params[], int argc,whd_csi_data_sendup csi_data_cb_func);
-
-#endif /* defined(WHD_CSI_SUPPORT) */
-
 /** Function to unregister callbacks that are note needed to be executed anymore
  *
  *  @param ifp                   Pointer to handle instance of whd interface
@@ -1792,6 +1715,36 @@ whd_configure_scanmac_randomisation(whd_interface_t ifp, whd_bool_t config);
  */
 extern whd_result_t whd_wifi_set_mac_addr_via_otp(whd_interface_t ifp, char *tlvBuf, uint8_t len);
 
+#if defined (COMPONENT_MTB_HAL)
+/** Process interrupts function for OOB gpio pin
+ *  This API is a wrapper for GPIO HAL driver's "process interrupts" function
+ *  This API should be invoked by the application
+ *
+ * @param host_oob_pin           Pointer to host oob (wakeup) pin
+ *
+ * @return WHD_SUCCESS or Error code
+ */
+static inline whd_result_t whd_bus_process_oob_interrupt(whd_gpio_t *host_oob_pin)
+{
+    return mtb_hal_gpio_process_interrupt(host_oob_pin);
+}
+
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
+/** Process interrupts function for SDIO instance
+ *  This API is a wrapper for SDIO HAL driver's "process interrupts" function
+ *  This API should be invoked by the application
+ *
+ * @param sdio_obj           Pointer to sdio object
+ *
+ * @return WHD_SUCCESS or Error code
+ */
+static inline whd_result_t whd_bus_process_sdio_interrupt(whd_sdio_t *sdio_obj)
+{
+    return mtb_hal_sdio_process_interrupt(sdio_obj);
+}
+#endif /* #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */
+
+#endif /* defined (COMPONENT_MTB_HAL) */
 
 /* @} */
 

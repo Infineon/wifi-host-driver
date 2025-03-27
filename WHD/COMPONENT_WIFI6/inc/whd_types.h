@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,18 +21,34 @@
  */
 
 #include <stdint.h>
+#include "cybsp.h"
+#include "cy_result.h"
 
 #ifndef INCLUDED_WHD_TYPES_H_
 #define INCLUDED_WHD_TYPES_H_
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
-#include "cyhal_gpio.h"
+#if defined (COMPONENT_MTB_HAL)
+    #include "mtb_hal_hw_types.h"
+    #include "mtb_hal_gpio.h"
+#else
+    #include "cyhal_hw_types.h"
+    #include "cyhal_gpio.h"
+#endif /* defined(COMPONENT_MTB_HAL) */
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
-#include "cyhal_sdio.h"
+#if defined (COMPONENT_MTB_HAL)
+    #include "mtb_hal_sdio.h"
+#else
+    #include "cyhal_sdio.h"
+#endif /* defined(COMPONENT_MTB_HAL) */
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
-#include "cyhal_spi.h"
+#if defined (COMPONENT_MTB_HAL)
+    #include "mtb_hal_spi.h"
+#else
+    #include "cyhal_spi.h"
+#endif /* defined(COMPONENT_MTB_HAL) */
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
-#include "cyhal_m2m.h"
+    #include "cyhal_m2m.h"
 #endif
 #endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
 
@@ -118,7 +134,12 @@ typedef struct tls_param_info  tls_param_info_t;
 typedef struct secure_sess_info secure_sess_info_t;
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
-#define WHD_NC_PIN_VALUE CYHAL_NC_PIN_VALUE
+#if defined (COMPONENT_MTB_HAL)
+typedef mtb_hal_gpio_t whd_gpio_t;
+typedef mtb_hal_gpio_drive_mode_t whd_gpio_drive_mode_t;
+typedef mtb_hal_sdio_t whd_sdio_t;
+typedef mtb_hal_spi_t whd_spi_t;
+#else
 typedef cyhal_gpio_t whd_gpio_t;
 typedef cyhal_gpio_drive_mode_t whd_gpio_drive_mode_t;
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
@@ -127,9 +148,9 @@ typedef cyhal_sdio_t whd_sdio_t;
 typedef cyhal_spi_t whd_spi_t;
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
 typedef cyhal_m2m_t whd_m2m_t;
-#endif
-#else
-#define WHD_NC_PIN_VALUE	NULL
+#endif /* #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */
+#endif /* defined (COMPONENT_MTB_HAL) */
+#else /* WHD_USE_CUSTOM_HAL_IMPL */
 typedef void* whd_gpio_t;
 typedef uint8_t whd_gpio_drive_mode_t;
 typedef void* whd_sdio_t;
@@ -235,12 +256,17 @@ typedef enum
 /**
  * Boolean values
  */
+#if defined(__llvm__)
+typedef uint8_t whd_bool_t;
+#define WHD_FALSE (0)
+#define WHD_TRUE  (1)
+#else
 typedef enum
 {
     WHD_FALSE = 0, /**< Boolean True */
     WHD_TRUE = 1   /**< Boolean False */
 } whd_bool_t;
-
+#endif
 
 /**
  * Transfer direction for the WHD platform bus interface

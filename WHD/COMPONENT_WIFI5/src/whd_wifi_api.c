@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -5951,18 +5951,14 @@ whd_wowl_get_secure_session_status(whd_interface_t ifp, secure_sess_info_t *tls_
     whd_buffer_t buffer;
     whd_buffer_t response;
     whd_driver_t whd_driver = ifp->whd_driver;
+    uint8_t *data = NULL;
     struct secure_sess_info *sess_info;
-    ret = (whd_result_t)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(struct secure_sess_info),
+    data = (uint8_t *)whd_proto_get_iovar_buffer(whd_driver, &buffer, sizeof(struct secure_sess_info),
 	  IOVAR_STR_WOWL_SEC_SESS_INFO);
-
-    ret = whd_proto_get_iovar(ifp, buffer, &response);
-    if (ret != WHD_SUCCESS)
-    {
-        whd_buffer_release(whd_driver, response, WHD_NETWORK_RX);
-        return WHD_WLAN_ERROR;
-    }
+    CHECK_IOCTL_BUFFER(data);
+    CHECK_RETURN(whd_proto_get_iovar(ifp, buffer, &response));
     sess_info = (secure_sess_info_t*) whd_buffer_get_current_piece_data_pointer(whd_driver, response);
-    memcpy(tls_sess_info, sess_info, sizeof(struct secure_sess_info));
+    whd_mem_memcpy(tls_sess_info, sess_info, sizeof(struct secure_sess_info));
     ret = whd_buffer_release(whd_driver, response, WHD_NETWORK_RX);
     return ret;
 }

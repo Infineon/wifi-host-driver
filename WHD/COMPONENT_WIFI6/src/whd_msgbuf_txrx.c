@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -848,7 +848,7 @@ static void whd_msgbuf_process_event_buffer(whd_driver_t whd_driver, whd_buffer_
                 {
                     /* Correct event type has been found - call the handler function and exit loop */
                     msgbuf_info->whd_event_list[i].handler_user_data =
-                        msgbuf_info->whd_event_list[i].handler(whd_driver->iflist[whd_event->bsscfgidx],
+                        msgbuf_info->whd_event_list[i].handler(whd_driver->iflist[whd_event->ifidx],
                                                                whd_event,
                                                                (uint8_t *)aligned_event,
                                                                msgbuf_info->whd_event_list[i].handler_user_data);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +44,12 @@ extern "C"
 #define CDCF_IOC_IF_SHIFT             (12)      /** # of bits of shift for I/F Mask */
 #define CDCF_IOC_ID_MASK      (0xFFFF0000)      /** used to uniquely id an ioctl req/resp pairing */
 #define CDCF_IOC_ID_SHIFT             (16)      /** # of bits of shift for ID Mask */
+
+#ifdef BUS_ENC
+#define CDCF_IOC_ENC                      (0x01)
+#define CDCF_IOC_ENC_MASK           (0x00000200)
+#define CDCF_IOC_ENC_SHIFT                   (9)
+#endif /* BUS_ENC */
 
 #define DATA_AFTER_HEADER(x)   ( (void *)(&x[1]) )
 

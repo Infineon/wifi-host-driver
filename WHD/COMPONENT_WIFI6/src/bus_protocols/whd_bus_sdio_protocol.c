@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +23,7 @@
  *  sending/receiving raw packets etc
  */
 
+#include "cybsp.h"
 #include "whd_utils.h"
 
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) && !defined(COMPONENT_WIFI_INTERFACE_OCI)
@@ -44,7 +45,7 @@
 #include "whd_types_int.h"
 #include "whd_types.h"
 #include "whd_proto.h"
-
+#include "whd_hal_port.h"
 #ifdef DM_43022C1
 #include "resources.h"
 #endif
@@ -52,6 +53,10 @@
 #ifdef CYCFG_ULP_SUPPORT_ENABLED
 #include "cy_network_mw_core.h"
 #endif
+
+#ifdef BUS_ENC
+#include "mbedtls/gcm.h"
+#endif /* BUS_ENC */
 
 /******************************************************
 *             Constants
@@ -79,6 +84,9 @@
 
 #define HOSTINTMASK                 (I_HMB_SW_MASK)
 
+#if !defined (CY_DISABLE_XMC7000_DATA_CACHE) && defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
+#define DCACHE_BYTE_ALIGNEMNT       (__SCB_DCACHE_LINE_SIZE)
+#endif
 
 /******************************************************
 *             Structures
@@ -91,14 +99,6 @@ struct whd_bus_priv
 
 };
 
-#ifndef WHD_USE_CUSTOM_HAL_IMPL
-/* For BSP backward compatible, should be removed the macro once 1.0 is not supported */
-#if (CYHAL_API_VERSION >= 2)
-typedef cyhal_sdio_transfer_type_t cyhal_sdio_transfer_t;
-#else
-typedef cyhal_transfer_t cyhal_sdio_transfer_t;
-#endif /* (CYHAL_API_VERSION >= 2) */
-#endif /* WHD_USE_CUSTOM_HAL_IMPL */
 
 /******************************************************
 *             Variables
@@ -125,14 +125,8 @@ static whd_result_t whd_bus_sdio_download_firmware(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_set_oob_interrupt(whd_driver_t whd_driver, uint8_t gpio_pin_number);
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
-#if (CYHAL_API_VERSION >= 2)
-static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_event_t event);
-static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_event_t event);
-#else
-static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t event);
-static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event);
-#endif /* (CYHAL_API_VERSION >= 2) */
-#endif /* WHD_USE_CUSTOM_HAL_IMPL */
+static void whd_bus_sdio_irq_handler(void *handler_arg, whd_hal_sdio_event_t event);
+static void whd_bus_sdio_oob_irq_handler(void *arg, whd_hal_gpio_event_t event);
 
 whd_result_t whd_bus_sdio_irq_enable(whd_driver_t whd_driver, whd_bool_t enable);
 whd_result_t whd_bus_sdio_irq_register(whd_driver_t whd_driver);
@@ -142,6 +136,8 @@ whd_result_t whd_bus_sdio_unregister_oob_intr(whd_driver_t whd_driver);
 
 static whd_result_t whd_bus_sdio_init_oob_intr(whd_driver_t whd_driver);
 static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver);
+#endif /* WHD_USE_CUSTOM_HAL_IMPL */
+
 #ifdef BLHS_SUPPORT
 static whd_result_t whd_bus_sdio_blhs(whd_driver_t whd_driver, whd_bus_blhs_stage_t stage);
 #endif
@@ -314,6 +310,10 @@ whd_result_t whd_bus_sdio_send_buffer(whd_driver_t whd_driver, whd_buffer_t buff
     return WHD_SUCCESS;
 }
 
+#ifdef BUS_ENC
+#define GCM_IV_SIZE  12
+#endif /* BUS_ENC */
+
 whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 {
     uint8_t byte_data;
@@ -328,6 +328,9 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
     uint32_t chip_rev = 0;
     uint32_t chip_data = 0;
     uint8_t *aligned_addr = NULL;
+#ifdef BUS_ENC
+    unsigned long i = 0;
+#endif /* BUS_ENC */
     whd_mem_memset(&whd_driver->chip_info, 0, sizeof(whd_driver->chip_info) );
 
     whd_bus_set_flow_control(whd_driver, WHD_FALSE);
@@ -609,6 +612,17 @@ whd_result_t whd_bus_sdio_init(whd_driver_t whd_driver)
 
     whd_bus_sdio_irq_enable(whd_driver, WHD_TRUE);
 
+#ifdef BUS_ENC
+    for (i = 0; i < GCM_KEY_SIZE_BYTES; i++)
+    {
+        whd_driver->key[i] = 0xaa;
+    }
+    for (i = 0; i < GCM_IV_SIZE; i++)
+    {
+        whd_driver->iv[i] = 0xbb;
+    }
+#endif /* BUS_ENC*/
+
     UNUSED_PARAMETER(elapsed_time);
 
     return result;
@@ -722,11 +736,11 @@ uint32_t whd_bus_sdio_packet_available_to_read(whd_driver_t whd_driver)
                     WPRINT_WHD_DEBUG(("DS EXIT Triggered: Start Re-Downloading Firmware \n"));
                     /* If we are running LPA, then LPA will disable MCU SDIO clock.So, re-dowanload fails.
                      in ordet to avoid this, releasing the clock before FW re-download */
-                    cyhal_syspm_lock_deepsleep();
+                    whd_hal_syspm_lock_deepsleep();
                     whd_sdpcm_quit(whd_driver);
                     /* Re-Download Firmware no need to check return, as it affects sync of whd thread, error will be thrown */
                     whd_bus_reinit_stats(whd_driver, true);
-                    cyhal_syspm_unlock_deepsleep();
+                    whd_hal_syspm_unlock_deepsleep();
                 }
             }
             else
@@ -1024,8 +1038,8 @@ whd_result_t whd_bus_sdio_cmd52(whd_driver_t whd_driver, whd_bus_transfer_direct
     arg.cmd52.write_data = value;
 
     WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, cmd52);
-    result = cyhal_sdio_send_cmd(whd_driver->bus_priv->sdio_obj, (cyhal_sdio_transfer_t)direction,
-                                 CYHAL_SDIO_CMD_IO_RW_DIRECT, arg.value,
+    result = whd_hal_sdio_host_send_cmd(whd_driver->bus_priv->sdio_obj, (whd_hal_sdio_host_transfer_type_t)direction,
+                                 WHD_HAL_SDIO_CMD_IO_RW_DIRECT, arg.value,
                                  &sdio_response);
     WHD_BUS_STATS_CONDITIONAL_INCREMENT_VARIABLE(whd_driver->bus_priv, (result != WHD_SUCCESS), cmd52_fail);
 
@@ -1051,6 +1065,11 @@ whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer_direct
 {
     sdio_cmd_argument_t arg;
     whd_result_t result = WHD_SUCCESS;
+    uint8_t *aligned_local_buffer = data;
+#if !defined (CY_DISABLE_XMC7000_DATA_CACHE) && defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
+    bool iscacheable = false;
+    uint8_t *local_buffer = NULL;
+#endif
 
     if (direction == BUS_WRITE)
     {
@@ -1063,18 +1082,39 @@ whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer_direct
     arg.cmd53.op_code = (uint32_t)1;
     arg.cmd53.rw_flag = (uint32_t)( (direction == BUS_WRITE) ? 1 : 0 );
 
+#if !defined (CY_DISABLE_XMC7000_DATA_CACHE) && defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
+    if(Cy_Syslib_IsMemCacheable(MPU, (uint32_t)data, data_size) && ((size_t)data % DCACHE_BYTE_ALIGNEMNT != 0 || (size_t)data_size % DCACHE_BYTE_ALIGNEMNT != 0) )
+    {
+        local_buffer = (uint8_t *)whd_mem_malloc(data_size + (2*DCACHE_BYTE_ALIGNEMNT));
+        if (NULL == local_buffer)
+        {
+            WPRINT_WHD_ERROR( ("%s:%d whd_mem_malloc failed\n", __func__, __LINE__) );
+            goto done;
+        }
+        aligned_local_buffer = (uint8_t*)((size_t)local_buffer + ((size_t)32 - ((size_t)local_buffer & 0x1F)));
+
+        if (direction == BUS_WRITE)
+        {
+            /* Copy the data to aligned buffer */
+            memcpy((void *)aligned_local_buffer, (void *)data, data_size);
+        }
+
+        iscacheable = true;
+    }
+#endif
+
     if (mode == SDIO_BYTE_MODE)
     {
         whd_assert("whd_bus_sdio_cmd53: data_size > 512 for byte mode", (data_size <= (uint16_t )512) );
         arg.cmd53.count = (uint32_t)(data_size & 0x1FF);
 
         result =
-            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_sdio_transfer_t)direction, arg.value,
-                                     (uint32_t *)data, data_size, response);
+            whd_hal_sdio_host_bulk_transfer(whd_driver->bus_priv->sdio_obj, (whd_hal_sdio_host_transfer_type_t)direction, arg.value,
+                                     (uint32_t *)aligned_local_buffer, data_size, response);
 
         if (result != CY_RSLT_SUCCESS)
         {
-            WPRINT_WHD_ERROR( ("%s:%d cyhal_sdio_bulk_transfer SDIO_BYTE_MODE failed\n", __func__, __LINE__) );
+            WPRINT_WHD_ERROR( ("%s:%d whd_hal_sdio_host_bulk_transfer SDIO_BYTE_MODE failed\n", __func__, __LINE__) );
             goto done;
         }
     }
@@ -1088,12 +1128,12 @@ whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer_direct
         arg.cmd53.block_mode = (uint32_t)1;
 
         result =
-            cyhal_sdio_bulk_transfer(whd_driver->bus_priv->sdio_obj, (cyhal_sdio_transfer_t)direction, arg.value,
-                                     (uint32_t *)data, data_size, response);
+            whd_hal_sdio_host_bulk_transfer(whd_driver->bus_priv->sdio_obj, (whd_hal_sdio_host_transfer_type_t)direction, arg.value,
+											 (uint32_t *)aligned_local_buffer, data_size, response);
 
         if (result != CY_RSLT_SUCCESS)
         {
-            WPRINT_WHD_ERROR( ("%s:%d cyhal_sdio_bulk_transfer SDIO_BLOCK_MODE failed\n", __func__, __LINE__) );
+            WPRINT_WHD_ERROR( ("%s:%d whd_hal_sdio_host_bulk_transfer SDIO_BLOCK_MODE failed\n", __func__, __LINE__) );
             goto done;
         }
     }
@@ -1103,7 +1143,21 @@ whd_result_t whd_bus_sdio_cmd53(whd_driver_t whd_driver, whd_bus_transfer_direct
         WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, cmd53_read);
     }
 
+    /* Copy back the data when response is needed(Rx) */
+#if !defined (CY_DISABLE_XMC7000_DATA_CACHE) && defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
+    if(iscacheable == true && response_expected == RESPONSE_NEEDED)
+    {
+        memcpy((void *)data, (void *)aligned_local_buffer, data_size);
+    }
+#endif
+
 done:
+#if !defined (CY_DISABLE_XMC7000_DATA_CACHE) && defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
+    if(iscacheable == true)
+    {
+        whd_mem_free(local_buffer);
+    }
+#endif
     WHD_BUS_STATS_CONDITIONAL_INCREMENT_VARIABLE(whd_driver->bus_priv,
                                                  ( (result != WHD_SUCCESS) && (direction == BUS_READ) ),
                                                  cmd53_read_fail);
@@ -1601,16 +1655,12 @@ uint32_t whd_bus_sdio_get_max_transfer_size(whd_driver_t whd_driver)
 }
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
-#if (CYHAL_API_VERSION >= 2)
-static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_event_t event)
-#else
-static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t event)
-#endif /* (CYHAL_API_VERSION >= 2) */
+static void whd_bus_sdio_irq_handler(void *handler_arg, whd_hal_sdio_event_t event)
 {
     whd_driver_t whd_driver = (whd_driver_t)handler_arg;
 
     /* WHD registered only for CY_CYHAL_SDIO_CARD_INTERRUPT */
-    if (event != CYHAL_SDIO_CARD_INTERRUPT)
+    if (event != WHD_HAL_SDIO_CARD_INTERRUPT)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
         WHD_BUS_STATS_INCREMENT_VARIABLE(whd_driver->bus_priv, error_intrs);
@@ -1625,40 +1675,24 @@ static void whd_bus_sdio_irq_handler(void *handler_arg, cyhal_sdio_irq_event_t e
 
 whd_result_t whd_bus_sdio_irq_register(whd_driver_t whd_driver)
 {
-#if (CYHAL_API_VERSION >= 2)
-    cyhal_sdio_register_callback(whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
-#else
-    cyhal_sdio_register_irq(whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
-#endif /* (CYHAL_API_VERSION >= 2) */
+    whd_hal_sdio_register_callback(whd_driver->bus_priv->sdio_obj, whd_bus_sdio_irq_handler, whd_driver);
     return WHD_SUCCESS;
 }
 
 whd_result_t whd_bus_sdio_irq_enable(whd_driver_t whd_driver, whd_bool_t enable)
 {
-#if (CYHAL_API_VERSION >= 2)
-    cyhal_sdio_enable_event(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, CYHAL_ISR_PRIORITY_DEFAULT,
-                            enable);
-#else
-    cyhal_sdio_irq_enable(whd_driver->bus_priv->sdio_obj, CYHAL_SDIO_CARD_INTERRUPT, enable);
-#endif /* (CYHAL_API_VERSION >= 2) */
+    whd_sdio_t* sdio_obj = whd_driver->bus_priv->sdio_obj;
+
+    whd_hal_sdio_enable_event(sdio_obj, enable);
     return WHD_SUCCESS;
 }
 
-#if (CYHAL_API_VERSION >= 2)
-static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_event_t event)
-#else
-static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event)
-#endif /* (CYHAL_API_VERSION >= 2) */
+static void whd_bus_sdio_oob_irq_handler(void *arg, whd_hal_gpio_event_t event)
 {
     whd_driver_t whd_driver = (whd_driver_t)arg;
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
-#if (CYHAL_API_VERSION >= 2)
-    const cyhal_gpio_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
-                                              ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-#else
-    const cyhal_gpio_irq_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
-                                                  ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-#endif /* (CYHAL_API_VERSION >= 2) */
+    const whd_hal_gpio_event_t expected_event = (config->is_falling_edge == WHD_TRUE)
+                                              ? WHD_HAL_GPIO_IRQ_FALL : WHD_HAL_GPIO_IRQ_RISE;
     if (event != expected_event)
     {
         WPRINT_WHD_ERROR( ("Unexpected interrupt event %d\n", event) );
@@ -1674,52 +1708,25 @@ static void whd_bus_sdio_oob_irq_handler(void *arg, cyhal_gpio_irq_event_t event
 
 whd_result_t whd_bus_sdio_register_oob_intr(whd_driver_t whd_driver)
 {
-    const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
+    whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
 
-#if !defined(CYCFG_WIFI_HOST_WAKE_ENABLED)
-    CHECK_RETURN(cyhal_gpio_init(config->host_oob_pin, CYHAL_GPIO_DIR_INPUT, config->drive_mode, config->init_drive_state));
-#endif
-#if (CYHAL_API_VERSION >= 2)
-    static cyhal_gpio_callback_data_t cbdata;
-    cbdata.callback = whd_bus_sdio_oob_irq_handler;
-    cbdata.callback_arg = whd_driver;
-    cyhal_gpio_register_callback(config->host_oob_pin, &cbdata);
-#else
-    cyhal_gpio_register_irq(config->host_oob_pin, config->intr_priority, whd_bus_sdio_oob_irq_handler,
-                            whd_driver);
-#endif /* (CYHAL_API_VERSION >= 2) */
-    return WHD_SUCCESS;
+    return whd_hal_gpio_register_callback(config, WHD_TRUE, whd_bus_sdio_oob_irq_handler, whd_driver);
 }
 
 whd_result_t whd_bus_sdio_unregister_oob_intr(whd_driver_t whd_driver)
 {
-    const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
-#if (CYHAL_API_VERSION >= 2)
-    cyhal_gpio_register_callback(config->host_oob_pin, NULL);
-#else
-    cyhal_gpio_register_irq(config->host_oob_pin, config->intr_priority, NULL, NULL);
-#endif /* (CYHAL_API_VERSION >= 2) */
-    return WHD_SUCCESS;
+    whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
+
+    return whd_hal_gpio_register_callback(config, WHD_FALSE, NULL, NULL);
 }
 
 whd_result_t whd_bus_sdio_enable_oob_intr(whd_driver_t whd_driver, whd_bool_t enable)
 {
-    const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
-#if (CYHAL_API_VERSION >= 2)
-    const cyhal_gpio_event_t event =
-        (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
+    whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
 
-    cyhal_gpio_enable_event(config->host_oob_pin, event, config->intr_priority, (enable == WHD_TRUE) ? true : false);
-#else
-    const cyhal_gpio_irq_event_t event =
-        (config->is_falling_edge == WHD_TRUE) ? CYHAL_GPIO_IRQ_FALL : CYHAL_GPIO_IRQ_RISE;
-
-    cyhal_gpio_irq_enable(config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
-#endif /* (CYHAL_API_VERSION >= 2) */
+    whd_hal_gpio_enable_event(config, enable);
     return WHD_SUCCESS;
 }
-#endif /* WHD_USE_CUSTOM_HAL_IMPL */
-
 
 static whd_result_t whd_bus_sdio_init_oob_intr(whd_driver_t whd_driver)
 {
@@ -1727,7 +1734,7 @@ static whd_result_t whd_bus_sdio_init_oob_intr(whd_driver_t whd_driver)
     uint8_t sepintpol;
 
     /* OOB isn't configured so bail */
-    if (config->host_oob_pin == WHD_NC_PIN_VALUE)
+    if (whd_hal_is_oob_pin_avaliable(config) != WHD_TRUE)
         return WHD_SUCCESS;
 
     /* Choose out-of-band interrupt polarity */
@@ -1760,7 +1767,7 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver)
 {
     const whd_oob_config_t *config = &whd_driver->bus_priv->sdio_config.oob_config;
 
-    if (config->host_oob_pin != WHD_NC_PIN_VALUE)
+    if (whd_hal_is_oob_pin_avaliable(config) == WHD_TRUE)
     {
         CHECK_RETURN(whd_bus_sdio_enable_oob_intr(whd_driver, WHD_FALSE) );
         CHECK_RETURN(whd_bus_sdio_unregister_oob_intr(whd_driver) );
@@ -1768,6 +1775,8 @@ static whd_result_t whd_bus_sdio_deinit_oob_intr(whd_driver_t whd_driver)
 
     return WHD_SUCCESS;
 }
+#endif /* WHD_USE_CUSTOM_HAL_IMPL */
+
 
 #ifdef BLHS_SUPPORT
 static whd_result_t whd_bus_sdio_blhs_read_h2d(whd_driver_t whd_driver, uint32_t *val)
@@ -2024,11 +2033,7 @@ static whd_result_t whd_bus_sdio_download_resource(whd_driver_t whd_driver, whd_
 #ifndef DM_43022C1
                 trx = (trx_header_t *)&image[0];
 #else
-#ifndef WLAN_MFG_FIRMWARE
                 trx = (trx_header_t *)&wifi_firmware_image_data;
-#else
-                trx = (trx_header_t *)&wifi_mfg_firmware_image_data;
-#endif /* WLAN_MFG_FIRMWARE */
 #endif /* DM_43022C1 */
 
                 if (trx->magic == TRX_MAGIC)
