@@ -24,7 +24,9 @@
  *
  */
 
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
 #include "cybsp.h"
+#endif
 #include "whd.h"
 #include "whd_types.h"
 

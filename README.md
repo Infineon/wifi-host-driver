@@ -20,7 +20,7 @@ The [release notes](./RELEASE.md) detail the current release. You can also find 
 ---------------------------------
 |  Security   |55500|55900|55572|
 |:-----------:|:---:|:---:|:---:|
-|  WPA3       |  O  |  O  |  O  |
+|  WPA3       |     |  O  |  O  |
 |  WPA2       |  O  |  O  |  O  |
 
 ### WIFI5

@@ -21,8 +21,6 @@
  */
 
 #include <stdint.h>
-#include "cybsp.h"
-#include "cy_result.h"
 
 #ifndef INCLUDED_WHD_TYPES_H_
 #define INCLUDED_WHD_TYPES_H_
@@ -48,7 +46,7 @@
     #include "cyhal_spi.h"
 #endif /* defined(COMPONENT_MTB_HAL) */
 #elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
-    #include "cyhal_m2m.h"
+#include "cyhal_m2m.h"
 #endif
 #endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
 

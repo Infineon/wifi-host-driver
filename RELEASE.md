@@ -1,7 +1,7 @@
-# Wi-Fi Host Driver (WHD) 4.3.0
+# Wi-Fi Host Driver (WHD) 4.3.1
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
-### WIFI6 Supported Chip v4.3.0
+### WIFI6 Supported Chip v4.3.1
 * Supports Wi-Fi Station (STA) and AP mode of operation
 * Supports multiple security methods such as WPA2, WPA3, and open
 
@@ -19,7 +19,6 @@ NA
 
 #### CYW55900
 * --- 28.10.400.1 ---
-
 
 
 ### WIFI5 Suppported Chip v3.3.3
