@@ -89,7 +89,8 @@ static const whd_fwcap_t whd_fwcap_map[] =
     {WHD_FWCAP_SAE, "sae "},
     {WHD_FWCAP_SAE_EXT, "sae_ext "},
     {WHD_FWCAP_OFFLOADS, "offloads "},
-    {WHD_FWCAP_GCMP, "gcmp" },
+    {WHD_FWCAP_GCMP, "gcmp "},
+    {WHD_FWCAP_ICMP, "icmp "},
 };
 /******************************************************
 *             Static Function Declarations
@@ -119,6 +120,7 @@ whd_result_t whd_internal_info_init(whd_driver_t whd_driver)
     internal_info->con_lastpos = 0;
     internal_info->whd_wifi_p2p_go_is_up = WHD_FALSE;
 
+#ifdef WHD_IOCTL_LOG_ENABLE
     /* Create the mutex protecting whd_log structure */
     if (cy_rtos_init_semaphore(&whd_driver->whd_log_mutex, 1, 0) != WHD_SUCCESS)
     {
@@ -129,13 +131,16 @@ whd_result_t whd_internal_info_init(whd_driver_t whd_driver)
         WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
         return WHD_SEMAPHORE_ERROR;
     }
+#endif
     return WHD_SUCCESS;
 }
 
 whd_result_t whd_internal_info_deinit(whd_driver_t whd_driver)
 {
+#ifdef WHD_IOCTL_LOG_ENABLE
     /* Delete the whd_log mutex */
     (void)cy_rtos_deinit_semaphore(&whd_driver->whd_log_mutex);
+#endif
     return WHD_SUCCESS;
 }
 
@@ -675,6 +680,7 @@ void whd_wifi_poke(whd_driver_t whd_driver, uint32_t address, uint8_t register_l
     WHD_WLAN_LET_SLEEP(whd_driver);
 }
 
+#ifdef WHD_IOCTL_LOG_ENABLE
 whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer)
 {
     uint8_t *data = NULL;
@@ -773,6 +779,7 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
     CHECK_RETURN(cy_rtos_set_semaphore(&whd_driver->whd_log_mutex, WHD_FALSE) );
     return WHD_SUCCESS;
 }
+#endif
 
 void whd_wifi_chip_info_init(whd_driver_t whd_driver)
 {

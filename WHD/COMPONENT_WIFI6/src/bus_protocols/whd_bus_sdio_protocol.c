@@ -992,12 +992,14 @@ static whd_result_t whd_bus_sdio_transfer(whd_driver_t whd_driver, whd_bus_trans
     {
         return whd_bus_sdio_cmd52(whd_driver, direction, function, address, *data, response_expected, data);
     }
+#if !defined(COMPONENT_MTB_HAL)
     else if (whd_driver->internal_info.whd_wlan_status.state == WLAN_UP)
     {
         return whd_bus_sdio_cmd53(whd_driver, direction, function,
                                   (data_size >= (uint16_t)64) ? SDIO_BLOCK_MODE : SDIO_BYTE_MODE, address, data_size,
                                   data, response_expected, NULL);
     }
+#endif
     else
     {
         /* We need to handle remaining size for source image download */

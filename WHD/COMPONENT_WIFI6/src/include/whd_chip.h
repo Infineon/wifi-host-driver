@@ -228,8 +228,16 @@ typedef struct
     uint8_t data[1];
 } rsnx_ie_t;
 
+typedef struct
+{
+    whd_tlv8_header_t tlv_header; /* id, length */
+    uint8_t data[1];
+} extended_rates_t;
+
 #define DOT11_RSNX_CAP_LEN 1 /* Extended RSN Capabilities length in octets (1 octet) */
 #define DOT11_RSNX_SAE_H2E 5 /* Extended RSN Capabilities */
+#define DOT11_RSNX_EXT_SAE 1
+#define DOT11_RSNX_EXT_SAE_ONLY 0xfb
 
 typedef struct
 {
@@ -337,6 +345,7 @@ typedef struct
 #define WHD_IOVAR_STRING_SIZE 128
 #define WHD_MAX_DATA_SIZE 64
 
+#ifdef WHD_IOCTL_LOG_ENABLE
 typedef struct
 {
     uint32_t ioct_log;
@@ -351,6 +360,7 @@ whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer
 whd_result_t whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t data);
 
 whd_result_t whd_ioctl_print(whd_driver_t whd_driver);
+#endif
 
 #pragma pack()
 
@@ -372,6 +382,8 @@ typedef struct whd_internal_info
     whd_bool_t whd_wifi_p2p_go_is_up;
     uint32_t whd_join_status[3];
     whd_auth_result_callback_t auth_result_callback;
+    whd_icmp_echo_req_callback_t icmp_echo_req_callback;
+    whd_itwt_event_callback_t twt_setup_cplt_callback;
 } whd_internal_info_t;
 
 #pragma pack(1)

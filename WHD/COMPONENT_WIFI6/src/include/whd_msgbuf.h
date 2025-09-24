@@ -73,9 +73,6 @@ extern "C"
 #define MSGBUF_TYPE_H2D_MAILBOX_DATA            0x23
 #define MSGBUF_TYPE_D2H_MAILBOX_DATA            0x24
 
-#define NR_TX_PKTIDS                            24
-#define NR_RX_PKTIDS                            24
-
 #define WHD_IOCTL_REQ_PKTID                     0xFFFE
 
 #define WHD_MSGBUF_IOCTL_MAX_TX_SIZE           (1500)    /* Should be less than 2KB(IOCTL inbut Buffer) */
@@ -87,6 +84,17 @@ extern "C"
 #define WHD_MSGBUF_MAX_IOCTLRESPBUF_POST        2
 #define WHD_MSGBUF_MAX_EVENTBUF_POST            2
 
+/* NR_TX_PKTIDS = TX_PACKET_POOL_SIZE + 2(reserve) */
+#ifndef TX_PACKET_POOL_SIZE
+#define NR_TX_PKTIDS                            26
+#else
+#define NR_TX_PKTIDS                            (TX_PACKET_POOL_SIZE + 2)
+#endif
+/* NR_RX_PKTIDS = WHD_DEF_MAX_RXBUFPOST + WHD_MSGBUF_MAX_EVENTBUF_POST
+                    + WHD_MSGBUF_MAX_IOCTLRESPBUF_POST + 2(reserve) */
+#define NR_RX_PKTIDS                            (WHD_DEF_MAX_RXBUFPOST + WHD_MSGBUF_MAX_EVENTBUF_POST \
+                                                 + WHD_MSGBUF_MAX_IOCTLRESPBUF_POST + 2)
+
 #define WHD_MSGBUF_RXBUFPOST_TIMER_DELAY        60000    /* RX buffer Timer expiry timeout in milliseconds */
 #define WHD_MSGBUF_RXBUFPOST_RETRY_COUNT        10
 
@@ -97,8 +105,6 @@ extern "C"
 #define WHD_MSGBUF_PKT_FLAGS_FRAME_MASK         0x07
 #define WHD_MSGBUF_PKT_FLAGS_PRIO_SHIFT         5
 
-#define WHD_MSGBUF_TX_FLUSH_CNT1                32
-#define WHD_MSGBUF_TX_FLUSH_CNT2                96
 #define WHD_MSGBUF_UPDATE_RX_PTR_THRS           48
 
 #define WHD_MAX_TXSTATUS_WAIT_RETRIES           10
@@ -118,6 +124,20 @@ extern "C"
 #error "RX_PACKET_POOL_SIZE Should be greater or equal to 16, as per WLAN design"
 #else
 #define WHD_MSGBUF_RXBUFPOST_THRESHOLD          2
+#endif
+
+/* Derived from TX_BUFFER_PAYLOAD_SIZE, used to check if wl cmd tx buffer is less than this
+ * threshold then allocate buffer of size IOCTL_TX_PAYLOAD_THRESH + 1 dynamically
+ * */
+#define IOCTL_TX_PAYLOAD_THRESH         (WHD_LINK_MTU + 20)
+
+#define TXPOOL_RESV_FOR_STACK           (4)
+
+#ifndef TX_PACKET_POOL_SIZE
+/* based on TX_PACKET_POOL_SIZE in cy_network.c */
+#define WHD_TXPOOL_BUFFER_THRESH        (14)
+#else
+#define WHD_TXPOOL_BUFFER_THRESH        (TX_PACKET_POOL_SIZE - TXPOOL_RESV_FOR_STACK)
 #endif
 
 #ifdef PROTO_MSGBUF
@@ -416,11 +436,12 @@ struct whd_msgbuf
     uint8_t *flow_map;
     uint32_t priority;
     uint32_t current_flowring_count;
+    uint32_t tot_txpkt_inqueue;
 };
 
 extern whd_result_t whd_msgbuf_send_mbdata(struct whd_driver *drvr, uint32_t mbdata);
 extern whd_result_t whd_msgbuf_ioctl_dequeue(struct whd_driver *whd_driver);
-extern uint32_t whd_msgbuf_process_rx_packet(struct whd_driver *dev);
+extern uint16_t whd_msgbuf_process_rx_packet(struct whd_driver *dev);
 extern void whd_msgbuf_delete_flowring(struct whd_driver *drvr, uint16_t flowid);
 extern whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid);
 extern whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t num_flowring, uint16_t *prio_ring_id);

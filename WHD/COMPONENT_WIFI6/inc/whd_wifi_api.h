@@ -350,6 +350,44 @@ extern whd_result_t whd_wifi_external_auth_request(whd_interface_t ifp,
  */
 extern whd_result_t whd_wifi_stop_external_auth_request(whd_interface_t ifp);
 
+/** TWT event callback function pointer type.
+ *
+ *  @param event_type      Indicates the type of TWT event that occurred.
+ *  @param event_data      event specific data that will be passed directly to the callback function
+ *
+ */
+typedef void (*whd_itwt_event_callback_t)(whd_itwt_event_type_t event_type, void *event_data);
+
+/** Initializes TWT event handling by registering a callback function.
+ *
+ * @param   ifp                       Pointer to handle instance of the whd interface.
+ * @param   callback                  The callback function which will be invoked when a TWT event occurs.
+ * @param   user_data                 User-specific data that will be passed directly to the callback function.
+ *
+ * @return  WHD_SUCCESS or an Error code on failure.
+ */
+extern whd_result_t whd_wifi_itwt_init(whd_interface_t ifp, whd_itwt_event_callback_t callback, void *user_data);
+
+/** De-initializes TWT event handling and frees associated resources.
+ *
+ *@param   ifp                       Pointer to handle instance of the whd interface.
+ *
+ *@return  WHD_SUCCESS on successful de-initialization, or an Error code on failure.
+ */
+extern whd_result_t whd_wifi_deinit_twt(whd_interface_t ifp);
+
+/** Gets the last negotiated TWT session parameters for a given interface.
+ *
+ * @param   ifp                       The WHD interface for which to retrieve the TWT information.
+ * @param   negotiated_params         A pointer to a caller-provided structure that will be
+ *                                    populated with the negotiated TWT parameters.
+ *
+ * @return   WHD_SUCCESS if data was successfully copied and printed.
+ * @return   WHD_DOES_NOT_EXIST if no active TWT session information is available.
+ * @return   WHD_BADARG if any of the provided pointers are NULL.
+ */
+extern whd_result_t whd_wifi_itwt_get_negotiated_info(whd_interface_t ifp, whd_itwt_negotiated_params_t *negotiated_params);
+
 /** Joins a Wi-Fi network
  *
  *  Scans for, associates and authenticates with a Wi-Fi network.
@@ -1153,6 +1191,15 @@ extern whd_result_t whd_wifi_mbo_send_notif(whd_interface_t ifp, uint8_t sub_ele
  */
 extern whd_result_t whd_wifi_set_coex_config(whd_interface_t ifp, whd_coex_config_t *coex_config);
 
+/** Set H2E capability in Firmware
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  h2ecap         Indicated whether PWE needs to be derived with H2E
+ *                         (enum value map to whd_fwcap_id_t)
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_set_auth_h2e_cap(whd_interface_t ifp, bool h2ecap);
+
 /** Set auth status used for External AUTH(SAE)
  *
  *  @param   ifp                    Pointer to handle instance of whd interface
@@ -1717,6 +1764,88 @@ whd_configure_scanmac_randomisation(whd_interface_t ifp, whd_bool_t config);
  */
 extern whd_result_t whd_wifi_set_mac_addr_via_otp(whd_interface_t ifp, char *tlvBuf, uint8_t len);
 
+/** Enable/Disable ICMP Ping Request Offload
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  Enable         Enable=1 / Disable=0
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_enable(whd_interface_t ifp, whd_bool_t Enable);
+
+/** Internet connectivity check add Configuration
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  ip_ver         IP Version: IPv4=1 / IPv6=2
+ *  @param  peer_ip        Pointer to peer's IP Address
+ *  @param  peer_mac       Pointer to peer's mac Address
+ *  @param  periodicity    Periodicty Of Ping in sec
+ *  @param  duration       Duration in sec
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_add(whd_interface_t ifp, whd_ip_ver_t ip_ver, uint8_t *peer_ip, whd_mac_t *peer_mac,
+                                                      uint32_t periodicity, uint32_t duration);
+
+/** Internet connectivity check delete Configuration
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  ip_ver         IP Version: IPv4=1 / IPv6=2
+ *  @param  peer_ip        Pointer to peer's IP Address
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_del(whd_interface_t ifp, whd_ip_ver_t ip_ver, uint8_t *peer_ip);
+
+/** Internet connectivity check start
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  ip_ver         IP Version: IPv4=1 / IPv6=2
+ *  @param  peer_ip        Pointer to peer's IP Address
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_start(whd_interface_t ifp, whd_ip_ver_t ip_ver, uint8_t *peer_ip);
+
+/** Internet connectivity check stop
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  ip_ver         IP Version: IPv4=1 / IPv6=2
+ *  @param  peer_ip        Pointer to peer's IP Address
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_stop(whd_interface_t ifp, whd_ip_ver_t ip_ver, uint8_t *peer_ip);
+
+/** Get Internet connectivity check Configuration Info
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  ip_ver         IP Version: IPv4=1 / IPv6=2
+ *  @param  peer_ip        Pointer to peer's IP Address
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_get_info(whd_interface_t ifp, whd_ip_ver_t ip_ver, uint8_t *peer_ip,
+                                                             whd_icmp_echo_req_info_t *whd_peer_info);
+
+/** ICMP_ECHO_REQ callback function pointer type
+ *
+ *  @param event_data      A pointer to the pointer that indicates where to put the event data
+ *
+ *  @return void           No error code returns
+ */
+typedef void (*whd_icmp_echo_req_callback_t)(whd_icmp_echo_req_event_data_t* event_data);
+
+/** Function to register/unregister ICMP_ECHO_REQ callback that is/isn't needed to be executed
+ *
+ *  @param ifp             Pointer to handle instance of whd interface
+ *  @param callback        Callback api to be registered
+ *  @param Register        Register=1 / Unregister=0
+ *
+ *  @return WHD_SUCCESS or Error code
+ */
+extern whd_result_t whd_wifi_icmp_echo_req_register_callback(whd_interface_t ifp, whd_icmp_echo_req_callback_t callback, whd_bool_t Register);
+
 #if defined (COMPONENT_MTB_HAL)
 /** Process interrupts function for OOB gpio pin
  *  This API is a wrapper for GPIO HAL driver's "process interrupts" function
@@ -1726,7 +1855,7 @@ extern whd_result_t whd_wifi_set_mac_addr_via_otp(whd_interface_t ifp, char *tlv
  *
  * @return WHD_SUCCESS or Error code
  */
-static inline whd_result_t whd_bus_process_oob_interrupt(whd_gpio_t *host_oob_pin)
+static inline whd_result_t whd_bus_process_oob_interrupt(whd_gpio_t host_oob_pin)
 {
     return mtb_hal_gpio_process_interrupt(host_oob_pin);
 }
@@ -1747,6 +1876,24 @@ static inline whd_result_t whd_bus_process_sdio_interrupt(whd_sdio_t *sdio_obj)
 #endif /* #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */
 
 #endif /* defined (COMPONENT_MTB_HAL) */
+
+/** Retrieves the current country code set
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  version        Pointer to a buffer where the Country information will be returned
+ *
+ *  @return WHD_SUCCESS or Error code */
+extern whd_result_t whd_wifi_get_country_code(whd_interface_t ifp, char* country_abbrev);
+
+/** Retrieves the list of all supported countries
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  band           Band requested
+ *  @param  count          Pointer to store count of the countries supported
+ *  @param  country_list   Pointer to the buffer to store country list
+ *
+ *  @return WHD_SUCCESS or Error code */
+extern whd_result_t whd_wifi_get_country_list(whd_interface_t ifp, uint32_t band, uint32_t* count, char* country_list);
 
 /* @} */
 

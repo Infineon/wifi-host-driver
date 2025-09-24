@@ -77,6 +77,11 @@ extern "C"
 #endif
 #endif
 
+#if defined(WHD_PRINT_VERSION_ENABLE) || !defined(WHD_PRINT_DISABLE)
+#define WPRINT_WHD_VERSION(args) do { cy_time_t time; cy_rtos_get_time(&time); printf("\n[%lu] " ,(unsigned long)time); printf args; } while (0 == 1)
+#else
+#define WPRINT_WHD_VERSION(args)
+#endif
 
 /* WICED printing macros for Wiced Wi-Fi Driver*/
 #ifdef WPRINT_ENABLE_WHD_INFO

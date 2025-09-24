@@ -169,17 +169,18 @@ typedef enum
     WLC_E_RRM = 141,                 /* RRM Event */
     WLC_E_ULP = 146,                 /* ULP entry event */
     WLC_E_TKO = 151,                 /* TCP Keep Alive Offload Event */
+    WLC_E_TWT_SETUP = 157,           /* TWT Setup Complete event */
     WLC_E_EXT_AUTH_REQ = 187,        /* authentication request received */
     WLC_E_EXT_AUTH_FRAME_RX = 188,   /* authentication request received */
     WLC_E_MGMT_FRAME_TXSTATUS = 189, /* mgmt frame Tx complete */
+    WLC_E_TWT_TEARDOWN = 195,        /* TWT Teardown Complete Event */
 #if defined(COMPONENT_WLANSENSE)
     WLC_E_CSI_ENABLE = 198,          /* Setup a communication with the application layer to send CSI data */
     WLC_E_CSI_DATA = 199,            /* Send the CSI data to application layer */
     WLC_E_CSI_DISABLE = 200,         /* Diable the communication from application layer */
-    WLC_E_LAST = 201,                /* highest val + 1 for range checking */
-#else
-    WLC_E_LAST = 190,
 #endif /* defined(COMPONENT_WLANSENSE) */
+    WLC_E_ICMP_ECHO_REQ = 202,       /* ICMP ping request Event indication */
+    WLC_E_LAST,                      /* highest val + 1 for range checking */
 } whd_event_num_t;
 
 /**
@@ -456,6 +457,8 @@ typedef enum
 #if defined(COMPONENT_WLANSENSE)
     WHD_CSI_EVENT_ENTRY,
 #endif /* defined(COMPONENT_WLANSENSE) */
+    WHD_ICMP_ECHO_REQ_EVENT_ENTRY,
+    WHD_TWT_EVENT_ENTRY,
     WHD_EVENT_ENTRY_MAX
 } whd_event_entry_t;
 
@@ -516,6 +519,27 @@ typedef struct
     void *handler_user_data;
     uint8_t ifidx;
 } event_list_elem_t;
+
+/* ICMP ECHO Req event reason code */
+#define WLC_E_REASON_ICMP_ECHO_REQ_SUCCESS  0
+#define WLC_E_REASON_ICMP_ECHO_REQ_TIMEOUT  1
+#define WLC_E_REASON_ICMP_ECHO_REQ_DISASSOC 2
+
+#define WL_ICMP_ECHO_REQ_EVENT_VER          1
+
+/* ICMP ECHO Req Event */
+typedef struct {
+    uint16_t version;
+    uint16_t length;
+    uint8_t  ip_ver;             /* Peer IP Version IPv4:1 IPv6:2 */
+    uint8_t  reason;             /* Event reason */
+    uint8_t  pad[2];
+    uint32_t echo_req_cnt;       /* ICMP Echo Req Count */
+    union {
+        whd_ipv4_addr_t ipv4;   /* Peer IPV4 Address */
+        whd_ipv6_addr_t ipv6;   /* Peer IPV6 Address */
+    } u;
+} wl_icmp_echo_req_event_t;
 
 /** @endcond */
 

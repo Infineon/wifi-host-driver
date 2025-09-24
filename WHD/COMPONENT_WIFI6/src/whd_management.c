@@ -603,6 +603,13 @@ whd_result_t whd_wifi_on(whd_driver_t whd_driver, whd_interface_t *ifpp)
         }
     }
 
+    /* Disabling ampdu hostreorder */
+    if ( (wlan_chip_id == 55500) || (wlan_chip_id == 55530) || (wlan_chip_id == 55572) ||
+         (wlan_chip_id == 55900) )
+    {
+        CHECK_RETURN(whd_wifi_set_iovar_value(ifp, IOVAR_STR_AMPDU_HOST_REORDER, WHD_FALSE) );
+    }
+
 #if defined(COMPONENT_WLANSENSE)
     CHECK_RETURN(whd_wlansense_create_interface(whd_driver));
 #endif /* defined(COMPONENT_WLANSENSE) */

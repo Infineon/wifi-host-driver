@@ -45,8 +45,12 @@ extern "C"
 /******************************************************
 *             Constants
 ******************************************************/
+#ifdef PROTO_MSGBUF
+#define WHD_THREAD_RX_BOUND           (WHD_DEF_MAX_RXBUFPOST - 2)
+#else
 #define WHD_THREAD_RX_BOUND           (20)
 #define WHD_MAX_BUS_FAIL              (10)
+#endif /* PROTO_MSGBUF */
 
 typedef struct whd_thread_info
 {

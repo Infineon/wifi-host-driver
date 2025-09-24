@@ -78,6 +78,10 @@ extern "C"
 #define IBSS_ENABLED       0x20000000  /**< Flag to enable IBSS mode           */
 #define FBT_ENABLED        0x40000000  /**< Flag to enable FBT                 */
 
+#define PSK_FBT            0x00000001
+#define SAE_FBT            0x00000002
+#define ENTERP_FBT         0x00000004
+
 #define PM1_POWERSAVE_MODE          (1) /**< Powersave mode on specified interface without regard for throughput reduction */
 #define PM2_POWERSAVE_MODE          (2) /**< Powersave mode on specified interface with High throughput */
 #define NO_POWERSAVE_MODE           (0) /**< No Powersave mode */
@@ -92,6 +96,10 @@ extern "C"
 #define ULP_DS1_SUPPORT             (1) /* Flag to enable DS1 mode in 43022 */
 #define ULP_DS2_SUPPORT             (2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */
 #define WHD_OOB_CONFIG_VERSION      (2) /**< Indicate the version for whd_oob_config structure */
+
+#define ETHER_ADDR_LEN              (6)
+#define IPV4_ADDR_LEN               (4)
+#define IPV6_ADDR_LEN               (16)
 
 /**
  * Suppress unused parameter warning
@@ -133,7 +141,7 @@ typedef struct secure_sess_info secure_sess_info_t;
 
 #ifndef WHD_USE_CUSTOM_HAL_IMPL
 #if defined (COMPONENT_MTB_HAL)
-typedef mtb_hal_gpio_t whd_gpio_t;
+typedef mtb_hal_gpio_t *whd_gpio_t;
 typedef mtb_hal_gpio_drive_mode_t whd_gpio_drive_mode_t;
 typedef mtb_hal_sdio_t whd_sdio_t;
 typedef mtb_hal_spi_t whd_spi_t;
@@ -296,7 +304,7 @@ typedef enum
     WHD_SECURITY_WPA3_FBT          = (WPA3_SECURITY | AES_ENABLED | FBT_ENABLED),                      /**< WPA3 Security with FBT                                */
     WHD_SECURITY_WPA3_WPA2_PSK_FBT  = (WPA3_SECURITY | WPA2_SECURITY | AES_ENABLED | FBT_ENABLED),     /**< WPA3 WPA2 PSK security with AES FT enabled.           */
     WHD_SECURITY_WPA2_WPA_AES_PSK  = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED),                     /**< WPA2 WPA PSK Security with AES                        */
-    WHD_SECURITY_WPA2_WPA_MIXED_PSK = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),      /**< WPA2 WPA PSK Security with AES & TKIP                  */
+    WHD_SECURITY_WPA2_WPA_MIXED_PSK = (WPA2_SECURITY | WPA_SECURITY | AES_ENABLED | TKIP_ENABLED),    /**< WPA2 WPA PSK Security with AES & TKIP                 */
     WHD_SECURITY_WPA3_WPA2_PSK    = (WPA3_SECURITY | WPA2_SECURITY | AES_ENABLED),                     /**< WPA3 WPA2 PSK Security with AES */
 
     WHD_SECURITY_WPA_TKIP_ENT     = (ENTERPRISE_ENABLED | WPA_SECURITY | TKIP_ENABLED),                /**< WPA Enterprise Security with TKIP                     */
@@ -510,7 +518,14 @@ typedef enum
     WHD_FWCAP_SAE_EXT = 1,    /**< External SAE */
     WHD_FWCAP_OFFLOADS = 2,   /**< Offload config */
     WHD_FWCAP_GCMP = 3,       /**< GCMP */
+    WHD_FWCAP_ICMP = 4,       /**< ICMP offload*/
 } whd_fwcap_id_t;
+
+typedef enum
+{
+    WHD_IPV4 = 1,
+    WHD_IPV6
+} whd_ip_ver_t;
 
 /******************************************************
 *                 Type Definitions
@@ -526,6 +541,22 @@ typedef struct
 {
     uint8_t octet[6]; /**< Unique 6-byte MAC address */
 } whd_mac_t;
+
+/**
+ * Structure for storing IPV4 address
+ */
+typedef struct
+{
+    uint8_t addr[IPV4_ADDR_LEN];
+} whd_ipv4_addr_t;
+
+/**
+ * Structure for storing IPV6 address
+ */
+typedef struct
+{
+    uint8_t addr[IPV6_ADDR_LEN];
+} whd_ipv6_addr_t;
 
 /**
  * Structure for storing the supported channels.
@@ -844,6 +875,7 @@ typedef struct whd_scan_result
     uint32_t max_data_rate;                     /**< Maximum data rate in kilobits/s                                           */
     whd_bss_type_t bss_type;                    /**< Network type                                                              */
     whd_security_t security;                    /**< Security type                                                             */
+    uint32_t  fbtbitmap;                        /**< Security type                                                             */
     uint8_t channel;                            /**< Radio channel that the AP beacon was received on                          */
     whd_802_11_band_t band;                     /**< Radio band                                                                */
     uint8_t ccode[2];                           /**< Two letter ISO country code from AP                                       */
@@ -1242,6 +1274,42 @@ typedef struct
     uint8_t reserved;
 } whd_twt_information_params_t;
 
+typedef enum {
+    WHD_TWT_SESSION_STATE_INACTIVE,
+    WHD_TWT_SESSION_STATE_SETUP_IN_PROGRESS,
+    WHD_TWT_SESSION_STATE_SETUP_COMPLETE,
+    WHD_TWT_SESSION_STATE_TEARDOWN_IN_PROGRESS,
+    WHD_TWT_SESSION_STATE_NOT_COMPLETED
+} whd_twt_session_state_t;
+
+typedef enum
+{
+    WHD_TWT_EVENT_SETUP_COMPLETE,     /* A TWT setup negotiation has completed. */
+    WHD_TWT_EVENT_TEARDOWN_COMPLETE,  /* A TWT teardown has completed. */
+} whd_itwt_event_type_t;
+
+typedef enum {
+    WHD_TWT_PARAM_NEGO_TYPE_INVALID     = -1,
+    WHD_TWT_PARAM_NEGO_TYPE_ITWT        = 0,
+    WHD_TWT_PARAM_NEGO_TYPE_WAKE_TBTT   = 1,
+    WHD_TWT_PARAM_NEGO_TYPE_BTWT_IE_BCN	= 2,
+    WHD_TWT_PARAM_NEGO_TYPE_BTWT        = 3,
+    WHD_TWT_PARAM_NEGO_TYPE_MAX         = 4
+} whd_twt_param_nego_type_t;
+
+typedef struct {
+    whd_twt_session_state_t session_state;      /* Current state of the TWT session. */
+    uint8_t                 flow_id;            /* The identifier for the established TWT flow (0-7). */
+    uint8_t                 dialog_token;       /* The dialog token used for the setup request. */
+    whd_mac_t               peer_mac;           /* MAC address of the TWT peer (the AP). */
+    uint64_t                target_wake_time;   /* The target wake time in microseconds (from TSF). */
+    uint32_t                wake_duration;      /* The negotiated wake duration in microseconds. */
+    uint32_t                wake_interval;      /* The negotiated wake interval in microseconds. */
+    whd_bool_t              is_implicit;        /* True for an Implicit TWT agreement. */
+    whd_bool_t              is_triggered;       /* True for a Trigger-based TWT session. */
+    whd_bool_t              is_announced;       /* True for an Announced (protected) TWT session. */
+} whd_itwt_negotiated_params_t;
+
 /* MBO attributes as defined in the mbo spec */
 enum {
     MBO_ATTR_MBO_AP_CAPABILITY = 1,
@@ -1447,9 +1515,6 @@ typedef struct {
     uint8_t padding[2];
 } ProtocolVersion;
 
-#define ETHER_ADDR_LEN      6
-#define IPV4_ADDR_LEN       4
-
 struct tls_param_info{
     ProtocolVersion version;
     uint32_t compression_algorithm;
@@ -1488,6 +1553,39 @@ struct tls_param_info{
 };
 
 #define TKO_DATA_OFFSET offsetof(wl_tko_t, data)  /**< TKO data offset */
+
+/* ICMP ECHO Req Info Data structure */
+typedef struct {
+    uint8_t enable;                   /* Offload Enable */
+    uint8_t count;                    /* Peer Count */
+    uint32_t state;                   /* State of the Peer */
+    uint32_t periodicity;             /* Periodicty Of Ping in sec */
+    uint32_t duration;                /* Duration in sec */
+    uint8_t ip_ver;                   /* IP Version IPv4:1 IPv6:2 */
+    union {
+        uint8_t ipv4[IPV4_ADDR_LEN];  /* Peer IPV4 Address */
+        uint8_t ipv6[IPV6_ADDR_LEN];  /* Peer IPV6 Address */
+    } u;
+    uint8_t mac_addr[ETHER_ADDR_LEN]; /* Peer Mac Address */
+} whd_icmp_echo_req_info_t;
+
+/* ICMP ECHO Req event reason code */
+typedef enum {
+    WHD_E_REASON_ICMP_ECHO_REQ_SUCCESS,
+    WHD_E_REASON_ICMP_ECHO_REQ_TIMEOUT,
+    WHD_E_REASON_ICMP_ECHO_REQ_DISASSOC
+} IcmpEchoReq_event_reason_e;
+
+/* ICMP ECHO Req Callback Event Data structure */
+typedef struct {
+    IcmpEchoReq_event_reason_e  reason; /* Event reason */
+    uint32_t echo_req_cnt;              /* ICMP Echo Req Count */
+    uint8_t  ip_ver;                    /* Peer IP Version IPv4:1 IPv6:2 */
+    union {
+        uint8_t ipv4[IPV4_ADDR_LEN];    /* Peer IPV4 Address */
+        uint8_t ipv6[IPV6_ADDR_LEN];    /* Peer IPV6 Address */
+    } u;
+} whd_icmp_echo_req_event_data_t;
 
 #ifdef __cplusplus
 }     /* extern "C" */

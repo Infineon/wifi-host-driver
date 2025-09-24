@@ -46,7 +46,6 @@ extern "C"
 #define WL_KEEP_ALIVE_FIXED_LEN		offsetof(wl_keep_alive_pkt_t, data)
 
 typedef uint16_t chanspec_t;
-#define    ETHER_ADDR_LEN        6
 
 typedef struct ether_addr
 {
@@ -215,6 +214,14 @@ typedef struct wl_twt_sdesc
     /* deprecated - to be removed */
     uint16_t li;
 } wl_twt_sdesc_t;
+
+typedef struct {
+    uint16_t version;
+    uint16_t length;
+    uint8_t  dialog;
+    int32_t  status;
+    wl_twt_sdesc_t desc;
+} wl_twt_setup_cplt_t;
 
 #define WL_TWT_FLOW_FLAG_BROADCAST  (1 << 0)
 #define WL_TWT_FLOW_FLAG_IMPLICIT   (1 << 1)
@@ -1279,13 +1286,17 @@ typedef struct eventmsgs_ext
 #define IOVAR_BUS_ENC_IV                 "bus_iv"
 #endif /* BUS_ENC */
 
+#define IOVAR_STR_ICMP_ECHO_REQ          "icmp_echo_req"
+#define IOVAR_STR_SAE_TRANSITON_MODE     "sae_transition_mode"
+#define IOV_SAE_PWE_H2E_ENABLE           "sae_pwe_h2e_enable"
+
 /* This value derived from the above strings, which appear maxed out in the 20s */
 #define IOVAR_NAME_STR_MAX_SIZE          32
 
 #define WLC_IOCTL_MAGIC                    (0x14e46c77)
 #define WLC_IOCTL_VERSION                  (1)
 #define WLC_IOCTL_SMLEN                    (256)
-#define WLC_IOCTL_MEDLEN                   (1536)
+#define WLC_IOCTL_MEDLEN                   (2048) /* The minimum value for counters is 1636 */
 #define WLC_IOCTL_MAXLEN                   (8192)
 
 #define WLC_GET_MAGIC                      ( (uint32_t)0 )
@@ -4431,18 +4442,15 @@ struct whd_tko_connect
                                */
 };
 
-#define IPV4_ADDR_LEN           4       /* IPV4 address length */
-#define IPV6_ADDR_LEN           16      /* IPV6 address length */
-
 /* IPV4 address */
-struct ipv4_addr {
-        uint8_t addr[IPV4_ADDR_LEN];
-};
+typedef struct wl_ipv4_addr {
+    uint8_t addr[IPV4_ADDR_LEN];
+} wl_ipv4_addr_t;
 
 /* IPV6 address */
-struct ipv6_addr {
-        uint8_t addr[IPV6_ADDR_LEN];
-};
+typedef struct wl_ipv6_addr {
+    uint8_t addr[IPV6_ADDR_LEN];
+} wl_ipv6_addr_t;
 
 typedef struct wl_tko_autoenab {
 	uint16_t version;         /* auto tko command version */
@@ -4540,12 +4548,12 @@ typedef struct wl_ol_cfg_v1 {
 			uint8_t pad[3];
 		} ol_profile;
 		struct {
-			struct ipv4_addr host_ipv4;
+			wl_ipv4_addr_t host_ipv4;
 			whd_bool_t del;				 /* 1:del 0:add host ipv4 address */
 			uint8_t pad[3];
 		} ol_inet_v4;
 		struct {
-			struct ipv6_addr host_ipv6;
+			wl_ipv6_addr_t host_ipv6;
 			uint8_t type; 			/* 0:unicast 1:anycast */
 			whd_bool_t del;				/* 1:del 0:add host ipv6 address */
 			uint8_t pad[2];
@@ -4643,6 +4651,67 @@ typedef struct wl_scanmac_config {
 #define WL_SCANMAC_SCAN_ASSOC_ROAM      (0x01 << 1)     /* associated roam scans */
 #define WL_SCANMAC_SCAN_ASSOC_PNO       (0x01 << 2)     /* associated PNO scans */
 #define WL_SCANMAC_SCAN_ASSOC_HOST      (0x01 << 3)     /* associated host scans */
+
+#define WL_ICMP_ECHO_REQ_VER         1
+
+/* ICMP ECHO Request Sub commands (the definitions for cmd_type in wl_icmp_echo_req_cmd_t) */
+typedef enum {
+    WL_ICMP_ECHO_REQ_ENAB,
+    WL_ICMP_ECHO_REQ_ADD,
+    WL_ICMP_ECHO_REQ_DEL,
+    WL_ICMP_ECHO_REQ_START,
+    WL_ICMP_ECHO_REQ_STOP,
+    WL_ICMP_ECHO_REQ_INFO
+} wl_icmp_echo_req_cmd_type_t;
+
+/* ICMP ECHO Req IOVAR Struct */
+typedef struct {
+    uint16_t version;
+    uint16_t length;
+    uint8_t  cmd_type;                      /* ICMP Echo Req Cmd Type */
+    uint8_t  pad[3];
+    uint8_t  data[];                        /* Data Pointing to Sub cmd structure */
+} wl_icmp_echo_req_cmd_t;
+
+typedef struct {
+    uint16_t version;
+    uint16_t length;
+    uint8_t  ip_ver;                        /* IP Version IPv4:1 IPv6:2 */
+    uint8_t  pad[3];
+    union {
+        wl_ipv4_addr_t ipv4;                /* Peer IPV4 Address */
+        wl_ipv6_addr_t ipv6;                /* Peer IPV6 Address */
+    } u;
+} wl_icmp_echo_req_peer_ip_t;
+
+typedef struct {
+    uint16_t version;
+    uint16_t length;
+    uint8_t  ip_ver;                        /* IP Version IPv4:1 IPv6:2 */
+    uint8_t  pad[3];
+    uint32_t periodicity;                   /* Periodicty Of Ping in sec */
+    uint32_t duration;                      /* Duration in sec */
+    union {
+        wl_ipv4_addr_t ipv4;                /* Peer IPV4 Address */
+        wl_ipv6_addr_t ipv6;                /* Peer IPV6 Address */
+    } u;
+    uint8_t mac_addr[ETHER_ADDR_LEN];       /* Peer Mac Address */
+} wl_icmp_echo_req_peer_config_t;
+
+/* ICMP ECHO Req IOVAR INFO Struct */
+typedef struct {
+    uint32_t                       state;   /* State of the Peer */
+    wl_icmp_echo_req_peer_config_t config;  /* Configuration of Peer */
+} wl_icmp_echo_req_get_peer_info_t;
+
+typedef struct {
+    uint16_t version;
+    uint16_t length;
+    uint8_t  enable;                         /* Offload Enable */
+    uint8_t  count;                          /* Peer Count */
+    uint8_t  pad[2];
+    uint8_t  data[];                         /* Data Pointing to get peer info structure (i.e. wl_icmp_echo_req_get_peer_info_t) */
+} wl_icmp_echo_req_get_info_t;
 
 /* Offload Skip Bitmap */
 #define WL_OL_ARP         (1 << 0)

@@ -88,6 +88,8 @@ struct whd_interface
 #if defined(COMPONENT_WLANSENSE)
     whd_csi_info_t csi_info;
 #endif /* defined(COMPONENT_WLANSENSE) */
+    whd_itwt_negotiated_params_t twt_negotiated_info;
+    cy_semaphore_t  twt_event_semaphore;
 };
 
 struct whd_bt_dev
@@ -137,11 +139,11 @@ struct whd_driver
 
     whd_stats_t whd_stats;
     whd_country_code_t country;
-
+#ifdef WHD_IOCTL_LOG_ENABLE
     whd_ioctl_log_t whd_ioctl_log[WHD_IOCTL_LOG_SIZE];
     int whd_ioctl_log_index;
     cy_semaphore_t whd_log_mutex;
-
+#endif
     struct whd_ram_shared_info *ram_shared;
     struct whd_msgbuf *msgbuf;
     uint16_t (*read_ptr)(struct whd_driver *whd_driver, uint32_t mem_offset);
@@ -175,7 +177,10 @@ struct whd_driver
    unsigned char key[16];
    unsigned char iv[12];
 #endif /* BUS_ENC */
-
+#ifdef CYW89530_AUTO
+    bool wl_cmd_in_prog;
+#endif /* CYW89530_AUTO */
+    bool is_mfp_auto; /* Do not set mfp in whd if this flag is set  */
 };
 
 whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8_t ifidx,

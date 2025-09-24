@@ -114,6 +114,7 @@ whd_result_t whd_thread_init(whd_driver_t whd_driver)
     return WHD_SUCCESS;
 }
 
+#ifndef PROTO_MSGBUF
 /** Sends the first queued packet
  *
  * Checks the queue to determine if there is any packets waiting
@@ -129,7 +130,6 @@ whd_result_t whd_thread_init(whd_driver_t whd_driver)
 int8_t whd_thread_send_one_packet(whd_driver_t whd_driver)
 {
     whd_result_t result;
-#ifndef PROTO_MSGBUF
     whd_buffer_t tmp_buf_hnd = NULL;
 
     if (whd_sdpcm_get_packet_to_send(whd_driver, &tmp_buf_hnd) != WHD_SUCCESS)
@@ -157,7 +157,79 @@ int8_t whd_thread_send_one_packet(whd_driver_t whd_driver)
     WHD_STATS_INCREMENT_VARIABLE(whd_driver, tx_total);
 
     return (int8_t)1;
+}
+
+/** Receives a packet if one is waiting
+ *
+ * Checks the wifi chip fifo to determine if there is any packets waiting
+ * to be received. If there are, then it receives the first one, and calls
+ * the callback @ref whd_sdpcm_process_rx_packet (in whd_sdpcm.c).
+ *
+ * This function is normally used by the WHD Thread, but can be
+ * called periodically by systems which have no RTOS to ensure
+ * packets get received properly.
+ *
+ * @return    1 : packet was received
+ *            0 : no packet waiting
+ */
+int8_t whd_thread_receive_one_packet(whd_driver_t whd_driver)
+{
+    /* Check if there is a packet ready to be received */
+    whd_buffer_t recv_buffer;
+    if (whd_bus_read_frame(whd_driver, &recv_buffer) != WHD_SUCCESS)
+    {
+        /* Failed to read a packet */
+        return 0;
+    }
+
+    if (recv_buffer != NULL)    /* Could be null if it was only a credit update */
+    {
+
+        WPRINT_WHD_DATA_LOG( ("Wcd:< Rcvd pkt 0x%08lX\n", (unsigned long)recv_buffer) );
+        WHD_STATS_INCREMENT_VARIABLE(whd_driver, rx_total);
+
+        /* Send received buffer up to SDPCM layer */
+        whd_sdpcm_process_rx_packet(whd_driver, recv_buffer);
+    }
+
+    return (uint16_t)1;
+}
+
+/** Sends and Receives all waiting packets
+ *
+ * Calls whd_thread_send_one_packet and whd_thread_receive_one_packet
+ * once to send and receive packets, until there are no more packets waiting to
+ * be transferred.
+ *
+ * This function is normally used by the WHD Thread, but can be
+ * called periodically by systems which have no RTOS to ensure
+ * packets get send and received properly.
+ *
+ * Note: do not loop in here, to avoid overwriting previously rx-ed packets
+ */
+int8_t whd_thread_poll_all(whd_driver_t whd_driver)
+{
+    int8_t result = 0;
+    result |= whd_thread_send_one_packet(whd_driver);
+    result |= whd_thread_receive_one_packet(whd_driver);
+    return result;
+}
 #else
+/** Sends the queued packets through commonring/flowring
+ *
+ * Checks the queue to determine if there is any packets waiting
+ * to be sent. If there are, then it sends the first one.
+ *
+ * This function is normally used by the WHD Thread, but can be
+ * called periodically by systems which have no RTOS to ensure
+ * packets get sent.
+ *
+ * @return    1 : packets were sent
+ *            0 : no packet sent
+ */
+int8_t whd_thread_send_packets(whd_driver_t whd_driver)
+{
+    whd_result_t result;
     uint16_t local_id = 0;
     uint16_t prio_ring = 0;
 
@@ -184,70 +256,27 @@ int8_t whd_thread_send_one_packet(whd_driver_t whd_driver)
     /* In MSGBUF protocol case, all the queued packets
        are sent through flowrings so, no need to check return 1 */
     return (int8_t)0;
-#endif /* PROTO_MSGBUF */
 }
 
-/** Receives a packet if one is waiting
+/** Receives a set of packets if anything available on ring.
  *
- * Checks the wifi chip fifo to determine if there is any packets waiting
+ * Checks the commonring to determine if there is any packets waiting
  * to be received. If there are, then it receives the first one, and calls
- * the callback @ref whd_sdpcm_process_rx_packet (in whd_sdpcm.c).
+ * the callback @ref whd_msgbuf_process_rx_packet (in whd_msgbuf_txrx.c).
  *
  * This function is normally used by the WHD Thread, but can be
  * called periodically by systems which have no RTOS to ensure
  * packets get received properly.
  *
- * @return    1 : packet was received
- *            0 : no packet waiting
+ * @return    1 : packets were received
+ *            0 : no packet is present in ring
  */
-int8_t whd_thread_receive_one_packet(whd_driver_t whd_driver)
+uint16_t whd_thread_receive_packets(whd_driver_t whd_driver)
 {
-#ifndef PROTO_MSGBUF
-    /* Check if there is a packet ready to be received */
-    whd_buffer_t recv_buffer;
-    if (whd_bus_read_frame(whd_driver, &recv_buffer) != WHD_SUCCESS)
-    {
-        /* Failed to read a packet */
-        return 0;
-    }
-
-    if (recv_buffer != NULL)    /* Could be null if it was only a credit update */
-    {
-
-        WPRINT_WHD_DATA_LOG( ("Wcd:< Rcvd pkt 0x%08lX\n", (unsigned long)recv_buffer) );
-        WHD_STATS_INCREMENT_VARIABLE(whd_driver, rx_total);
-
-        /* Send received buffer up to SDPCM layer */
-        whd_sdpcm_process_rx_packet(whd_driver, recv_buffer);
-    }
-
-    return (int8_t)1;
-#else
     /* Send Received Information to the Rings */
     return whd_msgbuf_process_rx_packet(whd_driver);
+}
 #endif /* PROTO_MSGBUF */
-
-}
-
-/** Sends and Receives all waiting packets
- *
- * Calls whd_thread_send_one_packet and whd_thread_receive_one_packet
- * once to send and receive packets, until there are no more packets waiting to
- * be transferred.
- *
- * This function is normally used by the WHD Thread, but can be
- * called periodically by systems which have no RTOS to ensure
- * packets get send and received properly.
- *
- * Note: do not loop in here, to avoid overwriting previously rx-ed packets
- */
-int8_t whd_thread_poll_all(whd_driver_t whd_driver)
-{
-    int8_t result = 0;
-    result |= whd_thread_send_one_packet(whd_driver);
-    result |= whd_thread_receive_one_packet(whd_driver);
-    return result;
-}
 
 /** Terminates the WHD Thread
  *
@@ -319,14 +348,15 @@ void whd_thread_notify(whd_driver_t whd_driver)
  * @param thread_input  : unused parameter needed to match thread prototype.
  *
  */
+#ifndef PROTO_MSGBUF
 static void whd_thread_func(cy_thread_arg_t thread_input)
 {
-    int8_t rx_status;
+    uint32_t status;
     int8_t tx_status;
-    uint8_t rx_cnt, rx_over_bound = 0;
+    uint16_t rx_cnt, rx_over_bound = 0;
     uint8_t bus_fail = 0;
     uint8_t error_type;
-    uint32_t status;
+    int8_t rx_status;
 
     whd_driver_t whd_driver = ( whd_driver_t )thread_input;
     whd_thread_info_t *thread_info = &whd_driver->thread_info;
@@ -341,10 +371,7 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
         rx_cnt = 0;
         /* Check if we were woken by interrupt */
         if ( (thread_info->bus_interrupt == WHD_TRUE) ||
-#ifdef PROTO_MSGBUF
-                (whd_driver->force_rx_read == WHD_TRUE) ||
-#endif /* PROTO_MSGBUF */
-                (whd_bus_use_status_report_scheme(whd_driver) ) )
+             (whd_bus_use_status_report_scheme(whd_driver) ) )
         {
             thread_info->bus_interrupt = WHD_FALSE;
 
@@ -368,6 +395,7 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
                     bus_fail++;
                 }
             }
+
         }
 
         /* Send all queued packets */
@@ -382,6 +410,7 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
             rx_over_bound = 1;
             continue;
         }
+
         if (bus_fail > WHD_MAX_BUS_FAIL)
         {
             WPRINT_WHD_ERROR( ("%s: Error bus_fail over %d times\n", __FUNCTION__, WHD_MAX_BUS_FAIL) );
@@ -389,25 +418,8 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
             whd_set_error_handler_locally(whd_driver, &error_type, NULL, NULL, NULL);
         }
 
-#ifdef PROTO_MSGBUF
-    if (whd_driver->update_buffs == 1)
-    {
-            whd_msgbuf_rxbuf_fill_all(whd_driver->msgbuf);
-    }
-#endif
-
         /* Sleep till WLAN do something */
         whd_bus_wait_for_wlan_event(whd_driver, &thread_info->transceive_semaphore);
-
-#ifdef PROTO_MSGBUF
-        /* Ensure the wlan backplane bus is up */
-        status = whd_ensure_wlan_bus_is_up(whd_driver);
-        if (status != WHD_SUCCESS)
-        {
-            whd_assert("Could not bring bus back up", 0 != 0);
-            return;
-        }
-#endif
 
         WPRINT_WHD_DATA_LOG( ("whd Thread: Woke\n") );
     }
@@ -418,12 +430,94 @@ static void whd_thread_func(cy_thread_arg_t thread_input)
     /* Reset the quit flag */
     thread_info->thread_quit_flag = WHD_FALSE;
 
-#ifndef PROTO_MSGBUF
     whd_sdpcm_quit(whd_driver);
-#endif /* PROTO_MSGBUF */
 
     WPRINT_WHD_DATA_LOG( ("Stopped whd Thread\n") );
 
     /* Ignore return - not much can be done about failure */
     (void)cy_rtos_exit_thread();
 }
+#else
+static void whd_thread_func (cy_thread_arg_t thread_input)
+{
+    uint32_t status;
+    int8_t tx_status;
+    uint16_t rx_cnt, rx_over_bound = 0;
+    uint16_t rx_ring_cnt = 0;
+
+    whd_driver_t whd_driver = ( whd_driver_t )thread_input;
+    whd_thread_info_t *thread_info = &whd_driver->thread_info;
+
+    WPRINT_WHD_DATA_LOG( ("Started whd Thread\n") );
+
+    /* Interrupts may be enabled inside thread. To make sure none lost set flag now. */
+    thread_info->whd_inited = WHD_TRUE;
+
+    while (thread_info->thread_quit_flag != WHD_TRUE)
+    {
+        rx_cnt = 0;
+        /* Check if we were woken by interrupt */
+        if ( (thread_info->bus_interrupt == WHD_TRUE) ||
+             (whd_driver->force_rx_read == WHD_TRUE) )
+        {
+            thread_info->bus_interrupt = WHD_FALSE;
+
+            /* Check if the interrupt indicated there is a packet to read */
+            status = whd_bus_packet_available_to_read(whd_driver);
+            if ( (status != 0) || rx_over_bound )
+            {
+                rx_over_bound = 0;
+                /* Receive all available packets */
+                do
+                {
+                    rx_ring_cnt = whd_thread_receive_packets(whd_driver);
+                    rx_cnt = rx_cnt + rx_ring_cnt;
+                    //printf("%d \t", rx_cnt);
+                } while (rx_ring_cnt != 0 && rx_cnt < WHD_THREAD_RX_BOUND);
+            }
+        }
+
+        /* Send all queued packets */
+        do
+        {
+            tx_status = whd_thread_send_packets(whd_driver);
+        } while (tx_status != 0);
+
+        if (whd_driver->update_buffs == 1)
+        {
+            whd_msgbuf_rxbuf_fill_all(whd_driver->msgbuf);
+        }
+
+        if (rx_cnt >= WHD_THREAD_RX_BOUND)
+        {
+            thread_info->bus_interrupt = WHD_TRUE;
+            rx_over_bound = 1;
+            continue;
+        }
+
+        /* Sleep till WLAN do something */
+        whd_bus_wait_for_wlan_event(whd_driver, &thread_info->transceive_semaphore);
+
+        /* Ensure the wlan backplane bus is up */
+        status = whd_ensure_wlan_bus_is_up(whd_driver);
+        if (status != WHD_SUCCESS)
+        {
+            whd_assert("Could not bring bus back up", 0 != 0);
+            return;
+        }
+
+        WPRINT_WHD_DATA_LOG( ("whd Thread: Woke\n") );
+    }
+
+    /* Set flag before releasing objects */
+    thread_info->whd_inited = WHD_FALSE;
+
+    /* Reset the quit flag */
+    thread_info->thread_quit_flag = WHD_FALSE;
+
+    WPRINT_WHD_DATA_LOG( ("Stopped whd Thread\n") );
+
+    /* Ignore return - not much can be done about failure */
+    (void)cy_rtos_exit_thread();
+}
+#endif /* PROTO_MSGBUF */

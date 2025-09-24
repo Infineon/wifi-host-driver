@@ -51,9 +51,11 @@ extern "C"
 #define WLC_E_ACTION_FRAME                59 /**< Indicates Action frame Rx */
 #define WLC_E_ACTION_FRAME_COMPLETE       60 /**< Indicates Action frame Tx complete */
 #define WLC_E_ESCAN_RESULT                69 /**< escan result event occurs when we scan for the networks */
+#define WLC_E_TWT_SETUP                  157 /**< TWT Setup Complete event */
 #define WLC_E_EXT_AUTH_REQ               187 /**< authentication request received */
 #define WLC_E_EXT_AUTH_FRAME_RX          188 /**< authentication request received */
 #define WLC_E_MGMT_FRAME_TXSTATUS        189 /**< mgmt frame Tx complete */
+#define WLC_E_TWT_TEARDOWN               195 /** TWT Teardown Complete Event */
 
 /* List of status codes - Applicable for any event type */
 #define WLC_E_STATUS_SUCCESS        0   /**< operation was successful */

@@ -38,7 +38,7 @@ extern "C"
 *             Function declarations
 ******************************************************/
 
-
+#ifndef PROTO_MSGBUF
 /** Sends the first queued packet
  *
  * Checks the queue to determine if there is any packets waiting
@@ -52,7 +52,6 @@ extern "C"
  *            0 : no packet sent
  */
 extern int8_t whd_thread_send_one_packet(whd_driver_t whd_driver);
-
 
 /** Receives a packet if one is waiting
  *
@@ -68,7 +67,36 @@ extern int8_t whd_thread_send_one_packet(whd_driver_t whd_driver);
  *            0 : no packet waiting
  */
 extern int8_t whd_thread_receive_one_packet(whd_driver_t whd_driver);
+#else
+/** Sends the queued packets through flowring
+ *
+ * Checks the queue to determine if there is any packets waiting
+ * to be sent. If there are, then it sends the first one.
+ *
+ * This function is normally used by the WHD Thread, but can be
+ * called periodically by systems which have no RTOS to ensure
+ * packets get sent.
+ *
+ * @return    1 : packets were sent
+ *            0 : no packet sent
+ */
+extern int8_t whd_thread_send_packets(whd_driver_t whd_driver);
 
+/** Receives a set of packets if anything available on ring.
+ *
+ * Checks the commonring to determine if there is any packets waiting
+ * to be received. If there are, then it receives the first one, and calls
+ * the callback @ref whd_msgbuf_process_rx_packet (in whd_msgbuf_txrx.c).
+ *
+ * This function is normally used by the WHD Thread, but can be
+ * called periodically by systems which have no RTOS to ensure
+ * packets get received properly.
+ *
+ * @return    1 : packets were received
+ *            0 : no packet is present in ring
+ */
+extern uint16_t whd_thread_receive_packets(whd_driver_t whd_driver);
+#endif /* PROTO_MSGBUF */
 
 /** Sends and Receives all waiting packets
  *

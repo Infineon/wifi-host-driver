@@ -36,18 +36,18 @@
 
 whd_bool_t whd_hal_is_oob_pin_avaliable(const whd_oob_config_t* oob_config)
 {
-    return !(oob_config->host_oob_pin.pin_num == WHD_NC_PIN_VALUE);
+    return ((oob_config->host_oob_pin->pin_num == WHD_NC_PIN_VALUE) ? WHD_FALSE : WHD_TRUE);
 }
 
 whd_result_t whd_hal_gpio_register_callback(whd_oob_config_t* oob_config, whd_bool_t register_action, whd_hal_gpio_event_callback_t callback, void* callback_arg)
 {
     if (register_action == WHD_TRUE) /* Register */
     {
-        mtb_hal_gpio_register_callback(&oob_config->host_oob_pin, callback, callback_arg);
+        mtb_hal_gpio_register_callback(oob_config->host_oob_pin, callback, callback_arg);
     }
     else /* Unregister */
     {
-        mtb_hal_gpio_register_callback(&oob_config->host_oob_pin, NULL, NULL);
+        mtb_hal_gpio_register_callback(oob_config->host_oob_pin, NULL, NULL);
     }
 
     return WHD_SUCCESS;
@@ -57,7 +57,7 @@ void whd_hal_gpio_enable_event(whd_oob_config_t* oob_config, whd_bool_t enable)
 {
     const mtb_hal_gpio_event_t event =
         (oob_config->is_falling_edge == WHD_TRUE) ? MTB_HAL_GPIO_IRQ_FALL : MTB_HAL_GPIO_IRQ_RISE;
-    mtb_hal_gpio_enable_event(&oob_config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
+    mtb_hal_gpio_enable_event(oob_config->host_oob_pin, event, (enable == WHD_TRUE) ? true : false);
 }
 
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
@@ -73,7 +73,7 @@ void whd_hal_sdio_enable_event(whd_sdio_t* sdio_obj, whd_bool_t enable)
 #elif defined(CYHAL_API_VERSION) && (CYHAL_API_VERSION == 2)
 whd_bool_t whd_hal_is_oob_pin_avaliable(const whd_oob_config_t* oob_config)
 {
-    return !(oob_config->host_oob_pin == WHD_NC_PIN_VALUE);
+    return ((oob_config->host_oob_pin == WHD_NC_PIN_VALUE) ? WHD_FALSE : WHD_TRUE);
 }
 
 whd_result_t whd_hal_gpio_register_callback(whd_oob_config_t* oob_config, whd_bool_t register_action, whd_hal_gpio_event_callback_t callback, void* callback_arg)
@@ -98,6 +98,7 @@ whd_result_t whd_hal_gpio_register_callback(whd_oob_config_t* oob_config, whd_bo
     else /* Unregister */
     {
         cyhal_gpio_register_callback(const_oob_config->host_oob_pin, NULL);
+        cyhal_gpio_free(const_oob_config->host_oob_pin);
     }
 
     return WHD_SUCCESS;
@@ -129,7 +130,7 @@ void whd_hal_sdio_enable_event(whd_sdio_t* sdio_obj, whd_bool_t enable)
 
 whd_bool_t whd_hal_is_oob_pin_avaliable(const whd_oob_config_t* oob_config)
 {
-    return !(oob_config->host_oob_pin == WHD_NC_PIN_VALUE);
+    return ((oob_config->host_oob_pin == WHD_NC_PIN_VALUE) ? WHD_FALSE : WHD_TRUE);
 }
 
 whd_result_t whd_hal_gpio_register_callback(whd_oob_config_t* oob_config, whd_bool_t register_action, whd_hal_gpio_event_callback_t callback, void* callback_arg)
@@ -158,6 +159,7 @@ whd_result_t whd_hal_gpio_register_callback(whd_oob_config_t* oob_config, whd_bo
     #else /* (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE) */
         cyhal_gpio_register_irq(const_oob_config->host_oob_pin, WLAN_INTR_PRIORITY, NULL, NULL);
     #endif /* #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) */
+        cyhal_gpio_free(const_oob_config->host_oob_pin);
     }
 
     return WHD_SUCCESS;

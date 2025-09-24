@@ -55,8 +55,7 @@ static void whd_msgbuf_update_rxbufpost_count(struct whd_msgbuf *msgbuf, uint16_
 static void whd_msgbuf_rxbuf_ioctlresp_post(struct whd_msgbuf *msgbuf);
 static void whd_msgbuf_set_next_buffer_in_queue(whd_driver_t whd_driver, whd_buffer_t buffer, whd_buffer_t prev_buffer);
 static void whd_msgbuf_rxbuf_event_post(struct whd_msgbuf *msgbuf);
-static int whd_msgbuf_schedule_txdata(struct whd_msgbuf *msgbuf, uint32_t flowid, whd_bool_t force);
-
+static void whd_msgbuf_schedule_txdata(struct whd_msgbuf *msgbuf, uint32_t flowid);
 
 /** Map a DSCP value from an IP header to a WMM QoS priority
  *
@@ -206,19 +205,33 @@ static void *whd_msgbuf_get_iovar_buffer(whd_driver_t whd_driver,
                                          const char *name)
 {
     uint32_t name_length = (uint32_t)strlen(name) + 1;    /* + 1 for terminating null */
+    uint16_t buffer_length = (uint16_t)(data_length + name_length);
+
+#ifdef CYW89530_AUTO
+    if (whd_driver->wl_cmd_in_prog && buffer_length <= IOCTL_TX_PAYLOAD_THRESH)
+    {
+        buffer_length = (IOCTL_TX_PAYLOAD_THRESH + 1);
+    }
+#endif /* CYW89530_AUTO */
 
     if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX,
-                            (uint16_t)(data_length + name_length),
+                            buffer_length,
                             (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
     {
         uint8_t *data = whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
+#ifdef CYW89530_AUTO
+        whd_driver->wl_cmd_in_prog = WHD_FALSE;
+#endif /* CYW89530_AUTO */
         CHECK_PACKET_NULL(data, NULL);
-        whd_mem_memset(data, 0, (name_length + data_length));
+        whd_mem_memset(data, 0, buffer_length);
         whd_mem_memcpy(data, name, name_length);
         return (data + name_length);
     }
     else
     {
+#ifdef CYW89530_AUTO
+        whd_driver->wl_cmd_in_prog = WHD_FALSE;
+#endif /* CYW89530_AUTO */
         WPRINT_WHD_ERROR( ("Error - failed to allocate a packet buffer for IOVAR\n") );
         return NULL;
     }
@@ -235,14 +248,26 @@ static void *whd_msgbuf_get_ioctl_buffer(whd_driver_t whd_driver,
                                          whd_buffer_t *buffer,
                                          uint16_t data_length)
 {
+#ifdef CYW89530_AUTO
+    if (whd_driver->wl_cmd_in_prog && data_length <= IOCTL_TX_PAYLOAD_THRESH)
+    {
+        data_length = IOCTL_TX_PAYLOAD_THRESH + 1;
+    }
+#endif /* CYW89530_AUTO */
 
     if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX, (uint16_t)(data_length),
                             (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
     {
+#ifdef CYW89530_AUTO
+        whd_driver->wl_cmd_in_prog = WHD_FALSE;
+#endif /* CYW89530_AUTO */
         return (whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) );
     }
     else
     {
+#ifdef CYW89530_AUTO
+        whd_driver->wl_cmd_in_prog = WHD_FALSE;
+#endif /* CYW89530_AUTO */
         WPRINT_WHD_ERROR( ("Error - failed to allocate a packet buffer for IOCTL\n") );
         return NULL;
     }
@@ -618,7 +643,7 @@ whd_msgbuf_process_flow_ring_create_response(struct whd_msgbuf *msgbuf, void *bu
     whd_flowring_open(msgbuf->flow, flowid);
     msgbuf->current_flowring_count++;
 
-    whd_msgbuf_schedule_txdata(msgbuf, flowid, WHD_TRUE);
+    whd_msgbuf_schedule_txdata(msgbuf, flowid);
 }
 
 static void
@@ -934,6 +959,7 @@ whd_msgbuf_process_txstatus(struct whd_msgbuf *msgbuf, void *buf)
     if (result != WHD_SUCCESS)
         WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
 
+    msgbuf->tot_txpkt_inqueue--;
     return;
 }
 
@@ -1081,7 +1107,7 @@ static void whd_msgbuf_process_msgtype(struct whd_msgbuf *msgbuf, void *buf)
     }
 }
 
-static uint32_t whd_msgbuf_process_rx_buffer(struct whd_msgbuf *msgbuf,
+static uint16_t whd_msgbuf_process_rx_buffer(struct whd_msgbuf *msgbuf,
                                          struct whd_commonring *commonring)
 {
     void *buf;
@@ -1102,11 +1128,6 @@ again:
         whd_msgbuf_process_msgtype(msgbuf, (uint8_t *)buf + msgbuf->rx_dataoffset);
         buf = (uint8_t *)buf + whd_commonring_len_item(commonring);
         processed++;
-        if (processed == WHD_MSGBUF_UPDATE_RX_PTR_THRS)
-        {
-            whd_commonring_read_complete(commonring, processed);
-            processed = 0;
-        }
         count--;
     }
     if (processed)
@@ -1117,23 +1138,23 @@ again:
 
     DELAYED_BUS_RELEASE_SCHEDULE(msgbuf->drvr, WHD_TRUE);
 
-    return 1;
+    return processed;
 }
 
-uint32_t whd_msgbuf_process_rx_packet(struct whd_driver *dev)
+uint16_t whd_msgbuf_process_rx_packet(struct whd_driver *dev)
 {
     struct whd_msgbuf *msgbuf = (struct whd_msgbuf *)dev->msgbuf;
     void *buf;
-    uint32_t result;
+    uint16_t rx_count;
 
     buf = msgbuf->commonrings[WHD_D2H_MSGRING_RX_COMPLETE];
-    result = whd_msgbuf_process_rx_buffer(msgbuf, buf);
+    rx_count = whd_msgbuf_process_rx_buffer(msgbuf, buf);
     buf = msgbuf->commonrings[WHD_D2H_MSGRING_TX_COMPLETE];
-    result = whd_msgbuf_process_rx_buffer(msgbuf, buf);
+    rx_count = whd_msgbuf_process_rx_buffer(msgbuf, buf);
     buf = msgbuf->commonrings[WHD_D2H_MSGRING_CONTROL_COMPLETE];
-    result = whd_msgbuf_process_rx_buffer(msgbuf, buf);
+    rx_count = whd_msgbuf_process_rx_buffer(msgbuf, buf);
 
-    return result;
+    return rx_count;
 }
 
 void whd_msgbuf_delete_flowring(struct whd_driver *drvr, uint16_t flowid)
@@ -1231,6 +1252,7 @@ whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t nu
 {
     struct whd_msgbuf *msgbuf = whd_driver->msgbuf;
     struct whd_flowring *flow = msgbuf->flow;
+    struct whd_flowring_ring *ring_temp = NULL;
     uint32_t compare = 0, i = 0;
     bool fr_act_avl = WHD_FALSE;
 
@@ -1243,6 +1265,7 @@ whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t nu
             {
                 compare = ring->ac_prio;
                 *prio_ring_id = i;
+                 ring_temp = ring;
             }
             fr_act_avl = WHD_TRUE;
         }
@@ -1250,6 +1273,7 @@ whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t nu
 
     if(fr_act_avl == WHD_TRUE)
     {
+        CY_ASSERT(ring_temp != NULL);
         return WHD_SUCCESS;
     }
     else
@@ -1265,7 +1289,7 @@ whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
     void *ret_ptr;
     struct msgbuf_tx_msghdr *tx_msghdr;
     uint32_t address;
-    uint32_t count;
+    uint32_t count = 0;
     uint32_t physaddr;
     uint32_t pktid;
     whd_buffer_t skb;
@@ -1281,7 +1305,6 @@ whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
 
     //whd_commonring_lock(commonring);	//to be fixed
 
-    count = WHD_MSGBUF_TX_FLUSH_CNT2 - WHD_MSGBUF_TX_FLUSH_CNT1;
     while (whd_flowring_qlen(flow, flowid) )
     {
         result = whd_msgbuf_txflow_dequeue(drvr, &skb, flowid);
@@ -1296,7 +1319,7 @@ whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
                                    &physaddr, &pktid) )
         {
             whd_msgbuf_txflow_reinsert(flow, flowid, skb);
-            WPRINT_WHD_ERROR( ("No PKTID available !!\n") );
+            WPRINT_WHD_ERROR( ("TXFL: No PKTID available !!\n") );
             result = WHD_NO_PKT_ID_AVAILABLE;
             break;
         }
@@ -1314,6 +1337,7 @@ whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
         WPRINT_WHD_DATA_LOG( ("Wcd:> Sending pkt 0x%08lX\n", (unsigned long)skb) );
         WHD_STATS_INCREMENT_VARIABLE(drvr, tx_total);
         count++;
+        msgbuf->tot_txpkt_inqueue++;
 
         tx_msghdr = (struct msgbuf_tx_msghdr *)ret_ptr;
 
@@ -1331,7 +1355,7 @@ whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
         tx_msghdr->metadata_buf_len = 0;
         tx_msghdr->metadata_buf_addr.high_addr = 0;
         tx_msghdr->metadata_buf_addr.low_addr = 0;
-        if (count >= WHD_MSGBUF_TX_FLUSH_CNT2)
+        if (count >= TXPOOL_RESV_FOR_STACK)
         {
             whd_commonring_write_complete(commonring);
             count = 0;
@@ -1393,17 +1417,13 @@ static whd_buffer_t whd_msgbuf_get_next_buffer_in_queue(whd_driver_t whd_driver,
     return packet->queue_next;
 }
 
-static int whd_msgbuf_schedule_txdata(struct whd_msgbuf *msgbuf, uint32_t flowid,
-                                      whd_bool_t force)
+static void whd_msgbuf_schedule_txdata(struct whd_msgbuf *msgbuf, uint32_t flowid)
 {
     whd_driver_t whd_driver = msgbuf->drvr;
     setbit(msgbuf->flow_map, flowid);
 
-    if (force == WHD_TRUE)
-    {
-        whd_thread_notify(whd_driver);
-    }
-    return 0;
+    whd_thread_notify(whd_driver);
+    return;
 }
 
 whd_result_t whd_msgbuf_txflow_dequeue(whd_driver_t whd_driver, whd_buffer_t *buffer, uint16_t flowid)
@@ -1490,7 +1510,14 @@ static whd_result_t whd_msgbuf_txflow_enqueue(whd_driver_t whd_driver, whd_buffe
     ring->ac_prio = whd_flowring_prio2fifo[msgbuf->priority];
 
     WPRINT_WHD_DEBUG(("Enqueuing +++ \n"));
-    CHECK_RETURN(whd_buffer_add_remove_at_front(whd_driver, &buffer, -(int)(sizeof(whd_buffer_header_t)) ) );
+
+    result = whd_buffer_add_remove_at_front(whd_driver, &buffer, -(int)(sizeof(whd_buffer_header_t)));
+    if ( result != WHD_SUCCESS) {
+        /* THIS ERROR is not expected. */
+        WPRINT_WHD_ERROR(("%s: whd_buffer_add_remove_at_front failed, space to be removed[%d]\n", __FUNCTION__, -(int)(sizeof(whd_buffer_header_t))));
+        CY_ASSERT(false);
+        return result;
+    }
     whd_msgbuf_set_next_buffer_in_queue(whd_driver, NULL, buffer);
     if (msgtx_info->send_queue_tail != NULL)
     {
@@ -1510,6 +1537,11 @@ static whd_result_t whd_msgbuf_txflow_enqueue(whd_driver_t whd_driver, whd_buffe
 
     if (result != WHD_SUCCESS)
         WPRINT_WHD_ERROR( ("Error setting semaphore in %s at %d \n", __func__, __LINE__) );
+
+    if (msgbuf->tot_txpkt_inqueue >= WHD_TXPOOL_BUFFER_THRESH)
+    {
+        return WHD_FLOW_CONTROLLED;
+    }
 
     return WHD_SUCCESS;
 }
@@ -1608,6 +1640,7 @@ static uint32_t whd_msgbuf_flowring_create(struct whd_msgbuf *msgbuf, int ifidx,
         return flowid;
     }
 
+    CY_ASSERT(whd_msgbuf_txflow_enqueue(msgbuf->drvr, (whd_buffer_t)skb, prio, flowid) == WHD_SUCCESS);
     create->flowid = flowid;
     create->ifidx = ifidx;
     whd_mem_memcpy(create->sa, eh->source_address, ETHER_ADDR_LEN);
@@ -1672,14 +1705,19 @@ whd_result_t whd_msgbuf_tx_queue_data(whd_interface_t ifp, whd_buffer_t buffer)
         }
         else
         {
-            whd_msgbuf_txflow_enqueue(whd_driver, buffer, priority, flowid);
             return WHD_SUCCESS;
         }
     }
 
-    whd_msgbuf_txflow_enqueue(whd_driver, buffer, priority, flowid);
+    result = whd_msgbuf_txflow_enqueue(whd_driver, buffer, priority, flowid);
+    /* If WHD TX buffer threshold exceeds, then just queue the packet,
+       don't schedule it, will be send in the next further slots */
+    if ((result == WHD_FLOW_CONTROLLED) && (ether_type != WHD_ETHERTYPE_ARP))
+    {
+        return WHD_SUCCESS;
+    }
 
-    whd_msgbuf_schedule_txdata(msgbuf, flowid, WHD_TRUE);
+    whd_msgbuf_schedule_txdata(msgbuf, flowid);
     return WHD_SUCCESS;
 }
 
@@ -1722,7 +1760,7 @@ static whd_result_t whd_msgbuf_rxbuf_data_post(struct whd_msgbuf *msgbuf, uint32
         {
             whd_commonring_write_cancel(commonring, alloced - i);
 
-            if(msgbuf->rxbufpost <= WHD_MSGBUF_RXBUFPOST_THRESHOLD)
+            if(msgbuf->rxbufpost < WHD_MSGBUF_RXBUFPOST_THRESHOLD)
             {
                 WPRINT_WHD_ERROR(("Allocation Failed error - %lu, need to alloced %d, available - %ld\n", result, alloced, msgbuf->rxbufpost));
             }
@@ -1740,7 +1778,7 @@ static whd_result_t whd_msgbuf_rxbuf_data_post(struct whd_msgbuf *msgbuf, uint32
             result = whd_buffer_release(drvr, rx_databuf, WHD_NETWORK_RX);
             if (result != WHD_SUCCESS)
                 WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
-            WPRINT_WHD_ERROR( ("No PKTID available !!\n") );
+            WPRINT_WHD_ERROR( ("DATA: No PKTID available !!\n") );
             whd_commonring_write_cancel(commonring, alloced - i);
             break;
         }
@@ -1793,7 +1831,9 @@ whd_msgbuf_rxbuf_data_fill(struct whd_msgbuf *msgbuf)
         fillbufs -= retcount;
     }
 
-    if (msgbuf->rxbufpost == WHD_MSGBUF_RXBUFPOST_THRESHOLD)
+    /* This is to make sure, device should not go to doze state,
+       in case FW don't have RX buffers to post to host */
+    if (msgbuf->rxbufpost < (WHD_MSGBUF_RXBUFPOST_THRESHOLD/2))
     {
         bool is_rxbuf_timer_running = WHD_FALSE;
         cy_rtos_is_running_timer(&msgbuf->drvr->rxbuf_update_timer, &is_rxbuf_timer_running);
@@ -1866,7 +1906,7 @@ whd_msgbuf_rxbuf_ctrl_post(struct whd_msgbuf *msgbuf, uint8_t event_buf,
             result = whd_buffer_release(drvr, rx_ctlbuf, WHD_NETWORK_RX);
             if (result != WHD_SUCCESS)
                 WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
-            WPRINT_WHD_ERROR( ("No PKTID available !!\n") );
+            WPRINT_WHD_ERROR( ("CTRL: No PKTID available !!\n") );
             whd_commonring_write_cancel(commonring, allocated - i);
             break;
         }
@@ -2261,7 +2301,7 @@ void whd_wifi_rxbuf_fill_timer_init(whd_driver_t whd_driver)
 void whd_wifi_rxbuf_fill_timer_start(whd_driver_t whd_driver)
 {
     /* Currently setting 60sec timed-out value to read the buffer availability.*/
-    WPRINT_WHD_ERROR(("Out of Buffers - Needs sometime to recover \n"));
+    WPRINT_WHD_ERROR(("Less RX Buffers for WLAN FW to post - recovery in prog \n"));
     cy_rtos_timer_start(&whd_driver->rxbuf_update_timer, WHD_MSGBUF_RXBUFPOST_TIMER_DELAY);
 }
 

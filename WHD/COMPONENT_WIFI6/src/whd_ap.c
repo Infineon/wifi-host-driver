@@ -224,6 +224,18 @@ whd_result_t whd_wifi_init_ap(whd_interface_t ifp, whd_ssid_t *ssid, whd_securit
         return WHD_UNSUPPORTED;
     }
 
+    /* WPA_MIXED sets TKIP as well implicitly, this is a WAR for H1 Combo SoftAP
+     * We do not want to set TKIP at all while configuring the AP in the firmware
+     */
+    if((auth_type == WHD_SECURITY_WPA2_MIXED_PSK) && (wlan_chip_id == 55500))
+    {
+        auth_type = WHD_SECURITY_WPA2_AES_PSK;
+    }
+    if((auth_type == WHD_SECURITY_WPA_MIXED_PSK) && (wlan_chip_id == 55500))
+    {
+        auth_type = WHD_SECURITY_WPA_AES_PSK;
+    }
+
     if ( (auth_type & WEP_ENABLED) != 0 )
     {
         WPRINT_WHD_ERROR( ("WEP auth type is not allowed , %s failed at line %d \n", __func__, __LINE__) );
