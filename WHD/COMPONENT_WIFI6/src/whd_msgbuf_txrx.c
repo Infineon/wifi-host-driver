@@ -1,6 +1,6 @@
 /*
- * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
- * SPDX-License-Identifier: Apache-2.0
+ * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -871,6 +871,23 @@ static void whd_msgbuf_process_event_buffer(whd_driver_t whd_driver, whd_buffer_
                 if ( (msgbuf_info->whd_event_list[i].events[j] == whd_event->event_type) &&
                      (msgbuf_info->whd_event_list[i].ifidx == whd_event->ifidx) )
                 {
+#if defined(CERT_MULTI_AKM) && defined(COMPONENT_CAT5)
+                    /* Forward Compatibility (FC) CERT TC 5.2.2
+                     * As part of TC, AP should not send deauth. But AP sends deauth
+                     * and WCM does not have roaming/connection retry in case of deauth
+                     * but is present in case of beacon loss.
+		     * WCM doesn't have retry logic if even_type is WLC_E_DISASSOC_IND,
+		     * as WAR change it to WLC_E_LINK with WLC_E_LINK_BCN_LOSS to trigger
+		     * retry logic in WCM */
+                    if ( (whd_driver->cert_mbssid_enable) &&
+                         (whd_event->event_type == WLC_E_DISASSOC_IND) )
+                    {
+                         whd_event->event_type = WLC_E_LINK;
+                         whd_event->flags = 0;
+                         whd_event->reason = WLC_E_LINK_BCN_LOSS;
+                         whd_driver->cert_mbssid_enable = WHD_FALSE;
+                    }
+#endif /* defined(CERT_MULTI_AKM) && defined(COMPONENT_CAT5) */
                     /* Correct event type has been found - call the handler function and exit loop */
                     msgbuf_info->whd_event_list[i].handler_user_data =
                         msgbuf_info->whd_event_list[i].handler(whd_driver->iflist[whd_event->ifidx],
@@ -1849,8 +1866,16 @@ whd_msgbuf_rxbuf_data_fill(struct whd_msgbuf *msgbuf)
 static void whd_msgbuf_update_rxbufpost_count(struct whd_msgbuf *msgbuf, uint16_t rxcnt)
 {
     msgbuf->rxbufpost -= rxcnt;
+/* Added WAR for CERT TC 5.57.1_24G: updated rxbufpost_threshold_cert value to 2
+ * based on the configuration from last passed milestone ES100)
+ */
+#if defined(CERT_MULTI_AKM) && defined(PROTO_MSGBUF)
+    if (msgbuf->rxbufpost <= (msgbuf->max_rxbufpost - msgbuf->drvr->rxbufpost_threshold_cert) )
+        whd_msgbuf_rxbuf_data_fill(msgbuf);
+#else /* defined(CERT_MULTI_AKM) && defined(PROTO_MSGBUF) */
     if (msgbuf->rxbufpost <= (msgbuf->max_rxbufpost - WHD_MSGBUF_RXBUFPOST_THRESHOLD) )
         whd_msgbuf_rxbuf_data_fill(msgbuf);
+#endif /* defined(CERT_MULTI_AKM) && defined(PROTO_MSGBUF) */
 }
 
 static uint32_t

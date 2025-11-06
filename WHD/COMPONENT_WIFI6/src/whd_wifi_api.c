@@ -1,6 +1,6 @@
 /*
- * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
- * SPDX-License-Identifier: Apache-2.0
+ * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2540,7 +2540,6 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
     uint32_t count_tmp = 0;
     uint16_t temp16;
     uint16_t bss_count;
-    extended_rates_t *extrates;
     whd_driver_t whd_driver = ifp->whd_driver;
 
     if (whd_driver->internal_info.scan_result_callback == NULL)
@@ -2889,16 +2888,9 @@ static void *whd_wifi_scan_events_handler(whd_interface_t ifp, const whd_event_h
         /* Otherwise no security */
         record->security = WHD_SECURITY_OPEN;
     }
-
-    extrates = (extended_rates_t *)whd_parse_tlvs(cp, len, DOT11_IE_ID_EXTENDED_SUPPORTED_RATES);
-    if ( (extrates != NULL) && (extrates->tlv_header.length == DOT11_RSNX_EXT_SAE) &&
-         (extrates->data[0] == DOT11_RSNX_EXT_SAE_ONLY))
-    {
-       record->flags |= WHD_SCAN_RESULT_FLAG_SAE_H2E;
-    }
     /* Find a RSNX IE */
     rsnxie = (rsnx_ie_t *)whd_parse_tlvs(cp, len, DOT11_IE_ID_RSNX);
-    if ( (rsnxie != NULL) && (rsnxie->tlv_header.length == DOT11_RSNX_CAP_LEN) &&
+    if ( (rsnxie != NULL) && (rsnxie->tlv_header.length >= DOT11_RSNX_CAP_LEN) &&
          (rsnxie->data[0] & (1 << DOT11_RSNX_SAE_H2E) ) )
     {
         record->flags |= WHD_SCAN_RESULT_FLAG_SAE_H2E;
@@ -4389,9 +4381,9 @@ static void *whd_wifi_itwt_events_handler(whd_interface_t ifp, const whd_event_h
                 ifp->twt_negotiated_info.target_wake_time = ((uint64_t)dtoh32(desc->wake_time_h) << 32) | dtoh32(desc->wake_time_l);
                 ifp->twt_negotiated_info.wake_duration    = dtoh32(desc->wake_dur);
                 ifp->twt_negotiated_info.wake_interval    = dtoh32(desc->wake_int);
-                ifp->twt_negotiated_info.is_implicit  = (whd_bool_t)((desc->flow_flags & WL_TWT_FLOW_FLAG_IMPLICIT) != 0);
-                ifp->twt_negotiated_info.is_triggered = (whd_bool_t)((desc->flow_flags & WL_TWT_FLOW_FLAG_TRIGGER) != 0);
-                ifp->twt_negotiated_info.is_announced = (whd_bool_t)((desc->flow_flags & WL_TWT_FLOW_FLAG_UNANNOUNCED) == 0);
+                ifp->twt_negotiated_info.is_implicit  = ((desc->flow_flags & WL_TWT_FLOW_FLAG_IMPLICIT) != 0);
+                ifp->twt_negotiated_info.is_triggered = ((desc->flow_flags & WL_TWT_FLOW_FLAG_TRIGGER) != 0);
+                ifp->twt_negotiated_info.is_announced = ((desc->flow_flags & WL_TWT_FLOW_FLAG_UNANNOUNCED) == 0);
                 if (whd_driver->internal_info.twt_setup_cplt_callback != NULL)
                 {
                      whd_driver->internal_info.twt_setup_cplt_callback(WHD_TWT_EVENT_SETUP_COMPLETE, (void *)event_data);
@@ -4496,6 +4488,21 @@ whd_result_t whd_wifi_deinit_twt(whd_interface_t ifp)
     return result;
 }
 
+#ifdef PROTO_MSGBUF
+void whd_wifi_scan_callback(whd_scan_result_t **result_ptr,
+                             void *user_data, whd_scan_status_t status)
+{
+    if ((result_ptr == NULL) || (*result_ptr == NULL))
+    {
+        if ((status == WHD_SCAN_COMPLETED_SUCCESSFULLY) || (status == WHD_SCAN_ABORTED))
+        {
+            WPRINT_WHD_DEBUG( ("scan complete \n") );
+        }
+        return;
+    }
+}
+#endif /* PROTO_MSGBUF */
+
 whd_result_t whd_wifi_itwt_setup(whd_interface_t ifp, whd_itwt_setup_params_t *twt_params)
 {
     whd_buffer_t buffer;
@@ -4503,6 +4510,12 @@ whd_result_t whd_wifi_itwt_setup(whd_interface_t ifp, whd_itwt_setup_params_t *t
     whd_driver_t whd_driver;
     wl_twt_setup_t itwt_setup;
     whd_result_t result;
+#ifdef PROTO_MSGBUF
+    uint16_t optional_channel_list[] =  {0x1001,0x1009,0x0000};
+    whd_scan_result_t scan_result;
+    wl_bss_info_t  bss_info;
+    whd_security_t security;
+#endif /* PROTO_MSGBUF */
 
     CHECK_IFP_NULL(ifp);
     whd_driver = ifp->whd_driver;
@@ -4542,6 +4555,25 @@ whd_result_t whd_wifi_itwt_setup(whd_interface_t ifp, whd_itwt_setup_params_t *t
     whd_mem_memcpy(twt_iovar->data, (uint8_t *)&itwt_setup, sizeof(wl_twt_setup_t) );
     result = whd_proto_set_iovar(ifp, buffer, NULL);
     CHECK_RETURN(cy_rtos_get_semaphore(&ifp->twt_event_semaphore, TWT_EVENT_TMOUT, WHD_FALSE));
+
+#ifdef PROTO_MSGBUF
+    /* During TWT state transitions (like setup ,teardown) TX_STATUS messages are not being
+     * received for packets not sent over-the-air(tx fifo not cleared by fw), preventing freeing
+     * of associated pktid/DMA buffers.
+     * This caused TX_pool exhaustion and data path breaks on subsequent iperf runs.
+     * As a WAR performing a single channel scan operation on other than connected channel
+     * after TWT setup/teardown.
+     */
+    CHECK_RETURN(whd_wifi_get_ap_info(whd_driver->iflist[0], &bss_info, &security));
+    if (bss_info.chanspec == optional_channel_list[0])
+    {
+        optional_channel_list[0] = optional_channel_list[1];
+    }
+    /* Termination condition to count the list of channels provided to scan only for single channel.*/
+    optional_channel_list[1] = 0x0000;
+    whd_wifi_scan(whd_driver->iflist[0], WHD_SCAN_TYPE_ACTIVE, WHD_BSS_TYPE_ANY,
+                  NULL, NULL, (const uint16_t *) optional_channel_list, NULL, whd_wifi_scan_callback, &scan_result, NULL);
+#endif /* PROTO_MSGBUF */
     return result;
 }
 
@@ -4591,6 +4623,12 @@ whd_result_t whd_wifi_twt_teardown(whd_interface_t ifp, whd_twt_teardown_params_
     whd_driver_t whd_driver;
     whd_result_t result;
     wl_twt_teardown_t twt_teardown;
+#ifdef PROTO_MSGBUF
+    whd_scan_result_t scan_result;
+    uint16_t optional_channel_list[] =  {0x1001,0x1009,0x0000};
+    wl_bss_info_t  bss_info;
+    whd_security_t security;
+#endif /* PROTO_MSGBUF */
 
     if (twt_params == NULL)
     {
@@ -4617,6 +4655,25 @@ whd_result_t whd_wifi_twt_teardown(whd_interface_t ifp, whd_twt_teardown_params_
     whd_mem_memcpy(twt_iovar->data, (uint8_t *)&twt_teardown, sizeof(wl_twt_teardown_t) );
     result = whd_proto_set_iovar(ifp, buffer, NULL);
     CHECK_RETURN(cy_rtos_get_semaphore(&ifp->twt_event_semaphore, TWT_EVENT_TMOUT, WHD_FALSE));
+
+#ifdef PROTO_MSGBUF
+    /* During TWT state transitions (like setup ,teardown), TX_STATUS messages are not being
+     * received for packets not sent over-the-air(tx fifo not cleared by fw), preventing freeing
+     * of associated pktid/DMA buffers.
+     * This caused TX_pool exhaustion and data path breaks on subsequent iperf runs.
+     * As a WAR performing a single channel scan operation on other than connected channel
+     * after TWT setup/teardown.
+     */
+    CHECK_RETURN(whd_wifi_get_ap_info(whd_driver->iflist[0], &bss_info, &security));
+    if (bss_info.chanspec == optional_channel_list[0])
+    {
+        optional_channel_list[0] = optional_channel_list[1];
+    }
+    /* Termination condition to count the list of channels provided to scan only for single channel.*/
+    optional_channel_list[1] = 0x0000;
+    whd_wifi_scan(whd_driver->iflist[0], WHD_SCAN_TYPE_ACTIVE, WHD_BSS_TYPE_ANY,
+                  NULL, NULL, (const uint16_t *) optional_channel_list, NULL, whd_wifi_scan_callback, &scan_result, NULL);
+#endif /* PROTO_MSGBUF */
     return result;
 }
 
@@ -5339,7 +5396,7 @@ whd_result_t whd_wifi_set_auth_h2e_cap(whd_interface_t ifp, bool h2ecap)
     }
     else
     {
-        WPRINT_WHD_ERROR(("\nFW set failed result %" PRIu32 "", result));
+        WPRINT_WHD_ERROR(("\nFW set failed result %ld", result));
     }
     return result;
 }

@@ -1,6 +1,6 @@
 /*
- * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
- * SPDX-License-Identifier: Apache-2.0
+ * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,6 +119,12 @@ extern "C" {
 #define WHD_D2H_MSGRING_CONTROL_COMPLETE  2
 #define WHD_D2H_MSGRING_TX_COMPLETE       3
 #define WHD_D2H_MSGRING_RX_COMPLETE       4
+
+/* Generally whd gets shared addr from FW within 500 ms
+ * WLAN_SHARED_ADDR_TIMEOUT_MS is the threshold time to do reset
+ * if whd does not get the shared addr within that time
+ * */
+#define WLAN_SHARED_ADDR_TIMEOUT_MS       3000
 
 static const uint32_t whd_ring_max_item[WHD_NROF_COMMON_MSGRINGS] = {
     WHD_H2D_MSGRING_CONTROL_SUBMIT_MAX_ITEM,

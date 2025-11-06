@@ -27,12 +27,16 @@ const resource_hnd_t wifi_firmware_image;
 extern const unsigned char wifi_firmware_image_data[];
 extern uint32_t wifi_firmware_image_size;
 #ifndef __IAR_SYSTEMS_ICC__
+#if defined(COMPONENT_CAT5) && defined(PSRAM_BUILD)
+RESOURCE_BIN_ADD(".cy_psram_data.fw", FW_IMAGE_NAME, wifi_firmware_image_data, wifi_firmware_image_size);
+#else
 #ifdef CY_STORAGE_WIFI_DATA
 RESOURCE_BIN_ADD(".cy_xip.fw", FW_IMAGE_NAME, wifi_firmware_image_data, wifi_firmware_image_size);
 #else
 RESOURCE_BIN_ADD(".rodata", FW_IMAGE_NAME, wifi_firmware_image_data, wifi_firmware_image_size);
-#endif
-#endif
+#endif /* ifdef CY_STORAGE_WIFI_DATA  */
+#endif /* if defined(COMPONENT_CAT5) && defined(PSRAM_BUILD)  */
+#endif /* __IAR_SYSTEMS_ICC__ */
 const resource_hnd_t wifi_firmware_image = { RESOURCE_IN_MEMORY, FW_IMAGE_SIZE, {.mem = { (const char *) wifi_firmware_image_data }}};
 
 #endif /* ifndef INCLUDED_RESOURCES_H_ */

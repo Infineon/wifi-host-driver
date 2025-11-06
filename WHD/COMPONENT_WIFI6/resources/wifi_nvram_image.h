@@ -31,14 +31,18 @@ extern unsigned char wifi_nvram_image_data[];
 extern uint32_t wifi_nvram_image_size;
 
 #ifndef __IAR_SYSTEMS_ICC__
+#if defined(COMPONENT_CAT5) && defined(PSRAM_BUILD)
+RESOURCE_BIN_ADD(".cy_psram_data.nvram", NVRAM_IMAGE_NAME, wifi_nvram_image_data, wifi_nvram_image_size);
+#else
 #ifdef CY_STORAGE_WIFI_DATA
 RESOURCE_BIN_ADD(".cy_xip.nvram", NVRAM_IMAGE_NAME, wifi_nvram_image_data, wifi_nvram_image_size);
 #else
 RESOURCE_BIN_ADD(".rodata", NVRAM_IMAGE_NAME, wifi_nvram_image_data, wifi_nvram_image_size);
-#endif
+#endif /* ifdef CY_STORAGE_WIFI_DATA */
+#endif /* if defined(COMPONENT_CAT5) && defined(PSRAM_BUILD) */
 #else
 uint32_t  wifi_nvram_image_size = NVRAM_IMAGE_SIZE;
-#endif
+#endif /* ifndef __IAR_SYSTEMS_ICC__ */
 
 const resource_hnd_t wifi_nvram_image = { RESOURCE_IN_MEMORY, NVRAM_IMAGE_SIZE, {.mem = { (char *) wifi_nvram_image_data }}};
 

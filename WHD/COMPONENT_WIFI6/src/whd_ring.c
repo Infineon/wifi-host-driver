@@ -1,6 +1,6 @@
 /*
- * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
- * SPDX-License-Identifier: Apache-2.0
+ * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -476,6 +476,7 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     uint32_t addr = 0;
     uint32_t host_capability = 0;
     whd_internal_info_t internal_info;
+    cy_time_t start_time = 0, cur_time = 0;
 
     struct whd_ram_shared_info *ram_shared_info;
 
@@ -494,9 +495,18 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
 
     WPRINT_WHD_DEBUG( ("Waiting for FW to update Shared Area\n") );
 
+    cy_rtos_time_get(&start_time);
     while ( (shared_addr == 0) || (shared_addr <= GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) ) ||
             (shared_addr >= (GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) ) ) )
     {
+	cy_rtos_time_get(&cur_time);
+	/* If whd does not get the shared addr within WLAN_SHARED_ADDR_TIMEOUT_MS, do soft reset for recovery
+	* Genrally whd should get the shared addr within 500ms
+	* */
+	if ((cur_time - start_time) > WLAN_SHARED_ADDR_TIMEOUT_MS)
+	{
+	    cyhal_system_reset_device();
+	}
         result = whd_bus_read_backplane_value(whd_driver, wlan_shared_address, 4, (uint8_t *)&shared_addr);
     }
 
