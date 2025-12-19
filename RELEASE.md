@@ -1,4 +1,4 @@
-# Wi-Fi Host Driver (WHD) 5.0.7
+# Wi-Fi Host Driver (WHD) 5.0.8
 Please refer to the [README File](./README.md) and the [WHD API Reference Manual](https://infineon.github.io/wifi-host-driver/html/index.html) for a complete description of the Wi-Fi Host Driver.
 
 ## Features

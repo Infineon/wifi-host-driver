@@ -4381,9 +4381,9 @@ static void *whd_wifi_itwt_events_handler(whd_interface_t ifp, const whd_event_h
                 ifp->twt_negotiated_info.target_wake_time = ((uint64_t)dtoh32(desc->wake_time_h) << 32) | dtoh32(desc->wake_time_l);
                 ifp->twt_negotiated_info.wake_duration    = dtoh32(desc->wake_dur);
                 ifp->twt_negotiated_info.wake_interval    = dtoh32(desc->wake_int);
-                ifp->twt_negotiated_info.is_implicit  = ((desc->flow_flags & WL_TWT_FLOW_FLAG_IMPLICIT) != 0);
-                ifp->twt_negotiated_info.is_triggered = ((desc->flow_flags & WL_TWT_FLOW_FLAG_TRIGGER) != 0);
-                ifp->twt_negotiated_info.is_announced = ((desc->flow_flags & WL_TWT_FLOW_FLAG_UNANNOUNCED) == 0);
+                ifp->twt_negotiated_info.is_implicit  = (whd_bool_t)((desc->flow_flags & WL_TWT_FLOW_FLAG_IMPLICIT) != 0);
+                ifp->twt_negotiated_info.is_triggered = (whd_bool_t)((desc->flow_flags & WL_TWT_FLOW_FLAG_TRIGGER) != 0);
+                ifp->twt_negotiated_info.is_announced = (whd_bool_t)((desc->flow_flags & WL_TWT_FLOW_FLAG_UNANNOUNCED) == 0);
                 if (whd_driver->internal_info.twt_setup_cplt_callback != NULL)
                 {
                      whd_driver->internal_info.twt_setup_cplt_callback(WHD_TWT_EVENT_SETUP_COMPLETE, (void *)event_data);
@@ -5396,7 +5396,7 @@ whd_result_t whd_wifi_set_auth_h2e_cap(whd_interface_t ifp, bool h2ecap)
     }
     else
     {
-        WPRINT_WHD_ERROR(("\nFW set failed result %ld", result));
+        WPRINT_WHD_ERROR(("\nFW set failed result %" PRIu32 "", result));
     }
     return result;
 }
