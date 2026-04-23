@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,6 +38,9 @@
 #define WPA_OUI_TYPE1                     "\x00\x50\xF2\x01"   /** WPA OUI */
 
 #ifdef PROTO_MSGBUF
+
+#define WHD_HEAP_ALIGN 8
+
 typedef struct dma_pool
 {
     int offset;
@@ -93,7 +96,7 @@ void whd_dmapool_reset( void )
     pool_mem->offset = 0;
     return;
 }
-#endif
+#endif /* PROTO_MSGBUF */
 
 /******************************************************
 *             Static Variables
@@ -1263,6 +1266,9 @@ inline void whd_mem_memset (void *buf, int val, size_t len)
 
 inline void *whd_mem_malloc (size_t size)
 {
+#ifdef PROTO_MSGBUF
+    size = (size + WHD_HEAP_ALIGN - 1) / size * size;
+#endif
     return malloc(size);
 }
 

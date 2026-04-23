@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -207,21 +207,18 @@ static void *whd_msgbuf_get_iovar_buffer(whd_driver_t whd_driver,
     uint32_t name_length = (uint32_t)strlen(name) + 1;    /* + 1 for terminating null */
     uint16_t buffer_length = (uint16_t)(data_length + name_length);
 
-#ifdef CYW89530_AUTO
     if (whd_driver->wl_cmd_in_prog && buffer_length <= IOCTL_TX_PAYLOAD_THRESH)
     {
         buffer_length = (IOCTL_TX_PAYLOAD_THRESH + 1);
     }
-#endif /* CYW89530_AUTO */
 
     if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX,
                             buffer_length,
                             (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
     {
         uint8_t *data = whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer);
-#ifdef CYW89530_AUTO
+
         whd_driver->wl_cmd_in_prog = WHD_FALSE;
-#endif /* CYW89530_AUTO */
         CHECK_PACKET_NULL(data, NULL);
         whd_mem_memset(data, 0, buffer_length);
         whd_mem_memcpy(data, name, name_length);
@@ -229,9 +226,7 @@ static void *whd_msgbuf_get_iovar_buffer(whd_driver_t whd_driver,
     }
     else
     {
-#ifdef CYW89530_AUTO
         whd_driver->wl_cmd_in_prog = WHD_FALSE;
-#endif /* CYW89530_AUTO */
         WPRINT_WHD_ERROR( ("Error - failed to allocate a packet buffer for IOVAR\n") );
         return NULL;
     }
@@ -248,26 +243,20 @@ static void *whd_msgbuf_get_ioctl_buffer(whd_driver_t whd_driver,
                                          whd_buffer_t *buffer,
                                          uint16_t data_length)
 {
-#ifdef CYW89530_AUTO
     if (whd_driver->wl_cmd_in_prog && data_length <= IOCTL_TX_PAYLOAD_THRESH)
     {
         data_length = IOCTL_TX_PAYLOAD_THRESH + 1;
     }
-#endif /* CYW89530_AUTO */
 
     if (whd_host_buffer_get(whd_driver, buffer, WHD_NETWORK_TX, (uint16_t)(data_length),
                             (uint32_t)WHD_IOCTL_PACKET_TIMEOUT) == WHD_SUCCESS)
     {
-#ifdef CYW89530_AUTO
         whd_driver->wl_cmd_in_prog = WHD_FALSE;
-#endif /* CYW89530_AUTO */
         return (whd_buffer_get_current_piece_data_pointer(whd_driver, *buffer) );
     }
     else
     {
-#ifdef CYW89530_AUTO
         whd_driver->wl_cmd_in_prog = WHD_FALSE;
-#endif /* CYW89530_AUTO */
         WPRINT_WHD_ERROR( ("Error - failed to allocate a packet buffer for IOCTL\n") );
         return NULL;
     }
@@ -346,6 +335,8 @@ whd_result_t whd_msgbuf_ioctl_dequeue(struct whd_driver *whd_driver)
     request->input_buf_len = htod16(buf_len);
     request->req_buf_addr.high_addr = htod32(msgbuf->ioctbuf_phys_hi);
     request->req_buf_addr.low_addr = htod32(msgbuf->ioctbuf_phys_lo);
+
+    WHD_IOCTL_LOG_ADD(whd_driver, msgbuf->ioctl_cmd, msgbuf->ioctl_queue);
 
     if (msgbuf->ioctl_queue)
     {
@@ -589,11 +580,14 @@ whd_msgbuf_remove_flowring(struct whd_msgbuf *msgbuf, uint16_t flowid)
 {
 
     WPRINT_WHD_DEBUG( ("Removing flowring %d\n", flowid) );
-    /* TODO: Buffer release is not needed as it is from whd dmapool */
-    //CHECK_RETURN(whd_buffer_release(msgbuf->drvr, (whd_buffer_t)msgbuf->flowring_handle[flowid], WHD_NETWORK_TX));
+    /* TODO: Buffer release for whd dmapool(today, it is permanent) */
+
+    if (isset(msgbuf->flow_map, flowid))
+    {
+        clrbit(msgbuf->flow_map, flowid);
+    }
 
     whd_flowring_delete(msgbuf->flow, flowid);
-
     return WHD_SUCCESS;
 }
 
@@ -876,9 +870,9 @@ static void whd_msgbuf_process_event_buffer(whd_driver_t whd_driver, whd_buffer_
                      * As part of TC, AP should not send deauth. But AP sends deauth
                      * and WCM does not have roaming/connection retry in case of deauth
                      * but is present in case of beacon loss.
-		     * WCM doesn't have retry logic if even_type is WLC_E_DISASSOC_IND,
-		     * as WAR change it to WLC_E_LINK with WLC_E_LINK_BCN_LOSS to trigger
-		     * retry logic in WCM */
+                     * WCM doesn't have retry logic if even_type is WLC_E_DISASSOC_IND,
+                     * as WAR change it to WLC_E_LINK with WLC_E_LINK_BCN_LOSS to trigger
+                     * retry logic in WCM */
                     if ( (whd_driver->cert_mbssid_enable) &&
                          (whd_event->event_type == WLC_E_DISASSOC_IND) )
                     {
@@ -1024,6 +1018,7 @@ whd_msgbuf_process_rx_complete(struct whd_msgbuf *msgbuf, void *buf)
             result = whd_buffer_release(drvr, skb, WHD_NETWORK_RX);
             if (result != WHD_SUCCESS)
                 WPRINT_WHD_ERROR( ("buffer release failed in %s at %d \n", __func__, __LINE__) );
+            return;
         }
 
         ifp = (whd_interface_t)whd_get_interface(drvr, rx_complete->msg.ifidx);
@@ -1046,9 +1041,7 @@ whd_msgbuf_process_rx_complete(struct whd_msgbuf *msgbuf, void *buf)
         WPRINT_WHD_DEBUG( ("%s : RECEIVED BUFFER IS NULL \n", __func__) );
 
     whd_msgbuf_update_rxbufpost_count(msgbuf, 1);
-
     return;
-
 }
 
 static void
@@ -1265,38 +1258,34 @@ static whd_result_t whd_msgbuf_txflow_reinsert(struct whd_flowring *flow, uint16
     return WHD_SUCCESS;
 }
 
-whd_result_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint32_t num_flowring, uint16_t *prio_ring_id)
+whd_bool_t whd_get_high_priority_flowring(whd_driver_t whd_driver, uint8_t *prio_ring_id)
 {
     struct whd_msgbuf *msgbuf = whd_driver->msgbuf;
     struct whd_flowring *flow = msgbuf->flow;
-    struct whd_flowring_ring *ring_temp = NULL;
-    uint32_t compare = 0, i = 0;
+    uint8_t compare = 0, i = 0;
     bool fr_act_avl = WHD_FALSE;
 
-    for (i = 0; i < num_flowring; i++) {
-        if(isset(whd_driver->msgbuf->flow_map, i))
+    for (i = 0; i < msgbuf->max_flowrings; i++)
+    {
+        if(isset(msgbuf->flow_map, i))
         {
             struct whd_flowring_ring *ring = flow->rings[i];
+
+            if (ring == NULL)
+            {
+                continue;
+            }
 
             if (compare <= ring->ac_prio)
             {
                 compare = ring->ac_prio;
                 *prio_ring_id = i;
-                 ring_temp = ring;
             }
             fr_act_avl = WHD_TRUE;
         }
     }
 
-    if(fr_act_avl == WHD_TRUE)
-    {
-        CY_ASSERT(ring_temp != NULL);
-        return WHD_SUCCESS;
-    }
-    else
-    {
-        return WHD_BADARG;
-    }
+    return fr_act_avl;
 }
 
 whd_result_t whd_msgbuf_txflow(struct whd_driver *drvr, uint16_t flowid)
@@ -1777,9 +1766,9 @@ static whd_result_t whd_msgbuf_rxbuf_data_post(struct whd_msgbuf *msgbuf, uint32
         {
             whd_commonring_write_cancel(commonring, alloced - i);
 
-            if(msgbuf->rxbufpost < WHD_MSGBUF_RXBUFPOST_THRESHOLD)
+            if(msgbuf->rxbufpost < WHD_MSGBUF_RXBUFPOST_LIMIT_CHECK)
             {
-                WPRINT_WHD_ERROR(("Allocation Failed error - %lu, need to alloced %d, available - %ld\n", result, alloced, msgbuf->rxbufpost));
+                WPRINT_WHD_ERROR(("WARN: Buffer alloc error[0x%lx], need to alloc %ld, avl for WLAN-FW - %ld\n", result, count, msgbuf->rxbufpost));
             }
             break;
         }
@@ -1826,8 +1815,7 @@ static whd_result_t whd_msgbuf_rxbuf_data_post(struct whd_msgbuf *msgbuf, uint32
     return i;
 }
 
-static void
-whd_msgbuf_rxbuf_data_fill(struct whd_msgbuf *msgbuf)
+void whd_msgbuf_rxbuf_data_fill(struct whd_msgbuf *msgbuf)
 {
     uint32_t fillbufs;
     uint32_t retcount;
@@ -1850,14 +1838,14 @@ whd_msgbuf_rxbuf_data_fill(struct whd_msgbuf *msgbuf)
 
     /* This is to make sure, device should not go to doze state,
        in case FW don't have RX buffers to post to host */
-    if (msgbuf->rxbufpost < (WHD_MSGBUF_RXBUFPOST_THRESHOLD/2))
+    if ((msgbuf->rxbufpost <= WHD_MSGBUF_RXBUFPOST_LIMIT_CHECK) && (!msgbuf->rx_buf_recovery))
     {
         bool is_rxbuf_timer_running = WHD_FALSE;
         cy_rtos_is_running_timer(&msgbuf->drvr->rxbuf_update_timer, &is_rxbuf_timer_running);
 
         if (is_rxbuf_timer_running == WHD_FALSE)
         {
-            whd_wifi_rxbuf_fill_timer_start(msgbuf->drvr);
+            whd_msgbuf_rxbuf_fill_timer_start(msgbuf->drvr);
         }
     }
 
@@ -1866,14 +1854,14 @@ whd_msgbuf_rxbuf_data_fill(struct whd_msgbuf *msgbuf)
 static void whd_msgbuf_update_rxbufpost_count(struct whd_msgbuf *msgbuf, uint16_t rxcnt)
 {
     msgbuf->rxbufpost -= rxcnt;
-/* Added WAR for CERT TC 5.57.1_24G: updated rxbufpost_threshold_cert value to 2
- * based on the configuration from last passed milestone ES100)
- */
 #if defined(CERT_MULTI_AKM) && defined(PROTO_MSGBUF)
-    if (msgbuf->rxbufpost <= (msgbuf->max_rxbufpost - msgbuf->drvr->rxbufpost_threshold_cert) )
+    /* Added WAR for CERT TC 5.57.1_24G: updated rxbufpost_threshold_cert value to 2
+     * based on the configuration from last passed milestone ES100)
+     */
+    if (msgbuf->rxbufpost <= (msgbuf->max_rxbufpost - msgbuf->drvr->rxbufpost_threshold_cert))
         whd_msgbuf_rxbuf_data_fill(msgbuf);
 #else /* defined(CERT_MULTI_AKM) && defined(PROTO_MSGBUF) */
-    if (msgbuf->rxbufpost <= (msgbuf->max_rxbufpost - WHD_MSGBUF_RXBUFPOST_THRESHOLD) )
+    if (msgbuf->rxbufpost <= (msgbuf->max_rxbufpost - WHD_MSGBUF_RXBUFPOST_THRESHOLD))
         whd_msgbuf_rxbuf_data_fill(msgbuf);
 #endif /* defined(CERT_MULTI_AKM) && defined(PROTO_MSGBUF) */
 }
@@ -1918,7 +1906,7 @@ whd_msgbuf_rxbuf_ctrl_post(struct whd_msgbuf *msgbuf, uint8_t event_buf,
 
         if (result != WHD_SUCCESS)
         {
-            WPRINT_WHD_ERROR( ("%s : Allocation Failed \n", __func__) );
+            WPRINT_WHD_ERROR(("Allocation Failed[event?-%d], err-0x%x \n", event_buf, result));
             whd_commonring_write_cancel(commonring, allocated - i);
             break;
         }
@@ -2029,7 +2017,7 @@ static void whd_msgbuf_detach(struct whd_driver *whd_driver)
         whd_mem_free(msgbuf->flowrings);
         whd_msgbuf_release_pktids(whd_driver, msgbuf);
         whd_mem_free(msgbuf);
-        whd_wifi_rxbuf_fill_timer_deinit(whd_driver);
+        whd_msgbuf_rxbuf_fill_timer_deinit(whd_driver);
     }
 }
 
@@ -2155,7 +2143,7 @@ static whd_result_t whd_msgbuf_attach(struct whd_driver *whd_driver)
     } while (msgbuf->max_rxbufpost != msgbuf->rxbufpost);
 
     /* This timer is required when buffer availability becomes 0, where WHD and FW communication breaks */
-    whd_wifi_rxbuf_fill_timer_init(whd_driver);
+    whd_msgbuf_rxbuf_fill_timer_init(whd_driver);
 
     WPRINT_WHD_DEBUG( ("Msgbuf Attach End \n") );
     return WHD_SUCCESS;
@@ -2279,65 +2267,52 @@ whd_result_t whd_msgbuf_info_init(whd_driver_t whd_driver)
     return WHD_SUCCESS;
 }
 
-void whd_msgbuf_rxbuf_fill_all(struct whd_msgbuf *msgbuf)
+void whd_msgbuf_rxbuf_fill_timer_cb(cy_timer_callback_arg_t arg)
 {
-    uint32_t retry_count = 0;
+    struct whd_msgbuf *msgbuf = (struct whd_msgbuf *)arg;
     cy_network_packet_pool_info_t rx_pool_avl;
 
-    msgbuf->drvr->update_buffs = 0;
-
-    do
+    if (msgbuf->rxbufpost >= (FW_WL_D11_BUF_POST + FW_M2MDMA_BUF_POST))
     {
-        cy_network_get_packet_pool_info(CY_NETWORK_PACKET_RX, &rx_pool_avl);
+        whd_msgbuf_rxbuf_fill_timer_stop(msgbuf->drvr);
+        WPRINT_WHD_ERROR(("\n # Recovered enough[%ld] # \n", msgbuf->rxbufpost));
+        return;
+    }
 
-        if(rx_pool_avl.free_packets >= (msgbuf->max_rxbufpost - WHD_MSGBUF_RXBUFPOST_THRESHOLD))
-        {
-            whd_msgbuf_rxbuf_data_fill(msgbuf);
-        }
-        else
-        {
-            retry_count++;
-            cy_rtos_delay_milliseconds(2000);
-        }
-    } while( (msgbuf->rxbufpost < (msgbuf->max_rxbufpost - WHD_MSGBUF_RXBUFPOST_THRESHOLD))
-                                               && (retry_count <= WHD_MSGBUF_RXBUFPOST_RETRY_COUNT));
-
-    if(msgbuf->cur_eventbuf == 0)
-        whd_msgbuf_rxbuf_event_post(msgbuf);
-
+    WPRINT_WHD_ERROR(("..."));
+    cy_network_get_packet_pool_info(CY_NETWORK_PACKET_RX, &rx_pool_avl);
+    if (rx_pool_avl.free_packets >= (FW_WL_D11_BUF_POST + FW_M2MDMA_BUF_POST))
+    {
+        whd_msgbuf_rxbuf_fill_timer_stop(msgbuf->drvr);
+        whd_msgbuf_rxbuf_data_fill(msgbuf);
+        WPRINT_WHD_ERROR(("\n # RX buffer recovery done[%ld] # \n", msgbuf->rxbufpost));
+    }
 }
 
-void whd_msgbuf_indicate_to_fill_buffers(cy_timer_callback_arg_t arg)
+void whd_msgbuf_rxbuf_fill_timer_init(whd_driver_t whd_driver)
 {
-     whd_driver_t whd_driver = (whd_driver_t)arg;
-
-     whd_driver->update_buffs = 1;
-     whd_thread_notify(whd_driver);
-
-     whd_wifi_rxbuf_fill_timer_stop(whd_driver->msgbuf->drvr);
+    cy_rtos_timer_init(&whd_driver->rxbuf_update_timer, CY_TIMER_TYPE_PERIODIC,
+                       whd_msgbuf_rxbuf_fill_timer_cb, (cy_timer_callback_arg_t )whd_driver->msgbuf);
 }
 
-void whd_wifi_rxbuf_fill_timer_init(whd_driver_t whd_driver)
+void whd_msgbuf_rxbuf_fill_timer_start(whd_driver_t whd_driver)
 {
-    cy_rtos_timer_init(&whd_driver->rxbuf_update_timer, CY_TIMER_TYPE_ONCE,
-                                        whd_msgbuf_indicate_to_fill_buffers, (cy_timer_callback_arg_t ) whd_driver);
-}
-
-void whd_wifi_rxbuf_fill_timer_start(whd_driver_t whd_driver)
-{
+    /* Call network activity function to resume the network stack if it was suspended */
+    cy_network_activity_notify(CY_NETWORK_ACTIVITY_RX);
     /* Currently setting 60sec timed-out value to read the buffer availability.*/
-    WPRINT_WHD_ERROR(("Less RX Buffers for WLAN FW to post - recovery in prog \n"));
+    WPRINT_WHD_ERROR(("Less RX buffers for WLAN FW to post, recovery in progress!!\n"));
+    whd_driver->msgbuf->rx_buf_recovery = 1;
     cy_rtos_timer_start(&whd_driver->rxbuf_update_timer, WHD_MSGBUF_RXBUFPOST_TIMER_DELAY);
 }
 
-void whd_wifi_rxbuf_fill_timer_deinit(whd_driver_t whd_driver)
+void whd_msgbuf_rxbuf_fill_timer_deinit(whd_driver_t whd_driver)
 {
     cy_rtos_timer_deinit(&whd_driver->rxbuf_update_timer);
 }
 
-void whd_wifi_rxbuf_fill_timer_stop(whd_driver_t whd_driver)
+void whd_msgbuf_rxbuf_fill_timer_stop(whd_driver_t whd_driver)
 {
+    whd_driver->msgbuf->rx_buf_recovery = 0;
     cy_rtos_timer_stop(&whd_driver->rxbuf_update_timer);
 }
-
 #endif /* PROTO_MSGBUF */

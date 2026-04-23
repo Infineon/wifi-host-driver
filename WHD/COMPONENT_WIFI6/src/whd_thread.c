@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -229,11 +229,10 @@ int8_t whd_thread_poll_all(whd_driver_t whd_driver)
  */
 int8_t whd_thread_send_packets(whd_driver_t whd_driver)
 {
-    whd_result_t result;
-    uint16_t local_id = 0;
-    uint16_t prio_ring = 0;
+    uint8_t local_id = 0;
+    uint8_t prio_ring_id = 0;
 
-    /* Prefer to IOCTL Data than Tx Data */
+    /* Preference to control path over data path */
     if (whd_driver->msgbuf->ioctl_queue)
     {
         WPRINT_WHD_DEBUG(("Wcd:> Sending pkt ioctl_queue - %p\n", whd_driver->msgbuf->ioctl_queue));
@@ -243,18 +242,16 @@ int8_t whd_thread_send_packets(whd_driver_t whd_driver)
 
     for (local_id = 0; local_id < whd_driver->msgbuf->current_flowring_count; local_id++)
     {
-        result = whd_get_high_priority_flowring(whd_driver, whd_driver->msgbuf->current_flowring_count, &prio_ring);
-
-        if (result == WHD_SUCCESS)
+        if (whd_get_high_priority_flowring(whd_driver, &prio_ring_id))
         {
-            clrbit(whd_driver->msgbuf->flow_map, prio_ring);
-            CHECK_RETURN(whd_msgbuf_txflow(whd_driver, prio_ring));
+            clrbit(whd_driver->msgbuf->flow_map, prio_ring_id);
+            CHECK_RETURN(whd_msgbuf_txflow(whd_driver, prio_ring_id));
             DELAYED_BUS_RELEASE_SCHEDULE(whd_driver, WHD_TRUE);
         }
     }
 
     /* In MSGBUF protocol case, all the queued packets
-       are sent through flowrings so, no need to check return 1 */
+       are sent through flowrings so, no need to return 1 */
     return (int8_t)0;
 }
 
@@ -482,11 +479,6 @@ static void whd_thread_func (cy_thread_arg_t thread_input)
         {
             tx_status = whd_thread_send_packets(whd_driver);
         } while (tx_status != 0);
-
-        if (whd_driver->update_buffs == 1)
-        {
-            whd_msgbuf_rxbuf_fill_all(whd_driver->msgbuf);
-        }
 
         if (rx_cnt >= WHD_THREAD_RX_BOUND)
         {

@@ -140,8 +140,6 @@ whd_result_t whd_oci_bus_write_wifi_firmware_image(whd_driver_t whd_driver);
 // Functions for whd_driver->bus_if function list
 whd_result_t whd_bus_oci_attach(whd_driver_t whd_driver, whd_oci_config_t *whd_oci_config )
 {
-    WPRINT_WHD_INFO( ("oci_attach\n") );
-
     whd_driver->bus_if   = &whd_bus_oci_info;
     whd_driver->bus_priv = &whd_bus_priv;
 
@@ -458,7 +456,8 @@ static whd_result_t whd_bus_oci_sleep_allow_decider(whd_driver_t whd_driver, cy_
 
     result = cy_rtos_get_semaphore(transceive_semaphore, timeout_ms, WHD_FALSE);
 
-    if (result == CY_RTOS_TIMEOUT)
+    if ((result == CY_RTOS_TIMEOUT) &&
+        (!whd_driver->msgbuf->rx_buf_recovery))
     {
         CHECK_RETURN(whd_msgbuf_send_mbdata(whd_driver, WHD_H2D_HOST_D3_INFORM));
     }

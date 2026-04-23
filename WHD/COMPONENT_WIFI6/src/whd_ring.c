@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -204,7 +204,7 @@ whd_result_t whd_bus_resume(whd_driver_t whd_driver)
     {
         whd_driver->ack_d2h_suspend = WHD_FALSE;
         /* If Resume from Host, send H1D DB1 to "WLAN FW" */
-        WPRINT_WHD_INFO( ("Notify Firmware about HOST READY!!! \n") );
+        WPRINT_WHD_DEBUG( ("Notify Firmware about HOST READY!!! \n") );
 #ifndef GCI_SECURE_ACCESS
         result = whd_bus_write_backplane_value(whd_driver, (uint32_t)GCI_BT2WL_DB1_REG, 4, WHD_H2D_INFORM_HOSTRDY);
 #else
@@ -499,14 +499,14 @@ whd_result_t whd_bus_m2m_sharedmem_init(whd_driver_t whd_driver)
     while ( (shared_addr == 0) || (shared_addr <= GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) ) ||
             (shared_addr >= (GET_C_VAR(whd_driver, ATCM_RAM_BASE_ADDRESS) + GET_C_VAR(whd_driver, CHIP_RAM_SIZE) ) ) )
     {
-	cy_rtos_time_get(&cur_time);
-	/* If whd does not get the shared addr within WLAN_SHARED_ADDR_TIMEOUT_MS, do soft reset for recovery
-	* Genrally whd should get the shared addr within 500ms
-	* */
-	if ((cur_time - start_time) > WLAN_SHARED_ADDR_TIMEOUT_MS)
-	{
-	    cyhal_system_reset_device();
-	}
+        cy_rtos_time_get(&cur_time);
+        /* If whd does not get the shared addr within WLAN_SHARED_ADDR_TIMEOUT_MS, do soft reset for recovery
+         * Genrally whd should get the shared addr within 500ms
+         */
+        if ((cur_time - start_time) > WLAN_SHARED_ADDR_TIMEOUT_MS)
+        {
+            cyhal_system_reset_device();
+        }
         result = whd_bus_read_backplane_value(whd_driver, wlan_shared_address, 4, (uint8_t *)&shared_addr);
     }
 

@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -97,9 +97,20 @@ extern "C"
 #define ULP_DS2_SUPPORT             (2) /* Flag to enable DS2 mode in 43022(Only supported in DM) */
 #define WHD_OOB_CONFIG_VERSION      (2) /**< Indicate the version for whd_oob_config structure */
 
+#ifndef ETHER_ADDR_LEN
 #define ETHER_ADDR_LEN              (6)
+#endif
+#ifndef IPV4_ADDR_LEN
 #define IPV4_ADDR_LEN               (4)
+#endif
+#ifndef IPV6_ADDR_LEN
 #define IPV6_ADDR_LEN               (16)
+#endif
+
+/**
+ * Join options
+ */
+#define WHD_SEC_JOIN_OP_PMK         0x00000001  /**< Flag for passphrase is PMK        */
 
 /**
  * Suppress unused parameter warning
@@ -886,6 +897,9 @@ typedef struct whd_scan_result
     uint8_t current_operating_class;            /**< Current operating class (Information Element)                             */
     uint8_t num_supported_operating_classes;    /**< Number of supported operating classes                                     */
     uint8_t supported_operating_classes[255];   /**< Supported operating classes                                               */
+    int16_t snr;                                /**< Average SNR(signal to noise ratio) during frame reception */
+    uint16_t beacon_period;                     /**< Interval between two consecutive beacon frames. Units are Kusec           */
+    uint16_t capability;                        /**< Capability information                                                    */
 } whd_scan_result_t;
 #pragma pack()
 

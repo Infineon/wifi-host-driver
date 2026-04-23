@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -173,6 +173,7 @@ typedef enum
     WLC_E_EXT_AUTH_REQ = 187,        /* authentication request received */
     WLC_E_EXT_AUTH_FRAME_RX = 188,   /* authentication request received */
     WLC_E_MGMT_FRAME_TXSTATUS = 189, /* mgmt frame Tx complete */
+    WLC_E_DLTRO = 193,               /* DHCP lease time renew offload */
     WLC_E_TWT_TEARDOWN = 195,        /* TWT Teardown Complete Event */
 #if defined(COMPONENT_WLANSENSE)
     WLC_E_CSI_ENABLE = 198,          /* Setup a communication with the application layer to send CSI data */

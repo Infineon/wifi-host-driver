@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -341,27 +341,6 @@ typedef struct
 /* Buffer size to be allocated to read wlan log */
 #define WLAN_LOG_BUF_LEN (4 * 1024)
 
-#define WHD_IOCTL_LOG_SIZE 64
-#define WHD_IOVAR_STRING_SIZE 128
-#define WHD_MAX_DATA_SIZE 64
-
-#ifdef WHD_IOCTL_LOG_ENABLE
-typedef struct
-{
-    uint32_t ioct_log;
-    uint8_t is_this_event;
-    uint8_t data[WHD_MAX_DATA_SIZE];
-    uint32_t data_size;
-    uint16_t flag;
-    uint32_t reason;
-}whd_ioctl_log_t;
-
-whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer);
-whd_result_t whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t data);
-
-whd_result_t whd_ioctl_print(whd_driver_t whd_driver);
-#endif
-
 #pragma pack()
 
 typedef struct whd_internal_info
@@ -440,6 +419,7 @@ extern uint32_t whd_wifi_read_tcm_byte(whd_driver_t whd_driver, uint32_t offset)
 #if defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS)
 bool whd_syspm_registered_callback(cyhal_syspm_callback_state_t state, cyhal_syspm_callback_mode_t mode, void *arg);
 #endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+whd_result_t whd_wifi_get_chip_serial(whd_interface_t ifp, char *buf, uint8_t length);
 
 #ifdef __cplusplus
 } /* extern "C" */

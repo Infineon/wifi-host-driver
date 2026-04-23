@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -424,6 +424,18 @@ extern whd_result_t whd_wifi_join(whd_interface_t ifp, const whd_ssid_t *ssid, w
  */
 extern whd_result_t whd_wifi_join_specific(whd_interface_t ifp, const whd_scan_result_t *ap, const uint8_t *security_key,
                                        uint8_t key_length);
+
+/** Set join options
+ *
+ *  Provide more options during join.
+ *
+ *  @param   ifp           Pointer to handle instance of whd interface
+ *  @param   option        Join command options
+ *
+ *  @return  WHD_SUCCESS   update option successfully
+ *           Error code    if an error occurred
+ */
+extern whd_result_t whd_set_join_option(whd_interface_t ifp, uint32_t option);
 
 /** Check whether the platform supports triband or not
  *
@@ -1894,6 +1906,14 @@ extern whd_result_t whd_wifi_get_country_code(whd_interface_t ifp, char* country
  *
  *  @return WHD_SUCCESS or Error code */
 extern whd_result_t whd_wifi_get_country_list(whd_interface_t ifp, uint32_t band, uint32_t* count, char* country_list);
+
+/** Retrieves wifi join timeout set
+ *
+ *  @param  ifp            Pointer to handle instance of whd interface
+ *  @param  timeout        WiFi join timeout
+ *
+ *  @return WHD_SUCCESS or Error code */
+extern whd_result_t whd_set_wifi_join_timeout(whd_interface_t ifp, uint32_t timeout);
 
 /* @} */
 

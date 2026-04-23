@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -93,12 +93,12 @@ whd_result_t whd_wifi_set_mac_address(whd_interface_t ifp, whd_mac_t mac)
 
         if (memcmp(&mac, &ap_mac_address, sizeof(whd_mac_t) ) != 0)
         {
-            WPRINT_WHD_INFO( (" STA MAC address : %02x:%02x:%02x:%02x:%02x:%02x \n"
-                              " AP  MAC address : %02x:%02x:%02x:%02x:%02x:%02x \n",
+            WPRINT_WHD_INFO( ("\tSTA MAC address : %02x:%02x:%02x:%02x:%02x:%02x\n"
+                              "\tAP  MAC address : %02x:%02x:%02x:%02x:%02x:%02x\n",
                               mac.octet[0], mac.octet[1], mac.octet[2],
-                              mac.octet[3], mac.octet[4], mac.octet[3],
+                              mac.octet[3], mac.octet[4], mac.octet[5],
                               ap_mac_address.octet[0], ap_mac_address.octet[1], ap_mac_address.octet[2],
-                              ap_mac_address.octet[3], ap_mac_address.octet[4], ap_mac_address.octet[3]) );
+                              ap_mac_address.octet[3], ap_mac_address.octet[4], ap_mac_address.octet[5]) );
         }
     }
     else

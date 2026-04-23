@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,6 +90,7 @@ struct whd_interface
 #endif /* defined(COMPONENT_WLANSENSE) */
     whd_itwt_negotiated_params_t twt_negotiated_info;
     cy_semaphore_t  twt_event_semaphore;
+    uint32_t join_option;
 };
 
 struct whd_bt_dev
@@ -158,7 +159,6 @@ struct whd_driver
 
 #ifdef PROTO_MSGBUF
     cy_timer_t rxbuf_update_timer;
-    bool update_buffs;
     bool force_rx_read;
 #endif
 
@@ -177,9 +177,7 @@ struct whd_driver
    unsigned char key[16];
    unsigned char iv[12];
 #endif /* BUS_ENC */
-#ifdef CYW89530_AUTO
     bool wl_cmd_in_prog;
-#endif /* CYW89530_AUTO */
     bool is_mfp_auto; /* Do not set mfp in whd if this flag is set  */
 #ifdef CERT_MULTI_AKM
     whd_bool_t cert_mbssid_enable;
@@ -187,6 +185,7 @@ struct whd_driver
     uint16_t rxbufpost_threshold_cert;
 #endif /* PROTO_MSGBUF */
 #endif
+   uint32_t wifi_join_timeout;
 };
 
 whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8_t ifidx,

@@ -1,6 +1,6 @@
 /*
- * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
- * Technologies AG.  SPDX-License-Identifier: Apache-2.0
+ * Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,7 +119,6 @@ typedef struct wl_wsec_info {
 #define WL_EXTAUTH_ABORT      2
 #define WL_EXTAUTH_FAIL       3
 #define WL_EXTAUTH_SUCCESS    4
-
 /* HE top level command IDs */
 enum
 {
@@ -609,6 +608,7 @@ typedef struct wl_rateset_args
 #define WL_RSPEC_ENCODE_RATE    0x00000000      /* Legacy rate is stored in RSPEC_RATE_MASK */
 #define WL_RSPEC_ENCODE_HT      0x01000000      /* HT MCS is stored in RSPEC_RATE_MASK */
 #define WL_RSPEC_ENCODE_VHT     0x02000000      /* VHT MCS and Nss is stored in RSPEC_RATE_MASK */
+#define WL_RSPEC_ENCODE_HE      0x03000000      /**< HE MCS and NSS are stored in RSPEC_RATE */
 
 typedef struct wl_uint32_list
 {
@@ -788,6 +788,7 @@ typedef struct
     uint16_t key_len;
     uint16_t flags;
     uint8_t key[WSEC_MAX_PSK_LEN + 1];
+    //whd_mac_t BSSID;
 } wsec_pmk_t;
 
 #define WSEC_MAX_SAE_PASSWORD_LEN      128
@@ -1289,13 +1290,12 @@ typedef struct eventmsgs_ext
 #define IOVAR_STR_ICMP_ECHO_REQ          "icmp_echo_req"
 #define IOVAR_STR_SAE_TRANSITON_MODE     "sae_transition_mode"
 #define IOV_SAE_PWE_H2E_ENABLE           "sae_pwe_h2e_enable"
-#define IOVAR_STR_CHIP_SERIAL            "chip_serial"
 
 /* This value derived from the above strings, which appear maxed out in the 20s */
 #define IOVAR_NAME_STR_MAX_SIZE          32
 
 #define WLC_IOCTL_MAGIC                    (0x14e46c77)
-#define WLC_IOCTL_VERSION                  (1)
+#define WLC_IOCTL_VERSION                  (2)
 #define WLC_IOCTL_SMLEN                    (256)
 #define WLC_IOCTL_MEDLEN                   (2048) /* The minimum value for counters is 1636 */
 #define WLC_IOCTL_MAXLEN                   (8192)
@@ -1629,7 +1629,21 @@ typedef struct _wl_assoc_result
 #define WL_RADIO_HW_DISABLE        (1 << 1)
 #define WL_RADIO_MPC_DISABLE       (1 << 2)
 #define WL_RADIO_COUNTRY_DISABLE   (1 << 3)
+
 #define WL_TXPWR_OVERRIDE          (1U << 31)
+#define WL_TXPWR_OVERRIDE       (1U<<31)
+#define WL_TXPWR_2G             (1U<<30)
+#define WL_TXPWR_5G             (1U<<29)
+#define WL_TXPWR_NEG   (1U<<28)
+
+#define WL_TXPWR_MASK           (~(0x7<<29))
+#define WL_TXPWR_CORE_MAX       (3)
+#define WL_TXPWR_CORE0_MASK     (0x000000FF)
+#define WL_TXPWR_CORE0_SHIFT    (0)
+#define WL_TXPWR_CORE1_MASK     (0x0000FF00)
+#define WL_TXPWR_CORE1_SHIFT    (8)
+#define WL_TXPWR_CORE2_MASK     (0x00FF0000)
+#define WL_TXPWR_CORE2_SHIFT    (16)
 #define WL_PHY_PAVARS_LEN          (6)
 #define WL_DIAG_INTERRUPT          (1)
 #define WL_DIAG_LOOPBACK           (2)
@@ -2208,6 +2222,12 @@ typedef struct
     uint32_t txdropped;       /* tx dropped pkts */
     uint32_t rxbcast;         /* BroadcastReceivedFrameCount */
     uint32_t rxdropped;       /* rx dropped pkts (derived: sum of others) */
+    uint32  txq_end_assoccb; /* forced txqueue_end callback fired in assoc */
+    uint32  tx_toss_cnt;    /* number of tx packets tossed */
+    uint32  rx_toss_cnt;    /* number of rx packets tossed  */
+    uint32  last_tx_toss_rsn; /* reason because of which last tx pkt tossed */
+    uint32  last_rx_toss_rsn; /* reason because of which last rx pkt tossed */
+    uint32  pmk_badlen_cnt; /* number of invalid pmk len */
     /* XXX: Do not remove or rename inthe middle of this struct.
      * All counter variables have to be of uint32_t.
      */
@@ -2931,6 +2951,116 @@ typedef struct
 
 } wl_cnt_ver_eight_t;
 
+/** MACSTAT counters for ucode (corerev >= 80) */
+typedef struct {
+        /* MAC counters: 32-bit version of d11.h's macstat_t */
+        /* Start of PSM2HOST stats(72) block */
+        /* total number of frames sent, incl. Data, ACK, RTS, CTS,
+         * Control Management (includes retransmissions)
+         */
+        uint32  txallfrm;
+        uint32  txrtsfrm;       /* number of RTS sent out by the MAC */
+        uint32  txctsfrm;       /* number of CTS sent out by the MAC */
+        uint32  txackfrm;       /* number of ACK frames sent out */
+        uint32  txdnlfrm;       /* number of Null-Data transmission generated from template  */
+        uint32  txbcnfrm;       /* beacons transmitted */
+        uint32  txampdu;        /* number of AMPDUs transmitted */
+        uint32  txmpdu;         /* number of MPDUs transmitted */
+        /* Template underflows (mac was too slow to transmit ACK/CTS or BCN) */
+        uint32  txtplunfl;
+        /* Transmit phy error, type of error is reported in tx-status for
+         * driver enqueued frames
+         */
+        uint32  txphyerror;
+        uint32  pktengrxducast; /* unicast frames rxed by the pkteng code */
+        uint32  pktengrxdmcast; /* multicast frames rxed by the pkteng code */
+        uint32  rxfrmtoolong;   /* Received frame longer than legal limit (2346 bytes) */
+        uint32  rxfrmtooshrt; /* Received frame did not contain enough bytes for its frame type */
+        uint32  rxanyerr;       /* Any RX error that is not counted by other counters. */
+        uint32  rxbadfcs;       /* number of frames for which the CRC check failed in the MAC */
+        uint32  rxbadplcp;      /* parity check of the PLCP header failed */
+        uint32  rxcrsglitch;    /* PHY was able to correlate the preamble but not the header */
+        /* Number of received frames with a good PLCP (i.e. passing parity check) */
+        uint32  rxstrt;
+        uint32  rxdtucastmbss; /* number of received DATA frames with good FCS and matching RA */
+        uint32  rxmgucastmbss; /* number of received mgmt frames with good FCS and matching RA */
+        uint32  rxctlucast; /* number of received CNTRL frames with good FCS and matching RA */
+        uint32  rxrtsucast;     /* number of unicast RTS addressed to the MAC (good FCS) */
+        uint32  rxctsucast;     /* number of unicast CTS addressed to the MAC (good FCS) */
+        uint32  rxackucast;     /* number of ucast ACKS received (good FCS) */
+        uint32  rxdtocast; /* number of received DATA frames (good FCS and not matching RA) */
+        uint32  rxmgocast; /* number of received MGMT frames (good FCS and not matching RA) */
+        uint32  rxctlocast; /* number of received CNTRL frame (good FCS and not matching RA) */
+        uint32  rxrtsocast;     /* number of received RTS not addressed to the MAC */
+        uint32  rxctsocast;     /* number of received CTS not addressed to the MAC */
+        uint32  rxdtmcast;      /* number of RX Data multicast frames received by the MAC */
+        uint32  rxmgmcast;      /* number of RX Management multicast frames received by the MAC */
+        /* number of RX Control multicast frames received by the MAC (unlikely to see these) */
+        uint32  rxctlmcast;
+        uint32  rxbeaconmbss;   /* beacons received from member of BSS */
+        /* number of unicast frames addressed to the MAC from other BSS (WDS FRAME) */
+        uint32  rxdtucastobss;
+        uint32  rxbeaconobss;   /* beacons received from other BSS */
+        /* number of response timeouts for transmitted frames expecting a response */
+        uint32  rxrsptmout;
+        uint32  bcntxcancl;     /* transmit beacons canceled due to receipt of beacon (IBSS) */
+        uint32  rxnodelim;      /* number of no valid delimiter detected by ampdu parser */
+        uint32  missbcn_dbg;    /* number of beacon missed to receive */
+        uint32  pmqovfl;        /* number of PMQ overflows */
+          uint32  pmqovfl;        /* number of PMQ overflows */
+        /* number of received Probe requests that made it into the PRQ fifo */
+        uint32  rxcgprqfrm;
+        uint32  rxcgprsqovfl;   /* Rx Probe Request Que overflow in the AP */
+        /* Tx Probe Response Fail. AP sent probe response but did not get ACK */
+        uint32  txcgprsfail;
+        uint32  txcgprssuc;     /* Tx Probe Response Success (ACK was received) */
+        /* number of probe requests that were dropped from the PRQ
+         * fifo because a probe response could not be sent out within
+         * the time limit defined in M_PRS_MAXTIME
+         */
+        uint32  prs_timeout;
+        uint32  txrtsfail;      /* number of rts transmission failure that reach retry limit */
+        uint32  txucast;        /* number of unicast tx expecting response other than cts/cwcts */
+        uint32  txinrtstxop;    /* number of data frame transmissions during rts txop */
+        uint32  rxback;         /* blockack rxcnt */
+        uint32  txback;         /* blockack txcnt */
+        uint32  bphy_rxcrsglitch;       /* PHY count of bphy glitches */
+        uint32  rxdrop20s;      /* drop secondary cnt */
+        uint32  rxtoolate;      /* receive too late */
+        uint32  bphy_badplcp;   /* number of bad PLCP reception on BPHY rate */
+        uint32  rxtrig_myaid;   /* New counters added in corerev 80 */
+        uint32  rxtrig_rand;
+        uint32  goodfcs;
+        uint32  colormiss;
+        uint32  txmampdu;
+        uint32  rxmtidback;
+        uint32  rxmstaback;
+        uint32  txfrag;
+        /* End of PSM2HOST stats block */
+        /* start of rxerror overflow counter(24) block which are modified/added in corerev 80 */
+        uint32  phyovfl;
+        uint32  rxf0ovfl;       /* number of receive fifo 0 overflows */
+        uint32  rxf1ovfl;       /* number of receive fifo 1 overflows */
+        uint32  lenfovfl;
+        uint32  weppeof;
+        uint32  badplcp;
+        uint32  msduthresh;
+        uint32  strmeof;
+        uint32  stsfifofull;
+        uint32  stsfifoerr;
+        uint32  PAD[6];
+        uint32  rxerr_stat;
+        uint32  ctx_fifo_full;
+        uint32  txdatamcast;    /* Number of TX multicast data packets */
+        uint32  txdatabcast;    /* Number of TX broadcast data packets */
+        uint32  PAD[36]; /* PAD added for counter elements to be added soon */
+} wl_cnt_ge80mcst_v1_t;
+
+typedef struct {
+        uint32 fifocount;
+        uint32 txfunfl[];
+} wl_cnt_ge80_txfunfl_v1_t;
+
 /* per-rate receive stat counters subset of full counters */
 typedef struct
 {
@@ -3213,6 +3343,35 @@ typedef struct
     uint32_t reinitreason[8];     /* reinitreason counters; 0: Unknown reason */
     uint32_t rxrtry;     /* num of received packets with retry bit on */
 } wl_cnt_ver_ten_t;
+/* he counters Version 2 */
+#define HE_COUNTERS_V2          (2)
+typedef struct wl_he_cnt_wlc_v2 {
+    uint16 version;
+    uint16 len;
+    uint32 he_rxtrig_myaid; /* rxed valid trigger frame with myaid */
+    uint32 he_rxtrig_rand; /* rxed valid trigger frame with random aid */
+    uint32 he_colormiss_cnt; /* for bss color mismatch cases */
+    uint32 he_txmampdu; /* for multi-TID AMPDU transmission */
+    uint32 he_txmtid_back; /* for multi-TID BACK transmission */
+    uint32 he_rxmtid_back; /* reception of multi-TID BACK */
+    uint32 he_rxmsta_back; /* reception of multi-STA BACK */
+    uint32 he_txfrag; /* transmission of Dynamic fragmented packets */
+    uint32 he_rxdefrag; /* reception of dynamic fragmented packets */
+    uint32 he_txtrig; /* transmission of trigger frames */
+    uint32 he_rxtrig_basic; /* reception of basic trigger frame */
+    uint32 he_rxtrig_murts; /* reception of MU-RTS trigger frame */
+    uint32 he_rxtrig_bsrp; /* reception of BSR poll trigger frame */
+    uint32 he_rxdlmu; /* reception of DL MU PPDU */
+    uint32 he_physu_rx; /* reception of SU frame */
+    uint32 he_phyru_rx; /* reception of RU frame */
+    uint32 he_txtbppdu; /* increments on transmission of every TB PPDU */
+    uint32 he_null_tbppdu; /* null TB PPDU's sent as a response to basic trigger frame */
+    uint32 he_rxtrig_bfrp; /* reception of BFRP frame */
+    uint32 he_rxtrig_mubar; /* reception of MU BAR frame */
+} wl_he_cnt_wlc_v2_t;
+
+#ifndef HE_COUNTERS_VERSION_ENABLED
+#define HE_COUNTERS_VERSION     (HE_COUNTERS_V1)
 
 typedef struct
 {
@@ -3696,6 +3855,8 @@ typedef struct wl_pkteng
     uint8_t seqno;
     wl_ether_addr_t dest;
     wl_ether_addr_t src;
+    uint8  sweep_steps;             /* Number of sweep power */
+    uint8  PAD[2];
 } wl_pkteng_t;
 #define NUM_80211b_RATES    4
 #define NUM_80211ag_RATES    8
@@ -3703,10 +3864,16 @@ typedef struct wl_pkteng
 #define NUM_80211_RATES        (NUM_80211b_RATES + NUM_80211ag_RATES + NUM_80211n_RATES)
 typedef struct wl_pkteng_stats
 {
-    uint32_t lostfrmcnt;
-    int32_t rssi;
-    int32_t snr;
-    uint16_t rxpktcnt[NUM_80211_RATES + 1];
+    uint32_t lostfrmcnt;              /* RX PER test: no of frames lost (skip seqno) */
+    int rssi;                     /* RSSI */
+    int snr;                      /* signal to noise ratio */
+    uint16_t rxpktcnt[NUM_80211_RATES+1];
+    uint8_t rssi_qdb;                 /* qdB portion of the computed rssi */
+    uint8_t  version;
+    uint16_t length;
+    uint16_t pad;
+    int rssi_per_core[WL_RSSI_ANT_MAX];
+    int rssi_per_core_qdb[WL_RSSI_ANT_MAX];
 } wl_pkteng_stats_t;
 typedef struct wl_sslpnphy_papd_debug_data
 {

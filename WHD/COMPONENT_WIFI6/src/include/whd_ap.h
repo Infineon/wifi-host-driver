@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,9 +66,10 @@ extern "C" {
 typedef struct whd_ap_int_info
 {
     whd_bool_t ap_is_up;
+    whd_bool_t is_ap_intf_created;
     whd_bool_t is_waiting_event;
+    uint32_t bss_idx;
     cy_semaphore_t whd_wifi_sleep_flag;
-
 } whd_ap_int_info_t;
 
 /******************************************************
@@ -82,7 +83,7 @@ extern void whd_wifi_set_ap_is_up(whd_driver_t whd_driver, whd_bool_t new_state)
 extern whd_bool_t whd_wifi_get_ap_is_up(whd_driver_t whd_driver);
 void whd_ap_info_init(whd_driver_t whd_driver);
 whd_result_t whd_wifi_set_block_ack_window_size(whd_interface_t ifp);
-
+extern whd_result_t whd_create_softap_interface (whd_interface_t ifp);
 
 /** Set the AMPDU parameters for both Soft AP and STA
  *

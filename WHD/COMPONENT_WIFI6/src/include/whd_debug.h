@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,6 +35,7 @@ extern "C"
 /* #define WPRINT_ENABLE_WHD_ERROR_RETURN */
 /* #define WPRINT_ENABLE_WHD_INFO */
 /* #define WPRINT_ENABLE_WHD_DEBUG */
+/* #define WHD_ENABLE_LOG_TIMESTAMP */
 
 #define WHD_ENABLE_STATS
 /*#define WHD_LOGGING_BUFFER_ENABLE*/
@@ -61,29 +62,34 @@ extern "C"
 #endif
 
 /******************************************************
-*             Print declarations
+*             Print Macro declarations                *
 ******************************************************/
 /* IF MFG TEST is enabled then disable all LOGGING VIA UART as
- + * this interrupts communication between WL TOOL and MFG Test APP
- + * via STDIO UART causing Wrong Message Exchange and failure.
- + */
+ * this interrupts communication between WL TOOL and MFG Test APP
+ * via STD-IO UART causing Wrong Message Exchange and failure.
+ */
 #if defined(WLAN_MFG_FIRMWARE) || defined(WHD_PRINT_DISABLE)
 #define WPRINT_MACRO(args)
 #else
 #if defined(WHD_LOGGING_BUFFER_ENABLE)
-#define WPRINT_MACRO(args) do { cy_time_t time; cy_rtos_get_time(&time); printf("\n[%lu] " ,(unsigned long)time); printf args; } while (0 == 1)
+#define WPRINT_MACRO(args)           do { whd_buffer_printf args; } while (0 == 1)
 #else
-#define WPRINT_MACRO(args) do { cy_time_t time; cy_rtos_get_time(&time); printf("\n[%lu] " ,(unsigned long)time); printf args; } while (0 == 1)
-#endif
-#endif
+#ifdef WHD_ENABLE_LOG_TIMESTAMP
+#define WPRINT_MACRO(args)           do { cy_time_t time; cy_rtos_get_time(&time); printf("\n[%lu] ", \
+                                          (unsigned long)time); printf args; } while (0 == 1)
+#else
+#define WPRINT_MACRO(args)           do { printf args; } while (0 == 1)
+#endif  /* WHD_ENABLE_LOG_TIMESTAMP */
+#endif  /* WHD_LOGGING_BUFFER_ENABLE */
+#endif  /* WLAN_MFG_FIRMWARE) || WHD_PRINT_DISABLE */
 
 #if defined(WHD_PRINT_VERSION_ENABLE) || !defined(WHD_PRINT_DISABLE)
-#define WPRINT_WHD_VERSION(args) do { cy_time_t time; cy_rtos_get_time(&time); printf("\n[%lu] " ,(unsigned long)time); printf args; } while (0 == 1)
+#define WPRINT_WHD_VERSION(args)     do { printf args; } while (0 == 1)
 #else
 #define WPRINT_WHD_VERSION(args)
 #endif
 
-/* WICED printing macros for Wiced Wi-Fi Driver*/
+/* WHD printing macros for logging in the console */
 #ifdef WPRINT_ENABLE_WHD_INFO
 #define WPRINT_WHD_INFO(args) WPRINT_MACRO(args)
 #else
@@ -146,6 +152,24 @@ typedef struct
 #endif /* WHD_LOGGING_BUFFER_ENABLE */
 
 #ifdef WHD_IOCTL_LOG_ENABLE
+#define WHD_IOCTL_LOG_SIZE    64
+#define WHD_IOVAR_STRING_SIZE 128
+#define WHD_MAX_DATA_SIZE     64
+
+typedef struct
+{
+    uint32_t ioct_log;
+    uint8_t is_this_event;
+    uint8_t data[WHD_MAX_DATA_SIZE];
+    uint32_t data_size;
+    uint16_t flag;
+    uint32_t reason;
+}whd_ioctl_log_t;
+
+whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer_t buffer);
+whd_result_t whd_ioctl_log_add_event(whd_driver_t whd_driver, uint32_t cmd, uint16_t flag, uint32_t data);
+whd_result_t whd_ioctl_print(whd_driver_t whd_driver);
+
 #define WHD_IOCTL_LOG_ADD(x, y, z) whd_ioctl_log_add(x, y, z)
 #define WHD_IOCTL_LOG_ADD_EVENT(w, x, y, z) whd_ioctl_log_add_event(w, x, y, z)
 #define WHD_IOCTL_PRINT(x) whd_ioctl_print(x)
@@ -153,7 +177,7 @@ typedef struct
 #define WHD_IOCTL_LOG_ADD(x, y, z)
 #define WHD_IOCTL_LOG_ADD_EVENT(w, x, y, z)
 #define WHD_IOCTL_PRINT(x)
-#endif
+#endif /* WHD_IOCTL_LOG_ENABLE */
 
 #ifdef __cplusplus
 } /* extern "C" */

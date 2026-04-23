@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -633,11 +633,11 @@ whd_result_t whd_wifi_read_wlan_log_unsafe(whd_driver_t whd_driver, uint32_t wla
                 n--;
             buffer[n] = 0;
 #ifndef PROTO_MSGBUF
-            WPRINT_MACRO( ("CONSOLE: %s\n", buffer) );
+            WPRINT_MACRO(("FW_CONS: %s\n", buffer));
 #else
-	    /* printf is used here because WPRINT_MACRO cannot be enabled in H1-CP because of memory constraint
-               This change has to be relooked again*/
-            printf("CONSOLE: %s\n", buffer);
+            /* WPRINT_MACRO cannot be enabled because of memory constraint
+               in CYW5591x, this change has to be relooked again */
+            printf("FW_CONS: %s\n", buffer);
 #endif
         }
     }
@@ -689,8 +689,10 @@ whd_result_t whd_ioctl_log_add(whd_driver_t whd_driver, uint32_t cmd, whd_buffer
     data = whd_buffer_get_current_piece_data_pointer(whd_driver, buffer);
     CHECK_IOCTL_BUFFER(data);
     CHECK_RETURN(cy_rtos_get_semaphore(&whd_driver->whd_log_mutex, CY_RTOS_NEVER_TIMEOUT, WHD_FALSE) );
+#ifndef PROTO_MSGBUF
     data = data + IOCTL_OFFSET;
     data_size = data_size - IOCTL_OFFSET;
+#endif
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].ioct_log = cmd;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].is_this_event = 0;
     whd_driver->whd_ioctl_log[whd_driver->whd_ioctl_log_index % WHD_IOCTL_LOG_SIZE].data_size = MIN_OF(
@@ -733,7 +735,7 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
         if ( (whd_driver->whd_ioctl_log[i].ioct_log == WLC_SET_VAR) ||
              (whd_driver->whd_ioctl_log[i].ioct_log == WLC_GET_VAR) )
         {
-            /* refer to whd_cdc_get_iovar_buffer() */
+            /* refer to whd_cdc_get_iovar_buffer()/whd_msgbuf_get_iovar_buffer() */
             while (!*data)
             {
                 whd_driver->whd_ioctl_log[i].data_size--;
@@ -758,12 +760,12 @@ whd_result_t whd_ioctl_print(whd_driver_t whd_driver)
         }
         else if (whd_driver->whd_ioctl_log[i].ioct_log == WLC_SET_VAR)
         {
-            WPRINT_MACRO( ("\n-> %s\n", iovar) );
+            WPRINT_MACRO( ("\n SET:- %s\n", iovar) );
             whd_hexdump(data, whd_driver->whd_ioctl_log[i].data_size);
         }
         else if (whd_driver->whd_ioctl_log[i].ioct_log == WLC_GET_VAR)
         {
-            WPRINT_MACRO( ("\n<- %s\n", iovar) );
+            WPRINT_MACRO( ("\n GET:- %s\n", iovar) );
             whd_hexdump(data, whd_driver->whd_ioctl_log[i].data_size);
         }
         else if (whd_driver->whd_ioctl_log[i].ioct_log != 0)
@@ -1877,3 +1879,30 @@ bool whd_syspm_registered_callback(cyhal_syspm_callback_state_t state, cyhal_sys
     }
 }
 #endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
+
+whd_result_t whd_wifi_get_chip_serial(whd_interface_t ifp, char *buf, uint8_t length)
+{
+    whd_result_t result;
+    uint8_t ver_len;
+
+    CHECK_IFP_NULL(ifp);
+
+    if (buf == NULL)
+        return WHD_BADARG;
+
+    result = whd_wifi_get_iovar_buffer(ifp, IOVAR_STR_CHIP_SERIAL, (uint8_t *)buf, length);
+    if (result == WHD_SUCCESS)
+    {
+        ver_len = strlen(buf);
+
+        if (ver_len > length - 2)
+            ver_len = length - 2;
+
+        if ( (ver_len > 1) && (buf[ver_len + 1] == '\n') )
+        {
+            buf[ver_len + 1] = '\0';
+        }
+    }
+
+    return result;
+}

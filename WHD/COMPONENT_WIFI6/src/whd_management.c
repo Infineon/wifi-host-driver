@@ -1,5 +1,5 @@
 /*
- * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+ * (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG.  SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -138,6 +138,14 @@ whd_result_t whd_add_interface(whd_driver_t whd_driver, uint8_t bsscfgidx, uint8
         {
             return WHD_MALLOC_FAILURE;
         }
+
+#ifdef COMPONENT_SDIO_HM
+    if ((ifidx == 1) && !(strncmp(name, "wlan1", strlen(name))))
+    {
+        WPRINT_WHD_INFO(("SoftAP: Creating SAP interface \n"));
+        whd_create_softap_interface(ifp);
+    }
+#endif
 
         return WHD_SUCCESS;
     }
